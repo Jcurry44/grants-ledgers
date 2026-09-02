@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Update history — The Grants Ledger</title>
+<meta name="description" content="Every significant change to The Grants Ledger since it began, compiled from the project's own version-control history — foundations added, years recovered, corrections made, and the defects that were found and fixed.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+a { color: var(--copper-deep); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.sr-only { position:absolute; width:1px; height:1px; clip-path: inset(50%); overflow:hidden; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
+.cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.4rem,6vh,3.9rem) 0 clamp(1.8rem,4vh,2.6rem); }
+.cover a { color: var(--copper); }
+.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+.lede { max-width: 46rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
+.tnav { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
+.tnav .wrap { display:flex; flex-wrap:wrap; gap:.15rem 1.25rem; align-items:center; padding-top:.55rem; padding-bottom:.55rem; }
+.tnav a { font-family: var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color: var(--ink-dim); padding:.2rem 0; border-bottom:2px solid transparent; }
+.tnav a:hover { color: var(--copper-deep); }
+.tnav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--copper); }
+.tnav .sp { margin-left:auto; }
+@media (max-width:719px) { .tnav { position: static; } .tnav .sp { margin-left:0; } }
+section { padding: clamp(1.8rem,4vh,2.6rem) 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.3rem,2.5vw,1.75rem); letter-spacing:-.015em; margin-bottom:.35rem; }
+.sub { color: var(--ink-dim); max-width: 46rem; margin-bottom: 1.3rem; }
+.body { max-width: 46rem; }
+.body p { margin-bottom: .85rem; }
+.body p:last-child { margin-bottom: 0; }
+strong { font-weight: 640; }
+
+.rel { display:grid; grid-template-columns: minmax(0,1fr); gap:.5rem; padding: clamp(1.5rem,3.5vh,2.2rem) 0; border-top: 1px solid var(--rule); }
+@media (min-width:840px) { .rel { grid-template-columns: 10.5rem minmax(0,1fr); gap:2rem; } }
+.rel:first-of-type { border-top: 0; padding-top: .4rem; }
+.reldate { font-family: var(--mono); font-size:.74rem; letter-spacing:.07em; text-transform:uppercase; color: var(--copper-deep); padding-top:.4rem; }
+@media (min-width:840px) { .reldate { position:sticky; top:3.1rem; align-self:start; } }
+.reldate em { display:block; font-style:normal; color: var(--ink-dim); font-size:.68rem; letter-spacing:.05em; margin-top:.25rem; }
+.relh { font-family: var(--serif); font-weight:640; font-size:1.28rem; letter-spacing:-.015em; line-height:1.25; }
+.rellede { color: var(--ink-dim); font-size:.95rem; margin-top:.35rem; max-width:46rem; }
+ul.ch { list-style:none; margin-top:.9rem; display:grid; gap:.05rem; }
+ul.ch li { display:grid; grid-template-columns: 5.6rem minmax(0,1fr); gap:.9rem; padding:.6rem 0; border-bottom:1px solid var(--rule); font-size:.93rem; align-items:start; }
+@media (max-width:520px) { ul.ch li { grid-template-columns: minmax(0,1fr); gap:.2rem; } }
+ul.ch li:last-child { border-bottom:0; }
+ul.ch .t { font-family: var(--mono); font-size:.62rem; letter-spacing:.07em; text-transform:uppercase; padding-top:.32rem; color: var(--ink-dim); }
+ul.ch .t.add { color: var(--copper-deep); }
+ul.ch .t.fix { color: var(--neg); }
+ul.ch b { font-weight:640; }
+.stat { display:inline-block; font-family: var(--mono); font-size:.86em; font-variant-numeric: tabular-nums; }
+.note { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
+.note b { font-family: var(--serif); font-weight:620; display:block; margin-bottom:.3rem; }
+.note p { font-size:.9rem; color: var(--ink-dim); }
+.note p + p { margin-top:.6rem; }
+.mono { font-family: var(--mono); font-size:.86rem; }
+footer { border-top:1px solid var(--rule); padding:2rem 0 2.8rem; color: var(--ink-dim); font-size:.86rem; }
+footer a { color: var(--copper-deep); }
+footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.9rem; font-family: var(--mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<header class="cover"><div class="wrap">
+  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Update history</div>
+  <h1>Everything that has changed,<br>with the dates it changed</h1>
+  <p class="lede">Compiled from the project’s own version-control history. Foundations added, years recovered from paper, years withheld, and — kept in deliberately — the defects that were found and the fixes that closed them. A changelog that only listed additions would be advertising.</p>
+</div></header>
+
+<nav class="tnav" aria-label="Trust and policy"><div class="wrap">
+  <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/changelog/" aria-current="page">Update history</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="sp">Exceptions ↗</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/">The collection ↗</a>
+</div></nav>
+
+<section><div class="wrap">
+  <div class="body">
+    <p>The Grants Ledger began on <strong>23 August 2026</strong> with a single foundation, and what follows is its complete history — nothing before this list exists. The pace below is real and is not the ongoing rate: the collection was assembled in an intensive build, and it now moves to a monthly refresh cycle described on the <a href="https://jcurry44.github.io/grants-ledgers/about/#maintained">about page</a>.</p>
+    <p>Entries are grouped by day and summarised from the project’s commit history. Figures quoted are the figures recorded at the time of the change.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+
+  <article class="rel">
+    <div class="reldate">1 Sep 2026<em>Current</em></div>
+    <div>
+      <h2 class="relh">One ledger withheld; figures re-stated</h2>
+      <p class="rellede">The collection stands at <span class="stat">1,932</span> foundations reconciling to <span class="stat">$304.7B</span>.</p>
+      <ul class="ch">
+        <li><span class="t fix">Changed</span><div><b>The Citi Foundation ledger is withheld from the collection for now.</b> Its filings and reconciliation are retained; the page returns when the hold is lifted.</div></li>
+        <li><span class="t fix">Changed</span><div><b>Every hand-written figure on this page and on About re-stated from the current build</b> — foundations, grant records, reconciled dollars, foundation-years, referee split, identity and location coverage, and year coverage.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">31 Aug 2026</div>
+    <div>
+      <h2 class="relh">Trust material, and a pre-sales hardening pass</h2>
+      <p class="rellede">Everything a reviewer needs in order to assess the product without taking a claim on faith.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>About, privacy, terms and update history published.</b> What the collection is and is not, how it is built and maintained, its stated limits, what the site collects, how the data may be used and attributed, and how to report a suspected error.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Trust hardening after a pre-sales audit.</b> Recipient locations corrected fleet-wide, template defects closed, mobile layout fixed, and disclosures tightened across every page.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">31 Aug 2026</div>
+    <div>
+      <h2 class="relh">The collection reaches 1,933 foundations</h2>
+      <p class="rellede">The top-2,000 sprint closes, the largest recovered book in the collection lands, and a fleet-wide geography defect is found and corrected.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>Top-2,000 sprint closed.</b> <span class="stat">1,933</span> foundations live, reconciling to <span class="stat">$305.1B</span>, with a recovery queue of 190 books still outstanding.</div></li>
+        <li><span class="t add">Added</span><div><b>Johnson &amp; Johnson — the collection’s largest ledger.</b> <span class="stat">187,513</span> rows across three recovered years. Its 2021 year alone is <span class="stat">62,600</span> rows, proven by two independent reading engines with zero disagreements across 60,250 comparisons. Its 2022 register overshoots its own sub-control by <span class="stat">$5.36M</span>, so that year is withheld with the evidence published.</div></li>
+        <li><span class="t add">Added</span><div><b>Recovery waves A through D.</b> Bezos (419 rows; 2021 withheld, attachment absent), Musk 2022 (31 rows exact), Roberts (three years; 2021 truncated mid-alphabet, a <span class="stat">$25M</span> residual finding), MetLife (866 rows across three years), Caterpillar (13,736 rows), Amon Carter (581 rows), Pennington (204 rows), Pritzker, Grainger and others.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>612 rows across 170 foundations carried a recipient location that was not the recipient’s.</b> A roll-up stub row inherits the <em>filer’s</em> own address, not a grantee’s. Those locations were blanked and the pages rebuilt.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>The map was hardcoded to New York.</b> Left over from the collection’s New-York-only period: state shading, and every state zoom, used New York’s geometry. Rebuilt from real home states across 51 jurisdictions, with per-state zoom from actual path geometry.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Shading no longer relies on colour vision.</b> The map uses a luminance ramp rather than a hue ramp, with a labelled legend.</div></li>
+        <li><span class="t add">Added</span><div><b>The collection page becomes a working instrument.</b> A one-viewport command deck; state dossiers on a real Albers-USA projection with per-city placement for 94.4% of foundations; purpose drill-downs; and a query index of <span class="stat">79,231</span> purpose-by-place-by-funder cells that answers “who funds work like mine”.</div></li>
+        <li><span class="t add">Added</span><div><b>Peer lens.</b> For any organisation, which funders support organisations like it and are not yet funding it — matched on grant scale, so a $25,000 grantee is not shown a billion-dollar funder.</div></li>
+        <li><span class="t add">Added</span><div><b>Findings page, exports and a report builder.</b> The recovery campaign’s catches organised by class; genuine spreadsheet, CSV and printable report exports generated inside the browser.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>The canonical address had been serving a months-old page.</b> Deploys wrote one filename but not the other, so the front door sat on a superseded build while every deploy reported success. Two sub-pages were serving stale copies with unrendered template placeholders. A pre-deploy gate now checks published-versus-source drift, the page-count invariant, visible placeholders and text defects, and refuses the deploy on any of them.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">30 Aug 2026</div>
+    <div>
+      <h2 class="relh">The sprint opens — from 342 foundations toward 2,000</h2>
+      <p class="rellede">A bulk fetch lane replaces one-foundation-at-a-time retrieval, and the inclusion floor is set at assets of $86.2M.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>Top-2,000 sprint declared and opened,</b> with 1,672 targets and a published asset floor of <span class="stat">$86,222,585</span>.</div></li>
+        <li><span class="t add">Added</span><div><b>Sprint waves 1 and 2 live</b> — 584 foundations in the first wave, a third batch in the second.</div></li>
+        <li><span class="t add">Added</span><div><b>Slates 8 and 9 closed.</b> Collection at 342 foundations and <span class="stat">$161.25B</span>; 2,110 rows and roughly <span class="stat">$524M</span> recovered from stub filers in slate 9 alone.</div></li>
+        <li><span class="t add">Added</span><div><b>Notable scan recoveries.</b> Hellman (all four scanned years exact, 947 rows, <span class="stat">$165.5M</span>), Kenan (333 rows across three years — the check caught a silent <span class="stat">$1M</span> truncation, and a fourth year was withheld because its list is absent), Dow (540 rows), Bloch (261 rows), Perenchio (both stub years exact).</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">29 Aug 2026</div>
+    <div>
+      <h2 class="relh">The collection crosses 500,000 grants</h2>
+      <p class="rellede">A second recovery campaign closes, and the first foundation is excluded on the grounds that its filings disclose nothing to verify.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>Recovery campaign complete:</b> <span class="stat">5,059</span> rows, roughly <span class="stat">$390.9M</span>, all exact. Includes a 1,150-cheque register read by eye and a year withheld by its own arithmetic.</div></li>
+        <li><span class="t add">Added</span><div><b>Slates 5, 6 and 7 closed.</b> Collection at 294 foundations and <span class="stat">$152.43B</span>; slate 7 settled all 25 targets with zero exclusions.</div></li>
+        <li><span class="t add">Added</span><div><b>A foundation excluded, and why.</b> One filer disbursed <span class="stat">$57.7M</span> while filing an empty grants schedule in every year — nothing for a referee to tie. It is named in the exceptions rather than silently absent.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">28 Aug 2026</div>
+    <div>
+      <h2 class="relh">Scan recovery becomes a standing lane</h2>
+      <p class="rellede">Reading grant schedules out of scanned paper stops being an exception and becomes part of the pipeline.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b><span class="stat">$655.5M</span> recovered exact across six year-ledgers</b> from IRS page images for two foundations whose grant detail exists in no machine-readable form.</div></li>
+        <li><span class="t add">Added</span><div><b>Slates 2, 3 and 4 closed.</b> Collection at 221 foundations and <span class="stat">$137.79B</span>.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>A foundation was registered as built when its build had failed.</b> Caught by the page-count invariant. The build driver now requires proof that a page was actually rebuilt before it will register.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Wrong referee named on 48 pages.</b> Ledgers reconciling to the grants schedule rather than to line 25(d) were attributing the tie to the wrong filed line. All 48 rebuilt.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">27 Aug 2026</div>
+    <div>
+      <h2 class="relh">National scope, and $100 billion</h2>
+      <p class="rellede">The collection leaves New York, and a second public source opens when the federal one runs out.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>The country’s largest foundations.</b> Lilly Endowment — <span class="stat">9,209</span> grants, <span class="stat">$9,705,037,940</span>, exact in all five years. Gates Foundation — <span class="stat">21,620</span> grants, <span class="stat">$29,176,287,563</span>. Robert Wood Johnson — <span class="stat">18,289</span> rows exact.</div></li>
+        <li><span class="t add">Added</span><div><b>First national tranche closed with zero exceptions</b> — 25 of 25 built. Collection at 153 foundations and <span class="stat">$106.98B</span>.</div></li>
+        <li><span class="t add">Added</span><div><b>A state-filing lane opens.</b> Where the IRS holds no usable copy, the New York Attorney General’s charities registry sometimes holds the foundation’s own filed copy. Two foundations previously marked unbuildable were recovered this way — 418 rows and <span class="stat">$103.9M</span>, and 384 rows and <span class="stat">$212.9M</span>.</div></li>
+        <li><span class="t add">Added</span><div><b>New York tranches 3 and 4 closed,</b> including 841 rows transcribed by eye from page images.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">26 Aug 2026</div>
+    <div>
+      <h2 class="relh">One shared database, and the monthly refresh</h2>
+      <p class="rellede">The collection stops being a set of separate pages and becomes a queryable record — and starts keeping itself current.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>A single shared database</b> across the collection, designed to carry 15,000 foundations. Cross-foundation search, recipients and totals become possible for the first time.</div></li>
+        <li><span class="t add">Added</span><div><b>The monthly freshness job.</b> Pulls the current IRS index, fetches filings not already held, re-reconciles, rebuilds and redeploys. Anything the standing rules cannot settle is reported for review rather than published, and an amended return never silently replaces a published year.</div></li>
+        <li><span class="t add">Added</span><div><b>The map,</b> and a rebuilt exceptions page computed from the data rather than written by hand.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Hub links could 404.</b> A foundation built between deploy waves was listed in the regenerated database but its page was never copied to the site. A deploy invariant now requires the published page count to equal the registry count.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">25 Aug 2026</div>
+    <div>
+      <h2 class="relh">Western New York finished; the fleet becomes rebuildable</h2>
+      <p class="rellede">The first billion reconciled, a third classification tier, and the identity system that stops two organisations from being merged into one.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>Western New York complete</b> — 35 ledgers, <span class="stat">$1,084,991,827</span>, every buildable foundation above $10M in assets.</div></li>
+        <li><span class="t add">Added</span><div><b>A third classification tier.</b> Grants that keyword and name rules cannot classify are matched to the recipient’s own IRS Business Master File classification, accepted only when unambiguous. On one foundation this cut unclassified grants from 66% to 23.9%.</div></li>
+        <li><span class="t add">Added</span><div><b>Recipient identity becomes a first-class system.</b> Three tiers with one shared normalisation, identity by EIN from the Business Master File, and a short reviewed merge list with stated reasons. Names resolving to different EINs are never joined — a guard that keeps genuinely separate organisations one token apart from collapsing into each other.</div></li>
+        <li><span class="t add">Added</span><div><b>New York’s first tranche closed</b> — 23 giants, <span class="stat">118,622</span> grants, <span class="stat">$29,656,404,986</span>. The Ford Foundation goes live.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>36 separate repositories become one.</b> Every ledger moves under a single address. The old repositories remain as hash-preserving redirects so links already sent to foundations keep working.</div></li>
+        <li><span class="t add">Added</span><div><b>The collection becomes reproducible.</b> Every page rebuilds from a frozen template, a per-foundation configuration and the parsed filings. Proven by rebuilding all 27 existing pages and confirming they came back identical on every metric.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">24 Aug 2026</div>
+    <div>
+      <h2 class="relh">One foundation becomes a collection</h2>
+      <p class="rellede">The hub launches, scanned paper is proven recoverable, and the exceptions page — the product’s spine — is published.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>Foundations 2 through 14, and the hub.</b> The collection passes <span class="stat">$927,302,618</span> reconciled, with 456 organisations funded by two or more foundations visible for the first time.</div></li>
+        <li><span class="t add">Added</span><div><b>Scanned paper proven recoverable.</b> A foundation that files each entire year as a single line — “see attached statement” — had <span class="stat">3,105</span> grants read out of the scanned attachment and tied to line 25(d) to the dollar. Figures too faint to read are labelled unread rather than guessed.</div></li>
+        <li><span class="t add">Added</span><div><b>The first schedule-referee ledger.</b> A foundation whose two filed grant totals disagree in all five years is published against the grants schedule’s own total, with both figures and every difference printed on its face.</div></li>
+        <li><span class="t add">Added</span><div><b>The exceptions page.</b> Every withheld year, every excluded year, every judgement call and every standing limit, in one place.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Unclassified grants cut from 50.9% to 6.7%,</b> with every classification rule printed on the page that runs it.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Accessibility.</b> Zero automated violations, plus a screen-reader walkthrough run by hand, and a dollar-composition graphic redesigned so it decodes without colour vision.</div></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">23 Aug 2026<em>First entry</em></div>
+    <div>
+      <h2 class="relh">The pilot, and the rule</h2>
+      <p class="rellede">One foundation, five years, and the standard that everything after it had to meet.</p>
+      <ul class="ch">
+        <li><span class="t add">Added</span><div><b>The John R. Oishei Foundation, tax years 2020–2024.</b> <span class="stat">857</span> grants, <span class="stat">$64,172,055</span> — five consecutive years, each reconciling to Part I, line 25, column (d) with a difference of <span class="stat">$0</span>.</div></li>
+        <li><span class="t add">Added</span><div><b>The ledger template,</b> built and frozen through thirty design revisions and three external design audits before any second foundation was attempted.</div></li>
+      </ul>
+    </div>
+  </article>
+
+</div></section>
+
+<section><div class="wrap">
+  <div class="note">
+    <b>How this page is produced</b>
+    <p>Entries are summarised from the project’s version-control history for the Grants Ledger source tree — 276 recorded changes between 23 August 2026 and 31 August 2026. Routine work is grouped; nothing that changed a published figure, a disclosure, or a stated limit is omitted. Where a change corrected a defect that had reached the live site, the entry says so.</p>
+    <p>From here the collection moves to the monthly refresh described on the <a href="https://jcurry44.github.io/grants-ledgers/about/#maintained">about page</a>, and this page will record what each refresh changed.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="flinks">
+    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+  </div>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings.</p>
+</div></footer>
+
+</body>
+</html>

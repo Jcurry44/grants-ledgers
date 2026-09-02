@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>The Grants Ledger — a verified record of grantmaking by 1,932 major U.S. foundations</title>
+<meta name="description" content="A verified record of grantmaking from 1,932 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #133024; --cover-ink: #0e241b;
+  --copper: #d19049; --copper-deep: #a35c1a; --copper-soft: #e7c28b;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --tint: #f3efe2; --cream: #f6efdd; --cream-faint: rgba(246, 239, 221, 0.72); --neg: #a7312a;
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --shadow: 0 18px 44px -22px rgba(20, 26, 18, 0.5);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 16.5px; line-height: 1.55; }
+a { color: var(--copper-deep); }
+button { font: inherit; cursor: pointer; color: inherit; background: none; border: 0; }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+/* the browser default for <small> is 0.8em, which lands under 10px inside mono labels;
+   rules that set their own size still win on specificity */
+small { font-size: 0.92em; }
+.sr-only { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* ---------- shell ---------- */
+.shell { display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); height: 100dvh; }
+@media (max-width: 1019px) { body { overflow: auto; } .shell { height: auto; min-height: 100dvh; } }
+
+/* ---------- top bar ---------- */
+.top { display: flex; align-items: center; gap: 1.4rem; min-width: 0; padding: 0.55rem clamp(14px, 2.2vw, 26px); background: var(--cover-ink); color: var(--cream); border-bottom: 1px solid rgba(246,239,221,0.14); }
+.brand { display: flex; align-items: baseline; gap: 0.55rem; min-width: 0; color: var(--cream); text-decoration: none; white-space: nowrap; }
+.brand .gl { font-family: Georgia, serif; color: var(--copper); font-size: 0.95rem; line-height: 1; width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid rgba(209,144,73,0.55); border-radius: 6px; background: rgba(209,144,73,0.12); }
+.brand:hover .gl { background: rgba(209,144,73,0.24); }
+.brand:hover b { color: var(--copper-soft); }
+.brand b { font-family: var(--serif); font-weight: 640; font-size: 1.02rem; letter-spacing: -0.01em; }
+.tots { display: flex; gap: 1.5rem; margin-left: 0.4rem; }
+.tots div { display: flex; align-items: baseline; gap: 0.4rem; white-space: nowrap; }
+.tots b { font-family: var(--serif); font-weight: 630; font-size: 1.02rem; color: var(--copper-soft); letter-spacing: -0.01em; transition: color 0.3s var(--ease), opacity 0.3s var(--ease); }
+/* the three headline figures hold one neutral state until the registry resolves,
+   then land together at their final values — they never count up through partials */
+.tots[data-state="wait"] b { color: rgba(246,239,221,0.34); opacity: 0.65; }
+.tots span { font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-faint); }
+.topnav { margin-left: auto; display: flex; align-items: center; gap: 1rem; min-width: 0; font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.topnav a, .topnav button { color: var(--cream-faint); text-decoration: none; white-space: nowrap; }
+.topnav a:hover, .topnav button:hover { color: var(--copper-soft); }
+/* the header is a single nowrap row, so its own min-content width sets the floor for the
+   whole document — the running totals have to leave before that floor passes the viewport */
+@media (max-width: 1199px) { .tots { display: none; } }
+.showsm { display: none; }
+
+/* ---------- deck ---------- */
+.deck { display: grid; grid-template-columns: minmax(420px, 46fr) minmax(0, 54fr); min-height: 0; min-width: 0; }
+@media (max-width: 1019px) { .deck { display: block; } }
+
+/* ---------- left panel ---------- */
+.left { display: flex; flex-direction: column; min-height: 0; min-width: 0; padding: clamp(14px, 1.8vw, 24px) clamp(14px, 2vw, 26px) 10px; gap: 0.75rem; }
+.mast { display: none; }
+.searchbox { position: relative; }
+#q { width: 100%; font: 500 1.04rem var(--text); padding: 0.8rem 2.6rem 0.8rem 1.05rem; border-radius: 14px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); box-shadow: 0 1px 0 rgba(30,26,12,0.04); }
+#q::placeholder { color: #8a8574; }
+.slash { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 0.75rem; color: var(--ink-dim); border: 1px solid var(--rule); border-radius: 6px; padding: 0.08rem 0.42rem; background: var(--tint); pointer-events: none; }
+.suggest { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px); background: var(--sheet); border-radius: 14px; box-shadow: var(--shadow), inset 0 0 0 1px var(--rule); overflow: hidden; max-height: min(58vh, 460px); overflow-y: auto; }
+.sug { display: grid; grid-template-columns: 1fr auto; gap: 0.1rem 0.9rem; width: 100%; text-align: left; border-bottom: 1px solid var(--rule); padding: 0.55rem 0.95rem; text-decoration: none; color: inherit; }
+.sug:last-child { border-bottom: 0; }
+.sug:hover, .sug:focus-visible { background: var(--tint); }
+.sug .n { font-weight: 600; font-size: 0.95rem; }
+.sug .m { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.sug .amt { font-family: var(--mono); font-size: 0.8rem; align-self: center; }
+.srchint { padding: 0.45rem 0.95rem; font-family: var(--mono); font-size: 0.73rem; color: var(--ink-dim); border-top: 1px solid var(--rule); }
+.nosug { padding: 0.7rem 1rem; font-size: 0.85rem; color: var(--ink-dim); }
+
+.scopes { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.rchip { border: 1px solid var(--rule); background: var(--sheet); color: var(--ink-dim); border-radius: 999px; padding: 0.26rem 0.8rem; font-family: var(--mono); font-size: 0.76rem; }
+.rchip.on { background: var(--cover); border-color: var(--cover); color: var(--cream); }
+.rchip small { opacity: 0.75; }
+.stchip { border: 1px solid var(--copper); background: var(--copper); color: #21150a; border-radius: 999px; padding: 0.26rem 0.8rem; font-family: var(--mono); font-size: 0.76rem; font-weight: 500; }
+.stchip:hover { background: var(--copper-soft); border-color: var(--copper-soft); }
+
+.tabs { display: flex; gap: 0.15rem; border-bottom: 1px solid var(--rule); }
+.tab { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-dim); padding: 0.45rem 0.75rem; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab:hover { color: var(--ink); }
+.tab.on { color: var(--copper-deep); border-bottom-color: var(--copper); font-weight: 500; }
+.panelbody { min-height: 0; flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; scrollbar-width: thin; scrollbar-color: #cfc9b8 transparent; }
+@media (max-width: 1019px) { .panelbody { overflow: visible; } }
+.tabpane[hidden] { display: none; }
+
+.phead { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.1rem 0.55rem; position: sticky; top: 0; background: var(--paper); z-index: 5; }
+.phead .cnt { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.phead select { font: 500 0.8rem var(--text); padding: 0.28rem 0.5rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); margin-left: auto; }
+.tbtn { background: var(--sheet); border: 1px solid var(--rule); border-radius: 999px; padding: 0.3rem 0.8rem; font-family: var(--mono); font-size: 0.75rem; white-space: nowrap; }
+.tbtn:hover { border-color: var(--copper); color: var(--copper-deep); }
+
+.flist { display: grid; gap: 0.5rem; }
+.fc { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto auto; gap: 0.75rem; align-items: center; background: var(--sheet); border-radius: 12px; padding: 0.55rem 0.7rem; text-decoration: none; color: inherit; box-shadow: inset 0 0 0 1px var(--rule); transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease); }
+.fc:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -18px rgba(30,26,12,0.45), inset 0 0 0 1px var(--copper); }
+.fc .cd { width: 40px; height: 40px; border-radius: 10px; background: var(--cover); color: var(--copper); font-family: var(--mono); font-weight: 500; font-size: 0.72rem; display: grid; place-items: center; }
+.fc b { font-family: var(--serif); font-weight: 620; font-size: 0.94rem; display: block; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fc .meta { font-family: var(--mono); font-size: 0.73rem; color: var(--ink-dim); display: block; margin-top: 0.12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc .tie { font-family: var(--mono); font-size: 0.72rem; color: var(--cover); white-space: nowrap; text-align: right; }
+.fc .tie small { display: block; color: var(--ink-dim); font-size: 0.73rem; }
+.fc .rowsb { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); border: 1px solid var(--rule); border-radius: 8px; padding: 0.3rem 0.5rem; }
+.fc .rowsb:hover { color: var(--copper-deep); border-color: var(--copper); }
+.fmore { display: block; width: 100%; margin: 0.7rem 0 1rem; padding: 0.55rem; border: 1px dashed var(--rule); border-radius: 12px; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.fmore:hover { color: var(--copper-deep); border-color: var(--copper); }
+
+.weave { display: grid; gap: 0.5rem; padding-top: 0.55rem; }
+.wv { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 0.9rem; align-items: center; background: var(--sheet); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--rule); padding: 0.55rem 0.85rem; }
+.wv .wn { padding: 0; font: 600 0.92rem var(--text); text-align: left; }
+.wv .wn:hover { color: var(--copper-deep); }
+.wv .wm { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); white-space: nowrap; }
+.wv .ws { font-family: var(--mono); font-size: 0.8rem; white-space: nowrap; }
+.panehint { font-size: 0.85rem; color: var(--ink-dim); padding: 0.55rem 0.1rem 0.2rem; }
+
+/* ---------- identity confidence ---------- */
+/* An entity id beginning "E" was matched to an IRS-registered organisation in the
+   Business Master File; one beginning "K" is matched on the filed name alone.
+   The difference is never carried by hue: filled vs hollow mark, a word, a border
+   texture and a luminance step, so it survives greyscale and colour blindness. */
+.idm { display: inline-flex; align-items: center; gap: 0.24rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.03em; line-height: 1.6; white-space: nowrap; border-radius: 999px; padding: 0.02rem 0.4rem; border: 1px solid; }
+.idm i { font-style: normal; font-size: 0.86em; line-height: 1; }
+.idm.gov { color: #102c20; border-color: rgba(30,70,52,0.5); background: rgba(30,70,52,0.11); font-weight: 500; }
+.idm.est { color: #6e6553; border-color: #bdb49e; border-style: dashed; background: transparent; }
+.idm.mini { font-size: 0.66rem; padding: 0 0.3rem; gap: 0.18rem; }
+.idm.lg { font-size: 0.75rem; padding: 0.1rem 0.5rem; }
+.dossier .idm.gov { color: #eaf6ee; border-color: rgba(246,239,221,0.55); background: rgba(246,239,221,0.16); }
+.dossier .idm.est { color: rgba(246,239,221,0.6); border-color: rgba(246,239,221,0.34); }
+/* A name-matched cross-foundation sum must never carry a matched sum's weight.
+   Three signals, none of them hue: a lighter ink (relative luminance 0.170 against
+   0.020 — a 3.2:1 step that survives greyscale, while still clearing WCAG AA at
+   4.6:1 on paper), a dotted rule under the figure, and the marker beside it. */
+.softsum { color: #7a7260; font-weight: 400; border-bottom: 1px dotted #bdb49e; }
+.hardsum { color: var(--ink); font-weight: 500; }
+.p-tot b.softsum { color: #7a7260; font-weight: 500; border-bottom-width: 2px; }
+.p-tot b.hardsum { color: var(--copper-deep); }
+.dbar .dv.softsum { color: rgba(246,239,221,0.56); border-bottom: 1px dotted rgba(246,239,221,0.42); }
+.dbar .dv.hardsum { color: #fff2dc; font-weight: 500; }
+/* a bar carrying a confidence marker must not eat the recipient's name to fit it;
+   on a narrow screen the name keeps the first line and the marker takes the second */
+@media (max-width: 700px) {
+  .dbar.marked { flex-wrap: wrap; row-gap: 0.05rem; padding-bottom: 0.34rem; }
+  .dbar.marked .dn { flex: 1 1 100%; }
+  .dbar.marked .dv { margin-left: auto; }
+}
+.p-warn { font-size: 0.88rem; line-height: 1.5; color: var(--ink-dim); background: var(--tint); border-left: 3px solid #bdb49e; border-radius: 0 8px 8px 0; padding: 0.5rem 0.75rem; margin: 0 0 0.9rem; max-width: 62ch; }
+.p-warn b { color: var(--ink); font-weight: 600; }
+.idbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.8rem; padding: 0.1rem 0.1rem 0.35rem; }
+.idtog { display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink-dim); border-radius: 999px; padding: 0.24rem 0.75rem; font-family: var(--mono); font-size: 0.75rem; }
+.idtog:hover { border-color: var(--copper); color: var(--copper-deep); }
+.idtog.on { background: var(--cover); border-color: var(--cover); color: var(--cream); font-weight: 500; }
+.idtog .bx { font-size: 0.9em; line-height: 1; }
+.idcount { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.idlegend { font-family: var(--mono); font-size: 0.73rem; line-height: 1.75; color: var(--ink-dim); padding: 0 0.1rem 0.5rem; border-bottom: 1px solid var(--rule); max-width: 78ch; }
+.idlegend .idm { margin-right: 0.1rem; }
+.sugtog { font-family: var(--mono); font-size: inherit; color: var(--copper-deep); text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+.qnote { font-family: var(--mono); font-size: 0.73rem; line-height: 1.6; color: var(--ink-dim); margin-top: 0.5rem; max-width: 74ch; }
+.qnote b { color: var(--ink); font-weight: 500; }
+#qst { max-width: 19rem; }
+
+.trend { display: grid; gap: 0.42rem; padding-top: 0.55rem; }
+.trow { display: grid; grid-template-columns: 46px 1fr auto; gap: 0.7rem; align-items: center; }
+.trow .y { font-family: var(--mono); font-size: 0.78rem; }
+.tbar { height: 18px; border-radius: 5px; background: linear-gradient(90deg, var(--cover), #2c5c46); min-width: 2px; }
+.trow .v { font-family: var(--mono); font-size: 0.74rem; white-space: nowrap; }
+.trow .v small { color: var(--ink-dim); }
+
+.catwrap { padding-top: 0.55rem; }
+.catbar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin-bottom: 0.7rem; }
+.catbar button { display: block; height: 100%; border: 0; padding: 0; transition: filter 0.15s var(--ease); }
+.catbar button:hover { filter: brightness(1.18); }
+.catkey { display: grid; gap: 0.3rem; font-size: 0.84rem; }
+.ck { position: relative; display: grid; grid-template-columns: 14px minmax(0,1fr) auto auto; gap: 0.55rem; align-items: center; width: 100%; text-align: left; padding: 0.3rem 0.45rem; border-radius: 8px; overflow: hidden; isolation: isolate; transition: background 0.15s var(--ease), transform 0.15s var(--ease); }
+.ck::before { content: ""; position: absolute; inset: 0; width: var(--w, 0%); background: rgba(30,70,52,0.09); border-right: 2px solid rgba(30,70,52,0.3); z-index: -1; border-radius: 8px 0 0 8px; }
+.ck:hover { background: var(--tint); transform: translateX(2px); }
+.ck i { width: 14px; height: 14px; border-radius: 4px; display: block; }
+.ck .kv { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.ck .chev { color: var(--copper-deep); opacity: 0.45; font-size: 0.9rem; }
+.ck:hover .chev { opacity: 1; }
+.ck:hover .kv { color: var(--copper-deep); }
+.toplist { display: grid; gap: 0.4rem; margin-top: 1.1rem; }
+.brow { display: grid; grid-template-columns: minmax(96px, 150px) 1fr auto; gap: 0.6rem; align-items: center; font-size: 0.83rem; padding: 0.25rem 0.45rem; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.15s var(--ease), transform 0.15s var(--ease); }
+a.brow:hover { background: var(--tint); transform: translateX(2px); }
+a.brow:hover .bn { color: var(--copper-deep); }
+.brow .bn { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brow .bb { height: 13px; border-radius: 4px; background: var(--bc, var(--cover)); min-width: 2px; }
+.brow .bv { font-family: var(--mono); font-size: 0.72rem; white-space: nowrap; }
+.h3 { font-family: var(--serif); font-weight: 620; font-size: 1.02rem; margin: 0.55rem 0 0.4rem; }
+
+.micro { border-top: 1px solid var(--rule); padding-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); align-items: baseline; }
+.micro a, .micro button { color: var(--ink-dim); text-decoration: underline; text-underline-offset: 2px; padding: 0; font-family: var(--mono); font-size: 0.72rem; }
+.micro a:hover, .micro button:hover { color: var(--copper-deep); }
+
+/* ---------- right stage ---------- */
+.stage { position: relative; min-height: 0; background:
+  radial-gradient(120% 90% at 68% 30%, #275641 0%, var(--cover) 46%, var(--cover-deep) 100%);
+  color: var(--cream); display: flex; flex-direction: column; padding: clamp(14px, 1.9vw, 26px) clamp(16px, 2.2vw, 30px) clamp(12px, 1.6vw, 20px); overflow: hidden; }
+.stagehead { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; align-items: baseline; }
+.stagehead h1 { font-family: var(--serif); font-weight: 640; font-size: clamp(1.05rem, 1.32vw, 1.32rem); letter-spacing: -0.015em; line-height: 1.15; max-width: 30ch; }
+.stagehead h1 em { font-style: normal; color: var(--copper); }
+.stagelede { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.05em; color: var(--cream-faint); }
+.stagesub { flex: 1 0 100%; font-family: var(--mono); font-size: 0.73rem; line-height: 1.5; color: var(--cream-faint); }
+.stagelink { font-family: inherit; font-size: inherit; color: var(--copper-soft); text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+.stagelink:hover { color: #ffd9a0; }
+.mapzone { position: relative; flex: 1 1 auto; min-height: min(34vh, 300px); display: grid; place-items: center; }
+.usmap { width: 100%; height: 100%; max-height: 100%; display: block; filter: drop-shadow(0 20px 38px rgba(0,0,0,0.3)); }
+.usmap .st { fill: rgba(246,239,221,0.1); stroke: rgba(246,239,221,0.32); stroke-width: 0.7; transition: fill 0.22s var(--ease), opacity 0.22s var(--ease); cursor: default; }
+.usmap .st:hover { fill: rgba(246,239,221,0.22); }
+.usmap .st.live { cursor: pointer; stroke: rgba(241,215,178,0.85); stroke-width: 1; }
+.usmap .st.lv1 { fill: #6d5636; }
+.usmap .st.lv2 { fill: #8e6d3e; }
+.usmap .st.lv3 { fill: #b08746; }
+.usmap .st.lv4 { fill: #d0a25a; }
+.usmap .st.lv5 { fill: #f0c07a; }
+.usmap .st.live:hover { fill: #ffd9a0; }
+.usmap .st.dim { opacity: 0.3; }
+.usmap .st.sel, .usmap .st.hl { stroke: #fff2dc; stroke-width: 2; }
+.usmap .st.live:focus-visible { outline: none; stroke: #fff2dc; stroke-width: 2.4; }
+.maptip { position: absolute; pointer-events: none; background: var(--sheet); color: var(--ink); border-radius: 10px; box-shadow: var(--shadow), inset 0 0 0 1px var(--rule); padding: 0.45rem 0.7rem; font-family: var(--mono); font-size: 0.75rem; line-height: 1.45; opacity: 0; transition: opacity 0.15s; max-width: 240px; z-index: 6; }
+.maptip.on { opacity: 1; }
+.maptip b { font-family: var(--serif); font-size: 0.85rem; display: block; }
+.mapfoot { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.73rem; color: var(--cream-faint); }
+.maplegend { display: inline-flex; align-items: center; gap: 0.3rem; }
+.maplegend i { display: inline-block; width: 18px; height: 7px; border-radius: 2px; }
+.mapfoot button { color: var(--copper); text-decoration: underline; display: none; font-family: var(--mono); font-size: 0.73rem; }
+.mapfoot button.on { display: inline; }
+
+/* ---------- city dots + dossier ---------- */
+.cdot { fill: #f0c07a; fill-opacity: 0.88; stroke: #1c2a22; stroke-width: 0.6; cursor: pointer; transition: fill 0.18s var(--ease); }
+.cdot:hover { fill: #ffd9a0; }
+.cdot.csel { fill: #fff2dc; stroke: #d19049; }
+.dlbl { font-family: var(--mono); fill: #fdf6e6; paint-order: stroke; stroke: rgba(14,36,27,0.85); stroke-width: 2.6px; pointer-events: none; }
+.dossier { flex: 0 0 auto; max-height: 46%; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(246,239,221,0.28) transparent; margin-top: 0.65rem; background: linear-gradient(180deg, rgba(14,36,27,0.62), rgba(14,36,27,0.4)); border: 1px solid rgba(246,239,221,0.16); border-radius: 16px; padding: 0.85rem 1.05rem 0.9rem; }
+.dcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-faint); margin-bottom: 0.35rem; }
+.dcrumb button { color: var(--cream-faint); padding: 0; letter-spacing: inherit; text-transform: inherit; font-size: inherit; font-family: inherit; }
+.dcrumb button:hover { color: var(--copper-soft); text-decoration: underline; text-underline-offset: 2px; }
+.dcrumb .sep { opacity: 0.5; }
+.dcrumb .leaf { color: var(--copper-soft); }
+.dcrumb .dx { margin-left: auto; border: 1px solid rgba(246,239,221,0.25); border-radius: 999px; width: 22px; height: 22px; display: grid; place-items: center; color: var(--cream-faint); font-size: 0.72rem; }
+.dcrumb .dx:hover { color: var(--copper-soft); border-color: var(--copper); }
+.dheadrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.1rem; margin-bottom: 0.7rem; }
+.dheadrow b { font-family: var(--serif); font-weight: 640; font-size: clamp(1.25rem, 1.9vw, 1.7rem); letter-spacing: -0.015em; line-height: 1.05; }
+.dheadrow .dfig { font-family: var(--serif); font-weight: 630; font-size: clamp(1.15rem, 1.7vw, 1.5rem); color: var(--copper-soft); letter-spacing: -0.01em; }
+.dheadrow .dsub { font-family: var(--mono); font-size: 0.73rem; color: var(--cream-faint); }
+/* the year chart needs ~240px to hold six readable value labels side by side, so its
+   column takes the largest share and the three-column dossier only appears when the
+   stage is wide enough to give it that (below 1380px the grid folds to two). */
+.dgrid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.05fr); gap: 0.4rem 1.5rem; }
+@media (max-width: 1379px) { .dgrid { grid-template-columns: 1fr 1fr; } .dzc { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .dgrid { grid-template-columns: 1fr; } }
+.dh { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--copper-soft); margin-bottom: 0.4rem; }
+.dh .dhu { letter-spacing: 0.06em; opacity: 0.85; }
+/* vertical filed-by-year chart */
+.ychart { display: flex; align-items: flex-end; gap: 8%; height: 108px; padding: 0 2px; }
+.ycol { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+.ycol i { display: block; width: 100%; max-width: 34px; border-radius: 4px 4px 2px 2px; background: linear-gradient(180deg, #f0c07a, #b08746); min-height: 2px; transition: height 0.5s var(--ease); }
+.ycol:hover i { background: linear-gradient(180deg, #ffd9a0, #c79045); }
+.ycol .yv { font-family: var(--mono); font-size: 0.68rem; color: var(--cream-faint); margin-bottom: 3px; white-space: nowrap; }
+.ycol .yl { font-family: var(--mono); font-size: 0.71rem; color: var(--cream-faint); margin-top: 4px; }
+/* partial years: a year no one has finished filing is hatched and counted, never dressed up as complete */
+.ycol i.part { background-image: repeating-linear-gradient(135deg, rgba(14,36,27,0.62) 0 3px, rgba(14,36,27,0) 3px 7px), linear-gradient(180deg, #f0c07a, #b08746); box-shadow: 0 0 0 1px rgba(255,242,220,0.85); }
+.ycol .yc { font-family: var(--mono); font-size: 0.68rem; line-height: 1.3; color: var(--cream-faint); white-space: nowrap; opacity: 0.9; }
+.ycol .yc.part { color: #ffd9a0; opacity: 1; }
+.ycol .yc.part::before { content: "◹ "; }
+.ynote { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--cream-faint); margin-top: 0.45rem; }
+.ynote[hidden] { display: none; }
+.ynote b { color: #ffd9a0; font-weight: 400; }
+/* data-bar rows: the value bar paints behind the text */
+.dbar { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; width: 100%; padding: 0.28rem 0.5rem; border-radius: 7px; overflow: hidden; text-align: left; color: var(--cream); isolation: isolate; }
+.dbar::before { content: ""; position: absolute; inset: 0; width: var(--w, 0%); background: rgba(209, 144, 73, 0.22); border-right: 2px solid rgba(240, 192, 122, 0.75); z-index: -1; transition: width 0.5s var(--ease); border-radius: 7px 0 0 7px; }
+.dbar .dn { font-family: var(--text); font-size: 0.84rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dbar .dv { font-family: var(--mono); font-size: 0.72rem; color: var(--cream-faint); white-space: nowrap; }
+.dbar .chev { color: var(--copper-soft); opacity: 0; transition: opacity 0.15s; margin-left: 0.15rem; }
+button.dbar:hover { background: rgba(246,239,221,0.06); }
+button.dbar:hover .chev { opacity: 1; }
+button.dbar.on::before { background: rgba(240, 192, 122, 0.34); }
+button.dbar.on .dn { color: var(--copper-soft); font-weight: 600; }
+a.dbar { text-decoration: none; }
+a.dbar:hover { background: rgba(246,239,221,0.06); }
+.dlist { display: grid; gap: 0.14rem; }
+.dnote { font-family: var(--mono); font-size: 0.7rem; color: var(--cream-faint); margin-top: 0.45rem; opacity: 0.85; }
+.dbar .chev { opacity: 0.42; }
+button.dbar:hover, a.dbar:hover { background: rgba(246,239,221,0.09); transform: translateX(2px); }
+button.dbar, a.dbar { transition: background 0.15s var(--ease), transform 0.15s var(--ease); }
+.usmap .st.live { cursor: pointer; }
+/* the dossier absorbs the slack and scrolls itself, so the findings strip below it
+   is never clipped off the bottom of the stage on a short window */
+.stage:not(.drilled) .dossier { max-height: none; flex: 1 1 auto; min-height: 0; }
+/* slim findings strip */
+.ticker { margin-top: 0.5rem; padding: 0.5rem 0.8rem; }
+.tcard { min-height: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.7rem; margin-top: 0.15rem; }
+.tcard b { font-size: 0.88rem; display: inline; }
+.tcard span { display: inline; font-size: 0.76rem; }
+.tcard .go { display: none; }
+@media (max-width: 1279px) { .tcard span:not(.go) { display: none; } }
+.stage.drilled .mapzone, .stage.drilled .mapfoot { display: none; }
+.stage.drilled .dossier { margin-top: 0.4rem; flex: 1 1 auto; max-height: none; min-height: 0; overflow-y: auto; }
+
+/* ---------- export menu + report ---------- */
+.expwrap { position: relative; display: inline-block; }
+.expmenu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 30; background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--shadow); min-width: 220px; overflow: hidden; }
+.expmenu[hidden] { display: none; }
+.expmenu button { display: block; width: 100%; text-align: left; padding: 0.5rem 0.75rem; font-family: var(--text); font-size: 0.9rem; border-bottom: 1px solid var(--rule); }
+.expmenu button:last-child { border-bottom: 0; }
+.expmenu button:hover { background: var(--tint); }
+.expmenu button small { display: block; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.expmenu .grp { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); padding: 0.45rem 0.75rem 0.2rem; background: var(--tint); }
+
+.rep { max-width: 100%; }
+/* A report can run past 6,000px of internal scrolling. Its two actions therefore ride a
+   sticky bar pulled out to the card's edges (negative margins = the card's own padding),
+   so Export and Print are on screen at every scroll position, 390px included. The same
+   pair repeats at the foot for anyone who reads to the end. */
+.repbar { position: sticky; top: calc(-1 * var(--pad)); z-index: 5; display: flex; align-items: center; gap: 0.5rem;
+  margin: calc(-1 * var(--pad)) calc(-1 * var(--pad)) 1rem; padding: 0.55rem var(--pad);
+  background: var(--sheet); border-bottom: 1px solid var(--rule); box-shadow: 0 10px 18px -16px rgba(20,26,18,0.55); }
+.repbar .rbt { flex: 1 1 auto; min-width: 0; font-family: var(--serif); font-weight: 630; font-size: 1rem; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.repbar .rbacts { flex: 0 0 auto; display: flex; align-items: center; gap: 0.35rem; }
+.repbar .rbx { width: 2rem; padding: 0.3rem 0; text-align: center; font-size: 0.9rem; line-height: 1; }
+.repfoot { display: flex; gap: 0.45rem; margin-top: 1rem; flex-wrap: wrap; }
+.ovlcard.repmode > .ovlx { display: none; }
+@media (max-width: 520px) { .repbar .rbt { display: none; } .repbar { justify-content: flex-end; } .repbar .rbpdf { display: none; } }
+.rephead { border-bottom: 2px solid var(--cover); padding-bottom: 0.7rem; margin-bottom: 1rem; }
+.rephead .t { font-family: var(--serif); font-weight: 640; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.018em; line-height: 1.1; }
+.rephead .p { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); margin-top: 0.3rem; }
+.repnums { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem; margin-bottom: 1.2rem; }
+.repnum { background: var(--tint); border-radius: 10px; padding: 0.6rem 0.75rem; }
+.repnum b { display: block; font-family: var(--serif); font-weight: 630; font-size: 1.35rem; letter-spacing: -0.015em; color: var(--cover); }
+.repnum span { font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); }
+.repsec { margin-bottom: 1.3rem; }
+.repsec h4 { font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper-deep); margin-bottom: 0.5rem; }
+.hbars { display: grid; gap: 0.3rem; }
+.hbar { display: grid; grid-template-columns: minmax(120px, 220px) 1fr auto; gap: 0.6rem; align-items: center; font-size: 0.86rem; }
+.hbar .hn { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar .hb { height: 14px; border-radius: 4px; background: var(--cover); min-width: 2px; }
+.hbar .hv { font-family: var(--mono); font-size: 0.72rem; white-space: nowrap; }
+.vbars { display: flex; align-items: flex-end; gap: 3%; height: 120px; }
+.vbar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.vbar i { display: block; width: 100%; max-width: 42px; background: linear-gradient(180deg, var(--copper), var(--copper-deep)); border-radius: 4px 4px 2px 2px; min-height: 2px; }
+.vbar .vv { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-dim); margin-bottom: 3px; }
+.vbar .vl { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); margin-top: 4px; }
+.repnote { font-family: var(--mono); font-size: 0.73rem; color: var(--ink-dim); border-top: 1px solid var(--rule); padding-top: 0.6rem; margin-top: 1rem; }
+
+/* ---------- peer lens ---------- */
+.peerwrap { margin-top: 1.4rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+.peerhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.8rem; margin-bottom: 0.2rem; }
+.peerhead b { font-family: var(--serif); font-weight: 630; font-size: 1.12rem; }
+.peerhead .sub { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.peerlead { font-size: 0.92rem; color: var(--ink-dim); margin: 0.15rem 0 0.75rem; max-width: 60ch; }
+.plist { display: grid; gap: 0.45rem; }
+.prow { display: grid; grid-template-columns: 1fr auto auto; gap: 0.7rem; align-items: center; background: var(--tint); border: 1px solid var(--rule); border-radius: 10px; padding: 0.5rem 0.7rem; }
+.prow .pn { font-family: var(--serif); font-weight: 620; font-size: 0.95rem; line-height: 1.2; }
+.prow .pn a { color: inherit; text-decoration: none; }
+.prow .pn a:hover { color: var(--copper-deep); }
+.prow .pm { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); display: block; margin-top: 0.12rem; }
+.prow .pv { font-family: var(--mono); font-size: 0.72rem; white-space: nowrap; text-align: right; }
+.prow .pv small { display: block; color: var(--ink-dim); font-size: 0.72rem; }
+.already { font-family: var(--mono); font-size: 0.72rem; color: var(--cover); background: rgba(30,70,52,0.08); border: 1px solid rgba(30,70,52,0.25); border-radius: 999px; padding: 0.1rem 0.4rem; }
+.peerorgs { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); margin-top: 0.7rem; line-height: 1.6; }
+.peerorgs button { font-family: inherit; font-size: inherit; color: var(--copper-deep); text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+
+/* ---------- the working list ---------- */
+.listbtn { position: relative; display: inline-flex; align-items: center; gap: 0.42rem; border: 1px solid rgba(246,239,221,0.24); border-radius: 999px; padding: 0.24rem 0.42rem 0.24rem 0.5rem; line-height: 1; }
+.listbtn:hover { border-color: var(--copper); }
+.listbtn .lbico { width: 12px; height: 12px; flex: 0 0 auto; display: block; }
+.listbtn .lbt { max-width: 11rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.listbtn .cnt { font-family: var(--mono); font-size: 0.74rem; background: var(--copper); color: #21150a; border-radius: 999px; min-width: 1.15rem; text-align: center; padding: 0.1rem 0.34rem; font-weight: 500; }
+.listbtn .cnt.zero { background: rgba(246,239,221,0.16); color: var(--cream-faint); }
+.lrow { display: grid; grid-template-columns: 34px 1fr auto auto; gap: 0.7rem; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+.lrow .cd { width: 34px; height: 34px; border-radius: 9px; background: var(--cover); color: var(--copper); font-family: var(--mono); font-size: 0.74rem; display: grid; place-items: center; }
+.lrow .ln { font-family: var(--serif); font-weight: 620; font-size: 0.98rem; line-height: 1.2; }
+.lrow .ln a { color: inherit; text-decoration: none; }
+.lrow .ln a:hover { color: var(--copper-deep); }
+.lrow .lm { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.lrow .lv { font-family: var(--mono); font-size: 0.76rem; white-space: nowrap; }
+.lrow .rm { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); border: 1px solid var(--rule); border-radius: 7px; padding: 0.18rem 0.42rem; }
+.lrow .rm:hover { border-color: var(--neg); color: var(--neg); }
+.lnote { grid-column: 2 / -1; width: 100%; font: 400 0.84rem var(--text); color: var(--ink); background: var(--tint); border: 1px solid var(--rule); border-radius: 8px; padding: 0.3rem 0.5rem; margin-top: 0.25rem; resize: vertical; min-height: 2rem; }
+/* ---------- projects: named lists, this browser only ---------- */
+.projbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+.projbar .qsel { font-size: 0.86rem; padding: 0.3rem 0.5rem; max-width: 17rem; flex: 0 1 auto; min-width: 0; }
+.projbar .pgap { flex: 1 1 auto; }
+.pbtn { background: var(--sheet); border: 1px solid var(--rule); border-radius: 999px; padding: 0.3rem 0.75rem; font-family: var(--mono); font-size: 0.74rem; white-space: nowrap; color: var(--ink-dim); }
+.pbtn:hover { border-color: var(--copper); color: var(--copper-deep); }
+.pbtn:disabled { opacity: 0.45; cursor: default; }
+.pbtn:disabled:hover { border-color: var(--rule); color: var(--ink-dim); }
+.projnote { font-family: var(--mono); font-size: 0.74rem; line-height: 1.6; color: var(--ink-dim); margin: 0.55rem 0 0.2rem; max-width: 78ch; }
+.projnote b { color: var(--ink); font-weight: 500; }
+.projmsg { font-family: var(--mono); font-size: 0.76rem; line-height: 1.5; color: #102c20; background: rgba(30,70,52,0.1); border-left: 3px solid var(--cover); border-radius: 0 8px 8px 0; padding: 0.4rem 0.6rem; margin: 0.5rem 0 0.2rem; }
+.projmsg.bad { color: #6b2018; background: rgba(167,49,42,0.09); border-left-color: var(--neg); }
+.projmsg[hidden] { display: none; }
+.lhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem; margin: 0.9rem 0 0.6rem; }
+.lhead .tot { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.lhead .acts { margin-left: auto; display: flex; gap: 0.45rem; }
+
+@media print {
+  body * { visibility: hidden; }
+  #ovl, #ovl * { visibility: visible; }
+  #ovl { position: absolute; inset: 0; background: #fff; padding: 0; }
+  .ovlcard { box-shadow: none; max-height: none; overflow: visible; width: 100%; }
+  .ovlx, .lhead .acts, .lrow .rm, .repbar, .repfoot, .projbar, .projmsg { display: none !important; }
+}
+
+/* ---------- find: the query spine ---------- */
+.qbar { background: var(--sheet); border: 1px solid var(--rule); border-radius: 14px; padding: 0.7rem 0.85rem 0.75rem; box-shadow: 0 1px 0 rgba(30,26,12,0.04); }
+/* The app has to open on something. It opens on one purpose — and says so, in the same
+   breath as the result, so the first screen is never read as the whole collection. */
+.qex { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.5rem; font-family: var(--mono); font-size: 0.76rem; line-height: 1.55; color: var(--ink-dim); margin-bottom: 0.55rem; }
+.qex[hidden] { display: none; }
+.qex b { color: var(--ink); font-weight: 500; }
+.qexb { flex: 0 0 auto; font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase; color: #21150a; background: var(--copper-soft); border-radius: 999px; padding: 0.1rem 0.5rem; }
+.qexlink { font-family: inherit; font-size: inherit; color: var(--copper-deep); text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+.qexlink:hover { color: var(--cover); }
+.qline { font-family: var(--text); font-size: 1rem; line-height: 2.1; color: var(--ink); }
+.qsel { font-family: var(--mono); font-size: 0.82rem; background: var(--tint); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 0.45rem; color: var(--ink); max-width: 15rem; }
+.qsel:hover { border-color: var(--copper); }
+.qsel:focus-visible { outline: 2px solid var(--copper); outline-offset: 1px; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; align-items: baseline; margin-top: 0.55rem; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-dim); }
+.qmeta b { font-family: var(--serif); font-weight: 630; font-size: 1.05rem; color: var(--ink); letter-spacing: -0.01em; }
+.qreset { color: var(--copper-deep); text-decoration: underline; text-underline-offset: 2px; font-family: var(--mono); font-size: 0.75rem; padding: 0; }
+.fcard { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 0.8rem; background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; padding: 0.6rem 0.75rem; transition: border-color 0.15s var(--ease), transform 0.15s var(--ease); }
+.fcard:hover { border-color: var(--copper); transform: translateY(-1px); }
+.fcard .nm { font-family: var(--serif); font-weight: 620; font-size: 0.98rem; line-height: 1.2; }
+.fcard .nm a { color: inherit; text-decoration: none; }
+.fcard .nm a:hover { color: var(--copper-deep); }
+.fcard .where { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+.fstats { display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; margin-top: 0.28rem; }
+.fstat { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.fstat b { font-family: var(--mono); font-weight: 500; font-size: 0.76rem; color: var(--ink); display: block; }
+.fside { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 0.3rem; }
+.proof { font-family: var(--mono); font-size: 0.71rem; color: var(--cover); border: 1px solid rgba(30,70,52,0.3); background: rgba(30,70,52,0.07); border-radius: 999px; padding: 0.14rem 0.45rem; white-space: nowrap; }
+.proof:hover { border-color: var(--cover); }
+.proof.bridged { color: var(--copper-deep); border-color: rgba(163,92,26,0.35); background: rgba(163,92,26,0.08); }
+.addb { font-family: var(--mono); font-size: 0.74rem; border: 1px solid var(--rule); border-radius: 8px; padding: 0.22rem 0.5rem; white-space: nowrap; color: var(--ink-dim); }
+.addb:hover { border-color: var(--copper); color: var(--copper-deep); }
+.addb.on { background: var(--cover); border-color: var(--cover); color: var(--cream); }
+.qempty { font-size: 0.9rem; color: var(--ink-dim); padding: 1rem 0.2rem; }
+.qempty b { font-family: var(--serif); font-size: 1.02rem; color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+/* ---------- findings ticker ---------- */
+.ticker { margin-top: 0.65rem; background: rgba(14, 36, 27, 0.55); border: 1px solid rgba(246,239,221,0.14); border-radius: 14px; padding: 0.7rem 0.9rem 0.6rem; backdrop-filter: blur(2px); }
+.tickhead { display: flex; align-items: center; gap: 0.7rem; font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--copper-soft); }
+.tickhead .dots { margin-left: auto; display: flex; gap: 0.3rem; }
+.tickhead .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(246,239,221,0.25); padding: 0; }
+.tickhead .dot.on { background: var(--copper); }
+.tickhead .arr { color: var(--cream-faint); font-size: 0.8rem; padding: 0 0.15rem; }
+.tickhead .arr:hover { color: var(--copper-soft); }
+.tcard { display: block; text-decoration: none; color: inherit; margin-top: 0.35rem; min-height: 3.2rem; }
+.tcard b { font-family: var(--serif); font-weight: 630; font-size: 1.02rem; letter-spacing: -0.01em; color: var(--cream); display: block; line-height: 1.25; }
+.tcard b:hover { color: var(--copper-soft); }
+.tcard span { display: block; font-size: 0.83rem; color: var(--cream-faint); line-height: 1.4; margin-top: 0.15rem; }
+.tcard .go { font-family: var(--mono); font-size: 0.72rem; color: var(--copper); margin-top: 0.2rem; }
+
+/* ---------- the collapsed map card (narrow screens only) ---------- */
+.mapcard { border: 1px solid var(--rule); border-radius: 14px; background: var(--sheet); overflow: hidden; }
+.mapcard[hidden] { display: none; }
+.mapcardt { display: flex; align-items: center; gap: 0.55rem; width: 100%; text-align: left; padding: 0.7rem 0.8rem; }
+.mapcardt .mct { font-family: var(--serif); font-weight: 620; font-size: 0.98rem; letter-spacing: -0.01em; }
+.mapcardt .mcm { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); margin-left: auto; text-align: right; white-space: nowrap; }
+.mapcardt .mcc { flex: 0 0 auto; width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--rule); border-radius: 999px; font-family: var(--mono); font-size: 0.95rem; line-height: 1; color: var(--copper-deep); }
+.mapcardt:hover .mcc { border-color: var(--copper); background: var(--tint); }
+.mapcardt:hover .mct { color: var(--copper-deep); }
+.mapcardb { max-height: 0; overflow: hidden; visibility: hidden; }
+.mapcard.open .mapcardb { max-height: none; visibility: visible; padding: 0 0.5rem 0.5rem; }
+
+@media (max-width: 1019px) {
+  /* Order on a phone: search, filters, results, then an opt-in map, then findings.
+     placeStage() moves the stage into #stagehost and the ticker into #tickhost. */
+  .mast { display: block; }
+  .masth { font-family: var(--serif); font-weight: 640; font-size: 1.12rem; line-height: 1.22; letter-spacing: -0.015em; }
+  .masth em { font-style: normal; color: var(--copper-deep); }
+  .mastsub { font-family: var(--mono); font-size: 0.76rem; line-height: 1.5; color: var(--ink-dim); margin-top: 0.2rem; }
+  .mastlink { font-family: inherit; font-size: inherit; color: var(--copper-deep); text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+  .stagehead h1, .stagesub { display: none; }   /* the masthead above the search carries both */
+  .stage { min-height: 0; border-radius: 12px; margin: 0; padding: 0.85rem 0.85rem 0.8rem; }
+  .mapzone { min-height: 0; height: 34vh; }
+  .left { padding-bottom: 1.4rem; }
+  .topnav .hidesm { display: none; }
+  .micro .showsm { display: inline; }
+  /* findings live on paper once they leave the stage */
+  #tickhost .ticker { margin-top: 0; background: var(--cover-ink); border-color: rgba(246,239,221,0.2); }
+  #tickhost .tcard { min-height: 0; }
+  #tickhost .tcard span:not(.go) { display: block; font-size: 0.86rem; }
+  #tickhost .tcard .go { display: block; }
+  #tickhost .tickhead .arr { font-size: 1.05rem; padding: 0.1rem 0.4rem; }
+  #tickhost .tickhead .dot { width: 8px; height: 8px; }
+  /* small mono type is the house voice, but it has to be readable in the hand */
+  .topnav { font-size: 0.78rem; gap: 0.85rem; }
+  .sug .m, .wv .wm, .fc .meta, .fc .tie small, .micro, .micro a, .micro button,
+  .fcard .where, .fstat, .addb, .p-id, .prow .pm, .prow .pv small, .already,
+  .lrow .lm, .peerorgs, .repnote, .expmenu button small, .yb .y, .dbar .dv,
+  .dheadrow .dsub, .stagelede, .stagesub, .mapfoot, .mapfoot button { font-size: 0.74rem; }
+  .srchint, .proof, .dcrumb, .dnote, .ynote, .th, th, .expmenu .grp, .repsec h4,
+  .repnum span, .vbar .vv, .vbar .vl, .tickhead, .dh { font-size: 0.76rem; }
+  .rchip, .stchip, .tbtn, .fmore, .ck .kv, .brow .bv, .qmeta, .qreset, .pager,
+  .pager button, .tcard .go, .p-tot span, .fchip .cd { font-size: 0.76rem; }
+  .tab, .phead .cnt, .fstat b, .fchip .fa, .yb .v, .qsel { font-size: 0.82rem; }
+  .ycol .yv, .ycol .yc { font-size: 0.74rem; }
+  .ycol .yl { font-size: 0.72rem; }
+  .qsel { max-width: 100%; }
+  .tabs { flex-wrap: wrap; gap: 0.1rem 0.15rem; }
+  .tab { padding: 0.45rem 0.55rem; }
+  /* a funder card has to fit in a thumb-scroll, so the stats line up in a grid
+     instead of ragged-wrapping and the two actions stack at the top right */
+  .fcard { padding: 0.55rem 0.7rem 0.6rem; }
+  .fstats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.3rem 0.5rem; }
+  .fstat { line-height: 1.25; }
+  .fside { justify-content: flex-start; gap: 0.35rem; }
+  .dcrumb, .dh, .tickhead { letter-spacing: 0.08em; }
+}
+@media (max-width: 430px) {
+  .brand b { font-size: 0.94rem; }
+  .top { gap: 0.7rem; padding-left: 12px; padding-right: 12px; }
+  .topnav { gap: 0.7rem; font-size: 0.76rem; }
+  .listbtn .lbt { display: none; }
+  .mapcardt .mcm { display: none; }
+}
+
+/* ---------- overlay ---------- */
+.ovl { position: fixed; inset: 0; z-index: 60; background: rgba(14, 26, 20, 0.55); display: grid; place-items: center; padding: clamp(8px, 3vh, 40px) clamp(8px, 3vw, 40px); }
+.ovl[hidden] { display: none; }
+.ovlcard { --pad: clamp(1rem, 3vw, 1.7rem); position: relative; width: min(980px, 100%); max-height: 100%; overflow-y: auto; background: var(--sheet); border-radius: 18px; box-shadow: var(--shadow), inset 0 0 0 1px var(--rule); padding: var(--pad); overscroll-behavior: contain; }
+.ovlx { position: sticky; top: 0; float: right; margin-left: 1rem; font-family: var(--mono); font-size: 0.85rem; border: 1px solid var(--rule); border-radius: 999px; width: 30px; height: 30px; background: var(--sheet); z-index: 4; }
+.ovlx:hover { border-color: var(--copper); color: var(--copper-deep); }
+.p-name { font-family: var(--serif); font-weight: 630; font-size: clamp(1.3rem, 2.6vw, 1.8rem); letter-spacing: -0.015em; }
+.p-id { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.4rem; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+/* a recipient row has to hold a name, a confidence marker and a sum on a phone */
+@media (max-width: 700px) {
+  .wv { grid-template-columns: minmax(0, 1fr) auto; row-gap: 0.12rem; }
+  .wv .wn { grid-column: 1; grid-row: 1; }
+  .wv .ws { grid-column: 2; grid-row: 1; }
+  .wv .wm { grid-column: 1 / -1; grid-row: 2; white-space: normal; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
+}
+.p-alias { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); margin-top: 0.2rem; }
+.p-tot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1.5rem; margin: 0.65rem 0 0.9rem; }
+.p-tot b { font-family: var(--serif); font-weight: 630; font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--copper-deep); }
+.p-tot span { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
+.chiprow { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.fchip { display: inline-flex; align-items: baseline; gap: 0.42rem; background: var(--tint); border: 1px solid var(--rule); border-radius: 999px; padding: 0.26rem 0.7rem 0.26rem 0.45rem; text-decoration: none; color: inherit; }
+.fchip:hover { border-color: var(--copper); }
+.fchip .cd { font-family: var(--mono); font-size: 0.71rem; font-weight: 500; background: var(--cover); color: var(--cream); border-radius: 999px; padding: 0.12rem 0.4rem; }
+.fchip .fa { font-family: var(--mono); font-size: 0.75rem; }
+.yearsline { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 0.45rem; margin-bottom: 1rem; }
+.yb { background: var(--tint); border-radius: 10px; padding: 0.45rem 0.55rem; }
+.yb .y { font-family: var(--mono); font-size: 0.73rem; color: var(--ink-dim); }
+.yb .v { font-family: var(--mono); font-size: 0.8rem; }
+.tw { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 540px; }
+th { text-align: left; font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--rule); }
+td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.amt, th.amt { text-align: right; font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
+.rowlink { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--copper); }
+.rowlink:hover { color: var(--copper-deep); }
+.recbtn { padding: 0; text-align: left; border-bottom: 1px dotted var(--copper); }
+.recbtn:hover { color: var(--copper-deep); }
+.loading { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); padding: 1rem 0; }
+.xhead { font-family: var(--serif); font-weight: 630; font-size: 1.3rem; margin-bottom: 0.7rem; }
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
+.filters input[type="search"], .filters select { font: 500 0.9rem var(--text); padding: 0.45rem 0.65rem; border-radius: 10px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); max-width: 100%; }
+.filters input[type="search"] { flex: 1 1 200px; }
+.toolline { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; align-items: baseline; margin-bottom: 0.5rem; }
+.toolline .count { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); }
+.toolline .actions { margin-left: auto; display: flex; gap: 0.45rem; }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.7rem; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.pager button { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 0.28rem 0.75rem; font-family: var(--mono); font-size: 0.76rem; }
+.pager button:disabled { opacity: 0.4; cursor: default; }
+.catcell { font-size: 0.78rem; color: var(--ink-dim); }
+.method { font-size: 0.92rem; color: var(--ink); max-width: 52rem; }
+.method p { margin-bottom: 0.8rem; }
+.method .h3 { margin-top: 0; }
+.method .mh { font-family: var(--serif); font-weight: 640; font-size: 1.02rem; letter-spacing: -0.01em; margin: 1.15rem 0 0.3rem; padding-top: 0.7rem; border-top: 1px solid var(--rule); }
+.method .fig { font-family: var(--mono); font-size: 0.95em; font-variant-numeric: tabular-nums; }
+.method .foot { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); }
+@media (max-width: 1019px) { .method .foot { font-size: 0.76rem; } }
+</style>
+</head>
+<body>
+
+<div class="shell">
+<header class="top">
+  <a class="brand" href="https://jcurry44.github.io/grants-ledgers/" title="The Grants Ledger — back to the start" aria-label="The Grants Ledger, home"><span class="gl" aria-hidden="true">≡</span><b>The Grants Ledger</b></a>
+  <div class="tots" id="bigstats" aria-live="polite" data-state="wait">
+    <div><b class="num" data-k="t">&mdash;</b><span>reconciled</span></div>
+    <div><b class="num" data-k="g">&mdash;</b><span>grants</span></div>
+    <div><b class="num" data-k="n">&mdash;</b><span>ledgers</span></div>
+  </div>
+  <nav class="topnav">
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/" class="hidesm">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/" class="hidesm">New York ↗</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="hidesm">Exceptions ↗</a>
+    <button type="button" id="listbtn" class="listbtn" aria-label="Project — 0 saved"><svg class="lbico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.1 1.6h7.8a1 1 0 0 1 1 1v11.8l-4.9-3.1-4.9 3.1V2.6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lbt">Project</span><span class="cnt" id="listcnt">0</span></button>
+    <button type="button" id="aboutbtn">Method</button>
+  </nav>
+</header>
+
+<main class="deck">
+<section class="left" aria-label="Browse the collection">
+  <div class="mast">
+    <h1 class="masth">A verified record of grantmaking from <em><span id="heroN2">1,932</span> major U.S. private foundations</em></h1>
+    <p class="mastsub">Every included year reconciles to the total that foundation itself filed with the IRS. <button type="button" class="mastlink" id="mastmethod">What is in, and what is not ›</button></p>
+  </div>
+  <div class="searchbox">
+    <label class="sr-only" for="q">Search organizations</label>
+    <input type="search" id="q" placeholder="Search any organization — try “philharmonic”…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggest">
+    <span class="slash" aria-hidden="true">/</span>
+    <div class="suggest" id="suggest" role="listbox" hidden></div>
+  </div>
+  <div class="scopes">
+    <span id="regions" role="group" aria-label="Region"></span>
+    <button type="button" class="stchip" id="stchip" hidden></button>
+  </div>
+  <div class="tabs" role="tablist" id="tabs">
+    <button class="tab on" role="tab" data-t="q" aria-selected="true">Find funders</button>
+    <button class="tab" role="tab" data-t="f" aria-selected="false">All ledgers</button>
+    <button class="tab" role="tab" data-t="r" aria-selected="false">Recipients</button>
+    <button class="tab" role="tab" data-t="y" aria-selected="false">Years</button>
+    <button class="tab" role="tab" data-t="c" aria-selected="false">Purposes</button>
+  </div>
+  <div class="panelbody" id="panelbody">
+    <div class="tabpane" id="pane-q" role="tabpanel">
+      <div class="qbar">
+        <p class="qex" id="qex"><span class="qexb">Starting example</span><span>This opens on <b>one purpose of 11</b> — not the whole collection. Change any word below to re-ask, or <button type="button" class="qexlink" id="qexall">browse all <span id="qexn">1,932</span> ledgers</button>.</span></p>
+        <div class="qline">Find funders of
+          <select class="qsel" id="qcat" aria-label="Purpose"></select> work
+          <select class="qsel" id="qst" aria-label="Recipient location as filed"></select>,
+          giving at least <select class="qsel" id="qmin" aria-label="Grant size">
+            <option value="0">any amount</option><option value="10000">$10k</option>
+            <option value="50000">$50k</option><option value="100000">$100k</option>
+            <option value="500000">$500k</option><option value="1000000">$1M</option>
+          </select>,
+          active since <select class="qsel" id="qyr" aria-label="Active since"></select>.
+        </div>
+        <p class="qnote"><b>Recipient location as filed</b> &mdash; the address on the grant row, not the geography the work ultimately serves. <b>Location not filed</b> is the 246,778 rows (16.2%) that name no recipient state.</p>
+        <div class="qmeta"><b id="qcount">—</b><span id="qsum"></span>
+          <button type="button" class="qreset" id="qreset">reset</button>
+          <span style="margin-left:auto; display:flex; gap:0.4rem">
+            <button type="button" class="tbtn" id="qreport">Build report</button>
+            <span class="expwrap"><button type="button" class="tbtn" id="qexport">Export ▾</button></span>
+          </span></div>
+      </div>
+      <div class="flist" id="qresults" style="margin-top:0.6rem"></div>
+      <button type="button" class="fmore" id="qmore" hidden>Show more</button>
+    </div>
+    <div class="tabpane" id="pane-f" role="tabpanel" hidden>
+      <div class="phead"><span class="cnt num" id="fcount"></span>
+        <select id="fsort" aria-label="Sort foundations">
+          <option value="t">by dollars</option><option value="g">by grants</option>
+          <option value="n">by name</option><option value="st">by state</option>
+        </select>
+        <button type="button" class="tbtn" id="rowsbtn">Browse rows ⌗</button>
+      </div>
+      <div class="flist" id="fleet"></div>
+      <button type="button" class="fmore" id="fmore" hidden>Show more</button>
+    </div>
+    <div class="tabpane" id="pane-r" role="tabpanel" hidden>
+      <p class="panehint">Organizations funded by many hands — commitments visible only when the records sit side by side. Click any name for its full cross-ledger record, or search above.</p>
+      <div class="idbar">
+        <button type="button" class="idtog" id="idtog" aria-pressed="false"><span class="bx" aria-hidden="true">&#9744;</span>Government-matched identities only</button>
+        <span class="idcount" id="idcount"></span>
+      </div>
+      <p class="idlegend" id="idlegend"></p>
+      <div class="weave" id="weave"></div>
+    </div>
+    <div class="tabpane" id="pane-y" role="tabpanel" hidden>
+      <p class="panehint">The sum of the records filed for each year in the current scope — <strong>not</strong> total giving. Each bar names how many records contain that year. A ledger only claims the years it can prove; every withheld year and why is on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>.</p>
+      <div class="trend" id="trend"></div>
+    </div>
+    <div class="tabpane" id="pane-c" role="tabpanel" hidden>
+      <div class="catwrap">
+        <p class="panehint" style="padding-top:0">Every dollar in the collection, by the purpose the filing states. Click any purpose for its own summary — its trend, its biggest recipients, and the funders behind it.</p>
+        <div class="catbar" id="catbar"></div><div class="catkey" id="catkey"></div>
+        <div class="h3">The largest records</div>
+        <div class="toplist" id="topfnd"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mapcard" id="mapcard" hidden>
+    <button type="button" class="mapcardt" id="mapcardt" aria-expanded="false" aria-controls="stagehost">
+      <span class="mct">Explore the national map</span>
+      <span class="mcm" id="mapcardsum">the whole collection, state by state</span>
+      <span class="mcc" aria-hidden="true">+</span>
+    </button>
+    <div class="mapcardb" id="stagehost"></div>
+  </div>
+  <div id="tickhost"></div>
+  <div class="micro">
+    <span>every grant reconciled to its foundation’s own IRS filing — to the dollar, differences disclosed</span>
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/" class="showsm">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="showsm">Exceptions ↗</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/" class="showsm">New York ↗</a>
+    <a href="db/all-grants.csv.gz">download everything (CSV)</a>
+    <span>an independent project by <a href="https://jcurry44.github.io/">Curry Studio</a> · not affiliated with any foundation shown</span>
+  </div>
+</section>
+
+<section class="stage" aria-label="The map">
+  <div class="stagehead">
+    <h1>A verified record of grantmaking from <em><span id="heroN">1,932</span> major U.S. private foundations</em></h1>
+    <span class="stagelede" id="mapstat"></span>
+    <span class="stagesub">every included year reconciled to the total that foundation itself filed with the IRS · <button type="button" class="stagelink" id="heromethod">what is in, and what is not ›</button></span>
+  </div>
+  <div class="mapzone">
+    <svg class="usmap" id="usmap" role="img" aria-label="Map of the United States, shaded where foundations in this collection are based."></svg>
+    <div class="maptip" id="maptip"></div>
+  </div>
+  <div class="mapfoot">
+    <span class="maplegend" aria-hidden="true"><span>less</span><i style="background:#6d5636"></i><i style="background:#8e6d3e"></i><i style="background:#b08746"></i><i style="background:#d0a25a"></i><i style="background:#f0c07a"></i><span>more verified</span></span>
+    <button type="button" id="mapback">← whole country</button>
+  </div>
+  <div class="dossier" id="dossier" hidden aria-label="Scope summary">
+    <div class="dcrumb" id="dcrumb"></div>
+    <div class="dheadrow"><b id="dname"></b><span class="dfig num" id="dfig"></span><span class="dsub" id="dstats"></span></div>
+    <div class="dgrid">
+      <div class="dz"><div class="dh">Filed by year <span class="dhu">US$</span></div><div class="ychart" id="dyears"></div><p class="ynote" id="dyearsnote" hidden></p></div>
+      <div class="dz"><div class="dh" id="dcatsh">Where the dollars go</div><div class="dlist" id="dcats"></div></div>
+      <div class="dz dzc" id="dctx"></div>
+    </div>
+    <div class="dnote" id="dnote"></div>
+  </div>
+  <div class="ticker" aria-label="What the ledger catches">
+    <div class="tickhead"><span>What the ledger catches</span>
+      <span class="dots" id="tdots"></span>
+      <button type="button" class="arr" id="tprev" aria-label="Previous finding">‹</button>
+      <button type="button" class="arr" id="tnext" aria-label="Next finding">›</button>
+    </div>
+    <a class="tcard" id="tcard" href="#"></a>
+  </div>
+</section>
+</main>
+</div>
+
+<div class="expmenu" id="expmenu" hidden>
+  <div class="grp">Spreadsheet</div>
+  <button type="button" data-x="xlsx-fmt">Excel — formatted<small>headers, currency, frozen row</small></button>
+  <button type="button" data-x="xlsx-raw">Excel — raw values<small>plain numbers for analysis</small></button>
+  <div class="grp">Comma-separated</div>
+  <button type="button" data-x="csv-fmt">CSV — formatted<small>$ figures, readable</small></button>
+  <button type="button" data-x="csv-raw">CSV — raw values<small>integers, no symbols</small></button>
+</div>
+<div class="ovl" id="ovl" hidden>
+  <div class="ovlcard" id="ovlcard" role="dialog" aria-modal="true" aria-label="Record">
+    <button type="button" class="ovlx" id="ovlx" aria-label="Close">×</button>
+    <div id="pbody"></div>
+    <div id="xplr" hidden>
+      <div class="xhead" id="xtitle">Browse the rows</div>
+      <div class="filters">
+        <select id="ff" aria-label="Foundation"><option value="">Choose a foundation…</option></select>
+        <input type="search" id="eq" placeholder="Filter these rows…" autocomplete="off" disabled>
+        <select id="fy" aria-label="Year" disabled><option value="">All years</option></select>
+        <select id="fc" aria-label="Category" disabled><option value="">All categories</option></select>
+        <select id="fm" aria-label="Minimum amount" disabled>
+          <option value="0">Any amount</option><option value="10000">$10k+</option>
+          <option value="50000">$50k+</option><option value="250000">$250k+</option><option value="1000000">$1M+</option>
+        </select>
+      </div>
+      <div class="toolline">
+        <span class="count num" id="count">Choose a foundation to fill the table.</span>
+        <div class="actions">
+          <button type="button" class="tbtn" id="csv" disabled>Export view CSV</button>
+          <a class="tbtn" id="openledger" hidden>Open this ledger ↗</a>
+        </div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr><th>Year</th><th>Recipient</th><th class="amt">Amount</th><th>Category</th><th>State</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+      <div class="pager">
+        <span id="pinfo">—</span>
+        <div><button type="button" id="prev" disabled>Previous</button> <button type="button" id="next" disabled>Next</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/*DBVER-START*/window.DBV='afff75bec1';/*DBVER-END*/
+(async () => {
+  const $ = (id) => document.getElementById(id);
+  const money = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US');
+  const moneyC = (v) => { const a = Math.abs(v); const s = a >= 1e9 ? (a / 1e9).toFixed(1) + 'B' : a >= 1e6 ? (a / 1e6).toFixed(a >= 1e7 ? 0 : 1) + 'M' : a >= 1e3 ? Math.round(a / 1e3) + 'K' : String(a); return (v < 0 ? '−$' : '$') + s; };
+  // the year chart cannot fit six currency labels in 239px at a readable size, so the
+  // unit is stated once in that chart's own heading and each bar keeps its magnitude
+  const compactN = (v) => moneyC(v).replace('$', '');
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const dc = (s) => (s === s.toUpperCase() && /[A-Z]{4}/.test(s))
+    ? s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\b(Of|The|For|And|In|On|At)\b/g, (m) => m.toLowerCase()).replace(/^./, (c) => c.toUpperCase())
+    : s;
+  const V = window.DBV || '0';
+  const get = (p) => fetch('db/' + p + '?v=' + V).then((r) => { if (!r.ok) throw new Error(p); return r.json(); });
+  const djb2 = (s) => { let h = 5381; for (let i = 0; i < s.length; i++) { h = (((h * 33) ^ s.charCodeAt(i)) >>> 0); } return h; };
+  const canon1 = (s) => { const m = s.toUpperCase().replace(/^THE\s+/, '').match(/[A-Z0-9]/); return m ? m[0] : '0'; };
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- identity confidence ----------
+  // No 990-PF grant row carries a recipient EIN — not one of the 1,527,245 here.
+  // An entity id beginning "E" is a filed name canonicalised and then matched to an
+  // IRS-registered organisation in the Business Master File; one beginning "K" is
+  // the canonical name and nothing more. Every recipient aggregate on this page has
+  // to say which of the two it is, in a mark that survives greyscale.
+  const isGov = (id) => String(id || '').charAt(0) === 'E';
+  const GOV_WHY = 'Government-matched identity — the recipient name as filed was canonicalised and matched to an IRS-registered organisation in the IRS Business Master File. A total added across foundations is definitive.';
+  const EST_WHY = 'Name-matched estimate — no 990-PF grant row carries a recipient EIN, so this identity is the filed name canonicalised and nothing more. A total added across foundations may split one organisation in two, or hold two same-named organisations as one.';
+  function idChip(id, size) {
+    const k = size ? ' ' + size : '';
+    return isGov(id)
+      ? '<span class="idm gov' + k + '" title="' + esc(GOV_WHY) + '"><i aria-hidden="true">●</i>Gov-matched</span>'
+      : '<span class="idm est' + k + '" title="' + esc(EST_WHY) + '"><i aria-hidden="true">○</i>Name-matched</span>';
+  }
+  const softCls = (id) => (isGov(id) ? '' : ' softsum');
+  // a recipient AGGREGATE gets the full pair, so the matched case is positively
+  // weighted rather than merely "not softened"
+  const sumCls = (id) => (isGov(id) ? ' hardsum' : ' softsum');
+  const softTip = (id) => (isGov(id) ? '' : ' title="' + esc(EST_WHY) + '"');
+  let govOnly = false;
+  let HASHQ = null;
+
+  // ---------- recipient location as filed ----------
+  // Every entry below is a code a filer actually typed in a recipient's state
+  // column. Group and label were checked against the rows that carry the code:
+  // where the rows do not support the meaning the code normally has, the code is
+  // NOT relabelled — it is carried as unidentified, raw code and all.
+  const ST_NAME = {
+    AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California', CO: 'Colorado',
+    CT: 'Connecticut', DE: 'Delaware', DC: 'District of Columbia', FL: 'Florida', GA: 'Georgia',
+    HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana', IA: 'Iowa', KS: 'Kansas',
+    KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland', MA: 'Massachusetts',
+    MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri', MT: 'Montana',
+    NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey', NM: 'New Mexico',
+    NY: 'New York', NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio', OK: 'Oklahoma',
+    OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina',
+    SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont',
+    VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+  };
+  const PLACE_MAP = {
+    // U.S. territories and military addresses — confirmed by the rows themselves
+    PR: ['t', 'Puerto Rico'], VI: ['t', 'U.S. Virgin Islands'], GU: ['t', 'Guam'], AS: ['t', 'American Samoa'],
+    // Canada — confirmed by the rows themselves
+    ON: ['c', 'Ontario'], QC: ['c', 'Quebec'], BC: ['c', 'British Columbia'],
+    // International — confirmed by the rows themselves
+    UK: ['i', 'United Kingdom'], GM: ['i', 'Germany'], Chile: ['i', 'Chile'],
+    // Codes whose rows do NOT sit in the place the code normally names
+    AA: ['u', 'Armed Forces Americas'], FM: ['u', 'the Federated States of Micronesia'],
+    MH: ['u', 'the Marshall Islands'], MP: ['u', 'the Northern Mariana Islands'],
+    PH: ['u', 'the Philippines'], PW: ['u', 'Palau'], SO: ['u', 'Somalia'],
+  };
+  const GRP_LABEL = {
+    s: 'United States', t: 'U.S. territories and military addresses', c: 'Canada',
+    i: 'International', u: 'Unidentified code as filed', n: 'Location not filed',
+  };
+  const GRP_ORDER = ['s', 't', 'c', 'i', 'u', 'n'];
+  function placeOf(raw) {
+    if (raw === '' || raw === undefined || raw === null) {
+      return { g: 'n', label: 'Location not filed', opt: 'location not filed', why: 'the 246,778 rows (16.2% of the collection) whose filing names no recipient state at all' };
+    }
+    if (ST_NAME[raw]) return { g: 's', label: raw + ' — ' + ST_NAME[raw], opt: 'in ' + raw + ' — ' + ST_NAME[raw], why: '' };
+    const p = PLACE_MAP[raw];
+    if (p && p[0] !== 'u') {
+      const lab = raw === p[1] ? p[1] : raw + ' — ' + p[1];
+      return { g: p[0], label: lab, opt: 'in ' + lab, why: '' };
+    }
+    const usual = p ? p[1] : null;
+    const lab = raw + ' — unidentified' + (usual ? ' (code normally: ' + usual + ')' : '');
+    return { g: 'u', label: lab, opt: 'in ' + lab, why: usual ? 'the recipients on these rows are not in ' + usual : 'this code names no place we can identify' };
+  }
+  function placeStat(si) {
+    if (si === 'all') return '';
+    const raw = QMETA ? QMETA.states[si] : undefined;
+    if (raw === '' || raw === undefined) return ' with no location filed';
+    return ' in ' + raw + (placeOf(raw).g === 'u' ? ' (unidentified code)' : '');
+  }
+  function syncPlaceTitle() {
+    const sel = $('qst');
+    if (!sel) return;
+    const o = sel.options[sel.selectedIndex];
+    sel.title = o ? (o.title || o.textContent) : '';
+  }
+
+  let REG, EAGER, AGG, USMAP;
+  let CITYPTS = {};
+  try { [REG, EAGER, AGG, USMAP, CITYPTS] = await Promise.all([get('registry.json'), get('search-eager.json'), get('aggregates.json'), fetch('db-static/usmap.json?v=' + V).then((r) => r.json()), fetch('db-static/citypts.json?v=' + V).then((r) => r.json()).catch(() => ({}))]); }
+  catch (e) { $('fcount').textContent = 'The dataset failed to load — refresh to retry.'; return; }
+  const F = REG.fleet;
+  const REGION_KEY = { all: '', wny: 'w', ny: 'n' };
+  let region = 'all';
+  const shardCache = new Map();
+  const bucketCache = new Map();
+
+  async function shardFor(q) {
+    const c = canon1(q);
+    let name = c === '0' || !/[A-Z]/.test(c) ? 'num' : c.toLowerCase();
+    if (REG.split && REG.split[name]) {
+      const two = (q.toUpperCase().replace(/^THE\s+/, '').replace(/[^A-Z0-9]/g, '').slice(0, 2)).toLowerCase();
+      name = (REG.split[name].includes(two)) ? two : name + '_';
+    }
+    if (!shardCache.has(name)) shardCache.set(name, get('search/' + name + '.json').catch(() => []));
+    return shardCache.get(name);
+  }
+  async function bucketFor(id) {
+    const b = djb2(id) % (REG.buckets || 128);
+    if (!bucketCache.has(b)) bucketCache.set(b, get('e/' + b + '.json'));
+    return bucketCache.get(b);
+  }
+
+  // ---------- overlay ----------
+  let ovlMode = null;
+  function openOvl(mode) {
+    ovlMode = mode;
+    stashExpMenu();
+    $('pbody').innerHTML = '';
+    $('pbody').style.display = mode === 'x' ? 'none' : 'block';
+    $('xplr').hidden = mode !== 'x';
+    // in a report the sticky action bar carries the close button, so the floating one steps aside
+    document.querySelector('.ovlcard').classList.toggle('repmode', mode === 'r');
+    $('ovl').hidden = false;
+    $('ovlcard').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    if (mode !== 'r') $('ovlx').focus({ preventScroll: true });
+  }
+  function closeOvl() {
+    $('ovl').hidden = true;
+    ovlMode = null;
+    curProfile = null;
+    document.body.style.overflow = '';
+    writeHash();
+  }
+  $('ovlx').addEventListener('click', closeOvl);
+  $('ovl').addEventListener('click', (e) => { if (e.target === $('ovl')) closeOvl(); });
+
+  // ---------- the map ----------
+  // Every value here comes from the fleet's own home states — never hand-maintained.
+  const BY_ST = (() => {
+    const m = {};
+    F.forEach((f) => {
+      const ab = (f.st || '').toUpperCase();
+      if (ab.length !== 2) return;
+      const e = m[ab] || (m[ab] = { n: 0, t: 0, g: 0 });
+      e.n++; e.t += (f.t || 0); e.g += (f.g || 0);
+    });
+    return m;
+  })();
+  const stName = (ab) => (USMAP.states[ab] ? USMAP.states[ab].n : ab);
+  const stLine = (ab) => {
+    const e = BY_ST[ab];
+    return e.n.toLocaleString() + ' foundation' + (e.n === 1 ? '' : 's') + ' · ' + moneyC(e.t) + ' verified · ' + e.g.toLocaleString() + ' grants';
+  };
+  let mapSel = null;
+  let citySel = null;      // normalized city key within the selected state
+  let catSel = null;       // drilled purpose category (state- or country-scoped)
+  const drillCache = new Map();
+  async function drillFor(scope) {
+    if (!drillCache.has(scope)) drillCache.set(scope, get('st/' + scope + '.json').catch(() => null));
+    return drillCache.get(scope);
+  }
+  const stBox = {};
+  const stRaw = {};        // ab -> raw (unpadded) bbox for dot containment guards
+
+  // ---------- Albers USA projection (d3 parameterization, implemented directly) ----------
+  // Every dot is guarded by containment in its own state's measured bbox, so a
+  // projection fault can only DROP a dot, never place one in the wrong state.
+  function conicEA(p0, p1, rotLng, cLng, cLat, k, tx, ty) {
+    const rad = Math.PI / 180;
+    const sy0 = Math.sin(p0 * rad), n = (sy0 + Math.sin(p1 * rad)) / 2;
+    const c = 1 + sy0 * (2 * n - sy0), r0 = Math.sqrt(c) / n;
+    const raw = (lng, lat) => {
+      const l = (lng + rotLng) * rad * n, r = Math.sqrt(Math.max(0, c - 2 * n * Math.sin(lat * rad))) / n;
+      return [r * Math.sin(l), r0 - r * Math.cos(l)];
+    };
+    const [cx, cy] = raw(cLng, cLat);
+    return (lng, lat) => {
+      const [x, y] = raw(lng, lat);
+      return [tx + k * (x - cx), ty - k * (y - cy)];
+    };
+  }
+  const AK = 1300, AT = [487.5, 305];
+  const projL48 = conicEA(29.5, 45.5, 96, -96.6, 38.7, AK, AT[0], AT[1]);
+  const projAK = conicEA(55, 65, 154, -156, 58.5, AK * 0.35, AT[0] - 0.307 * AK, AT[1] + 0.201 * AK);
+  const projHI = conicEA(8, 18, 157, -160, 19.9, AK, AT[0] - 0.205 * AK, AT[1] + 0.212 * AK);
+  const project = (ab, lat, lng) => (ab === 'AK' ? projAK : ab === 'HI' ? projHI : projL48)(lng, lat);
+
+  const cnorm = (s) => String(s || '').toUpperCase().replace(/[.']/g, '').replace(/\s+/g, ' ').trim()
+    .replace(/^SAINT /, 'ST ').replace(/^FORT /, 'FT ').replace(/^MOUNT /, 'MT ');
+
+  function stateCities(ab) {
+    const m = new Map();
+    F.forEach((f) => {
+      if ((f.st || '').toUpperCase() !== ab) return;
+      const key = cnorm(f.ci);
+      const e = m.get(key) || { key, name: f.ci, n: 0, t: 0, g: 0 };
+      e.n++; e.t += f.t || 0; e.g += f.g || 0;
+      m.set(key, e);
+    });
+    return [...m.values()].sort((a, b) => b.t - a.t);
+  }
+
+  function renderDots(ab) {
+    const svg = $('usmap');
+    const old = svg.querySelector('#dotlayer');
+    if (old) old.remove();
+    if (!ab || !stRaw[ab]) return;
+    const bb = stRaw[ab];
+    const M = Math.min(bb.w, bb.h) || 1;
+    const cities = stateCities(ab);
+    const placed = [];
+    cities.forEach((c) => {
+      const pt = CITYPTS[ab + '|' + c.key];
+      if (!pt) return;
+      const [x, y] = project(ab, pt[0], pt[1]);
+      const mx = bb.w * 0.06, my = bb.h * 0.06;   // containment guard, small margin
+      if (x < bb.x - mx || x > bb.x + bb.w + mx || y < bb.y - my || y > bb.y + bb.h + my) return;
+      placed.push({ ...c, x, y });
+    });
+    if (!placed.length) return;
+    const vmax = placed[0].t || 1;
+    const r = (t) => M * 0.03 + M * 0.085 * Math.sqrt(t / vmax);
+    const dots = placed.slice().sort((a, b) => b.t - a.t).map((c) =>
+      `<circle class="cdot${citySel === c.key ? ' csel' : ''}" data-ck="${c.key}" data-cn="${esc(c.name)}" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${r(c.t).toFixed(1)}"><title>${esc(c.name)} · ${c.n} foundation${c.n === 1 ? '' : 's'} · ${moneyC(c.t)}</title></circle>`).join('');
+    const labels = placed.slice(0, 3).map((c) =>
+      `<text class="dlbl" x="${c.x.toFixed(1)}" y="${(c.y - r(c.t) - M * 0.015).toFixed(1)}" text-anchor="middle" font-size="${(M * 0.055).toFixed(1)}">${esc(c.name)}</text>`).join('');
+    svg.insertAdjacentHTML('beforeend', `<g id="dotlayer">${dots}${labels}</g>`);
+  }
+
+  function selectCity(key, name) {
+    citySel = citySel === key ? null : key;
+    document.querySelectorAll('#usmap .cdot').forEach((d) => d.classList.toggle('csel', d.dataset.ck === citySel));
+    document.querySelectorAll('#dcities .drow').forEach((b) => b.classList.toggle('on', b.dataset.ck === citySel));
+    if (mapSel) {
+      const cn = citySel ? (stateCities(mapSel).find((c) => c.key === citySel) || { name: citySel }).name : null;
+      $('stchip').textContent = citySel ? '✕ ' + cn + ', ' + mapSel : '✕ ' + stName(mapSel) + ' · ' + BY_ST[mapSel].n;
+      const fc = fleetFiltered();
+      $('mapstat').textContent = citySel
+        ? cn + ', ' + mapSel + ' · ' + fc.length + ' foundation' + (fc.length === 1 ? '' : 's')
+        : stName(mapSel) + ' · ' + stLine(mapSel);
+    }
+    renderDossier();
+    renderFleet();
+    writeHash();
+  }
+
+  let dossierSeq = 0;
+  function crumbHTML() {
+    if (!mapSel && !catSel) return '<span class="leaf">United States</span><span class="sep">·</span><span>the whole collection</span>';
+    const bits = ['<button type="button" data-pop="all">United States</button>'];
+    if (mapSel) bits.push('<span class="sep">›</span>', catSel || citySel
+      ? '<button type="button" data-pop="st">' + esc(stName(mapSel)) + '</button>'
+      : '<span class="leaf">' + esc(stName(mapSel)) + '</span>');
+    if (citySel && mapSel) {
+      const cn = (stateCities(mapSel).find((c) => c.key === citySel) || { name: citySel }).name;
+      bits.push('<span class="sep">›</span>', '<span class="leaf">' + esc(cn) + '</span>');
+    }
+    if (catSel) bits.push('<span class="sep">›</span>', '<span class="leaf">' + esc(catSel) + '</span>');
+    bits.push('<button type="button" class="dx" data-pop="one" aria-label="Back one level">✕</button>');
+    return bits.join('');
+  }
+  // `cov` (optional) is the same year -> ledger-count map the Years tab prints, with
+  // `covN` ledgers in scope. A year no one has finished filing must say so on the bar
+  // itself: hatched fill, a counted label, and a sentence naming it. Passed only where
+  // the counts are provable (the country / region view), never guessed for a subset.
+  function yearChart(el, by, cov, covN, noteEl) {
+    const years = Object.keys(by || {}).map(Number).sort().slice(-6);
+    const ymax = Math.max(1, ...years.map((y) => by[y]));
+    const covOf = (y) => (cov ? (cov[y] || 0) : null);
+    const isPart = (y) => cov && covN ? covOf(y) < covN * 0.6 : false;
+    el.innerHTML = years.map((y) => {
+      const c = covOf(y);
+      const p = isPart(y);
+      const tip = `${y} · ${money(by[y])}` + (c === null ? '' : ` · filed by ${c.toLocaleString('en-US')} of ${covN.toLocaleString('en-US')} ledgers${p ? ' — still filling' : ''}`);
+      return `<div class="ycol" title="${esc(tip)}"><span class="yv num">${compactN(by[y])}</span>` +
+        `<i class="${p ? 'part' : ''}" style="height:${Math.max(2, by[y] / ymax * 100)}%"></i>` +
+        `<span class="yl">’${String(y).slice(2)}</span>` +
+        (c === null ? '' : `<span class="yc num${p ? ' part' : ''}">${c.toLocaleString('en-US')}</span>`) + '</div>';
+    }).join('');
+    if (!years.length) el.innerHTML = '<div class="dnote">no years in view</div>';
+    if (!noteEl) return;
+    if (cov && covN && years.length) {
+      const part = years.filter(isPart);
+      noteEl.hidden = false;
+      noteEl.innerHTML = 'The number under each year is how many of ' + covN.toLocaleString('en-US') + ' ledgers have filed it — bar height is dollars filed, not total giving.'
+        + (part.length ? ' <b>' + part.map((y) => '◹ ' + y).join(' and ') + ' ' + (part.length === 1 ? 'is' : 'are') + ' still filling</b> (' + part.map((y) => covOf(y).toLocaleString('en-US') + ' ledgers').join(', ') + '), so ' + (part.length === 1 ? 'that bar is' : 'those bars are') + ' a floor, not a year-over-year comparison.' : '');
+    } else { noteEl.hidden = true; noteEl.innerHTML = ''; }
+  }
+  function barRows(items, opts) {
+    const vmax = Math.max(1, ...items.map((x) => x.v));
+    return items.map((x) => {
+      const inner = `<span class="dn">${esc(x.n)}<span class="chev">›</span></span>`
+        + `<span class="dv num${x.soft ? ' softsum' : (x.hard ? ' hardsum' : '')}">${x.mark ? x.mark + ' ' : ''}${x.m || moneyC(x.v)}</span>`;
+      const style = `--w:${Math.max(2.5, x.v / vmax * 100)}%`;
+      return x.href
+        ? `<a class="dbar" style="${style}" href="${x.href}">${inner}</a>`
+        : `<button type="button" class="dbar${x.on ? ' on' : ''}${x.mark ? ' marked' : ''}" style="${style}" ${x.data || ''} title="${esc(x.tip || x.n)}">${inner}</button>`;
+    }).join('');
+  }
+
+  async function renderDossier() {
+    $('dossier').hidden = false;                     // always visible: the page reads as a tool at rest
+    if (catSel || mapSel || citySel) revealStage();  // a scoped summary must not sit inside a shut card
+    document.querySelector('.ticker').style.display = catSel ? 'none' : '';
+    document.querySelector('.stage').classList.toggle('drilled', !!catSel);
+    const seq = ++dossierSeq;
+    const scope = mapSel || '_US';
+    $('dcrumb').innerHTML = crumbHTML();
+    const D = await drillFor(scope);
+    if (seq !== dossierSeq) return;
+
+    if (catSel) {
+      // ---- category drill view ----
+      const cy = (D && D.catYear && D.catYear[catSel]) || {};
+      const total = Object.values(cy).reduce((s, v) => s + v, 0);
+      const scopeTotal = mapSel ? BY_ST[mapSel].t : REG.totals.all.t;
+      $('dname').textContent = catSel;
+      $('dfig').textContent = moneyC(total);
+      $('dstats').textContent = (100 * total / Math.max(1, scopeTotal)).toFixed(0) + '% of ' + (mapSel ? stName(mapSel) : 'the collection') + ' · by foundations based ' + (mapSel ? 'there' : 'anywhere');
+      yearChart($('dyears'), cy, null, 0, $('dyearsnote'));
+      // sibling categories stay clickable for lateral moves
+      const cats = Object.entries((mapSel ? (AGG.byStCat[mapSel] || {}) : (AGG.byCat.all || {}))).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      $('dcatsh').textContent = 'Purposes — switch';
+      $('dcats').innerHTML = barRows(cats.map(([k, v]) => ({ n: k, v, on: k === catSel, data: `data-cat="${esc(k)}"`, tip: 'Drill into ' + k })));
+      const recsAll = (D && D.catRec && D.catRec[catSel]) || [];
+      const recs = govOnly ? recsAll.filter((r) => isGov(r[1])) : recsAll;
+      const fnds = (D && D.catFnd && D.catFnd[catSel]) || [];
+      // every recipient total here carries the mark that says how the identity was built
+      $('dctx').innerHTML = '<div class="dh">Top recipients' + (govOnly ? ' · government-matched only' : '') + ' — click for the full record</div><div class="dlist" id="drecs">'
+        + barRows(recs.slice(0, 6).map(([n, e2, t]) => ({ n: dc(n), v: t, data: `data-e="${e2}"`, tip: (isGov(e2) ? GOV_WHY : EST_WHY), mark: idChip(e2, 'mini'), soft: !isGov(e2), hard: isGov(e2) }))) + '</div>'
+        + '<div class="dh" style="margin-top:0.55rem">Most from</div><div class="dlist">'
+        + barRows(fnds.slice(0, 3).map(([fi, t]) => ({ n: F[fi] ? F[fi].s : '?', v: t, href: F[fi] ? 'https://jcurry44.github.io/grants-ledgers/f/' + F[fi].u + '/' : '#' }))) + '</div>';
+      $('dnote').innerHTML = 'categories follow the collection’s three published tiers · amounts are the filed rows · '
+        + idChip('E', 'mini') + ' matched to an IRS-registered organisation, safe to add across foundations · '
+        + idChip('K', 'mini') + ' the filed name alone — read that total as an estimate';
+      return;
+    }
+
+    if (!mapSel) {
+      // ---- country view: live, clickable, on load ----
+      const t = REG.totals.all;
+      $('dname').textContent = 'United States';
+      $('dfig').textContent = moneyC(t.t);
+      $('dstats').textContent = t.n.toLocaleString() + ' ledgers · ' + t.g.toLocaleString() + ' grants · every year reconciled to its filed total';
+      // the same AGG.filed counts the Years tab prints — so the first screen discloses
+      // a partial year instead of letting 2025 read like a finished one
+      const uby = AGG.byYear.all || {};
+      const ucov = {}; Object.keys(uby).forEach((y) => { ucov[y] = AGG.filed['all:' + y] || 0; });
+      yearChart($('dyears'), uby, ucov, t.n, $('dyearsnote'));
+      const ucats = Object.entries(AGG.byCat.all || {}).sort((a2, b2) => b2[1] - a2[1]).slice(0, 6);
+      $('dcatsh').textContent = 'Where the dollars go — click to drill';
+      $('dcats').innerHTML = barRows(ucats.map(([k, v]) => ({ n: k, v, data: `data-cat="${esc(k)}"`, tip: 'Drill into ' + k })));
+      const sts = Object.entries(BY_ST).filter(([ab]) => USMAP.states[ab])
+        .sort((a2, b2) => b2[1].t - a2[1].t).slice(0, 6);
+      $('dctx').innerHTML = '<div class="dh">Top states — click to zoom the map</div><div class="dlist">'
+        + barRows(sts.map(([ab, s]) => ({ n: stName(ab), v: s.t, m: s.n + ' · ' + moneyC(s.t), data: `data-ab="${ab}"`, tip: 'Zoom to ' + stName(ab) }))) + '</div>';
+      $('dnote').textContent = 'click any purpose or state above · every figure reconciles to a filed total';
+      return;
+    }
+    // ---- geo view (state, optionally a city) ----
+    const e = BY_ST[mapSel];
+    const cityObj = citySel ? stateCities(mapSel).find((c) => c.key === citySel) : null;
+    $('dname').textContent = cityObj ? cityObj.name + ', ' + mapSel : stName(mapSel);
+    $('dfig').textContent = moneyC(cityObj ? cityObj.t : e.t);
+    $('dstats').textContent = (cityObj ? cityObj.n : e.n).toLocaleString() + ' foundation' + ((cityObj ? cityObj.n : e.n) === 1 ? '' : 's')
+      + ' · ' + (cityObj ? cityObj.g : e.g).toLocaleString() + ' grants';
+    // the same disclosure for a state or a city, counted straight off the registry:
+    // how many ledgers based in this scope actually claim each year
+    const scopedF = F.filter((f) => (f.st || '').toUpperCase() === mapSel && (!citySel || cnorm(f.ci) === citySel));
+    const gcov = {};
+    scopedF.forEach((f) => f.y.forEach((y) => { gcov[y] = (gcov[y] || 0) + 1; }));
+    yearChart($('dyears'), cityObj ? ((D && D.cityYear && D.cityYear[citySel]) || {}) : ((AGG.byStY && AGG.byStY[mapSel]) || {}), gcov, scopedF.length, $('dyearsnote'));
+    const catSrc = cityObj ? ((D && D.cityCat && D.cityCat[citySel]) || {}) : ((AGG.byStCat && AGG.byStCat[mapSel]) || {});
+    const cats = Object.entries(catSrc).sort((a, b) => b[1] - a[1]).slice(0, 6);
+    $('dcatsh').textContent = 'Where the dollars go — click to drill';
+    $('dcats').innerHTML = barRows(cats.map(([k, v]) => ({ n: k, v, data: `data-cat="${esc(k)}"`, tip: 'Drill into ' + k })));
+    const cities = stateCities(mapSel).slice(0, 6);
+    const top = scopedF.slice().sort((a, b) => b.t - a.t).slice(0, 3);
+    $('dctx').innerHTML = '<div class="dh">Where they sit — click to scope</div><div class="dlist" id="dcities">'
+      + barRows(cities.map((c) => ({ n: c.name, v: c.t, m: c.n + ' · ' + moneyC(c.t), on: citySel === c.key, data: `data-ck="${esc(c.key)}" data-cn="${esc(c.name)}"`, tip: 'Show only ' + c.name }))) + '</div>'
+      + '<div class="dh" style="margin-top:0.55rem">Largest records</div><div class="dlist">'
+      + barRows(top.map((f) => ({ n: f.n, v: f.t, href: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/' }))) + '</div>';
+    $('dnote').textContent = 'scoped to foundations based here · every figure reconciles to filed totals';
+  }
+
+  // one delegated listener for the whole dossier
+  $('dossier').addEventListener('click', (e) => {
+    const pop = e.target.closest('[data-pop]');
+    if (pop) {
+      const k = pop.dataset.pop;
+      if (k === 'all') { catSel = null; selectState(null); }
+      else if (k === 'st') { catSel = null; citySel = null; selectState(mapSel); }
+      else if (k === 'one') {
+        if (catSel) { catSel = null; renderDossier(); writeHash(); }
+        else if (citySel) selectCity(citySel);
+        else selectState(null);
+      }
+      return;
+    }
+    const cat = e.target.closest('[data-cat]');
+    if (cat) { drillCat(cat.dataset.cat); return; }
+    const abBtn = e.target.closest('[data-ab]');
+    if (abBtn) { selectState(abBtn.dataset.ab); return; }
+    const ck = e.target.closest('[data-ck]');
+    if (ck) { selectCity(ck.dataset.ck, ck.dataset.cn); return; }
+    const rec = e.target.closest('[data-e]');
+    if (rec) openProfile(rec.dataset.e);
+  });
+  function drillCat(cat) {
+    catSel = catSel === cat ? null : cat;
+    if (catSel) citySel = null;
+    renderDossier();
+    renderFleet();
+    writeHash();
+  }
+
+  function countryCaption() {
+    const nLive = Object.keys(BY_ST).filter((x) => USMAP.states[x]).length;
+    const nAll = Object.keys(USMAP.states).length;
+    return nLive === nAll ? 'every state and DC · brighter = more verified · click a state'
+                          : nLive + ' of ' + nAll + ' states begun · click a state';
+  }
+
+  function renderMap() {
+    const svg = $('usmap');
+    svg.setAttribute('viewBox', USMAP.vb);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    const lit = Object.keys(BY_ST).filter((ab) => USMAP.states[ab]);
+    const ranked = lit.slice().sort((a, b) => BY_ST[a].t - BY_ST[b].t);
+    const lvOf = {};
+    ranked.forEach((ab, i) => { lvOf[ab] = ' lv' + (1 + Math.min(4, Math.floor(i * 5 / Math.max(1, ranked.length)))); });
+    svg.innerHTML = Object.entries(USMAP.states).map(([ab, s]) => {
+      const on = !!BY_ST[ab];
+      const label = on ? stName(ab) + ': ' + stLine(ab) : stName(ab) + ': none yet';
+      return '<path class="st' + (on ? ' live' + lvOf[ab] : '') + '" data-ab="' + ab + '" d="' + s.d + '"' +
+             (on ? ' tabindex="0" role="button"' : '') + ' aria-label="' + esc(label) + '"><title>' + esc(label) + '</title></path>';
+    }).join('');
+    svg.querySelectorAll('.st').forEach((el) => {
+      const b = el.getBBox();
+      stRaw[el.dataset.ab] = { x: b.x, y: b.y, w: b.width, h: b.height };
+      const pad = Math.max(b.width, b.height) * 0.18 + 4;
+      const vbw = Number(USMAP.vb.split(' ')[2]) || 975;
+      const minExt = vbw * 0.12;
+      const w = Math.max(b.width + pad * 2, minExt);
+      const hh = Math.max(b.height + pad * 2, minExt);
+      const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+      stBox[el.dataset.ab] = (cx - w / 2).toFixed(1) + ' ' + (cy - hh / 2).toFixed(1) + ' ' + w.toFixed(1) + ' ' + hh.toFixed(1);
+    });
+    $('mapstat').textContent = countryCaption();
+    const tip = $('maptip');
+    const showTip = (ab, x, y) => {
+      tip.innerHTML = BY_ST[ab] ? '<b>' + esc(stName(ab)) + '</b>' + stLine(ab) + '<br><i>click to see them</i>'
+                                : '<b>' + esc(stName(ab)) + '</b>not yet begun';
+      const zone = svg.parentElement.getBoundingClientRect();
+      tip.style.left = Math.min(x - zone.left + 14, zone.width - 220) + 'px';
+      tip.style.top = (y - zone.top - 10) + 'px';
+      tip.classList.add('on');
+    };
+    svg.addEventListener('mousemove', (e) => {
+      const d = e.target.closest('.cdot');
+      if (d) {
+        tip.innerHTML = '<b>' + esc(d.dataset.cn) + '</b>' + d.querySelector('title').textContent.split(' · ').slice(1).join(' · ') + '<br><i>click to scope the list</i>';
+        const zone = svg.parentElement.getBoundingClientRect();
+        tip.style.left = Math.min(e.clientX - zone.left + 14, zone.width - 220) + 'px';
+        tip.style.top = (e.clientY - zone.top - 10) + 'px';
+        tip.classList.add('on');
+        return;
+      }
+      const p2 = e.target.closest('.st');
+      if (!p2) { tip.classList.remove('on'); return; }
+      showTip(p2.dataset.ab, e.clientX, e.clientY);
+    });
+    svg.addEventListener('mouseleave', () => tip.classList.remove('on'));
+    svg.addEventListener('focusin', (e) => {
+      const p2 = e.target.closest('.st');
+      if (!p2) return;
+      const r = p2.getBoundingClientRect();
+      showTip(p2.dataset.ab, r.left + r.width / 2, r.top + r.height / 2);
+    });
+    svg.addEventListener('focusout', () => tip.classList.remove('on'));
+    svg.addEventListener('click', (e) => {
+      const d = e.target.closest('.cdot');
+      if (d) { selectCity(d.dataset.ck, d.dataset.cn); return; }
+      const p2 = e.target.closest('.st.live');
+      if (!p2) return;
+      selectState(p2.dataset.ab === mapSel ? null : p2.dataset.ab);
+    });
+    svg.addEventListener('keydown', (e) => {
+      const p2 = e.target.closest('.st.live');
+      if (!p2) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectState(p2.dataset.ab === mapSel ? null : p2.dataset.ab); }
+      else if (e.key === 'Escape') selectState(null);
+    });
+    $('mapback').addEventListener('click', () => selectState(null));
+  }
+
+  // selecting a state zooms to it AND scopes the Foundations tab to those based there
+  function selectState(ab, silent) {
+    const svg = $('usmap');
+    mapSel = ab;
+    citySel = null;
+    catSel = null;
+    svg.querySelectorAll('.st').forEach((el) => {
+      el.classList.toggle('sel', el.dataset.ab === ab);
+      el.classList.toggle('dim', !!ab && el.dataset.ab !== ab);
+      el.classList.remove('hl');
+    });
+    animVB(svg, (ab && stBox[ab]) ? stBox[ab] : USMAP.vb);
+    $('mapback').classList.toggle('on', !!ab);
+    $('mapstat').textContent = ab ? stName(ab) + ' · ' + stLine(ab) : countryCaption();
+    $('stchip').hidden = !ab;
+    if (ab) $('stchip').textContent = '✕ ' + stName(ab) + ' · ' + BY_ST[ab].n;
+
+    renderDots(ab);
+    renderDossier();
+    if (tab === 'q') runQuery(); else renderFleet();
+    if (!silent) writeHash();
+  }
+  $('stchip').addEventListener('click', () => selectState(null));
+  function animVB(svg, to) {
+    if (reduced()) { svg.setAttribute('viewBox', to); return; }
+    const from = svg.getAttribute('viewBox').split(' ').map(Number);
+    const dest = to.split(' ').map(Number);
+    const t0 = performance.now();
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / 550);
+      const e2 = 1 - Math.pow(1 - k, 3);
+      svg.setAttribute('viewBox', from.map((v, i) => v + (dest[i] - v) * e2).join(' '));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    // animation frames are throttled in background tabs — guarantee the end state
+    setTimeout(() => { if (svg.getAttribute('viewBox') !== to) svg.setAttribute('viewBox', to); }, 640);
+  }
+
+  // ---------- headline totals ----------
+  // There is deliberately no count-up here. A figure that climbs through partial
+  // values reads as a database changing under the reader, which is the opposite of
+  // what this collection sells. The shell holds one neutral em-dash for all three,
+  // and paintTotals() lands all three at their registry values in a single
+  // synchronous pass — a reader sees the placeholder or the final number, never
+  // anything in between, and every figure still comes from the data on disk.
+  function paintTotals() {
+    const t = REG.totals[region];
+    const box = $('bigstats');
+    const vals = { t: money(t.t), g: t.g.toLocaleString('en-US'), n: t.n.toLocaleString('en-US') };
+    ['t', 'g', 'n'].forEach((k) => {
+      const el = box.querySelector('[data-k="' + k + '"]');
+      if (el) el.textContent = vals[k];
+    });
+    box.setAttribute('data-state', 'ready');
+  }
+
+  // ---------- scopes + stats ----------
+  function renderRegions() {
+    const LBL = { all: ['Everything', ''], wny: ['Western New York', 'complete'], ny: ['NY giants', ''] };
+    $('regions').innerHTML = ['all', 'wny', 'ny'].map((r) =>
+      `<button type="button" class="rchip${r === region ? ' on' : ''}" data-r="${r}">${LBL[r][0]}${LBL[r][1] ? ' <small>· ' + LBL[r][1] + '</small>' : ''}</button>`).join('');
+    paintTotals();
+    // the headline count is the registry's, never a number typed into the markup
+    const nAll = REG.totals.all.n.toLocaleString('en-US');
+    $('heroN').textContent = nAll;
+    $('heroN2').textContent = nAll;
+    $('mapcardsum').textContent = nAll + ' ledgers · ' + moneyC(REG.totals.all.t);
+  }
+  $('regions').addEventListener('click', (e) => {
+    const b = e.target.closest('.rchip');
+    if (!b) return;
+    region = b.dataset.r;
+    renderRegions(); renderWeave(); renderTrend(); renderCats(); renderFleet(); writeHash();
+  });
+
+  // ---------- tabs ----------
+  let tab = 'q';
+  function setTab(t, silent) {
+    tab = t;
+    document.querySelectorAll('.tab').forEach((b) => {
+      b.classList.toggle('on', b.dataset.t === t);
+      b.setAttribute('aria-selected', b.dataset.t === t ? 'true' : 'false');
+    });
+    ['q', 'f', 'r', 'y', 'c'].forEach((k) => { $('pane-' + k).hidden = k !== t; });
+    $('panelbody').scrollTop = 0;
+    if (!silent) writeHash();
+  }
+  $('tabs').addEventListener('click', (e) => { const b = e.target.closest('.tab'); if (b) setTab(b.dataset.t); });
+
+  // ---------- fleet (chunked) ----------
+  const span = (ys) => { const out = []; let a = ys[0], b = ys[0]; for (let i = 1; i <= ys.length; i++) { if (ys[i] === b + 1) b = ys[i]; else { out.push(a === b ? String(a) : a + '–' + b); a = b = ys[i]; } } return out.join(', '); };
+  const CHUNK = 72;
+  let fleetView = [], fleetShown = 0;
+  function fleetFiltered() {
+    return F.filter((f) => (region === 'all' || f.r === region)
+      && (!mapSel || (f.st || '').toUpperCase() === mapSel)
+      && (!citySel || cnorm(f.ci) === citySel));
+  }
+  function renderFleet() {
+    const sort = $('fsort').value;
+    fleetView = fleetFiltered().slice().sort(
+      sort === 'g' ? (a, b) => b.g - a.g :
+      sort === 'n' ? (a, b) => a.n.localeCompare(b.n) :
+      sort === 'st' ? (a, b) => (a.st || '').localeCompare(b.st || '') || b.t - a.t :
+      (a, b) => b.t - a.t);
+    fleetShown = 0;
+    $('fleet').innerHTML = '';
+    const t = fleetView.reduce((s, f) => s + f.t, 0);
+    $('fcount').textContent = fleetView.length.toLocaleString('en-US') + ' ledgers · ' + moneyC(t);
+    moreFleet();
+  }
+  function moreFleet() {
+    const slice = fleetView.slice(fleetShown, fleetShown + CHUNK);
+    $('fleet').insertAdjacentHTML('beforeend', slice.map((f) => `
+      <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" data-st="${f.st || ''}" data-u="${f.u}">
+        <span class="cd">${f.c}</span>
+        <span style="min-width:0"><b title="${esc(f.n)}">${esc(f.n)}</b><span class="meta">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${span(f.y)}${f.rn ? ' · †' : ''}</span></span>
+        <span class="tie" title="every year reconciles to its filed total${f.rn ? ' — ' + esc(f.rn) : ''}">✓ ${f.y.length}/${f.y.length} · Δ $0<small>${f.g.toLocaleString('en-US')} · ${moneyC(f.t)}</small></span>
+        <button type="button" class="rowsb" data-rows="${f.u}" title="Browse this foundation's rows here" aria-label="Browse rows">⌗</button>
+      </a>`).join(''));
+    fleetShown += slice.length;
+    $('fmore').hidden = fleetShown >= fleetView.length;
+    $('fmore').textContent = 'Show more · ' + (fleetView.length - fleetShown).toLocaleString('en-US') + ' remaining';
+  }
+  $('fmore').addEventListener('click', moreFleet);
+  // the panel is the scroller on a desktop; on a phone the document is, and using the
+  // panel as the root there would make one glance load all 1,932 cards at once
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => {
+    es.forEach((en) => { if (en.isIntersecting && !$('fmore').hidden) moreFleet(); });
+  }, { root: matchMedia('(max-width: 1019px)').matches ? null : $('panelbody'), rootMargin: '400px' }) : null;
+  if (io) io.observe($('fmore'));
+  $('fsort').addEventListener('change', renderFleet);
+  // hover a foundation → its home state lights on the map (two-way linking)
+  $('fleet').addEventListener('mouseover', (e) => {
+    const a = e.target.closest('.fc');
+    if (!a || !a.dataset.st) return;
+    document.querySelectorAll('#usmap .st.hl').forEach((el) => el.classList.remove('hl'));
+    const p = document.querySelector('#usmap .st[data-ab="' + a.dataset.st + '"]');
+    if (p && a.dataset.st !== mapSel) p.classList.add('hl');
+  });
+  $('fleet').addEventListener('mouseleave', () => {
+    document.querySelectorAll('#usmap .st.hl').forEach((el) => el.classList.remove('hl'));
+  });
+  $('fleet').addEventListener('click', (e) => {
+    const b = e.target.closest('.rowsb');
+    if (!b) return;
+    e.preventDefault();
+    openExplorer(b.dataset.rows);
+  });
+  $('rowsbtn').addEventListener('click', () => openExplorer(''));
+
+  // ---------- FIND: cross-collection funder query ----------
+  // Answers "who funds work like mine?" from precomputed purpose x place cells
+  // (db/q/cat<i>.json) — no corpus in the browser.
+  let QMETA = null;
+  let QDEF = -1;                              // the purpose the app opens on, so it can say so
+  const qCache = new Map();
+  const qState = { cat: 0, st: 'all', min: 0, yr: 0, shown: 0, rows: [] };
+  // ---------- PROJECTS: several named working lists, all kept in this browser ----------
+  // This is a static site: there is no server, no account, and nothing is uploaded.
+  // A project therefore lives in this browser's storage — it survives a reload but not
+  // a cleared browser — so every project can be written to a file and read back here or
+  // on another machine. Never imply otherwise in the UI.
+  const PKEY = 'gl_projects';
+  // the reader's own calendar date — toISOString() alone is UTC and prints tomorrow
+  // for anyone west of Greenwich after their afternoon
+  const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+  const uid = () => 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const slug = (s2) => String(s2).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48) || 'project';
+  const blankProject = (nm) => ({ id: uid(), name: nm || 'Untitled project', created: todayISO(), updated: todayISO(), funders: [], notes: {} });
+  function readStore() {
+    let s2 = null;
+    try { s2 = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { s2 = null; }
+    if (!s2 || !Array.isArray(s2.list) || !s2.list.length) {
+      // one-time carry-over of the single anonymous list this app used to keep
+      let old = [], oldN = {};
+      try { old = JSON.parse(localStorage.getItem('gl_list') || '[]'); } catch (e) { old = []; }
+      try { oldN = JSON.parse(localStorage.getItem('gl_notes') || '{}'); } catch (e) { oldN = {}; }
+      const p = blankProject(Array.isArray(old) && old.length ? 'My list' : 'First project');
+      p.funders = Array.isArray(old) ? old.filter((u) => typeof u === 'string') : [];
+      p.notes = (oldN && typeof oldN === 'object') ? oldN : {};
+      s2 = { v: 1, active: p.id, list: [p] };
+    }
+    s2.list = s2.list.filter((p) => p && typeof p === 'object' && p.id).map((p) => ({
+      id: p.id, name: String(p.name || 'Untitled project'), created: p.created || todayISO(), updated: p.updated || todayISO(),
+      funders: Array.isArray(p.funders) ? p.funders.filter((u) => typeof u === 'string') : [],
+      notes: (p.notes && typeof p.notes === 'object') ? p.notes : {},
+    }));
+    if (!s2.list.length) s2.list = [blankProject('First project')];
+    if (!s2.list.some((p) => p.id === s2.active)) s2.active = s2.list[0].id;
+    return s2;
+  }
+  const STORE = readStore();
+  const PROJ = () => STORE.list.find((p) => p.id === STORE.active) || STORE.list[0];
+  function writeStore() { try { localStorage.setItem(PKEY, JSON.stringify(STORE)); } catch (e) {} }
+  // PICKED and NOTES are the live view of the ACTIVE project; every writer goes through saveList()
+  const PICKED = new Set(PROJ().funders);
+  const NOTES = Object.assign({}, PROJ().notes);
+  function loadProject(id) {
+    if (id) STORE.active = id;
+    const p = PROJ();
+    PICKED.clear();
+    p.funders.forEach((u) => PICKED.add(u));
+    Object.keys(NOTES).forEach((k) => delete NOTES[k]);
+    Object.assign(NOTES, p.notes);
+    writeStore();
+  }
+  // after a project switch every "+ list" button on screen has to tell the truth again
+  function syncAddButtons() {
+    document.querySelectorAll('.addb[data-add]').forEach((b) => {
+      const on = PICKED.has(b.dataset.add);
+      b.classList.toggle('on', on);
+      b.textContent = on ? '✓ on list' : '+ list';
+    });
+  }
+
+  async function qMeta() {
+    if (!QMETA) QMETA = await get('q/meta.json').catch(() => null);
+    return QMETA;
+  }
+  async function qCat(ci) {
+    if (!qCache.has(ci)) qCache.set(ci, get('q/cat' + ci + '.json').catch(() => ({})));
+    return qCache.get(ci);
+  }
+
+  async function initQuery() {
+    const m = await qMeta();
+    if (!m) { $('qresults').innerHTML = '<div class="qempty">The query index did not load.</div>'; return; }
+    $('qcat').innerHTML = m.cats.map((c, i) => `<option value="${i}">${esc(c.toLowerCase())}</option>`).join('');
+    // Every place that actually appears in a recipient's state column, grouped and
+    // labelled from the rows themselves. No raw code is shown on its own, and the
+    // stateless rows are a first-class option rather than a silent omission.
+    const stCount = {};
+    Object.values(m.cells).forEach((cell) => Object.entries(cell).forEach(([si, cnt]) => {
+      if (si.charAt(0) === 'p') return;            // 'p<i>' keys are peer counts, not places
+      stCount[si] = (stCount[si] || 0) + cnt;
+    }));
+    const groups = {};
+    Object.keys(stCount).forEach((si) => {
+      const raw = m.states[si];
+      if (raw === undefined) return;
+      const pl = placeOf(raw);
+      (groups[pl.g] || (groups[pl.g] = [])).push({ si, pl, n: stCount[si] });
+    });
+    GRP_ORDER.forEach((g) => { if (groups[g]) groups[g].sort((a, b) => a.pl.label.localeCompare(b.pl.label)); });
+    $('qst').innerHTML = '<option value="all" title="every recipient location, filed or not">anywhere</option>'
+      + GRP_ORDER.filter((g) => groups[g]).map((g) => '<optgroup label="' + esc(GRP_LABEL[g]) + '">'
+        + groups[g].map((o) => '<option value="' + o.si + '" title="'
+          + esc('recipient location as filed: ' + o.pl.label + (o.pl.why ? ' — ' + o.pl.why : ''))
+          + '">' + esc(o.pl.opt) + '</option>').join('')
+        + '</optgroup>').join('');
+    const years = Object.keys(AGG.byYear.all || {}).map(Number).sort();
+    $('qyr').innerHTML = '<option value="0">any year</option>'
+      + years.map((y) => `<option value="${y}">${y}</option>`).join('');
+    // The app has to open on a purpose; it opens on this one and labels it an example.
+    qState.cat = m.cats.indexOf('Education & youth') >= 0 ? m.cats.indexOf('Education & youth') : 0;
+    QDEF = qState.cat;
+    $('qex').querySelector('b').textContent = 'one purpose of ' + m.cats.length;
+    $('qexn').textContent = REG.totals.all.n.toLocaleString('en-US');
+    $('qexall').addEventListener('click', () => setTab('f'));
+    // a shared link restores the whole query, the place filter included
+    if (HASHQ) {
+      if (HASHQ.cat >= 0 && HASHQ.cat < m.cats.length) qState.cat = HASHQ.cat;
+      if (HASHQ.st === 'all' || m.states[HASHQ.st] !== undefined) qState.st = HASHQ.st;
+      qState.min = HASHQ.min; qState.yr = HASHQ.yr;
+    }
+    $('qcat').value = String(qState.cat);
+    $('qst').value = qState.st;
+    $('qmin').value = String(qState.min);
+    $('qyr').value = String(qState.yr);
+    // a select left blank means the hash named something this build does not have
+    if (!$('qst').value) { $('qst').value = 'all'; qState.st = 'all'; }
+    if (!$('qmin').value) { $('qmin').value = '0'; qState.min = 0; }
+    if (!$('qyr').value) { $('qyr').value = '0'; qState.yr = 0; }
+    syncPlaceTitle();
+    ['qcat', 'qst', 'qmin', 'qyr'].forEach((id) => $(id).addEventListener('change', () => {
+      qState.cat = +$('qcat').value; qState.st = $('qst').value;
+      qState.min = +$('qmin').value; qState.yr = +$('qyr').value;
+      syncPlaceTitle(); runQuery(); writeHash();
+    }));
+    $('qreset').addEventListener('click', () => {
+      $('qst').value = 'all'; $('qmin').value = '0'; $('qyr').value = '0';
+      qState.st = 'all'; qState.min = 0; qState.yr = 0;
+      syncPlaceTitle(); runQuery(); writeHash();
+    });
+    $('qmore').addEventListener('click', () => paintQuery(true));
+    $('qreport').addEventListener('click', () => buildReport('query'));
+    $('qexport').addEventListener('click', () => exportMenu($('qexport'), () => {
+      const m2 = QMETA;
+      return {
+        name: ('funders-' + (m2 ? m2.cats[qState.cat] : 'query') + (qState.st === 'all' ? '' : '-' + ((m2 && m2.states[qState.st]) || 'location-not-filed')))
+          .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+        cols: FCOLS,
+        rows: qState.rows.map(([fi, n, tot, med, lastY, mx]) => F[fi] ? funderRow(F[fi], { n, median: med, max: mx, last: lastY, total: tot }) : null).filter(Boolean),
+      };
+    }));
+    runQuery();
+  }
+
+  async function runQuery() {
+    const box = $('qresults');
+    box.innerHTML = '<div class="qempty">Searching the collection…</div>';
+    const [data] = await Promise.all([qCat(qState.cat), behaviour()]);
+    const key = qState.st === 'all' ? 'all' : qState.st;
+    let rows = (data && data[key]) || [];
+    // [fndIdx, n, total, median, lastYear, maxGrant]
+    rows = rows.filter((r) => (!qState.min || r[5] >= qState.min) && (!qState.yr || r[4] >= qState.yr));
+    if (region !== 'all') rows = rows.filter((r) => F[r[0]] && F[r[0]].r === region);
+    if (mapSel) rows = rows.filter((r) => F[r[0]] && (F[r[0]].st || '').toUpperCase() === mapSel);
+    qState.rows = rows;
+    qState.shown = 0;
+    box.innerHTML = '';
+    const nG = rows.reduce((s, r) => s + r[1], 0);
+    const sum = rows.reduce((s, r) => s + r[2], 0);
+    // Every headline count carries its denominator, so no result can be read as the
+    // whole collection. Both sides come from the same registry: funders in scope and
+    // the dollars those ledgers reconcile in total.
+    const scoped = mapSel && BY_ST[mapSel] ? BY_ST[mapSel] : REG.totals[region];
+    const scopeWord = mapSel ? stName(mapSel) + ' ledgers' : (region === 'all' ? 'ledgers' : 'ledgers in scope');
+    const ofWhose = mapSel || region !== 'all' ? 'their' : "the collection's";
+    $('qcount').textContent = rows.length.toLocaleString('en-US') + (rows.length === 1 ? ' funder' : ' funders');
+    $('qsum').textContent = 'of ' + scoped.n.toLocaleString('en-US') + ' ' + scopeWord + ' · '
+      + nG.toLocaleString('en-US') + ' matching grants · ' + moneyC(sum) + ' of ' + ofWhose + ' ' + moneyC(scoped.t);
+    // the "starting example" note belongs to the untouched opening query only
+    $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
+    if (!rows.length) {
+      box.innerHTML = '<div class="qempty"><b>No funder in the collection matches that.</b>Widen the place or lower the grant size — the collection is 1,932 ledgers deep, not exhaustive.</div>';
+      $('qmore').hidden = true;
+      return;
+    }
+    paintQuery();
+  }
+
+  function paintQuery(more) {
+    const box = $('qresults');
+    // a phone gets a shorter first helping — the same "Show more · N remaining"
+    // button carries the rest, rather than laying 25 cards down the document
+    const page = matchMedia('(max-width: 1019px)').matches ? 10 : 25;
+    const slice = qState.rows.slice(qState.shown, qState.shown + page);
+    const stTxt = placeStat(qState.st);
+    box.insertAdjacentHTML('beforeend', slice.map(([fi, n, tot, med, last, mx]) => {
+      const f = F[fi];
+      if (!f) return '';
+      const bridged = !!f.rn;
+      return `<div class="fcard">
+        <div>
+          <div class="nm"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></div>
+          <div class="where">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]}</div>
+          <div class="fstats">
+            <span class="fstat"><b>${n.toLocaleString('en-US')}</b>grants${esc(stTxt)}</span>
+            <span class="fstat"><b>${moneyC(med)}</b>median</span>
+            <span class="fstat"><b>${moneyC(mx)}</b>largest</span>
+            <span class="fstat"><b>${last}</b>most recent</span>
+            ${fitLine(fi)}
+          </div>
+        </div>
+        <div class="fside">
+          <button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" title="How this ledger reconciles">${bridged ? '✓ reconciled · bridged' : '✓ reconciled'}</button>
+          <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}">${PICKED.has(f.u) ? '✓ on list' : '+ list'}</button>
+        </div>
+      </div>`;
+    }).join(''));
+    qState.shown += slice.length;
+    $('qmore').hidden = qState.shown >= qState.rows.length;
+    $('qmore').textContent = 'Show more · ' + (qState.rows.length - qState.shown).toLocaleString('en-US') + ' remaining';
+  }
+
+  $('qresults').addEventListener('click', (e) => {
+    const add = e.target.closest('[data-add]');
+    if (add) {
+      const u = add.dataset.add;
+      if (PICKED.has(u)) { PICKED.delete(u); add.classList.remove('on'); add.textContent = '+ list'; }
+      else { PICKED.add(u); add.classList.add('on'); add.textContent = '✓ on list'; }
+      saveList();
+      renderList();
+      return;
+    }
+    const pf = e.target.closest('[data-proof]');
+    if (pf) showProof(+pf.dataset.proof);
+  });
+
+  function showProof(fi) {
+    const f = F[fi];
+    openOvl('m');
+    const yrs = f.y.map((y) => `<div class="yb"><div class="y">${y}</div><div class="v num">✓ filed</div></div>`).join('');
+    $('pbody').innerHTML = `<div class="p-name">${esc(f.n)}</div>
+      <div class="p-id">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${f.g.toLocaleString('en-US')} grants · ${money(f.t)}</div>
+      <div class="p-tot"><b class="num">Δ $0</b><span>every filed year reconciles to its own filed total</span></div>
+      <div class="yearsline">${yrs}</div>
+      ${(BEH && BEH[fi]) ? `<p style="font-size:0.94rem;color:var(--ink-dim)">Across ${BEH[fi][0].toLocaleString('en-US')} recipients, this funder gave in more than one year to <strong>${BEH[fi][1]}%</strong> of them, typically for ${BEH[fi][2]} year${BEH[fi][2] === 1 ? '' : 's'}. A first grant is usually around <strong>${money(BEH[fi][3])}</strong>.</p>` : ''}
+      ${f.rn ? `<p style="font-size:0.94rem;color:var(--ink-dim)">${esc(f.rn)}</p>` : ''}
+      <p style="font-size:0.94rem;color:var(--ink-dim)">Each year above ties to the total this foundation itself filed with the IRS. Where a year is bridged between two filed figures, or withheld because the public copy does not contain the recipient list, it is named on the
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a> — where every exception in this collection is disclosed.</p>
+      <p><a class="tbtn" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">Open the full ledger ↗</a></p>`;
+  }
+
+  // ---------- funder behaviour (renewal, tenure, typical first grant) ----------
+  let BEH = null;
+  async function behaviour() {
+    if (!BEH) BEH = await get('q/behaviour.json').catch(() => ({}));
+    return BEH;
+  }
+  // [recipients, renewal%, medianYearsOfSupport, medianFirstGrant]
+  function fitLine(fi) {
+    const b = BEH && BEH[fi];
+    if (!b) return '';
+    return `<span class="fstat"><b>${b[1]}%</b>renew</span>` +
+           `<span class="fstat"><b>${moneyC(b[3])}</b>typical first grant</span>`;
+  }
+
+  // ---------- export engine (CSV + real XLSX, formatted or raw) ----------
+  // No libraries: the page is one self-contained file, so the .xlsx is written
+  // as a stored (uncompressed) ZIP byte by byte.
+  const CRC = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+    return (u8) => { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = t[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  })();
+  const enc = (s) => new TextEncoder().encode(s);
+  function zip(files) {                       // [{name, data:Uint8Array}]
+    const parts = [], central = [];
+    let off = 0;
+    files.forEach((f) => {
+      const nm = enc(f.name), crc = CRC(f.data), sz = f.data.length;
+      const lh = new Uint8Array(30 + nm.length), dv = new DataView(lh.buffer);
+      dv.setUint32(0, 0x04034b50, true); dv.setUint16(4, 20, true); dv.setUint16(6, 0, true);
+      dv.setUint16(8, 0, true); dv.setUint16(10, 0, true); dv.setUint16(12, 0x2100, true);
+      dv.setUint32(14, crc, true); dv.setUint32(18, sz, true); dv.setUint32(22, sz, true);
+      dv.setUint16(26, nm.length, true); dv.setUint16(28, 0, true);
+      lh.set(nm, 30);
+      parts.push(lh, f.data);
+      const ch = new Uint8Array(46 + nm.length), cv = new DataView(ch.buffer);
+      cv.setUint32(0, 0x02014b50, true); cv.setUint16(4, 20, true); cv.setUint16(6, 20, true);
+      cv.setUint16(8, 0, true); cv.setUint16(10, 0, true); cv.setUint16(12, 0, true); cv.setUint16(14, 0x2100, true);
+      cv.setUint32(16, crc, true); cv.setUint32(20, sz, true); cv.setUint32(24, sz, true);
+      cv.setUint16(28, nm.length, true); cv.setUint32(42, off, true);
+      ch.set(nm, 46);
+      central.push(ch);
+      off += lh.length + sz;
+    });
+    const cdSize = central.reduce((s, c) => s + c.length, 0);
+    const end = new Uint8Array(22), ev = new DataView(end.buffer);
+    ev.setUint32(0, 0x06054b50, true); ev.setUint16(8, files.length, true); ev.setUint16(10, files.length, true);
+    ev.setUint32(12, cdSize, true); ev.setUint32(16, off, true);
+    const all = parts.concat(central, [end]);
+    const total = all.reduce((s, a) => s + a.length, 0);
+    const out = new Uint8Array(total);
+    let p = 0;
+    all.forEach((a) => { out.set(a, p); p += a.length; });
+    return out;
+  }
+  const xe = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  // cols: [{h, k, type:'n'|'s'|'pct', w}]
+  function xlsx(sheetName, cols, rows, fmt) {
+    const colsXml = '<cols>' + cols.map((c, i) => `<col min="${i + 1}" max="${i + 1}" width="${c.w || 18}" customWidth="1"/>`).join('') + '</cols>';
+    const cell = (v, t, r, ci, styled) => {
+      const ref = String.fromCharCode(65 + (ci % 26)) + (ci >= 26 ? '' : '') + r;
+      const A = ci < 26 ? String.fromCharCode(65 + ci) : String.fromCharCode(64 + Math.floor(ci / 26)) + String.fromCharCode(65 + (ci % 26));
+      const at = A + r;
+      if (t === 'n' && v !== '' && v !== null && isFinite(v)) return `<c r="${at}"${styled ? ' s="' + styled + '"' : ''}><v>${v}</v></c>`;
+      return `<c r="${at}" t="inlineStr"${styled ? ' s="' + styled + '"' : ''}><is><t>${xe(v == null ? '' : v)}</t></is></c>`;
+    };
+    let r = 1;
+    const head = '<row r="1">' + cols.map((c, i) => cell(c.h, 's', 1, i, fmt ? 1 : 0)).join('') + '</row>';
+    r = 2;
+    const body = rows.map((row) => {
+      const cells = cols.map((c, i) => {
+        const v = row[c.k];
+        // 'n' is money, 'int' a plain count, 'yr' a bare year — a count or a year must
+        // never come out of here wearing a dollar sign
+        const st = fmt ? (c.type === 'n' ? 2 : c.type === 'pct' ? 3 : c.type === 'int' ? 4 : 0) : 0;
+        const numeric = c.type === 'n' || c.type === 'pct' || c.type === 'int' || c.type === 'yr';
+        return cell(v, numeric ? 'n' : 's', r, i, st || 0);
+      }).join('');
+      const out = `<row r="${r}">${cells}</row>`;
+      r++;
+      return out;
+    }).join('');
+    const sheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${colsXml}` +
+      (fmt ? '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>' : '') +
+      `<sheetData>${head}${body}</sheetData></worksheet>`;
+    const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+<numFmts count="3"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0"/><numFmt numFmtId="165" formatCode="0&quot;%&quot;"/><numFmt numFmtId="166" formatCode="#,##0"/></numFmts>
+<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>
+<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1E4634"/><bgColor indexed="64"/></patternFill></fill></fills>
+<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>
+<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
+<cellXfs count="5">
+<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>
+<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"><alignment vertical="center"/></xf>
+<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>
+<xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>
+<xf numFmtId="166" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>
+</cellXfs></styleSheet>`;
+    const files = [
+      { name: '[Content_Types].xml', data: enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`) },
+      { name: '_rels/.rels', data: enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`) },
+      { name: 'xl/workbook.xml', data: enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="${xe(sheetName).slice(0, 28)}" sheetId="1" r:id="rId1"/></sheets></workbook>`) },
+      { name: 'xl/_rels/workbook.xml.rels', data: enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`) },
+      { name: 'xl/styles.xml', data: enc(styles) },
+      { name: 'xl/worksheets/sheet1.xml', data: enc(sheet) },
+    ];
+    return zip(files);
+  }
+  function download(name, data, mime) {
+    const blob = data instanceof Uint8Array ? new Blob([data], { type: mime }) : new Blob([data], { type: mime });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  function csv(cols, rows, fmt) {
+    const q = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const head = cols.map((c) => q(c.h)).join(',');
+    const body = rows.map((r) => cols.map((c) => {
+      const v = r[c.k];
+      if (!fmt) return q(v);
+      if (c.type === 'n') return q(typeof v === 'number' ? money(v) : v);
+      if (c.type === 'int') return q(typeof v === 'number' ? v.toLocaleString('en-US') : v);
+      if (c.type === 'yr') return q(v == null ? '' : String(v));
+      if (c.type === 'pct') return q(typeof v === 'number' ? v + '%' : v);
+      return q(v);
+    }).join(',')).join(String.fromCharCode(10));
+    return head + String.fromCharCode(10) + body;
+  }
+  // one menu, reused: pass a builder that returns {name, cols, rows}.
+  // It is MOVED into the calling button's .expwrap, so any repaint of a panel it was
+  // moved into would delete it and kill every later export — every writer of #pbody
+  // therefore parks it back on the body first.
+  function stashExpMenu() {
+    const m = document.getElementById('expmenu');
+    const host = document.getElementById('pbody');
+    if (m && host && host.contains(m)) { m.hidden = true; document.body.appendChild(m); }
+  }
+  let expBuilder = null;
+  function exportMenu(btn, builder) {
+    expBuilder = builder;
+    const m = $('expmenu');
+    m.hidden = !m.hidden;
+    if (!m.hidden) {
+      const w = btn.closest('.expwrap');
+      if (w && m.parentElement !== w) w.appendChild(m);
+    }
+  }
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.expwrap')) { const m = $('expmenu'); if (m) m.hidden = true; }
+  });
+  function doExport(kind) {
+    if (!expBuilder) return;
+    const { name, cols, rows } = expBuilder();
+    if (!rows.length) return;
+    if (kind === 'csv-raw') download(name + '.csv', csv(cols, rows, false), 'text/csv');
+    if (kind === 'csv-fmt') download(name + '-formatted.csv', csv(cols, rows, true), 'text/csv');
+    if (kind === 'xlsx-raw') download(name + '.xlsx', xlsx(name, cols, rows, false), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    if (kind === 'xlsx-fmt') download(name + '-formatted.xlsx', xlsx(name, cols, rows, true), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    $('expmenu').hidden = true;
+  }
+
+  // columns shared by the funder exports
+  const FCOLS = [
+    { h: 'Foundation', k: 'name', type: 's', w: 42 },
+    { h: 'City', k: 'city', type: 's', w: 18 },
+    { h: 'State', k: 'st', type: 's', w: 8 },
+    { h: 'Matching grants', k: 'n', type: 'int', w: 16 },
+    { h: 'Median grant', k: 'median', type: 'n', w: 15 },
+    { h: 'Largest grant', k: 'max', type: 'n', w: 15 },
+    { h: 'Most recent year', k: 'last', type: 'yr', w: 16 },
+    { h: 'Renewal rate', k: 'renew', type: 'pct', w: 13 },
+    { h: 'Typical first grant', k: 'first', type: 'n', w: 18 },
+    { h: 'Total verified (all years)', k: 'total', type: 'n', w: 22 },
+    { h: 'Reconciliation', k: 'recon', type: 's', w: 30 },
+    { h: 'Ledger', k: 'url', type: 's', w: 46 },
+    { h: 'Note', k: 'note', type: 's', w: 40 },
+  ];
+  function funderRow(f, extra) {
+    const b = BEH && BEH[F.indexOf(f)];
+    return Object.assign({
+      name: f.n, city: f.ci, st: f.st || '', total: f.t,
+      recon: f.rn ? 'reconciled to filed total (bridged: ' + f.rn + ')' : 'reconciled to filed total',
+      url: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/',
+      note: NOTES[f.u] || '',
+      renew: b ? b[1] : '', first: b ? b[3] : '',
+      n: '', median: '', max: '', last: f.y[f.y.length - 1],
+    }, extra || {});
+  }
+
+  // ---------- ACT: the working list, inside the active project ----------
+  function saveList() {
+    const p = PROJ();
+    p.funders = [...PICKED];
+    p.notes = Object.assign({}, NOTES);
+    p.updated = todayISO();
+    writeStore();
+  }
+  function paintListCount() {
+    const n = PICKED.size, p = PROJ();
+    $('listcnt').textContent = n;
+    $('listcnt').classList.toggle('zero', n === 0);
+    const lb = $('listbtn').querySelector('.lbt');
+    if (lb) lb.textContent = p.name.length > 22 ? p.name.slice(0, 21) + '…' : p.name;
+    $('listbtn').setAttribute('aria-label', 'Project ' + p.name + ' — ' + n + ' funder' + (n === 1 ? '' : 's') + ' saved');
+  }
+  function renderList() {
+    paintListCount();
+    if (ovlMode !== 'l') return;
+    paintList();
+  }
+  function listRows() {
+    return [...PICKED].map((u) => F.find((f) => f.u === u)).filter(Boolean).sort((a, b) => b.t - a.t);
+  }
+  // one line of feedback under the project bar — repainted with the panel, so it is
+  // always written after the paint that would otherwise wipe it
+  let projMsg = null;
+  function flash(msg, bad) { projMsg = msg ? { msg, bad: !!bad } : null; const el = $('projmsg'); if (!el) return; el.textContent = msg || ''; el.classList.toggle('bad', !!bad); el.hidden = !msg; }
+  function projectFile(p) {
+    return JSON.stringify({
+      format: 'grants-ledger-project', v: 1, exported: todayISO(),
+      source: 'https://jcurry44.github.io/grants-ledgers/',
+      project: { name: p.name, created: p.created, updated: p.updated, funders: p.funders, notes: p.notes },
+    }, null, 2);
+  }
+  function paintList() {
+    stashExpMenu();
+    const rows = listRows();
+    const p = PROJ();
+    const tot = rows.reduce((s, f) => s + f.t, 0);
+    $('pbody').innerHTML = `
+      <div class="projbar">
+        <label class="sr-only" for="projsel">Active project</label>
+        <select class="qsel" id="projsel">${STORE.list.map((x) => `<option value="${esc(x.id)}"${x.id === p.id ? ' selected' : ''}>${esc(x.name)} · ${x.funders.length}</option>`).join('')}</select>
+        <button type="button" class="pbtn" id="pnew">New</button>
+        <button type="button" class="pbtn" id="pren">Rename</button>
+        <button type="button" class="pbtn" id="pdel"${STORE.list.length > 1 ? '' : ' disabled title="this is the only project"'}>Delete</button>
+        <span class="pgap"></span>
+        <button type="button" class="pbtn" id="psave">Save to file</button>
+        <button type="button" class="pbtn" id="popen">Open from file…</button>
+        <input type="file" id="pfile" accept=".json,application/json" hidden>
+      </div>
+      <p class="projnote">Projects are kept in <b>this browser</b> — there is no account here and nothing is uploaded. Clearing site data clears them. <b>Save to file</b> writes this project out so it survives that, moves to another machine, or goes to a colleague; <b>Open from file</b> reads one back in.</p>
+      <p class="projmsg" id="projmsg" hidden></p>
+      <div class="lhead">
+        <div><div class="p-name">${esc(p.name)}</div>
+          <div class="tot">${rows.length} ${rows.length === 1 ? 'funder' : 'funders'} · ${money(tot)} verified across their filed years · last change ${esc(p.updated)}</div></div>
+        <div class="acts">
+          <span class="expwrap"><button type="button" class="tbtn" id="lexport"${rows.length ? '' : ' disabled'}>Export ▾</button></span>
+          <button type="button" class="tbtn" id="lreport"${rows.length ? '' : ' disabled'}>Build report</button>
+          <button type="button" class="tbtn" id="lprint"${rows.length ? '' : ' disabled'}>Print</button>
+          <button type="button" class="tbtn" id="lclear"${rows.length ? '' : ' disabled'}>Clear</button>
+        </div>
+      </div>
+      ${rows.length ? rows.map((f) => `
+        <div class="lrow">
+          <span class="cd">${f.c}</span>
+          <span><span class="ln"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
+            <span class="lm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]} · ✓ reconciled${f.rn ? ' · bridged' : ''}</span></span>
+          <span class="lv num">${moneyC(f.t)}</span>
+          <button type="button" class="rm" data-rm="${f.u}" aria-label="Remove">remove</button>
+          <textarea class="lnote" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
+        </div>`).join('')
+        : `<div class="qempty"><b>Nothing in this project yet.</b>Add funders from Find funders — they stay in this project in this browser, and export as a CSV, a spreadsheet, or a printable brief.</div>`}
+      <p style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-dim); margin-top:0.9rem">Every figure here reconciles to a total the foundation itself filed with the IRS. Exceptions are named on the exceptions page.</p>`;
+    if (projMsg) { const el = $('projmsg'); el.textContent = projMsg.msg; el.classList.toggle('bad', projMsg.bad); el.hidden = false; }
+    // ---- project controls ----
+    const sel = $('projsel');
+    if (sel) sel.addEventListener('change', () => { flash(''); loadProject(sel.value); renderList(); syncAddButtons(); });
+    const nb = $('pnew');
+    if (nb) nb.addEventListener('click', () => {
+      const nm = (prompt('Name this project', 'Project ' + (STORE.list.length + 1)) || '').trim();
+      if (!nm) return;
+      const np = blankProject(nm.slice(0, 60));
+      STORE.list.push(np);
+      flash('');
+      loadProject(np.id);
+      renderList();
+      syncAddButtons();
+    });
+    const rn = $('pren');
+    if (rn) rn.addEventListener('click', () => {
+      const nm = (prompt('Rename this project', p.name) || '').trim();
+      if (!nm) return;
+      p.name = nm.slice(0, 60);
+      p.updated = todayISO();
+      writeStore();
+      renderList();
+    });
+    const dl = $('pdel');
+    if (dl) dl.addEventListener('click', () => {
+      if (STORE.list.length < 2) return;
+      if (!confirm('Delete the project “' + p.name + '” and its ' + p.funders.length + ' funder' + (p.funders.length === 1 ? '' : 's') + ' from this browser? Any file you saved is untouched.')) return;
+      STORE.list = STORE.list.filter((x) => x.id !== p.id);
+      flash('');
+      loadProject(STORE.list[0].id);
+      renderList();
+      syncAddButtons();
+    });
+    const sv = $('psave');
+    if (sv) sv.addEventListener('click', () => {
+      download('grants-ledger-' + slug(p.name) + '.json', projectFile(p), 'application/json');
+      flash('Saved “' + p.name + '” to a file — ' + p.funders.length + ' funder' + (p.funders.length === 1 ? '' : 's') + ', notes included.', false);
+    });
+    const op = $('popen');
+    if (op) op.addEventListener('click', () => { const inp = $('pfile'); inp.value = ''; inp.click(); });
+    const fin = $('pfile');
+    if (fin) fin.addEventListener('change', () => {
+      const file = fin.files && fin.files[0];
+      if (!file) return;
+      const rd = new FileReader();
+      rd.onload = () => {
+        let d = null;
+        try { d = JSON.parse(rd.result); } catch (e) { d = null; }
+        const pr = d && d.project;
+        if (!d || d.format !== 'grants-ledger-project' || !pr || !Array.isArray(pr.funders)) {
+          flash('That file is not a Grants Ledger project — nothing was changed.', true);
+          return;
+        }
+        // only funders this build actually publishes are carried in, and the count that
+        // did not survive is stated rather than quietly dropped
+        const known = pr.funders.filter((u) => typeof u === 'string' && F.some((x) => x.u === u));
+        const dropped = pr.funders.length - known.length;
+        // a fresh browser holds one empty placeholder project; opening a file on that
+        // browser should restore the file's own name, not "… (opened today)" beside a blank
+        if (STORE.list.length === 1 && !STORE.list[0].funders.length && !Object.keys(STORE.list[0].notes).length) STORE.list = [];
+        let nm = String(pr.name || 'Imported project').slice(0, 60);
+        if (STORE.list.some((x) => x.name === nm)) nm += ' (opened ' + todayISO() + ')';
+        const np = blankProject(nm);
+        if (typeof pr.created === 'string') np.created = pr.created;
+        np.funders = known;
+        if (pr.notes && typeof pr.notes === 'object') known.forEach((u) => { if (typeof pr.notes[u] === 'string') np.notes[u] = pr.notes[u]; });
+        STORE.list.push(np);
+        loadProject(np.id);
+        renderList();
+        syncAddButtons();
+        flash('Opened “' + nm + '” — ' + known.length + ' funder' + (known.length === 1 ? '' : 's') + ', ' + Object.keys(np.notes).length + ' note' + (Object.keys(np.notes).length === 1 ? '' : 's')
+          + (dropped ? ' · ' + dropped + ' name' + (dropped === 1 ? '' : 's') + ' not in this collection left out' : ''), false);
+      };
+      rd.onerror = () => flash('That file could not be read.', true);
+      rd.readAsText(file);
+    });
+    const ex = $('lexport');
+    if (ex) ex.addEventListener('click', () => exportMenu(ex, () => ({
+      name: slug(PROJ().name) + '-funders', cols: FCOLS,
+      rows: listRows().map((f) => funderRow(f, { n: f.g })),
+    })));
+    const lr = $('lreport');
+    if (lr) lr.addEventListener('click', () => buildReport('list'));
+    const pr = $('lprint');
+    if (pr) pr.addEventListener('click', () => window.print());
+    const cl = $('lclear');
+    if (cl) cl.addEventListener('click', () => {
+      if (!confirm('Remove all ' + PICKED.size + ' funders from “' + PROJ().name + '”? The project itself stays.')) return;
+      PICKED.clear();
+      Object.keys(NOTES).forEach((k) => delete NOTES[k]);
+      saveList();
+      renderList();
+      document.querySelectorAll('.addb.on').forEach((b) => { b.classList.remove('on'); b.textContent = '+ list'; });
+    });
+  }
+  $('pbody').addEventListener('click', (e) => {
+    const add = e.target.closest('[data-add]');
+    if (add) {
+      const u = add.dataset.add;
+      if (PICKED.has(u)) { PICKED.delete(u); add.classList.remove('on'); add.textContent = '+ list'; }
+      else { PICKED.add(u); add.classList.add('on'); add.textContent = '✓ on list'; }
+      saveList();
+      paintListCount();
+      const twin = document.querySelector('#qresults .addb[data-add="' + u + '"]');
+      if (twin) { twin.classList.toggle('on', PICKED.has(u)); twin.textContent = PICKED.has(u) ? '✓ on list' : '+ list'; }
+      return;
+    }
+    const jump = e.target.closest('#peerhost [data-e]');
+    if (jump) { openProfile(jump.dataset.e); return; }
+    const rm = e.target.closest('[data-rm]');
+    if (!rm) return;
+    PICKED.delete(rm.dataset.rm);
+    delete NOTES[rm.dataset.rm];
+    saveList();
+    renderList();
+    const b = document.querySelector('.addb[data-add="' + rm.dataset.rm + '"]');
+    if (b) { b.classList.remove('on'); b.textContent = '+ list'; }
+  });
+  $('pbody').addEventListener('input', (e) => {
+    const t = e.target.closest('[data-note]');
+    if (!t) return;
+    NOTES[t.dataset.note] = t.value;
+    saveList();
+  });
+  $('listbtn').addEventListener('click', () => { openOvl('l'); paintList(); });
+  $('expmenu').addEventListener('click', (e) => { const b = e.target.closest('[data-x]'); if (b) doExport(b.dataset.x); });
+
+  // ---------- recipients (weave) ----------
+  function renderWeave() {
+    const pool = AGG.weave.filter((w) => region === 'all' || w[4].includes(REGION_KEY[region]));
+    const gov = pool.filter((w) => isGov(w[0]));
+    const items = (govOnly ? gov : pool).slice(0, 14);
+    $('weave').innerHTML = items.map(([id, n, t, nf]) =>
+      `<div class="wv"><button type="button" class="wn" data-e="${id}">${esc(dc(n))}</button>
+       <span class="wm">${nf} foundations ${idChip(id)}</span><span class="ws num${sumCls(id)}"${softTip(id)}>${money(t)}</span></div>`).join('');
+    $('idcount').textContent = govOnly
+      ? 'showing ' + items.length + ' of ' + gov.length + ' government-matched identities in this most-funded list'
+      : 'showing ' + items.length + ' of ' + pool.length + ' · ' + (pool.length - gov.length) + ' of the ' + pool.length + ' are name-matched estimates';
+    $('idlegend').innerHTML = idChip('E')
+      + ' matched to an IRS-registered organisation — safe to add across foundations. '
+      + idChip('K')
+      + ' the filed name only — no 990-PF row carries a recipient EIN, so read the cross-foundation total as an estimate.';
+  }
+  // one switch, shared by the Recipients tab and the search box, carried in the hash
+  function paintGovToggle() {
+    const b = $('idtog');
+    if (!b) return;
+    b.classList.toggle('on', govOnly);
+    b.setAttribute('aria-pressed', govOnly ? 'true' : 'false');
+    b.querySelector('.bx').textContent = govOnly ? '☑' : '☐';
+  }
+  function setGovOnly(v, silent) {
+    govOnly = !!v;
+    paintGovToggle();
+    renderWeave();
+    renderDossier();
+    const qv = $('q').value;
+    if (qv.trim().length >= 2) suggest(qv);
+    if (!silent) writeHash();
+  }
+  $('idtog').addEventListener('click', () => setGovOnly(!govOnly));
+  $('weave').addEventListener('click', (e) => { const b = e.target.closest('.wn'); if (b) openProfile(b.dataset.e); });
+
+  // ---------- years ----------
+  function renderTrend() {
+    const by = AGG.byYear[region] || {};
+    const years = Object.keys(by).map(Number).sort();
+    const maxY = Math.max(...years.map((y) => by[y]));
+    const n = REG.totals[region].n;
+    $('trend').innerHTML = years.map((y) => `
+      <div class="trow"><span class="y">${y}</span>
+        <div><div class="tbar" style="width:${Math.max(1, by[y] / maxY * 100)}%"></div></div>
+        <span class="v num">${moneyC(by[y])} <small>· ${AGG.filed[region + ':' + y] || 0} of ${n}</small></span>
+      </div>`).join('');
+  }
+
+  // ---------- purposes + largest ----------
+  const SHADES = ['#432708', '#5d370d', '#7a4a13', '#96601f', '#b0782f', '#c79045', '#d9aa64', '#e7c28b', '#f1d7b2', '#c9c2ae'];
+  function renderCats() {
+    const cats = Object.entries(AGG.byCat[region] || {}).sort((a, b) => b[1] - a[1]);
+    const tot = cats.reduce((s, c) => s + Math.max(0, c[1]), 0) || 1;
+    const top = cats.slice(0, 7);
+    const restV = cats.slice(7).reduce((s, c) => s + Math.max(0, c[1]), 0);
+    const rows = restV > 0 ? top.concat([['Everything else', restV]]) : top;
+    $('catbar').innerHTML = rows.map(([k, v], i) =>
+      `<button type="button" data-cat="${esc(k)}" style="background:${k === 'Other filed purposes' ? '#c9c2ae' : SHADES[Math.min(i, 8)]}; width:${Math.max(0.6, v / tot * 100)}%" title="${esc(k)} · ${moneyC(v)} — click to drill" aria-label="${esc(k)}"></button>`).join('');
+    $('catbar').onclick = (e) => { const b = e.target.closest('[data-cat]'); if (b) drillCat(b.dataset.cat); };
+    const kmax = rows.length ? Math.max(...rows.map((r) => r[1])) : 1;
+    $('catkey').innerHTML = rows.map(([k, v], i) => `
+      <button type="button" class="ck" data-cat="${esc(k)}" style="--w:${Math.max(3, v / kmax * 100)}%" title="See everything filed as ${esc(k)}">
+        <i style="background:${k === 'Other filed purposes' ? '#c9c2ae' : SHADES[Math.min(i, 8)]}"></i>
+        <span>${esc(k)}</span><span class="kv num">${moneyC(v)} · ${(v / tot * 100).toFixed(0)}%</span><span class="chev">›</span></button>`).join('');
+    $('catkey').onclick = (e) => { const b = e.target.closest('[data-cat]'); if (b) drillCat(b.dataset.cat); };
+    const fl = fleetFiltered().slice().sort((a, b) => b.t - a.t).slice(0, 10);
+    const mx = fl[0] ? fl[0].t : 1;
+    $('topfnd').innerHTML = fl.map((f, i) => `
+      <a class="brow" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" title="Open the ${esc(f.n)} ledger">
+        <span class="bn">${esc(f.s)}</span>
+        <div><div class="bb" style="--bc:${SHADES[Math.min(i, 8)]}; width:${Math.max(2, f.t / mx * 100)}%"></div></div>
+        <span class="bv num">${moneyC(f.t)}</span></a>`).join('');
+  }
+
+  // ---------- search ----------
+  const rmatch = (rg) => region === 'all' || rg.includes(REGION_KEY[region]);
+  let sugItems = [];
+  let sugSeq = 0;
+  async function suggest(qraw) {
+    const q = qraw.trim().toLowerCase();
+    const box = $('suggest');
+    const seq = ++sugSeq;
+    if (q.length < 2) { box.hidden = true; $('q').setAttribute('aria-expanded', 'false'); return; }
+    const fhits = F.filter((f) => (region === 'all' || f.r === region) && (f.n.toLowerCase().includes(q) || f.s.toLowerCase().includes(q))).slice(0, 2);
+    const pick = [];
+    for (const e2 of EAGER) {
+      if (pick.length >= 9) break;
+      if (rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && e2[1].toLowerCase().includes(q)) pick.push(e2);
+    }
+    let deep = false;
+    if (pick.length < 9) {
+      const shard = await shardFor(qraw);
+      if (seq !== sugSeq) return;
+      const have = new Set(pick.map((x) => x[0]));
+      for (const e2 of shard) {
+        if (pick.length >= 9) break;
+        if (!have.has(e2[0]) && rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && e2[5].includes(q)) { pick.push(e2); deep = true; }
+      }
+    }
+    sugItems = pick;
+    const fhtml = fhits.map((f) => '<a class="sug" href="https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/"><span class="n">' + esc(f.n) + '</span><span class="amt num">' + moneyC(f.t) + '</span><span class="m">foundation · ' + f.g.toLocaleString('en-US') + ' grants · open its ledger ↗</span></a>').join('');
+    box.innerHTML = fhtml + ((pick.length || fhits.length) ? pick.map((e2) =>
+      `<button type="button" class="sug" role="option" data-e="${e2[0]}">
+        <span class="n">${esc(dc(e2[1]))}</span>
+        <span class="amt num${sumCls(e2[0])}"${softTip(e2[0])}>${moneyC(e2[2])}</span>
+        <span class="m">${e2[3]} ${e2[3] === 1 ? 'foundation' : 'foundations'} ${idChip(e2[0], 'mini')}${isGov(e2[0]) ? ' · EIN ' + e2[0].slice(1) : ''}</span>
+      </button>`).join('')
+      : `<div class="nosug">No organization matches in this scope${govOnly ? ' with a government-matched identity' : ''}.</div>`)
+      + '<div class="srchint">' + (deep ? 'searched the full index · ' : '')
+      + '<button type="button" class="sugtog" id="sugidtog">'
+      + (govOnly ? '☑ government-matched identities only' : '☐ government-matched identities only')
+      + '</button></div>';
+    box.hidden = false;
+    $('q').setAttribute('aria-expanded', 'true');
+  }
+  $('q').addEventListener('input', (e) => { suggest(e.target.value); });
+  $('q').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && sugItems.length) openProfile(sugItems[0][0]);
+    if (e.key === 'Escape') { $('suggest').hidden = true; $('q').blur(); }
+  });
+  $('suggest').addEventListener('click', (e) => {
+    if (e.target.closest('#sugidtog')) { setGovOnly(!govOnly); return; }
+    const b = e.target.closest('button.sug');
+    if (b) openProfile(b.dataset.e);
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.searchbox')) $('suggest').hidden = true; });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey && !/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+      e.preventDefault(); $('q').focus(); $('q').select();
+    }
+    if (e.key === 'Escape' && !$('ovl').hidden) closeOvl();
+    else if (e.key === 'Escape' && catSel && $('suggest').hidden) drillCat(catSel);
+    else if (e.key === 'Escape' && citySel && $('suggest').hidden) selectCity(citySel);
+    else if (e.key === 'Escape' && mapSel && $('suggest').hidden) selectState(null);
+  });
+
+  // ---------- profile (overlay) ----------
+  let curProfile = null;
+  function ledgerLink(fi, variant) { return `https://jcurry44.github.io/grants-ledgers/f/${F[fi].u}/#tab=grants&q=${encodeURIComponent(variant)}`; }
+  async function openProfile(id, silent) {
+    curProfile = id;
+    openOvl('p');
+    $('pbody').innerHTML = '<div class="loading">Loading the record…</div>';
+    let rec;
+    try { rec = (await bucketFor(id))[id]; } catch (e) { rec = null; }
+    if (ovlMode !== 'p' || curProfile !== id) return;
+    if (!rec) { $('pbody').innerHTML = '<div class="loading">That record could not be loaded.</div>'; return; }
+    const rows = rec.g.slice().sort((a, b) => b[0] - a[0] || b[2] - a[2]);
+    const total = rows.reduce((s, g) => s + g[2], 0);
+    const byF = new Map(), byY = new Map();
+    rows.forEach((g) => { byF.set(g[1], (byF.get(g[1]) || 0) + g[2]); byY.set(g[0], (byY.get(g[0]) || 0) + g[2]); });
+    const years = [...byY.keys()].sort();
+    const alias = rec.v.filter((_, i) => i !== rec.d);
+    $('pbody').innerHTML = `
+      <div class="p-name">${esc(dc(rec.n))}</div>
+      <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· EIN ' + id.slice(1) + ' · matched to an IRS-registered organisation' : '· identity built from the recipient name as filed'}</span></div>
+      ${alias.length ? `<div class="p-alias">also filed as: ${esc(alias.slice(0, 6).map(dc).join(' · '))}${alias.length > 6 ? ' · …' : ''}</div>` : ''}
+      <div class="p-tot"><b class="num${sumCls(id)}"${softTip(id)}>${money(total)}</b><span>${rows.length} grants · ${byF.size} ${byF.size === 1 ? 'foundation' : 'foundations'} · ${years[0]}–${years[years.length - 1]}${isGov(id) ? '' : ' · name-matched estimate'}</span></div>
+      ${isGov(id) ? '' : '<p class="p-warn"><b>This cross-foundation total is a name-matched estimate.</b> No 990-PF grant row carries a recipient EIN — not one of the 1,527,245 rows in this collection — so this organization is held together only by canonicalising the name each foundation filed. The record may split one organization across two entries, or hold two same-named organizations as one. Read the figure as a close estimate, not a settled total.</p>'}
+      <div class="chiprow">${[...byF.entries()].sort((a, b) => b[1] - a[1]).map(([fi, amt]) =>
+        `<a class="fchip" href="https://jcurry44.github.io/grants-ledgers/f/${F[fi].u}/" title="${esc(F[fi].n)} — open its ledger"><span class="cd">${F[fi].c}</span><span>${esc(F[fi].s)}</span><span class="fa num">${moneyC(amt)}</span></a>`).join('')}</div>
+      <div class="yearsline">${years.map((y) => `<div class="yb"><div class="y">${y}</div><div class="v num">${moneyC(byY.get(y))}</div></div>`).join('')}</div>
+      <div class="tw"><table><thead><tr><th>Year</th><th>Foundation</th><th class="amt">Amount</th><th>Source ledger</th></tr></thead><tbody>
+        ${rows.map((g) => `<tr><td class="yr">${g[0]}</td><td>${esc(F[g[1]].s)}</td><td class="amt num">${money(g[2])}</td>
+          <td><a class="rowlink" href="${ledgerLink(g[1], rec.v[g[3]] || rec.n)}" title="Opens the ${esc(F[g[1]].s)} ledger filtered to this recipient — it may hold more than one grant">View this recipient in the source ledger ↗</a></td></tr>`).join('')}
+      </tbody></table></div>
+      <div id="peerhost"></div>`;
+    renderPeers(rec, id, [...byF.keys()]);
+    $('suggest').hidden = true;
+    if (!silent) writeHash();
+  }
+
+  // ---------- PEER LENS: funders of organizations like this one ----------
+  // Uses the org's own purpose+place cell, minus the funders it already has.
+  async function renderPeers(rec, id, funderIdx) {
+    const host = $('peerhost');
+    if (!host) return;
+    const m = await qMeta();
+    if (!m) { host.innerHTML = ''; return; }
+    // the org's dominant purpose and place, from its own grants
+    const catT = {}, stT = {}, amts = [];
+    rec.g.forEach(([y, fi, a, vi, ci2, si2]) => { catT[ci2] = (catT[ci2] || 0) + a; stT[si2] = (stT[si2] || 0) + a; amts.push(a); });
+    // "Other filed purposes" is a residual bucket, not a subject — never match on it
+    // if this organization has any real purpose behind it.
+    const junk = m.cats.indexOf('Other filed purposes');
+    const catRank = Object.keys(catT).sort((a, b) => catT[b] - catT[a]);
+    const ci = (catRank.find((c) => +c !== junk) !== undefined ? catRank.find((c) => +c !== junk) : catRank[0]);
+    const si = Object.keys(stT).sort((a, b) => stT[b] - stT[a])[0];
+    // what this organization actually receives, so we don't hand a $25k grantee
+    // a funder whose median grant is $400k
+    amts.sort((a, b) => a - b);
+    const orgMed = amts.length ? amts[Math.floor(amts.length / 2)] : 0;
+    const orgTot = amts.reduce((s, v) => s + v, 0);
+    if (ci === undefined || si === undefined) { host.innerHTML = ''; return; }
+    const [data] = await Promise.all([qCat(+ci), behaviour()]);
+    const cell = (data && data[si]) || [];
+    const peers = (data && data['p' + si]) || [];
+    const have = new Set(funderIdx);
+    const unfunded = cell.filter((r) => !have.has(r[0]));
+    // rank by how many comparable grants they've made, within a plausible size band
+    const band = (lo, hi) => unfunded.filter((r) => r[3] >= orgMed * lo && r[3] <= orgMed * hi)
+      .sort((a, b) => b[1] - a[1]);
+    let fresh = orgMed ? band(0.2, 5) : [];
+    if (fresh.length < 4) fresh = orgMed ? band(0.08, 12) : [];
+    if (fresh.length < 4) fresh = unfunded.slice().sort((a, b) => b[1] - a[1]);
+    fresh = fresh.slice(0, 8);
+    const catName = m.cats[ci], stName2 = m.states[si] || 'the same state';
+    host.innerHTML = `
+      <div class="peerwrap">
+        <div class="peerhead"><b>Funders of organizations like this</b>
+          <span class="sub">${esc(catName.toLowerCase())} · ${esc(stName2)}</span></div>
+        <p class="peerlead">${fresh.length
+          ? `These funders give to ${esc(catName.toLowerCase())} work in ${esc(stName2)} at a comparable grant size, and have no grant to this organization anywhere in the collection.`
+          : `Every funder of ${esc(catName.toLowerCase())} work in ${esc(stName2)} in this collection already funds this organization.`}</p>
+        <div class="plist">${fresh.map(([fi, n, tot, med, last, mx]) => {
+          const f = F[fi];
+          if (!f) return '';
+          const b = BEH && BEH[fi];
+          return `<div class="prow">
+            <span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
+              <span class="pm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${n} comparable grant${n === 1 ? '' : 's'} · most recent ${last}${b ? ' · renews ' + b[1] + '%' : ''}</span></span>
+            <span class="pv">${moneyC(med)}<small>median grant</small></span>
+            <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}">${PICKED.has(f.u) ? '✓ on list' : '+ list'}</button>
+          </div>`;
+        }).join('')}</div>
+        ${peers.length ? `<div class="peerorgs">Comparable grantees here: ${peers.filter((p) => p[1] !== id && (!govOnly || isGov(p[1])) && (!orgTot || (p[2] <= orgTot * 12 && p[2] >= orgTot / 12))).slice(0, 6)
+          .map((p) => `<button type="button" data-e="${p[1]}">${esc(dc(p[0]))}</button> ${idChip(p[1], 'mini')}`).join(' · ')}</div>` : ''}
+      </div>`;
+  }
+
+  // ---------- explorer (overlay) ----------
+  const st = { slug: '', q: '', y: '', c: '', m: 0, page: 0 };
+  let fndRows = [], view = [];
+  $('ff').innerHTML = '<option value="">Choose a foundation…</option>' + F.map((f) => `<option value="${f.u}">${esc(f.n)}</option>`).join('');
+  $('fc').innerHTML = '<option value="">All categories</option>' + REG.cats.map((c, i) => `<option value="${i}">${esc(c)}</option>`).join('');
+  function openExplorer(slug, keep) {
+    openOvl('x');
+    if (slug !== st.slug || !keep) { $('ff').value = slug || ''; pickFnd(slug || '', keep); }
+    writeHash();
+  }
+  async function pickFnd(slug, keep) {
+    st.slug = slug; if (!keep) { st.q = ''; st.y = ''; st.c = ''; st.m = 0; st.page = 0; $('eq').value = ''; $('fy').value = ''; $('fc').value = ''; $('fm').value = '0'; }
+    const dis = !slug;
+    ['eq', 'fy', 'fc', 'fm', 'csv'].forEach((i) => { $(i).disabled = dis; });
+    $('openledger').hidden = dis;
+    $('xtitle').textContent = slug ? ((F.find((f) => f.u === slug) || {}).n || 'Browse the rows') : 'Browse the rows';
+    if (dis) { fndRows = []; applyF(); return; }
+    $('openledger').href = `https://jcurry44.github.io/grants-ledgers/f/${slug}/`;
+    $('count').textContent = 'Loading…';
+    fndRows = await get('fnd/' + slug + '.json').catch(() => []);
+    const years = [...new Set(fndRows.map((r) => r[0]))].sort().reverse();
+    $('fy').innerHTML = '<option value="">All years</option>' + years.map((y) => `<option>${y}</option>`).join('');
+    applyF();
+  }
+  function applyF() {
+    const q = st.q.trim().toLowerCase();
+    view = fndRows.filter((r) =>
+      (st.y === '' || r[0] === +st.y) && (st.c === '' || r[3] === +st.c) &&
+      (st.m === 0 || r[2] >= st.m) && (!q || r[5].toLowerCase().includes(q)));
+    view.sort((a, b) => b[2] - a[2]);
+    st.page = Math.min(st.page, Math.max(0, Math.ceil(view.length / 50) - 1));
+    const start = st.page * 50, slice = view.slice(start, start + 50);
+    $('rows').innerHTML = slice.map((r) => `<tr>
+      <td class="yr">${r[0]}</td>
+      <td><button type="button" class="recbtn" data-e="${r[1]}" title="Open this organization's full record">${esc(dc(r[5]))}</button> ${idChip(r[1], 'mini')}</td>
+      <td class="amt num">${money(r[2])}</td>
+      <td class="catcell">${esc(REG.cats[r[3]])}</td>
+      <td class="yr">${esc(REG.states[r[4]] || '')}</td></tr>`).join('');
+    const sum = view.reduce((s, r) => s + r[2], 0);
+    $('count').textContent = st.slug ? `${view.length.toLocaleString('en-US')} grants · ${money(sum)} in view` : 'Choose a foundation to fill the table.';
+    $('pinfo').textContent = view.length ? `Showing ${start + 1}–${Math.min(start + 50, view.length)} of ${view.length.toLocaleString('en-US')}` : '—';
+    $('prev').disabled = st.page === 0 || !view.length;
+    $('next').disabled = start + 50 >= view.length;
+  }
+  $('ff').addEventListener('change', (e) => { pickFnd(e.target.value); writeHash(); });
+  $('eq').addEventListener('input', (e) => { st.q = e.target.value; st.page = 0; applyF(); });
+  ['fy', 'fc', 'fm'].forEach((i) => $(i).addEventListener('change', (e) => {
+    if (i === 'fy') st.y = e.target.value; else if (i === 'fc') st.c = e.target.value; else st.m = +e.target.value;
+    st.page = 0; applyF();
+  }));
+  $('prev').addEventListener('click', () => { st.page--; applyF(); });
+  $('next').addEventListener('click', () => { st.page++; applyF(); });
+  $('rows').addEventListener('click', (e) => { const b = e.target.closest('.recbtn'); if (b) openProfile(b.dataset.e); });
+  $('csv').addEventListener('click', () => {
+    const head = 'year,recipient_as_filed,amount,category,state,entity_id';
+    const lines = view.map((r) => [r[0], r[5], r[2], REG.cats[r[3]], REG.states[r[4]] || '', r[1]]
+      .map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(','));
+    const blob = new Blob([head + String.fromCharCode(10) + lines.join(String.fromCharCode(10))], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (st.slug || 'grants') + '-view.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  // ---------- the report builder ----------
+  // Turns whatever is in scope — a query or the saved list — into a titled
+  // report with headline figures and charts, exportable and printable.
+  let repRows = [], repMeta = null;
+  async function buildReport(kind) {
+    await behaviour();
+    const m = await qMeta();
+    let rows, title, params;
+    if (kind === 'list') {
+      rows = listRows().map((f) => ({ f, n: f.g, median: null, max: null, last: f.y[f.y.length - 1], total: f.t }));
+      title = PROJ().name;
+      params = rows.length + ' funder' + (rows.length === 1 ? '' : 's') + ' on this project';
+    } else {
+      const cat = m.cats[qState.cat];
+      const place = qState.st === 'all' ? 'anywhere' : placeOf(m.states[qState.st]).label;
+      rows = qState.rows.map(([fi, n, tot, med, last, mx]) => ({ f: F[fi], n, median: med, max: mx, last, total: tot }))
+        .filter((r) => r.f);
+      title = cat + (qState.st === 'all' ? '' : ' · ' + place);
+      params = [
+        'purpose: ' + cat,
+        'recipient location as filed: ' + place,
+        'grant size: ' + (qState.min ? 'at least ' + money(qState.min) : 'any'),
+        'active since: ' + (qState.yr || 'any year'),
+        region !== 'all' ? 'scope: ' + region : '',
+        mapSel ? 'funders based in: ' + stName(mapSel) : '',
+      ].filter(Boolean).join('  ·  ');
+    }
+    repRows = rows;
+    repMeta = { title, params, kind };
+    openOvl('r');
+    paintReport();
+  }
+  function paintReport() {
+    stashExpMenu();
+    const rows = repRows, meta = repMeta;
+    const nG = rows.reduce((s, r) => s + (r.n || 0), 0);
+    const sum = rows.reduce((s, r) => s + (r.total || 0), 0);
+    const meds = rows.map((r) => r.median).filter((v) => v != null).sort((a, b) => a - b);
+    const medOfMed = meds.length ? meds[Math.floor(meds.length / 2)] : null;
+    const active = rows.filter((r) => r.last >= 2023).length;
+    const top = rows.slice().sort((a, b) => (b.total || 0) - (a.total || 0)).slice(0, 10);
+    const tmax = top[0] ? top[0].total : 1;
+    // years present across the funders in scope
+    const byYear = {};
+    rows.forEach((r) => { if (r.last) byYear[r.last] = (byYear[r.last] || 0) + 1; });
+    const yrs = Object.keys(byYear).map(Number).sort().slice(-6);
+    const ymax = Math.max(1, ...yrs.map((y) => byYear[y]));
+    const today = todayISO();
+    $('pbody').innerHTML = `<div class="rep">
+      <div class="repbar">
+        <span class="rbt">${esc(meta.title)}</span>
+        <span class="rbacts">
+          <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
+          <button type="button" class="tbtn" data-rprint>Print<span class="rbpdf"> / PDF</span></button>
+          <button type="button" class="tbtn rbx" id="repclose" aria-label="Close report">×</button>
+        </span>
+      </div>
+      <div class="rephead">
+        <div class="t">${esc(meta.title)}</div>
+        <div class="p">${esc(meta.params)} · prepared ${today} from The Grants Ledger</div>
+      </div>
+      <div class="repnums">
+        <div class="repnum"><b class="num">${rows.length.toLocaleString('en-US')}</b><span>funders</span></div>
+        <div class="repnum"><b class="num">${nG ? nG.toLocaleString('en-US') : '—'}</b><span>matching grants</span></div>
+        <div class="repnum"><b class="num">${moneyC(sum)}</b><span>${meta.kind === 'list' ? 'verified, all years' : 'in matching grants'}</span></div>
+        <div class="repnum"><b class="num">${medOfMed != null ? moneyC(medOfMed) : '—'}</b><span>typical grant</span></div>
+        <div class="repnum"><b class="num">${active}</b><span>active since 2023</span></div>
+      </div>
+      <div class="repsec">
+        <h4>Largest funders in scope</h4>
+        <div class="hbars">${top.map((r) => `<div class="hbar">
+          <span class="hn">${esc(r.f.n)}</span>
+          <span><span class="hb" style="width:${Math.max(2, (r.total || 0) / tmax * 100)}%"></span></span>
+          <span class="hv num">${moneyC(r.total || 0)}</span></div>`).join('')}</div>
+      </div>
+      <div class="repsec">
+        <h4>Most recent year a funder in scope gave</h4>
+        <div class="vbars">${yrs.map((y) => `<div class="vbar" title="${byYear[y]} funders last gave in ${y}">
+          <span class="vv num">${byYear[y]}</span><i style="height:${Math.max(2, byYear[y] / ymax * 100)}%"></i><span class="vl">${y}</span></div>`).join('')}</div>
+      </div>
+      <div class="repsec">
+        <h4>The funders</h4>
+        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">Median</th><th class="amt">Renews</th><th class="amt">Recent</th><th class="amt">Total</th></tr></thead><tbody>
+          ${rows.slice(0, 60).map((r) => {
+            const b = BEH && BEH[F.indexOf(r.f)];
+            return `<tr><td><a class="rowlink" href="https://jcurry44.github.io/grants-ledgers/f/${r.f.u}/">${esc(r.f.n)}</a></td>
+              <td class="yr">${esc(r.f.ci)}${r.f.st ? ', ' + r.f.st : ''}</td>
+              <td class="amt num">${r.n ? r.n.toLocaleString('en-US') : '—'}</td>
+              <td class="amt num">${r.median != null ? money(r.median) : '—'}</td>
+              <td class="amt num">${b ? b[1] + '%' : '—'}</td>
+              <td class="amt num">${r.last || '—'}</td>
+              <td class="amt num">${money(r.total || 0)}</td></tr>`;
+          }).join('')}
+        </tbody></table></div>
+        ${rows.length > 60 ? `<div class="repnote">Showing the first 60 of ${rows.length.toLocaleString('en-US')} — the export contains every row.</div>` : ''}
+      </div>
+      <div class="repnote">Every figure reconciles to a total the foundation itself filed with the IRS; bridges and withheld years are named on the exceptions page. Prepared from public IRS Form 990-PF filings. Nothing here is an audit.</div>
+      <div class="repfoot">
+        <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
+        <button type="button" class="tbtn" data-rprint>Print / PDF</button>
+      </div>
+    </div>`;
+    // the same two actions live in the sticky bar and at the end of the report, so a
+    // 6,000px document never strands them — both are bound, neither is a duplicate id
+    const repExport = (btn) => exportMenu(btn, () => ({
+      name: slug(repMeta.title || 'report').slice(0, 40) || 'report',
+      cols: FCOLS,
+      rows: repRows.map((r) => funderRow(r.f, { n: r.n || '', median: r.median != null ? r.median : '', max: r.max != null ? r.max : '', last: r.last || '', total: r.total || 0 })),
+    }));
+    document.querySelectorAll('#pbody [data-rex]').forEach((b) => b.addEventListener('click', () => repExport(b)));
+    document.querySelectorAll('#pbody [data-rprint]').forEach((b) => b.addEventListener('click', () => window.print()));
+    $('repclose').addEventListener('click', closeOvl);
+    $('repclose').focus({ preventScroll: true });
+  }
+
+  // ---------- method (overlay) ----------
+  // The limits are the product. Figures below are counted off the published corpus
+  // (db/all-grants.csv.gz): 1,527,245 rows, 287,710 recipient identities; an id
+  // beginning "E" is an EIN proven against the IRS Business Master File.
+  function openMethod() {
+    openOvl('m');
+    $('pbody').innerHTML = `<div class="method">
+      <div class="h3">The method</div>
+      <p>Every grant on this site is reconciled to its foundation&rsquo;s own IRS Form 990-PF — to a named filed total, to the dollar. Where a year cannot be proven it is withheld and says so; every bridge between a schedule and a cash line, and every exception in this collection, is disclosed on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>.</p>
+      <p>Source data is the IRS TEOS public 990-PF e-file XML, plus scanned attachments read page by page and proven against their own printed totals — including registers the reading software cannot see whole, where every missing figure is read from the page image by hand and priced back to a zero residual.</p>
+
+      <div class="mh">What is in this collection, and what is not</div>
+      <p>These are the largest U.S. private foundations, taken in order by assets. The collection is currently built down to a floor of roughly <span class="fig">$86 million</span> in assets — the top 2,000 foundations in the country, <span class="fig">${(REG.totals.all.n).toLocaleString('en-US')}</span> of them published here so far.</p>
+      <p>It is <strong>not</strong> a census of American philanthropy. The great majority of U.S. private foundations sit below that floor and are not here yet, and neither are public charities, community-foundation donor funds, or corporate giving that never passes through a private foundation. If a search returns nothing, that is usually what it means — not that no one funded the work.</p>
+
+      <div class="mh">How certain the recipient names are</div>
+      <p><strong>No 990-PF grant row carries a recipient EIN</strong> — not one of the <span class="fig">1,527,245</span> rows in this collection. Every EIN on this site is inferred: the recipient name as filed is canonicalised and then matched against the IRS Business Master File, with a short reviewed merge list carrying stated reasons; names that resolve to different EINs are never joined. That match succeeds for <span class="fig">34.5%</span> of grant rows, <span class="fig">31.8%</span> of the dollars, and <span class="fig">23,948</span> of <span class="fig">286,921</span> recipient identities.</p>
+      <p>Those carry the ${idChip('E')} mark and are safe to add across foundations. Everything else carries ${idChip('K')} — the filed name canonicalised and nothing more. That is sound for reading one foundation&rsquo;s book, where the filer spells its own grantees consistently. A total added <em>across</em> foundations is definitive only on a government-matched record; elsewhere read it as a close estimate that may split one organization in two, or hold two same-named organizations as one. The Recipients tab and the search box both carry a switch that hides everything but the government-matched identities.</p>
+
+      <div class="mh">Where the money landed</div>
+      <p>Recipient state is the <em>recipient location as filed</em> — the address the foundation typed on the grant row, not the geography the work ultimately serves. <span class="fig">246,778</span> rows — <span class="fig">16.2%</span> of the collection — carry no recipient state at all; the place filter offers them as <em>Location not filed</em> rather than dropping them. Every map shade and state total is built only from the rows that do carry one, so read those as a floor under a state&rsquo;s giving, not as its share of everything.</p>
+      <p>Seven codes appear on rows whose recipients are demonstrably not in the place the code normally names — <span class="fig">AA</span>, <span class="fig">FM</span>, <span class="fig">MH</span>, <span class="fig">MP</span>, <span class="fig">PH</span>, <span class="fig">PW</span> and <span class="fig">SO</span>, 30 rows between them. They are grouped as <em>unidentified</em> and shown with their raw code, never quietly relabelled.</p>
+
+      <p style="margin-top:1.15rem">Categories follow three published tiers. Nothing here is an audit; it is a documented reconciliation of public filings, with the receipts attached.</p>
+      <p class="foot">An independent project by Curry Studio · Joe Curry, North Tonawanda NY · not affiliated with, commissioned by, or endorsed by any foundation shown.</p>
+    </div>`;
+  }
+  $('aboutbtn').addEventListener('click', openMethod);
+  $('heromethod').addEventListener('click', openMethod);
+  $('mastmethod').addEventListener('click', openMethod);
+
+  // ---------- findings ticker ----------
+  const FINDINGS = [
+    { u: 'novartispati', t: '$14.6 billion filed as “Various individuals”', s: 'A pharmaceutical patient-assistance foundation: its grants line is free medicine to patients, and the ledger says exactly that instead of pretending it is grantmaking.' },
+    { u: 'pncfoundatio', t: '$367 million itemized in no public filing', s: 'Every year of this bank foundation says “see attached” — and the attachment reaches no public copy of any return. Verified page by page.' },
+    { u: 'muskfoundati', t: '$89.9 million to “The Foundation” of Houston', s: 'The Musk Foundation’s largest rows cite an Attachment A that is absent from every public copy. The year still proves to the dollar.' },
+    { u: 'johnsonjohns', t: '187,513 rows read from 2,547 scanned pages', s: 'J&J’s matching-gift registers, down to a genuine 78-cent gift — and the registers miss the filer’s own subtotals, each gap named on the page.' },
+    { u: 'bezosfamilyf', t: 'A $1,533,193 arithmetic error, disclosed', s: 'The Bezos Family Foundation’s 2023 attachment sums its own book-value column wrong. Left exactly as filed, and said out loud.' },
+    { u: 'robertsfound', t: 'A register cut off mid-alphabet', s: 'The Roberts Foundation’s 2021 sheet ends after “Mc” in every public copy — $25.0 million carried as one labeled line, not guessed.' },
+    { u: 'jwillardanda', t: '$141.2 million paid; zero recipients public', s: 'The Marriott Foundation’s grant lists never reach the public record — proven by the filings’ own arithmetic, not assumed.' },
+    { u: 'hellmanfound', t: 'The software read $2,500 as $500', s: 'Caught by checking the ink to the left of the digits. The Hellman Foundation’s four scanned years reconcile exactly — 947 rows.' },
+  ];
+  let tIdx = 0, tTimer = null;
+  function renderTicker() {
+    const f = FINDINGS[tIdx];
+    $('tcard').href = 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/';
+    $('tcard').innerHTML = '<b>' + esc(f.t) + '</b><span>' + esc(f.s) + '</span><span class="go">open the ledger ↗</span>';
+    $('tdots').innerHTML = FINDINGS.map((_, i) => '<button type="button" class="dot' + (i === tIdx ? ' on' : '') + '" data-i="' + i + '" aria-label="Finding ' + (i + 1) + '"></button>').join('');
+  }
+  function tickNext(d) { tIdx = (tIdx + d + FINDINGS.length) % FINDINGS.length; renderTicker(); }
+  function tickAuto() { if (tTimer) clearInterval(tTimer); if (!reduced()) tTimer = setInterval(() => tickNext(1), 8000); }
+  $('tnext').addEventListener('click', () => { tickNext(1); tickAuto(); });
+  $('tprev').addEventListener('click', () => { tickNext(-1); tickAuto(); });
+  $('tdots').addEventListener('click', (e) => { const b = e.target.closest('.dot'); if (b) { tIdx = +b.dataset.i; renderTicker(); tickAuto(); } });
+  document.querySelector('.ticker').addEventListener('mouseenter', () => { if (tTimer) clearInterval(tTimer); });
+  document.querySelector('.ticker').addEventListener('mouseleave', tickAuto);
+
+  // ---------- responsive stage placement ----------
+  // On a phone the map is not the point — finding a funder is. The stage drops into
+  // a collapsed card BELOW the results, and the findings strip comes out of the stage
+  // so it still reads on paper. On wide screens both go back to the right-hand stage.
+  // Moving the nodes (rather than duplicating them) keeps every listener bound.
+  // The card collapses with max-height, never display:none, so the map's paths keep
+  // real geometry for getBBox() while it is shut.
+  const mqNarrow = matchMedia('(max-width: 1019px)');
+  function placeStage() {
+    const stage = document.querySelector('.stage');
+    const ticker = document.querySelector('.ticker');
+    const deck = document.querySelector('.deck');
+    const card = $('mapcard');
+    if (mqNarrow.matches) {
+      if (stage.parentElement !== $('stagehost')) $('stagehost').appendChild(stage);
+      if (ticker.parentElement !== $('tickhost')) $('tickhost').appendChild(ticker);
+      card.hidden = false;
+    } else {
+      card.hidden = true;
+      if (stage.parentElement !== deck) deck.appendChild(stage);
+      if (ticker.parentElement !== stage) stage.appendChild(ticker);
+    }
+  }
+  function setMapCard(open) {
+    $('mapcard').classList.toggle('open', open);
+    $('mapcardt').setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('mapcardt').querySelector('.mcc').textContent = open ? '−' : '+';
+  }
+  $('mapcardt').addEventListener('click', () => {
+    const open = !$('mapcard').classList.contains('open');
+    setMapCard(open);
+    if (open) $('mapcard').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+  });
+  (mqNarrow.addEventListener ? mqNarrow.addEventListener('change', placeStage) : mqNarrow.addListener(placeStage));
+  placeStage();
+  // opening a state, a city or a purpose from anywhere must reveal the card it lives in
+  function revealStage() { if (mqNarrow.matches && !$('mapcard').classList.contains('open')) setMapCard(true); }
+
+  // ---------- hash + boot ----------
+  function writeHash() {
+    const p = [];
+    if (curProfile) p.push('org=' + encodeURIComponent(curProfile));
+    if (region !== 'all') p.push('region=' + region);
+    if (mapSel) p.push('st=' + mapSel);
+    if (citySel) p.push('city=' + encodeURIComponent(citySel));
+    if (catSel) p.push('cat=' + encodeURIComponent(catSel));
+    if (govOnly) p.push('id=gov');
+    if (tab !== 'q') p.push('tab=' + tab);
+    if (tab === 'q' && (qState.st !== 'all' || qState.min || qState.yr || qState.cat)) {
+      p.push('q=' + [qState.cat, qState.st, qState.min, qState.yr].join(','));
+    }
+    if (ovlMode === 'x' && st.slug) p.push('f=' + st.slug);
+    history.replaceState(null, '', p.length ? '#' + p.join('&') : location.pathname);
+  }
+  async function readHash() {
+    const p = Object.fromEntries(location.hash.slice(1).split('&').filter(Boolean).map((kv) => { const i = kv.indexOf('='); return [kv.slice(0, i), decodeURIComponent(kv.slice(i + 1))]; }));
+    if (['wny', 'ny'].includes(p.region)) region = p.region;
+    if (p.id === 'gov') govOnly = true;
+    if (p.q) {
+      const b = p.q.split(',');
+      HASHQ = { cat: +b[0] || 0, st: b[1] || 'all', min: +b[2] || 0, yr: +b[3] || 0 };
+    }
+    paintGovToggle();
+    renderRegions(); renderWeave(); renderTrend(); renderCats(); renderMap(); renderFleet(); renderTicker(); tickAuto(); renderDossier(); initQuery(); renderList();
+    if (['q', 'f', 'r', 'y', 'c'].includes(p.tab)) setTab(p.tab, true);
+    if (p.st && BY_ST[p.st.toUpperCase()]) {
+      selectState(p.st.toUpperCase(), true);
+      if (p.city) selectCity(cnorm(p.city));
+    }
+    if (p.cat) drillCat(p.cat);
+    if (p.f && F.some((f) => f.u === p.f)) { openExplorer(p.f, true); await pickFnd(p.f, true); }
+    if (p.org) {
+      if (/^[EK]/.test(p.org)) openProfile(p.org, true);
+      else {
+        const nm = p.org.toLowerCase();
+        let hit = EAGER.find((e2) => e2[1].toLowerCase() === nm);
+        if (!hit) { const shard = await shardFor(p.org); hit = shard.find((e2) => e2[1].toLowerCase() === nm || e2[5].split(' | ').includes(nm)); }
+        if (hit) openProfile(hit[0], true);
+      }
+    }
+  }
+  readHash();
+})();
+</script>
+</body>
+</html>

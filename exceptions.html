@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Exceptions — The Grants Ledger</title>
+<meta name="description" content="Every year withheld, every year excluded, every judgement call and known limit across the Grants Ledger collection — in one place.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='36' font-weight='700' fill='%23d19049'%3E!%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+a { color: var(--copper-deep); }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
+.cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.6rem,7vh,4.4rem) 0 clamp(2rem,5vh,3rem); }
+.cover a { color: var(--copper); }
+.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2.1rem,5vw,3.4rem); line-height:1.04; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+.lede { max-width: 44rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
+section { padding: clamp(2.2rem,6vh,3.6rem) 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.35rem,2.6vw,1.85rem); letter-spacing:-.015em; margin-bottom:.35rem; }
+.sub { color: var(--ink-dim); max-width: 46rem; margin-bottom: 1.3rem; }
+.tw { overflow-x:auto; }
+table { width:100%; border-collapse: collapse; font-size:.9rem; }
+th { text-align:left; font-family: var(--mono); font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; color: var(--ink-dim); font-weight:600; padding:.5rem .55rem; border-bottom:1px solid var(--rule); }
+td { padding:.6rem .55rem; border-bottom:1px solid var(--rule); vertical-align:top; }
+.x-f { font-weight:600; }
+.x-y, .x-n, .x-m, .x-d { font-family: var(--mono); font-size:.82rem; white-space:nowrap; }
+.x-n, .x-m, .x-d { text-align:right; }
+.x-d { color: var(--neg); font-weight:500; }
+.x-note td { border-bottom:1px solid var(--rule); padding-top:0; font-size:.85rem; color: var(--ink-dim); }
+.cards { display:grid; gap:.9rem; grid-template-columns: 1fr; }
+@media (min-width:780px) { .cards { grid-template-columns: 1fr 1fr; } }
+.card { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; }
+.card b { font-family: var(--serif); font-weight:620; font-size:1.02rem; display:block; }
+.card .meta { font-family: var(--mono); font-size:.72rem; color: var(--copper-deep); margin:.25rem 0 .45rem; }
+.card p { font-size:.87rem; color: var(--ink-dim); }
+.asfiled { display:grid; gap:.7rem; }
+.af { display:grid; grid-template-columns: minmax(0,1fr); gap:.2rem; background: var(--sheet); border-radius:12px; box-shadow: inset 0 0 0 1px var(--rule); padding:.85rem 1rem; }
+.af code { font-family: var(--mono); font-size:.82rem; color: var(--ink); background: #f1ecdf; padding:.15rem .4rem; border-radius:5px; display:inline-block; word-break: break-word; }
+.af .who { font-family: var(--mono); font-size:.68rem; color: var(--copper-deep); text-transform:uppercase; letter-spacing:.05em; }
+.af p { font-size:.85rem; color: var(--ink-dim); }
+.limits { display:grid; gap:.55rem; }
+.lim { padding:.7rem 0; border-bottom:1px solid var(--rule); }
+.lim b { font-weight:600; }
+.lim span { display:block; font-size:.87rem; color: var(--ink-dim); margin-top:.15rem; }
+.pull { font-family: var(--serif); font-size: clamp(1.1rem,2.2vw,1.5rem); line-height:1.35; max-width:38ch; border-left:3px solid var(--copper); padding-left:1.1rem; margin:.6rem 0 0; }
+footer { border-top:1px solid var(--rule); padding:2rem 0 2.6rem; color: var(--ink-dim); font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<header class="cover"><div class="wrap">
+  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Exceptions</div>
+  <h1>Everything that did not go cleanly</h1>
+  <p class="lede">1932 foundations, 1,527,245 grants, $304,655,349,529 reconciled — and this page is the rest of the truth: every year withheld, every year excluded, every judgement call, and every known limit. A reconciliation product that only published its successes would not be one.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>Years withheld — the rows did not equal the filed total</h2>
+  <p class="sub">In each of these the grant schedule is internally consistent: the rows sum to the schedule’s own stated total. That total then disagrees with the filed line the ledger reconciles to. The year is not shown, and it is never estimated to fit.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Foundation</th><th>Year</th><th>Rows</th><th>Schedule total</th><th>Filed referee</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/grigglewis/">Grigg Lewis Foundation</a></td>
+        <td class="x-y">TY2021</td>
+        <td class="x-n">70</td>
+        <td class="x-m">$3,011,279</td>
+        <td class="x-m">$1,749,579</td>
+        <td class="x-d">$-1,261,700</td>
+      </tr>
+      <tr class="x-note"><td colspan="6">Four of its five filed years tie exactly. This one does not, and the break is large — the schedule reports 72% more than the filed line.</td></tr>
+      <tr>
+        <td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wnyf/">The Western New York Foundation</a></td>
+        <td class="x-y">TY2024</td>
+        <td class="x-n">134</td>
+        <td class="x-m">$1,219,199</td>
+        <td class="x-m">$1,113,198</td>
+        <td class="x-d">$-106,001</td>
+      </tr>
+      <tr class="x-note"><td colspan="6">The year before and the year after both tie to the dollar.</td></tr>
+      <tr>
+        <td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hfwcny/">The Health Foundation for W&amp;CNY</a></td>
+        <td class="x-y">TY2020</td>
+        <td class="x-n">138</td>
+        <td class="x-m">$6,745,797</td>
+        <td class="x-m">$4,004,663</td>
+        <td class="x-d">$-2,741,134</td>
+      </tr>
+      <tr class="x-note"><td colspan="6">The first year in the record; the four that follow tie exactly.</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Years excluded — nothing to verify row by row</h2>
+  <p class="sub">Not a disagreement between numbers, but an absence of them.</p>
+  <div class="cards">
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/baird/">The Cameron &amp; Jane Baird Foundation</a></b>
+      <div class="meta">TY2020 · One line: “See Attached list of Donees”, $2,927,500</div><p>The filing reports the year as a single row and puts the donee list in an attachment that is not part of the e-filed data. That line does tie to the filed total exactly — but a year that cannot be checked row by row is not shown as one. Itemised rows resume in 2021.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/peterandjeri/">Peter and Jeri Dejana Family Foundation</a></b>
+      <div class="meta">TY2023 &amp; TY2024 · A recovered attachment that does not add up, and one not yet posted</div><p>The 2023 “See Attachment” year was recovered whole from the IRS scan — 142 rows, verified page by page against the images — and its rows sum to $3,097,333 while the attachment’s own printed total and the filed line say $3,102,333. The $5,000 difference is inside the filing itself, so the year is disclosed rather than shown. 2024’s attachment is not yet in a posted scan.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/eriefamily/">Erie Family Foundation</a></b>
+      <div class="meta">All five years · $74,210,317 behind “SEE ATTACHMENT” lines</div><p>Every year files as a single attachment line, and the IRS’s scans — including a 232-page 2020 copy — contain investment schedules but never the grant attachment. Unbuildable from IRS sources; the state-filing lane is the remaining path.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/moore/">The Moore Charitable Foundation</a></b>
+      <div class="meta">TY2020 &amp; TY2024 · Two years behind “See statement” lines — $16,113,120 and $23,407,209</div><p>The 2020 IRS scan omits the grant statement and the 2024 scan is not yet posted. 2021–2023 are published in full, recovered from the scans and exact to the filed lines.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/triad/">Triad Foundation</a></b>
+      <div class="meta">TY2020, TY2023 &amp; TY2024 · Three years with no row data anywhere public — $14,698,802, $15,253,002 and $15,343,408</div><p>The machine-readable filings carry no grant rows in any year; the 2020 and 2023 IRS scans omit the “Cash Grants Paid” report, and the 2024 scan is not yet posted. The two years whose reports the scans include are published in full.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/perelmanfami/">Perelman Family Charitable Trust I</a></b>
+      <div class="meta">TY2024 · One named row plus a $15,563,000 election-statement line</div><p>The 642(c) election statement carrying the year’s detail is not yet in the IRS’s posted scan. 2020–2023 are published in full, the two statement years recovered from the scans.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/charinaendow/">Charina Endowment Fund</a></b>
+      <div class="meta">TY2020 · One line: “See schedule attached” — $14,910,000</div><p>The recipient detail lives in an attachment outside the e-filed data; the scan-recovery check is queued. 2021–2024 are published in full, each year exact to the filed line.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/cullen/">The Cullen Foundation of Western New York</a></b>
+      <div class="meta">TY2022 · No grants paid</div><p>Their first filing reports no grantmaking, and reconciles at zero. The ledger therefore begins in 2023 and is that foundation’s complete grantmaking record rather than a five-year window.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Ledgers that reconcile to a different filed line</h2>
+  <p class="sub">1619 of the 1932 ledgers tie every published year to Part&nbsp;I, line&nbsp;25(d) exactly. The other 313 reconcile instead to the grants schedule’s own filed total (Part&nbsp;XIV, line&nbsp;3a), because in their returns the two filed numbers are not the same. That is a definitional difference inside the filing, not an error in it — and it is disclosed, never averaged: each of those ledgers names its referee on its face and prints both figures. The clearest case is <a href="https://jcurry44.github.io/grants-ledgers/f/rcwjf/">The Ralph C. Wilson, Jr. Foundation</a>, where the two lines differ in every year:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Year</th><th>Schedule 3a (the referee used)</th><th>Part I 25(d)</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr><td class="x-y">TY2020</td><td class="x-m">$115,831,747</td><td class="x-m">$101,831,747</td><td class="x-d">$-14,000,000</td></tr>
+      <tr><td class="x-y">TY2021</td><td class="x-m">$128,927,348</td><td class="x-m">$129,186,850</td><td class="x-d">+$259,502</td></tr>
+      <tr><td class="x-y">TY2022</td><td class="x-m">$155,857,838</td><td class="x-m">$154,662,837</td><td class="x-d">$-1,195,001</td></tr>
+      <tr><td class="x-y">TY2023</td><td class="x-m">$138,135,387</td><td class="x-m">$138,055,386</td><td class="x-d">$-80,001</td></tr>
+      <tr><td class="x-y">TY2024</td><td class="x-m">$141,170,822</td><td class="x-m">$140,293,690</td><td class="x-d">$-877,132</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="margin-top:2rem"><a href="https://jcurry44.github.io/grants-ledgers/f/lee/">The Patrick P. Lee Foundation</a> shows the same signature at a much smaller scale: the rows tie the schedule exactly every year, while line&nbsp;25(d) sits one or two dollars away in four years and $50,001 away in the fifth. Rounding inside a filing is still a difference, so the referee is named rather than glossed.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Year</th><th>Schedule 3a (the referee used)</th><th>Part I 25(d)</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr><td class="x-y">TY2020</td><td class="x-m">$1,759,303</td><td class="x-m">$1,709,302</td><td class="x-d">$-50,001</td></tr>
+      <tr><td class="x-y">TY2021</td><td class="x-m">$1,802,547</td><td class="x-m">$1,802,546</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-y">TY2022</td><td class="x-m">$2,372,948</td><td class="x-m">$2,372,948</td><td class="x-d">$0</td></tr>
+      <tr><td class="x-y">TY2023</td><td class="x-m">$2,227,410</td><td class="x-m">$2,227,408</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-y">TY2024</td><td class="x-m">$1,945,277</td><td class="x-m">$1,945,276</td><td class="x-d">$-1</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="margin-top:2rem">And these are the remaining 311, with every year in which the two filed lines differ. Many differ by exactly one dollar — a rounding artifact of the form itself. Each ledger’s Methodology carries its own bridge table.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Foundation</th><th>Year</th><th>Schedule 3a (the referee used)</th><th>Part I 25(d)</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/ford/">The Ford Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$908,598,475</td><td class="x-m">$904,908,475</td><td class="x-d">$-3,690,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$772,941,747</td><td class="x-m">$767,621,738</td><td class="x-d">$-5,320,009</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$735,763,273</td><td class="x-m">$732,196,124</td><td class="x-d">$-3,567,149</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$844,698,067</td><td class="x-m">$840,817,348</td><td class="x-d">$-3,880,719</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/topromoteope/">Foundation to Promote Open Society</a></td><td class="x-y">TY2021</td><td class="x-m">$2,372,776,596</td><td class="x-m">$672,776,596</td><td class="x-d">$-1,700,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$486,240,040</td><td class="x-m">$485,690,040</td><td class="x-d">$-550,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$759,038,806</td><td class="x-m">$758,388,806</td><td class="x-d">$-650,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$481,525,362</td><td class="x-m">$481,275,362</td><td class="x-d">$-250,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/opensocietyi/">Open Society Institute</a></td><td class="x-y">TY2020</td><td class="x-m">$127,998,260</td><td class="x-m">$127,993,758</td><td class="x-d">$-4,502</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$310,846,698</td><td class="x-m">$310,706,693</td><td class="x-d">$-140,005</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rockefeller/">The Rockefeller Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$233,227,602</td><td class="x-m">$233,227,603</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/carnegiecorp/">Carnegie Corporation of New York</a></td><td class="x-y">TY2024</td><td class="x-m">$174,390,015</td><td class="x-m">$174,390,014</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/freedomtoget/">Freedom Together Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$424,004,239</td><td class="x-m">$424,004,240</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$469,974,092</td><td class="x-m">$469,974,091</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/alfredpsloan/">Alfred P. Sloan Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$86,213,398</td><td class="x-m">$86,213,399</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$89,001,751</td><td class="x-m">$89,001,749</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/druckenmille/">Druckenmiller Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$174,942,500</td><td class="x-m">$173,942,500</td><td class="x-d">$-1,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thewallace/">The Wallace Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$61,371,995</td><td class="x-m">$61,371,994</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jpmorganchas/">The JPMorgan Chase Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$220,805,696</td><td class="x-m">$220,800,652</td><td class="x-d">$-5,044</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/commonwealth/">Commonwealth Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$22,238,467</td><td class="x-m">$22,238,468</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$26,155,128</td><td class="x-m">$26,155,127</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pinkerton/">Pinkerton Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$37,711,417</td><td class="x-m">$37,686,417</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/stanleyfamil/">Stanley Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$40,781,000</td><td class="x-m">$40,831,000</td><td class="x-d">+$50,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$13,790,000</td><td class="x-m">$13,810,000</td><td class="x-d">+$20,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/russellsage/">Russell Sage Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,412,899</td><td class="x-m">$6,666,110</td><td class="x-d">+$253,211</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/leonlevy/">Leon Levy Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$24,902,080</td><td class="x-m">$25,360,886</td><td class="x-d">+$458,806</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$27,619,034</td><td class="x-m">$28,116,814</td><td class="x-d">+$497,780</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$34,589,087</td><td class="x-m">$35,063,579</td><td class="x-d">+$474,492</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$32,290,914</td><td class="x-m">$33,002,873</td><td class="x-d">+$711,959</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$38,451,826</td><td class="x-m">$39,282,628</td><td class="x-d">+$830,802</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/clark/">Clark Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$19,799,426</td><td class="x-m">$19,851,970</td><td class="x-d">+$52,544</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$23,291,222</td><td class="x-m">$23,299,847</td><td class="x-d">+$8,625</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$23,174,771</td><td class="x-m">$23,205,450</td><td class="x-d">+$30,679</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$22,120,165</td><td class="x-m">$22,138,679</td><td class="x-d">+$18,514</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$21,507,672</td><td class="x-m">$21,525,312</td><td class="x-d">+$17,640</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/vitalproject/">Vital Projects Fund</a></td><td class="x-y">TY2022</td><td class="x-m">$14,812,000</td><td class="x-m">$14,912,000</td><td class="x-d">+$100,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$15,142,500</td><td class="x-m">$15,142,525</td><td class="x-d">+$25</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/avichai/">The Avi Chai Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$11,590,453</td><td class="x-m">$12,440,753</td><td class="x-d">+$850,300</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/perelmanfami/">Perelman Family Charitable Trust I</a></td><td class="x-y">TY2021</td><td class="x-m">$18,497,924</td><td class="x-m">$14,749,000</td><td class="x-d">$-3,748,924</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/maxandmarian/">Max and Marian Farash Charitable Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$13,034,907</td><td class="x-m">$13,034,097</td><td class="x-d">$-810</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/charlesadana/">The Charles A. Dana Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,078,103</td><td class="x-m">$6,226,156</td><td class="x-d">+$1,148,053</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/greaterroche/">Greater Rochester Health Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$9,456,489</td><td class="x-m">$9,260,115</td><td class="x-d">$-196,374</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/siegelfamily/">Siegel Family Endowment</a></td><td class="x-y">TY2024</td><td class="x-m">$27,792,258</td><td class="x-m">$27,792,259</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/overdeckfami/">Overdeck Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$53,464,780</td><td class="x-m">$53,464,779</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/circleofserv/">Circle of Service Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$32,779,864</td><td class="x-m">$32,779,862</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$37,027,088</td><td class="x-m">$37,027,087</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sarahscaifef/">Sarah Scaife Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$39,226,079</td><td class="x-m">$39,217,336</td><td class="x-d">$-8,743</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/edwardcjohns/">Edward C Johnson Fund</a></td><td class="x-y">TY2022</td><td class="x-m">$29,036,500</td><td class="x-m">$26,299,000</td><td class="x-d">$-2,737,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$22,016,479</td><td class="x-m">$20,541,479</td><td class="x-d">$-1,475,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$16,455,700</td><td class="x-m">$15,628,200</td><td class="x-d">$-827,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thecocacolaf/">The Coca-Cola Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$139,005,704</td><td class="x-m">$138,982,030</td><td class="x-d">$-23,674</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$109,190,503</td><td class="x-m">$108,025,885</td><td class="x-d">$-1,164,618</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$94,372,845</td><td class="x-m">$94,684,802</td><td class="x-d">+$311,957</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$95,920,861</td><td class="x-m">$95,888,203</td><td class="x-d">$-32,658</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$117,155,948</td><td class="x-m">$116,505,217</td><td class="x-d">$-650,731</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/charleskblan/">Charles K Blandin Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$15,804,895</td><td class="x-m">$15,804,897</td><td class="x-d">+$2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/iowawestfoun/">Iowa West Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$14,958,154</td><td class="x-m">$14,958,155</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$16,667,097</td><td class="x-m">$16,667,094</td><td class="x-d">$-3</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$15,877,150</td><td class="x-m">$15,877,149</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/peterkiewitf/">Peter Kiewit Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$33,192,750</td><td class="x-m">$33,192,751</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pricephilant/">Price Philanthropies Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$19,279,020</td><td class="x-m">$19,279,022</td><td class="x-d">+$2</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$16,836,187</td><td class="x-m">$16,817,598</td><td class="x-d">$-18,589</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/skillmanfoun/">Skillman Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$17,042,873</td><td class="x-m">$17,042,874</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$23,772,506</td><td class="x-m">$23,772,505</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$17,815,860</td><td class="x-m">$17,815,859</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kohlerfounda/">Kohler Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$11,569,713</td><td class="x-m">$11,569,763</td><td class="x-d">+$50</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/greenacresfo/">Greenacres Foundation</a></td><td class="x-y">TY2025</td><td class="x-m">$9,599,011</td><td class="x-m">$9,803,428</td><td class="x-d">+$204,417</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/garyandmaryw/">Gary and Mary West Charitable Trust</a></td><td class="x-y">TY2023</td><td class="x-m">$29,941,850</td><td class="x-m">$29,944,404</td><td class="x-d">+$2,554</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$49,510,525</td><td class="x-m">$49,511,228</td><td class="x-d">+$703</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/unihealthfou/">Unihealth Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$15,427,280</td><td class="x-m">$15,427,279</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/carlangusdes/">Carl Angus Desantis Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,000</td><td class="x-m">$0</td><td class="x-d">$-5,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/marcusfounda/">Marcus Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$194,456,652</td><td class="x-m">$194,456,650</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tenacrefound/">Tenacre Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$100,764,402</td><td class="x-m">$101,333,103</td><td class="x-d">+$568,701</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$109,859,586</td><td class="x-m">$109,859,585</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$50,932,454</td><td class="x-m">$50,932,453</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/geraldinerdo/">Geraldine R Dodge Foundation Incorporated</a></td><td class="x-y">TY2021</td><td class="x-m">$11,143,303</td><td class="x-m">$11,181,752</td><td class="x-d">+$38,449</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/clifbarfamil/">Clif Bar Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$2,512,646</td><td class="x-m">$3,296,934</td><td class="x-d">+$784,288</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jonandkarenh/">Jon and Karen Huntsman Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$36,085,691</td><td class="x-m">$36,080,691</td><td class="x-d">$-5,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$22,033,767</td><td class="x-m">$21,028,767</td><td class="x-d">$-1,005,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$8,713,157</td><td class="x-m">$7,213,157</td><td class="x-d">$-1,500,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/1111foundati/">1111 Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$27,647,357</td><td class="x-m">$29,683,357</td><td class="x-d">+$2,036,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thepowellfou/">The Powell Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$15,017,783</td><td class="x-m">$15,017,781</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sorensonlega/">Sorenson Legacy Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$24,479,736</td><td class="x-m">$20,690,724</td><td class="x-d">$-3,789,012</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/inasmuchfoun/">Inasmuch Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$19,015,719</td><td class="x-m">$19,146,938</td><td class="x-d">+$131,219</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$22,075,196</td><td class="x-m">$22,201,853</td><td class="x-d">+$126,657</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$19,480,838</td><td class="x-m">$20,319,758</td><td class="x-d">+$838,920</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$22,194,655</td><td class="x-m">$22,201,104</td><td class="x-d">+$6,449</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tosafoundati/">Tosa Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$129,772,088</td><td class="x-m">$102,894,306</td><td class="x-d">$-26,877,782</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/richardmfair/">Richard M Fairbanks Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$12,248,897</td><td class="x-m">$12,248,896</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jewishfounda/">Jewish Foundation of Cincinnati</a></td><td class="x-y">TY2022</td><td class="x-m">$23,108,108</td><td class="x-m">$23,111,071</td><td class="x-d">+$2,963</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/christensenf/">Christensen Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$8,397,375</td><td class="x-m">$8,397,374</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$13,235,092</td><td class="x-m">$12,305,092</td><td class="x-d">$-930,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnwanderso/">John W Anderson Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$11,333,800</td><td class="x-m">$12,333,800</td><td class="x-d">+$1,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$13,028,500</td><td class="x-m">$13,608,500</td><td class="x-d">+$580,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/benandcather/">Ben and Catherine Ivy Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$14,802,211</td><td class="x-m">$14,802,210</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/oakspringgar/">Oak Spring Garden Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$79,148</td><td class="x-m">$76,456</td><td class="x-d">$-2,692</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$136,624</td><td class="x-m">$141,754</td><td class="x-d">+$5,130</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$193,425</td><td class="x-m">$209,012</td><td class="x-d">+$15,587</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/argyrosfamil/">Argyros Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$13,911,272</td><td class="x-m">$13,931,272</td><td class="x-d">+$20,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thetowfounda/">The Tow Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$19,176,215</td><td class="x-m">$19,145,546</td><td class="x-d">$-30,669</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/fauquierheal/">Fauquier Health Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$9,371,312</td><td class="x-m">$9,371,311</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/greatertexas/">Greater Texas Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$7,980,605</td><td class="x-m">$7,980,604</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/alvingoldfar/">Alvin Goldfarb Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$6,804,350</td><td class="x-m">$7,752,754</td><td class="x-d">+$948,404</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$13,385,751</td><td class="x-m">$13,888,542</td><td class="x-d">+$502,791</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$13,778,305</td><td class="x-m">$13,773,647</td><td class="x-d">$-4,658</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mathilefamil/">Mathile Family Foundation</a></td><td class="x-y">TY2019</td><td class="x-m">$11,427,683</td><td class="x-m">$10,911,744</td><td class="x-d">$-515,939</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2020</td><td class="x-m">$11,394,646</td><td class="x-m">$11,144,646</td><td class="x-d">$-250,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cotsenfounda/">Cotsen Foundation for the Art of Teaching</a></td><td class="x-y">TY2023</td><td class="x-m">$8,329,566</td><td class="x-m">$8,329,565</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/stanleymherz/">Stanley M Herzog Charitable Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,528,130</td><td class="x-m">$3,468,229</td><td class="x-d">$-59,901</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$68,317,631</td><td class="x-m">$68,317,630</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tennesseehea/">Tennessee Health Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$1,832,800</td><td class="x-m">$1,877,111</td><td class="x-d">+$44,311</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pritzkerfami/">Pritzker Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$56,740,230</td><td class="x-m">$56,670,229</td><td class="x-d">$-70,001</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/boettcherfou/">Boettcher Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$10,780,185</td><td class="x-m">$10,780,183</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$9,485,349</td><td class="x-m">$9,477,349</td><td class="x-d">$-8,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/murielmcbrie/">Muriel Mcbrien Kauffman Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$9,091,358</td><td class="x-m">$8,976,358</td><td class="x-d">$-115,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$8,585,782</td><td class="x-m">$8,470,782</td><td class="x-d">$-115,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$9,511,926</td><td class="x-m">$9,401,926</td><td class="x-d">$-110,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$10,119,072</td><td class="x-m">$9,954,072</td><td class="x-d">$-165,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$12,224,728</td><td class="x-m">$12,064,728</td><td class="x-d">$-160,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thebobolinkf/">The Bobolink Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$14,270,051</td><td class="x-m">$12,320,286</td><td class="x-d">$-1,949,765</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cummingsfou2/">Cummings Foundation Grants</a></td><td class="x-y">TY2023</td><td class="x-m">$26,113,911</td><td class="x-m">$26,113,917</td><td class="x-d">+$6</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/khrmcneelyfa/">Khr Mcneely Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$12,745,541</td><td class="x-m">$12,695,541</td><td class="x-d">$-50,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pfizerfounda/">Pfizer Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$51,473,236</td><td class="x-m">$48,341,640</td><td class="x-d">$-3,131,596</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dhanamfounda/">Dhanam Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$12,111,345</td><td class="x-m">$12,111,144</td><td class="x-d">$-201</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/schoonerfoun/">Schooner Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$7,421,932</td><td class="x-m">$7,431,932</td><td class="x-d">+$10,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wellcomeleap/">Wellcome Leap</a></td><td class="x-y">TY2023</td><td class="x-m">$70,971,369</td><td class="x-m">$68,969,341</td><td class="x-d">$-2,002,028</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/eastonsports/">Easton Sports Developmentfoundation II</a></td><td class="x-y">TY2020</td><td class="x-m">$3,219,073</td><td class="x-m">$919,073</td><td class="x-d">$-2,300,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$1,366,131</td><td class="x-m">$1,366,130</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$11,082,530</td><td class="x-m">$11,082,529</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jfmaddoxfoun/">J F Maddox Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$2,927,990</td><td class="x-m">$2,927,992</td><td class="x-d">+$2</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$8,317,180</td><td class="x-m">$8,317,181</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$9,889,940</td><td class="x-m">$9,890,185</td><td class="x-d">+$245</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dysonfoundat/">Dyson Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$14,168,175</td><td class="x-m">$11,818,175</td><td class="x-d">$-2,350,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/morgridgefam/">Morgridge Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$12,020,394</td><td class="x-m">$12,008,600</td><td class="x-d">$-11,794</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$11,254,417</td><td class="x-m">$11,253,520</td><td class="x-d">$-897</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$13,029,585</td><td class="x-m">$12,677,191</td><td class="x-d">$-352,394</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$12,077,438</td><td class="x-m">$12,072,200</td><td class="x-d">$-5,238</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$13,046,742</td><td class="x-m">$13,046,292</td><td class="x-d">$-450</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/researchcorp/">Research Corporation</a></td><td class="x-y">TY2024</td><td class="x-m">$7,964,645</td><td class="x-m">$7,964,644</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/williamkbowe/">William K Bowes Jr Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$48,606,333</td><td class="x-m">$48,606,334</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mcgregorfund/">Mcgregor Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$9,385,123</td><td class="x-m">$9,385,122</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/assisifounda/">Assisi Foundation of Memphis</a></td><td class="x-y">TY2022</td><td class="x-m">$10,496,636</td><td class="x-m">$10,996,636</td><td class="x-d">+$500,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dunardfundlt/">Dunard Fund Ltd</a></td><td class="x-y">TY2021</td><td class="x-m">$25,595,000</td><td class="x-m">$15,595,000</td><td class="x-d">$-10,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$49,496,000</td><td class="x-m">$11,946,000</td><td class="x-d">$-37,550,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thearhantsoc/">The@Arhant Social Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$290,000</td><td class="x-m">$234,500</td><td class="x-d">$-55,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hawthorndenf/">Hawthornden Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$2,142,650</td><td class="x-m">$2,142,785</td><td class="x-d">+$135</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/moreheadcain/">Morehead Cain Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$9,901,830</td><td class="x-m">$9,498,759</td><td class="x-d">$-403,071</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$12,347,095</td><td class="x-m">$12,317,591</td><td class="x-d">$-29,504</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$12,831,191</td><td class="x-m">$13,095,142</td><td class="x-d">+$263,951</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$13,846,637</td><td class="x-m">$13,872,250</td><td class="x-d">+$25,613</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$14,946,994</td><td class="x-m">$14,956,783</td><td class="x-d">+$9,789</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/klafffamilyf/">Klaff Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$8,116,903</td><td class="x-m">$8,116,904</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$15,565,990</td><td class="x-m">$15,566,050</td><td class="x-d">+$60</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/leonlowenste/">Leon Lowenstein Foundation</a></td><td class="x-y">TY2025</td><td class="x-m">$7,960,000</td><td class="x-m">$7,585,000</td><td class="x-d">$-375,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bluecrossan2/">Blue Cross and Blue Shield of North Carolina Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$19,360,288</td><td class="x-m">$13,970,000</td><td class="x-d">$-5,390,288</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/royalcommiss/">Royal Commission for the Exhibition of 1851</a></td><td class="x-y">TY2020</td><td class="x-m">$6,353,896</td><td class="x-m">$4,511,363</td><td class="x-d">$-1,842,533</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$5,339,549</td><td class="x-m">$5,781,694</td><td class="x-d">+$442,145</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$5,423,432</td><td class="x-m">$5,908,374</td><td class="x-d">+$484,942</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,483,175</td><td class="x-m">$5,286,654</td><td class="x-d">$-1,196,521</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kinderfounda/">Kinder Foundation</a></td><td class="x-y">TY2025</td><td class="x-m">$66,876,693</td><td class="x-m">$67,139,744</td><td class="x-d">+$263,051</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/drschollfoun/">Dr Scholl Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$6,850,000</td><td class="x-m">$7,100,000</td><td class="x-d">+$250,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$9,015,700</td><td class="x-m">$9,035,700</td><td class="x-d">+$20,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$8,638,500</td><td class="x-m">$8,683,500</td><td class="x-d">+$45,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$8,110,000</td><td class="x-m">$8,160,000</td><td class="x-d">+$50,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/saintlukesfo/">Saint Lukes Foundation of Cleveland Ohio</a></td><td class="x-y">TY2022</td><td class="x-m">$7,202,289</td><td class="x-m">$7,195,289</td><td class="x-d">$-7,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$7,878,500</td><td class="x-m">$7,881,000</td><td class="x-d">+$2,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/colburnfound/">Colburn Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$8,895,997</td><td class="x-m">$8,870,997</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jeffersonfou/">Jefferson Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$6,642,167</td><td class="x-m">$6,642,168</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thefristfoun/">The Frist Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$34,154,282</td><td class="x-m">$29,154,282</td><td class="x-d">$-5,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/diangravesow/">Dian Graves Owen Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$19,011,836</td><td class="x-m">$19,015,038</td><td class="x-d">+$3,202</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cvsfoundatio/">Cvs Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$9,538,608</td><td class="x-m">$9,538,607</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$19,218,183</td><td class="x-m">$19,382,192</td><td class="x-d">+$164,009</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$21,410,990</td><td class="x-m">$21,466,313</td><td class="x-d">+$55,323</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/karakinfound/">Karakin Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$13,456,916</td><td class="x-m">$13,456,915</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wokafoundati/">Woka Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$13,693,986</td><td class="x-m">$13,493,986</td><td class="x-d">$-200,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rockefellera/">Rockefeller Archive Center</a></td><td class="x-y">TY2022</td><td class="x-m">$110,286</td><td class="x-m">$102,872</td><td class="x-d">$-7,414</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$176,047</td><td class="x-m">$169,400</td><td class="x-d">$-6,647</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$151,339</td><td class="x-m">$152,285</td><td class="x-d">+$946</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/draperfounda/">Draper Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$6,502,835</td><td class="x-m">$6,502,836</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/apolloopport/">Apollo Opportunity Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$11,179,889</td><td class="x-m">$12,302,520</td><td class="x-d">+$1,122,631</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thornburgfou/">Thornburg Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,436,684</td><td class="x-m">$6,402,934</td><td class="x-d">$-33,750</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thepaulandph/">The Paul and Phyllis Fireman Charitable Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$6,181,800</td><td class="x-m">$6,081,800</td><td class="x-d">$-100,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/foundationf2/">Foundation for A Healthy St Petersburg</a></td><td class="x-y">TY2021</td><td class="x-m">$3,729,309</td><td class="x-m">$3,729,308</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$2,743,586</td><td class="x-m">$2,743,585</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/paulesingerf/">Paul E Singer Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$200,018,665</td><td class="x-m">$175,018,665</td><td class="x-d">$-25,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/waynedkunian/">Wayne D Kuni and Joan E Kuni</a></td><td class="x-y">TY2024</td><td class="x-m">$7,608,058</td><td class="x-m">$7,608,057</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/oprahwinfrey/">Oprah Winfrey Charitable Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$15,026,657</td><td class="x-m">$24,526,657</td><td class="x-d">+$9,500,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/robinsfounda/">Robins Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$5,704,157</td><td class="x-m">$5,704,156</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hueyandangel/">Huey and Angelina Wilson Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$6,281,990</td><td class="x-m">$6,246,990</td><td class="x-d">$-35,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cameronfound/">Cameron Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$3,821,009</td><td class="x-m">$3,899,406</td><td class="x-d">+$78,397</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$4,340,767</td><td class="x-m">$4,375,304</td><td class="x-d">+$34,537</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,732,028</td><td class="x-m">$3,757,825</td><td class="x-d">+$25,797</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/themargareta/">The Margaret and Daniel Loeb Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$9,303,300</td><td class="x-m">$9,377,507</td><td class="x-d">+$74,207</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$16,154,273</td><td class="x-m">$16,231,624</td><td class="x-d">+$77,351</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thehandfound/">The Hand Foundation Incorporated</a></td><td class="x-y">TY2020</td><td class="x-m">$173,000</td><td class="x-m">$180,000</td><td class="x-d">+$7,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rudermanfami/">Ruderman Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$4,310,770</td><td class="x-m">$4,197,770</td><td class="x-d">$-113,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/debeaumontfo/">De Beaumont Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$5,339,620</td><td class="x-m">$5,419,430</td><td class="x-d">+$79,810</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,083,942</td><td class="x-m">$2,884,751</td><td class="x-d">$-199,191</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bluecrossbl2/">Blue Cross & Blue Shield of Mississippi Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$5,473,476</td><td class="x-m">$5,130,415</td><td class="x-d">$-343,061</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$7,408,551</td><td class="x-m">$7,858,551</td><td class="x-d">+$450,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hauolimauloa/">Hau Oli Mau Loa Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,311,640</td><td class="x-m">$5,325,233</td><td class="x-d">+$13,593</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$6,843,760</td><td class="x-m">$6,593,760</td><td class="x-d">$-250,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/newtamarindf/">New Tamarind Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$852,545</td><td class="x-m">$0</td><td class="x-d">$-852,545</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/walderfamily/">Walder Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$25,356,980</td><td class="x-m">$25,320,980</td><td class="x-d">$-36,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mainehealtha/">Maine Health Access Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$5,309,643</td><td class="x-m">$5,289,643</td><td class="x-d">$-20,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/therawlingsf/">The Rawlings Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$836,665</td><td class="x-m">$836,666</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/westlakeheal/">Westlake Health Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$11,454,669</td><td class="x-m">$7,062,857</td><td class="x-d">$-4,391,812</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$5,497,790</td><td class="x-m">$7,531,938</td><td class="x-d">+$2,034,148</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,020,870</td><td class="x-m">$6,005,276</td><td class="x-d">$-15,594</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2025</td><td class="x-m">$9,046,794</td><td class="x-m">$9,962,551</td><td class="x-d">+$915,757</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/alcoafoundat/">Alcoa Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$6,279,395</td><td class="x-m">$6,259,395</td><td class="x-d">$-20,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$4,522,346</td><td class="x-m">$5,897,604</td><td class="x-d">+$1,375,258</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$9,123,638</td><td class="x-m">$6,461,440</td><td class="x-d">$-2,662,198</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/robertischat/">Robert I Schattner Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$7,842,000</td><td class="x-m">$7,512,000</td><td class="x-d">$-330,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/apexfoundati/">Apex Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,483,267</td><td class="x-m">$5,485,267</td><td class="x-d">+$2,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$5,401,251</td><td class="x-m">$5,401,248</td><td class="x-d">$-3</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$5,707,914</td><td class="x-m">$5,707,915</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tentalentsfo/">Ten Talents Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$5,146,538</td><td class="x-m">$2,972,743</td><td class="x-d">$-2,173,795</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thepowdermil/">The Powder Mill Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$2,566,803</td><td class="x-m">$7,213,689</td><td class="x-d">+$4,646,886</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$2,752,750</td><td class="x-m">$10,577,818</td><td class="x-d">+$7,825,068</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$5,201,714</td><td class="x-m">$12,456,714</td><td class="x-d">+$7,255,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$6,979,684</td><td class="x-m">$12,393,678</td><td class="x-d">+$5,413,994</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$11,393,994</td><td class="x-m">$13,105,040</td><td class="x-d">+$1,711,046</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/elizabethmor/">Elizabeth Morse Genius Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$5,394,727</td><td class="x-m">$5,392,727</td><td class="x-d">$-2,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$4,473,458</td><td class="x-m">$4,472,458</td><td class="x-d">$-1,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/woodforestch/">Woodforest Charitable Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$1,344,400</td><td class="x-m">$1,594,400</td><td class="x-d">+$250,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$2,893,923</td><td class="x-m">$3,272,800</td><td class="x-d">+$378,877</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$5,143,886</td><td class="x-m">$4,663,000</td><td class="x-d">$-480,886</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$8,866,140</td><td class="x-m">$5,400,361</td><td class="x-d">$-3,465,779</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/retirementre/">Retirement Research Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$2,255,561</td><td class="x-m">$6,673,919</td><td class="x-d">+$4,418,358</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$5,274,366</td><td class="x-m">$7,842,119</td><td class="x-d">+$2,567,753</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/newyorklifef/">New York Life Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$27,274,901</td><td class="x-m">$27,078,468</td><td class="x-d">$-196,433</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/ruthstjohnjo/">Ruth St John & John Dunham West Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$4,265,335</td><td class="x-m">$4,032,835</td><td class="x-d">$-232,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,860,450</td><td class="x-m">$4,092,950</td><td class="x-d">+$232,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/theirvinghar/">The Irving Harris Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$20,251,222</td><td class="x-m">$20,251,223</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$20,603,729</td><td class="x-m">$18,603,729</td><td class="x-d">$-2,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$22,113,372</td><td class="x-m">$17,780,039</td><td class="x-d">$-4,333,333</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mastercardim/">Mastercard Impact Fund</a></td><td class="x-y">TY2023</td><td class="x-m">$73,328,949</td><td class="x-m">$71,328,949</td><td class="x-d">$-2,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bairdfoundat/">Baird Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,620,946</td><td class="x-m">$6,618,746</td><td class="x-d">$-2,200</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2025</td><td class="x-m">$6,985,596</td><td class="x-m">$6,985,326</td><td class="x-d">$-270</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/howmetaerosp/">Howmet Aerospace Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$6,962,550</td><td class="x-m">$6,982,550</td><td class="x-d">+$20,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/snapfoundati/">Snap Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$6,212,800</td><td class="x-m">$6,129,800</td><td class="x-d">$-83,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/edwardjonesf/">Edward Jones Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$20,324,765</td><td class="x-m">$20,074,766</td><td class="x-d">$-249,999</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnpmcgover/">John P Mcgovern Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$7,067,350</td><td class="x-m">$7,056,772</td><td class="x-d">$-10,578</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thesharondlu/">The Sharon D Lund Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$6,750,000</td><td class="x-m">$6,758,989</td><td class="x-d">+$8,989</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,750,000</td><td class="x-m">$6,758,067</td><td class="x-d">+$8,067</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/crifoundatio/">Cri Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$1,014,234</td><td class="x-m">$741,231</td><td class="x-d">$-273,003</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,325,845</td><td class="x-m">$3,271,288</td><td class="x-d">$-54,557</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$10,070,534</td><td class="x-m">$10,007,267</td><td class="x-d">$-63,267</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/robertwdeuts/">Robert W Deutsch Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,130,660</td><td class="x-m">$3,219,673</td><td class="x-d">+$89,013</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,948,050</td><td class="x-m">$4,777,042</td><td class="x-d">+$828,992</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$3,845,112</td><td class="x-m">$5,104,581</td><td class="x-d">+$1,259,469</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/metrowesthea/">Metrowest Health Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,510,548</td><td class="x-m">$2,319,683</td><td class="x-d">$-1,190,865</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wellspringph/">Wellspring Philantropic Fund</a></td><td class="x-y">TY2019</td><td class="x-m">$428,190,410</td><td class="x-m">$422,131,410</td><td class="x-d">$-6,059,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/independence/">Independence Blue Cross Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$8,657,710</td><td class="x-m">$8,782,710</td><td class="x-d">+$125,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dteenergyfou/">Dte Energy Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$24,457,482</td><td class="x-m">$21,357,482</td><td class="x-d">$-3,100,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$20,983,874</td><td class="x-m">$18,892,873</td><td class="x-d">$-2,091,001</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$18,397,564</td><td class="x-m">$16,597,564</td><td class="x-d">$-1,800,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$19,837,338</td><td class="x-m">$18,039,839</td><td class="x-d">$-1,797,499</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$15,822,090</td><td class="x-m">$14,619,590</td><td class="x-d">$-1,202,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/simpsonfound/">Simpson Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$13,592,525</td><td class="x-m">$12,992,525</td><td class="x-d">$-600,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/angellfounda/">Angell Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,216,022</td><td class="x-m">$6,206,522</td><td class="x-d">$-9,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cignafoundat/">Cigna Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$14,097,258</td><td class="x-m">$14,096,661</td><td class="x-d">$-597</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sarkeysfound/">Sarkeys Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$5,377,989</td><td class="x-m">$5,357,989</td><td class="x-d">$-20,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/maxhgluckfou/">Max H Gluck Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,014,385</td><td class="x-m">$5,014,384</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/knappcommuni/">Knapp Community Care Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$485,263</td><td class="x-m">$4,675,917</td><td class="x-d">+$4,190,654</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$992,758</td><td class="x-m">$4,642,513</td><td class="x-d">+$3,649,755</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$2,016,885</td><td class="x-m">$5,204,003</td><td class="x-d">+$3,187,118</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$1,182,074</td><td class="x-m">$4,744,690</td><td class="x-d">+$3,562,616</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$1,708,843</td><td class="x-m">$4,708,843</td><td class="x-d">+$3,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wclementjess/">W Clement & Jessie V Stone Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$5,156,250</td><td class="x-m">$5,185,800</td><td class="x-d">+$29,550</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thomasmhelen/">Thomas M & Helen Mckee & John P Ryan Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$6,110,700</td><td class="x-m">$5,544,200</td><td class="x-d">$-566,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$5,888,000</td><td class="x-m">$6,491,500</td><td class="x-d">+$603,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$8,380,300</td><td class="x-m">$6,070,300</td><td class="x-d">$-2,310,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$4,717,600</td><td class="x-m">$6,857,600</td><td class="x-d">+$2,140,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,871,500</td><td class="x-m">$6,672,500</td><td class="x-d">$-199,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tsaofamilyfo/">Tsao Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$3,858,500</td><td class="x-m">$3,855,000</td><td class="x-d">$-3,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/intuitivefou/">Intuitive Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,133,493</td><td class="x-m">$5,133,492</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/connecticuth/">Connecticut Health Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$2,086,043</td><td class="x-m">$2,636,688</td><td class="x-d">+$550,645</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/andreagassif/">Andre Agassi Foundation for Education</a></td><td class="x-y">TY2021</td><td class="x-m">$7,708,925</td><td class="x-m">$6,908,925</td><td class="x-d">$-800,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/aslanfoundat/">Aslan Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$1,117,238</td><td class="x-m">$1,091,631</td><td class="x-d">$-25,607</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kylejandshar/">Kyle J and Sharon Krause Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$1,074,503</td><td class="x-m">$1,072,003</td><td class="x-d">$-2,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/richmondmemo/">Richmond Memorial Health Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$3,333,458</td><td class="x-m">$3,338,708</td><td class="x-d">+$5,250</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/zellfamilyfo/">Zell Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$20,887,167</td><td class="x-m">$18,887,167</td><td class="x-d">$-2,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$21,962,950</td><td class="x-m">$19,962,950</td><td class="x-d">$-2,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tawanicharit/">Tawani Charitable Distribution Fund</a></td><td class="x-y">TY2021</td><td class="x-m">$8,975,441</td><td class="x-m">$8,543,735</td><td class="x-d">$-431,706</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$8,463,534</td><td class="x-m">$8,056,650</td><td class="x-d">$-406,884</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$8,535,628</td><td class="x-m">$8,106,622</td><td class="x-d">$-429,006</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$9,552,840</td><td class="x-m">$9,069,088</td><td class="x-d">$-483,752</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dwightandlin/">Dwight and Linda Davis Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$1,123,349</td><td class="x-m">$1,643,349</td><td class="x-d">+$520,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/carlmfreeman/">Carl M Freeman Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$2,916,744</td><td class="x-m">$2,957,244</td><td class="x-d">+$40,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$3,613,941</td><td class="x-m">$4,494,842</td><td class="x-d">+$880,901</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hoagfoundati/">Hoag Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$4,020,000</td><td class="x-m">$5,603,333</td><td class="x-d">+$1,583,333</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/equitablefou/">Equitable Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$3,496,950</td><td class="x-m">$3,496,647</td><td class="x-d">$-303</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/krogercofoun/">Kroger Co Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$16,174,768</td><td class="x-m">$16,124,768</td><td class="x-d">$-50,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/margaretclar/">Margaret Clark Morgan Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$2,623,643</td><td class="x-m">$2,609,962</td><td class="x-d">$-13,681</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/stoneleighfo/">Stoneleigh Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$2,530,515</td><td class="x-m">$2,549,514</td><td class="x-d">+$18,999</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thecarrollan/">The Carroll and Milton Petrie Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$7,003,183</td><td class="x-m">$7,002,183</td><td class="x-d">$-1,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/abdolhossein/">Abdolhossein and Guitty Ejtemai Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$3,100,199</td><td class="x-m">$3,099,899</td><td class="x-d">$-300</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$1,919,370</td><td class="x-m">$1,919,170</td><td class="x-d">$-200</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/questfoundat/">Quest Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$7,861,028</td><td class="x-m">$7,861,029</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/gerryfoundat/">Gerry Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$4,689,043</td><td class="x-m">$4,685,926</td><td class="x-d">$-3,117</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$4,132,697</td><td class="x-m">$4,111,301</td><td class="x-d">$-21,396</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$1,867,338</td><td class="x-m">$1,859,408</td><td class="x-d">$-7,930</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$6,594,276</td><td class="x-m">$6,565,621</td><td class="x-d">$-28,655</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/avedisfounda/">Avedis Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$1,942,354</td><td class="x-m">$1,899,660</td><td class="x-d">$-42,694</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/esbcharitabl/">Esb Charitable Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$11,600,000</td><td class="x-m">$0</td><td class="x-d">$-11,600,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$13,600,000</td><td class="x-m">$2,000,000</td><td class="x-d">$-11,600,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$14,660,000</td><td class="x-m">$3,060,000</td><td class="x-d">$-11,600,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$20,025,000</td><td class="x-m">$25,000</td><td class="x-d">$-20,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/haroldarlene/">Harold & Arlene Schnitzer Care Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$2,632,635</td><td class="x-m">$2,532,365</td><td class="x-d">$-100,270</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$1,826,070</td><td class="x-m">$1,700,613</td><td class="x-d">$-125,457</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pincusfamily/">Pincus Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$4,734,375</td><td class="x-m">$4,674,375</td><td class="x-d">$-60,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$4,969,701</td><td class="x-m">$4,909,701</td><td class="x-d">$-60,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$5,727,721</td><td class="x-m">$5,717,721</td><td class="x-d">$-10,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,383,256</td><td class="x-m">$6,268,256</td><td class="x-d">$-115,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2025</td><td class="x-m">$5,332,568</td><td class="x-m">$5,207,568</td><td class="x-d">$-125,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/benwoodfound/">Benwood Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$2,641,490</td><td class="x-m">$3,932,940</td><td class="x-d">+$1,291,450</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hewlettpacka/">Hewlett Packard Enterprise Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$7,720,330</td><td class="x-m">$7,720,332</td><td class="x-d">+$2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bryancameron/">Bryan Cameron Education Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$3,149,544</td><td class="x-m">$3,180,980</td><td class="x-d">+$31,436</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,477,202</td><td class="x-m">$3,732,725</td><td class="x-d">+$255,523</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kolatchfamil/">Kolatch Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$6,365,216</td><td class="x-m">$6,365,214</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/watkinschris/">Watkins Christian Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$3,260,000</td><td class="x-m">$3,201,000</td><td class="x-d">$-59,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$3,394,350</td><td class="x-m">$3,335,350</td><td class="x-d">$-59,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,863,155</td><td class="x-m">$3,803,500</td><td class="x-d">$-59,655</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/patrickaimee/">Patrick & Aimee Butler Family Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$2,924,750</td><td class="x-m">$4,679,750</td><td class="x-d">+$1,755,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/josephandkat/">Joseph and Kathleen Sorenson Legacy Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$4,392,847</td><td class="x-m">$4,393,989</td><td class="x-d">+$1,142</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,108,000</td><td class="x-m">$3,108,009</td><td class="x-d">+$9</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$3,736,000</td><td class="x-m">$3,736,045</td><td class="x-d">+$45</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/zemurrayfoun/">Zemurray Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,994,166</td><td class="x-m">$6,994,167</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/exelonfounda/">Exelon Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$12,392,603</td><td class="x-m">$13,059,409</td><td class="x-d">+$666,806</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/therileyfoun/">The Riley Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$3,132,767</td><td class="x-m">$3,323,946</td><td class="x-d">+$191,179</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,828,043</td><td class="x-m">$3,983,170</td><td class="x-d">+$155,127</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$2,957,863</td><td class="x-m">$2,962,863</td><td class="x-d">+$5,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/highmarkfoun/">Highmark Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$14,640,672</td><td class="x-m">$14,640,626</td><td class="x-d">$-46</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$18,696,982</td><td class="x-m">$18,679,782</td><td class="x-d">$-17,200</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cambiahealth/">Cambia Health Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,843,829</td><td class="x-m">$9,332,910</td><td class="x-d">+$3,489,081</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$4,770,112</td><td class="x-m">$9,235,406</td><td class="x-d">+$4,465,294</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,889,300</td><td class="x-m">$5,596,800</td><td class="x-d">+$1,707,500</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,254,293</td><td class="x-m">$6,209,293</td><td class="x-d">+$2,955,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$2,743,563</td><td class="x-m">$5,106,813</td><td class="x-d">+$2,363,250</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/brownformanf/">Brown-Forman Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$7,600,000</td><td class="x-m">$7,385,000</td><td class="x-d">$-215,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/abramsfounda/">Abrams Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$8,329,667</td><td class="x-m">$8,286,916</td><td class="x-d">$-42,751</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$5,954,667</td><td class="x-m">$5,950,862</td><td class="x-d">$-3,805</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$7,656,666</td><td class="x-m">$7,656,631</td><td class="x-d">$-35</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/harnishfound/">Harnish Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$4,989,750</td><td class="x-m">$4,964,750</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/danhaklfamfo/">Danhakl Fam Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,690,000</td><td class="x-m">$3,687,500</td><td class="x-d">$-2,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kirkpatrickf/">Kirkpatrick Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$2,045,797</td><td class="x-m">$2,020,797</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/raikesfounda/">Raikes Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$21,556,999</td><td class="x-m">$18,576,767</td><td class="x-d">$-2,980,232</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/englandfamil/">England Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,000,388</td><td class="x-m">$3,011,888</td><td class="x-d">+$11,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/stewardship2/">Stewardship Foundation C D A B & W T Weyerhaeuser Ttees</a></td><td class="x-y">TY2023</td><td class="x-m">$5,649,028</td><td class="x-m">$5,959,028</td><td class="x-d">+$310,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rastfoundati/">Rast Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$1,423,332</td><td class="x-m">$1,423,331</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/trowepricefo/">T Rowe Price Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$11,561,951</td><td class="x-m">$11,556,951</td><td class="x-d">$-5,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thefrancisfa/">The Francis Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,230,728</td><td class="x-m">$5,505,228</td><td class="x-d">+$274,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rockymountai/">Rocky Mountain Health Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$3,831,100</td><td class="x-m">$3,936,100</td><td class="x-d">+$105,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,967,000</td><td class="x-m">$3,925,000</td><td class="x-d">$-42,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/joanandtimfe/">Joan and Tim Fenton Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$4,008,805</td><td class="x-m">$4,008,911</td><td class="x-d">+$106</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$2,244,000</td><td class="x-m">$2,344,670</td><td class="x-d">+$100,670</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sunfamilyfou/">Sun Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$6,451,750</td><td class="x-m">$6,303,838</td><td class="x-d">$-147,912</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wwwfoundatio/">W W W Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$3,426,894</td><td class="x-m">$3,210,387</td><td class="x-d">$-216,507</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pfaffingerfo/">Pfaffinger Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$2,893,406</td><td class="x-m">$2,291,036</td><td class="x-d">$-602,370</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thehaslam3fo/">The Haslam 3 Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$11,905,833</td><td class="x-m">$11,903,083</td><td class="x-d">$-2,750</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$31,098,345</td><td class="x-m">$31,094,995</td><td class="x-d">$-3,350</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/valleyfundch/">Valley Fund Charitable Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$2,983,000</td><td class="x-m">$2,958,000</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,645,750</td><td class="x-m">$3,620,750</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/houghfamilyf/">Hough Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$7,094,266</td><td class="x-m">$6,389,276</td><td class="x-d">$-704,990</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/leeandramona/">Lee and Ramona Bass Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$23,103,646</td><td class="x-m">$18,103,646</td><td class="x-d">$-5,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/winstonfamil/">Winston Family Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$26,711,176</td><td class="x-m">$3,315,634</td><td class="x-d">$-23,395,542</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/philiplgraha/">Philip L Graham Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$6,827,000</td><td class="x-m">$6,777,000</td><td class="x-d">$-50,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/allstatefoun/">Allstate Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$34,529,498</td><td class="x-m">$34,519,498</td><td class="x-d">$-10,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/fundetfounda/">Fundet Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$1,000</td><td class="x-m">$2,344,333</td><td class="x-d">+$2,343,333</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/horizonchar2/">Horizon Charitable Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$5,277,857</td><td class="x-m">$5,277,856</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$3,813,646</td><td class="x-m">$3,793,645</td><td class="x-d">$-20,001</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$2,998,000</td><td class="x-m">$3,118,998</td><td class="x-d">+$120,998</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$3,272,000</td><td class="x-m">$2,812,259</td><td class="x-d">$-459,741</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2025</td><td class="x-m">$2,991,000</td><td class="x-m">$2,746,000</td><td class="x-d">$-245,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/ronaldslaude/">Ronald S Lauder Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$8,949,433</td><td class="x-m">$8,978,499</td><td class="x-d">+$29,066</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pacesfoundat/">Paces Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$2,000</td><td class="x-m">$3,645</td><td class="x-d">+$1,645</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/leirfoundati/">Leir Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$7,097,500</td><td class="x-m">$5,647,500</td><td class="x-d">$-1,450,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$6,469,440</td><td class="x-m">$5,169,440</td><td class="x-d">$-1,300,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$6,713,993</td><td class="x-m">$5,593,993</td><td class="x-d">$-1,120,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$5,567,343</td><td class="x-m">$2,853,000</td><td class="x-d">$-2,714,343</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$12,721,614</td><td class="x-m">$4,072,614</td><td class="x-d">$-8,649,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/ronaldddeffe/">Ronald D Deffenbaugh Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$3,105,220</td><td class="x-m">$3,220,220</td><td class="x-d">+$115,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/tworedrosesf/">Two Red Roses Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$36,417</td><td class="x-m">$0</td><td class="x-d">$-36,417</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$27,246</td><td class="x-m">$0</td><td class="x-d">$-27,246</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cascadehemop/">Cascade Hemophilia Consortium</a></td><td class="x-y">TY2020</td><td class="x-m">$3,948,456</td><td class="x-m">$3,940,124</td><td class="x-d">$-8,332</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/psifoundatio/">Psi Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$5,258,620</td><td class="x-m">$3,919,955</td><td class="x-d">$-1,338,665</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$5,358,408</td><td class="x-m">$4,334,270</td><td class="x-d">$-1,024,138</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/welfarefound/">Welfare Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$3,985,892</td><td class="x-m">$4,600,892</td><td class="x-d">+$615,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$5,352,890</td><td class="x-m">$5,382,890</td><td class="x-d">+$30,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sarahcampbel/">Sarah Campbell Blaffer Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$171,683</td><td class="x-m">$0</td><td class="x-d">$-171,683</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/geicophilant/">Geico Philanthropic Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$10,826,179</td><td class="x-m">$9,213,829</td><td class="x-d">$-1,612,350</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$7,959,086</td><td class="x-m">$9,405,066</td><td class="x-d">+$1,445,980</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$6,834,950</td><td class="x-m">$8,103,220</td><td class="x-d">+$1,268,270</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,312,686</td><td class="x-m">$7,095,105</td><td class="x-d">+$3,782,419</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$4,630,571</td><td class="x-m">$5,170,810</td><td class="x-d">+$540,239</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/firstenergyf/">Firstenergy Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$9,832,663</td><td class="x-m">$10,093,552</td><td class="x-d">+$260,889</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$5,075,394</td><td class="x-m">$5,198,507</td><td class="x-d">+$123,113</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$9,269,468</td><td class="x-m">$9,164,168</td><td class="x-d">$-105,300</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/publicsafety/">Public Safety Training Foundation</a></td><td class="x-y">TY2025</td><td class="x-m">$738,889</td><td class="x-m">$0</td><td class="x-d">$-738,889</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/trottfamilyp/">Trott Family Philanthropies</a></td><td class="x-y">TY2021</td><td class="x-m">$8,127,465</td><td class="x-m">$6,027,465</td><td class="x-d">$-2,100,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/anverseinc/">Anverse Inc</a></td><td class="x-y">TY2022</td><td class="x-m">$4,411,245</td><td class="x-m">$4,444,362</td><td class="x-d">+$33,117</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$3,512,765</td><td class="x-m">$3,482,467</td><td class="x-d">$-30,298</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$2,541,970</td><td class="x-m">$2,539,471</td><td class="x-d">$-2,499</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/lampertfamfo/">Lampert Fam Foundation Uta 121500</a></td><td class="x-y">TY2021</td><td class="x-m">$4,085,000</td><td class="x-m">$4,084,000</td><td class="x-d">$-1,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/winterparkhe/">Winter Park Health Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$677,499</td><td class="x-m">$776,998</td><td class="x-d">+$99,499</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$883,875</td><td class="x-m">$967,325</td><td class="x-d">+$83,450</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/chantecaille/">Chantecaille Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$100,000</td><td class="x-m">$0</td><td class="x-d">$-100,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/natureconser/">Nature Conservation Tr</a></td><td class="x-y">TY2025</td><td class="x-m">$31,000</td><td class="x-m">$0</td><td class="x-d">$-31,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/alfredandisa/">Alfred and Isabel Bader 2014 Charitable Trust</a></td><td class="x-y">TY2021</td><td class="x-m">$27,500,000</td><td class="x-m">$10,029,270</td><td class="x-d">$-17,470,730</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$40,000,000</td><td class="x-m">$10,961,370</td><td class="x-d">$-29,038,630</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$50,500,000</td><td class="x-m">$13,618,600</td><td class="x-d">$-36,881,400</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/healthcaref2/">Healthcare Foundation of La Porte</a></td><td class="x-y">TY2021</td><td class="x-m">$5,524,889</td><td class="x-m">$5,525,339</td><td class="x-d">+$450</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$8,467,969</td><td class="x-m">$8,463,849</td><td class="x-d">$-4,120</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$7,611,051</td><td class="x-m">$7,603,744</td><td class="x-d">$-7,307</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$7,995,703</td><td class="x-m">$7,997,837</td><td class="x-d">+$2,134</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/nortonsimonf/">Norton Simon Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$5,000,000</td><td class="x-m">$4,700,000</td><td class="x-d">$-300,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bluesquareal/">Blue Square Alliance Against Hate Corp</a></td><td class="x-y">TY2024</td><td class="x-m">$71,000</td><td class="x-m">$46,000</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/lindahalllib/">Linda Hall Library Trust</a></td><td class="x-y">TY2020</td><td class="x-m">$2,009,051</td><td class="x-m">$9,051</td><td class="x-d">$-2,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/robertlyndaa/">Robert & Lynda Altman Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$4,525,684</td><td class="x-m">$0</td><td class="x-d">$-4,525,684</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$5,924,316</td><td class="x-m">$0</td><td class="x-d">$-5,924,316</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$1,401,103</td><td class="x-m">$1,393,579</td><td class="x-d">$-7,524</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/themorrisfou/">The Morris Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$9,539,950</td><td class="x-m">$9,328,872</td><td class="x-d">$-211,078</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$16,206,930</td><td class="x-m">$16,421,930</td><td class="x-d">+$215,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/edenhallfoun/">Eden Hall Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$18,571,800</td><td class="x-m">$13,360,800</td><td class="x-d">$-5,211,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/caterpillarf/">Caterpillar Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$43,500,336</td><td class="x-m">$43,500,310</td><td class="x-d">$-26</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wegefoundati/">Wege Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$18,308,984</td><td class="x-m">$18,208,984</td><td class="x-d">$-100,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$28,458,545</td><td class="x-m">$27,808,545</td><td class="x-d">$-650,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$21,763,752</td><td class="x-m">$21,699,798</td><td class="x-d">$-63,954</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/croucherfoun/">Croucher Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$11,761,008</td><td class="x-m">$10,158,706</td><td class="x-d">$-1,602,302</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/boehringerin/">Boehringer Ingelheim Cares Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$753,047,849</td><td class="x-m">$1,780,323</td><td class="x-d">$-751,267,526</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jessieballdu/">Jessie Ball Dupont Religious Charitable & Educational Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$8,362,267</td><td class="x-m">$8,144,747</td><td class="x-d">$-217,520</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$11,933,183</td><td class="x-m">$11,558,142</td><td class="x-d">$-375,041</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnandmarci/">John and Marcia Goldman Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$6,027,555</td><td class="x-m">$5,877,555</td><td class="x-d">$-150,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mtcubacenter/">Mt Cuba Center</a></td><td class="x-y">TY2021</td><td class="x-m">$3,086,085</td><td class="x-m">$3,088,585</td><td class="x-d">+$2,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/shramansouth/">Shraman South Asian Museum and Learning Center Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$4,826,735</td><td class="x-m">$826,735</td><td class="x-d">$-4,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/henrytnichol/">Henry T Nicholas Iii Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$4,172,839</td><td class="x-m">$4,685,752</td><td class="x-d">+$512,913</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$6,276,024</td><td class="x-m">$7,116,215</td><td class="x-d">+$840,191</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/connellyfoun/">Connelly Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$12,498,224</td><td class="x-m">$12,498,223</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/humanafounda/">Humana Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$15,914,314</td><td class="x-m">$23,008,695</td><td class="x-d">+$7,094,381</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$16,542,960</td><td class="x-m">$16,943,302</td><td class="x-d">+$400,342</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$13,364,497</td><td class="x-m">$24,941,687</td><td class="x-d">+$11,577,190</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$15,914,894</td><td class="x-m">$27,644,621</td><td class="x-d">+$11,729,727</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/stevenalexan/">Steven & Alexandra Cohen Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$128,674,204</td><td class="x-m">$123,741,300</td><td class="x-d">$-4,932,904</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$130,036,842</td><td class="x-m">$129,220,638</td><td class="x-d">$-816,204</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/coloradotrus/">Colorado Trust</a></td><td class="x-y">TY2020</td><td class="x-m">$15,736,319</td><td class="x-m">$15,736,318</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$28,773,733</td><td class="x-m">$28,773,039</td><td class="x-d">$-694</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kingphilanth/">King Philanthropies</a></td><td class="x-y">TY2021</td><td class="x-m">$1</td><td class="x-m">$0</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$1,250,000</td><td class="x-m">$1,250,090</td><td class="x-d">+$90</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$11,235,000</td><td class="x-m">$11,243,600</td><td class="x-d">+$8,600</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thebathanadi/">The Bat Hanadiv Foundation No 3</a></td><td class="x-y">TY2020</td><td class="x-m">$45,060,085</td><td class="x-m">$44,415,506</td><td class="x-d">$-644,579</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$0</td><td class="x-m">$46,183,103</td><td class="x-d">+$46,183,103</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$0</td><td class="x-m">$23,353,509</td><td class="x-d">+$23,353,509</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$0</td><td class="x-m">$28,820,362</td><td class="x-d">+$28,820,362</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$0</td><td class="x-m">$31,752,798</td><td class="x-d">+$31,752,798</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sgfoundation/">S & G Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$125,578,043</td><td class="x-m">$125,578,042</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kavlifoundat/">Kavli Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$17,416,685</td><td class="x-m">$17,416,683</td><td class="x-d">$-2</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thegranthamf/">The Grantham Foundation for the Protection of the Environment</a></td><td class="x-y">TY2020</td><td class="x-m">$29,914,304</td><td class="x-m">$29,915,097</td><td class="x-d">+$793</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$35,108,973</td><td class="x-m">$35,114,310</td><td class="x-d">+$5,337</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$54,586,116</td><td class="x-m">$54,591,143</td><td class="x-d">+$5,027</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$61,325,572</td><td class="x-m">$61,346,003</td><td class="x-d">+$20,431</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$66,961,311</td><td class="x-m">$66,961,611</td><td class="x-d">+$300</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/negauneefoun/">Negaunee Foundation Ltd</a></td><td class="x-y">TY2020</td><td class="x-m">$16,627,749</td><td class="x-m">$16,624,749</td><td class="x-d">$-3,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$20,698,278</td><td class="x-m">$0</td><td class="x-d">$-20,698,278</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/essexavenuef/">Essex Avenue Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$23,424,750</td><td class="x-m">$23,412,426</td><td class="x-d">$-12,324</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/kennethraini/">Kenneth Rainin Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$15,553,639</td><td class="x-m">$15,553,638</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/herberthgrac/">Herbert H. and Grace A. Dow Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$16,396,021</td><td class="x-m">$16,396,731</td><td class="x-d">+$710</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/agoodnamefou/">A Good Name Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$51,672,750</td><td class="x-m">$37,342,750</td><td class="x-d">$-14,330,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/spencerfound/">Spencer Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$24,680,629</td><td class="x-m">$24,680,632</td><td class="x-d">+$3</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$20,033,782</td><td class="x-m">$20,033,783</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$24,318,536</td><td class="x-m">$24,318,535</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/charterfundi/">Charter Fund</a></td><td class="x-y">TY2023</td><td class="x-m">$93,114,445</td><td class="x-m">$99,829,945</td><td class="x-d">+$6,715,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/adamrscripps/">Adam R Scripps Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$27,009,336</td><td class="x-m">$26,764,336</td><td class="x-d">$-245,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$35,482,978</td><td class="x-m">$35,457,978</td><td class="x-d">$-25,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/charleskochf/">Charles Koch Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$100,905,370</td><td class="x-m">$100,892,812</td><td class="x-d">$-12,558</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/crawfordtayl/">Crawford Taylor Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$59,712,700</td><td class="x-m">$28,812,700</td><td class="x-d">$-30,900,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$11,194,299</td><td class="x-m">$42,194,299</td><td class="x-d">+$31,000,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$41,410,400</td><td class="x-m">$41,145,400</td><td class="x-d">$-265,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnefetzeri/">John E Fetzer Institute</a></td><td class="x-y">TY2023</td><td class="x-m">$10,494,015</td><td class="x-m">$10,493,914</td><td class="x-d">$-101</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$12,365,138</td><td class="x-m">$12,365,238</td><td class="x-d">+$100</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rasmusonfoun/">Rasmuson Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$21,477,222</td><td class="x-m">$21,440,521</td><td class="x-d">$-36,701</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$17,659,981</td><td class="x-m">$17,654,981</td><td class="x-d">$-5,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/skollfoundat/">Skoll Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$58,191,684</td><td class="x-m">$58,191,683</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sobratofamil/">Sobrato Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$56,356,116</td><td class="x-m">$56,356,115</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$51,962,236</td><td class="x-m">$51,900,220</td><td class="x-d">$-62,016</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$69,330,316</td><td class="x-m">$69,330,315</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/packardhuman/">Packard Humanities Institute</a></td><td class="x-y">TY2023</td><td class="x-m">$9,835,277</td><td class="x-m">$9,505,277</td><td class="x-d">$-330,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rainwatercha/">Rainwater Charitable Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$54,584,011</td><td class="x-m">$54,334,010</td><td class="x-d">$-250,001</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$53,295,003</td><td class="x-m">$53,295,002</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$37,948,780</td><td class="x-m">$37,948,774</td><td class="x-d">$-6</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jamesmcoxfou/">James M Cox Foundation of Ga</a></td><td class="x-y">TY2020</td><td class="x-m">$30,578,899</td><td class="x-m">$30,528,899</td><td class="x-d">$-50,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/haroldalfond/">Harold Alfond Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$51,645,655</td><td class="x-m">$51,645,654</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thecaliforn2/">The California Wellness Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$48,752,827</td><td class="x-m">$48,752,823</td><td class="x-d">$-4</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hobsonlucasf/">Hobson Lucas Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$62,965,086</td><td class="x-m">$62,812,086</td><td class="x-d">$-153,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dianadavissp/">Diana Davis Spencer Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$79,892,000</td><td class="x-m">$79,174,000</td><td class="x-d">$-718,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/longwoodgard/">Longwood Gardens</a></td><td class="x-y">TY2019</td><td class="x-m">$73,050</td><td class="x-m">$75,550</td><td class="x-d">+$2,500</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/theannenberg/">The Annenberg Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$59,441,614</td><td class="x-m">$51,770,128</td><td class="x-d">$-7,671,486</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$56,913,605</td><td class="x-m">$50,975,923</td><td class="x-d">$-5,937,682</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$200,053,691</td><td class="x-m">$50,053,691</td><td class="x-d">$-150,000,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/barrfoundati/">Barr Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$100,253,934</td><td class="x-m">$100,052,059</td><td class="x-d">$-201,875</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$108,480,933</td><td class="x-m">$108,432,405</td><td class="x-d">$-48,528</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$106,878,904</td><td class="x-m">$106,015,610</td><td class="x-d">$-863,294</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$123,235,702</td><td class="x-m">$123,587,074</td><td class="x-d">+$351,372</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/theleonlevin/">The Leon Levine Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$42,183,334</td><td class="x-m">$42,183,335</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$57,934,379</td><td class="x-m">$57,934,380</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mjmurdockcha/">M J Murdock Charitable Trust</a></td><td class="x-y">TY2022</td><td class="x-m">$86,257,473</td><td class="x-m">$86,152,473</td><td class="x-d">$-105,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/theschmidtfa/">The Schmidt Family Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$185,440,970</td><td class="x-m">$185,125,970</td><td class="x-d">$-315,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dogwoodhealt/">Dogwood Health Trust</a></td><td class="x-y">TY2024</td><td class="x-m">$148,184,788</td><td class="x-m">$147,684,786</td><td class="x-d">$-500,002</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/cummingsfoun/">Cummings Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$37,022,600</td><td class="x-m">$17,313</td><td class="x-d">$-37,005,287</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$18,366,000</td><td class="x-m">$16,000</td><td class="x-d">$-18,350,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$32,722,022</td><td class="x-m">$8,356</td><td class="x-d">$-32,713,666</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/annieecaseyf/">Annie E Casey Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$94,171,445</td><td class="x-m">$93,871,445</td><td class="x-d">$-300,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$82,384,202</td><td class="x-m">$82,209,202</td><td class="x-d">$-175,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$81,767,343</td><td class="x-m">$81,677,343</td><td class="x-d">$-90,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$83,491,462</td><td class="x-m">$83,416,462</td><td class="x-d">$-75,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$93,091,674</td><td class="x-m">$93,029,674</td><td class="x-d">$-62,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/rippleworksi/">Rippleworks Inc</a></td><td class="x-y">TY2022</td><td class="x-m">$53,489,869</td><td class="x-m">$53,489,870</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$40,379,366</td><td class="x-m">$40,379,365</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnsandjame/">John S and James L Knight Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$108,276,848</td><td class="x-m">$108,276,849</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/gersonbakarf/">Gerson Bakar Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$174,577,851</td><td class="x-m">$140,175,851</td><td class="x-d">$-34,402,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$246,737,901</td><td class="x-m">$203,137,901</td><td class="x-d">$-43,600,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$327,022,258</td><td class="x-m">$314,620,258</td><td class="x-d">$-12,402,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$255,406,561</td><td class="x-m">$254,931,561</td><td class="x-d">$-475,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$169,365,674</td><td class="x-m">$161,524,674</td><td class="x-d">$-7,841,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/caseyfamilyp/">Casey Family Programs</a></td><td class="x-y">TY2022</td><td class="x-m">$8,985,882</td><td class="x-m">$8,961,746</td><td class="x-d">$-24,136</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$7,597,508</td><td class="x-m">$7,614,409</td><td class="x-d">+$16,901</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$6,025,045</td><td class="x-m">$6,033,045</td><td class="x-d">+$8,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/koumfamilyfo/">Koum Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$72,731,370</td><td class="x-m">$90,357,036</td><td class="x-d">+$17,625,666</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$81,359,540</td><td class="x-m">$92,379,150</td><td class="x-d">+$11,019,610</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jamesirvinef/">James Irvine Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$117,639,983</td><td class="x-m">$117,639,982</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-m">$155,587,188</td><td class="x-m">$155,587,187</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/williampennf/">William Penn Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$110,407,496</td><td class="x-m">$121,707,496</td><td class="x-d">+$11,300,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/dukeendowmen/">Duke Endowment</a></td><td class="x-y">TY2024</td><td class="x-m">$251,218,558</td><td class="x-m">$251,218,557</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/jackjosephan/">Jack Joseph and Morton Mandel Foundation</a></td><td class="x-y">TY2023</td><td class="x-m">$91,600,061</td><td class="x-m">$91,612,651</td><td class="x-d">+$12,590</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$77,003,582</td><td class="x-m">$77,001,782</td><td class="x-d">$-1,800</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johntempleto/">John Templeton Foundation</a></td><td class="x-y">TY2022</td><td class="x-m">$176,763,091</td><td class="x-m">$161,284,392</td><td class="x-d">$-15,478,699</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$126,807,051</td><td class="x-m">$126,805,997</td><td class="x-d">$-1,054</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/alicelwalton/">Alice L Walton Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$27,402,495</td><td class="x-m">$27,402,494</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/lauraandjohn/">Laura and John Arnold Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$171,172,319</td><td class="x-m">$171,172,320</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/fidelityfoun/">Fidelity Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$88,395,665</td><td class="x-m">$88,225,665</td><td class="x-d">$-170,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$160,823,752</td><td class="x-m">$160,625,871</td><td class="x-d">$-197,881</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johndcatheri/">John D & Catherine T Macarthur Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$311,460,883</td><td class="x-m">$311,460,874</td><td class="x-d">$-9</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/williamflora/">William & Flora Hewlett Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$529,060,585</td><td class="x-m">$529,010,585</td><td class="x-d">$-50,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$560,735,625</td><td class="x-m">$560,367,747</td><td class="x-d">$-367,878</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$625,009,380</td><td class="x-m">$624,609,380</td><td class="x-d">$-400,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/gatesfoundat/">Gates Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$6,311,161,824</td><td class="x-m">$6,310,876,323</td><td class="x-d">$-285,501</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hallfamilyfo/">Hall Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-m">$39,778,754</td><td class="x-m">$38,802,910</td><td class="x-d">$-975,844</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$47,625,522</td><td class="x-m">$47,625,523</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/burroughswel/">Burroughs Wellcome Fund</a></td><td class="x-y">TY2020</td><td class="x-m">$29,653,466</td><td class="x-m">$29,653,467</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-m">$34,200,359</td><td class="x-m">$34,200,360</td><td class="x-d">+$1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$37,721,547</td><td class="x-m">$37,721,546</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hebuttfounda/">H. E. Butt Foundation</a></td><td class="x-y">TY2024</td><td class="x-m">$4,231,538</td><td class="x-m">$4,220,833</td><td class="x-d">$-10,705</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/howardgbuffe/">Howard G. Buffett Foundation</a></td><td class="x-y">TY2021</td><td class="x-m">$227,071,721</td><td class="x-m">$227,071,720</td><td class="x-d">$-1</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-m">$458,103,720</td><td class="x-m">$457,671,720</td><td class="x-d">$-432,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-m">$473,405,666</td><td class="x-m">$462,005,815</td><td class="x-d">$-11,399,851</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2025</td><td class="x-m">$698,710,460</td><td class="x-m">$494,963,612</td><td class="x-d">$-203,746,848</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Years read from photocopies</h2>
+  <p class="sub"><a href="https://jcurry44.github.io/grants-ledgers/f/mt/">M&amp;T Charitable Foundation</a> reports each entire year of grantmaking as a single line — “See attached statement” — and the grants themselves live only in attachments the IRS publishes as scanned images with no text layer. Those rows were read by optical character recognition, page by page, and judged by the same referee as everything else.</p>
+  <p class="pull">TY2023: 3,105 grants, $41,009,568 — matching both the statement’s own printed total and the filed line, to the dollar.</p>
+  <p class="pull" style="margin-top:1.1rem">TY2022: 3,302 grants recovered; the $7,640 the scan would not render legibly appears as one explicitly labelled “unread” line, so the year still sums to the filed $41,196,491 exactly.</p>
+  <p class="sub" style="margin-top:1.1rem">A handful of recipient names in each year were too faint to read. They appear as unread rather than guessed; their amounts remain, because the amounts are what the totals prove.</p>
+  <p class="sub" style="margin-top:2rem">Where a filer left its grant detail to an attachment and the IRS’s scanned copy includes it, the year is recovered the same way — read by OCR, proven against the attachment’s own printed total where one is printed, and against the filed line always. Every scan-recovered year in the collection:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Foundation</th><th>Year</th><th>Rows</th><th>Recovered = filed total</th></tr></thead>
+    <tbody>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/manton/">The Manton Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">56</td><td class="x-m">$24,905,529</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">53</td><td class="x-m">$27,146,766</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/thefreemanp0/">The Freeman Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">70</td><td class="x-m">$15,693,660</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">81</td><td class="x-m">$19,778,123</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">91</td><td class="x-m">$19,940,871</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/triad/">Triad Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">565</td><td class="x-m">$15,331,049</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">551</td><td class="x-m">$16,123,223</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/perelmanfami/">Perelman Family Charitable Trust I</a></td><td class="x-y">TY2022</td><td class="x-n">23</td><td class="x-m">$15,001,761</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">28</td><td class="x-m">$16,567,239</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/moore/">The Moore Charitable Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">297</td><td class="x-m">$30,592,564</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">271</td><td class="x-m">$21,470,674</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">273</td><td class="x-m">$21,995,785</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/siegelfamily/">Siegel Family Endowment</a></td><td class="x-y">TY2021</td><td class="x-n">86</td><td class="x-m">$24,452,401</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">112</td><td class="x-m">$24,771,536</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">110</td><td class="x-m">$26,907,603</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-n">110</td><td class="x-m">$27,792,258</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/overdeckfami/">Overdeck Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">97</td><td class="x-m">$45,923,201</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">96</td><td class="x-m">$50,160,335</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">89</td><td class="x-m">$53,464,780</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-n">102</td><td class="x-m">$63,400,533</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/metlifefound/">Metlife Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">277</td><td class="x-m">$29,702,928</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">304</td><td class="x-m">$37,919,846</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">285</td><td class="x-m">$37,401,844</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/globalaction/">Global Action To End Smoking</a></td><td class="x-y">TY2022</td><td class="x-n">61</td><td class="x-m">$27,669,201</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-n">47</td><td class="x-m">$19,522,049</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bezosfamilyf/">Bezos Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">176</td><td class="x-m">$99,205,381</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">243</td><td class="x-m">$156,961,900</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/graingerfoun/">Grainger Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">132</td><td class="x-m">$44,394,439</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">135</td><td class="x-m">$16,693,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/johnsonjohns/">Johnson & Johnson Foundation United States</a></td><td class="x-y">TY2020</td><td class="x-n">51074</td><td class="x-m">$61,248,354</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">62601</td><td class="x-m">$67,217,023</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">73838</td><td class="x-m">$68,570,428</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/caterpillarf/">Caterpillar Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">6167</td><td class="x-m">$42,348,169</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">7569</td><td class="x-m">$43,500,336</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pritzkertrau/">Pritzker Traubert Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">270</td><td class="x-m">$12,480,863</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">225</td><td class="x-m">$18,955,376</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">254</td><td class="x-m">$17,531,276</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">215</td><td class="x-m">$13,206,131</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/robertsfound/">Roberts Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">28</td><td class="x-m">$49,045,803</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">80</td><td class="x-m">$49,701,845</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">77</td><td class="x-m">$45,741,340</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/pritzkerfoun/">Pritzker Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">68</td><td class="x-m">$28,529,973</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">77</td><td class="x-m">$27,481,688</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">80</td><td class="x-m">$31,594,379</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">69</td><td class="x-m">$34,483,333</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/amongcarterf/">Amon G Carter Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">192</td><td class="x-m">$34,550,825</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">197</td><td class="x-m">$31,924,126</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">192</td><td class="x-m">$33,718,566</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/capitalgroup/">Capital Group Companies Charitable Foundation</a></td><td class="x-y">TY2019</td><td class="x-n">1</td><td class="x-m">$23,976,005</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/bluecrossand/">Blue Cross and Blue Shield of Florida Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">581</td><td class="x-m">$21,268,763</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">621</td><td class="x-m">$23,777,494</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">659</td><td class="x-m">$25,656,875</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/mayandstanle/">May and Stanley Smith Charitable Trust</a></td><td class="x-y">TY2020</td><td class="x-n">524</td><td class="x-m">$23,958,618</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">331</td><td class="x-m">$23,813,878</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">265</td><td class="x-m">$21,731,709</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">243</td><td class="x-m">$20,262,917</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/muskfoundati/">Musk Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">31</td><td class="x-m">$160,461,913</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/williamnpenn/">William N Pennington Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">62</td><td class="x-m">$28,598,220</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">74</td><td class="x-m">$36,260,357</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">68</td><td class="x-m">$31,574,457</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/sgfoundation/">S & G Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">24</td><td class="x-m">$81,195,350</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">10</td><td class="x-m">$103,495,937</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">60</td><td class="x-m">$125,578,043</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hellmanfound/">Hellman Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">292</td><td class="x-m">$59,100,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">215</td><td class="x-m">$43,112,190</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">198</td><td class="x-m">$27,128,190</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">242</td><td class="x-m">$36,126,050</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/herberthgrac/">Herbert H. and Grace A. Dow Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">202</td><td class="x-m">$18,439,978</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">171</td><td class="x-m">$16,396,021</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">167</td><td class="x-m">$19,968,632</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/marionandhen/">Marion and Henry Bloch Family Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">125</td><td class="x-m">$32,002,710</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">138</td><td class="x-m">$29,718,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/williamrkena/">William R. Kenan Jr. Charitable Trust</a></td><td class="x-y">TY2020</td><td class="x-n">136</td><td class="x-m">$31,571,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">110</td><td class="x-m">$32,820,034</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">87</td><td class="x-m">$31,647,436</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/perenchiofou/">Perenchio Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">13</td><td class="x-m">$36,375,000</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">16</td><td class="x-m">$5,965,000</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/charlesandly/">Charles and Lynn Schusterman Family Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">688</td><td class="x-m">$292,518,511</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/anschutzfoun/">The Anschutz Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">519</td><td class="x-m">$69,078,667</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">552</td><td class="x-m">$71,158,807</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">548</td><td class="x-m">$70,370,780</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/wyssfoundati/">Wyss Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">125</td><td class="x-m">$132,214,860</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">99</td><td class="x-m">$163,338,595</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">134</td><td class="x-m">$149,332,735</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/danielsfund/">Daniels Fund</a></td><td class="x-y">TY2022</td><td class="x-n">796</td><td class="x-m">$63,585,856</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/genehaasfoun/">Gene Haas Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">1150</td><td class="x-m">$20,461,302</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/paulmangellf/">Paul M. Angell Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-n">427</td><td class="x-m">$34,078,136</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-n">505</td><td class="x-m">$57,054,396</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hallfamilyfo/">Hall Family Foundation</a></td><td class="x-y">TY2020</td><td class="x-n">475</td><td class="x-m">$39,778,754</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2021</td><td class="x-n">181</td><td class="x-m">$37,304,749</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">205</td><td class="x-m">$47,625,522</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">205</td><td class="x-m">$53,005,934</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/burroughswel/">Burroughs Wellcome Fund</a></td><td class="x-y">TY2020</td><td class="x-n">618</td><td class="x-m">$29,653,466</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">587</td><td class="x-m">$34,200,359</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2023</td><td class="x-n">706</td><td class="x-m">$37,721,547</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/larryhmiller/">Larry H. & Gail Miller Family Foundation</a></td><td class="x-y">TY2023</td><td class="x-n">194</td><td class="x-m">$28,040,884</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/hebuttfounda/">H. E. Butt Foundation</a></td><td class="x-y">TY2022</td><td class="x-n">78</td><td class="x-m">$2,481,714</td></tr>
+      <tr><td class="x-f"><a href="https://jcurry44.github.io/grants-ledgers/f/howardgbuffe/">Howard G. Buffett Foundation</a></td><td class="x-y">TY2021</td><td class="x-n">70</td><td class="x-m">$227,071,721</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2022</td><td class="x-n">108</td><td class="x-m">$297,165,049</td></tr>
+      <tr><td class="x-f"></td><td class="x-y">TY2024</td><td class="x-n">116</td><td class="x-m">$473,405,666</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="margin-top:1.1rem">Amounts the OCR engine would not read — predominantly round figures its recognizer drops inside table cells — were read from the page images by hand and are proven by the same totals. Each ledger’s Methodology tells its own recovery story, including returns kept as negative rows and any name or city the scan would not yield.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Filings that needed handling, not judgement</h2>
+  <p class="sub">Structural quirks in how a return is put together. None of these changes a number; each changes how the number had to be read.</p>
+  <div class="cards">
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/lenna/">The Reginald A. and Elizabeth S. Lenna Foundation</a></b><p>Every recipient is filed in the return’s <em>person</em> name field rather than its organisation field — “YWCA of Jamestown” arrives where an individual’s name would sit. They are organisations, read as filed. All five years tie exactly.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/baird/">The Cameron &amp; Jane Baird Foundation</a></b><p>TY2020 files one row — “See Attached list of Donees” — with the list in an attachment outside the e-filed data. That is a genuine stub, and it is why the person-name field is checked for stub language rather than assumed to be one.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/johnahartfor/">The John A. Hartford Foundation</a></b><p>Eight of its 539 rows are the foundation’s own aggregate lines — “Various Matching Grants”, “Various Discretionary Grants” — 1.9% of the dollars, in an otherwise fully named schedule. They are printed exactly as filed and disclosed on the page; the totals prove them along with everything else.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/knightfounda/">Knight Foundation and the John S. and James L. Knight Foundation</a></b><p>Two unrelated foundations share the Knight name: Philip and Penelope Knight’s Oregon foundation (EIN 91-1791788) and the Miami journalism funder John S. and James L. Knight Foundation (EIN 65-0464177). Both have ledgers here; neither total includes the other.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/hearst/">The Hearst Foundation and the William Randolph Hearst Foundation</a></b><p>Two sister foundations share the Hearst name, run by the same board yet filing their own returns (EIN 13-6161746 and EIN 13-6019226). Both have ledgers here; neither total includes the other.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/twrfam/">Tower Family Fund and the Peter and Elizabeth C. Tower Foundation</a></b><p>Two separate funders share the Tower name and file their own returns (EIN 20-5848514 and EIN 16-6350753). Both have ledgers here; neither total includes the other.</p></div>
+    <div class="card"><b><a href="https://jcurry44.github.io/grants-ledgers/f/boyd/">The Alexander and Jane Boyd Foundation</a></b><p>A bank-administered trust filing from Buffalo whose grantmaking runs largely to central Pennsylvania. The location column carries the recipient’s filed mailing address, which is what makes that visible rather than hidden behind the filer’s own address.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Named, and not yet in the collection</h2>
+  <p class="sub">Foundations screened, fetched, and found unbuildable from the machine-readable filings alone — listed here rather than silently absent.</p>
+  <div class="cards">
+    <div class="card"><b>Bat Hanadiv Foundation No. 3</b><div class="meta">five years behind a single stub line</div><p>Registered with the NY Charities Bureau twice — as a trust and a not-for-profit — but the registry holds only a 2005 registration statement, no annual filings. Its grant detail remains unpublished by both the IRS and the AG.</p></div>
+    <div class="card"><b>Renwick Foundation</b><div class="meta">first real year TY2024, three grants</div><p>A young foundation. A ledger of one thin year would suggest a record where there barely is one; it joins the collection as its filings accumulate.</p></div>
+    <div class="card"><b>Marina Kellen French Foundation</b><div class="meta">two filings: a $0 year, then a single transfer</div><p>Its 2024 grantmaking is one line — $13,092,186 to a donor-advised fund. Deferred until it files program grantmaking.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Kept exactly as filed</h2>
+  <p class="sub">These look like mistakes because they are — the foundations’ own, in their own filings. Correcting them silently would make the ledger easier to read and impossible to check against the source, so they stand.</p>
+  <div class="asfiled">
+    <div class="af"><span class="who">Oishei, TY2023</span><code>ENDEAVOR HEALTH SERVICESMID-ERIE MENTAL HEALTH SERVICES</code><p>Two organisation names run together with no separator. That is how the filing reads; the filing has no second name line. Preserved.</p></div>
+    <div class="af"><span class="who">Wendt</span><code>AVAILABLIE</code><p>A typo for “available”, in the purpose field. Preserved.</p></div>
+    <div class="af"><span class="who">Oishei</span><code>METRO COMMUNITY DEVELOPMENT CORPORA</code><p>Truncated mid-word in the filing itself. Preserved.</p></div>
+    <div class="af"><span class="who">Wendt — 54% of dollars</span><code>AVAILABLE UPON REQUEST</code><p>The foundation files most purposes this way. Legal, and uninformative. Where the purpose names no field, the ledger reads the recipient’s own filed name instead, and says so.</p></div>
+    <div class="af"><span class="who">Tower — 58% of dollars</span><code>CHARITABLE</code><p>A single word for most grant purposes.</p></div>
+    <div class="af"><span class="who">Statler — most grants</span><code>SUPPORT</code><p>Likewise.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Standing limits</h2>
+  <p class="sub">True of every ledger in the collection, on every page, always.</p>
+  <div class="limits">
+    <div class="lim"><b>No recipient EINs</b><span>Form 990-PF does not ask for the recipient’s EIN, so organisations are matched by name, through a published canonical form, with the filer’s own EIN anchoring identity where the IRS Business Master File pins it. Every as-filed spelling stays visible on the recipient’s own row.</span></div>
+    <div class="lim"><b>Capitalisation changes mid-period</b><span>Some foundations switch from filing names in capitals to mixed case partway through — the Western New York Foundation (36 of its 37 merges) and Ralph C. Wilson, Jr. (202 of 205) are the clearest. Those merges are the same name, differently typed.</span></div>
+    <div class="lim"><b>Purposes are grouped by published rules, in three tiers</b><span>Every ledger’s Methodology prints the rules it actually runs: keywords in the filed purpose, then the recipient’s filed name, then — for names neither step matches — the recipient’s own classification in the IRS Business Master File, accepted only when the match is unambiguous. Where nothing matches, the grant stays in “other” instead of being assigned a guess.</span></div>
+    <div class="lim"><b>Addresses are mailing addresses</b><span>The location on a grant row is where the recipient receives mail, not where the money is spent.</span></div>
+    <div class="lim"><b>Amounts are as filed</b><span>No inflation adjustment, no restatement, no netting of refunds.</span></div>
+    <div class="lim"><b>Nothing here is an audit</b><span>These are documented reconciliations of public filings, with the receipts attached. They are not an audit, an attestation, or an opinion.</span></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  An independent project by <a href="https://jcurry44.github.io/">Curry Studio</a>, North Tonawanda, NY.
+  Not affiliated with, commissioned by, or endorsed by any foundation shown.
+  <a href="https://jcurry44.github.io/grants-ledgers/">Back to the collection ↗</a>
+</div></footer>
+
+</body>
+</html>

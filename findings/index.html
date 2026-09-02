@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>What the ledger catches — The Grants Ledger</title>
+<meta name="description" content="What turns up when every foundation filing is reconciled to its own filed total: money with no named recipient, registers that stop mid-alphabet, arithmetic errors inside the filings themselves.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #133024; --cover-ink: #0e241b;
+  --copper: #d19049; --copper-deep: #a35c1a; --copper-soft: #e7c28b;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --tint: #f3efe2; --cream: #f6efdd; --cream-faint: rgba(246,239,221,0.72);
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+a { color: var(--copper-deep); }
+button { font: inherit; cursor: pointer; color: inherit; background: none; border: 0; }
+:focus-visible { outline: 2px solid var(--copper-deep); outline-offset: 2px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
+.num { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+
+.top { background: var(--cover-ink); color: var(--cream); padding: 0.55rem 0; }
+.top .wrap { display: flex; align-items: center; gap: 1.2rem; }
+.brand { display: flex; align-items: baseline; gap: 0.5rem; color: var(--cream); text-decoration: none; }
+.brand .gl { font-family: Georgia, serif; color: var(--copper); font-size: 1.2rem; line-height: 1; }
+.brand b { font-family: var(--serif); font-weight: 640; font-size: 1rem; }
+.top nav { margin-left: auto; display: flex; gap: 1rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.top nav a { color: var(--cream-faint); text-decoration: none; }
+.top nav a:hover, .top nav a[aria-current] { color: var(--copper-soft); }
+
+.hero { background: linear-gradient(180deg, var(--cover), var(--cover-deep)); color: var(--cream); padding: clamp(2.6rem, 7vh, 4.4rem) 0 clamp(2rem, 5vh, 3rem); }
+.kick { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--copper); }
+h1 { font-family: var(--serif); font-weight: 640; font-size: clamp(2.1rem, 5.4vw, 3.6rem); line-height: 1.03; letter-spacing: -0.022em; margin: 0.5rem 0 0.9rem; text-wrap: balance; max-width: 18ch; }
+h1 em { font-style: normal; color: var(--copper); }
+.lede { max-width: 54ch; color: var(--cream-faint); font-size: clamp(1.02rem, 1.5vw, 1.16rem); }
+.heronums { display: flex; flex-wrap: wrap; gap: 1.2rem 2.8rem; margin-top: 1.9rem; }
+.heronums div b { display: block; font-family: var(--serif); font-weight: 630; font-size: clamp(1.5rem, 3vw, 2.15rem); color: var(--copper); letter-spacing: -0.02em; }
+.heronums div span { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-faint); }
+
+.classes { padding: clamp(2.2rem, 6vh, 3.2rem) 0 0.6rem; }
+.classhead { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.3rem; }
+.classhead h2 { font-family: var(--serif); font-weight: 630; font-size: clamp(1.35rem, 2.7vw, 1.85rem); letter-spacing: -0.015em; text-wrap: balance; }
+.classhead .n { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-dim); white-space: nowrap; }
+.classsub { color: var(--ink-dim); max-width: 62ch; margin-bottom: 1.2rem; }
+
+.cards { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 14px; padding: 1rem 1.05rem 0.9rem; display: flex; flex-direction: column; gap: 0.45rem; transition: border-color 0.18s var(--ease), transform 0.18s var(--ease); }
+.card:hover { border-color: var(--copper); transform: translateY(-2px); }
+.card .fig { font-family: var(--serif); font-weight: 640; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.02em; color: var(--copper-deep); line-height: 1.05; }
+.card .who { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
+.card p { font-size: 0.95rem; color: var(--ink); }
+.card .prov { font-family: var(--mono); font-size: 0.64rem; color: var(--ink-dim); border-top: 1px solid var(--rule); padding-top: 0.5rem; margin-top: auto; }
+.card a.open { font-family: var(--mono); font-size: 0.68rem; text-decoration: none; color: var(--copper-deep); }
+.card a.open:hover { text-decoration: underline; }
+
+.method { background: var(--cover); color: var(--cream); padding: clamp(2.2rem, 6vh, 3.2rem) 0; margin-top: clamp(2.4rem, 6vh, 3.4rem); }
+.method h2 { font-family: var(--serif); font-weight: 630; font-size: clamp(1.35rem, 2.7vw, 1.9rem); margin-bottom: 0.5rem; letter-spacing: -0.015em; }
+.method p { color: var(--cream-faint); max-width: 62ch; margin-bottom: 0.8rem; }
+.method strong { color: var(--cream); }
+.rules { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 1.4rem; }
+.rule { border-left: 2px solid var(--copper); padding-left: 0.8rem; }
+.rule b { font-family: var(--serif); font-weight: 620; font-size: 1rem; display: block; margin-bottom: 0.15rem; }
+.rule span { font-size: 0.9rem; color: var(--cream-faint); }
+
+footer { padding: 2rem 0 2.8rem; color: var(--ink-dim); font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 0.4rem; }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="https://jcurry44.github.io/grants-ledgers/"><span class="gl">≡</span><b>The Grants Ledger</b></a>
+  <nav>
+    <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/" aria-current="page">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions ↗</a>
+  </nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">What the ledger catches</div>
+  <h1>Reconcile every filing and <em>things turn up</em>.</h1>
+  <p class="lede">Each of these was found by insisting that a foundation's grant rows equal a total that foundation itself filed with the IRS. When they don't, something is there. Every figure below links to the ledger it came from.</p>
+  <div class="heronums">
+    <div><b class="num">1,932</b><span>foundations reconciled</span></div>
+    <div><b class="num">$304.7B</b><span>tied to filed totals</span></div>
+    <div><b class="num">$25.9B</b><span>characterized in the recovery campaign</span></div>
+    <div><b class="num">18</b><span>books settled from scanned paper</span></div>
+  </div>
+</div></section>
+
+<main>
+
+<section class="classes"><div class="wrap">
+  <div class="classhead"><h2>Money that names no recipient</h2><span class="n">4 findings</span></div>
+  <p class="classsub">Some of the largest “private foundations” in the country distribute almost nothing that a grant database would call a grant. The ledger reports what the filing actually says rather than ranking these entities alongside grantmakers.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="fig">$14.6 billion</div>
+      <div class="who">Novartis Patient Assistance Foundation</div>
+      <p>Each year's grants line is a single row reading “Various individuals” — medicines given free to patients. No recipient list exists anywhere public, by design and by privacy. The row is printed exactly as filed.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/novartispati/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$6.7 billion</div>
+      <div class="who">Boehringer Ingelheim Cares Foundation</div>
+      <p>The same pattern at a different company: roughly $0.75–1.6 billion a year filed as one line pointing to an attached statement, for medicines distributed through a patient programme.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/boehringerin/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">One grant</div>
+      <div class="who">Amgen Safety Net Foundation</div>
+      <p>Between $1.6 and $2.6 billion a year in charitable spending, and in five years exactly one filed grant: $10,001 to Heart to Heart International. Every year still reconciles to the dollar.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/amgensafetyn/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">95% to one fund</div>
+      <div class="who">A Good Name Foundation</div>
+      <p>$250.7 million of $265.0 million went to a donor-advised fund sponsor in five annual grants. Where money enters a donor-advised fund the public record ends; the ledger says so instead of implying the money was tracked further.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/agoodnamefou/">open the ledger ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="classes"><div class="wrap">
+  <div class="classhead"><h2>Filed, but itemized nowhere public</h2><span class="n">3 findings</span></div>
+  <p class="classsub">A foundation reports a grants total on its return and points to an attachment. The attachment never reaches any public copy. The money is real and disclosed in aggregate; the recipients are not public at all. Each of these was proven page by page, not assumed.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="fig">$367 million</div>
+      <div class="who">PNC Foundation</div>
+      <p>Every year says “see attached”, addressed to the foundation's own Pittsburgh grants office. Two scanned returns were inventoried page by page: 261 of 328 pages are the securities register, and where the grant list belongs there is verifiably blank paper.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/pncfoundatio/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$141.2 million</div>
+      <div class="who">J. Willard and Alice S. Marriott Foundation</div>
+      <p>Ninety pages across three filings, every page classified. The filings prove it themselves: the roll-up line equals the grants total and both columns of Part I line 25 exactly — which is only possible if not one grant was itemized anywhere.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/jwillardanda/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$11.9M of $205.3M</div>
+      <div class="who">U.S. Bancorp Foundation</div>
+      <p>Five consecutive years reported by attachment only. All that is public is what the filer happened to break out on the face of the form: $40,000 to Ceres, twice, and one $11.8 million grant. This ledger will not print an attachment reference as though it were a grantee.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/usbancorpfou/">open the ledger ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="classes"><div class="wrap">
+  <div class="classhead"><h2>The public copy is incomplete</h2><span class="n">4 findings</span></div>
+  <p class="classsub">Not withheld by the foundation — lost somewhere between the filing and the copy the public can download. The ledger publishes what exists, labels the gap, and states exactly where the record stops.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="fig">Stops at “Mc”</div>
+      <div class="who">Roberts Foundation · 2021</div>
+      <p>The whole year is one oversized sheet more than two feet tall, and in every public copy it ends mid-alphabet after McAuliffe Elementary School — blank paper below, no printed total. The A-through-Mc rows are published; the remaining $24,983,353 is one labeled line.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/robertsfound/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">Seven schedules cited, none present</div>
+      <div class="who">Amon G. Carter Foundation · 2023</div>
+      <p>The filing indexes its own missing documents: the surviving pages cite seven filer schedules — including Schedule 15, the grant register — that the public copy does not contain. The $36.3 million is confirmed at three separate points; not one recipient row exists.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/amongcarterf/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">A blank grants page</div>
+      <div class="who">William N. Pennington Foundation · 2020</div>
+      <p>That year's grants page reaches the public copy as a header band with nothing beneath it, and the filing carries no attachment pages at all — against twenty-three to twenty-five in each later year.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/williamnpenn/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">“Attachment A” — everywhere absent</div>
+      <div class="who">Musk Foundation</div>
+      <p>The largest rows in the book cite an Attachment A that exists in no public copy of any return. The amounts and recipients are filed and the years reconcile to the dollar — whatever the attachment elaborates simply never becomes public.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/muskfoundati/">open the ledger ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="classes"><div class="wrap">
+  <div class="classhead"><h2>The filing disagrees with itself</h2><span class="n">4 findings</span></div>
+  <p class="classsub">The most interesting class. A filing carries two figures that cannot both be right — and only reconciling every row against a named total makes that visible. Nothing here is corrected; it is transcribed as filed and named.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="fig">$1,533,193</div>
+      <div class="who">Bezos Family Foundation · 2023</div>
+      <p>The stock register's own book-value column sums $1,533,193 more than the filer's own printed book total. It touches none of the reconciled money — the grants themselves prove to the cent — but it is left exactly as filed and disclosed.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/bezosfamilyf/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$5,363,749 over</div>
+      <div class="who">Johnson &amp; Johnson Foundation · 2022</div>
+      <p>The matching-gift register ties its filed sub-total to the cent, while the non-matching register itemizes $5.36 million <em>more</em> than the sub-total it belongs to. No subset of rows accounts for it. Publishing those rows would carry the year past the foundation's own filed total, so that section is withheld and preserved as evidence.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/johnsonjohns/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$926,803 unitemized</div>
+      <div class="who">Winston Family Foundation · 2020</div>
+      <p>The filed schedule itemizes $926,803 less than the filing's own grants-paid total — the same figure printed in two places. The remainder is attributed to no recipient anywhere, so it is carried as one labeled row and the year proves to the dollar.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/winstonfamil/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">A grantee-less line</div>
+      <div class="who">Marion and Henry Bloch Family Foundation</div>
+      <p>Each year's schedule prints a line naming no recipient — “Contributions from Passthrough activity”, carrying the foundation's own address, $107 one year and $80 the next. Kept exactly as filed rather than dropped, which is why all five years tie to the dollar.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/marionandhen/">open the ledger ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="classes"><div class="wrap">
+  <div class="classhead"><h2>What the reading software got wrong</h2><span class="n">4 findings</span></div>
+  <p class="classsub">Scanned filings have to be read by machine, and machines misread. These were caught because the rows had to equal a filed total — a database built without that requirement would have published them silently.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="fig">$2,500 read as $500</div>
+      <div class="who">Hellman Foundation</div>
+      <p>The software kept only the tail of the number, and the result was right-aligned and correctly shaped — invisible to every check except looking for ink to the <em>left</em> of the digits. A second misread turned $1,500,000 into $500,000. All four scanned years reconcile exactly: 947 rows.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/hellmanfound/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$1,148,464 → $148,464</div>
+      <div class="who">William R. Kenan Jr. Charitable Trust</div>
+      <p>A grant to the UNC Health Foundation lost its leading digit — exactly $1,000,000 gone. Caught by the position of the ink in a right-aligned column, then confirmed against the page. The referee is what made it findable.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/williamrkena/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$26 on $43.5 million</div>
+      <div class="who">Caterpillar Foundation · 2023</div>
+      <p>The rows summed $26 <em>over</em> the filed line. The cause is that year's register prints whole dollars against a total carrying cents — for 7,569 rows the expected drift is about $25. Rather than discard a verified register or quietly adjust rows, both figures are shown and the $26 is named.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/caterpillarf/">open the ledger ↗</a></div>
+    </div>
+    <div class="card">
+      <div class="fig">$2.3 million, self-inflicted</div>
+      <div class="who">Herbert H. and Grace A. Dow Foundation</div>
+      <p>Our own reading tool inflated a year by $2.3 million: hand-read corrections were keyed by page and position, and page names repeat between filings, so one year's correction silently overwrote another's. Nothing looked wrong. Only the reconciliation caught it — which is the entire argument for reconciling.</p>
+      <div class="prov"><a class="open" href="https://jcurry44.github.io/grants-ledgers/f/herberthgrac/">open the ledger ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="method"><div class="wrap">
+  <h2>Why any of this is findable</h2>
+  <p>Most grant databases publish what a filing's data fields contain. This one requires that the rows <strong>add up to a number the foundation itself filed</strong> — Part&nbsp;I line&nbsp;25, or the schedule's own printed total. That single rule is what surfaces everything above, and it is the reason a figure here can be trusted without taking anyone's word for it.</p>
+  <div class="rules">
+    <div class="rule"><b>Transcribe, never correct</b><span>A filer's typo, a returned grant printed as a negative, a line naming no recipient — all kept as filed and explained.</span></div>
+    <div class="rule"><b>Publish short, withhold over</b><span>When rows fall short of the filed total the difference is one labeled line. When they exceed it with no proven mechanism, that section is withheld — a negative grant would be a lie.</span></div>
+    <div class="rule"><b>Never invent a recipient</b><span>An attachment reference is not a grantee and its address is not a city. Where the public record ends, the ledger says so.</span></div>
+    <div class="rule"><b>Every exception is published</b><span>Bridges, withheld years and residuals all appear on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" style="color:var(--copper-soft)">exceptions page</a> — the collection's honesty ledger.</span></div>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <div>An independent project by <strong>Curry Studio</strong> · Joe Curry, North Tonawanda NY · <a href="https://jcurry44.github.io/">jcurry44.github.io</a></div>
+  <div>Not affiliated with, commissioned by, or endorsed by any foundation shown. Nothing here is an audit; it is a documented reconciliation of public filings, with the receipts attached.</div>
+</div></footer>
+
+</body>
+</html>

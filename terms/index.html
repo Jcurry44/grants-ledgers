@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Terms of use — The Grants Ledger</title>
+<meta name="description" content="How the data on The Grants Ledger may be used, how to attribute it, what is and is not warranted, and how to report a suspected error. A documented reconciliation of public filings — not an audit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+a { color: var(--copper-deep); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.sr-only { position:absolute; width:1px; height:1px; clip-path: inset(50%); overflow:hidden; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
+.cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.4rem,6vh,3.9rem) 0 clamp(1.8rem,4vh,2.6rem); }
+.cover a { color: var(--copper); }
+.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+.lede { max-width: 46rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
+.stamp { font-family: var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--cream-faint); margin-top:1.2rem; }
+.tnav { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
+.tnav .wrap { display:flex; flex-wrap:wrap; gap:.15rem 1.25rem; align-items:center; padding-top:.55rem; padding-bottom:.55rem; }
+.tnav a { font-family: var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color: var(--ink-dim); padding:.2rem 0; border-bottom:2px solid transparent; }
+.tnav a:hover { color: var(--copper-deep); }
+.tnav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--copper); }
+.tnav .sp { margin-left:auto; }
+@media (max-width:719px) { .tnav { position: static; } .tnav .sp { margin-left:0; } }
+section { padding: clamp(2rem,5vh,3.2rem) 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.35rem,2.6vw,1.85rem); letter-spacing:-.015em; margin-bottom:.35rem; }
+h2 .num { font-family: var(--mono); font-size:.72rem; letter-spacing:.1em; color: var(--copper-deep); display:block; margin-bottom:.35rem; font-weight:500; }
+h3 { font-family: var(--serif); font-weight:620; font-size:1.05rem; letter-spacing:-.01em; margin:1.5rem 0 .3rem; }
+.sub { color: var(--ink-dim); max-width: 46rem; margin-bottom: 1.3rem; }
+.body { max-width: 46rem; }
+.body p { margin-bottom: .85rem; }
+.body p:last-child { margin-bottom: 0; }
+strong { font-weight: 640; }
+.perm { display:grid; gap:0; margin-top:.5rem; }
+.p { display:grid; grid-template-columns: minmax(0,1fr); gap:.15rem; padding:.85rem 0; border-bottom:1px solid var(--rule); align-items:start; }
+@media (min-width:760px) { .p { grid-template-columns: 6.6rem minmax(0,1fr); gap:1.2rem; } }
+.p .tag { font-family: var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; padding-top:.28rem; }
+.p .tag.y { color: var(--copper-deep); }
+.p .tag.n { color: var(--neg); }
+.p b { font-weight:640; display:block; }
+.p span { display:block; font-size:.92rem; color: var(--ink-dim); margin-top:.15rem; }
+.note { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
+.note b { font-family: var(--serif); font-weight:620; display:block; margin-bottom:.3rem; }
+.note p { font-size:.9rem; color: var(--ink-dim); }
+.note p + p { margin-top:.6rem; }
+.attrib { background: var(--cover); color: var(--cream); border-radius:14px; padding:1.05rem 1.2rem; margin-top:1rem; max-width:52rem; }
+.attrib .lbl { font-family: var(--mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color: var(--cream-faint); }
+.attrib code { display:block; font-family: var(--mono); font-size:.86rem; margin-top:.45rem; line-height:1.6; word-break: break-word; }
+.attrib code a { color: var(--copper); }
+.pull { font-family: var(--serif); font-size: clamp(1.15rem,2.3vw,1.55rem); line-height:1.32; max-width:42ch; border-left:3px solid var(--copper); padding-left:1.1rem; margin:1.3rem 0; }
+.mono { font-family: var(--mono); font-size:.86rem; }
+ol.steps { list-style:none; counter-reset: s; margin-top:.6rem; }
+ol.steps li { counter-increment: s; display:grid; grid-template-columns: 2rem minmax(0,1fr); gap:.9rem; padding:.7rem 0; border-bottom:1px solid var(--rule); font-size:.94rem; }
+ol.steps li::before { content: counter(s); font-family: var(--mono); font-size:.75rem; color: var(--copper-deep); padding-top:.25rem; }
+footer { border-top:1px solid var(--rule); padding:2rem 0 2.8rem; color: var(--ink-dim); font-size:.86rem; }
+footer a { color: var(--copper-deep); }
+footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.9rem; font-family: var(--mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<header class="cover"><div class="wrap">
+  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Terms of use</div>
+  <h1>Use it, cite it,<br>and tell me when it is wrong</h1>
+  <p class="lede">These terms cover what you may do with the material on this site, what is and is not warranted about it, and how a suspected error gets reported and fixed. They are written to be read rather than clicked past.</p>
+  <p class="stamp">Effective 31 August 2026</p>
+</div></header>
+
+<nav class="tnav" aria-label="Trust and policy"><div class="wrap">
+  <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/terms/" aria-current="page">Terms</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="sp">Exceptions ↗</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/">The collection ↗</a>
+</div></nav>
+
+<section><div class="wrap">
+  <h2><span class="num">01</span>What the material here is</h2>
+  <div class="body">
+    <p>Two different things are on this site, and they carry different status.</p>
+    <p><strong>The underlying facts are public record.</strong> Every grant, amount, purpose, date and recipient shown comes from Form 990-PF returns that private foundations file with the Internal Revenue Service and that the IRS publishes for public inspection. Facts drawn from public government filings are not owned by this project and are not claimed here.</p>
+    <p><strong>The compilation is this project’s work.</strong> The reconciliation of each year against its filed total, the recovery of grant schedules from scanned attachments, the recipient-identity resolution, the purpose classification, the written disclosures, the page design, and the code that produces all of it are the work of Curry Studio.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">02</span>What you may do with it</h2>
+  <p class="sub">This site is free to read and free to use in your work. The permissions below are granted to anyone, without a fee, an account, or a request.</p>
+  <div class="perm">
+    <div class="p"><span class="tag y">Permitted</span><div><b>Read it, search it, and use it in your own research</b><span>Including for prospect research, grant strategy, board and committee materials, internal briefings, academic work and journalism.</span></div></div>
+    <div class="p"><span class="tag y">Permitted</span><div><b>Quote figures and cite pages, with attribution</b><span>Reproduce figures, tables and short passages in your own reports, articles, presentations and filings, provided the source is named as set out in section 3.</span></div></div>
+    <div class="p"><span class="tag y">Permitted</span><div><b>Download and analyse the exports</b><span>The collection-wide CSV, and the spreadsheet, CSV and report files the site can generate, may be downloaded and analysed inside your organisation, including in combination with your own data.</span></div></div>
+    <div class="p"><span class="tag y">Permitted</span><div><b>Link to any page, freely</b><span>Deep links to a foundation’s ledger, a state, a purpose or a saved query are stable and are meant to be shared.</span></div></div>
+    <div class="p"><span class="tag n">Not granted</span><div><b>Republishing the collection as a competing dataset or product</b><span>Redistributing the compiled collection, in whole or in substantial part, as your own dataset, database, product or service is not permitted without written permission. The underlying filings are public and you are free to build your own compilation from them.</span></div></div>
+    <div class="p"><span class="tag n">Not granted</span><div><b>Presenting this work as your own</b><span>Removing attribution, or representing the reconciliation, recovery or classification work as having been performed by you or your organisation.</span></div></div>
+    <div class="p"><span class="tag n">Not granted</span><div><b>Automated bulk collection from the site</b><span>Please do not crawl or scrape the pages at volume. A complete, clean export of the collection is published for exactly this purpose and is the better source; if you need something the export does not contain, ask.</span></div></div>
+    <div class="p"><span class="tag n">Not granted</span><div><b>Using it to make decisions about a person</b><span>This is a record of institutional filings, not a background-check, screening, credit or eligibility tool, and it must not be used as one.</span></div></div>
+  </div>
+  <div class="note">
+    <b>If you need something broader</b>
+    <p>Requests to redistribute, embed, or license the collection for a product are considered on their own terms. Ask rather than assume; the answer is often yes, with attribution and a note about the version used.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">03</span>How to attribute it</h2>
+  <p class="sub">One line, and — where you are citing a specific figure — a link to the page that figure came from, so a reader can verify it against the filing the way you did.</p>
+  <div class="attrib">
+    <span class="lbl">General attribution</span>
+    <code>Source: The Grants Ledger, Curry Studio — <a href="https://jcurry44.github.io/grants-ledgers/">https://jcurry44.github.io/grants-ledgers/</a></code>
+  </div>
+  <div class="attrib">
+    <span class="lbl">Citing a specific foundation figure</span>
+    <code>Source: The Grants Ledger, Curry Studio, from IRS Form 990-PF — [link to that foundation’s ledger page], retrieved [date].</code>
+  </div>
+  <div class="body" style="margin-top:1.2rem">
+    <p>Include the retrieval date when the figure matters. The collection is refreshed on a schedule and a foundation’s record can gain a year, or have a year withheld, between one reading and the next; the date is what lets a reader reconcile your figure with what they see.</p>
+    <p>If you are describing where a figure comes from, the accurate phrasing is that it is reconciled to a total the foundation filed with the IRS. Please do not describe it as audited, certified, verified by the IRS, or endorsed by the foundation. None of those is true.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">04</span>Accuracy, and the limits of it</h2>
+  <p class="pull">This is a documented reconciliation of public filings. It is not an audit.</p>
+  <div class="body">
+    <p>Every year published here has been checked so that the individual grants listed add up, to the dollar, to a grant total the foundation itself filed with the IRS. A year that does not tie is withheld rather than adjusted, and every withheld year in the collection is named on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>. That is a real and unusually strong guarantee, and it is a narrower one than it may first appear. It is worth being exact about what it does and does not cover.</p>
+    <h3>What the reconciliation does establish</h3>
+    <p>That the rows shown for a year are complete and correctly totalled with respect to the foundation’s own filed figure — that nothing has been dropped, duplicated, mistyped in the amount column, or invented.</p>
+    <h3>What it cannot establish</h3>
+    <p><strong>That the filing itself is right.</strong> If a foundation filed a figure incorrectly, this site reproduces the incorrect figure, because the filing is the source of record. Several such internal contradictions have been found and are published rather than smoothed over; the <a href="https://jcurry44.github.io/grants-ledgers/findings/">findings page</a> collects them.</p>
+    <p><strong>That a recipient name identifies the organisation you think it does.</strong> Form 990-PF does not ask for the recipient’s EIN, so no grant row here carries one as filed. Recipients matched to an IRS-registered organisation are identified by government record; the majority are grouped by normalised name and may split one organisation in two or hold two same-named organisations as one. The <a href="https://jcurry44.github.io/grants-ledgers/about/#limits">data limits</a> give the exact proportions.</p>
+    <p><strong>That the collection is complete.</strong> It is the top of the field by assets — 1,904 of the largest 2,000 U.S. private foundations plus a 29-foundation Western New York slate — and nothing below that floor. It is not a census of American philanthropy, and an absence from it is not evidence that nobody funded something.</p>
+    <p><strong>That a state total is a state’s giving.</strong> 16.22% of rows carry no recipient state in the filing. Place-based figures are floors, not shares.</p>
+  </div>
+  <div class="note">
+    <b>No warranty</b>
+    <p>The site and its data are provided as they are, without warranty of any kind, express or implied, including any implied warranty of merchantability, fitness for a particular purpose, accuracy, or non-infringement. Nothing here is legal, tax, accounting, financial or investment advice, and nothing here is an audit, an examination, an attestation or an opinion. Decisions taken on the basis of this material are yours; where a figure is material to a decision, check it against the filing the page cites.</p>
+    <p>To the fullest extent permitted by law, Curry Studio and Joe Curry are not liable for any loss arising from use of this site or its data.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">05</span>Reporting a suspected error</h2>
+  <p class="sub">This matters more than anything else on this page. A product whose entire claim is accuracy has to make being told it is wrong easy, and has to act when it is told.</p>
+  <ol class="steps">
+    <li>Email <span class="mono"><a href="mailto:jjcurry027@gmail.com?subject=Correction%20%E2%80%94%20The%20Grants%20Ledger">jjcurry027@gmail.com</a></span> with <span class="mono">Correction</span> in the subject line.</li>
+    <li>Include the page URL, the foundation, and the tax year.</li>
+    <li>Say which figure you believe is wrong, and what you believe it should be.</li>
+    <li>Where you can, name the source — ideally the filing itself, or the page of the attachment.</li>
+  </ol>
+  <div class="body" style="margin-top:1.3rem">
+    <p><strong>What then happens.</strong> The report is checked against the original filing rather than against the page. If the page is wrong, it is corrected. If the figure cannot be proven from the filing, the year is withheld and the reason is published on the exceptions page — a number that cannot be sourced does not stay up in a softened form. Either way the change is recorded in the <a href="https://jcurry44.github.io/grants-ledgers/changelog/">update history</a>.</p>
+    <p><strong>If you are the foundation.</strong> A report about your own foundation’s page goes to the front of the queue. If your filed record contains something you believe is wrong, note that this site reproduces filings rather than correcting them — the durable fix is an amended return, which the monthly refresh will pick up. In the meantime the disagreement can be disclosed on the page.</p>
+    <p>Realistic expectations for response times, and what support does and does not exist, are set out on the <a href="https://jcurry44.github.io/grants-ledgers/about/#support">about page</a>.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">06</span>Availability, and changes to these terms</h2>
+  <div class="body">
+    <p>This is an independent project maintained by one person. Pages may change, be corrected, or be withdrawn; the collection may gain foundations and years, and may withhold years that no longer reconcile. No availability guarantee is offered and no service-level agreement exists.</p>
+    <p>Nothing on this site is currently sold. No subscription is offered here, no price is quoted, and no payment is collected anywhere on it. If that changes, the terms governing a paid service will be published separately and will not be applied retroactively to material you have already used under these terms.</p>
+    <p>These terms are dated. Material changes will be dated again and recorded in the update history rather than made silently.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="flinks">
+    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+  </div>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
+</div></footer>
+
+</body>
+</html>
