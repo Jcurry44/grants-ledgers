@@ -1836,7 +1836,7 @@ body::before {
         <h1>The John R. Oishei Foundation</h1>
         <p class="v5-lede">Every grant reported in the Form 990-PF grants-paid schedule—Part XIV in current filings, formerly Part XV—reconciled to Part I, line 25(d). Five tax years, one evidence trail.</p>
         <div class="v5-hero-actions">
-          <button class="v5-btn v5-btn-primary" type="button" data-go="grants">Explore all grants <span aria-hidden="true">→</span></button>
+          <button class="v5-btn v5-btn-primary" type="button" data-go="grants" data-reset-grants>Explore all grants <span aria-hidden="true">→</span></button>
           <button class="v5-btn" type="button" data-go="methodology">How verification works</button>
         </div>
       </article>
@@ -2952,8 +2952,10 @@ window.OISHEI_DATA={"meta":{"foundation":"The John R. Oishei Foundation","ein":"
 
   function readHash() {
     var params = new URLSearchParams(location.hash.replace(/^#/, ''));
-    state.view = VALID_VIEWS.includes(params.get('view')) ? params.get('view') : 'overview';
-    state.year = YEARS.includes(Number(params.get('year'))) ? Number(params.get('year')) : '';
+    var view = params.get('view') || params.get('tab');
+    state.view = VALID_VIEWS.includes(view) ? view : 'overview';
+    var year = params.get('year') || params.get('y');
+    state.year = YEARS.includes(Number(year)) ? Number(year) : '';
     state.recipient = recipientsMap.has(params.get('recipient')) ? params.get('recipient') : '';
     state.detail = recipientsMap.has(params.get('detail')) ? params.get('detail') : '';
     state.q = params.get('q') || '';
@@ -3283,7 +3285,19 @@ window.OISHEI_DATA={"meta":{"foundation":"The John R. Oishei Foundation","ein":"
     tabs[index].focus();
     goView(tabs[index].dataset.view,true);
   });
-  document.querySelectorAll('[data-go]').forEach(function (button) { button.addEventListener('click', function () { goView(button.dataset.go,true); }); });
+  document.querySelector('.v5-skip').addEventListener('click', function (event) {
+    event.preventDefault();
+    document.getElementById('v5-main').focus();
+  });
+  document.querySelectorAll('[data-go]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (button.hasAttribute('data-reset-grants')) {
+        state.year=''; state.recipient=''; state.q=''; state.min=0;
+        state.sort='amount-desc'; state.page=0;
+      }
+      goView(button.dataset.go,true);
+    });
+  });
   document.addEventListener('click', function (event) {
     var detail = event.target.closest('[data-detail]');
     if (detail) openRecipient(detail.getAttribute('data-detail'),true);

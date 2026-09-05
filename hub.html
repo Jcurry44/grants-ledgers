@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>The Grants Ledger — a verified record of grantmaking by 1,932 major U.S. foundations</title>
-<meta name="description" content="A verified record of grantmaking from 1,932 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
+<title>The Grants Ledger — a verified record of grantmaking by 1,950 major U.S. foundations</title>
+<meta name="description" content="A verified record of grantmaking from 1,950 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -585,6 +585,20 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 .method .fig { font-family: var(--mono); font-size: 0.95em; font-variant-numeric: tabular-nums; }
 .method .foot { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-dim); }
 @media (max-width: 1019px) { .method .foot { font-size: 0.76rem; } }
+
+/* Compact research controls keep the first funder in reach on a phone. */
+.qline { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.65rem .8rem; line-height:1.35; }
+.qline .qfield { display:flex; flex-direction:column; min-width:0; gap:.2rem; }
+.qfield > span { font: .7rem var(--mono); color:var(--ink-dim); }
+.qline .qsel { width:100%; max-width:100%; min-width:0; margin:0; font-size:.86rem; padding:.3rem .4rem; }
+.qnote summary { cursor:pointer; }
+.qnote p { margin:.4rem 0 0; }
+.qmeta .tbtn:disabled { opacity:.45; cursor:wait; }
+@media(max-width:600px) {
+  .qline { gap:.5rem .6rem; }
+  .qline .qwide { grid-column:1 / -1; }
+  .qex { margin-bottom:.5rem; }
+}
 </style>
 </head>
 <body>
@@ -609,8 +623,8 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 <main class="deck">
 <section class="left" aria-label="Browse the collection">
   <div class="mast">
-    <h1 class="masth">A verified record of grantmaking from <em><span id="heroN2">1,932</span> major U.S. private foundations</em></h1>
-    <p class="mastsub">Every included year reconciles to the total that foundation itself filed with the IRS. <button type="button" class="mastlink" id="mastmethod">What is in, and what is not ›</button></p>
+    <h1 class="masth">A verified record of grantmaking from <em><span id="heroN2">1,950</span> major U.S. private foundations</em></h1>
+    <p class="mastsub">Reconciled IRS grant records. <button type="button" class="mastlink" id="mastmethod">What is in, and what is not ›</button></p>
   </div>
   <div class="searchbox">
     <label class="sr-only" for="q">Search organizations</label>
@@ -632,18 +646,18 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   <div class="panelbody" id="panelbody">
     <div class="tabpane" id="pane-q" role="tabpanel">
       <div class="qbar">
-        <p class="qex" id="qex"><span class="qexb">Starting example</span><span>This opens on <b>one purpose of 11</b> — not the whole collection. Change any word below to re-ask, or <button type="button" class="qexlink" id="qexall">browse all <span id="qexn">1,932</span> ledgers</button>.</span></p>
-        <div class="qline">Find funders of
-          <select class="qsel" id="qcat" aria-label="Purpose"></select> work
-          <select class="qsel" id="qst" aria-label="Recipient location as filed"></select>,
-          giving at least <select class="qsel" id="qmin" aria-label="Grant size">
-            <option value="0">any amount</option><option value="10000">$10k</option>
+        <p class="qex" id="qex"><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,950</span><!-- 1,950 ledgers deep --> ledgers</button></p>
+        <div class="qline">
+          <label class="qfield qwide"><span>Purpose</span><select class="qsel" id="qcat" aria-label="Purpose"></select></label>
+          <label class="qfield qwide"><span>Recipient location</span><select class="qsel" id="qst" aria-label="Recipient location as filed"></select></label>
+          <label class="qfield"><span>Minimum grant</span><select class="qsel" id="qmin" aria-label="Grant size">
+            <option value="0">Any amount</option><option value="10000">$10k</option>
             <option value="50000">$50k</option><option value="100000">$100k</option>
             <option value="500000">$500k</option><option value="1000000">$1M</option>
-          </select>,
-          active since <select class="qsel" id="qyr" aria-label="Active since"></select>.
+          </select></label>
+          <label class="qfield"><span>Tax year from</span><select class="qsel" id="qyr" aria-label="Tax year from"></select></label>
         </div>
-        <p class="qnote"><b>Recipient location as filed</b> &mdash; the address on the grant row, not the geography the work ultimately serves. <b>Location not filed</b> is the 246,778 rows (16.2%) that name no recipient state.</p>
+        <details class="qnote"><summary>How these results are counted</summary><p>Every filter applies to the same grant row. Counts, amounts and medians include matching rows with named recipients; unitemized disclosures stay in the source ledgers. Recipient location is the filed address, which may differ from the area served. “Location not filed” means the row has no recipient state.</p></details>
         <div class="qmeta"><b id="qcount">—</b><span id="qsum"></span>
           <button type="button" class="qreset" id="qreset">reset</button>
           <span style="margin-left:auto; display:flex; gap:0.4rem">
@@ -708,7 +722,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 
 <section class="stage" aria-label="The map">
   <div class="stagehead">
-    <h1>A verified record of grantmaking from <em><span id="heroN">1,932</span> major U.S. private foundations</em></h1>
+    <h1>A verified record of grantmaking from <em><span id="heroN">1,950</span> major U.S. private foundations</em></h1>
     <span class="stagelede" id="mapstat"></span>
     <span class="stagesub">every included year reconciled to the total that foundation itself filed with the IRS · <button type="button" class="stagelink" id="heromethod">what is in, and what is not ›</button></span>
   </div>
@@ -786,7 +800,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 </div>
 
 <script>
-/*DBVER-START*/window.DBV='afff75bec1';/*DBVER-END*/
+/*DBVER-START*/window.DBV='b243d1d295';/*DBVER-END*/
 (async () => {
   const $ = (id) => document.getElementById(id);
   const money = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US');
@@ -805,13 +819,13 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- identity confidence ----------
-  // No 990-PF grant row carries a recipient EIN — not one of the 1,527,245 here.
+  // No 990-PF grant row carries a recipient EIN — not one of the 1,565,291 here.
   // An entity id beginning "E" is a filed name canonicalised and then matched to an
   // IRS-registered organisation in the Business Master File; one beginning "K" is
   // the canonical name and nothing more. Every recipient aggregate on this page has
   // to say which of the two it is, in a mark that survives greyscale.
   const isGov = (id) => String(id || '').charAt(0) === 'E';
-  const GOV_WHY = 'Government-matched identity — the recipient name as filed was canonicalised and matched to an IRS-registered organisation in the IRS Business Master File. A total added across foundations is definitive.';
+  const GOV_WHY = 'Government-matched identity — the recipient name as filed was canonicalised and matched to an IRS-registered organisation in the IRS Business Master File. This match is inferred from the filed name and IRS organization record; it does not independently verify every grant or resolve every alias.';
   const EST_WHY = 'Name-matched estimate — no 990-PF grant row carries a recipient EIN, so this identity is the filed name canonicalised and nothing more. A total added across foundations may split one organisation in two, or hold two same-named organisations as one.';
   function idChip(id, size) {
     const k = size ? ' ' + size : '';
@@ -1426,7 +1440,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   }
   $('fmore').addEventListener('click', moreFleet);
   // the panel is the scroller on a desktop; on a phone the document is, and using the
-  // panel as the root there would make one glance load all 1,932 cards at once
+  // panel as the root there would make one glance load all 1,950 cards at once
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => {
     es.forEach((en) => { if (en.isIntersecting && !$('fmore').hidden) moreFleet(); });
   }, { root: matchMedia('(max-width: 1019px)').matches ? null : $('panelbody'), rootMargin: '400px' }) : null;
@@ -1557,7 +1571,6 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     // The app has to open on a purpose; it opens on this one and labels it an example.
     qState.cat = m.cats.indexOf('Education & youth') >= 0 ? m.cats.indexOf('Education & youth') : 0;
     QDEF = qState.cat;
-    $('qex').querySelector('b').textContent = 'one purpose of ' + m.cats.length;
     $('qexn').textContent = REG.totals.all.n.toLocaleString('en-US');
     $('qexall').addEventListener('click', () => setTab('f'));
     // a shared link restores the whole query, the place filter included
@@ -1593,44 +1606,88 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         name: ('funders-' + (m2 ? m2.cats[qState.cat] : 'query') + (qState.st === 'all' ? '' : '-' + ((m2 && m2.states[qState.st]) || 'location-not-filed')))
           .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
         cols: FCOLS,
-        rows: qState.rows.map(([fi, n, tot, med, lastY, mx]) => F[fi] ? funderRow(F[fi], { n, median: med, max: mx, last: lastY, total: tot }) : null).filter(Boolean),
+        rows: qState.rows.map(([fi, n, tot, med, lastY, mx]) => F[fi] ? funderRow(F[fi], { n, median: med, max: mx, last: lastY, total: tot, scope: queryScope() }) : null).filter(Boolean),
       };
     }));
     runQuery();
   }
 
-  async function runQuery() {
-    const box = $('qresults');
-    box.innerHTML = '<div class="qempty">Searching the collection…</div>';
-    const [data] = await Promise.all([qCat(qState.cat), behaviour()]);
-    const key = qState.st === 'all' ? 'all' : qState.st;
-    let rows = (data && data[key]) || [];
-    // [fndIdx, n, total, median, lastYear, maxGrant]
-    rows = rows.filter((r) => (!qState.min || r[5] >= qState.min) && (!qState.yr || r[4] >= qState.yr));
-    if (region !== 'all') rows = rows.filter((r) => F[r[0]] && F[r[0]].r === region);
-    if (mapSel) rows = rows.filter((r) => F[r[0]] && (F[r[0]].st || '').toUpperCase() === mapSel);
-    qState.rows = rows;
-    qState.shown = 0;
-    box.innerHTML = '';
-    const nG = rows.reduce((s, r) => s + r[1], 0);
-    const sum = rows.reduce((s, r) => s + r[2], 0);
-    // Every headline count carries its denominator, so no result can be read as the
-    // whole collection. Both sides come from the same registry: funders in scope and
-    // the dollars those ledgers reconcile in total.
-    const scoped = mapSel && BY_ST[mapSel] ? BY_ST[mapSel] : REG.totals[region];
-    const scopeWord = mapSel ? stName(mapSel) + ' ledgers' : (region === 'all' ? 'ledgers' : 'ledgers in scope');
-    const ofWhose = mapSel || region !== 'all' ? 'their' : "the collection's";
-    $('qcount').textContent = rows.length.toLocaleString('en-US') + (rows.length === 1 ? ' funder' : ' funders');
-    $('qsum').textContent = 'of ' + scoped.n.toLocaleString('en-US') + ' ' + scopeWord + ' · '
-      + nG.toLocaleString('en-US') + ' matching grants · ' + moneyC(sum) + ' of ' + ofWhose + ' ' + moneyC(scoped.t);
-    // the "starting example" note belongs to the untouched opening query only
-    $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
-    if (!rows.length) {
-      box.innerHTML = '<div class="qempty"><b>No funder in the collection matches that.</b>Widen the place or lower the grant size — the collection is 1,932 ledgers deep, not exhaustive.</div>';
-      $('qmore').hidden = true;
-      return;
+  // Pure research calculations; regression-tested against row-level fixtures.
+  function weightedMedian(pairs) {
+    const sorted = pairs.slice().sort((a, b) => a[0] - b[0]);
+    const n = sorted.reduce((sum, p) => sum + p[1], 0);
+    if (!n) return null;
+    const lo = Math.floor((n - 1) / 2), hi = Math.floor(n / 2);
+    let count = 0, a, b;
+    for (const [amount, weight] of sorted) {
+      if (a === undefined && count + weight > lo) a = amount;
+      if (count + weight > hi) { b = amount; break; }
+      count += weight;
     }
-    paintQuery();
+    return (a + b) / 2;
+  }
+  function matchingResearch(source, filters, fleet) {
+    const byFunder = new Map(), pooled = [];
+    for (const [fi, year, amount, place, count] of source) {
+      const f = fleet[fi];
+      if (!f || (filters.st !== 'all' && place !== +filters.st)
+        || (filters.min && amount < filters.min) || (filters.yr && year < filters.yr)
+        || (filters.region !== 'all' && f.r !== filters.region)
+        || (filters.mapSel && (f.st || '').toUpperCase() !== filters.mapSel)) continue;
+      if (!byFunder.has(fi)) byFunder.set(fi, { n: 0, total: 0, last: 0, max: -Infinity, amounts: [] });
+      const b = byFunder.get(fi);
+      b.n += count; b.total += amount * count;
+      b.last = Math.max(b.last, year); b.max = Math.max(b.max, amount);
+      b.amounts.push([amount, count]); pooled.push([amount, count]);
+    }
+    return {
+      rows: [...byFunder].map(([fi, b]) => [fi, b.n, b.total, weightedMedian(b.amounts), b.last, b.max])
+        .sort((a, b) => b[2] - a[2] || a[0] - b[0]),
+      median: weightedMedian(pooled)
+    };
+  }
+  const researchCache = new Map();
+  let queryRequest = 0;
+  async function runQuery() {
+    const request = ++queryRequest;
+    const filters = { ...qState, region, mapSel };
+    const box = $('qresults');
+    qState.rows = []; qState.median = null; qState.ready = false;
+    $('qreport').disabled = $('qexport').disabled = true;
+    $('qmore').hidden = true;
+    $('qcount').textContent = 'Searching…'; $('qsum').textContent = '';
+    box.setAttribute('aria-busy', 'true');
+    box.innerHTML = '<div class="qempty">Searching matching grant rows…</div>';
+    try {
+      if (!researchCache.has(filters.cat)) {
+        researchCache.set(filters.cat, get('q/rows' + filters.cat + '.json').catch((error) => {
+          researchCache.delete(filters.cat); throw error;
+        }));
+      }
+      const [source] = await Promise.all([researchCache.get(filters.cat), behaviour()]);
+      if (request !== queryRequest) return;
+      if (!Array.isArray(source)) throw new Error('Invalid research index');
+      const result = matchingResearch(source, filters, F);
+      qState.rows = result.rows; qState.median = result.median; qState.ready = true;
+      qState.shown = 0;
+      box.innerHTML = '';
+      const nG = result.rows.reduce((sum, r) => sum + r[1], 0);
+      const sum = result.rows.reduce((sum, r) => sum + r[2], 0);
+      $('qcount').textContent = result.rows.length.toLocaleString('en-US') + (result.rows.length === 1 ? ' funder' : ' funders');
+      $('qsum').textContent = nG.toLocaleString('en-US') + ' matching grants · ' + moneyC(sum);
+      $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
+      $('qreport').disabled = $('qexport').disabled = !result.rows.length;
+      if (!result.rows.length) {
+        box.innerHTML = '<div class="qempty"><b>No matching named-recipient grant rows.</b>Try a broader place, amount or year. This collection does not cover every funder.</div>';
+      } else paintQuery();
+    } catch (error) {
+      if (request !== queryRequest) return;
+      $('qcount').textContent = 'Results unavailable';
+      box.innerHTML = '<div class="qempty"><b>The grant index could not load.</b><button type="button" class="tbtn" id="qretry">Try again</button></div>';
+      $('qretry').addEventListener('click', runQuery);
+    } finally {
+      if (request === queryRequest) box.removeAttribute('aria-busy');
+    }
   }
 
   function paintQuery(more) {
@@ -1689,25 +1746,35 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       <div class="p-id">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${f.g.toLocaleString('en-US')} grants · ${money(f.t)}</div>
       <div class="p-tot"><b class="num">Δ $0</b><span>every filed year reconciles to its own filed total</span></div>
       <div class="yearsline">${yrs}</div>
-      ${(BEH && BEH[fi]) ? `<p style="font-size:0.94rem;color:var(--ink-dim)">Across ${BEH[fi][0].toLocaleString('en-US')} recipients, this funder gave in more than one year to <strong>${BEH[fi][1]}%</strong> of them, typically for ${BEH[fi][2]} year${BEH[fi][2] === 1 ? '' : 's'}. A first grant is usually around <strong>${money(BEH[fi][3])}</strong>.</p>` : ''}
+      ${behaviourNote(fi)}
       ${f.rn ? `<p style="font-size:0.94rem;color:var(--ink-dim)">${esc(f.rn)}</p>` : ''}
       <p style="font-size:0.94rem;color:var(--ink-dim)">Each year above ties to the total this foundation itself filed with the IRS. Where a year is bridged between two filed figures, or withheld because the public copy does not contain the recipient list, it is named on the
         <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a> — where every exception in this collection is disclosed.</p>
       <p><a class="tbtn" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">Open the full ledger ↗</a></p>`;
   }
 
-  // ---------- funder behaviour (renewal, tenure, typical first grant) ----------
+  // [named recipients, multi-year %, median observed years,
+  //  median first-observed-year total, first filed year, last filed year]
   let BEH = null;
   async function behaviour() {
     if (!BEH) BEH = await get('q/behaviour.json').catch(() => ({}));
     return BEH;
   }
-  // [recipients, renewal%, medianYearsOfSupport, medianFirstGrant]
-  function fitLine(fi) {
+  function observedBehaviour(fi) {
     const b = BEH && BEH[fi];
+    return b && b.length >= 6 ? b : null;
+  }
+  function behaviourNote(fi) {
+    const b = observedBehaviour(fi);
     if (!b) return '';
-    return `<span class="fstat"><b>${b[1]}%</b>renew</span>` +
-           `<span class="fstat"><b>${moneyC(b[3])}</b>typical first grant</span>`;
+    return `<p class="repnote">${b[0].toLocaleString('en-US')} named recipients observed in TY${b[4]}–${b[5]}. ${b[1] == null
+      ? 'One filed year is available, so a multi-year share is not reported.'
+      : `${b[1]}% appear in more than one filed year. This describes the available history; it is not an award renewal rate.`}</p>`;
+  }
+  function fitLine(fi) {
+    const b = observedBehaviour(fi);
+    if (!b || b[1] == null) return '';
+    return `<span class="fstat" title="${b[0].toLocaleString('en-US')} named recipients, TY${b[4]}–${b[5]}; share appearing in multiple filed years, not a renewal probability"><b>${b[1]}%</b>multi-year recipients</span>`;
   }
 
   // ---------- export engine (CSV + real XLSX, formatted or raw) ----------
@@ -1861,30 +1928,39 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('expmenu').hidden = true;
   }
 
+  function queryScope() {
+    return (QMETA ? QMETA.cats[qState.cat] : '') + '; recipient location: '
+      + (qState.st === 'all' ? 'any' : QMETA.states[qState.st] || 'not filed')
+      + '; minimum amount: ' + qState.min + '; tax year from: ' + (qState.yr || 'any')
+      + '; region: ' + region + '; funder state: ' + (mapSel || 'any') + '; named recipients only';
+  }
   // columns shared by the funder exports
   const FCOLS = [
     { h: 'Foundation', k: 'name', type: 's', w: 42 },
     { h: 'City', k: 'city', type: 's', w: 18 },
     { h: 'State', k: 'st', type: 's', w: 8 },
-    { h: 'Matching grants', k: 'n', type: 'int', w: 16 },
+    { h: 'Rows in scope', k: 'n', type: 'int', w: 16 },
     { h: 'Median grant', k: 'median', type: 'n', w: 15 },
     { h: 'Largest grant', k: 'max', type: 'n', w: 15 },
     { h: 'Most recent year', k: 'last', type: 'yr', w: 16 },
-    { h: 'Renewal rate', k: 'renew', type: 'pct', w: 13 },
-    { h: 'Typical first grant', k: 'first', type: 'n', w: 18 },
-    { h: 'Total verified (all years)', k: 'total', type: 'n', w: 22 },
+    { h: 'Recipients observed in multiple years (%)', k: 'renew', type: 'pct', w: 30 },
+    { h: 'Recipient denominator', k: 'recipients', type: 'int', w: 22 },
+    { h: 'Observation window', k: 'window', type: 's', w: 22 },
+    { h: 'Scope', k: 'scope', type: 's', w: 52 },
+    { h: 'Total in scope', k: 'total', type: 'n', w: 22 },
     { h: 'Reconciliation', k: 'recon', type: 's', w: 30 },
     { h: 'Ledger', k: 'url', type: 's', w: 46 },
     { h: 'Note', k: 'note', type: 's', w: 40 },
   ];
   function funderRow(f, extra) {
-    const b = BEH && BEH[F.indexOf(f)];
+    const b = observedBehaviour(F.indexOf(f));
     return Object.assign({
       name: f.n, city: f.ci, st: f.st || '', total: f.t,
       recon: f.rn ? 'reconciled to filed total (bridged: ' + f.rn + ')' : 'reconciled to filed total',
       url: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/',
       note: NOTES[f.u] || '',
-      renew: b ? b[1] : '', first: b ? b[3] : '',
+      renew: b && b[1] != null ? b[1] : '', recipients: b ? b[0] : '',
+      window: b ? 'TY' + b[4] + '–' + b[5] : '', scope: 'All filed rows, including unitemized disclosures; all available years',
       n: '', median: '', max: '', last: f.y[f.y.length - 1],
     }, extra || {});
   }
@@ -2251,7 +2327,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· EIN ' + id.slice(1) + ' · matched to an IRS-registered organisation' : '· identity built from the recipient name as filed'}</span></div>
       ${alias.length ? `<div class="p-alias">also filed as: ${esc(alias.slice(0, 6).map(dc).join(' · '))}${alias.length > 6 ? ' · …' : ''}</div>` : ''}
       <div class="p-tot"><b class="num${sumCls(id)}"${softTip(id)}>${money(total)}</b><span>${rows.length} grants · ${byF.size} ${byF.size === 1 ? 'foundation' : 'foundations'} · ${years[0]}–${years[years.length - 1]}${isGov(id) ? '' : ' · name-matched estimate'}</span></div>
-      ${isGov(id) ? '' : '<p class="p-warn"><b>This cross-foundation total is a name-matched estimate.</b> No 990-PF grant row carries a recipient EIN — not one of the 1,527,245 rows in this collection — so this organization is held together only by canonicalising the name each foundation filed. The record may split one organization across two entries, or hold two same-named organizations as one. Read the figure as a close estimate, not a settled total.</p>'}
+      ${isGov(id) ? '' : '<p class="p-warn"><b>This cross-foundation total is a name-matched estimate.</b> No 990-PF grant row carries a recipient EIN — not one of the 1,565,291 rows in this collection — so this organization is held together only by canonicalising the name each foundation filed. The record may split one organization across two entries, or hold two same-named organizations as one. Read the figure as a close estimate, not a settled total.</p>'}
       <div class="chiprow">${[...byF.entries()].sort((a, b) => b[1] - a[1]).map(([fi, amt]) =>
         `<a class="fchip" href="https://jcurry44.github.io/grants-ledgers/f/${F[fi].u}/" title="${esc(F[fi].n)} — open its ledger"><span class="cd">${F[fi].c}</span><span>${esc(F[fi].s)}</span><span class="fa num">${moneyC(amt)}</span></a>`).join('')}</div>
       <div class="yearsline">${years.map((y) => `<div class="yb"><div class="y">${y}</div><div class="v num">${moneyC(byY.get(y))}</div></div>`).join('')}</div>
@@ -2313,7 +2389,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
           const b = BEH && BEH[fi];
           return `<div class="prow">
             <span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
-              <span class="pm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${n} comparable grant${n === 1 ? '' : 's'} · most recent ${last}${b ? ' · renews ' + b[1] + '%' : ''}</span></span>
+              <span class="pm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${n} comparable grant${n === 1 ? '' : 's'} · most recent ${last}${b && b.length >= 6 && b[1] != null ? ' · ' + b[1] + '% multi-year recipients' : ''}</span></span>
             <span class="pv">${moneyC(med)}<small>median grant</small></span>
             <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}">${PICKED.has(f.u) ? '✓ on list' : '+ list'}</button>
           </div>`;
@@ -2393,8 +2469,10 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   // report with headline figures and charts, exportable and printable.
   let repRows = [], repMeta = null;
   async function buildReport(kind) {
+    if (kind !== 'list' && !qState.ready) return;
     await behaviour();
     const m = await qMeta();
+    if (kind !== 'list' && !qState.ready) return;
     let rows, title, params;
     if (kind === 'list') {
       rows = listRows().map((f) => ({ f, n: f.g, median: null, max: null, last: f.y[f.y.length - 1], total: f.t }));
@@ -2410,13 +2488,13 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         'purpose: ' + cat,
         'recipient location as filed: ' + place,
         'grant size: ' + (qState.min ? 'at least ' + money(qState.min) : 'any'),
-        'active since: ' + (qState.yr || 'any year'),
+        'tax year from: ' + (qState.yr || 'any year'),
         region !== 'all' ? 'scope: ' + region : '',
         mapSel ? 'funders based in: ' + stName(mapSel) : '',
       ].filter(Boolean).join('  ·  ');
     }
     repRows = rows;
-    repMeta = { title, params, kind };
+    repMeta = { title, params, kind, median: kind === 'list' ? null : qState.median };
     openOvl('r');
     paintReport();
   }
@@ -2425,9 +2503,8 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const rows = repRows, meta = repMeta;
     const nG = rows.reduce((s, r) => s + (r.n || 0), 0);
     const sum = rows.reduce((s, r) => s + (r.total || 0), 0);
-    const meds = rows.map((r) => r.median).filter((v) => v != null).sort((a, b) => a - b);
-    const medOfMed = meds.length ? meds[Math.floor(meds.length / 2)] : null;
-    const active = rows.filter((r) => r.last >= 2023).length;
+    const pooledMedian = meta.median;
+    const latest = rows.reduce((last, r) => Math.max(last, r.last || 0), 0);
     const top = rows.slice().sort((a, b) => (b.total || 0) - (a.total || 0)).slice(0, 10);
     const tmax = top[0] ? top[0].total : 1;
     // years present across the funders in scope
@@ -2451,10 +2528,10 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       </div>
       <div class="repnums">
         <div class="repnum"><b class="num">${rows.length.toLocaleString('en-US')}</b><span>funders</span></div>
-        <div class="repnum"><b class="num">${nG ? nG.toLocaleString('en-US') : '—'}</b><span>matching grants</span></div>
-        <div class="repnum"><b class="num">${moneyC(sum)}</b><span>${meta.kind === 'list' ? 'verified, all years' : 'in matching grants'}</span></div>
-        <div class="repnum"><b class="num">${medOfMed != null ? moneyC(medOfMed) : '—'}</b><span>typical grant</span></div>
-        <div class="repnum"><b class="num">${active}</b><span>active since 2023</span></div>
+        <div class="repnum"><b class="num">${nG.toLocaleString('en-US')}</b><span>${meta.kind === 'list' ? 'filed rows, all years' : 'matching grants'}</span></div>
+        <div class="repnum"><b class="num">${moneyC(sum)}</b><span>${meta.kind === 'list' ? 'filed total, all years' : 'in matching grants'}</span></div>
+        <div class="repnum"><b class="num">${pooledMedian != null ? moneyC(pooledMedian) : '—'}</b><span>median matching grant</span></div>
+        <div class="repnum"><b class="num">${latest || '—'}</b><span>latest tax year in scope</span></div>
       </div>
       <div class="repsec">
         <h4>Largest funders in scope</h4>
@@ -2470,21 +2547,21 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       </div>
       <div class="repsec">
         <h4>The funders</h4>
-        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">Median</th><th class="amt">Renews</th><th class="amt">Recent</th><th class="amt">Total</th></tr></thead><tbody>
+        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">Median</th><th class="amt" title="Share of named recipients appearing in multiple available filed years; not an award renewal rate">Multi-year recipients</th><th class="amt">Recent</th><th class="amt">Total</th></tr></thead><tbody>
           ${rows.slice(0, 60).map((r) => {
-            const b = BEH && BEH[F.indexOf(r.f)];
+            const b = observedBehaviour(F.indexOf(r.f));
             return `<tr><td><a class="rowlink" href="https://jcurry44.github.io/grants-ledgers/f/${r.f.u}/">${esc(r.f.n)}</a></td>
               <td class="yr">${esc(r.f.ci)}${r.f.st ? ', ' + r.f.st : ''}</td>
               <td class="amt num">${r.n ? r.n.toLocaleString('en-US') : '—'}</td>
               <td class="amt num">${r.median != null ? money(r.median) : '—'}</td>
-              <td class="amt num">${b ? b[1] + '%' : '—'}</td>
+              <td class="amt num">${b && b[1] != null ? b[1] + '%' : '—'}</td>
               <td class="amt num">${r.last || '—'}</td>
               <td class="amt num">${money(r.total || 0)}</td></tr>`;
           }).join('')}
         </tbody></table></div>
         ${rows.length > 60 ? `<div class="repnote">Showing the first 60 of ${rows.length.toLocaleString('en-US')} — the export contains every row.</div>` : ''}
       </div>
-      <div class="repnote">Every figure reconciles to a total the foundation itself filed with the IRS; bridges and withheld years are named on the exceptions page. Prepared from public IRS Form 990-PF filings. Nothing here is an audit.</div>
+      <div class="repnote">Query figures describe the matching named-recipient grant rows; project totals include every filed row. Multi-year shares use each funder’s full available history, exclude unnamed recipients, and do not estimate renewal probability. Source ledgers disclose reconciliation bridges and unitemized amounts. Prepared from public IRS Form 990-PF filings. Nothing here is an audit.</div>
       <div class="repfoot">
         <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
         <button type="button" class="tbtn" data-rprint>Print / PDF</button>
@@ -2495,7 +2572,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const repExport = (btn) => exportMenu(btn, () => ({
       name: slug(repMeta.title || 'report').slice(0, 40) || 'report',
       cols: FCOLS,
-      rows: repRows.map((r) => funderRow(r.f, { n: r.n || '', median: r.median != null ? r.median : '', max: r.max != null ? r.max : '', last: r.last || '', total: r.total || 0 })),
+      rows: repRows.map((r) => funderRow(r.f, { n: r.n || '', median: r.median != null ? r.median : '', max: r.max != null ? r.max : '', last: r.last || '', total: r.total || 0, scope: repMeta.params })),
     }));
     document.querySelectorAll('#pbody [data-rex]').forEach((b) => b.addEventListener('click', () => repExport(b)));
     document.querySelectorAll('#pbody [data-rprint]').forEach((b) => b.addEventListener('click', () => window.print()));
@@ -2505,7 +2582,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 
   // ---------- method (overlay) ----------
   // The limits are the product. Figures below are counted off the published corpus
-  // (db/all-grants.csv.gz): 1,527,245 rows, 287,710 recipient identities; an id
+  // (db/all-grants.csv.gz): 1,565,291 rows, 293,021 recipient identities; an id
   // beginning "E" is an EIN proven against the IRS Business Master File.
   function openMethod() {
     openOvl('m');
@@ -2519,7 +2596,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       <p>It is <strong>not</strong> a census of American philanthropy. The great majority of U.S. private foundations sit below that floor and are not here yet, and neither are public charities, community-foundation donor funds, or corporate giving that never passes through a private foundation. If a search returns nothing, that is usually what it means — not that no one funded the work.</p>
 
       <div class="mh">How certain the recipient names are</div>
-      <p><strong>No 990-PF grant row carries a recipient EIN</strong> — not one of the <span class="fig">1,527,245</span> rows in this collection. Every EIN on this site is inferred: the recipient name as filed is canonicalised and then matched against the IRS Business Master File, with a short reviewed merge list carrying stated reasons; names that resolve to different EINs are never joined. That match succeeds for <span class="fig">34.5%</span> of grant rows, <span class="fig">31.8%</span> of the dollars, and <span class="fig">23,948</span> of <span class="fig">286,921</span> recipient identities.</p>
+      <p><strong>No 990-PF grant row carries a recipient EIN</strong> — not one of the <span class="fig">1,565,291</span> rows in this collection. Every EIN on this site is inferred: the recipient name as filed is canonicalised and then matched against the IRS Business Master File, with a short reviewed merge list carrying stated reasons; names that resolve to different EINs are never joined. That match succeeds for <span class="fig">34.5%</span> of grant rows, <span class="fig">31.8%</span> of the dollars, and <span class="fig">23,948</span> of <span class="fig">286,921</span> recipient identities.</p>
       <p>Those carry the ${idChip('E')} mark and are safe to add across foundations. Everything else carries ${idChip('K')} — the filed name canonicalised and nothing more. That is sound for reading one foundation&rsquo;s book, where the filer spells its own grantees consistently. A total added <em>across</em> foundations is definitive only on a government-matched record; elsewhere read it as a close estimate that may split one organization in two, or hold two same-named organizations as one. The Recipients tab and the search box both carry a switch that hides everything but the government-matched identities.</p>
 
       <div class="mh">Where the money landed</div>
