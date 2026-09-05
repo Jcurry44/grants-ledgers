@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Inter:wght@400;500;550;600;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
   color-scheme: light;
@@ -645,10 +645,295 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
  .projbar { padding-right:2rem; }
  .brief .repbar .rbt { max-width:100%; }
 }
+/* Research workspace: readable controls, comparable results, optional geography. */
+:root { --text: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --ink-dim:#62675c; --paper:#f5f4ee; --rule:#dedfd5; }
+body { font-size:14px; line-height:1.5; }
+button, input, select, textarea { font-family:var(--text); }
+button:disabled { cursor:default; opacity:.48; }
+[hidden] { display:none !important; }
+.skiplink { position:fixed;top:-80px;left:16px;z-index:100;background:var(--sheet);padding:12px 20px;border-radius:8px; }
+.skiplink:focus { top:12px; }
+.shell { display:block;height:auto;min-height:100dvh; }
+.top { position:sticky;top:0;z-index:40;min-height:66px;padding:0 max(24px,calc((100vw - 1344px)/2));gap:36px;background:var(--cover-deep);border-bottom:1px solid #345141; }
+.brand b { font-size:1.2rem;white-space:nowrap; }
+.brand .gl { width:30px;height:32px;font-size:1.1rem;border-radius:5px; }
+.topnav { flex:1;gap:6px;font-family:var(--text);font-size:.84rem;letter-spacing:0;text-transform:none; }
+.topnav button { padding:9px 14px;color:#e5e9df;min-height:42px;border-radius:6px; }
+.topnav .navresearch { background:#2a4a39;color:#fff; }
+.topnav .navbrief { margin-left:auto;background:var(--copper-soft);color:var(--cover-ink);font-weight:600; }
+.topnav .navbrief:hover { background:#f0d19f;color:var(--cover-ink); }
+.topnav .listbtn { border-color:transparent;gap:8px; }
+.listbtn .lbt { display:inline; }
+.listbtn .cnt { font:600 .75rem var(--text);min-width:22px;padding:3px 6px; }
+.listbtn .cnt.zero { background:#355140;color:#f6efdd; }
+.topnav .navcoverage { color:#cdd7ca;font-size:.8rem; }
+.tots { display:none; }
+.deck { display:block; }
+.left { max-width:1344px;margin:0 auto;padding:24px 28px 32px;gap:0;overflow:visible; }
+.workspacehead { display:flex;align-items:center;gap:32px;justify-content:space-between;margin-bottom:15px; }
+.mast { display:block; }
+.masth { font:570 clamp(1.65rem,2.2vw,2rem)/1.15 var(--serif);letter-spacing:-.04em; }
+.mastsub { font:.84rem/1.5 var(--text);color:var(--ink-dim);margin-top:6px; }
+.mastlink { font:inherit;color:var(--copper-deep); }
+.searchbox { flex:0 1 420px;width:100%; }
+#q { border-radius:9px;background:var(--sheet);font:400 .86rem var(--text);height:48px;padding:12px 40px 12px 42px;box-shadow:0 2px 4px #20332404,inset 0 0 0 1px var(--rule); }
+.searchicon { position:absolute;left:15px;top:15px;width:18px;height:18px;color:var(--ink-dim);pointer-events:none; }
+#q::placeholder { color:#72766b; }
+.slash { font:12px var(--mono);border:1px solid var(--rule);border-radius:4px;right:14px;padding:2px 6px; }
+.suggest { z-index:45;box-shadow:0 14px 35px #19362820; }
+.sug .m,.srchint { font-family:var(--text);font-size:.8rem; }
+.workspacebar { display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--rule);margin-bottom:18px;position:relative; }
+.tabs { border:0;flex:1;gap:20px;flex-wrap:nowrap;min-width:0; }
+.tab { font:500 .84rem var(--text);letter-spacing:0;text-transform:none;padding:11px 0 13px;white-space:nowrap; }
+.tab.on { color:var(--cover);border-color:var(--cover); }
+.viewtools { display:flex;align-items:center;gap:8px; }
+.collection { position:relative; }
+.collection > summary { cursor:pointer;list-style:none;font-size:.78rem;color:var(--ink-dim);padding:9px 8px;white-space:nowrap; }
+.collection > summary::-webkit-details-marker { display:none; }
+.collection > summary::after { content:'⌄';margin-left:8px; }
+.collection .scopes { position:absolute;right:0;top:42px;background:var(--sheet);box-shadow:0 12px 30px #19362820;border:1px solid var(--rule);padding:10px;min-width:260px;border-radius:9px;z-index:20; }
+#regions { display:grid;gap:4px; }
+.rchip { text-align:left;font:.82rem var(--text);border:0;border-radius:5px;padding:12px; }
+.rchip small { font:inherit; }
+.viewtoggle { display:flex;align-items:center;gap:7px;font-size:.78rem;white-space:nowrap;padding:8px 10px;border:1px solid var(--rule);background:var(--sheet);border-radius:6px;min-height:36px; }
+.viewtoggle svg { width:15px;height:15px; }
+.viewtoggle[aria-pressed=true] { background:var(--cover);color:var(--cream);border-color:var(--cover); }
+.scopealert { display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;font-size:.78rem; }
+.scopealert:empty { display:none; }
+.scopealert:has(.stchip[hidden]) { display:none; }
+.scopealert .stchip { margin:0; }
+.panelbody { flex:initial;overflow:visible;padding:0; }
+.qbar { background:transparent;border:0;box-shadow:none;padding:0;border-radius:0; }
+.filterbar { display:flex;align-items:end;gap:14px; }
+.filterbar > .qfield { flex:1.5;max-width:380px;min-width:0; }
+.qfield { display:flex;flex-direction:column;gap:6px; }
+.qfield > span { font:500 .73rem var(--text);color:var(--ink-dim); }
+.qsel,.qline .qsel { font:400 .84rem var(--text);border:1px solid #d7d9ce;background:var(--sheet);padding:10px 12px;border-radius:7px;height:42px;max-width:100%;width:100%; }
+#qst { max-width:none; }
+.qmorefilters { flex:3;display:flex;gap:14px; }
+.qmorefilters .qfield { flex:1;min-width:0; }
+.qmorefilters .qfield:first-child { flex:1.5; }
+.filtertoggle,.filterdone { display:none; }
+.activefilters { display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px; }
+.activefilters:empty { display:none; }
+.filterchip { display:inline-flex;align-items:center;gap:8px;background:#e9eee6;color:var(--cover-deep);font-size:.75rem;padding:5px 9px;border:1px solid #d9e0d4;border-radius:5px; }
+.filterchip span { color:#52664f;font-size:15px; }
+.qreset { font:.76rem var(--text);text-decoration:none;padding:6px;color:var(--copper-deep); }
+.qmeta { display:flex;align-items:center;gap:8px;margin:18px 0 0;padding:0 0 13px;font-family:var(--text);font-size:.78rem; }
+.qmeta b { font:600 1rem var(--text);letter-spacing:-.02em; }
+.resulttotals { display:flex;align-items:baseline;gap:10px;flex-wrap:wrap; }
+.resulttools { display:flex;align-items:center;gap:8px;margin-left:auto; }
+.qsort { border:0;background:transparent;color:var(--ink-dim);font:.76rem var(--text);max-width:170px;padding:8px 4px; }
+.qreportlink { font-size:.76rem;padding:8px;color:var(--ink-dim); }
+.tbtn { border-radius:6px;font:500 .79rem var(--text);padding:8px 12px;min-height:36px; }
+.qnote { font:.76rem/1.6 var(--text);margin:12px 0 0;max-width:90ch; }
+.qnote summary { color:var(--ink-dim); }
+.qex { margin:0;font:.76rem var(--text); }
+.qexlink { font:inherit; }
+.resultcaption { display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 0 12px;color:var(--ink-dim);font-size:.75rem; }
+.resultcaption > span { display:flex;align-items:center;gap:6px; }
+.resultcaption i { display:inline-block;width:6px;height:6px;border-radius:50%;background:#567753; }
+#qresults { margin:0 !important;gap:0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--sheet);box-shadow:0 3px 8px #19362803; }
+.fcard { display:grid;grid-template-columns:minmax(260px,1fr) minmax(245px,.85fr) 226px;gap:20px;align-items:center;padding:14px 22px;border:0;border-bottom:1px solid #e7e8df;border-radius:0;background:transparent; }
+.fcard:last-child { border-bottom:0; }
+.fcard:hover { background:#f8f9f3;transform:none; }
+.fcard .nm { font:550 1.08rem/1.3 var(--serif);letter-spacing:-.02em; }
+.fcard .where { font:.74rem var(--text);margin-top:5px; }
+.matchreason { display:block;font:.73rem/1.4 var(--text);color:var(--ink-dim);margin-top:8px; }
+.matchreason span { color:var(--cover); }
+.fstats { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0; }
+.fstat { font:.7rem/1.45 var(--text);color:var(--ink-dim); }
+.fstat b { font:550 1rem/1.4 var(--text);color:var(--ink);letter-spacing:-.02em;margin-bottom:3px;font-variant-numeric:tabular-nums; }
+.fside { display:grid;grid-template-columns:1fr 36px;gap:7px;align-items:center; }
+.evidencebtn { padding:10px 12px;min-height:39px;border-radius:6px;border:1px solid #bdcab7;background:#f4f7ef;color:var(--cover-deep);font:600 .77rem var(--text); }
+.evidencebtn:hover { border-color:var(--cover);background:#e9f0e3; }
+.fside .evidencebtn { grid-column:1;grid-row:1; }
+.fside .proof { grid-column:2;grid-row:1;display:grid;place-items:center;width:34px;height:34px;padding:0; }
+.fside .addb { grid-column:1 / -1; }
+.proof { font:.72rem var(--text); }
+.addb { font:500 .76rem var(--text);padding:8px 12px;min-height:36px;border-radius:6px;background:var(--sheet);color:var(--cover-deep);border:1px solid #d0d6c8; }
+.addb:hover { background:#edf1e7;color:var(--cover-deep);border-color:#94a68b; }
+.addb.on { background:var(--cover);color:var(--cream); }
+.fmore { background:var(--sheet);border:1px solid var(--rule);font:.8rem var(--text);padding:12px;border-radius:7px;margin-top:12px; }
+.qempty { padding:35px 22px;font:.86rem var(--text); }
+.qempty b { font:550 1.2rem var(--serif);margin-bottom:10px; }
+.micro { margin-top:24px;padding-top:18px;gap:8px 18px;font:.73rem/1.5 var(--text);color:var(--ink-dim); }
+.micro a,.micro button { font:inherit; }
+.micro .showsm { display:inline; }
+.coveragefoot { margin-right:auto; }
+.stage { min-height:630px;border-radius:10px;padding:26px; }
+.stagehead h1 { display:block; }
+.stagehead .stagesub { display:block; }
+.stage .mapzone { height:370px;min-height:0;flex:initial; }
+.stage .dossier,.stage:not(.drilled) .dossier { flex:initial;max-height:none;overflow:visible; }
+.stage.drilled .dossier { flex:1; }
+.stage .ticker { display:none; }
+.mapcard { border:0;background:transparent; }
+.mapcardt { display:none; }
+.mapcard.open .mapcardb { padding:0; }
+.mapcard:not(.open) { height:0;border:0; }
+.geography #panelbody,.geography .scopealert { display:none; }
+.geography .mapcard.open { margin-bottom:16px; }
+.fc,.wv { padding:14px 16px; }
+.fc b { font-size:1rem; }
+.fc .meta,.fc .tie,.wv .wm,.wv .ws,.panehint,.idlegend,.idcount,.idtog,.phead .cnt { font-family:var(--text);font-size:.8rem; }
+.ovl { backdrop-filter:blur(3px);background:#10241cc2; }
+.ovlcard { --pad:28px;border-radius:13px;width:min(1000px,100%); }
+.ovlx { width:36px;height:36px;font-size:1rem;z-index:10; }
+.ovlcard.repmode .ovlx { display:block;float:none;margin:0 0 -36px auto; }
+.p-name { font-weight:560;font-size:1.8rem;line-height:1.2; }
+.p-id,.p-alias,.p-tot span,.peerlead,.peerfilters label,.projectobjective,.projnote,.projmsg,.lhead .tot,.lrow .lm,.lnote,.repnote,.briefmeta,.pbtn { font-family:var(--text); }
+.p-id,.peerfilters label,.projectobjective,.projnote,.lhead .tot,.lrow .lm,.pbtn { font-size:.8rem; }
+.p-id { margin-top:8px; }
+.peerfilters { gap:12px; }
+.peerfilters .qsel { height:42px; }
+.prow { padding:15px;gap:15px; }
+.prow .pn,.lrow .ln { font:550 1.02rem var(--serif); }
+.prow .pm,.prow .pv small,.peerevidence,.savedreason { font-family:var(--text);font-size:.8rem; }
+.peerevidence { padding:0 15px 12px; }
+.projbar { gap:8px;padding-bottom:16px;margin-bottom:12px; }
+.projectnameform { margin:0 0 16px;padding:16px;border:1px solid #c7d1bc;background:#edf2e7;border-radius:8px; }
+.projectnameform label { display:block;font-size:.82rem;font-weight:600;margin-bottom:8px; }
+.projectnameform > div { display:flex;gap:8px;flex-wrap:wrap; }
+.projectnameform input { flex:1;min-width:160px;border:1px solid #c7d1bc;background:var(--sheet);border-radius:6px;padding:10px;font-size:.85rem; }
+.projbar .qsel { width:auto;max-width:320px; }
+.pbtn { border-radius:5px;padding:7px 9px; }
+.projnote { line-height:1.6;color:var(--ink-dim); }
+.lhead { margin:24px 0 10px;align-items:center; }
+.lhead .acts { gap:6px; }
+#lreport { background:var(--cover);color:var(--cream);border-color:var(--cover); }
+.lnote { font-size:.84rem;padding:12px;line-height:1.55;background:#fcfdf9; }
+.lrow { padding:20px 0;gap:12px;border-radius:0;border-left:0;border-right:0; }
+.lrow .lv { font:550 1rem var(--text); }
+.lrow .lv small { font-size:.68rem; }
+.lrow .rm { font:.75rem var(--text);padding:8px; }
+.savedreason { background:#f1f4eb;border-left:2px solid #8ba078;padding:10px 13px; }
+.savedreason b { font-weight:600; }
+.savedreason p { margin:5px 0; }
+.repbar { padding-right:72px;min-height:62px; }
+.repbar .rbacts { flex:1 1 auto;min-width:0;flex-wrap:wrap; }
+.lrow .lnote { min-height:80px; }
+.brief .rephead { padding:16px 0 24px; }
+.briefcard { padding:24px 0; }
+.briefcard h3 { margin-bottom:6px; }
+.briefgoal { max-width:70ch; }
+.briefnote { margin-top:16px; }
+.evidencehead { padding-right:38px; }
+.evidencehead .eyebrow { font:600 .7rem var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:10px; }
+.evidenceactions { display:flex;gap:8px;flex-wrap:wrap;margin:20px 0; }
+.evidencesummary { display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);border-radius:8px;padding:18px;background:var(--paper);gap:18px;margin:18px 0; }
+.evidencesummary b { display:block;font:550 1.45rem var(--serif); }
+.evidencesummary span { display:block;font-size:.76rem;color:var(--ink-dim);margin-top:4px; }
+.evidencecriteria { padding:13px 16px;background:#edf2e7;border-radius:7px;font-size:.82rem;line-height:1.6; }
+.evidencecriteria b { color:var(--cover); }
+.evidencerows { display:grid; }
+.evidencerow { display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:16px 0;border-bottom:1px solid var(--rule); }
+.evidencerow a { font-size:.87rem;font-weight:500;color:var(--ink);text-decoration:none; }
+.evidencerow a:hover { text-decoration:underline;text-underline-offset:3px; }
+.evidencerow small { display:block;color:var(--ink-dim);font-size:.74rem;margin-top:4px; }
+.evidencerow strong { font-size:.9rem;font-weight:550;font-variant-numeric:tabular-nums;white-space:nowrap; }
+.evidencelabel { display:flex;gap:12px;justify-content:space-between;align-items:baseline;margin-top:22px; }
+.evidencelabel h3 { font:550 1.12rem var(--serif); }
+.evidencelabel span { font-size:.73rem;color:var(--ink-dim); }
+.toast { position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--cover-deep);color:var(--cream);padding:12px 20px;border:1px solid #56744f;border-radius:8px;z-index:90;box-shadow:0 8px 30px #17271b30;font-size:.82rem;max-width:calc(100% - 32px); }
+@media(min-width:1500px) { .fcard { padding:23px 24px; } }
+@media(max-width:1100px) {
+ .fcard { grid-template-columns:minmax(220px,1fr) minmax(210px,.85fr) 180px;gap:16px;padding:18px; }
+ .tabs { gap:16px; } .tab { font-size:.8rem; }
+ .collection > summary { max-width:135px;overflow:hidden;text-overflow:ellipsis; }
+ .left { padding:22px; } .workspacehead { gap:22px; }
+}
+@media(max-width:800px) {
+ .top { padding:0 18px;gap:16px;min-height:60px; }
+ .topnav .navresearch { display:none; } .topnav { justify-content:flex-end;flex:initial;margin-left:auto; }
+ .topnav .navbrief { margin-left:0; } .topnav .navcoverage { display:none; }
+ .workspacehead { align-items:flex-start;flex-direction:column;gap:16px;margin-bottom:14px; }
+ .searchbox { flex:initial;max-width:none; }
+ .workspacebar { flex-wrap:wrap;gap:4px;margin-bottom:16px; }
+ .tabs { gap:21px;flex:1 1 100%;order:2; }
+ .viewtools { width:100%;justify-content:space-between;order:1;margin-bottom:4px; }
+ .collection > summary { padding:4px 0;max-width:none;font-size:.75rem; }
+ .collection .scopes { left:0;right:auto;top:32px; }
+ .viewtoggle { min-height:30px;font-size:.74rem;padding:4px 8px; }
+ .fcard { grid-template-columns:1fr 185px; }
+ .fcard .fidentity { grid-column:1;grid-row:1; } .fside { grid-column:2;grid-row:1 / 3; }
+ .fstats { grid-column:1;grid-row:2;margin-top:2px;max-width:350px; }
+ .qmeta { align-items:flex-start; } .resulttotals { gap:3px;flex-direction:column; }
+ .qreportlink { display:none; }
+ .micro { gap:10px 16px; } .coveragefoot { flex-basis:100%; }
+}
+@media(max-width:600px) {
+ .top { min-height:58px;padding:0 16px;gap:10px; } .brand { gap:8px; }
+ .brand b { font-size:1.04rem; } .brand .gl { width:24px;height:27px; }
+ .topnav { gap:0; } .topnav .navbrief { display:none; }
+ .topnav .listbtn { padding:8px 0 8px 8px;gap:6px; } .listbtn .lbico { display:none; }
+ .listbtn .lbt { display:inline;font-size:.78rem; }
+ .left { padding:20px 16px 28px; }
+ .masth { font-size:1.72rem; } .mastsub { font-size:.78rem;max-width:36ch; }
+ .workspacehead { gap:14px;margin-bottom:10px; }
+ #q { height:46px;font-size:.82rem; }
+ .workspacebar { margin-bottom:15px; } .tabs { gap:18px;justify-content:flex-start;overflow-x:auto;scrollbar-width:none; }
+ .tab { font-size:.75rem;padding:10px 0 11px; } .viewtools { margin:0; }
+ .filterbar { gap:10px;flex-wrap:wrap;position:relative; }
+ .filterbar > .qfield { flex:1;max-width:none; }
+ .qsel { height:42px; }
+ .filtertoggle { display:flex;align-items:center;gap:7px;padding:10px 13px;border:1px solid #c7cfbf;border-radius:7px;min-height:42px;font-size:.79rem;background:var(--sheet); }
+ .filtertoggle svg { width:16px;height:16px; }
+ .filtertoggle[aria-expanded=true] { background:var(--cover);color:var(--cream);border-color:var(--cover); }
+ .qmorefilters { display:none;flex:1 1 100%;grid-template-columns:1fr 1fr;gap:12px;padding:16px;background:#eeefe7;border:1px solid var(--rule);border-radius:8px; }
+ .qmorefilters.open { display:grid; }
+ .qmorefilters .qfield:first-child { grid-column:1 / -1; }
+ .filterdone { display:block;grid-column:1 / -1;font-size:.8rem;background:var(--cover);color:var(--cream);padding:10px;border-radius:6px; }
+ .qmeta { margin-top:16px;gap:6px;padding-bottom:10px;flex-wrap:nowrap; }
+ .resulttotals { flex:1;min-width:0; }
+ .qmeta b { font-size:.94rem; } .qmeta #qsum { font-size:.69rem;max-width:180px; } .sumdollars { display:none; }
+ .resulttools { gap:0; } .qsort { max-width:110px;font-size:.7rem; }
+ .resulttools .tbtn { min-height:32px;font-size:.71rem;padding:6px; }
+ .resultcaption { font-size:.68rem;padding-bottom:10px;align-items:flex-start; }
+ .resultcaption #qex { display:none; }
+ .fcard { padding:18px 16px;grid-template-columns:1fr;gap:14px; }
+ .fcard .fidentity { grid-column:1;grid-row:1; }
+ .fcard .nm { font-size:1.08rem;line-height:1.25; }
+ .fcard .where { font-size:.71rem;margin-top:5px; }
+ .matchreason { font-size:.7rem;margin-top:6px; }
+ .fstats { grid-column:1;grid-row:2;margin:0;max-width:none;gap:18px; }
+ .fstat b { font-size:1rem;margin:0; } .fstat { font-size:.68rem; }
+ .fside { grid-column:1;grid-row:3;display:flex;flex-direction:row;align-items:stretch;gap:8px; }
+ .fside .proof { display:none; } .fside .evidencebtn { flex:1;min-height:38px; }
+ .fside .addb { flex:1;padding:9px 8px;font-size:.73rem;min-height:38px; }
+ .qnote { font-size:.72rem;margin-top:14px; }
+ .fc { grid-template-columns:32px 1fr auto;gap:10px;padding:12px; } .fc .cd { width:32px;height:34px; } .fc .tie { font-size:.72rem; }
+ .fc .rowsb { display:none; } .fc b { font-size:.93rem; } .fc .meta { font-size:.68rem; }
+ .ovl { padding:8px; } .ovlcard { --pad:18px;border-radius:10px;max-height:calc(100dvh - 16px); }
+ .p-name { font-size:1.45rem; } .p-id { font-size:.75rem; }
+ .projbar { padding-right:42px; } .projbar .qsel { width:100%;max-width:100%; }
+ .lhead .acts { width:100%;margin:12px 0 0; } #lreport { order:-1;flex:1; }
+ .lrow { padding:18px 0; } .list-evidence { margin:0; } .savedreason { font-size:.75rem; }
+ .projectobjective { margin:18px 0; } .projnote { font-size:.73rem; }
+ .repbar .tbtn { padding:8px 9px;font-size:.75rem; }
+ .evidencesummary { gap:10px;padding:14px 12px; } .evidencesummary b { font-size:1.2rem; } .evidencesummary span { font-size:.68rem; }
+ .evidencecriteria { font-size:.77rem;padding:12px; } .evidencelabel { flex-wrap:wrap;gap:4px; }
+ .evidencerow { gap:8px 12px; } .evidencerow a { font-size:.82rem; } .evidencerow small { font-size:.7rem; }
+ .evidenceactions .addb { flex:1; } .evidenceactions .tbtn { font-size:.74rem; }
+ .stage { padding:16px;min-height:550px; } .stage .mapzone { height:230px; } .stagehead h1 { font-size:1.1rem; }
+ .toast { bottom:16px;width:max-content;text-align:center; }
+}
+@media(max-width:360px) {
+ .qmeta { flex-wrap:wrap; } .resulttotals { flex:1 1 100%; } .resulttools { width:100%;justify-content:space-between; }
+ .qsort { max-width:none; } .fside .evidencebtn span { display:none; }
+}
+@media print {
+ .top,.toast,.ovlx,.skiplink { display:none !important; }
+ .briefcard { break-inside:auto; } .briefcard h3 { break-after:avoid; } .briefcard p,.briefsources li,.savedreason { break-inside:avoid; }
+ .briefcard a { text-decoration:none; } .ovl { backdrop-filter:none;background:white; } .brief .rephead { padding-top:0; }
+}
+
 </style>
 </head>
 <body>
+<a class="skiplink" href="#tabs">Skip to research</a>
 
+<div class="toast" id="toast" role="status" hidden></div>
 <div class="shell">
 <header class="top">
   <a class="brand" href="https://jcurry44.github.io/grants-ledgers/" title="The Grants Ledger — back to the start" aria-label="The Grants Ledger, home"><span class="gl" aria-hidden="true">≡</span><b>The Grants Ledger</b></a>
@@ -657,31 +942,30 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     <div><b class="num" data-k="g">&mdash;</b><span>filed rows</span></div>
     <div><b class="num" data-k="n">&mdash;</b><span>ledgers</span></div>
   </div>
-  <nav class="topnav">
-    <a href="https://jcurry44.github.io/grants-ledgers/findings/" class="hidesm">Findings</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/ny/" class="hidesm">New York ↗</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="hidesm">Exceptions ↗</a>
-    <button type="button" id="listbtn" class="listbtn" aria-label="Project — 0 saved"><svg class="lbico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.1 1.6h7.8a1 1 0 0 1 1 1v11.8l-4.9-3.1-4.9 3.1V2.6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lbt">Project</span><span class="cnt" id="listcnt">0</span></button>
-    <button type="button" id="aboutbtn">Coverage</button>
+  <nav class="topnav" aria-label="Research workflow">
+    <button type="button" id="navresearch" class="navresearch" aria-current="page">Research</button>
+    <button type="button" id="listbtn" class="listbtn" aria-label="Shortlist — 0 saved"><svg class="lbico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.1 1.6h7.8a1 1 0 0 1 1 1v11.8l-4.9-3.1-4.9 3.1V2.6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lbt">Shortlist</span><span class="cnt" id="listcnt">0</span></button>
+    <button type="button" id="navbrief" class="navbrief">Build brief <span aria-hidden="true">↗</span></button>
+    <button type="button" id="aboutbtn" class="navcoverage">Coverage & sources</button>
   </nav>
 </header>
 
 <main class="deck">
 <section class="left" aria-label="Browse the collection">
-  <div class="mast">
-    <h1 class="masth">A verified record of grantmaking from <em><span id="heroN2">1,950</span> major U.S. private foundations</em></h1>
-    <p class="mastsub">Reconciled IRS grant records. <button type="button" class="mastlink" id="mastmethod">Coverage & freshness ›</button></p>
+  <div class="workspacehead">
+    <div class="mast">
+      <h1 class="masth">Find your next funder.</h1>
+      <p class="mastsub">Follow the evidence. Build a stronger shortlist.</p>
+    </div>
+    <div class="searchbox">
+      <svg class="searchicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+      <label class="sr-only" for="q">Search organizations</label>
+      <input type="search" id="q" placeholder="Search a foundation or nonprofit…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggest">
+      <span class="slash" aria-hidden="true">/</span>
+      <div class="suggest" id="suggest" role="listbox" hidden></div>
+    </div>
   </div>
-  <div class="searchbox">
-    <label class="sr-only" for="q">Search organizations</label>
-    <input type="search" id="q" placeholder="Search any organization — try “philharmonic”…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggest">
-    <span class="slash" aria-hidden="true">/</span>
-    <div class="suggest" id="suggest" role="listbox" hidden></div>
-  </div>
-  <div class="scopes">
-    <span id="regions" role="group" aria-label="Region"></span>
-    <button type="button" class="stchip" id="stchip" hidden></button>
-  </div>
+  <div class="workspacebar">
   <div class="tabs" role="tablist" id="tabs">
     <button class="tab on" role="tab" data-t="q" aria-selected="true">Find funders</button>
     <button class="tab" role="tab" data-t="f" aria-selected="false">All ledgers</button>
@@ -689,30 +973,39 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     <button class="tab" role="tab" data-t="y" aria-selected="false">Years</button>
     <button class="tab" role="tab" data-t="c" aria-selected="false">Purposes</button>
   </div>
+    <div class="viewtools">
+      <details class="collection" id="collection"><summary id="collectionlabel">All foundations</summary><div class="scopes"><span id="regions" role="group" aria-label="Foundation collection"></span></div></details>
+      <button class="viewtoggle" type="button" id="geotoggle" aria-pressed="false" aria-controls="mapcard"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 5 5-2 6 2 5-2v12l-5 2-6-2-5 2Z M7 3v12 M13 5v12"/></svg><span>Explore geography</span></button>
+    </div>
+  </div>
+  <div class="scopealert"><button type="button" class="stchip" id="stchip" hidden></button></div>
   <div class="panelbody" id="panelbody">
     <div class="tabpane" id="pane-q" role="tabpanel">
       <div class="qbar">
-        <p class="qex" id="qex"><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,950</span><!-- 1,950 ledgers deep --> ledgers</button></p>
-        <div class="qline">
-          <label class="qfield qwide"><span>Purpose</span><select class="qsel" id="qcat" aria-label="Purpose"></select></label>
-          <label class="qfield qwide"><span>Recipient location</span><select class="qsel" id="qst" aria-label="Recipient location as filed"></select></label>
-          <label class="qfield"><span>Minimum grant</span><select class="qsel" id="qmin" aria-label="Grant size">
-            <option value="0">Any amount</option><option value="10000">$10k</option>
-            <option value="50000">$50k</option><option value="100000">$100k</option>
-            <option value="500000">$500k</option><option value="1000000">$1M</option>
-          </select></label>
-          <label class="qfield"><span>Tax year from</span><select class="qsel" id="qyr" aria-label="Tax year from"></select></label>
+        <div class="filterbar">
+          <label class="qfield"><span>Filed purpose</span><select class="qsel" id="qcat" aria-label="Purpose"></select></label>
+          <button type="button" id="filtertoggle" class="filtertoggle" aria-expanded="false" aria-controls="qmorefilters"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 5h16 M2 15h16 M7 2v6 M13 12v6"/></svg><span>Filters</span><span id="filtercount"></span></button>
+          <div id="qmorefilters" class="qmorefilters">
+            <label class="qfield"><span>Recipient location</span><select class="qsel" id="qst" aria-label="Recipient location as filed"></select></label>
+            <label class="qfield"><span>Minimum grant</span><select class="qsel" id="qmin" aria-label="Grant size"><option value="0">Any amount</option><option value="10000">$10,000</option><option value="50000">$50,000</option><option value="100000">$100,000</option><option value="500000">$500,000</option><option value="1000000">$1 million</option></select></label>
+            <label class="qfield"><span>Tax year from</span><select class="qsel" id="qyr" aria-label="Tax year from"></select></label>
+            <button type="button" id="filterdone" class="filterdone">Show results</button>
+          </div>
         </div>
-        <details class="qnote"><summary>How these results are counted</summary><p>Every filter applies to the same grant row. Counts, amounts and medians include matching rows with named recipients; unitemized disclosures stay in the source ledgers. Recipient location is the filed address, which may differ from the area served. “Location not filed” means the row has no recipient state.</p></details>
-        <div class="qmeta"><b id="qcount">—</b><span id="qsum"></span>
-          <button type="button" class="qreset" id="qreset">reset</button>
-          <span style="margin-left:auto; display:flex; gap:0.4rem">
-            <button type="button" class="tbtn" id="qreport">Build report</button>
+        <div id="activefilters" class="activefilters" aria-label="Active filters"></div>
+        <div class="qmeta">
+          <div class="resulttotals"><b id="qcount" role="status">Searching…</b><span id="qsum"></span></div>
+          <div class="resulttools">
+            <select id="qsort" class="qsort" aria-label="Sort matching funders"><option value="total">Matching giving</option><option value="recent">Recent activity</option><option value="count">Grant count</option><option value="median">Median grant</option><option value="name">Name A–Z</option></select>
+            <button type="button" class="qreportlink" id="qreport">Report</button>
             <span class="expwrap"><button type="button" class="tbtn" id="qexport">Export ▾</button></span>
-          </span></div>
+          </div>
+        </div>
+        <div class="resultcaption"><span><i aria-hidden="true"></i> Matching grants · historical evidence, not eligibility</span><p class="qex" id="qex"><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,950</span> ledgers ↗</button></p></div>
       </div>
       <div class="flist" id="qresults" style="margin-top:0.6rem"></div>
       <button type="button" class="fmore" id="qmore" hidden>Show more</button>
+      <details class="qnote"><summary>How these results are counted</summary><p>Every filter applies to the same grant row. Counts, amounts and medians include matching rows with named recipients; unitemized disclosures stay in the source ledgers. Recipient location is the filed address, which may differ from the area served. “Location not filed” means the row has no recipient state. The initial selection is Education & youth; choose another filed purpose above.</p></details>
     </div>
     <div class="tabpane" id="pane-f" role="tabpanel" hidden>
       <div class="phead"><span class="cnt num" id="fcount"></span>
@@ -756,14 +1049,14 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     <div class="mapcardb" id="stagehost"></div>
   </div>
   <div id="tickhost"></div>
-  <div class="micro">
-    <span>every grant reconciled to its foundation’s own IRS filing — to the dollar, differences disclosed</span>
-    <a href="https://jcurry44.github.io/grants-ledgers/findings/" class="showsm">Findings</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="showsm">Exceptions ↗</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/ny/" class="showsm">New York ↗</a>
-    <a href="db/all-grants.csv.gz">download everything (CSV)</a>
-    <span>an independent project by <a href="https://jcurry44.github.io/">Curry Studio</a> · not affiliated with any foundation shown</span>
-  </div>
+  <footer class="micro">
+    <span class="coveragefoot"><span id="heroN2">1,950</span> foundation ledgers · Reconciled to IRS filings · <button type="button" id="mastmethod">Coverage & freshness</button></span>
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/">New York</a>
+    <a href="db/all-grants.csv.gz">Full dataset ↓</a>
+    <span>By <a href="https://jcurry44.github.io/">Curry Studio</a></span>
+  </footer>
 </section>
 
 <section class="stage" aria-label="The map">
@@ -975,9 +1268,12 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   }
 
   // ---------- overlay ----------
-  let ovlMode = null;
+  let ovlMode = null, returnFocus = null;
   function openOvl(mode) {
+    if ($('ovl').hidden) returnFocus = document.activeElement;
     ovlMode = mode;
+    $('ovlcard').setAttribute('aria-label',({l:'Shortlist',r:'Research report',p:'Organization record',x:'Grant rows',m:'Coverage and methodology',e:'Grant evidence'})[mode]||'Record');
+    document.querySelector('.shell').inert = true;
     stashExpMenu();
     $('pbody').innerHTML = '';
     $('pbody').style.display = mode === 'x' ? 'none' : 'block';
@@ -987,11 +1283,13 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('ovl').hidden = false;
     $('ovlcard').scrollTop = 0;
     document.body.style.overflow = 'hidden';
-    if (mode !== 'r') $('ovlx').focus({ preventScroll: true });
+    $('ovlx').focus({ preventScroll: true });
   }
   function closeOvl() {
     $('ovl').hidden = true;
     ovlMode = null;
+    document.querySelector('.shell').inert = false;
+    if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
     curProfile = null;
     document.body.style.overflow = '';
     writeHash();
@@ -1422,6 +1720,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('regions').innerHTML = ['all', 'wny', 'ny'].map((r) =>
       `<button type="button" class="rchip${r === region ? ' on' : ''}" data-r="${r}">${LBL[r][0]}${LBL[r][1] ? ' <small>· ' + LBL[r][1] + '</small>' : ''}</button>`).join('');
     paintTotals();
+    $('collectionlabel').textContent = {all:'All foundations',wny:'Western New York',ny:'NY giants'}[region];
     // the headline count is the registry's, never a number typed into the markup
     const nAll = REG.totals.all.n.toLocaleString('en-US');
     $('heroN').textContent = nAll;
@@ -1432,16 +1731,24 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const b = e.target.closest('.rchip');
     if (!b) return;
     region = b.dataset.r;
-    renderRegions(); renderWeave(); renderTrend(); renderCats(); renderFleet(); writeHash();
+    renderRegions(); renderWeave(); renderTrend(); renderCats(); renderFleet();
+    $('collection').open = false;
+    if (tab === 'q') runQuery();
+    writeHash();
   });
 
   // ---------- tabs ----------
   let tab = 'q';
   function setTab(t, silent) {
     tab = t;
+    setMapCard(false);
     document.querySelectorAll('.tab').forEach((b) => {
       b.classList.toggle('on', b.dataset.t === t);
       b.setAttribute('aria-selected', b.dataset.t === t ? 'true' : 'false');
+      b.tabIndex = b.dataset.t === t ? 0 : -1;
+      b.id = 'tab-' + b.dataset.t;
+      b.setAttribute('aria-controls','pane-' + b.dataset.t);
+      $('pane-' + b.dataset.t).setAttribute('aria-labelledby',b.id);
     });
     ['q', 'f', 'r', 'y', 'c'].forEach((k) => { $('pane-' + k).hidden = k !== t; });
     $('panelbody').scrollTop = 0;
@@ -1489,7 +1796,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   // panel as the root there would make one glance load all 1,950 cards at once
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => {
     es.forEach((en) => { if (en.isIntersecting && !$('fmore').hidden) moreFleet(); });
-  }, { root: matchMedia('(max-width: 1019px)').matches ? null : $('panelbody'), rootMargin: '400px' }) : null;
+  }, { root: null, rootMargin: '400px' }) : null;
   if (io) io.observe($('fmore'));
   $('fsort').addEventListener('change', renderFleet);
   // hover a foundation → its home state lights on the map (two-way linking)
@@ -1569,12 +1876,13 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     Object.assign(NOTES, p.notes);
     writeStore();
   }
-  // after a project switch every "+ list" button on screen has to tell the truth again
+  // after a project switch every "+ Add to shortlist" button on screen has to tell the truth again
   function syncAddButtons() {
     document.querySelectorAll('.addb[data-add]').forEach((b) => {
       const on = PICKED.has(b.dataset.add);
       b.classList.toggle('on', on);
-      b.textContent = on ? '✓ on list' : '+ list';
+      b.setAttribute('aria-pressed',String(on));
+      b.textContent = on ? '✓ Shortlisted' : '+ Add to shortlist';
     });
   }
 
@@ -1590,7 +1898,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   async function initQuery() {
     const m = await qMeta();
     if (!m) { $('qresults').innerHTML = '<div class="qempty">The query index did not load.</div>'; return; }
-    $('qcat').innerHTML = m.cats.map((c, i) => `<option value="${i}">${esc(c.toLowerCase())}</option>`).join('');
+    $('qcat').innerHTML = m.cats.map((c, i) => `<option value="${i}">${esc(c)}</option>`).join('');
     // Every place that actually appears in a recipient's state column, grouped and
     // labelled from the rows themselves. No raw code is shown on its own, and the
     // stateless rows are a first-class option rather than a silent omission.
@@ -1607,14 +1915,14 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       (groups[pl.g] || (groups[pl.g] = [])).push({ si, pl, n: stCount[si] });
     });
     GRP_ORDER.forEach((g) => { if (groups[g]) groups[g].sort((a, b) => a.pl.label.localeCompare(b.pl.label)); });
-    $('qst').innerHTML = '<option value="all" title="every recipient location, filed or not">anywhere</option>'
+    $('qst').innerHTML = '<option value="all" title="every recipient location, filed or not">Anywhere</option>'
       + GRP_ORDER.filter((g) => groups[g]).map((g) => '<optgroup label="' + esc(GRP_LABEL[g]) + '">'
         + groups[g].map((o) => '<option value="' + o.si + '" title="'
           + esc('recipient location as filed: ' + o.pl.label + (o.pl.why ? ' — ' + o.pl.why : ''))
           + '">' + esc(o.pl.opt) + '</option>').join('')
         + '</optgroup>').join('');
     const years = Object.keys(AGG.byYear.all || {}).map(Number).sort();
-    $('qyr').innerHTML = '<option value="0">any year</option>'
+    $('qyr').innerHTML = '<option value="0">Any year</option>'
       + years.map((y) => `<option value="${y}">${y}</option>`).join('');
     // The app has to open on a purpose; it opens on this one and labels it an example.
     qState.cat = m.cats.indexOf('Education & youth') >= 0 ? m.cats.indexOf('Education & youth') : 0;
@@ -1641,11 +1949,6 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       qState.min = +$('qmin').value; qState.yr = +$('qyr').value;
       syncPlaceTitle(); runQuery(); writeHash();
     }));
-    $('qreset').addEventListener('click', () => {
-      $('qst').value = 'all'; $('qmin').value = '0'; $('qyr').value = '0';
-      qState.st = 'all'; qState.min = 0; qState.yr = 0;
-      syncPlaceTitle(); runQuery(); writeHash();
-    });
     $('qmore').addEventListener('click', () => paintQuery(true));
     $('qreport').addEventListener('click', () => buildReport('query'));
     $('qexport').addEventListener('click', () => exportMenu($('qexport'), () => {
@@ -1696,8 +1999,123 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   }
   const researchCache = new Map();
   let queryRequest = 0;
+  function setFiltersOpen(open) {
+    $('qmorefilters').classList.toggle('open',open);
+    $('filtertoggle').setAttribute('aria-expanded',String(open));
+  }
+  $('filtertoggle').onclick=()=>setFiltersOpen(!$('qmorefilters').classList.contains('open'));
+  $('filterdone').onclick=()=>{setFiltersOpen(false);$('filtertoggle').focus({preventScroll:true});};
+  function paintActiveFilters() {
+    const chips=[];
+    if(qState.st!=='all') chips.push(['st',placeOf(QMETA.states[qState.st]).label]);
+    if(qState.min) chips.push(['min','At least '+money(qState.min)]);
+    if(qState.yr) chips.push(['yr','Tax year '+qState.yr+' onward']);
+    $('filtercount').textContent=chips.length||'';
+    $('activefilters').innerHTML=chips.map(([key,label])=>`<button type="button" class="filterchip" data-filter-remove="${key}" aria-label="Remove ${esc(label)} filter">${esc(label)} <span aria-hidden="true">×</span></button>`).join('')+(chips.length?'<button type="button" class="qreset" id="qreset">Clear filters</button>':'');
+  }
+  $('activefilters').onclick=e=>{
+    const chip=e.target.closest('[data-filter-remove]'),reset=e.target.closest('#qreset');
+    if(!chip&&!reset)return;
+    const keys=reset?['st','min','yr']:[chip.dataset.filterRemove];
+    keys.forEach(key=>{qState[key]=key==='st'?'all':0;$('q'+key).value=String(qState[key]);});
+    syncPlaceTitle();runQuery();writeHash();
+    $('qcat').focus({preventScroll:true});
+  };
+  function sortQueryRows() {
+    const sort=$('qsort').value;
+    qState.rows.sort((a,b)=>(sort==='name'?F[a[0]].n.localeCompare(F[b[0]].n):sort==='recent'?b[4]-a[4]:sort==='count'?b[1]-a[1]:sort==='median'?b[3]-a[3]:b[2]-a[2])||b[2]-a[2]||a[0]-b[0]);
+  }
+  $('qsort').onchange=()=>{if(!qState.ready)return;sortQueryRows();qState.shown=0;$('qresults').innerHTML='';paintQuery();};
+  $('navresearch').onclick=()=>{if(!$('ovl').hidden)closeOvl();setTab('q');$('tabs').scrollIntoView({block:'nearest'});};
+  $('navbrief').onclick=()=>{if(PICKED.size)prepareBrief();else{openOvl('l');paintList();flash('Add a funder to your shortlist, then build a brief with your evidence and notes.');}};
+  $('tabs').addEventListener('keydown',e=>{
+    const tabs=[...$('tabs').querySelectorAll('[role=tab]')],i=tabs.indexOf(document.activeElement);
+    if(i<0||!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+    e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+    setTab(tabs[next].dataset.t);tabs[next].focus();
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('#collection'))$('collection').open=false;});
+  $('ovlcard').addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const items=[...$('ovlcard').querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),textarea,select:not([disabled]),summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);
+    const first=items[0],last=items[items.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}
+  });
+  let toastTimer;
+  function notifySaved(u) {
+    clearTimeout(toastTimer);$('toast').textContent=PICKED.has(u)?'Added to '+PROJ().name+' · '+PICKED.size+' shortlisted':'Removed from shortlist';
+    $('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,2800);
+  }
+  // Use the same filed-name classification as the query index. Every filter
+  // intersects on this exact source row; original indices remain stable.
+  const queryPlaceholder = new RegExp("\\bSEE\\b.{0,60}\\b(?:ATTACHED|ATTACHMENTS?|SCHEDULES?|STATEMENTS?|EXHIBITS?|LIST|LISTING|DETAILS?|DETAILED|PDF|SUPPLEMENT)\\b|\\bGRANTS? PAID\\s*[-:]\\s*ATTACHMENT\\b|\\bGRANTS TO VARIOUS\\b|^THE FOUNDATION MAKES ANNUAL GRANTS TO VARIOUS\\b|^\\s*(?:PART XV IS NOT REQUIRED|N/?A REGULATION SECTION|NUMEROUS INDIVIDUALS|MISCELLANEOUS (?:CONTRIBUTIONS|GRANTS))\\b|^\\s*\\[?(?:ATTACHED|ATTACHMENT|SCHEDULE|STATEMENT|EXHIBIT|LISTING)\\b|\\bRECIPIENT STATEMENT ATTACHED\\b|\\b(?:UNITEMIZED|NOT ITEMIZED|ANONYMOUS|WITHHELD|CONFIDENTIAL)\\b|^\\s*(?:NONE|N/?A|MISCELLANEOUS|INDIVIDUALS?|GRANTEES|RECIPIENTS)\\s*$|^\\s*VARIOUS\\b|^\\s*(?:MULTIPLE|OTHER)\\s+(?:GRANTEES|RECIPIENTS|ORGANIZATIONS|GRANTS|CHARITIES)\\b|\\b(?:ELIGIBLE PATIENTS?|SCHOLARSHIP RECIPIENTS?|INDIVIDUAL ASSISTANCE|INDIVIDUAL PATIENT PROGRAMS|INDIVIDUAL SCHOLARSHIPS?|GRANTS TO INDIVIDUALS)\\b|\\b(?:LIST AVAILABLE UPON REQUEST|FULL SCHEDULE KEPT ON FILE|SMALL DISCRETIONARY GRANTS--VARIOUS)\\b",'i');
+  function queryEvidenceRows(rows,filters) {
+    return rows.map((g,index)=>({g,index})).filter(({g})=>g[3]===filters.cat
+      &&(filters.st==='all'||g[4]===Number(filters.st))
+      &&(!filters.min||g[2]>=filters.min)&&(!filters.yr||g[0]>=filters.yr)
+      &&!queryPlaceholder.test(g[5]||''))
+      .sort((a,b)=>b.g[0]-a.g[0]||b.g[2]-a.g[2]||a.index-b.index);
+  }
+  async function openQueryEvidence(fi) {
+    const f=F[fi],row=qState.rows.find(r=>r[0]===fi),filters={...qState};
+    if(!f||!row)return;
+    const scope=QMETA.cats[filters.cat]+' (filed-purpose category) · '+(filters.st==='all'?'any recipient location':placeOf(QMETA.states[filters.st]).label)+' · minimum '+money(filters.min)+' · tax year from '+(filters.yr||'any')+(region!=='all'?' · region '+region:'')+(mapSel?' · funders based in '+stName(mapSel):'');
+    openOvl('e');
+    $('ovlcard').setAttribute('aria-label','Grant evidence');
+    $('pbody').innerHTML=`<section class="queryevidence"><div class="evidencehead"><div class="eyebrow">Review the evidence</div><h2 class="p-name">${esc(f.n)}</h2><p class="p-id">${esc(f.ci)}${f.st?', '+esc(f.st):''} · Foundation location</p></div>
+      <div class="evidencesummary"><div><b>${row[1].toLocaleString('en-US')}</b><span>matching grants</span></div><div><b>${moneyC(row[3])}</b><span>median grant</span></div><div><b>${row[4]}</b><span>latest tax year</span></div></div>
+      <p class="evidencecriteria"><b>Why it appears</b><br>${esc(scope)}. Every criterion applies to the same filed grant.</p>
+      <div class="evidenceactions"><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1" disabled>${PICKED.has(f.u)?'✓ Shortlisted':'+ Add to shortlist'}</button><a class="tbtn" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" target="_blank" rel="noopener">Full source ledger ↗</a><button class="tbtn" type="button" id="evidence-back">Back to results</button></div>
+      <div class="evidencehost" aria-live="polite"><p class="loading">Loading the matching filed grants…</p></div>
+      <p class="qnote">Historical support does not establish current eligibility or an open application. Recipient location is the filed address. Unitemized disclosures are excluded from these matching results and retained in the source ledger.</p></section>`;
+    const host=$('pbody').querySelector('.evidencehost'),add=$('pbody').querySelector('[data-add]');
+    $('evidence-back').onclick=closeOvl;
+    async function loadEvidence() {
+      host.innerHTML='<p class="loading">Loading the matching filed grants…</p>';
+      try {
+        const [source,coverage]=await Promise.all([prospectData('fnd/'+f.u+'.json'),coverageData()]);
+        if(!host.isConnected)return;
+        const matches=queryEvidenceRows(source,filters);
+        // A mismatch should be visible, never presented as proof of this selection.
+        if(matches.length!==row[1]||matches.reduce((sum,x)=>sum+x.g[2],0)!==row[2])throw new Error('Selection/source mismatch');
+        const examples=matches.slice(0,3);
+        const ev={kind:'query',n:row[1],total:row[2],median:row[3],last:row[4],max:row[5],saved_at:todayISO(),scope,
+          registry_sha256:coverage.registry_sha256,dataset_sha256:coverage.dataset_sha256,
+          examples:examples.map(x=>({index:x.index})),sources:examples.map(({g})=>({name:g[5],year:g[0],amount:g[2]}))};
+        candidateEvidence.set(f.u,ev);add.disabled=false;
+        const saved=PROJ().evidence[f.u];
+        if(PICKED.has(f.u)&&saved?.scope===scope){Object.assign(saved,{examples:ev.examples,sources:ev.sources,registry_sha256:ev.registry_sha256,dataset_sha256:ev.dataset_sha256});saveList();}
+        if(PICKED.has(f.u)&&saved?.scope!==scope){
+          const note=document.createElement('div');note.className='evidencecriteria';
+          note.innerHTML='<p>This funder is already shortlisted with different criteria.</p><button type="button" class="evidencebtn" style="margin-top:8px">Update saved evidence</button>';
+          host.before(note);
+          note.querySelector('button').onclick=()=>{
+            PROJ().evidence[f.u]=JSON.parse(JSON.stringify(ev));saveList();
+            note.textContent='Your shortlist now includes this matching selection and its source examples.';
+          };
+        }
+        let shown=0;
+        host.innerHTML='<div class="evidencelabel"><h3>Matching source grants</h3><span>Most recent first · amounts as filed</span></div><div class="evidencerows"></div><button type="button" class="fmore">Show more grants</button>';
+        const box=host.querySelector('.evidencerows'),more=host.querySelector('.fmore');
+        function appendRows(){
+          const slice=matches.slice(shown,shown+20);shown+=slice.length;
+          box.insertAdjacentHTML('beforeend',slice.map(({g})=>`<article class="evidencerow"><div><a href="${ledgerLink(fi,g[5])}" target="_blank" rel="noopener">${esc(dc(g[5]))} ↗</a><small>TY${g[0]} · ${esc(placeOf(REG.states[g[4]]||'').label)}</small></div><strong>${money(g[2])}</strong></article>`).join(''));
+          more.hidden=shown>=matches.length;more.textContent='Show more · '+(matches.length-shown).toLocaleString('en-US')+' remaining';
+        }
+        more.onclick=appendRows;appendRows();
+      } catch(error) {
+        if(!host.isConnected)return;
+        host.innerHTML='<div class="qempty"><b>Source evidence is unavailable.</b><p>Retry, or inspect the full source ledger above.</p><button class="tbtn" type="button">Try again</button></div>';
+        host.querySelector('button').onclick=loadEvidence;
+      }
+    }
+    loadEvidence();
+  }
+
   async function runQuery() {
     const request = ++queryRequest;
+    paintActiveFilters();
     const filters = { ...qState, region, mapSel };
     const box = $('qresults');
     qState.rows = []; qState.median = null; qState.ready = false;
@@ -1722,12 +2140,12 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       const nG = result.rows.reduce((sum, r) => sum + r[1], 0);
       const sum = result.rows.reduce((sum, r) => sum + r[2], 0);
       $('qcount').textContent = result.rows.length.toLocaleString('en-US') + (result.rows.length === 1 ? ' funder' : ' funders');
-      $('qsum').textContent = nG.toLocaleString('en-US') + ' matching grants · ' + moneyC(sum);
+      $('qsum').innerHTML = nG.toLocaleString('en-US') + ' matching grants<span class="sumdollars"> · ' + moneyC(sum) + '</span>';
       $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
       $('qreport').disabled = $('qexport').disabled = !result.rows.length;
       if (!result.rows.length) {
         box.innerHTML = '<div class="qempty"><b>No matching named-recipient grant rows.</b>Try a broader place, amount or year. This collection does not cover every funder.</div>';
-      } else paintQuery();
+      } else { sortQueryRows(); paintQuery(); }
     } catch (error) {
       if (request !== queryRequest) return;
       $('qcount').textContent = 'Results unavailable';
@@ -1749,23 +2167,23 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       const f = F[fi];
       if (!f) return '';
       const bridged = !!f.rn;
-      return `<div class="fcard">
-        <div>
-          <div class="nm"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></div>
-          <div class="where">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]}</div>
-          <div class="fstats">
-            <span class="fstat"><b>${n.toLocaleString('en-US')}</b>grants${esc(stTxt)}</span>
-            <span class="fstat"><b>${moneyC(med)}</b>median</span>
-            <span class="fstat"><b>${moneyC(mx)}</b>largest</span>
-            <span class="fstat"><b>${last}</b>most recent</span>
-            ${fitLine(fi)}
-          </div>
+      return `<article class="fcard" aria-label="${esc(f.n)}">
+        <div class="fidentity">
+          <h2 class="nm"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" data-evidence="${fi}">${esc(f.n)}</a></h2>
+          <div class="where">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · Foundation location</div>
+          <span class="matchreason"><span>${esc(QMETA.cats[qState.cat])}</span> · ${qState.st==='all'?'All recipient locations':esc(placeOf(QMETA.states[qState.st]).label)}</span>
+        </div>
+        <div class="fstats">
+          <span class="fstat"><b>${n.toLocaleString('en-US')}</b>matching grants</span>
+          <span class="fstat"><b>${moneyC(med)}</b>median grant</span>
+          <span class="fstat"><b>${last}</b>latest tax year</span>
         </div>
         <div class="fside">
-          <button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" title="How this ledger reconciles">${bridged ? '✓ reconciled · bridged' : '✓ reconciled'}</button>
-          <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}">${PICKED.has(f.u) ? '✓ on list' : '+ list'}</button>
+          <button type="button" class="evidencebtn" data-evidence="${fi}">View evidence <span aria-hidden="true">↗</span></button>
+          <button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" aria-label="Reconciliation for ${esc(f.n)}" title="${bridged?'Reconciled with a disclosed bridge':'Reconciled to IRS filings'}">✓</button>
+          <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}" aria-pressed="${PICKED.has(f.u)}">${PICKED.has(f.u) ? '✓ Shortlisted' : '+ Add to shortlist'}</button>
         </div>
-      </div>`;
+      </article>`;
     }).join(''));
     qState.shown += slice.length;
     $('qmore').hidden = qState.shown >= qState.rows.length;
@@ -1773,12 +2191,14 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   }
 
   $('qresults').addEventListener('click', (e) => {
+    const evidence = e.target.closest('[data-evidence]');
+    if (evidence) { e.preventDefault(); openQueryEvidence(+evidence.dataset.evidence); return; }
     const add = e.target.closest('[data-add]');
     if (add) {
       const u = add.dataset.add;
-      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ list'; }
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ Add to shortlist'; }
       else {
-        PICKED.add(u); add.classList.add('on'); add.textContent='✓ on list';
+        PICKED.add(u); add.classList.add('on'); add.textContent='✓ Shortlisted';
         const row=qState.rows.find(r=>F[r[0]].u===u);
         if(row) PROJ().evidence[u]={kind:'query',n:row[1],total:row[2],median:row[3],last:row[4],max:row[5],saved_at:todayISO(),
           scope:QMETA.cats[qState.cat]+' (filed-purpose category) · '+(qState.st==='all'?'any recipient location':placeOf(QMETA.states[qState.st]).label)+' · minimum '+money(qState.min)+' · tax year from '+(qState.yr||'any')+(region!=='all'?' · region '+region:'')+(mapSel?' · funders based in '+stName(mapSel):''),
@@ -1786,6 +2206,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       }
       saveList();
       renderList();
+      notifySaved(u);
       return;
     }
     const pf = e.target.closest('[data-proof]');
@@ -2031,10 +2452,11 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   function paintListCount() {
     const n = PICKED.size, p = PROJ();
     $('listcnt').textContent = n;
+    syncAddButtons();
     $('listcnt').classList.toggle('zero', n === 0);
     const lb = $('listbtn').querySelector('.lbt');
-    if (lb) lb.textContent = p.name.length > 22 ? p.name.slice(0, 21) + '…' : p.name;
-    $('listbtn').setAttribute('aria-label', 'Project ' + p.name + ' — ' + n + ' funder' + (n === 1 ? '' : 's') + ' saved');
+    if (lb) lb.textContent = 'Shortlist';
+    $('listbtn').setAttribute('aria-label', 'Shortlist: ' + p.name + ' — ' + n + ' funder' + (n === 1 ? '' : 's') + ' saved');
   }
   function renderList() {
     paintListCount();
@@ -2135,6 +2557,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         <button type="button" class="pbtn" id="popen">Open from file…</button>
         <input type="file" id="pfile" accept=".json,application/json" hidden>
       </div>
+      <div id="project-name-editor" hidden></div>
       <p class="projnote">Saved in <b>this browser only</b>. <b>Save to file</b> backs up your funders, evidence and notes; <b>Open from file</b> restores them on another device. Clearing site data removes local projects.</p>
       <p class="projmsg" id="projmsg" hidden></p>
       <div class="lhead">
@@ -2158,32 +2581,27 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
           <div class="list-evidence">${evidenceSummary(f)}</div>
           <textarea class="lnote" aria-label="Research note for ${esc(f.n)}" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
         </div>`).join('')
-        : `<div class="qempty"><b>Nothing in this project yet.</b>Add funders from Find funders — they stay in this project in this browser, and export as a CSV, a spreadsheet, or a printable brief.</div>`}
+        : `<div class="qempty"><b>Start with one promising funder.</b>Review its grants, save the evidence, and add a note for your brief.<br><button type="button" class="evidencebtn" id="list-find" style="margin-top:16px">Find funders →</button></div>`}
       <p style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-dim); margin-top:0.9rem">Saved evidence describes historical grants within its stated scope. Recheck eligibility and the source ledger before outreach.</p>`;
     if (projMsg) { const el = $('projmsg'); el.textContent = projMsg.msg; el.classList.toggle('bad', projMsg.bad); el.hidden = false; }
     // ---- project controls ----
+    const find=$('list-find');if(find)find.onclick=()=>{closeOvl();setTab('q');$('qcat').focus({preventScroll:true});};
     const sel = $('projsel');
     if (sel) sel.addEventListener('change', () => { flash(''); loadProject(sel.value); renderList(); syncAddButtons(); });
-    const nb = $('pnew');
-    if (nb) nb.addEventListener('click', () => {
-      const nm = (prompt('Name this project', 'Project ' + (STORE.list.length + 1)) || '').trim();
-      if (!nm) return;
-      const np = blankProject(nm.slice(0, 60));
-      STORE.list.push(np);
-      flash('');
-      loadProject(np.id);
-      renderList();
-      syncAddButtons();
-    });
-    const rn = $('pren');
-    if (rn) rn.addEventListener('click', () => {
-      const nm = (prompt('Rename this project', p.name) || '').trim();
-      if (!nm) return;
-      p.name = nm.slice(0, 60);
-      p.updated = todayISO();
-      writeStore();
-      renderList();
-    });
+    function editProjectName(rename) {
+      const editor=$('project-name-editor');editor.hidden=false;
+      editor.innerHTML=`<form class="projectnameform"><label for="project-name">${rename?'Rename project':'New research project'}</label><div><input id="project-name" type="text" maxlength="60" required value="${rename?esc(p.name):''}" placeholder="e.g. Youth arts funding"><button type="submit" class="evidencebtn">${rename?'Save name':'Create project'}</button><button type="button" class="tbtn" id="name-cancel">Cancel</button></div></form>`;
+      $('project-name').focus();
+      editor.querySelector('form').onsubmit=e=>{
+        e.preventDefault();const nm=$('project-name').value.trim();if(!nm)return;
+        if(rename){p.name=nm;p.updated=todayISO();writeStore();}
+        else{const np=blankProject(nm);STORE.list.push(np);loadProject(np.id);}
+        flash('');renderList();syncAddButtons();$('projsel').focus();
+      };
+      $('name-cancel').onclick=()=>{editor.hidden=true;$(rename?'pren':'pnew').focus();};
+    }
+    $('pnew').onclick=()=>editProjectName(false);
+    $('pren').onclick=()=>editProjectName(true);
     const dl = $('pdel');
     if (dl) dl.addEventListener('click', () => {
       if (STORE.list.length < 2) return;
@@ -2256,19 +2674,20 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       Object.keys(NOTES).forEach((k) => delete NOTES[k]);
       saveList();
       renderList();
-      document.querySelectorAll('.addb.on').forEach((b) => { b.classList.remove('on'); b.textContent = '+ list'; });
+      document.querySelectorAll('.addb.on').forEach((b) => { b.classList.remove('on'); b.textContent = '+ Add to shortlist'; });
     });
   }
   $('pbody').addEventListener('click', (e) => {
     const add = e.target.closest('[data-add]');
     if (add) {
       const u = add.dataset.add;
-      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ list'; }
-      else { PICKED.add(u); if(add.dataset.prospect && candidateEvidence.has(u)) PROJ().evidence[u]=JSON.parse(JSON.stringify(candidateEvidence.get(u))); add.classList.add('on'); add.textContent='✓ on list'; }
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ Add to shortlist'; }
+      else { PICKED.add(u); if(add.dataset.prospect && candidateEvidence.has(u)) PROJ().evidence[u]=JSON.parse(JSON.stringify(candidateEvidence.get(u))); add.classList.add('on'); add.textContent='✓ Shortlisted'; }
       saveList();
       paintListCount();
+      notifySaved(u);
       const twin = document.querySelector('#qresults .addb[data-add="' + u + '"]');
-      if (twin) { twin.classList.toggle('on', PICKED.has(u)); twin.textContent = PICKED.has(u) ? '✓ on list' : '+ list'; }
+      if (twin) { twin.classList.toggle('on', PICKED.has(u)); twin.textContent = PICKED.has(u) ? '✓ Shortlisted' : '+ Add to shortlist'; }
       return;
     }
     const jump = e.target.closest('#peerhost [data-e]');
@@ -2281,7 +2700,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     saveList();
     renderList();
     const b = document.querySelector('.addb[data-add="' + rm.dataset.rm + '"]');
-    if (b) { b.classList.remove('on'); b.textContent = '+ list'; }
+    if (b) { b.classList.remove('on'); b.textContent = '+ Add to shortlist'; }
   });
   $('pbody').addEventListener('input', (e) => {
     if(e.target.id==='project-brief') { PROJ().brief=e.target.value;saveList();return; }
@@ -2569,7 +2988,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
             reason:'Historical support matching the selected sector, filed recipient location, grant use, amount range and years.'};
           candidateEvidence.set(f.u,evidence);
           const check=coverage.funders[f.u]?.ledger_check_date;
-          return `<article class="prospect"><div class="prow"><span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span><span class="pm">${r.n.toLocaleString('en-US')} matching filed rows · latest tax year ${r.last}${check?' · ledger checked '+esc(check):' · check date not recorded'}</span></span><span class="pv">${moneyC(r.median)}<small>matching median</small></span><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1">${PICKED.has(f.u)?'✓ on list':'+ list'}</button></div>
+          return `<article class="prospect"><div class="prow"><span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span><span class="pm">${r.n.toLocaleString('en-US')} matching filed rows · latest tax year ${r.last}${check?' · ledger checked '+esc(check):' · check date not recorded'}</span></span><span class="pv">${moneyC(r.median)}<small>matching median</small></span><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1">${PICKED.has(f.u)?'✓ Shortlisted':'+ Add to shortlist'}</button></div>
             <details class="peerevidence" data-proof="${f.u}"><summary>View matching grants and criteria</summary><p>${esc(scope)}</p><div data-samples>Opening filed evidence…</div></details></article>`;
         }).join('')}</div>`;
       out.querySelectorAll('[data-proof]').forEach(details=>details.addEventListener('toggle',async()=>{
@@ -2823,50 +3242,31 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('tdots').innerHTML = FINDINGS.map((_, i) => '<button type="button" class="dot' + (i === tIdx ? ' on' : '') + '" data-i="' + i + '" aria-label="Finding ' + (i + 1) + '"></button>').join('');
   }
   function tickNext(d) { tIdx = (tIdx + d + FINDINGS.length) % FINDINGS.length; renderTicker(); }
-  function tickAuto() { if (tTimer) clearInterval(tTimer); if (!reduced()) tTimer = setInterval(() => tickNext(1), 8000); }
+  function tickAuto() { if (tTimer) clearInterval(tTimer); }
   $('tnext').addEventListener('click', () => { tickNext(1); tickAuto(); });
   $('tprev').addEventListener('click', () => { tickNext(-1); tickAuto(); });
   $('tdots').addEventListener('click', (e) => { const b = e.target.closest('.dot'); if (b) { tIdx = +b.dataset.i; renderTicker(); tickAuto(); } });
   document.querySelector('.ticker').addEventListener('mouseenter', () => { if (tTimer) clearInterval(tTimer); });
   document.querySelector('.ticker').addEventListener('mouseleave', tickAuto);
 
-  // ---------- responsive stage placement ----------
-  // On a phone the map is not the point — finding a funder is. The stage drops into
-  // a collapsed card BELOW the results, and the findings strip comes out of the stage
-  // so it still reads on paper. On wide screens both go back to the right-hand stage.
-  // Moving the nodes (rather than duplicating them) keeps every listener bound.
-  // The card collapses with max-height, never display:none, so the map's paths keep
-  // real geometry for getBBox() while it is shut.
-  const mqNarrow = matchMedia('(max-width: 1019px)');
+  // Geography is an explicit view at every width. Move the existing nodes so
+  // listeners and map geometry remain intact while the closed card is clipped.
   function placeStage() {
-    const stage = document.querySelector('.stage');
-    const ticker = document.querySelector('.ticker');
-    const deck = document.querySelector('.deck');
-    const card = $('mapcard');
-    if (mqNarrow.matches) {
-      if (stage.parentElement !== $('stagehost')) $('stagehost').appendChild(stage);
-      if (ticker.parentElement !== $('tickhost')) $('tickhost').appendChild(ticker);
-      card.hidden = false;
-    } else {
-      card.hidden = true;
-      if (stage.parentElement !== deck) deck.appendChild(stage);
-      if (ticker.parentElement !== stage) stage.appendChild(ticker);
-    }
+    const stage=document.querySelector('.stage');
+    $('stagehost').appendChild(stage);
+    $('mapcard').hidden=false;
   }
   function setMapCard(open) {
-    $('mapcard').classList.toggle('open', open);
-    $('mapcardt').setAttribute('aria-expanded', open ? 'true' : 'false');
-    $('mapcardt').querySelector('.mcc').textContent = open ? '−' : '+';
+    $('mapcard').classList.toggle('open',open);
+    document.querySelector('.left').classList.toggle('geography',open);
+    $('mapcardt').setAttribute('aria-expanded',String(open));
+    $('geotoggle').setAttribute('aria-pressed',String(open));
+    $('geotoggle').querySelector('span').textContent=open?'Back to results':'Explore geography';
   }
-  $('mapcardt').addEventListener('click', () => {
-    const open = !$('mapcard').classList.contains('open');
-    setMapCard(open);
-    if (open) $('mapcard').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
-  });
-  (mqNarrow.addEventListener ? mqNarrow.addEventListener('change', placeStage) : mqNarrow.addListener(placeStage));
+  $('geotoggle').addEventListener('click',()=>setMapCard(!$('mapcard').classList.contains('open')));
+  $('mapcardt').addEventListener('click',()=>setMapCard(!$('mapcard').classList.contains('open')));
   placeStage();
-  // opening a state, a city or a purpose from anywhere must reveal the card it lives in
-  function revealStage() { if (mqNarrow.matches && !$('mapcard').classList.contains('open')) setMapCard(true); }
+  function revealStage() { setMapCard(true); }
 
   // ---------- hash + boot ----------
   function writeHash() {
@@ -2911,6 +3311,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       }
     }
   }
+  setTab('q',true);
   readHash();
 })();
 </script>
