@@ -599,6 +599,52 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   .qline .qwide { grid-column:1 / -1; }
   .qex { margin-bottom:.5rem; }
 }
+
+.peerfilters { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem;margin:.8rem 0; }
+.peerfilters label,.projectobjective { font-family:var(--mono);font-size:.75rem;color:var(--ink-dim);display:block; }
+.peerfilters .qsel { display:block;width:100%;min-width:0;margin-top:.3rem; }
+.peerfilters input { box-sizing:border-box; }
+.prospect { border:1px solid var(--rule);border-radius:10px;overflow:hidden; }
+.prospect .prow { border:0;border-radius:0; }
+.peerevidence { padding:.45rem .7rem;font-size:.82rem; }
+.peerevidence summary,.sourcegrants summary,.method summary { cursor:pointer;color:var(--copper-deep);font-weight:600; }
+.peerevidence p { margin:.45rem 0;line-height:1.45; }
+.sourcegrants { margin-top:1.3rem;border-top:1px solid var(--rule);padding-top:1rem; }
+.projectobjective { margin:1rem 0; }
+.projectobjective .lnote { display:block;width:100%;box-sizing:border-box;margin-top:.4rem; }
+.list-evidence { grid-column:2 / -1; }
+.savedreason { font-size:.82rem;line-height:1.45; }
+.savedreason p { margin:.3rem 0; }
+.savedreason small,.briefmeta { color:var(--ink-dim); }
+.lv small { display:block;font-size:.64rem;white-space:normal; }
+.briefgoal,.briefnote { white-space:pre-wrap;line-height:1.6; }
+.briefcard { break-inside:avoid; }
+.briefcard h3 { font-family:var(--serif);font-size:1.25rem;margin:0; }
+.briefcard a { color:inherit; }
+.briefsources { padding-left:1.2rem;font-size:.85rem;line-height:1.65; }
+.coveragegrid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1.1rem 0; }
+.coveragegrid div { padding:.85rem;background:var(--tint);border:1px solid var(--rule);border-radius:8px; }
+.coveragegrid b { display:block;font-size:1.5rem; }
+.coveragegrid span { display:block;font-size:.8rem; }
+@media(max-width:600px) { .peerfilters { grid-template-columns:repeat(2,minmax(0,1fr)); } .list-evidence { grid-column:1 / -1; } .prospect .prow { grid-template-columns:1fr auto; } .prospect .prow .addb { grid-column:2; } .prospect .prow .pv { grid-column:1;grid-row:2;text-align:left; } }
+@media print { .brief .repbar { display:none; } .briefcard { break-inside:avoid; } }
+
+
+.lnote { box-sizing:border-box; }
+.lrow .lm { display:block;margin-top:.25rem; }
+.lhead .acts { flex-wrap:wrap; }
+.brief .repbar { flex-wrap:wrap; }
+.brief .rbacts { flex-wrap:wrap; }
+@media(max-width:600px) {
+ .lrow { grid-template-columns:34px minmax(0,1fr) auto;align-items:start;gap:.6rem; }
+ .lrow > span:nth-child(2) { grid-column:2 / -1;min-width:0; }
+ .lrow .lv { grid-column:2; }
+ .lrow .rm { grid-column:3; }
+ .lrow .lnote,.lrow .list-evidence { grid-column:1 / -1;min-width:0; }
+ .lhead .acts { margin-left:0; }
+ .projbar { padding-right:2rem; }
+ .brief .repbar .rbt { max-width:100%; }
+}
 </style>
 </head>
 <body>
@@ -608,7 +654,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   <a class="brand" href="https://jcurry44.github.io/grants-ledgers/" title="The Grants Ledger — back to the start" aria-label="The Grants Ledger, home"><span class="gl" aria-hidden="true">≡</span><b>The Grants Ledger</b></a>
   <div class="tots" id="bigstats" aria-live="polite" data-state="wait">
     <div><b class="num" data-k="t">&mdash;</b><span>reconciled</span></div>
-    <div><b class="num" data-k="g">&mdash;</b><span>grants</span></div>
+    <div><b class="num" data-k="g">&mdash;</b><span>filed rows</span></div>
     <div><b class="num" data-k="n">&mdash;</b><span>ledgers</span></div>
   </div>
   <nav class="topnav">
@@ -616,7 +662,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     <a href="https://jcurry44.github.io/grants-ledgers/ny/" class="hidesm">New York ↗</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="hidesm">Exceptions ↗</a>
     <button type="button" id="listbtn" class="listbtn" aria-label="Project — 0 saved"><svg class="lbico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.1 1.6h7.8a1 1 0 0 1 1 1v11.8l-4.9-3.1-4.9 3.1V2.6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lbt">Project</span><span class="cnt" id="listcnt">0</span></button>
-    <button type="button" id="aboutbtn">Method</button>
+    <button type="button" id="aboutbtn">Coverage</button>
   </nav>
 </header>
 
@@ -624,7 +670,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 <section class="left" aria-label="Browse the collection">
   <div class="mast">
     <h1 class="masth">A verified record of grantmaking from <em><span id="heroN2">1,950</span> major U.S. private foundations</em></h1>
-    <p class="mastsub">Reconciled IRS grant records. <button type="button" class="mastlink" id="mastmethod">What is in, and what is not ›</button></p>
+    <p class="mastsub">Reconciled IRS grant records. <button type="button" class="mastlink" id="mastmethod">Coverage & freshness ›</button></p>
   </div>
   <div class="searchbox">
     <label class="sr-only" for="q">Search organizations</label>
@@ -724,7 +770,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   <div class="stagehead">
     <h1>A verified record of grantmaking from <em><span id="heroN">1,950</span> major U.S. private foundations</em></h1>
     <span class="stagelede" id="mapstat"></span>
-    <span class="stagesub">every included year reconciled to the total that foundation itself filed with the IRS · <button type="button" class="stagelink" id="heromethod">what is in, and what is not ›</button></span>
+    <span class="stagesub">every included year reconciled to the total that foundation itself filed with the IRS · <button type="button" class="stagelink" id="heromethod">coverage & freshness ›</button></span>
   </div>
   <div class="mapzone">
     <svg class="usmap" id="usmap" role="img" aria-label="Map of the United States, shaded where foundations in this collection are based."></svg>
@@ -800,7 +846,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
 </div>
 
 <script>
-/*DBVER-START*/window.DBV='b243d1d295';/*DBVER-END*/
+/*DBVER-START*/window.DBV='research-20260905-v1';/*DBVER-END*/
 (async () => {
   const $ = (id) => document.getElementById(id);
   const money = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US');
@@ -819,18 +865,18 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- identity confidence ----------
-  // No 990-PF grant row carries a recipient EIN — not one of the 1,565,291 here.
+  // Coverage is measured per release; identity linkage remains an inference.
   // An entity id beginning "E" is a filed name canonicalised and then matched to an
   // IRS-registered organisation in the Business Master File; one beginning "K" is
   // the canonical name and nothing more. Every recipient aggregate on this page has
   // to say which of the two it is, in a mark that survives greyscale.
   const isGov = (id) => String(id || '').charAt(0) === 'E';
   const GOV_WHY = 'Government-matched identity — the recipient name as filed was canonicalised and matched to an IRS-registered organisation in the IRS Business Master File. This match is inferred from the filed name and IRS organization record; it does not independently verify every grant or resolve every alias.';
-  const EST_WHY = 'Name-matched estimate — no 990-PF grant row carries a recipient EIN, so this identity is the filed name canonicalised and nothing more. A total added across foundations may split one organisation in two, or hold two same-named organisations as one.';
+  const EST_WHY = 'Name-matched estimate — this identity uses a canonical filed name without a resolved IRS identity. A total added across foundations may split one organisation in two, or hold two same-named organisations as one.';
   function idChip(id, size) {
     const k = size ? ' ' + size : '';
     return isGov(id)
-      ? '<span class="idm gov' + k + '" title="' + esc(GOV_WHY) + '"><i aria-hidden="true">●</i>Gov-matched</span>'
+      ? '<span class="idm gov' + k + '" title="' + esc(GOV_WHY) + '"><i aria-hidden="true">●</i>IRS-linked</span>'
       : '<span class="idm est' + k + '" title="' + esc(EST_WHY) + '"><i aria-hidden="true">○</i>Name-matched</span>';
   }
   const softCls = (id) => (isGov(id) ? '' : ' softsum');
@@ -877,7 +923,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   const GRP_ORDER = ['s', 't', 'c', 'i', 'u', 'n'];
   function placeOf(raw) {
     if (raw === '' || raw === undefined || raw === null) {
-      return { g: 'n', label: 'Location not filed', opt: 'location not filed', why: 'the 246,778 rows (16.2% of the collection) whose filing names no recipient state at all' };
+      return { g: 'n', label: 'Location not filed', opt: 'location not filed', why: 'rows whose filing names no recipient state; see Coverage & method for the current count' };
     }
     if (ST_NAME[raw]) return { g: 's', label: raw + ' — ' + ST_NAME[raw], opt: 'in ' + raw + ' — ' + ST_NAME[raw], why: '' };
     const p = PLACE_MAP[raw];
@@ -1150,7 +1196,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         + '<div class="dh" style="margin-top:0.55rem">Most from</div><div class="dlist">'
         + barRows(fnds.slice(0, 3).map(([fi, t]) => ({ n: F[fi] ? F[fi].s : '?', v: t, href: F[fi] ? 'https://jcurry44.github.io/grants-ledgers/f/' + F[fi].u + '/' : '#' }))) + '</div>';
       $('dnote').innerHTML = 'categories follow the collection’s three published tiers · amounts are the filed rows · '
-        + idChip('E', 'mini') + ' matched to an IRS-registered organisation, safe to add across foundations · '
+        + idChip('E', 'mini') + ' linked to an IRS-registered name by inference; review before combining · '
         + idChip('K', 'mini') + ' the filed name alone — read that total as an estimate';
       return;
     }
@@ -1483,7 +1529,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
   const uid = () => 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const slug = (s2) => String(s2).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48) || 'project';
-  const blankProject = (nm) => ({ id: uid(), name: nm || 'Untitled project', created: todayISO(), updated: todayISO(), funders: [], notes: {} });
+  const blankProject = (nm) => ({ id: uid(), name: nm || 'Untitled project', created: todayISO(), updated: todayISO(), funders: [], notes: {}, evidence: {}, brief: '' });
   function readStore() {
     let s2 = null;
     try { s2 = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { s2 = null; }
@@ -1501,6 +1547,8 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       id: p.id, name: String(p.name || 'Untitled project'), created: p.created || todayISO(), updated: p.updated || todayISO(),
       funders: Array.isArray(p.funders) ? p.funders.filter((u) => typeof u === 'string') : [],
       notes: (p.notes && typeof p.notes === 'object') ? p.notes : {},
+      evidence: cleanEvidence(p.evidence, Array.isArray(p.funders) ? p.funders : []),
+      brief: typeof p.brief === 'string' ? p.brief.slice(0,3000) : '',
     }));
     if (!s2.list.length) s2.list = [blankProject('First project')];
     if (!s2.list.some((p) => p.id === s2.active)) s2.active = s2.list[0].id;
@@ -1728,8 +1776,14 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const add = e.target.closest('[data-add]');
     if (add) {
       const u = add.dataset.add;
-      if (PICKED.has(u)) { PICKED.delete(u); add.classList.remove('on'); add.textContent = '+ list'; }
-      else { PICKED.add(u); add.classList.add('on'); add.textContent = '✓ on list'; }
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ list'; }
+      else {
+        PICKED.add(u); add.classList.add('on'); add.textContent='✓ on list';
+        const row=qState.rows.find(r=>F[r[0]].u===u);
+        if(row) PROJ().evidence[u]={kind:'query',n:row[1],total:row[2],median:row[3],last:row[4],max:row[5],saved_at:todayISO(),
+          scope:QMETA.cats[qState.cat]+' (filed-purpose category) · '+(qState.st==='all'?'any recipient location':placeOf(QMETA.states[qState.st]).label)+' · minimum '+money(qState.min)+' · tax year from '+(qState.yr||'any')+(region!=='all'?' · region '+region:'')+(mapSel?' · funders based in '+stName(mapSel):''),
+          registry_sha256:COVERAGE?.registry_sha256||'',dataset_sha256:COVERAGE?.dataset_sha256||'',examples:[]};
+      }
       saveList();
       renderList();
       return;
@@ -1950,6 +2004,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     { h: 'Total in scope', k: 'total', type: 'n', w: 22 },
     { h: 'Reconciliation', k: 'recon', type: 's', w: 30 },
     { h: 'Ledger', k: 'url', type: 's', w: 46 },
+    { h: 'Saved evidence', k: 'evidence', type: 's', w: 60 },
     { h: 'Note', k: 'note', type: 's', w: 40 },
   ];
   function funderRow(f, extra) {
@@ -1997,9 +2052,72 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     return JSON.stringify({
       format: 'grants-ledger-project', v: 1, exported: todayISO(),
       source: 'https://jcurry44.github.io/grants-ledgers/',
-      project: { name: p.name, created: p.created, updated: p.updated, funders: p.funders, notes: p.notes },
+      project: { name: p.name, created: p.created, updated: p.updated, funders: p.funders, notes: p.notes, evidence: p.evidence, brief: p.brief },
     }, null, 2);
   }
+  function cleanEvidence(value, funders) {
+    const out = {};
+    if (!value || typeof value !== 'object') return out;
+    for (const u of funders) {
+      const e = value[u];
+      if (!e || typeof e !== 'object' || typeof e.scope !== 'string' || !['n','total','median','last'].every(k=>Number.isFinite(e[k]))) continue;
+      const clean = {scope:e.scope.slice(0,2000),kind:e.kind==='prospect'?'prospect':'query'};
+      for (const k of ['recipient_id','recipient_name','dataset_sha256','registry_sha256','built_at','saved_at','reason'])
+        if (typeof e[k]==='string') clean[k]=e[k].slice(0,2000);
+      for (const k of ['n','total','median','max','last']) if (Number.isFinite(e[k])) clean[k]=e[k];
+      clean.examples = Array.isArray(e.examples) ? e.examples.filter(x=>x && Number.isInteger(x.index) && x.index>=0).slice(0,3) : [];
+      clean.sources = Array.isArray(e.sources) ? e.sources.filter(x=>x && typeof x.name==='string' && Number.isFinite(x.amount) && Number.isInteger(x.year)).slice(0,3).map(x=>({name:x.name.slice(0,500),amount:x.amount,year:x.year})) : [];
+      out[u]=clean;
+    }
+    return out;
+  }
+  function savedFunderRow(f) {
+    const e=PROJ().evidence[f.u];
+    return funderRow(f,e ? {n:e.n,median:e.median,max:e.max,last:e.last,total:e.total,scope:e.scope,
+      evidence:'Saved '+(e.saved_at||'date unknown')+(e.recipient_name?' · comparable: '+e.recipient_name:''),
+      note:NOTES[f.u]||''} : {n:f.g,evidence:'Added without a saved matching selection'});
+  }
+  function evidenceSummary(f) {
+    const e=PROJ().evidence[f.u];
+    if (!e) return '<span class="lm">No matching selection saved. Add your rationale below.</span>';
+    return `<div class="savedreason"><b>${e.n.toLocaleString('en-US')} matching filed rows · ${money(e.median)} median · latest TY${e.last}</b>
+      <p>${e.recipient_name?'Comparable record: '+esc(e.recipient_name)+'. ':''}${esc(e.scope)}</p>
+      <small>Saved ${esc(e.saved_at||'date unknown')}${COVERAGE && e.dataset_sha256 && e.dataset_sha256!==COVERAGE.dataset_sha256?' · Earlier collection: recheck the evidence before outreach.':''}</small></div>`;
+  }
+  async function prepareBrief() {
+    const p=PROJ(), projectId=p.id;
+    openOvl('r'); $('pbody').innerHTML='<div class="loading">Preparing your research brief…</div>';
+    let coverage=null;
+    try { coverage=await coverageData(); } catch(e) {}
+    const funders=listRows();
+    await Promise.all(funders.map(async f=>{
+      const ev=p.evidence[f.u];
+      if (!ev || ev.sources?.length || !ev.examples?.length || !coverage || ev.dataset_sha256!==coverage.dataset_sha256) return;
+      try {
+        const rows=await prospectData('fnd/'+f.u+'.json');
+        ev.sources=ev.examples.map(x=>rows[x.index]).filter(Boolean).map(g=>({name:g[5],amount:g[2],year:g[0]}));
+      } catch(e) {}
+    }));
+    if(ovlMode!=='r' || PROJ().id!==projectId) return;
+    saveList(); stashExpMenu();
+    $('pbody').innerHTML=`<div class="rep brief">
+      <div class="repbar"><span class="rbt">${esc(p.name)}</span><span class="rbacts"><span class="expwrap"><button type="button" class="tbtn" id="brief-export">Export ▾</button></span><button type="button" class="tbtn" id="brief-print">Print / PDF</button><button type="button" class="tbtn" id="brief-back">Edit shortlist</button></span></div>
+      <div class="rephead"><div class="eyebrow">Grants Ledger · research brief · ${todayISO()}</div><h2>${esc(p.name)}</h2>
+      <p class="briefgoal">${esc(p.brief||'Add a project objective in the shortlist to give this brief context.')}</p>
+      <p>${funders.length} shortlisted ${funders.length===1 ? 'funder' : 'funders'} · ${funders.filter(f=>p.evidence[f.u]).length} with saved matching criteria · ${funders.filter(f=>String(NOTES[f.u]||'').trim()).length} with research notes</p></div>
+      ${funders.map((f,i)=>{const e=p.evidence[f.u];return `<section class="repsec briefcard"><h3>${i+1}. <a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></h3>
+        <p class="briefmeta">${esc(f.ci)}${f.st?', '+esc(f.st):''} · published ledger TY${f.y[0]}–${f.y[f.y.length-1]}</p>
+        ${evidenceSummary(f)}
+        ${e?.sources?.length?`<ul class="briefsources">${e.sources.map(g=>`<li><a href="${ledgerLink(F.indexOf(f),g.name)}">${esc(dc(g.name))} ↗</a> · ${money(g.amount)} · TY${g.year}</li>`).join('')}</ul>`:e?'<p class="repnote">Individual source examples are unavailable in this snapshot; open the ledger to inspect the selection.</p>':''}
+        <p class="briefnote"><b>Research note & next step</b><br>${esc(NOTES[f.u]||'Review current eligibility, application route and fit before outreach.')}</p>
+      </section>`;}).join('')}
+      <div class="repnote">Historical support is evidence for further research, not a prediction of funding. Recipient identities and sectors may be inferred; confirm the organization and current funder criteria. Each saved selection has its own scope, so its dollar totals are not added into a funding opportunity estimate. ${coverage?'Collection measured '+esc(coverage.built_at.slice(0,10))+'; '+coverage.foundations.toLocaleString('en-US')+' published funders.':'Current coverage could not load; check the collection before using this brief.'}</div>
+    </div>`;
+    $('brief-export').onclick=()=>exportMenu($('brief-export'),()=>({name:slug(p.name)+'-research-brief',cols:FCOLS,rows:funders.map(savedFunderRow)}));
+    $('brief-print').onclick=()=>window.print();
+    $('brief-back').onclick=()=>{openOvl('l');paintList();};
+  }
+
   function paintList() {
     stashExpMenu();
     const rows = listRows();
@@ -2017,29 +2135,31 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         <button type="button" class="pbtn" id="popen">Open from file…</button>
         <input type="file" id="pfile" accept=".json,application/json" hidden>
       </div>
-      <p class="projnote">Projects are kept in <b>this browser</b> — there is no account here and nothing is uploaded. Clearing site data clears them. <b>Save to file</b> writes this project out so it survives that, moves to another machine, or goes to a colleague; <b>Open from file</b> reads one back in.</p>
+      <p class="projnote">Saved in <b>this browser only</b>. <b>Save to file</b> backs up your funders, evidence and notes; <b>Open from file</b> restores them on another device. Clearing site data removes local projects.</p>
       <p class="projmsg" id="projmsg" hidden></p>
       <div class="lhead">
         <div><div class="p-name">${esc(p.name)}</div>
-          <div class="tot">${rows.length} ${rows.length === 1 ? 'funder' : 'funders'} · ${money(tot)} verified across their filed years · last change ${esc(p.updated)}</div></div>
+          <div class="tot">${rows.length} ${rows.length === 1 ? 'funder' : 'funders'} · ${rows.filter(f=>p.evidence[f.u]).length} with saved matching criteria · updated ${esc(p.updated)}</div></div>
         <div class="acts">
           <span class="expwrap"><button type="button" class="tbtn" id="lexport"${rows.length ? '' : ' disabled'}>Export ▾</button></span>
-          <button type="button" class="tbtn" id="lreport"${rows.length ? '' : ' disabled'}>Build report</button>
+          <button type="button" class="tbtn" id="lreport"${rows.length ? '' : ' disabled'}>Build research brief</button>
           <button type="button" class="tbtn" id="lprint"${rows.length ? '' : ' disabled'}>Print</button>
           <button type="button" class="tbtn" id="lclear"${rows.length ? '' : ' disabled'}>Clear</button>
         </div>
       </div>
+      <label class="projectobjective">Project objective<textarea class="lnote" id="project-brief" rows="2" maxlength="3000" placeholder="Who is this research for, what needs funding, and what makes a strong fit?">${esc(p.brief||'')}</textarea></label>
       ${rows.length ? rows.map((f) => `
         <div class="lrow">
           <span class="cd">${f.c}</span>
           <span><span class="ln"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
             <span class="lm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]} · ✓ reconciled${f.rn ? ' · bridged' : ''}</span></span>
-          <span class="lv num">${moneyC(f.t)}</span>
+          <span class="lv num">${p.evidence[f.u] ? moneyC(p.evidence[f.u].total) : moneyC(f.t)}<small>${p.evidence[f.u] ? 'saved matching total' : 'all filed giving'}</small></span>
           <button type="button" class="rm" data-rm="${f.u}" aria-label="Remove">remove</button>
-          <textarea class="lnote" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
+          <div class="list-evidence">${evidenceSummary(f)}</div>
+          <textarea class="lnote" aria-label="Research note for ${esc(f.n)}" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
         </div>`).join('')
         : `<div class="qempty"><b>Nothing in this project yet.</b>Add funders from Find funders — they stay in this project in this browser, and export as a CSV, a spreadsheet, or a printable brief.</div>`}
-      <p style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-dim); margin-top:0.9rem">Every figure here reconciles to a total the foundation itself filed with the IRS. Exceptions are named on the exceptions page.</p>`;
+      <p style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-dim); margin-top:0.9rem">Saved evidence describes historical grants within its stated scope. Recheck eligibility and the source ledger before outreach.</p>`;
     if (projMsg) { const el = $('projmsg'); el.textContent = projMsg.msg; el.classList.toggle('bad', projMsg.bad); el.hidden = false; }
     // ---- project controls ----
     const sel = $('projsel');
@@ -2106,6 +2226,8 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
         const np = blankProject(nm);
         if (typeof pr.created === 'string') np.created = pr.created;
         np.funders = known;
+        np.evidence = cleanEvidence(pr.evidence,known);
+        np.brief = typeof pr.brief==='string' ? pr.brief.slice(0,3000) : '';
         if (pr.notes && typeof pr.notes === 'object') known.forEach((u) => { if (typeof pr.notes[u] === 'string') np.notes[u] = pr.notes[u]; });
         STORE.list.push(np);
         loadProject(np.id);
@@ -2120,16 +2242,17 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const ex = $('lexport');
     if (ex) ex.addEventListener('click', () => exportMenu(ex, () => ({
       name: slug(PROJ().name) + '-funders', cols: FCOLS,
-      rows: listRows().map((f) => funderRow(f, { n: f.g })),
+      rows: listRows().map(savedFunderRow),
     })));
     const lr = $('lreport');
     if (lr) lr.addEventListener('click', () => buildReport('list'));
     const pr = $('lprint');
-    if (pr) pr.addEventListener('click', () => window.print());
+    if (pr) pr.addEventListener('click', () => prepareBrief());
     const cl = $('lclear');
     if (cl) cl.addEventListener('click', () => {
       if (!confirm('Remove all ' + PICKED.size + ' funders from “' + PROJ().name + '”? The project itself stays.')) return;
       PICKED.clear();
+      PROJ().evidence = {};
       Object.keys(NOTES).forEach((k) => delete NOTES[k]);
       saveList();
       renderList();
@@ -2140,8 +2263,8 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     const add = e.target.closest('[data-add]');
     if (add) {
       const u = add.dataset.add;
-      if (PICKED.has(u)) { PICKED.delete(u); add.classList.remove('on'); add.textContent = '+ list'; }
-      else { PICKED.add(u); add.classList.add('on'); add.textContent = '✓ on list'; }
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.textContent = '+ list'; }
+      else { PICKED.add(u); if(add.dataset.prospect && candidateEvidence.has(u)) PROJ().evidence[u]=JSON.parse(JSON.stringify(candidateEvidence.get(u))); add.classList.add('on'); add.textContent='✓ on list'; }
       saveList();
       paintListCount();
       const twin = document.querySelector('#qresults .addb[data-add="' + u + '"]');
@@ -2154,12 +2277,14 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     if (!rm) return;
     PICKED.delete(rm.dataset.rm);
     delete NOTES[rm.dataset.rm];
+    delete PROJ().evidence[rm.dataset.rm];
     saveList();
     renderList();
     const b = document.querySelector('.addb[data-add="' + rm.dataset.rm + '"]');
     if (b) { b.classList.remove('on'); b.textContent = '+ list'; }
   });
   $('pbody').addEventListener('input', (e) => {
+    if(e.target.id==='project-brief') { PROJ().brief=e.target.value;saveList();return; }
     const t = e.target.closest('[data-note]');
     if (!t) return;
     NOTES[t.dataset.note] = t.value;
@@ -2180,7 +2305,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
       ? 'showing ' + items.length + ' of ' + gov.length + ' government-matched identities in this most-funded list'
       : 'showing ' + items.length + ' of ' + pool.length + ' · ' + (pool.length - gov.length) + ' of the ' + pool.length + ' are name-matched estimates';
     $('idlegend').innerHTML = idChip('E')
-      + ' matched to an IRS-registered organisation — safe to add across foundations. '
+      + ' linked to an IRS-registered name by inference; review source names and addresses before combining. '
       + idChip('K')
       + ' the filed name only — no 990-PF row carries a recipient EIN, so read the cross-foundation total as an estimate.';
   }
@@ -2325,79 +2450,146 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('pbody').innerHTML = `
       <div class="p-name">${esc(dc(rec.n))}</div>
       <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· EIN ' + id.slice(1) + ' · matched to an IRS-registered organisation' : '· identity built from the recipient name as filed'}</span></div>
-      ${alias.length ? `<div class="p-alias">also filed as: ${esc(alias.slice(0, 6).map(dc).join(' · '))}${alias.length > 6 ? ' · …' : ''}</div>` : ''}
+      ${alias.length ? `<details class="p-alias"><summary>View ${alias.length+1} filed name variants</summary><p>${esc([rec.v[rec.d]||rec.n,...alias].join(' · '))}</p></details>` : ''}
       <div class="p-tot"><b class="num${sumCls(id)}"${softTip(id)}>${money(total)}</b><span>${rows.length} grants · ${byF.size} ${byF.size === 1 ? 'foundation' : 'foundations'} · ${years[0]}–${years[years.length - 1]}${isGov(id) ? '' : ' · name-matched estimate'}</span></div>
-      ${isGov(id) ? '' : '<p class="p-warn"><b>This cross-foundation total is a name-matched estimate.</b> No 990-PF grant row carries a recipient EIN — not one of the 1,565,291 rows in this collection — so this organization is held together only by canonicalising the name each foundation filed. The record may split one organization across two entries, or hold two same-named organizations as one. Read the figure as a close estimate, not a settled total.</p>'}
+      <p class="p-warn">Cross-foundation totals use inferred recipient matches. Check filed names and addresses; aliases can split one organization, and same-named organizations can be combined.</p>
+      <div id="peerhost"></div>
+      <details class="sourcegrants"><summary>View ${rows.length.toLocaleString('en-US')} source grants and ${byF.size} known funders</summary>
       <div class="chiprow">${[...byF.entries()].sort((a, b) => b[1] - a[1]).map(([fi, amt]) =>
         `<a class="fchip" href="https://jcurry44.github.io/grants-ledgers/f/${F[fi].u}/" title="${esc(F[fi].n)} — open its ledger"><span class="cd">${F[fi].c}</span><span>${esc(F[fi].s)}</span><span class="fa num">${moneyC(amt)}</span></a>`).join('')}</div>
       <div class="yearsline">${years.map((y) => `<div class="yb"><div class="y">${y}</div><div class="v num">${moneyC(byY.get(y))}</div></div>`).join('')}</div>
       <div class="tw"><table><thead><tr><th>Year</th><th>Foundation</th><th class="amt">Amount</th><th>Source ledger</th></tr></thead><tbody>
         ${rows.map((g) => `<tr><td class="yr">${g[0]}</td><td>${esc(F[g[1]].s)}</td><td class="amt num">${money(g[2])}</td>
           <td><a class="rowlink" href="${ledgerLink(g[1], rec.v[g[3]] || rec.n)}" title="Opens the ${esc(F[g[1]].s)} ledger filtered to this recipient — it may hold more than one grant">View this recipient in the source ledger ↗</a></td></tr>`).join('')}
-      </tbody></table></div>
-      <div id="peerhost"></div>`;
+      </tbody></table></div></details>`;
     renderPeers(rec, id, [...byF.keys()]);
     $('suggest').hidden = true;
     if (!silent) writeHash();
   }
 
-  // ---------- PEER LENS: funders of organizations like this one ----------
-  // Uses the org's own purpose+place cell, minus the funders it already has.
-  async function renderPeers(rec, id, funderIdx) {
-    const host = $('peerhost');
-    if (!host) return;
-    const m = await qMeta();
-    if (!m) { host.innerHTML = ''; return; }
-    // the org's dominant purpose and place, from its own grants
-    const catT = {}, stT = {}, amts = [];
-    rec.g.forEach(([y, fi, a, vi, ci2, si2]) => { catT[ci2] = (catT[ci2] || 0) + a; stT[si2] = (stT[si2] || 0) + a; amts.push(a); });
-    // "Other filed purposes" is a residual bucket, not a subject — never match on it
-    // if this organization has any real purpose behind it.
-    const junk = m.cats.indexOf('Other filed purposes');
-    const catRank = Object.keys(catT).sort((a, b) => catT[b] - catT[a]);
-    const ci = (catRank.find((c) => +c !== junk) !== undefined ? catRank.find((c) => +c !== junk) : catRank[0]);
-    const si = Object.keys(stT).sort((a, b) => stT[b] - stT[a])[0];
-    // what this organization actually receives, so we don't hand a $25k grantee
-    // a funder whose median grant is $400k
-    amts.sort((a, b) => a - b);
-    const orgMed = amts.length ? amts[Math.floor(amts.length / 2)] : 0;
-    const orgTot = amts.reduce((s, v) => s + v, 0);
-    if (ci === undefined || si === undefined) { host.innerHTML = ''; return; }
-    const [data] = await Promise.all([qCat(+ci), behaviour()]);
-    const cell = (data && data[si]) || [];
-    const peers = (data && data['p' + si]) || [];
-    const have = new Set(funderIdx);
-    const unfunded = cell.filter((r) => !have.has(r[0]));
-    // rank by how many comparable grants they've made, within a plausible size band
-    const band = (lo, hi) => unfunded.filter((r) => r[3] >= orgMed * lo && r[3] <= orgMed * hi)
-      .sort((a, b) => b[1] - a[1]);
-    let fresh = orgMed ? band(0.2, 5) : [];
-    if (fresh.length < 4) fresh = orgMed ? band(0.08, 12) : [];
-    if (fresh.length < 4) fresh = unfunded.slice().sort((a, b) => b[1] - a[1]);
-    fresh = fresh.slice(0, 8);
-    const catName = m.cats[ci], stName2 = m.states[si] || 'the same state';
-    host.innerHTML = `
-      <div class="peerwrap">
-        <div class="peerhead"><b>Funders of organizations like this</b>
-          <span class="sub">${esc(catName.toLowerCase())} · ${esc(stName2)}</span></div>
-        <p class="peerlead">${fresh.length
-          ? `These funders give to ${esc(catName.toLowerCase())} work in ${esc(stName2)} at a comparable grant size, and have no grant to this organization anywhere in the collection.`
-          : `Every funder of ${esc(catName.toLowerCase())} work in ${esc(stName2)} in this collection already funds this organization.`}</p>
-        <div class="plist">${fresh.map(([fi, n, tot, med, last, mx]) => {
-          const f = F[fi];
-          if (!f) return '';
-          const b = BEH && BEH[fi];
-          return `<div class="prow">
-            <span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
-              <span class="pm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · ${n} comparable grant${n === 1 ? '' : 's'} · most recent ${last}${b && b.length >= 6 && b[1] != null ? ' · ' + b[1] + '% multi-year recipients' : ''}</span></span>
-            <span class="pv">${moneyC(med)}<small>median grant</small></span>
-            <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}">${PICKED.has(f.u) ? '✓ on list' : '+ list'}</button>
-          </div>`;
-        }).join('')}</div>
-        ${peers.length ? `<div class="peerorgs">Comparable grantees here: ${peers.filter((p) => p[1] !== id && (!govOnly || isGov(p[1])) && (!orgTot || (p[2] <= orgTot * 12 && p[2] >= orgTot / 12))).slice(0, 6)
-          .map((p) => `<button type="button" data-e="${p[1]}">${esc(dc(p[0]))}</button> ${idChip(p[1], 'mini')}`).join(' · ')}</div>` : ''}
-      </div>`;
+  // A sector is an adjustable signal. Every other constraint intersects on a filed row.
+  function matchProspects(source, filter, excluded) {
+    const grouped = new Map();
+    for (const [fi, year, amount, state, mechanism, count, example] of source) {
+      if (excluded.has(fi) || (filter.state !== 'all' && state !== +filter.state)
+        || (filter.mechanism !== 'all' && mechanism !== +filter.mechanism)
+        || year < filter.year || (filter.min !== null && amount < filter.min)
+        || (filter.max !== null && amount > filter.max)) continue;
+      if (!grouped.has(fi)) grouped.set(fi, {fi, n:0, total:0, last:0, max:-Infinity, amounts:[], examples:[]});
+      const row = grouped.get(fi);
+      row.n += count; row.total += amount * count; row.last = Math.max(row.last, year);
+      row.max = Math.max(row.max, amount); row.amounts.push([amount, count]);
+      row.examples.push({index:example, year, amount});
+    }
+    return [...grouped.values()].map(row => {
+      row.median = weightedMedian(row.amounts);
+      row.examples.sort((a,b) => b.year-a.year || Math.abs(a.amount-row.median)-Math.abs(b.amount-row.median));
+      row.examples = row.examples.slice(0,3);
+      return row;
+    }).sort((a,b) => b.last-a.last || (filter.reference > 0
+      ? Math.abs(Math.log(Math.max(1,a.median)/filter.reference))-Math.abs(Math.log(Math.max(1,b.median)/filter.reference)) : 0)
+      || b.n-a.n || a.fi-b.fi);
   }
+  const prospectCache = new Map(), candidateEvidence = new Map();
+  let COVERAGE = null;
+  coverageData().catch(()=>{});
+  async function prospectData(path) {
+    if (!prospectCache.has(path)) prospectCache.set(path, get(path).catch(e => { prospectCache.delete(path); throw e; }));
+    return prospectCache.get(path);
+  }
+  async function coverageData() {
+    const c = await prospectData('coverage.json');
+    if (c.foundations !== F.length || c.totals.rows !== REG.totals.all.g || c.totals.dollars !== REG.totals.all.t)
+      throw new Error('Coverage and collection versions differ.');
+    COVERAGE = c; return c;
+  }
+  async function renderPeers(rec, id, funderIdx) {
+    const host = $('peerhost'); if (!host) return;
+    host.innerHTML = '<div class="peerwrap"><b>Find additional funders</b><p class="peerlead">Loading sector signals and filed evidence…</p></div>';
+    let m, profile, coverage;
+    try {
+      [m, profile, coverage] = await Promise.all([prospectData('research/meta.json'),
+        prospectData('research/profiles/' + (djb2(id) % (REG.buckets || 128)) + '.json'), coverageData()]);
+      if (m.dataset_sha256 !== coverage.dataset_sha256) throw new Error('Index versions differ.');
+    } catch(e) {
+      if (!host.isConnected || curProfile !== id) return;
+      host.innerHTML = '<div class="peerwrap"><b>Suggestions could not load.</b><p class="peerlead">Your source grants remain available below.</p><button type="button" class="pbtn" data-peer-retry>Retry suggestions</button></div>';
+      host.querySelector('[data-peer-retry]').onclick = () => renderPeers(rec,id,funderIdx); return;
+    }
+    if (!host.isConnected || curProfile !== id || ovlMode !== 'p') return;
+    const signal = profile[id], stateCounts = new Map();
+    rec.g.forEach(g => { if (REG.states[g[5]]) stateCounts.set(g[5],(stateCounts.get(g[5])||0)+1); });
+    const state = [...stateCounts].sort((a,b)=>b[1]-a[1])[0]?.[0];
+    const orgMedian = weightedMedian(rec.g.filter(g=>g[2]>0).map(g=>[g[2],1]));
+    const latest = Math.max(...Object.keys(coverage.rows_by_year).map(Number));
+    const opts = (values,selected) => values.map(([v,n]) => `<option value="${esc(String(v))}"${String(v)===String(selected)?' selected':''}>${esc(n)}</option>`).join('');
+    host.innerHTML = `<section class="peerwrap" aria-label="Funder suggestions">
+      <div class="peerhead"><b>Find additional funders</b><span class="sub">Evidence you can inspect and save</span></div>
+      <p class="peerlead">${signal ? 'Starting sector signal: ' + esc(m.sectors[signal[0]]) + ', from the ' + esc(m.basis[signal[1]]) + '.' : 'Choose a sector to begin; this record has no clear sector signal.'} Adjust it to fit the work. Location refers to a recipient’s filed address.</p>
+      <div class="peerfilters">
+        <label>Sector signal<select class="qsel" id="peer-sector">${opts([[-1,'Choose a sector…'],...m.sectors.map((n,i)=>[i,n])],signal ? signal[0] : -1)}</select></label>
+        <label>Recipient location<select class="qsel" id="peer-state">${opts([['all','Any location'],...REG.states.map((n,i)=>[i,placeOf(n).label]).sort((a,b)=>a[1].localeCompare(b[1]))],state ?? 'all')}</select></label>
+        <label>Grant use<select class="qsel" id="peer-use">${opts([['all','Any grant use'],...m.mechanisms.map((n,i)=>[i,n])],'all')}</select></label>
+        <label>Minimum grant ($)<input class="qsel" id="peer-min" type="number" min="0" step="any" placeholder="Any amount" value="${orgMedian ? Math.floor(orgMedian/4) : ''}"></label>
+        <label>Maximum grant ($)<input class="qsel" id="peer-max" type="number" min="0" step="any" placeholder="No maximum" value="${orgMedian ? Math.ceil(orgMedian*4) : ''}"></label>
+        <label>Tax year from<select class="qsel" id="peer-year">${opts([[0,'Any filed year'],...Object.keys(coverage.rows_by_year).sort().reverse().map(y=>[y,y])],latest-2)}</select></label>
+      </div>
+      <p class="peerlead">${orgMedian ? 'Starting size band: ¼–4× this record’s ' + money(orgMedian) + ' median positive grant. ' : ''}Ranked by latest matching year, closeness to that median, then number of matching rows. Filters never widen automatically.</p>
+      <div id="peer-results" aria-live="polite"></div>
+      <p class="peerlead">Suggestions exclude funders already linked to this recipient identity in the collection. Aliases, earlier filings and unitemized disclosures can hide other relationships. Sector signals are inferred; historical grants do not establish current eligibility or an open application.</p>
+    </section>`;
+    let request = 0;
+    async function update() {
+      const token = ++request, out = host.querySelector('#peer-results');
+      const sector = +$('peer-sector').value;
+      const readAmount = key => $(key).value.trim()==='' ? null : Number($(key).value);
+      const filter = {state:$('peer-state').value, mechanism:$('peer-use').value, min:readAmount('peer-min'),
+        max:readAmount('peer-max'), year:+$('peer-year').value, reference:orgMedian};
+      if (sector<0) { out.innerHTML='<p class="peerlead">Select the sector you want to research.</p>'; return; }
+      if ([filter.min,filter.max].some(v=>v!==null && (!Number.isFinite(v)||v<0)) || (filter.min!==null && filter.max!==null && filter.min>filter.max)) {
+        out.innerHTML='<p class="peerlead">Enter a valid amount range; the maximum must be at least the minimum.</p>'; return;
+      }
+      out.innerHTML='<p class="peerlead">Checking matching filed rows…</p>';
+      let source;
+      try { source=await prospectData('research/sector'+sector+'.json'); }
+      catch(e) { if(token===request && host.isConnected) { out.innerHTML='<p class="peerlead">The matching evidence could not load. <button type="button" class="pbtn" data-retry>Retry</button></p>';out.querySelector('[data-retry]').onclick=update; } return; }
+      if(token!==request || !host.isConnected || curProfile!==id || ovlMode!=='p') return;
+      const matched=matchProspects(source,filter,new Set(funderIdx));
+      const location=filter.state==='all'?'any recipient location':placeOf(REG.states[+filter.state]).label;
+      const scope=[m.sectors[sector]+' (inferred sector)',location+' (filed address)',
+        filter.mechanism==='all'?'any grant use':m.mechanisms[+filter.mechanism],
+        (filter.min===null?'no minimum':money(filter.min)+' minimum')+', '+(filter.max===null?'no maximum':money(filter.max)+' maximum'),
+        filter.year?'tax year '+filter.year+' onward':'all filed years'].join(' · ');
+      out.innerHTML=`<p class="peerlead"><b>${matched.length.toLocaleString('en-US')} matching funders</b>${matched.length>8?' · showing the first 8':''}${!matched.length?' · adjust the filters to explore a broader set. No evidence was found within this selection.':''}</p>
+        <div class="plist">${matched.slice(0,8).map(r=>{
+          const f=F[r.fi];
+          const evidence={kind:'prospect',recipient_id:id,recipient_name:dc(rec.n),scope,filter:{...filter,sector},
+            n:r.n,total:r.total,median:r.median,max:r.max,last:r.last,examples:r.examples,
+            registry_sha256:m.registry_sha256,dataset_sha256:m.dataset_sha256,built_at:coverage.built_at,saved_at:todayISO(),
+            reason:'Historical support matching the selected sector, filed recipient location, grant use, amount range and years.'};
+          candidateEvidence.set(f.u,evidence);
+          const check=coverage.funders[f.u]?.ledger_check_date;
+          return `<article class="prospect"><div class="prow"><span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span><span class="pm">${r.n.toLocaleString('en-US')} matching filed rows · latest tax year ${r.last}${check?' · ledger checked '+esc(check):' · check date not recorded'}</span></span><span class="pv">${moneyC(r.median)}<small>matching median</small></span><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1">${PICKED.has(f.u)?'✓ on list':'+ list'}</button></div>
+            <details class="peerevidence" data-proof="${f.u}"><summary>View matching grants and criteria</summary><p>${esc(scope)}</p><div data-samples>Opening filed evidence…</div></details></article>`;
+        }).join('')}</div>`;
+      out.querySelectorAll('[data-proof]').forEach(details=>details.addEventListener('toggle',async()=>{
+        if(!details.open || details.dataset.loaded) return;
+        const u=details.dataset.proof, ev=candidateEvidence.get(u), fi=F.findIndex(f=>f.u===u), area=details.querySelector('[data-samples]');
+        try {
+          const grants=await prospectData('fnd/'+u+'.json');
+          if(!details.isConnected) return;
+          const samples=ev.examples.map(x=>grants[x.index]).filter(Boolean);
+          area.innerHTML=samples.map(g=>`<p><a href="${ledgerLink(fi,g[5])}">${esc(dc(g[5]))} ↗</a> · ${money(g[2])} · TY${g[0]}</p>`).join('');
+          ev.sources=samples.map(g=>({name:g[5],year:g[0],amount:g[2],url:ledgerLink(fi,g[5])}));
+          if(PICKED.has(u) && PROJ().evidence[u]?.dataset_sha256===ev.dataset_sha256 && PROJ().evidence[u]?.scope===ev.scope) { PROJ().evidence[u].sources=ev.sources;saveList(); }
+          details.dataset.loaded='1';
+        } catch(e) { if(details.isConnected) area.textContent='Source rows could not load. Close and reopen to retry, or open the foundation ledger.'; }
+      }));
+    }
+    host.querySelectorAll('select,input').forEach(input=>input.addEventListener('change',update));
+    update();
+  }
+
 
   // ---------- explorer (overlay) ----------
   const st = { slug: '', q: '', y: '', c: '', m: 0, page: 0 };
@@ -2469,6 +2661,7 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
   // report with headline figures and charts, exportable and printable.
   let repRows = [], repMeta = null;
   async function buildReport(kind) {
+    if(kind==='list') { await prepareBrief();return; }
     if (kind !== 'list' && !qState.ready) return;
     await behaviour();
     const m = await qMeta();
@@ -2580,33 +2773,33 @@ td.yr { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
     $('repclose').focus({ preventScroll: true });
   }
 
-  // ---------- method (overlay) ----------
-  // The limits are the product. Figures below are counted off the published corpus
-  // (db/all-grants.csv.gz): 1,565,291 rows, 293,021 recipient identities; an id
-  // beginning "E" is an EIN proven against the IRS Business Master File.
-  function openMethod() {
+  async function openMethod() {
     openOvl('m');
-    $('pbody').innerHTML = `<div class="method">
-      <div class="h3">The method</div>
-      <p>Every grant on this site is reconciled to its foundation&rsquo;s own IRS Form 990-PF — to a named filed total, to the dollar. Where a year cannot be proven it is withheld and says so; every bridge between a schedule and a cash line, and every exception in this collection, is disclosed on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>.</p>
-      <p>Source data is the IRS TEOS public 990-PF e-file XML, plus scanned attachments read page by page and proven against their own printed totals — including registers the reading software cannot see whole, where every missing figure is read from the page image by hand and priced back to a zero residual.</p>
-
-      <div class="mh">What is in this collection, and what is not</div>
-      <p>These are the largest U.S. private foundations, taken in order by assets. The collection is currently built down to a floor of roughly <span class="fig">$86 million</span> in assets — the top 2,000 foundations in the country, <span class="fig">${(REG.totals.all.n).toLocaleString('en-US')}</span> of them published here so far.</p>
-      <p>It is <strong>not</strong> a census of American philanthropy. The great majority of U.S. private foundations sit below that floor and are not here yet, and neither are public charities, community-foundation donor funds, or corporate giving that never passes through a private foundation. If a search returns nothing, that is usually what it means — not that no one funded the work.</p>
-
-      <div class="mh">How certain the recipient names are</div>
-      <p><strong>No 990-PF grant row carries a recipient EIN</strong> — not one of the <span class="fig">1,565,291</span> rows in this collection. Every EIN on this site is inferred: the recipient name as filed is canonicalised and then matched against the IRS Business Master File, with a short reviewed merge list carrying stated reasons; names that resolve to different EINs are never joined. That match succeeds for <span class="fig">34.5%</span> of grant rows, <span class="fig">31.8%</span> of the dollars, and <span class="fig">23,948</span> of <span class="fig">286,921</span> recipient identities.</p>
-      <p>Those carry the ${idChip('E')} mark and are safe to add across foundations. Everything else carries ${idChip('K')} — the filed name canonicalised and nothing more. That is sound for reading one foundation&rsquo;s book, where the filer spells its own grantees consistently. A total added <em>across</em> foundations is definitive only on a government-matched record; elsewhere read it as a close estimate that may split one organization in two, or hold two same-named organizations as one. The Recipients tab and the search box both carry a switch that hides everything but the government-matched identities.</p>
-
-      <div class="mh">Where the money landed</div>
-      <p>Recipient state is the <em>recipient location as filed</em> — the address the foundation typed on the grant row, not the geography the work ultimately serves. <span class="fig">246,778</span> rows — <span class="fig">16.2%</span> of the collection — carry no recipient state at all; the place filter offers them as <em>Location not filed</em> rather than dropping them. Every map shade and state total is built only from the rows that do carry one, so read those as a floor under a state&rsquo;s giving, not as its share of everything.</p>
-      <p>Seven codes appear on rows whose recipients are demonstrably not in the place the code normally names — <span class="fig">AA</span>, <span class="fig">FM</span>, <span class="fig">MH</span>, <span class="fig">MP</span>, <span class="fig">PH</span>, <span class="fig">PW</span> and <span class="fig">SO</span>, 30 rows between them. They are grouped as <em>unidentified</em> and shown with their raw code, never quietly relabelled.</p>
-
-      <p style="margin-top:1.15rem">Categories follow three published tiers. Nothing here is an audit; it is a documented reconciliation of public filings, with the receipts attached.</p>
-      <p class="foot">An independent project by Curry Studio · Joe Curry, North Tonawanda NY · not affiliated with, commissioned by, or endorsed by any foundation shown.</p>
+    const host=$('pbody');host.innerHTML='<div class="loading">Loading measured coverage…</div>';
+    const loading=host.firstElementChild;
+    let c;
+    try { c=await coverageData(); }
+    catch(e) { if(ovlMode==='m' && loading.isConnected) { host.innerHTML='<div class="method"><div class="h3">Coverage could not load</div><p>We cannot display current measurements. Your source ledgers remain available.</p><button type="button" class="pbtn" id="coverage-retry">Retry</button></div>';$('coverage-retry').onclick=openMethod; } return; }
+    if(ovlMode!=='m' || !loading.isConnected) return;
+    const n=v=>(v||0).toLocaleString('en-US'),pct=(a,b)=>b?(100*a/b).toFixed(1)+'%':'—', t=c.totals, ident=c.identity;
+    const dates=Object.values(c.funders).map(f=>f.ledger_check_date).filter(Boolean).sort();
+    host.innerHTML=`<div class="method"><div class="h3">Coverage & method</div>
+      <p>Measured from this published collection on <b>${esc(c.built_at.slice(0,10))}</b>. This is a dataset build date; filing and review dates are shown separately.</p>
+      <div class="coveragegrid"><div><b>${n(c.foundations)}</b><span>published foundations</span></div><div><b>${n(t.rows)}</b><span>filed rows · ${moneyC(t.dollars)}</span></div><div><b>${n(t.named_rows)}</b><span>named-recipient rows</span></div><div><b>${n(t.unitemized_rows)}</b><span>unitemized rows · ${moneyC(t.unitemized_dollars)}</span></div></div>
+      <div class="mh">How current is it?</div>
+      <p>The ledgers contain ${n(c.foundation_years)} foundation-years. Their latest tax years vary; a recent site build does not imply a recent filing. ${dates.length?'Explicit ledger check dates run from '+esc(dates[0])+' to '+esc(dates[dates.length-1])+', recorded for '+n(dates.length)+' of '+n(c.foundations)+' funders.':'Ledger check dates are not recorded.'}</p>
+      <p>${c.latest_source_scan?'Latest logged filing-index scan: <b>'+esc(c.latest_source_scan.date)+'</b>; '+n(c.latest_source_scan.foundations_watched)+' foundations watched, '+n(c.latest_source_scan.review_candidates)+' funders with review candidates. '+esc(c.latest_source_scan.note):'No filing-index scan date is recorded.'}</p>
+      <details><summary>Latest published tax year by funder</summary><div class="tw"><table><thead><tr><th>Foundation</th><th>Latest TY</th><th>Ledger checked</th><th>Unitemized rows</th></tr></thead><tbody>${F.map(f=>{const d=c.funders[f.u];return `<tr><td><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></td><td>${d.latest_year}</td><td>${esc(d.ledger_check_date||'Not recorded')}</td><td>${n(d.unitemized_rows)}</td></tr>`;}).join('')}</tbody></table></div></details>
+      <div class="mh">What the collection covers</div><p>A selected collection of major U.S. private-foundation Form 990-PF filings. It does not cover all philanthropy, all years, public charities, donor-advised funds or every corporate giving program. An empty search is not evidence that no funder supports the work.</p>
+      <div class="mh">Recipient identity is an inference</div>
+      <p>${n(ident.source_ein_rows)} parsed rows contain a source recipient-EIN field. Public EIN-linked records are inferred by matching filed names against the IRS Business Master File and a reviewed merge list. ${n(ident.matched_identities)} of ${n(ident.named_identities)} named-recipient identities are EIN-linked, covering ${pct(ident.matched_rows,t.named_rows)} of named-recipient rows and ${pct(ident.matched_dollars,t.named_dollars)} of their dollars.</p>
+      <p>${idChip('E')} indicates an inferred IRS-name match; ${idChip('K')} indicates a canonical filed name. Either can split aliases or combine same-named recipients. Check source names and addresses before relying on a combined total. The IRS-only switch filters match status; it does not certify identity.</p>
+      <div class="mh">Location and sector</div><p>${n(t.missing_state_rows)} filed rows (${pct(t.missing_state_rows,t.rows)}) have no recipient state. Recipient filters use the filed address, which may differ from the service area. The main map groups foundations by <b>funder home location</b>; it does not map where grant-funded work happened. Ambiguous location codes are labeled as unidentified.</p>
+      <p>Prospecting uses adjustable sector signals inferred from recipient names, available NTEE maps, then filed purposes. Grant use—such as endowment, capital or operating support—is a separate filter. ${n(t.unclassified_named_rows)} named-recipient rows have no sector signal and cannot appear in sector-based suggestions. Every displayed match satisfies all selected filters on the same row.</p>
+      <div class="mh">What reconciliation establishes</div><p>Source ledgers compare grant schedules with named filed totals and disclose bridges on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>. A total tie-out does not certify each transcription, recipient identity, classification or current eligibility. Unitemized dollars remain in filed totals, and are excluded from named-recipient analytics. This is documented research from public filings, not an audit.</p>
     </div>`;
   }
+
   $('aboutbtn').addEventListener('click', openMethod);
   $('heromethod').addEventListener('click', openMethod);
   $('mastmethod').addEventListener('click', openMethod);

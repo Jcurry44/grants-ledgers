@@ -225,18 +225,18 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   <p class="sub">These are true of every page in the collection, always. They are here because a figure used without them can be wrong even though it reconciles.</p>
 
   <div class="lim">
-    <b>No 990-PF grant row carries a recipient EIN. Every EIN here is inferred.</b>
-    <span>Form 990-PF does not ask for the recipient’s EIN, so no grant row in this collection carries one as filed — none of the 1,521,279 parsed rows. Every EIN shown is produced by canonicalising the name the foundation filed and matching it against the IRS Business Master File. The correct way to describe such a recipient is <em>matched to an IRS-registered organisation</em>, never “as filed with an EIN”. Where a filer volunteered an identifier inside the recipient name text, it is preserved as part of that text, exactly as filed.</span>
+    <b>Recipient identifiers require source review.</b>
+    <span>Some parsed records contain a recipient-EIN field; its source should be checked before treating it as a filed identifier. The collection’s IRS-linked recipient records use inferred matches between filed names and IRS organization records. Matching does not independently verify each grant or resolve every alias.</span>
   </div>
 
   <div class="lim">
-    <b>Only part of the collection is matched to a government record.</b>
-    <span>994,632 of 1,565,291 grant rows (63.54%), $140,861,242,625 of $307,030,456,390 (45.88%), and 124,793 of 293,021 recipient identities (42.59%) carry a matched EIN. Those are three different denominators and must never be quoted as one rate. The remainder are grouped by normalised name. That is sound for reading a single foundation’s book, where a filer spells its own grantees consistently. A total added <em>across</em> foundations is definitive only where the recipient’s profile says identity is by government record; elsewhere read it as a close estimate that may split one organisation into two, or hold two same-named organisations as one.</span>
+    <b>Identity coverage is measured for each release.</b>
+    <span>The collection reports separate denominators for named-recipient rows, their dollars and recipient identities. Open <a href="https://jcurry44.github.io/grants-ledgers/">the collection</a> and choose <b>Coverage</b> for the current measurements. Both IRS-linked and canonical-name records can split aliases or combine same-named organizations. Review source names and addresses before relying on a cross-foundation total.</span>
   </div>
 
   <div class="lim">
-    <b>16.59% of rows carry no recipient state at all.</b>
-    <span>259,687 of 1,565,291 rows have no recipient state in the filing — $57,432,818,332, or 18.71% of the dollars. Every map shade, state total and place filter on this site is built only from the rows that do. Read them as a floor under a state’s giving, never as its share of everything. Where a location is present it is a mailing address — where the recipient receives post, not where the money is spent.</span>
+    <b>Recipient addresses and funder locations describe different things.</b>
+    <span>Some rows have no recipient state; Coverage reports their current count. Recipient-location filters use the address as filed, which may differ from where the work happens. The main map groups foundations by their home location. Its state totals do not describe where grant-funded work took place.</span>
   </div>
 
   <div class="lim">
