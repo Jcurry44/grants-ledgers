@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-blob="SNAPFOUNDA_DATA" data-slug="snapfoundati" data-n="212" data-grand="39343657" data-recsub="All five years" data-running="to the dollar, five years running." data-names="120 as-filed names">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Snap Foundation — Grants Ledger · 990-PF</title>
+<meta name="description" content="Every grant Snap Foundation reported in its Form 990-PF grants-paid schedule, 2020–2024 — 212 grants, $39,343,657, reconciling to Part XIV, line 3a to the dollar. An independent presentation built from public IRS filings.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Snap Foundation — Grants Ledger">
+<meta property="og:description" content="212 grants · $39,343,657 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
+<meta name="theme-color" content="#1e4634">
+<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
+<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<aside class="side" aria-label="Sections and scope">
+  <div class="side-brand">
+    <span class="side-mark" aria-hidden="true">S</span>
+    <span class="side-title">Grants Ledger<span>Snap Foundation</span></span>
+  </div>
+  <nav class="side-nav" aria-label="Sections">
+    <button type="button" data-tab="overview">Overview</button>
+    <button type="button" data-tab="recipients">Recipients <span class="sn-count" id="sn-recipients"></span></button>
+    <button type="button" data-tab="grants">Grants <span class="sn-count" id="sn-grants"></span></button>
+    <button type="button" data-tab="methodology">Methodology</button>
+  </nav>
+  <div class="side-scope">
+    <div class="ss-label">Tax year</div>
+    <div class="ss-rail" id="year-rail"></div>
+    <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
+  </div>
+  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+</aside>
+<noscript>
+<div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
+</noscript>
+
+<header class="cover">
+  <canvas class="wave" id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="mark">Grants Ledger<span class="tm">.</span></span>
+      <span class="tb-meta">TY2020–2024</span>
+      <span class="tb-meta">Checked 2026-09-05</span>
+      <span class="spacer"></span>
+      <nav class="tb-site" aria-label="Site">
+        <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      </nav>
+      <a href="https://projects.propublica.org/nonprofits/organizations/611817014" target="_blank" rel="noopener">The filings ↗</a>
+      <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>Snap&nbsp;Foundation</h1>
+        <p class="hero-meta">Los Angeles, CA · EIN <code>61-1817014</code></p>
+        <p class="lede">
+          <strong>The grants the foundation awarded</strong> — every dollar paid to 120 organizations,
+          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
+          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          years 2020–2024. Built from the foundation’s own public IRS filings.
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+        </div>
+        <div class="hero-note" id="explore-note" hidden></div>
+        <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
+      </div>
+      <div class="grand">
+        <div class="g-label">Awarded · five filed years</div>
+        <div class="g-val" id="kpi-total">$39,343,657</div>
+        <div class="g-rule" aria-hidden="true"></div>
+        <div class="g-sub"><span class="tick">✓</span> 212 grants paid out · sum equals the filed totals, every year</div>
+        <div class="g-scope" id="g-scope" hidden></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <main id="main" tabindex="-1">
+
+  <div class="sheet-kpis" role="group" aria-label="Headline figures">
+    <div class="kpi">
+      <div class="k-label">Recipients</div>
+      <div class="k-val" id="kpi-orgs">120</div>
+      <div class="k-hint">Organizations the foundation funded · 120 as-filed names</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Median grant</div>
+      <div class="k-val" id="kpi-median">—</div>
+      <div class="k-hint">Across all 212 grants</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Latest year</div>
+      <div class="k-val" id="kpi-delta">—</div>
+      <div class="k-hint" id="kpi-delta-hint">—</div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
+    <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">120</span></button>
+    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">212</span></button>
+    <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
+  </div>
+
+
+    <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">I</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">II</span>
+            <h2>Concentration</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-conc">—</p>
+          <div id="conc-share">—</div>
+          <div class="conc-pair" aria-hidden="true"><div class="p5" id="conc-bar" style="width:0%"></div><div class="prest" style="flex:1"></div></div>
+          <div id="conc-hint">—</div>
+          <div id="conc-top5" aria-label="The largest recipients"></div>
+        </div>
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">III</span>
+            <h2>New vs returning</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-newret">—</p>
+          <div class="newret" id="newret"></div>
+          <div class="nr-detail" id="nr-detail" hidden></div>
+        </div>
+      </div>
+
+      <div class="doctrine-band rv" role="note">
+        <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
+        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $39,343,657, equals Part XIV, line 3a, $39,343,657 — a difference of zero dollars, verified.">
+          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$39,343,657</span></span>
+          <span class="eq-op">=</span>
+          <span class="eq-part"><span class="eq-label">Part XIV, line 3a</span><span class="eq-val" id="eq-b">$39,343,657</span></span>
+          <span class="eq-seal" aria-hidden="true">Δ $0 ✓</span>
+        </div>
+        <div class="db-rule" aria-hidden="true"></div>
+        <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Where a granted dollar goes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
+        </div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">V</span>
+          <h2 id="movers-h">Biggest changes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub" id="movers-sub"></span>
+        </div>
+        <p class="card-lede" id="lede-movers">—</p>
+        <ul id="movers"></ul>
+      </div>
+    </section>
+
+    <section id="panel-recipients" role="tabpanel" aria-labelledby="tab-recipients" hidden>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>Top recipients</h2>
+          <span class="sub" id="rec-top-sub">All five years · select a bar for the full profile</span>
+        </div>
+        <div id="rec-bars"></div>
+      </div>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>All recipients</h2>
+          <span class="sub" id="rec-count" aria-live="polite">—</span>
+        </div>
+        <div class="rec-tools">
+          <label class="sr-only" for="rec-q">Search recipients</label>
+          <input type="search" id="rec-q" placeholder="Search recipients…" autocomplete="off">
+          <div class="rec-sort" role="group" aria-label="Sort recipients">
+            <button type="button" id="rs-total" class="active" aria-pressed="true">By dollars</button>
+            <button type="button" id="rs-name" aria-pressed="false">A–Z</button>
+          </div>
+        </div>
+        <div class="alpha" id="alpha" hidden></div>
+        <ul id="rec-rows"></ul>
+        <div class="empty" id="rec-empty" hidden>No recipients match — clear the search.</div>
+      </div>
+    </section>
+
+    <section id="panel-grants" role="tabpanel" aria-labelledby="tab-grants" hidden>
+      <div class="card rv" id="ledger-top">
+        <div class="card-head">
+          <h2>The ledger</h2>
+          <span class="sub" id="view-line" aria-live="polite">—</span>
+        </div>
+        <div class="scope-line">
+          <div id="chips"></div>
+          <button type="button" id="clear-all" hidden>Clear all filters</button>
+        </div>
+        <div id="tools-sentinel" aria-hidden="true"></div>
+        <div class="ledger-tools" id="ledger-tools">
+          <div class="lt-row">
+            <label class="sr-only" for="q">Search grants</label>
+            <div class="q-wrap">
+              <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
+            </div>
+            <label class="sr-only" for="sort">Sort</label>
+            <select id="sort">
+              <option value="amount-desc">Amount ↓</option>
+              <option value="amount-asc">Amount ↑</option>
+              <option value="recipient-asc">Recipient A–Z</option>
+              <option value="recipient-desc">Recipient Z–A</option>
+              <option value="year-desc">Year ↓</option>
+              <option value="year-asc">Year ↑</option>
+              <option value="purpose-asc">Purpose A–Z</option>
+            </select>
+            <label class="sr-only" for="min-amt">Minimum grant amount</label>
+            <select id="min-amt">
+              <option value="0">Any amount</option>
+              <option value="50000">$50K and up</option>
+              <option value="250000">$250K and up</option>
+              <option value="1000000">$1M and up</option>
+            </select>
+            <label class="sr-only" for="cat-sel">Purpose</label>
+            <select id="cat-sel">
+              <option value="">All purposes</option>
+            </select>
+            <span class="lt-spacer" aria-hidden="true"></span>
+            <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
+          </div>
+          <div class="lt-row">
+            <div class="lt-years" role="group" aria-label="Filter by tax year">
+              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
+              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
+              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
+              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
+              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
+              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="grant-table">
+            <caption class="sr-only">Grants reported in the foundation’s Form 990-PF grants-paid schedules, filtered by the controls above.</caption>
+            <thead id="grant-thead">
+              <tr>
+                <th data-sort="year" scope="col" aria-sort="none">Year</th>
+                <th data-sort="recipient" scope="col" aria-sort="none">Recipient</th>
+                <th data-sort="amount" scope="col" class="amt-h" aria-sort="descending">Amount</th>
+                <th data-sort="purpose" scope="col" aria-sort="none">Purpose</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody id="grant-tbody"></tbody>
+          </table>
+        </div>
+        <ul id="grant-cards"></ul>
+        <div class="empty" id="empty" hidden>No grants match this view.</div>
+        <div class="pager">
+          <span id="page-info" aria-live="polite">—</span>
+          <div>
+            <button type="button" id="prev-page">Previous</button>
+            <button type="button" id="next-page">Next</button>
+          </div>
+        </div>
+        <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
+      </div>
+    </section>
+
+    <section id="panel-methodology" role="tabpanel" aria-labelledby="tab-methodology" hidden>
+      <div class="card meth rv">
+        <div class="card-head"><h2>The referee</h2><span class="sub">Halt-on-fail: a year publishes only when it reconciles exactly</span></div>
+        <p>
+          Grant rows come from the Form&nbsp;990-PF grants-paid schedule — Part&nbsp;XIV in current filings,
+          formerly Part&nbsp;XV. For every tax year, the sum of the grant rows must equal Part&nbsp;I,
+          line&nbsp;25, column&nbsp;(d) — charitable disbursements — to the dollar. A year that does not
+          tie is withheld, never estimated. All five available years pass; the same checks re-run in
+          your browser’s console on every load.
+        </p>
+        <div class="tie-cards" id="tie-cards"></div>
+        <h3>Which filed total this ledger reconciles to</h3>
+        <p>In this foundation’s returns the grants schedule and Part I line 25(d) are not the same number, so the referee here is stated plainly: the schedule’s own filed total, Part XIV line 3a. Every year’s rows sum to it exactly. The two figures as filed, year by year:</p><div class="tie-cards">          <div class="tie-card"><div class="tc-top"><span class="tc-y">2020</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$4,821,181</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$4,821,181</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2021</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$6,212,800</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$6,129,800</strong></div><div class="tc-row"><span>Difference</span><strong>−$83,000</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$14,407,308</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$14,407,308</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$7,967,368</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$7,967,368</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$5,935,000</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$5,935,000</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div></div><p>This ledger does not explain the difference, because the filings do not; it shows both filed numbers.</p>
+        <h3>Source</h3>
+        <p>
+          IRS TEOS public 990-PF e-file XML for EIN <code>61-1817014</code> —
+          <a href="https://projects.propublica.org/nonprofits/organizations/611817014" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
+          <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
+          Only these five tax periods appear as Snap 990-PF filings in the live TEOS indexes; the ledger
+          re-issues when the next 990-PF is filed. Object IDs: <code id="obj-ids"></code>
+        </p>
+        <h3>Bridging to other public figures</h3>
+        <p>
+          Summary sites often report a foundation’s <em>total</em> charitable disbursements — the grants
+          this ledger counts (Part&nbsp;I, line&nbsp;25(d)) plus the foundation’s own charitable operating
+          costs (line&nbsp;24(d)). These e-filings do not populate line&nbsp;26(d), so the totals below are computed sums of the two filed lines and are labeled as such:
+        </p>
+        <div class="tie-cards">
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2020</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$4,821,181</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$602,082</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$5,423,263</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2021</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$6,212,800</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$1,084,698</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$7,297,498</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$14,407,308</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$1,348,142</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$15,755,450</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$7,967,368</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$1,014,145</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$8,981,513</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$5,935,000</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$852,618</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$6,787,618</strong></div></div>
+        </div>
+        <h3>Canonical recipients</h3>
+        <p id="ent-note">—</p>
+        <ul id="ent-table"></ul>
+        <h3>The purpose map</h3>
+        <p>
+          “Where a granted dollar goes” assigns each grant to one category by the words of the filing
+          itself — first the filed purpose, then (only when the purpose names no field) the
+          recipient’s filed name. Every rule is published below; anything no rule matches is left
+          unassigned rather than guessed. The filed purpose text on every ledger row remains the record.
+          On this page there is a third step: when the filed purpose names no field and the recipient’s name matches no published rule, the recipient’s own classification in the IRS Business Master File (its NTEE code) is used — accepted only when the filing’s own recipient state pins the name to exactly one organization, when the name is nationally unique, when every same-named listing carries one classification, or when all listings are chapters of a single group exemption. Names with conflicting listings stay unassigned, as do IRS groups with no honest home in these categories.
+        </p>
+        <div id="cat-map"></div>
+        <h4 style="margin:1.1rem 0 0.3rem; font-size:0.95rem;">Step 3 — the recipient’s IRS classification</h4>
+        <p style="font-size:0.9rem;">17 recipients are grouped this way on this page. The crosswalk from the IRS’s major groups to these categories, in full:</p>
+        <div class="tw" style="overflow-x:auto;"><table class="grant-table" style="font-size:0.85rem;"><thead><tr><th>IRS major group (NTEE)</th><th>Category here</th></tr></thead><tbody><tr><td class="cm-kw">A — Arts</td><td class="cm-cat">Arts & culture</td></tr><tr><td class="cm-kw">B — Education</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">C, D — Environment, animals</td><td class="cm-cat">Environment & animals</td></tr><tr><td class="cm-kw">E–H, N — Health, mental health, disease, research, recreation</td><td class="cm-cat">Health & wellbeing</td></tr><tr><td class="cm-kw">I, K, L, M, P — Legal aid, food, housing, safety, human services</td><td class="cm-cat">Basic needs & response</td></tr><tr><td class="cm-kw">J, S, W — Employment, community improvement, public benefit</td><td class="cm-cat">Community & economic development</td></tr><tr><td class="cm-kw">O — Youth development</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">T — Philanthropy & grantmaking</td><td class="cm-cat">Nonprofit capacity & transitions</td></tr><tr><td class="cm-kw">Q, R, U, V, X, Y, Z — International, civil rights, science, social science, religion, other</td><td class="cm-cat">stay in “other”</td></tr></tbody></table></div>
+        <h3>Limitations</h3>
+        <p>
+          Recipient location is the mailing address on the filing, not a service area. Display casing
+          is editorial; hover any name for the as-filed text. Amounts are as filed; no inflation
+          adjustment. Nothing here is an audit, attestation, or opinion — it is a documented
+          reconciliation of the foundation’s own public filings, with the receipts attached.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <canvas class="wave" id="wave-foot" aria-hidden="true"></canvas>
+  <div class="wrap foot-in">
+    <div>Built independently by <strong>Curry Studio</strong> · Joe Curry, North Tonawanda&nbsp;NY · <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">jcurry44.github.io</a> · <a href="mailto:jjcurry027@gmail.com">jjcurry027@gmail.com</a></div>
+    <div>Not affiliated with, commissioned by, or endorsed by Snap Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
+    <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
+    <nav class="foot-site" aria-label="Site">
+      <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    </nav>
+  </div>
+</footer>
+
+<button type="button" class="return-chip" id="return-chip" hidden>← Back to overview</button>
+<div class="pf-backdrop" id="pf-backdrop" hidden></div>
+<div class="profile" id="profile" role="dialog" aria-modal="true" aria-labelledby="pf-title" hidden>
+  <button type="button" class="pf-close" id="pf-close" aria-label="Close recipient profile">✕</button>
+  <div class="pf-head">
+    <h2 id="pf-title">—</h2>
+    <div id="pf-sub">—</div>
+  </div>
+  <div class="pf-body">
+    <div id="pf-aliases"></div>
+    <div class="pf-h">Giving by year</div>
+    <div id="pf-years"></div>
+    <div class="pf-h">Every grant</div>
+    <ul id="pf-grants"></ul>
+  </div>
+  <div class="pf-actions">
+    <button type="button" id="pf-all">Open in the ledger</button>
+  </div>
+</div>
+<script>
+window.SNAPFOUNDA_DATA={"meta":{"foundation":"Snap Foundation","ein":"61-1817014","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":212,"grand_total":39343657,"tieout":{"2020":{"object_id":"202143139349101414","grant_count":23,"grant_sum":4821181,"line25_col_d":4821181,"status":"PASS"},"2021":{"object_id":"202203159349102980","grant_count":32,"grant_sum":6212800,"line25_col_d":6212800,"status":"PASS"},"2022":{"object_id":"202303169349100165","grant_count":13,"grant_sum":14407308,"line25_col_d":14407308,"status":"PASS"},"2023":{"object_id":"202423139349101332","grant_count":83,"grant_sum":7967368,"line25_col_d":7967368,"status":"PASS"},"2024":{"object_id":"202523189349101647","grant_count":61,"grant_sum":5935000,"line25_col_d":5935000,"status":"PASS"}}},"grants":[{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":100000,"p":"LA n Sync collaborative fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":40000,"p":"LAUSD's LA Students Most in Need Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":90000,"p":"COVID-19 LA County Response Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":75000,"p":"SNAP FOUNDATION'S DONOR ADVISED FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":250000,"p":"LA Arts Relief and Recovery Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":150000,"p":"LA JUSTICE FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":40000,"p":"LACOE's Greater LA Education Foundation COVID-19 Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":1350000,"p":"SNAP FOUNDATION'S DONOR ADVISED FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":150000,"p":"Nonprofit Sustainability Initiative","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"DESTINATION CRENSHAW","a":200000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"FAITHWORKS COMPTON","a":75000,"p":"Algorithm & Flow program","c":"COMPTON","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"GET LIT WORDS IGNITE INC","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"GREAT PUBLIC SCHOOLS NOW","a":45000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"LOS ANGELES COUNTY DEPARTMENT OF ARTS AND CULTURE","a":50000,"p":"Program focusing on how racial equity and antiracism can play a more direct role in its Advancement and District Strategic Planning processes related to arts and education","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"LOST ANGELS CHILDRENS PROJECT INC","a":25000,"p":"Good Life Manufacturing program","c":"LANCASTER","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"MAYORS FUND FOR LOS ANGELES","a":50000,"p":"LA Emergency COVID-19 Crisis Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"MAYORS FUND FOR LOS ANGELES","a":50000,"p":"COVID-19 Response Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"MISSION ASSET FUND","a":1471181,"p":"General & Unrestricted","c":"SAN FRANCISCO","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"SELF-HELP GRAPHICS AND ARTS INC","a":250000,"p":"Latinx Arts Alliance PROGRAM","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"SOCIAL AND ENVIRONMENTAL ENTREPRENEURS","a":60000,"p":"Boyle Heights Beat - Voices Project","c":"CALABASAS","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"SOCIAL JUSTICE LEARNING INSTITUTE INC","a":100000,"p":"Youth Justice Fellowship PROGRAM","c":"INGLEWOOD","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":50000,"p":"FBO Black Equity Collective initiative","c":"LOS ANGELES","s":"CA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2020,"r":"THE ALLIANCE FOR MEDIA ARTS CULTURE INC","a":75000,"p":"General & Unrestricted","c":"SPOKANE","s":"WA","e":"","o":"202143139349101414","record_type":"named_recipient"},{"y":2021,"r":"4C LAB","a":15000,"p":"for technical assistance in support of capacity building","c":"AZUSA","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"A PLACE CALLED HOME","a":50000,"p":"Community Arts Initiative, Arts and Creative Expression (ACE) Program","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"BLACK OWNED AND OPERATED COMMUNITY LAND TRUST INC","a":175000,"p":"to support Sole Folks programmatic activity","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":699800,"p":"Snap Foundation's Donor Advised Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":10000,"p":"LA Postsecondary Funders Collaborative Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":750000,"p":"LA Arts Recovery Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":100000,"p":"LA n Sync Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY PARTNERS","a":15000,"p":"for technical assistance in support of capacity building at Rhythm Arts Alliance","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY PARTNERS","a":15000,"p":"for technical assistance in support of capacity building at Vigilant Love","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"COOP CAREERS INC","a":50000,"p":"COOP Careers Los Angeles Expansion","c":"NEW YORK","s":"NY","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"DESTINATION CRENSHAW","a":200000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"DREAM HAUS INC","a":25000,"p":"General & Unrestricted","c":"INGLEWOOD","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"FRACTURED ATLAS INC","a":550000,"p":"Crenshaw Dairy Mart-Rubric for Advancing the Creative Economy","c":"HARTSDALE","s":"NY","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"FUTURE ROOTS INC","a":50000,"p":"new Media & Arts Creative Center of Echo Park","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"HEART OF LOS ANGELES YOUTH INC","a":1000000,"p":"for the strategic planning process to support expansion in Los Angeles and launch of Arts and STEAM K-12 programming at Augustus Hawkins Park","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"ICA LA","a":50000,"p":"Agency of Assets program","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"JOURNEY HOUSE INC","a":100000,"p":"to support the design and launch of the Arts Program","c":"PASADENA","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"KCRW FOUNDATION INC","a":125000,"p":"to host a three-part Young Creators Residency for LA-based artists and the 2nd Report LA Fellowship Program","c":"SANTA MONICA","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"KHMER GIRLS IN ACTION","a":15000,"p":"for technical assistance in support of capacity building","c":"LONG BEACH","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"LITTLE KIDS ROCK INC","a":50000,"p":"Modern Band Music Education program","c":"MONTCLAIR","s":"NJ","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"MISSION ASSET FUND","a":83000,"p":"general & unrestricted","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"NEW VENTURE FUND","a":45000,"p":"IllumiNative Native Artists and Storytellers Fund and AT&T Foundation and WarnerMedia Fund","c":"WASHINGTON","s":"DC","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"READY TO SUCCEED","a":50000,"p":"Youth Advisory Council career development","c":"SANTA MONICA","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"REDISCOVER CENTER INC","a":110000,"p":"in support of Planning and Feasibility Analysis, Cardboard City 2022, and collaboration with Safe Place for Youth for a reDiscover workshop series","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"RESTORE NEIGHBORHOODS LA INC","a":250000,"p":"offTOP & Unearthing the Black Aesthetic - to proceed with developing the Unearthing the Black Aesthetic, a physical space in Watts that celebrates Black art, culture, educational experiences, and an artist residency program that will support young creatives","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"SELF-HELP GRAPHICS AND ARTS INC","a":50000,"p":"to implement youth programs","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"SEQ HOPE FOUNDATION","a":15000,"p":"for technical assistance in support of capacity building","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":250000,"p":"Black Equity Collective - in support of strengthening the long-term capacity and infrastructure of Black-led and Black-empowering social justice organizations","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"STREET POETS INC","a":1200000,"p":"For Capital Campaign to secure a new building for program operations and for General Operating Support","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"TYME FOUNDATION","a":15000,"p":"for technical assistance in support of capacity building","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"VENICE ARTS","a":50000,"p":"Film & Digital Media Pilot program","c":"VENICE","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2021,"r":"WRKZ INC","a":50000,"p":"Wrkz Inc. Mentorship Program","c":"LOS ANGELES","s":"CA","e":"","o":"202203159349102980","record_type":"named_recipient"},{"y":2022,"r":"4C LAB","a":1600,"p":"Annual NeueHouse Membership Fund","c":"AZUSA","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":13185558,"p":"SNAP FOUNDATION'S DONOR ADVISED FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":250000,"p":"Los Angeles Arts Relief and Recovery Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY PARTNERS","a":1600,"p":"In support of Vigilant Love and Annual NeueHouse Memebership Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"DESTINATION CRENSHAW","a":200000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"DREAM HAUS INC","a":15000,"p":"General & Unrestricted","c":"INGLEWOOD","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"JOURNEY HOUSE INC","a":100,"p":"Charitable Event","c":"PASADENA","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"LOS ANGELES COUNTY DEPARTMENT OF ARTS AND CULTURE","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"READY TO SUCCEED","a":220250,"p":"General & Unrestricted","c":"SANTA MONICA","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"SEQ HOPE FOUNDATION","a":1600,"p":"annual NeueHouse Membership Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":250000,"p":"Black Equity Collective Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"THE ALLIANCE FOR MEDIA ARTS CULTURE INC","a":205000,"p":"General & Unrestricted","c":"SPOKANE","s":"WA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2022,"r":"TYME FOUNDATION","a":1600,"p":"Annual NeueHouse Membership fund","c":"LONG BEACH","s":"CA","e":"","o":"202303169349100165","record_type":"named_recipient"},{"y":2023,"r":"24TH STREET THEATRE COMPANY","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"826LA","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"9 DOTS COMMUNITY LEARNING CENTER","a":50000,"p":"In-class Computer Science curriculum fund","c":"TORRANCE","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"A NOISE WITHIN","a":75000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"A PLACE CALLED HOME","a":100000,"p":"Arts & Creative Expression Department","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"A SENSE OF HOME","a":7000,"p":"General & Unrestricted","c":"MARINA DEL RAY","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ACTORS GANG INC","a":250000,"p":"General & Unrestricted","c":"CULVER CITY","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"AMPLIFIER FOUNDATION","a":115000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ARMORY CENTER FOR THE ARTS","a":100000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ARRAY ALLIANCE INC","a":150000,"p":"General & Unrestricted","c":"ENCINO","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ARTS FOR HEALING AND JUSTICE NETWORK","a":125000,"p":"General & Unrestricted","c":"LONG BEACH","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ARTS FOR L A","a":150000,"p":"General & Unrestricted","c":"WEST COVINA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ARTS MEDIA AND ENTERTAINMENT INSTITUTE INC","a":150000,"p":"AME Institute Events fund and General Support fund","c":"CONCORD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BARCID FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BETTER YOUTH INC","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BLACK PHOTOGRAPHERS UNION","a":50000,"p":"Annual Black Photographer Incubator Program","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BLACK WOMEN FOR WELLNESS","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BOB BAKER MARIONETTE THEATER","a":50000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"BRIC FOUNDATION","a":75000,"p":"General & Unrestricted","c":"N HOLLYWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":250000,"p":"Los Angeles Arts Relief and Recovery Fund","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":125000,"p":"Nonprofit Sustainability Initiative","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":125000,"p":"LA n Sync fund","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIANS FOR THE ARTS","a":100000,"p":"General & Unrestricted","c":"SACRAMENTO","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CLOCKSHOP","a":75000,"p":"Clockshop Youth Arts + Advocacy Fellowship fund","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY COALITION FOR SUBSTANCE ABUSE PREVENTION","a":125000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY PARTNERS","a":90000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY PARTNERS","a":100000,"p":"General Support fund for Las Fotos","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"COOP CAREERS INC","a":100000,"p":"COOP Careers LA Flagship Program","c":"NEW YORK","s":"NY","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"CREATE CA","a":100000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"DANCE AND DIALOGUE","a":30000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"DIY GIRLS","a":100000,"p":"General & Unrestricted","c":"SAN FERNANDO","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ELEMENTAL MUSIC","a":25000,"p":"General & Unrestricted","c":"SANTA MONICA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ELEVATED MINDS EMBRACING RIGHTEOUSNESS AND GAINING","a":75000,"p":"EmpowerMENt Leadership Training Program","c":"INGLEWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"FILIPINO MIGRANT CENTER","a":75000,"p":"General & Unrestricted","c":"LONG BEACH","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"FUTURE ROOTS INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"GET LIT WORDS IGNITE INC","a":50000,"p":"Uni(verse) program","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"GHETTO FILM SCHOOL LA INC","a":200000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"GIRLS INC OF GREATER LOS ANGELES","a":75000,"p":"General & Unrestricted","c":"NORTH HOLLYWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"GLOBAL ARTS CORPORATION","a":25110,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"HEIDI DUCKLER DANCE","a":50000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"HOMEBOY ART ACADEMY INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"HUMAN FAMILY EDUCATIONAL AND CULTURAL INSTITUTE","a":50000,"p":"General & Unrestricted","c":"SANTA MONICA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"HUMAN FAMILY EDUCATIONAL AND CULTURAL INSTITUTE","a":25000,"p":"Back to School Special & Grocery Support fund","c":"SANTA MONICA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"ICA LA","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"INNER-CITY ARTS","a":250000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"JAIL GUITAR DOORS","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"JAZZ HANDS FOR AUTISM","a":50000,"p":"Curricula fund for ASD adults in music-related careers","c":"CULVER CITY","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"JOURNEY HOUSE INC","a":100000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"KCRW FOUNDATION INC","a":100000,"p":"General & Unrestricted","c":"SANTA MONICA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"KOREATOWN YOUTH AND COMMUNITY CENTER INC","a":100000,"p":"Koreatown Storytelling Project (KSP)","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LA PROMISE FUND","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LATINO THEATER COMPANY","a":200000,"p":"Latino Theater Company's National Latinx Theater Initiative and Impact Theater Initiative","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LITTLE KIDS ROCK INC","a":50000,"p":"Music Will program (aka Little Kids Rock)","c":"MONTCLAIR","s":"NJ","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES COUNTY DEPARTMENT OF ARTS AND CULTURE","a":180000,"p":"Creative Careers Online fund","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES COUNTY DEPARTMENT OF ARTS AND CULTURE","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES MUSIC AND ART SCHOOL","a":50000,"p":"Tuition-Free Music Ensembles program","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"LOST ANGELS CHILDRENS PROJECT INC","a":50000,"p":"General & Unrestricted","c":"LANCASTER","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"MANIFESTWORKS","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"NO EASY PROPS INC","a":50000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"P F BRESEE FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"PARTNERS FOR CHILDREN SOUTH LA","a":100000,"p":"General & Unrestricted","c":"INGLEWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"PARTNERSHIP FOR LOS ANGELES SCHOOLS","a":250000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"PEN AMERICA LOS ANGELES","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"PS SCIENCE","a":75000,"p":"General & Unrestricted","c":"INGLEWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"RAINBOW LABS MENTORING INC","a":50000,"p":"Expansion fund for Mentoring Labs","c":"W HOLLYWOOD","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"RED HEN PRESS INC","a":50000,"p":"Writing in the Schools Program","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"REDISCOVER CENTER INC","a":125000,"p":"General Support fund and Mid City reDiscover Center Fitout fund","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"SAFE PLACE FOR YOUTH","a":50000,"p":"Healing Arts Program","c":"VENICE","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"SCHOOL ON WHEELS INC","a":75000,"p":"research fund for Leveraging Artificial Intelligence in service to students experiencing homelessness","c":"VENTURA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"SELF-HELP GRAPHICS AND ARTS INC","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"SOLA I CAN FOUNDATION","a":50000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":250000,"p":"Black Equity Collective program","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"EVERYBODY DANCE LA","a":10000,"p":"EDLA! 2023 CELEBRATION FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"THE H E ART PROJECT","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"THE HARMONY PROJECT","a":50000,"p":"funds for Connecting current Harmony Project students as well as alumni to various opportunities","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"TIA CHUCHAS CENTRO CULTURAL INC","a":100000,"p":"General & Unrestricted","c":"SYLMAR","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"UNUSUAL SUSPECTS THEATRE CO","a":100258,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"URBAN TXT TEENS EXPLORING TECHNOLOGY","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"VENICE ARTS","a":85000,"p":"General & Unrestricted","c":"MARINA DL REY","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"WOMEN IN ANIMATION INC","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"YOUNG STORYTELLERS FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"YOUTH LEADERSHIP INSTITUTE","a":50000,"p":"General & Unrestricted","c":"SAN FRANCISCO","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2023,"r":"YOUTH MENTORING CONNECTION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202423139349101332","record_type":"named_recipient"},{"y":2024,"r":"4C LAB","a":50000,"p":"General & Unrestricted","c":"AZUSA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"826LA","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"A NOISE WITHIN","a":75000,"p":"Education Program","c":"PASADENA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"A PLACE CALLED HOME","a":100000,"p":"Arts & Creative Expression Program","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ACADEMY FOUNDATION","a":75000,"p":"General & Unrestricted","c":"BEVERLY HILLS","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ARMORY CENTER FOR THE ARTS","a":100000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ARTLAB21 FOUNDATION","a":75000,"p":"General & Unrestricted","c":"LAWNDALE","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ARTS FOR HEALING AND JUSTICE NETWORK","a":125000,"p":"General & Unrestricted","c":"LONG BEACH","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ARTS FOR L A","a":125000,"p":"General & Unrestricted","c":"WEST COVINA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"BARCID FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":40000,"p":"to support the Los Angeles Postsecondary Funders Collaborative learning community: including project management, communications, meeting coordination, facilitation, documentation, and logistics","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"CENTER THEATRE GROUP OF LOS ANGELES","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"CLOCKSHOP","a":50000,"p":"Summer Youth Arts & Advocacy Fellowship","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA MEMORIAL SPACE SCIENCE LEARNING CENTER FO","a":50000,"p":"General & Unrestricted","c":"DOWNEY","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY INITIATIVES","a":75000,"p":"Libros Schmibros fund","c":"OAKLAND","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY PARTNERS","a":40000,"p":"TeenTix LA fund","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY PARTNERS","a":10000,"p":"Las Fotos Project - Equipment Replacement fund","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY PARTNERS","a":100000,"p":"WriteGirl fund","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"COOP CAREERS INC","a":100000,"p":"COOP Careers LA Flagship Program Expansion fund","c":"NEW YORK","s":"NY","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"DESTINATION CRENSHAW","a":50000,"p":"DC Arts Corp: Creative Economy Pathways","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"DIY GIRLS","a":100000,"p":"General & Unrestricted","c":"PACOIMA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"EDWARD CHARLES FOUNDATION","a":50000,"p":"Creative Futures Collective Program","c":"BEVERLY HILLS","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ETM-LA INC","a":150000,"p":"General & Unrestricted","c":"BURBANK","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"FRACTURED ATLAS INC","a":75000,"p":"Crenshaw Dairy Mart - General Operating fund","c":"HARTSDALE","s":"NY","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GET LIT WORDS IGNITE INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GHETTO FILM SCHOOL LA INC","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GIRLS INC OF GREATER LOS ANGELES","a":75000,"p":"General & Unrestricted","c":"NORTH HOLLYWOOD","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GIRLS MAKE BEATS INC","a":75000,"p":"General & Unrestricted","c":"NORTH HOLLYWOOD","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GLOBAL ARTS CORPORATION","a":35000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"GREATER LOS ANGELES EDUCATION FOUNDATION","a":50000,"p":"General & Unrestricted","c":"DOWNEY","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"HEART OF LOS ANGELES YOUTH INC","a":250000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"HOLLYWOOD CINEMA PRODUCTION RESOURCES","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"HOMEBOY ART ACADEMY INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"INNER-CITY ARTS","a":250000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"INSIDEOUT WRITERS INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"JAIL GUITAR DOORS","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"JOURNEY HOUSE INC","a":100000,"p":"General & Unrestricted","c":"PASADENA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"KOREATOWN YOUTH AND COMMUNITY CENTER INC","a":75000,"p":"Koreatown Storytelling Program (KSP)","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"LA PLAZA DE CULTURA Y ARTES","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"LATINO THEATER COMPANY","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"LEADERSUP","a":50000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"MANIFESTWORKS","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"MUSIC WILL INC","a":50000,"p":"Music Will Los Angeles fund","c":"COVINA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"MUSICIANS AT PLAY FOUNDATION INC","a":50000,"p":"General & Unrestricted","c":"VALLEY VILLAGE","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"NEWFILMMAKERS LOS ANGELES","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"OTIS COLLEGE OF ART AND DESIGN","a":100000,"p":"Otis College Report fund on the Creative Economy","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"P F BRESEE FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"P S ARTS","a":150000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"PARTNERSHIP FOR LOS ANGELES SCHOOLS","a":250000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"READY TO SUCCEED","a":100000,"p":"General & Unrestricted","c":"SANTA MONICA","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"REDISCOVER CENTER INC","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"ROCKEFELLER PHILANTHROPY ADVISORS INC","a":100000,"p":"Upstart Co-Lab fund","c":"NEW YORK","s":"NY","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"RYMAN CARROLL FOUNDATION","a":75000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"SAVE THE MUSIC FOUNDATION","a":100000,"p":"General & Unrestricted","c":"NEW YORK","s":"NY","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"SELF-HELP GRAPHICS AND ARTS INC","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":250000,"p":"Black Equity Collective","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"THE H E ART PROJECT","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"TIA CHUCHAS CENTRO CULTURAL INC","a":100000,"p":"General & Unrestricted","c":"SYLMAR","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"VENICE ARTS","a":100000,"p":"General & Unrestricted","c":"MARINA DL REY","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"YOUNG STORYTELLERS FOUNDATION","a":100000,"p":"General & Unrestricted","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"},{"y":2024,"r":"YOUTH LEADERSHIP INSTITUTE","a":35000,"p":"General & Unrestricted","c":"SAN FRANCISCO","s":"CA","e":"","o":"202523189349101647","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"CALIFORNIA COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","FAITHWORKS COMPTON":"Community & economic development","LOST ANGELS CHILDRENS PROJECT INC":"Basic needs & response","SOUTHERN CALIFORNIA GRANTMAKERS":"Nonprofit capacity & transitions","BLACK OWNED AND OPERATED COMMUNITY LAND TRUST INC":"Basic needs & response","COOP CAREERS INC":"Education & youth","FRACTURED ATLAS INC":"Arts & culture","ICA LA":"Arts & culture","4C LAB":"Arts & culture","COMMUNITY PARTNERS":"Community & economic development","JOURNEY HOUSE INC":"Basic needs & response","SEQ HOPE FOUNDATION":"Basic needs & response","TYME FOUNDATION":"Education & youth","GET LIT WORDS IGNITE INC":"Arts & culture","COMMUNITY INITIATIVES":"Nonprofit capacity & transitions","EDWARD CHARLES FOUNDATION":"Basic needs & response","ROCKEFELLER PHILANTHROPY ADVISORS INC":"Nonprofit capacity & transitions"};</script>
+<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
+<script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

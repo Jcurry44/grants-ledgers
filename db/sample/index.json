@@ -1,0 +1,49 @@
+{
+ "generated": "2026-09-05",
+ "books": 59,
+ "foundation_years": 144,
+ "rows": 267243,
+ "dollars": 6356104517,
+ "sample": [
+  {
+   "name": "Howard G. Buffett Foundation",
+   "slug": "howardgbuffe",
+   "year": "2024",
+   "rows": 116,
+   "total": 473405666,
+   "file": "howardgbuffe-2024.csv"
+  },
+  {
+   "name": "Wyss Foundation",
+   "slug": "wyssfoundati",
+   "year": "2022",
+   "rows": 99,
+   "total": 163338595,
+   "file": "wyssfoundati-2022.csv"
+  },
+  {
+   "name": "S & G Foundation",
+   "slug": "sgfoundation",
+   "year": "2023",
+   "rows": 2,
+   "total": 125578042,
+   "file": "sgfoundation-2023.csv"
+  },
+  {
+   "name": "Charles and Lynn Schusterman Family Foundation",
+   "slug": "charlesandly",
+   "year": "2021",
+   "rows": 688,
+   "total": 292518511,
+   "file": "charlesandly-2021.csv"
+  },
+  {
+   "name": "Bezos Family Foundation",
+   "slug": "bezosfamilyf",
+   "year": "2023",
+   "rows": 243,
+   "total": 156961900,
+   "file": "bezosfamilyf-2023.csv"
+  }
+ ]
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jcurry44.github.io/grants-ledgers/sitemap.xml

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-blob="CAPITALONE_DATA" data-slug="capitalonefo" data-n="249" data-grand="78567718" data-recsub="All five years" data-running="to the dollar, five years running." data-names="208 as-filed names">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Capital One Foundation — Grants Ledger · 990-PF</title>
+<meta name="description" content="Every grant Capital One Foundation reported in its Form 990-PF grants-paid schedule, 2021–2025 — 249 grants, $78,567,718, reconciling to Part I line 25(d) to the dollar. An independent presentation built from public IRS filings.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Capital One Foundation — Grants Ledger">
+<meta property="og:description" content="249 grants · $78,567,718 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
+<meta name="theme-color" content="#1e4634">
+<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
+<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<aside class="side" aria-label="Sections and scope">
+  <div class="side-brand">
+    <span class="side-mark" aria-hidden="true">C</span>
+    <span class="side-title">Grants Ledger<span>Capital One Foundation</span></span>
+  </div>
+  <nav class="side-nav" aria-label="Sections">
+    <button type="button" data-tab="overview">Overview</button>
+    <button type="button" data-tab="recipients">Recipients <span class="sn-count" id="sn-recipients"></span></button>
+    <button type="button" data-tab="grants">Grants <span class="sn-count" id="sn-grants"></span></button>
+    <button type="button" data-tab="methodology">Methodology</button>
+  </nav>
+  <div class="side-scope">
+    <div class="ss-label">Tax year</div>
+    <div class="ss-rail" id="year-rail"></div>
+    <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
+  </div>
+  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+</aside>
+<noscript>
+<div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
+</noscript>
+
+<header class="cover">
+  <canvas class="wave" id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="mark">Grants Ledger<span class="tm">.</span></span>
+      <span class="tb-meta">TY2021–2025</span>
+      <span class="tb-meta">Checked 2026-09-05</span>
+      <span class="spacer"></span>
+      <nav class="tb-site" aria-label="Site">
+        <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      </nav>
+      <a href="https://projects.propublica.org/nonprofits/organizations/113276603" target="_blank" rel="noopener">The filings ↗</a>
+      <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>Capital One&nbsp;Foundation</h1>
+        <p class="hero-meta">McLean, VA · EIN <code>11-3276603</code></p>
+        <p class="lede">
+          <strong>The grants the foundation awarded</strong> — every dollar paid to 205 organizations,
+          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
+          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          years 2021–2025. Built from the foundation’s own public IRS filings.
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+        </div>
+        <div class="hero-note" id="explore-note" hidden></div>
+        <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
+      </div>
+      <div class="grand">
+        <div class="g-label">Awarded · five filed years</div>
+        <div class="g-val" id="kpi-total">$78,567,718</div>
+        <div class="g-rule" aria-hidden="true"></div>
+        <div class="g-sub"><span class="tick">✓</span> 249 grants paid out · sum equals the filed totals, every year</div>
+        <div class="g-scope" id="g-scope" hidden></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <main id="main" tabindex="-1">
+
+  <div class="sheet-kpis" role="group" aria-label="Headline figures">
+    <div class="kpi">
+      <div class="k-label">Recipients</div>
+      <div class="k-val" id="kpi-orgs">205</div>
+      <div class="k-hint">Organizations the foundation funded · 208 as-filed names</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Median grant</div>
+      <div class="k-val" id="kpi-median">—</div>
+      <div class="k-hint">Across all 249 grants</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Latest year</div>
+      <div class="k-val" id="kpi-delta">—</div>
+      <div class="k-hint" id="kpi-delta-hint">—</div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
+    <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">205</span></button>
+    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">249</span></button>
+    <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
+  </div>
+
+
+    <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">I</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">II</span>
+            <h2>Concentration</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-conc">—</p>
+          <div id="conc-share">—</div>
+          <div class="conc-pair" aria-hidden="true"><div class="p5" id="conc-bar" style="width:0%"></div><div class="prest" style="flex:1"></div></div>
+          <div id="conc-hint">—</div>
+          <div id="conc-top5" aria-label="The largest recipients"></div>
+        </div>
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">III</span>
+            <h2>New vs returning</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-newret">—</p>
+          <div class="newret" id="newret"></div>
+          <div class="nr-detail" id="nr-detail" hidden></div>
+        </div>
+      </div>
+
+      <div class="doctrine-band rv" role="note">
+        <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
+        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $78,567,718, equals Part I line 25(d), $78,567,718 — a difference of zero dollars, verified.">
+          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$78,567,718</span></span>
+          <span class="eq-op">=</span>
+          <span class="eq-part"><span class="eq-label">Part I · line 25(d)</span><span class="eq-val" id="eq-b">$78,567,718</span></span>
+          <span class="eq-seal" aria-hidden="true">Δ $0 ✓</span>
+        </div>
+        <div class="db-rule" aria-hidden="true"></div>
+        <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Where a granted dollar goes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
+        </div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">V</span>
+          <h2 id="movers-h">Biggest changes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub" id="movers-sub"></span>
+        </div>
+        <p class="card-lede" id="lede-movers">—</p>
+        <ul id="movers"></ul>
+      </div>
+    </section>
+
+    <section id="panel-recipients" role="tabpanel" aria-labelledby="tab-recipients" hidden>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>Top recipients</h2>
+          <span class="sub" id="rec-top-sub">All five years · select a bar for the full profile</span>
+        </div>
+        <div id="rec-bars"></div>
+      </div>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>All recipients</h2>
+          <span class="sub" id="rec-count" aria-live="polite">—</span>
+        </div>
+        <div class="rec-tools">
+          <label class="sr-only" for="rec-q">Search recipients</label>
+          <input type="search" id="rec-q" placeholder="Search recipients…" autocomplete="off">
+          <div class="rec-sort" role="group" aria-label="Sort recipients">
+            <button type="button" id="rs-total" class="active" aria-pressed="true">By dollars</button>
+            <button type="button" id="rs-name" aria-pressed="false">A–Z</button>
+          </div>
+        </div>
+        <div class="alpha" id="alpha" hidden></div>
+        <ul id="rec-rows"></ul>
+        <div class="empty" id="rec-empty" hidden>No recipients match — clear the search.</div>
+      </div>
+    </section>
+
+    <section id="panel-grants" role="tabpanel" aria-labelledby="tab-grants" hidden>
+      <div class="card rv" id="ledger-top">
+        <div class="card-head">
+          <h2>The ledger</h2>
+          <span class="sub" id="view-line" aria-live="polite">—</span>
+        </div>
+        <div class="scope-line">
+          <div id="chips"></div>
+          <button type="button" id="clear-all" hidden>Clear all filters</button>
+        </div>
+        <div id="tools-sentinel" aria-hidden="true"></div>
+        <div class="ledger-tools" id="ledger-tools">
+          <div class="lt-row">
+            <label class="sr-only" for="q">Search grants</label>
+            <div class="q-wrap">
+              <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
+            </div>
+            <label class="sr-only" for="sort">Sort</label>
+            <select id="sort">
+              <option value="amount-desc">Amount ↓</option>
+              <option value="amount-asc">Amount ↑</option>
+              <option value="recipient-asc">Recipient A–Z</option>
+              <option value="recipient-desc">Recipient Z–A</option>
+              <option value="year-desc">Year ↓</option>
+              <option value="year-asc">Year ↑</option>
+              <option value="purpose-asc">Purpose A–Z</option>
+            </select>
+            <label class="sr-only" for="min-amt">Minimum grant amount</label>
+            <select id="min-amt">
+              <option value="0">Any amount</option>
+              <option value="50000">$50K and up</option>
+              <option value="250000">$250K and up</option>
+              <option value="1000000">$1M and up</option>
+            </select>
+            <label class="sr-only" for="cat-sel">Purpose</label>
+            <select id="cat-sel">
+              <option value="">All purposes</option>
+            </select>
+            <span class="lt-spacer" aria-hidden="true"></span>
+            <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
+          </div>
+          <div class="lt-row">
+            <div class="lt-years" role="group" aria-label="Filter by tax year">
+              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
+                <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
+              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
+              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
+              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
+              <button type="button" class="lt-year" data-y="2025" aria-pressed="false">2025</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="grant-table">
+            <caption class="sr-only">Grants reported in the foundation’s Form 990-PF grants-paid schedules, filtered by the controls above.</caption>
+            <thead id="grant-thead">
+              <tr>
+                <th data-sort="year" scope="col" aria-sort="none">Year</th>
+                <th data-sort="recipient" scope="col" aria-sort="none">Recipient</th>
+                <th data-sort="amount" scope="col" class="amt-h" aria-sort="descending">Amount</th>
+                <th data-sort="purpose" scope="col" aria-sort="none">Purpose</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody id="grant-tbody"></tbody>
+          </table>
+        </div>
+        <ul id="grant-cards"></ul>
+        <div class="empty" id="empty" hidden>No grants match this view.</div>
+        <div class="pager">
+          <span id="page-info" aria-live="polite">—</span>
+          <div>
+            <button type="button" id="prev-page">Previous</button>
+            <button type="button" id="next-page">Next</button>
+          </div>
+        </div>
+        <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
+      </div>
+    </section>
+
+    <section id="panel-methodology" role="tabpanel" aria-labelledby="tab-methodology" hidden>
+      <div class="card meth rv">
+        <div class="card-head"><h2>The referee</h2><span class="sub">Halt-on-fail: a year publishes only when it reconciles exactly</span></div>
+        <p>
+          Grant rows come from the Form&nbsp;990-PF grants-paid schedule — Part&nbsp;XIV in current filings,
+          formerly Part&nbsp;XV. For every tax year, the sum of the grant rows must equal Part&nbsp;I,
+          line&nbsp;25, column&nbsp;(d) — charitable disbursements — to the dollar. A year that does not
+          tie is withheld, never estimated. All five available years pass; the same checks re-run in
+          your browser’s console on every load.
+        </p>
+        <div class="tie-cards" id="tie-cards"></div>
+        <h3>Source</h3>
+        <p>
+          IRS TEOS public 990-PF e-file XML for EIN <code>11-3276603</code> —
+          <a href="https://projects.propublica.org/nonprofits/organizations/113276603" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
+          <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
+          Only these five tax periods appear as Capital One 990-PF filings in the live TEOS indexes; the ledger
+          re-issues when the next 990-PF is filed. Object IDs: <code id="obj-ids"></code>
+        </p>
+        <h3>Bridging to other public figures</h3>
+        <p>
+          Summary sites often report a foundation’s <em>total</em> charitable disbursements — the grants
+          this ledger counts (Part&nbsp;I, line&nbsp;25(d)) plus the foundation’s own charitable operating
+          costs (line&nbsp;24(d)). These e-filings do not populate line&nbsp;26(d), so the totals below are computed sums of the two filed lines and are labeled as such:
+        </p>
+        <div class="tie-cards">
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2021</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$3,000,000</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$79,603</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$3,079,603</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$13,000,000</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$83,834</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$13,083,834</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$11,682,500</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$14,135</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$11,696,635</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$14,933,700</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$12,600</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$14,946,300</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2025</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$35,951,518</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$447,100</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$36,398,618</strong></div></div>
+        </div>
+        <h3>Canonical recipients</h3>
+        <p id="ent-note">—</p>
+        <ul id="ent-table"></ul>
+        <h3>The purpose map</h3>
+        <p>
+          “Where a granted dollar goes” assigns each grant to one category by the words of the filing
+          itself — first the filed purpose, then (only when the purpose names no field) the
+          recipient’s filed name. Every rule is published below; anything no rule matches is left
+          unassigned rather than guessed. The filed purpose text on every ledger row remains the record.
+          On this page there is a third step: when the filed purpose names no field and the recipient’s name matches no published rule, the recipient’s own classification in the IRS Business Master File (its NTEE code) is used — accepted only when the filing’s own recipient state pins the name to exactly one organization, when the name is nationally unique, when every same-named listing carries one classification, or when all listings are chapters of a single group exemption. Names with conflicting listings stay unassigned, as do IRS groups with no honest home in these categories.
+        </p>
+        <div id="cat-map"></div>
+        <h4 style="margin:1.1rem 0 0.3rem; font-size:0.95rem;">Step 3 — the recipient’s IRS classification</h4>
+        <p style="font-size:0.9rem;">33 recipients are grouped this way on this page. The crosswalk from the IRS’s major groups to these categories, in full:</p>
+        <div class="tw" style="overflow-x:auto;"><table class="grant-table" style="font-size:0.85rem;"><thead><tr><th>IRS major group (NTEE)</th><th>Category here</th></tr></thead><tbody><tr><td class="cm-kw">A — Arts</td><td class="cm-cat">Arts & culture</td></tr><tr><td class="cm-kw">B — Education</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">C, D — Environment, animals</td><td class="cm-cat">Environment & animals</td></tr><tr><td class="cm-kw">E–H, N — Health, mental health, disease, research, recreation</td><td class="cm-cat">Health & wellbeing</td></tr><tr><td class="cm-kw">I, K, L, M, P — Legal aid, food, housing, safety, human services</td><td class="cm-cat">Basic needs & response</td></tr><tr><td class="cm-kw">J, S, W — Employment, community improvement, public benefit</td><td class="cm-cat">Community & economic development</td></tr><tr><td class="cm-kw">O — Youth development</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">T — Philanthropy & grantmaking</td><td class="cm-cat">Nonprofit capacity & transitions</td></tr><tr><td class="cm-kw">Q, R, U, V, X, Y, Z — International, civil rights, science, social science, religion, other</td><td class="cm-cat">stay in “other”</td></tr></tbody></table></div>
+        <h3>Limitations</h3>
+        <p>
+          Recipient location is the mailing address on the filing, not a service area. Display casing
+          is editorial; hover any name for the as-filed text. Amounts are as filed; no inflation
+          adjustment. Nothing here is an audit, attestation, or opinion — it is a documented
+          reconciliation of the foundation’s own public filings, with the receipts attached.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <canvas class="wave" id="wave-foot" aria-hidden="true"></canvas>
+  <div class="wrap foot-in">
+    <div>Built independently by <strong>Curry Studio</strong> · Joe Curry, North Tonawanda&nbsp;NY · <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">jcurry44.github.io</a> · <a href="mailto:jjcurry027@gmail.com">jjcurry027@gmail.com</a></div>
+    <div>Not affiliated with, commissioned by, or endorsed by Capital One Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
+    <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
+    <nav class="foot-site" aria-label="Site">
+      <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    </nav>
+  </div>
+</footer>
+
+<button type="button" class="return-chip" id="return-chip" hidden>← Back to overview</button>
+<div class="pf-backdrop" id="pf-backdrop" hidden></div>
+<div class="profile" id="profile" role="dialog" aria-modal="true" aria-labelledby="pf-title" hidden>
+  <button type="button" class="pf-close" id="pf-close" aria-label="Close recipient profile">✕</button>
+  <div class="pf-head">
+    <h2 id="pf-title">—</h2>
+    <div id="pf-sub">—</div>
+  </div>
+  <div class="pf-body">
+    <div id="pf-aliases"></div>
+    <div class="pf-h">Giving by year</div>
+    <div id="pf-years"></div>
+    <div class="pf-h">Every grant</div>
+    <ul id="pf-grants"></ul>
+  </div>
+  <div class="pf-actions">
+    <button type="button" id="pf-all">Open in the ledger</button>
+  </div>
+</div>
+<script>
+window.CAPITALONE_DATA={"meta":{"foundation":"Capital One Foundation","ein":"11-3276603","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":249,"grand_total":78567718,"tieout":{"2021":{"object_id":"202213199349103241","grant_count":8,"grant_sum":3000000,"line25_col_d":3000000,"status":"PASS"},"2022":{"object_id":"202302369349100910","grant_count":27,"grant_sum":13000000,"line25_col_d":13000000,"status":"PASS"},"2023":{"object_id":"202421029349100237","grant_count":17,"grant_sum":11682500,"line25_col_d":11682500,"status":"PASS"},"2024":{"object_id":"202541329349100524","grant_count":95,"grant_sum":14933700,"line25_col_d":14933700,"status":"PASS"},"2025":{"object_id":"202631359349103323","grant_count":102,"grant_sum":35951518,"line25_col_d":35951518,"status":"PASS"}}},"grants":[{"y":2021,"r":"HARVARD UNIVERSITY","a":700000,"p":"THE COLLEGE TO CAREER CONNECTION: A RESEARCH AND PRACTICE INITIATIVE","c":"CAMBRIDGE","s":"MA","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"EDUCATION FINANCE INSTITUTE","a":650000,"p":"IMPROVING ADMISSIONS AND RETENTION RATES IN HBCUS THROUGH BEHAVIORALLY INTELLIGENT STUDENT ENGAGEMENT PLATFORM MESSAGING","c":"NEW YORK","s":"NY","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"HISPANIC SCHOLARSHIP FUND","a":250000,"p":"HSF COLLEGE 101","c":"GARDENA","s":"CA","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"BEYOND 12","a":300000,"p":"MYCOACH 4.0: A DIGITAL COACHING PLATFORM THAT HELPS STUDENTS THRIVE IN COLLEGE AND BEYOND","c":"OAKLAND","s":"CA","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"DIGITAL HARBOR FOUNDATION","a":500000,"p":"LAST MILE EDUCATION FUND","c":"BALTIMORE","s":"MD","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"INSTITUTE FOR EAST AFRICAN COUNCILS ON HIGHER EDUCATION","a":200000,"p":"BUILDING INFRASTRUCTURE FOR SUSTAINABILITY","c":"WASHINGTON","s":"DC","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"ARIZOU DBA BASTA","a":200000,"p":"BRIDGING THE COLLEGE TO CAREER GAP","c":"NEW YORK","s":"NY","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2021,"r":"DELAWARE STATE UNIVERSITY FOUNDATION","a":200000,"p":"EXPANDING CAREER SERVICE DEVELOPMENT THROUGH EXPERIENTIAL LEARNING","c":"DOVER","s":"DE","e":"","o":"202213199349103241","record_type":"named_recipient"},{"y":2022,"r":"HARVARD UNIVERSITY","a":700000,"p":"THE COLLEGE TO CAREER CONNECTION: A RESEARCH AND PRACTICE INITIATIVE","c":"CAMBRIDGE","s":"MA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"HISPANIC SCHOLARSHIP FUND","a":250000,"p":"HSF COLLEGE 101","c":"GARDENA","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"MONEYTHINK","a":500000,"p":"BUILDING AND SCALING OUR DECIDED API: A GAME-CHANGING SOLUTION FOR THE COLLEGE AFFORDABILITY ECOSYSTEM","c":"BERKELEY","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"MDRC","a":775000,"p":"INCREASING COLLEGE ACCESS IN WASHINGTON STATE BY OPTIMIZING CHATBOT TECHNOLOGY","c":"NEW YORK","s":"NY","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"LAST MILE EDUCATION FUND","a":250000,"p":"LAST MILE FELLOWSHIP FOR INDIGENOUS WOMEN IN COMPUTING","c":"BALTIMORE","s":"MD","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"BRAVEN INC","a":500000,"p":"LAUNCHING BRAVEN IN PARTNERSHIP WITH DELAWARE STATE UNIVERSITY","c":"CHICAGO","s":"IL","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"CENTER FOR NEW DATA","a":660000,"p":"EXPANSION OF VOTING RIGHTS DATA PROGRAM (OBSERVING DEMOCRACY) FOR GRASSROOTS NGOS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"RURAL ADVANCEMENT FOUNDATION INTERNATIONAL-USA","a":275000,"p":"FARMERS OF COLOR NETWORK","c":"PITTSBORO","s":"NC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"RACE FORWARD","a":440000,"p":"GARE NETWORK IMPACT AND EVALUATION","c":"NEW YORK","s":"NY","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"STUDENT FREEDOM INITIATIVE","a":1100000,"p":"HANDLING EVERYDAY LIFE PROBLEMS FOR STUDENTS (HELPS) PROGRAM","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"THIRD SECTOR NEW ENGLAND INC","a":525000,"p":"INTEGRATING RACIAL & ECONOMIC EQUITY IN PUBLIC FINANCE TO DRIVE ENVIRONMENTAL JUSTICE OUTCOMES","c":"BOSTON","s":"MA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"REINVESTMENT FUND INC","a":357500,"p":"REINVESTMENT FUND HBCU BRILLIANCE FUND","c":"PHILADELPHIA","s":"PA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"ROCKWOOD LEADERSHIP INSTITUTE","a":2750000,"p":"CAPITAL ONE LEADERSHIP INITIATIVE","c":"OAKLAND","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"CENTER FOR LAW AND SOCIAL POLICY","a":550000,"p":"ADVOCATING FOR IMPROVED ACCESS TO PUBLIC BENEFITS IN SOUTHERN STATES","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"BLACK ECONOMIC ALLIANCE FOUNDATION","a":905000,"p":"PREDICTIVE DATA TOOL AND GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"URBAN INSTITUTE","a":550000,"p":"FINANCIAL WELL-BEING DATA HUB","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY INITIATIVES","a":550000,"p":"LATINO OUTDOORS - VAMOS OUTDOORS / EXPANDING OUTDOOR ACCESS TO LATINX COMMUNITIES ACROSS THE COUNTRY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"OUTDOOR AFRO","a":450000,"p":"OUTDOOR AFRO - GENERAL OPERATING AND PROGRAM SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"ONE FAIR WAGE INC","a":550000,"p":"HIGH ROAD KITCHENS- NYC AND PRINCE GEORGES COUNTY","c":"OAKLAND","s":"CA","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"PROSPERITY NOW (FORMERLY THE CORPORATION FOR ENTERPRISE DEVELOPMENT)","a":60500,"p":"BUILDING HIGH-IMPACT NONPROFITS OF COLOR, DC-MD-VA METRO AREA COHORT. ADDITION OF 7TH NONPROFIT","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"THURGOOD MARSHALL COLLEGE FUND","a":30500,"p":"TMCF-CAPITAL ONE BUILD TO BEST IMMERSION","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"INSTITUTE FOR EAST AFRICAN COUNCILS ON HIGHER EDUCATION","a":25000,"p":"COLLEGE ACCESS STUDENT TRIPS","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"FLORIDA AGRICULTURAL AND MECHANICAL UNIVERSITY FOUNDATION","a":30000,"p":"EDUCATING ENGINEERING STUDENT INNOVATIVELY (EESI) PROGRAM","c":"TALLAHASSEE","s":"FL","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"HISPANIC ASSOCIATION OF COLLEGES AND UNIVERSITIES","a":30000,"p":"UNIVERSITY OF PUERTO RICO-MAYAGUEZ DISASTER RECOVERY","c":"SAN ANTONIO","s":"TX","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"HOWARD UNIVERSITY","a":35000,"p":"VIP PROJECT/DEVELOPING ANOMALY DETECTION ALGORITHMS","c":"WASHINGTON","s":"DC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"NORTH CAROLINA A&T STATE UNIVERSITY","a":35000,"p":"MALE STUDENT SUCCESS STRATEGIES","c":"GREENSBORO","s":"NC","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2022,"r":"NATIONAL URBAN LEAGUE","a":116500,"p":"EXPUNGEMENT PROJECT 2023","c":"NEW YORK","s":"NY","e":"","o":"202302369349100910","record_type":"named_recipient"},{"y":2023,"r":"BRAVEN INC","a":500000,"p":"LAUNCHING BRAVEN IN PARTNERSHIP WITH DELAWARE STATE UNIVERSITY","c":"CHICAGO","s":"IL","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"CENTER FOR LAW AND SOCIAL POLICY","a":550000,"p":"BUILDING EQUITABLE ECONOMIC SUPPORTS IN THE SOUTH","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"HISPANIC ASSOCIATION OF COLLEGES AND UNIVERSITIES","a":1420000,"p":"HSI IMMERSION PROGRAM+ AND HBCU-HSI JOINT IMMERSION PROGRAM (SUMMER 2024)","c":"SAN ANTONIO","s":"TX","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"HISPANIC SCHOLARSHIP FUND","a":275000,"p":"2023-25 CAPITAL ONE FOUNDATION/HSF PARTNERSHIP","c":"GARDENA","s":"CA","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"MDRC","a":720000,"p":"OPTIMIZING TEXTING TECHNOLOGY THROUGH ENGAGEMENT RESEARCH WITH STUDENTS (OTTERS) PROJECT","c":"NEW YORK","s":"NY","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"THURGOOD MARSHALL COLLEGE FUND","a":110360,"p":"HBCU IMMERSION PROGRAM (ADDITIONAL STUDENTS) AND TMCF CAPITAL ONE CAMPUS ENGAGEMENT & DEVCON","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"URBAN INSTITUTE","a":550000,"p":"FINANCIAL WELL-BEING DATA HUB","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"VAL VERDE UNIFIED SCHOOL DISTRICT","a":462500,"p":"SMS CHATBOT - CALI","c":"PERRIS","s":"CA","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"KIVA","a":3500000,"p":"REDUCING STRUCTURAL BARRIERS FOR BLACK AND LATINO ENTREPRENEURS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"NBMBAA - AUSTIN CHAPTER","a":200000,"p":"HBCU/HSI BATTLE OF THE BRAINS","c":"AUSTIN","s":"TX","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"LATINO DONOR COLLABORATIVE INC","a":330000,"p":"ECONOMIC DATA ABOUT THE U.S.LATINO COHORT","c":"BEVERLY HILLS","s":"CA","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"CONGRESSIONAL HISPANIC CAUCUS INSTITUTE INC","a":700000,"p":"2024 CHCI X CAPITAL ONE FOUNDATION","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"OUTDOOR FOUNDATION","a":275000,"p":"THRIVE OUTSIDE COMMUNITIES","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"JUSTICE OUTSIDE","a":275000,"p":"CAREER PATHWAYS PROGRAMS","c":"OAKLAND","s":"CA","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"CHLI","a":275000,"p":"CONGRESSIONAL HISPANIC LEADERSHIP INSTITUTE","c":"WASHINGTON","s":"DC","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"ALLIANCE FOR THE CHESAPEAKE BAY INC","a":550000,"p":"EMPOWERING EQUITY: INCREASING GREEN ACCESS IN THE CHESAPEAKE BAY WATERSHED","c":"ANNAPOLIS","s":"MD","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2023,"r":"INSTITUTE FOR ENTREPRENEURIAL LEADERSHIP","a":989640,"p":"ANGEL INCLUSION INITIATIVE","c":"NEWARK","s":"NJ","e":"","o":"202421029349100237","record_type":"named_recipient"},{"y":2024,"r":"AI4ALL","a":60000,"p":"EXPANDING AI PATHWAYS FOR UNDERREPRESENTED STUDENTS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"ASCEND DALLAS","a":50000,"p":"ECONOMIC ADVANCEMENT","c":"DALLAS","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BAKERRIPLEY","a":50000,"p":"BAKERRIPLEYS VOLUNTEER INCOME TAX ASSISTANCE (VITA) PROGRAM","c":"HOUSTON","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BEDFORD STUYVESANT RESTORATION CORPORATION","a":50000,"p":"FINANCIAL COUNSELING AND COACHING","c":"BROOKLYN","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BLACK ECONOMIC ALLIANCE FOUNDATION","a":100000,"p":"BEA SOLUTIONS SUMMIT","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BOGALUSA REBIRTH","a":12200,"p":"CAPITAL ONE HOMEBUYER ASSISTANCE FUND","c":"BOGALUSA","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BOWIE BUSINESS INNOVATION CENTER INC","a":175000,"p":"8(A) ACCELERATOR PROGRAM EXPANSION","c":"BOWIE","s":"MD","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BRAVEN INC","a":500000,"p":"LAUNCHING BRAVEN IN PARTNERSHIP WITH DELAWARE STATE UNIVERSITY","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BUSINESS OUTREACH CENTER NETWORK INC","a":100000,"p":"BOC WOMEN OF COLOR BUSINESS DEVELOPMENT PROJECT","c":"BROOKLYN","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"BUSINESSES UNITED IN INVESTING LENDING AND DEVELOPMENT","a":50000,"p":"BUILD METRO DC YOUTH ENTREPRENEURSHIP PROGRAM 2024/2025","c":"REDWOOD CITY","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CALIFORNIA ASSOCIATION FOR MICROENTERPRISE OPPORTUNITY","a":150000,"p":"SUPPORTING EMERGING CDFIS TO INCREASE CAPITAL ACCESS FOR BIPOC AND LMI FOUNDERS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CAREER COMPASS OF LOUISIANA","a":67000,"p":"CAREER COMPASS OF LOUISIANA: EAST BATON ROUGE, TANGIPAHOA, TERREBONNE, AND LAFOURCHE PARISH 2024-25","c":"BATON ROUGE","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC CHARITIES OF DALLAS INC","a":50000,"p":"PROMOTING FINANCIAL WELL-BEING","c":"DALLAS","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CENTRO COMMUNITY PARTNERS","a":100000,"p":"SMALL BUSINESS PROGRAMS AND SERVICES FOR UNDERSERVED ENTREPRENEURS","c":"OAKLAND","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CHINESE AMERICAN SERVICE LEAGUE","a":75000,"p":"SECURED CARD INITIATIVE","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CHOICE FOR ALL INC","a":124000,"p":"LONG ISLAND FINANCIAL EMPOWERMENT CENTERS","c":"ROOSEVELT","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CODEPATH","a":75000,"p":"COMPUTER SCIENCE EDUCATION OPPORTUNITIES FOR UNDERSERVED COLLEGE STUDENTS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CODEVA","a":50000,"p":"BUILDING DIGITAL LITERACY FOR VIRGINIAS FUTURE GENERATIONS","c":"RICHMOND","s":"VA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COLLEGE TRACK","a":135000,"p":"PROGRAMMING AND EDUCATIONAL JUSTICE VIA COLLEGE COMPLETION FOR NEW ORLEANS YOUTH","c":"SILVER SPRING","s":"MD","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COLLEGIATE DIRECTIONS INC","a":50000,"p":"2024 SCHOLARS PROGRAM","c":"BETHESDA","s":"MD","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COLUMBUS URBAN LEAGUE","a":25000,"p":"WORKFORCE READINESS TRAINING UNIVERSITY","c":"COLUMBUS","s":"OH","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY ACTION PARTNERSHIP OF ORANGE COUNTY","a":50000,"p":"FINANCIAL WELL BEING AND EMPOWERMENT","c":"GARDEN GROVE","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY REINVESTMENT FUND USA","a":250000,"p":"REI PATH AHEAD VENTURES FUND","c":"MINNEAPOLIS","s":"MN","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"COVENANT COMMUNITY CAPITAL CORPORATION","a":25000,"p":"SAVINGS FOR LIFE PROGRAM","c":"HOUSTON","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"CREDIT COALITION","a":5000,"p":"FUNDAMENTALS OF GOOD CREDIT","c":"HOUSTON","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"DELAWARE COMMUNITY REINVESTMENT ACTION COUNCIL INC","a":30000,"p":"DELAWARE MONEY SCHOOL","c":"WILMNGTON","s":"DE","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"DELAWARE STATE UNIVERSITY FOUNDATION INC","a":510000,"p":"HBCU PHILANTHROPY SYMPOSIUM AND CENTER FOR EXCELLENCE FOR EMERGING TECHNOLOGY IN AGRICULTURE","c":"DOVER","s":"DE","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"EMERALD SOUTH ECONOMIC DEVELOPMENT COLLABORATIVE","a":500000,"p":"EMERALD SOUTH ECONOMIC DEVELOPMENT COLLABORATIVE COOPERATIVE PURCHASING INITIATIVE","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"EVERYONEON","a":60000,"p":"DIGITAL CONNECTIONS & DIGITAL COMMUNITIES","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"FIFTH AVENUE COMMITTEE INC","a":50000,"p":"BROOKLYN DIGITAL PROGRAM","c":"BROOKLYN","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"FLETCHER TECHNICAL COMMUNITY COLLEGE FOUNDATION INC","a":25000,"p":"CULTIVATING OPPORTUNITIES FOR NEW EXPERIENCES, CAREERS, AND TRADES (CONNECT)","c":"SCHRIEVER","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION COMMUNITIES","a":85000,"p":"AUSTIN AND DALLAS TAX HELP VITA PROGRAMS","c":"AUSTIN","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"GENESYS WORKS NATIONAL CAPITAL REGION","a":150000,"p":"GENESYS WORKS NCR: PREPARING YOUTH FOR THE FUTURE","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"GEORGETOWN UNIVERSITY","a":37289,"p":"RESEARCH ON SHORT AND LONG-RUN RESPONSES TO CTC REFUNDABILITY","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"GIRLS FOR A CHANGE","a":50000,"p":"CAMP DIVA LEADERSHIP ACADEMY","c":"RICHMOND","s":"VA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"GIRLS WHO CODE","a":50000,"p":"GWC CLUBS PROGRAM","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"GODDARD RIVERSIDE COMMUNITY CENTER","a":60000,"p":"THE OPTIONS CENTER","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"HARMONY COMMUNITY DEVELOPMENT CORPORATION","a":50000,"p":"FINANCIAL PATHWAYS","c":"DALLAS","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"HISPANIC ASSOCIATION OF COLLEGES AND UNIVERSITIES","a":850000,"p":"LAUNCHPAD: JOINT HBCU-HSI IMMERSION PROGRAM, LA ACADEMIA, ENLACE, VOCES NUEVAS, 39TH ANNUAL CONFERENCE AND ADELANTE! LEADERSHIP INSTITUTE","c":"SAN ANTONIO","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"HISPANIC FEDERATION INC","a":50000,"p":"FINANCIAL LITERACY AND ECONOMIC EMPOWERMENT FOR NYC LATINO COMMUNITIES","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"HOPE CHICAGO","a":100000,"p":"DEBT-FREE POSTSECONDARY PATHWAYS","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"HOT BREAD KITCHEN","a":100000,"p":"HBK INCUBATES: SEEDING, STARTING, AND SCALING SMALL FOOD BUSINESSES OWNED BY WOMEN OF COLOR","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"IMPACT CHARITABLE","a":1100000,"p":"CAPITAL READINESS ACCELERATOR","c":"DENVER","s":"CO","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"INTERNATIONAL RESCUE COMMITEE INC","a":50000,"p":"FINANCIAL CAPABILITIES","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"JAMAICA PLAIN NEIGHBORHOOD DEVELOPMENT CORPORATION","a":100000,"p":"SMALL BUSINESS SERVICES","c":"JAMAICA PLAIN","s":"ME","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"JERICHO ROAD EPISCOPAL HOUSING INITIATIVE","a":25000,"p":"JERICHO ROADS FINANCIAL COACHING PROGRAM","c":"NEW ORLEANS","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"JUNIOR ACHIEVEMENT OF EAST TEXAS","a":15000,"p":"JA PERSONAL FINANCE","c":"LONGVIEW","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"KHAN ACADEMY","a":449500,"p":"FINANCIAL LITERACY, ECONOMICS & PERSONAL FINANCE FOR VIRGINIA BEACH SCHOOL DISTRICT AND VIRGINIA LAB SCHOOLS","c":"MOUNTAIN VIEW","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"KOREATOWN YOUTH AND COMMUNITY CENTER INC","a":40000,"p":"KYCC FINANCIAL COACHING PROGRAM","c":"LOS ANGELES","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"LATINO BUSINESS ACTION NETWORK INC","a":880000,"p":"LBAN STARTUP ACCELERATOR & STARTUP CAPITAL RESEARCH","c":"SAN JOSE","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"LATINO ECONOMIC DEVELOPMENT CORPORATION OF WASHINGTON DC","a":300000,"p":"SMALL BUSINESS AND HOUSING COUNSELING SUPPORT SERVICES","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"LIFT-CHICAGO","a":75000,"p":"LIFT-CHICAGO: FINANCIAL COUNSELING AND COACHING PROGRAM","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"MISSION ASSET FUND","a":177711,"p":"LENDING CIRCLE PROGRAM + RESEARCH","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL ASSOCIATION FOR LATINO COMMUNITY ASSET BUILDERS","a":1460000,"p":"LEAD & NALCE LEADERSHIP ADVANCEMENT PROGRAMS AND NETWORKING/TRAINING SCHOLARSHIPS","c":"SAN ANTONIO","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL COLLEGE ATTAINMENT NETWORK (NCAN)","a":400000,"p":"FAFSA SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL URBAN LEAGUE","a":1075000,"p":"GENERAL OPERATIONS AND NATIONAL CONFERENCE PARTNER","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NBMBAA - AUSTIN CHAPTER","a":84500,"p":"HBCU/HSI BATTLE OF THE BRAINS","c":"AUSTIN","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NEIGHBORHOOD REINVESTMENT CORPORATION","a":75000,"p":"NEIGHBORWORKS TRAINING INSTITUTE - A HISTORIC 45TH ANNIVERSARY CELEBRATION","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NEIGHBORHOOD TRUST FINANCIAL PARTNERS INC","a":50000,"p":"TRUSTPLUS FINANCIAL COACHING IN NEW YORK CITY","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NEW FUTURES","a":150000,"p":"SUPPORTING SCHOLARS COLLEGE & CAREER SUCCESS","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NEW YORK CITY OUTWARD BOUND CENTER INC","a":50000,"p":"COLLEGE AND CAREER READINESS STARTS IN HIGH SCHOOL","c":"LONG ISLAND CITY","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"NORTHWEST SIDE HOUSING CENTER","a":75000,"p":"READY, SET, LIVE! AND ADULT EDUCATION FOR LATINX/HISPANIC RESIDENTS","c":"CHICAGO","s":"IL","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"ON THE ROAD LENDING","a":50000,"p":"DALLAS MOBILITY PROGRAM","c":"IRVING","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"ONE WORLD EDUCATION INC","a":100000,"p":"IN-SCHOOL PROGRAMMING","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"OPERATION SPARK","a":75000,"p":"HIGH SCHOOL TO HIGH WAGE: NEW ORLEANS AND BATON ROUGE","c":"NEW ORLEANS","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"OPPORTUNITY FINANCE NETWORK","a":250000,"p":"FINANCE JUSTICE FUND","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"ORANGE COUNTY'S UNITED WAY","a":50000,"p":"SPARKPOINT OC","c":"IRVINE","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"PREPARE AND PROSPER","a":50000,"p":"PROVIDING FREE TAX PREPARATION AND FINANCIAL SERVICES TO LOW-INCOME MINNESOTANS","c":"ST PAUL","s":"MN","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"PROSPERITY NOW","a":100000,"p":"THE PROSPERITY SUMMIT 2024: MOBILIZING OUR COLLECTIVE POWER TOWARD ECONOMIC JUSTICE","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"RAISE TEXAS","a":35000,"p":"FINANCIAL COACHING","c":"AUSTIN","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"RAZA DEVELOPMENT FUND INC","a":110000,"p":"THE IMPACT OF CDFIS IN THE LATINO COMMUNITY (RESEARCH ANALYSIS)","c":"PHOENIX","s":"AZ","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"RENAISSANCE ECONOMIC DEVELOPMENT CORPORATION","a":100000,"p":"RENAISSANCE DIGITAL ACCELERATOR PROGRAM","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"RISE ECONOMY","a":50000,"p":"FINANCIAL EDUCATION","c":"OAKLAND","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"SOCIETY OF HISPANIC PROFESSIONAL ENGINEERS","a":10000,"p":"MENTORSHPE - QUARTERLY TITLE SPONSORSHIP","c":"CITY OF INDUSTRY","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"SON OF A SAINT","a":50000,"p":"2024 SON OF A SAINT POSTSECONDARY SUCCESS GRANT","c":"NEW ORLEANS","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"SPARK THE JOURNEY","a":125000,"p":"YOUTH MENTORSHIP FOR ACADEMIC AND CAREER SUCCESS","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE CAPITAL GOOD FUND","a":50000,"p":"INCLUSIVE FINANCIAL SERVICES","c":"PROVIDENCE","s":"PR","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE COMMIT PARTNERSHIP","a":25000,"p":"THE DALLAS COUNTY PROMISE","c":"DALLAS","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE CONCILIO","a":35000,"p":"THE CONCILIO'S PARENTAL ENGAGEMENT PROGAMMING","c":"DALLAS","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE WALLS PROJECT","a":50000,"p":"FUTURES FUND WORKSHOPS AND CULTURE CLUB","c":"BATON ROUGE","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE WOMEN'S HOME","a":30000,"p":"RESIDENTIAL TREATMENT PROGRAM FOR INDIGENT WOMEN","c":"HOUSTON","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THE YWCA OF BROOKLYN INC","a":50000,"p":"YW BROOKLYN LEAD","c":"BROOKLYN","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"THURGOOD MARSHALL COLLEGE FUND","a":55500,"p":"TMCF CAPITAL ONE CAMPUS ENGAGEMENT & DEVCON","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"TMC COMMUNITY CAPITAL","a":150000,"p":"JUST LENDING/SMALL BUSINESS TA AND ACCESS TO CAPITAL IN OAKLAND, SAN JOSE, AND LOS ANGELES","c":"OAKLAND","s":"CA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"TRUST FOR PUBLIC LAND","a":1000000,"p":"TRUST FOR PUBLIC LAND (EA REI COMMITMENT)","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"TULANE UNIVERSITY","a":50000,"p":"NEW ORLEANS COLLEGE AND CAREER ATTAINMENT NETWORK (NOLA CCAN)","c":"NEW ORLEANS","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY OF CENTRAL LOUISIANA INC","a":25000,"p":"VITA & FINANCIAL LITERACY","c":"ALEXANDRIA","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY OF NORTHEAST LOUISIANA","a":51000,"p":"UNITED WAY OF NORTHEAST LOUISIANA FINANCIAL WELL-BEING & VITA PROGRAMS","c":"MONROE","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY OF TARRANT COUNTY","a":10000,"p":"VOLUNTEER INCOME TAX ASSISTANCE","c":"FORT WORTH","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"URBAN ALLIANCE","a":155000,"p":"URBAN ALLIANCE HIGH SCHOOL INTERNSHIP PROGRAM GREATER DC AND BALTIMORE","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"VOLUNTEERS OF AMERICA TEXAS","a":25000,"p":"WOMENS ECONOMIC EMPOWERMENT","c":"HOUSTON","s":"TX","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"WASHINGTON AREA COMMUNITY INVESTMENT FUND INC","a":100000,"p":"WACIF INCLUSIVE, RESILIENT ENTREPRENEURSHIP","c":"WASHINGTON","s":"DC","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"YMCA OF GREATER NEW YORK","a":50000,"p":"PROMOTING SOCIAL-EMOTIONAL LEARNING AND COLLEGE READINESS THROUGH THE YMCA OF GREATER NEW YORK'S ROWE SCHOLARS PROGRAM","c":"NEW YORK","s":"NY","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"YMCA OF GREATER RICHMOND","a":50000,"p":"LEARNING LOSS","c":"RICHMOND","s":"VA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2024,"r":"YOUTHFORCE NOLA","a":50000,"p":"YOUTHFORCE NOLA: HIGH-QUALITY COLLEGE AND CAREER PROGRAMMING FOR NEW ORLEANS PUBLIC SCHOOL STUDENTS","c":"NEW ORLEANS","s":"LA","e":"","o":"202541329349100524","record_type":"named_recipient"},{"y":2025,"r":"ACCION OPPORTUNITY FUND COMMUNITY DEVELOPMENT","a":100000,"p":"SMALL BUSINESS","c":"SAN JOSE","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"AHC INC","a":125000,"p":"AFFORDABLE HOUSING","c":"ARLINGTON","s":"VA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"ASCENDUS INC","a":250000,"p":"SMALL BUSINESS","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"ASSOCIATION FOR NEIGHBORHOOD & HOUSING DEVELOPMENT INC","a":110000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"AVENUE COMMUNITY DEVELOPMENT COPORATION","a":50000,"p":"AFFORDABLE HOUSING","c":"HOUSTON","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BAKERRIPLEY FORMERLY NEIGHBORHOOD CENTERS INC","a":50000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"HOUSTON","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BONTON ENTERPRISES","a":50000,"p":"WORKFORCE DEVELOPMENT","c":"DALLAS","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BOWIE BUSINESS INNOVATION CENTER INC","a":175000,"p":"SMALL BUSINESS","c":"BOWIE","s":"MD","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BRAVEN INC","a":500000,"p":"WORKFORCE DEVELOPMENT","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BREAKING GROUND","a":100000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BRONX OVERALL ECONOMIC DEVELOPMENT CORPORATION","a":400000,"p":"SMALL BUSINESS","c":"BRONX","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"BRONZE VALLEY CORP","a":250000,"p":"SMALL BUSINESS","c":"BIRMINGHAM","s":"AL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CALIFORNIA ASSOCIATION FOR MICROENTERPRISE OPPORTUNITY","a":100000,"p":"SMALL BUSINESS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CAREERWORKS INC","a":100000,"p":"WORKFORCE DEVELOPMENT","c":"BROCKTON","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CENTER FOR RESPONSIBLE LENDING","a":1000000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"DURHAM","s":"NC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CENTER ON RURAL INNOVATION INC","a":250000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"HARTLAND","s":"VT","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CENTRO COMMUNITY PARTNERS","a":100000,"p":"SMALL BUSINESS","c":"OAKLAND","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CHANGE MACHINE","a":560000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CHANGE MACHINE","a":94018,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CHICAGO COMMUNITY LOAN FUND","a":100000,"p":"AFFORDABLE HOUSING","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CODED BY KIDS","a":100000,"p":"EDUCATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"COMMONWEALTH KITCHEN INC","a":100000,"p":"SMALL BUSINESS","c":"DORCHESTER","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY ENTERPRISE DEVELOPMENT SERVICES","a":100000,"p":"SMALL BUSINESS","c":"AURORA","s":"CO","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY LOAN FUND OF NEW JERSEY","a":100000,"p":"AFFORDABLE HOUSING","c":"ELIZABETH","s":"NJ","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"CORPORATION FOR SUPPORTIVE HOUSING","a":150000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DC CENTRAL KITCHEN INC","a":175000,"p":"WORKFORCE DEVELOPMENT","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DELAWARE COMMUNITY FOUNDATION","a":249000,"p":"WORKFORCE DEVELOPMENT","c":"WILMINGTON","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DELAWARE COMMUNITY FOUNDATION","a":500000,"p":"AFFORDABLE HOUSING","c":"WILMINGTON","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DELAWARE STATE UNIVERSITY FOUNDATION INC","a":77000,"p":"EDUCATION","c":"DOVER","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DREAMSPRING","a":50000,"p":"SMALL BUSINESS","c":"ALBUQUERQUE","s":"NM","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"DRESS FOR SUCCESS WORLDWIDE","a":510000,"p":"FINANCIAL EDUCATION","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"ENTERPRISE COMMUNITY PARTNERS INC","a":175000,"p":"AFFORDABLE HOUSING","c":"COLUMBIA","s":"MD","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"EVERYONEON","a":400000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"FAMILY SERVICE OF MONTGOMERY COUNTY PA","a":200000,"p":"WORKFORCE DEVELOPMENT","c":"EAGLEVILLE","s":"PA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"FIRST 72","a":100000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEW ORLEANS","s":"LA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"FOOD BANK FOR NEW YORK CITY FOOD FOR SURVIVAL","a":100000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"GENESYS WORKS - NATIONAL CAPITAL REGION (NCR)","a":150000,"p":"WORKFORCE DEVELOPMENT","c":"TYSONS","s":"VA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HALCYON HOUSE","a":120000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HISPANIC ASSOCIATION OF COLLEGES AND UNIVERSITIES","a":600000,"p":"EDUCATION","c":"SAN ANTONIO","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HOPE CHICAGO INC","a":100000,"p":"EDUCATION","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HOPE ENTERPRISE CORPORATION","a":100000,"p":"AFFORDABLE HOUSING","c":"JACKSON","s":"MS","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HOT BREAD KITCHEN LTD","a":100000,"p":"SMALL BUSINESS","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"HUMANIM INC","a":125000,"p":"WORKFORCE DEVELOPMENT","c":"BALTIMORE","s":"MD","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"IMPACT VENTURES ACCELERATOR DBA IMPACT VENTURES","a":40000,"p":"SMALL BUSINESS","c":"DALLAS","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"INCLUSIV INC","a":100000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"JAMAICA PLAIN NEIGHBORHOOD DEVELOPMENT CORPORATION","a":100000,"p":"SMALL BUSINESS","c":"BOSTON","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"JUST A START INC","a":300000,"p":"WORKFORCE DEVELOPMENT","c":"CAMBRIDGE","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LADDER UP","a":100000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LATIN AMERICAN YOUTH CENTER","a":150000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LATINO ECONOMIC DEVELOPMENT CORPORATION OF WASHINGTON DC","a":450000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LOCAL INITIATIVES SUPPORT CORPORATION","a":100000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LOCAL INITIATIVES SUPPORT CORPORATION","a":100000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LONG ISLAND HOUSING PARTNERSHIP INC","a":100000,"p":"AFFORDABLE HOUSING","c":"HAUPPAUGE","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"LOW INCOME INVESTMENT FUND","a":200000,"p":"AFFORDABLE HOUSING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"METROPOLITAN ECONOMIC DEVELOPMENT ASSOCIATION","a":50000,"p":"SMALL BUSINESS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"MID CITY REDEVELOPMENT ALLIANCE INC","a":50000,"p":"AFFORDABLE HOUSING","c":"BATON ROUGE","s":"LA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"MISSION ASSET FUND","a":200000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"MISSION ECONOMIC DEVELOPMENT AGENCY","a":100000,"p":"AFFORDABLE HOUSING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NATIONAL ASSOCIATION FOR LATINO COMMUNITY ASSET BUILDERS","a":1400000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"SAN ANTONIO","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NATIONAL ASSOCIATION FOR LATINO COMMUNITY ASSET BUILDERS","a":500000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"SAN ANTONIO","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NATIONAL ASSOCIATION FOR LATINO COMMUNITY ASSET BUILDERS","a":5000000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"SAN ANTONIO","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NATIONAL COALITION FOR ASIAN PACIFIC AMERICAN COMMUNITY DEV","a":100000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NATIONAL URBAN LEAGUE INC","a":1000000,"p":"OTHER COMMUNITY SERVICE","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NEIGHBORHOOD REINVESTMENT CORP","a":200000,"p":"AFFORDABLE HOUSING","c":"DALLAS","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NEIGHBORHOOD REINVESTMENT CORP","a":500000,"p":"AFFORDABLE HOUSING","c":"DALLAS","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NEW HOPE HOUSING INC","a":50000,"p":"AFFORDABLE HOUSING","c":"ALEXANDRIA","s":"VA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NEW HOUR FOR WOMEN AND CHILDREN LI INC","a":100000,"p":"FINANCIAL EDUCATION","c":"BRENTWOOD","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NEW JERSEY CITIZEN ACTION EDUCATION FUND INC","a":100000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"NEWARK","s":"NJ","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"NORTH LAWNDALE EMPLOYMENT NETWORK","a":100000,"p":"WORKFORCE DEVELOPMENT","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"OPPORTUNITY FINANCE NETWORK","a":10000000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"OPPORTUNITY FINANCE NETWORK","a":105000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"OPPORTUNITY FINANCE NETWORK","a":500000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"OWEESTA CORPORATION","a":50000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"LONGMONT","s":"CO","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"PENNSYLVANIA MICROENTERPRISE COALITION","a":150000,"p":"SMALL BUSINESS","c":"EXTON","s":"PA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"PEOPLEFUND","a":60000,"p":"SMALL BUSINESS","c":"AUSTIN","s":"TX","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"PER SCHOLAS INC","a":100000,"p":"WORKFORCE DEVELOPMENT","c":"BRONX","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"PROJECT OWN INC","a":150000,"p":"AFFORDABLE HOUSING","c":"BALTIMORE","s":"MD","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"REBUILD METRO INC","a":125000,"p":"AFFORDABLE HOUSING","c":"BALTIMORE","s":"MD","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"RENAISSANCE ECONOMIC DEVELOPMENT CORPORATION","a":100000,"p":"SMALL BUSINESS","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"RESURRECTION PROJECT","a":100000,"p":"AFFORDABLE HOUSING","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"RURAL COMMUNITY ASSISTANCE","a":50000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"SASHA BRUCE YOUTHWORK INC","a":150000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"SOCIAL ENTREPRENEURS OF NEW ORLEANS","a":150000,"p":"SMALL BUSINESS","c":"NEW ORLEANS","s":"LA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"SUPPORTING AND MENTORING YOUTH ADVOCATES AND LEADERS","a":150000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"TECH GOES HOME","a":235000,"p":"OTHER COMMUNITY SERVICE","c":"BOSTON","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"TEEN WAREHOUSE INC","a":100000,"p":"WORKFORCE DEVELOPMENT","c":"WILMINGTON","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"THE FOUNTAIN FUND","a":375000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"CHARLOTTESVILLE","s":"VA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"THE HOUSING PARTNERSHIP NETWORK INC","a":150000,"p":"AFFORDABLE HOUSING","c":"BOSTON","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"THE PETE DU PONT FREEDOM FOUNDATION LLC","a":100000,"p":"SMALL BUSINESS","c":"MOTCHANIN","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"THURGOOD MARSHALL COLLEGE FUND","a":55500,"p":"WORKFORCE DEVELOPMENT","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"TMC COMMUNITY CAPITAL","a":147000,"p":"SMALL BUSINESS","c":"OAKLAND","s":"CA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"TRUE ACCESS CAPITAL CORPORATION","a":250000,"p":"SMALL BUSINESS","c":"WILMINGTON","s":"DE","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"TRUE GROUND HOUSING PARTNERS","a":50000,"p":"AFFORDABLE HOUSING","c":"ARLINGTON","s":"VA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"UNIDOSUS","a":1000000,"p":"AFFORDABLE HOUSING","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"UNITED WAY OF ACADIANA INC","a":64000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"LAFAYETTE","s":"LA","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"UNITED WAY OF NEW YORK CITY","a":100000,"p":"AFFORDABLE HOUSING","c":"NEW YORK","s":"NY","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"URBAN ALLIANCE FOUNDATION INC","a":125000,"p":"WORKFORCE DEVELOPMENT","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"URBAN INSTITUTE","a":250000,"p":"ASSET BUILDING/FINANCIAL CAPABILITY","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"WASHINGTON AREA COMMUNITY INVESTMENT FUND INC","a":450000,"p":"SMALL BUSINESS","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"WOODSTOCK INSTITUTE","a":200000,"p":"FINANCIAL EDUCATION","c":"CHICAGO","s":"IL","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"YEAR UP NATIONAL CAPITAL REGION","a":175000,"p":"WORKFORCE DEVELOPMENT","c":"WASHINGTON","s":"DC","e":"","o":"202631359349103323","record_type":"named_recipient"},{"y":2025,"r":"YEAR UP INC","a":150000,"p":"WORKFORCE DEVELOPMENT","c":"BOSTON","s":"MA","e":"","o":"202631359349103323","record_type":"named_recipient"}]};window.LEDGER_MERGES=["DELAWARE STATE UNIVERSITY FOUNDATION","NATIONAL URBAN LEAGUE","HOPE CHICAGO"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"CENTER FOR NEW DATA":"Health & wellbeing","RACE FORWARD":"Community & economic development","REINVESTMENT FUND INC":"Community & economic development","CENTER FOR LAW AND SOCIAL POLICY":"Basic needs & response","COMMUNITY INITIATIVES":"Nonprofit capacity & transitions","HOWARD UNIVERSITY":"Education & youth","NATIONAL URBAN LEAGUE":"Basic needs & response","NATIONAL URBAN LEAGUE INC":"Basic needs & response","NBMBAA - AUSTIN CHAPTER":"Basic needs & response","OUTDOOR FOUNDATION":"Education & youth","JUSTICE OUTSIDE":"Nonprofit capacity & transitions","ALLIANCE FOR THE CHESAPEAKE BAY INC":"Environment & animals","BAKERRIPLEY":"Basic needs & response","BEDFORD STUYVESANT RESTORATION CORPORATION":"Basic needs & response","BOWIE BUSINESS INNOVATION CENTER INC":"Education & youth","BUSINESS OUTREACH CENTER NETWORK INC":"Community & economic development","CAREER COMPASS OF LOUISIANA":"Education & youth","CHINESE AMERICAN SERVICE LEAGUE":"Community & economic development","CHOICE FOR ALL INC":"Community & economic development","COVENANT COMMUNITY CAPITAL CORPORATION":"Community & economic development","DELAWARE STATE UNIVERSITY FOUNDATION INC":"Education & youth","FOUNDATION COMMUNITIES":"Basic needs & response","GIRLS WHO CODE":"Basic needs & response","OPPORTUNITY FINANCE NETWORK":"Community & economic development","PREPARE AND PROSPER":"Basic needs & response","RAISE TEXAS":"Basic needs & response","SON OF A SAINT":"Education & youth","THE CAPITAL GOOD FUND":"Community & economic development","THE CONCILIO":"Basic needs & response","THE WALLS PROJECT":"Arts & culture","TRUST FOR PUBLIC LAND":"Environment & animals","UNITED WAY OF NORTHEAST LOUISIANA":"Nonprofit capacity & transitions","UNITED WAY OF TARRANT COUNTY":"Nonprofit capacity & transitions"};</script>
+<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
+<script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

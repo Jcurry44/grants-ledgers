@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-blob="EASTHILL_DATA" data-slug="easthill" data-n="183" data-grand="3096895" data-recsub="All five years" data-running="to the dollar, five years running." data-names="99 as-filed names">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>East Hill Foundation — Grants Ledger · 990-PF</title>
+<meta name="description" content="Every grant East Hill Foundation reported in its Form 990-PF grants-paid schedule, 2020–2024 — 183 grants, $3,096,895, reconciling to Part I line 25(d) to the dollar. An independent presentation built from public IRS filings.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="East Hill Foundation — Grants Ledger">
+<meta property="og:description" content="183 grants · $3,096,895 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
+<meta name="theme-color" content="#1e4634">
+<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
+<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<aside class="side" aria-label="Sections and scope">
+  <div class="side-brand">
+    <span class="side-mark" aria-hidden="true">E</span>
+    <span class="side-title">Grants Ledger<span>East Hill Foundation</span></span>
+  </div>
+  <nav class="side-nav" aria-label="Sections">
+    <button type="button" data-tab="overview">Overview</button>
+    <button type="button" data-tab="recipients">Recipients <span class="sn-count" id="sn-recipients"></span></button>
+    <button type="button" data-tab="grants">Grants <span class="sn-count" id="sn-grants"></span></button>
+    <button type="button" data-tab="methodology">Methodology</button>
+  </nav>
+  <div class="side-scope">
+    <div class="ss-label">Tax year</div>
+    <div class="ss-rail" id="year-rail"></div>
+    <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
+  </div>
+  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+</aside>
+<noscript>
+<div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
+</noscript>
+
+<header class="cover">
+  <canvas class="wave" id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="mark">Grants Ledger<span class="tm">.</span></span>
+      <span class="tb-meta">TY2020–2024</span>
+      <span class="tb-meta">Checked 2026-09-05</span>
+      <span class="spacer"></span>
+      <nav class="tb-site" aria-label="Site">
+        <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      </nav>
+      <a href="https://projects.propublica.org/nonprofits/organizations/161441497" target="_blank" rel="noopener">The filings ↗</a>
+      <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>East Hill&nbsp;Foundation</h1>
+        <p class="hero-meta">North Tonawanda, NY · EIN <code>16-1441497</code></p>
+        <p class="lede">
+          <strong>The grants the foundation awarded</strong> — every dollar paid to 99 organizations,
+          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
+          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          years 2020–2024. Built from the foundation’s own public IRS filings.
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+        </div>
+        <div class="hero-note" id="explore-note" hidden></div>
+        <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
+      </div>
+      <div class="grand">
+        <div class="g-label">Awarded · five filed years</div>
+        <div class="g-val" id="kpi-total">$3,096,895</div>
+        <div class="g-rule" aria-hidden="true"></div>
+        <div class="g-sub"><span class="tick">✓</span> 183 grants paid out · sum equals the filed totals, every year</div>
+        <div class="g-scope" id="g-scope" hidden></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <main id="main" tabindex="-1">
+
+  <div class="sheet-kpis" role="group" aria-label="Headline figures">
+    <div class="kpi">
+      <div class="k-label">Recipients</div>
+      <div class="k-val" id="kpi-orgs">99</div>
+      <div class="k-hint">Organizations the foundation funded · 99 as-filed names</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Median grant</div>
+      <div class="k-val" id="kpi-median">—</div>
+      <div class="k-hint">Across all 183 grants</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Latest year</div>
+      <div class="k-val" id="kpi-delta">—</div>
+      <div class="k-hint" id="kpi-delta-hint">—</div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
+    <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">99</span></button>
+    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">183</span></button>
+    <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
+  </div>
+
+
+    <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">I</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">II</span>
+            <h2>Concentration</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-conc">—</p>
+          <div id="conc-share">—</div>
+          <div class="conc-pair" aria-hidden="true"><div class="p5" id="conc-bar" style="width:0%"></div><div class="prest" style="flex:1"></div></div>
+          <div id="conc-hint">—</div>
+          <div id="conc-top5" aria-label="The largest recipients"></div>
+        </div>
+        <div class="card rv">
+          <div class="sec-head">
+            <span class="snum" aria-hidden="true">III</span>
+            <h2>New vs returning</h2>
+            <span class="sec-rule" aria-hidden="true"></span>
+          </div>
+          <p class="card-lede" id="lede-newret">—</p>
+          <div class="newret" id="newret"></div>
+          <div class="nr-detail" id="nr-detail" hidden></div>
+        </div>
+      </div>
+
+      <div class="doctrine-band rv" role="note">
+        <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
+        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $3,096,895, equals Part I line 25(d), $3,096,895 — a difference of zero dollars, verified.">
+          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$3,096,895</span></span>
+          <span class="eq-op">=</span>
+          <span class="eq-part"><span class="eq-label">Part I · line 25(d)</span><span class="eq-val" id="eq-b">$3,096,895</span></span>
+          <span class="eq-seal" aria-hidden="true">Δ $0 ✓</span>
+        </div>
+        <div class="db-rule" aria-hidden="true"></div>
+        <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Where a granted dollar goes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
+        </div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">V</span>
+          <h2 id="movers-h">Biggest changes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub" id="movers-sub"></span>
+        </div>
+        <p class="card-lede" id="lede-movers">—</p>
+        <ul id="movers"></ul>
+      </div>
+    </section>
+
+    <section id="panel-recipients" role="tabpanel" aria-labelledby="tab-recipients" hidden>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>Top recipients</h2>
+          <span class="sub" id="rec-top-sub">All five years · select a bar for the full profile</span>
+        </div>
+        <div id="rec-bars"></div>
+      </div>
+      <div class="card rv">
+        <div class="card-head">
+          <h2>All recipients</h2>
+          <span class="sub" id="rec-count" aria-live="polite">—</span>
+        </div>
+        <div class="rec-tools">
+          <label class="sr-only" for="rec-q">Search recipients</label>
+          <input type="search" id="rec-q" placeholder="Search recipients…" autocomplete="off">
+          <div class="rec-sort" role="group" aria-label="Sort recipients">
+            <button type="button" id="rs-total" class="active" aria-pressed="true">By dollars</button>
+            <button type="button" id="rs-name" aria-pressed="false">A–Z</button>
+          </div>
+        </div>
+        <div class="alpha" id="alpha" hidden></div>
+        <ul id="rec-rows"></ul>
+        <div class="empty" id="rec-empty" hidden>No recipients match — clear the search.</div>
+      </div>
+    </section>
+
+    <section id="panel-grants" role="tabpanel" aria-labelledby="tab-grants" hidden>
+      <div class="card rv" id="ledger-top">
+        <div class="card-head">
+          <h2>The ledger</h2>
+          <span class="sub" id="view-line" aria-live="polite">—</span>
+        </div>
+        <div class="scope-line">
+          <div id="chips"></div>
+          <button type="button" id="clear-all" hidden>Clear all filters</button>
+        </div>
+        <div id="tools-sentinel" aria-hidden="true"></div>
+        <div class="ledger-tools" id="ledger-tools">
+          <div class="lt-row">
+            <label class="sr-only" for="q">Search grants</label>
+            <div class="q-wrap">
+              <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
+            </div>
+            <label class="sr-only" for="sort">Sort</label>
+            <select id="sort">
+              <option value="amount-desc">Amount ↓</option>
+              <option value="amount-asc">Amount ↑</option>
+              <option value="recipient-asc">Recipient A–Z</option>
+              <option value="recipient-desc">Recipient Z–A</option>
+              <option value="year-desc">Year ↓</option>
+              <option value="year-asc">Year ↑</option>
+              <option value="purpose-asc">Purpose A–Z</option>
+            </select>
+            <label class="sr-only" for="min-amt">Minimum grant amount</label>
+            <select id="min-amt">
+              <option value="0">Any amount</option>
+              <option value="50000">$50K and up</option>
+              <option value="250000">$250K and up</option>
+              <option value="1000000">$1M and up</option>
+            </select>
+            <label class="sr-only" for="cat-sel">Purpose</label>
+            <select id="cat-sel">
+              <option value="">All purposes</option>
+            </select>
+            <span class="lt-spacer" aria-hidden="true"></span>
+            <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
+          </div>
+          <div class="lt-row">
+            <div class="lt-years" role="group" aria-label="Filter by tax year">
+              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
+              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
+              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
+              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
+              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
+              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="grant-table">
+            <caption class="sr-only">Grants reported in the foundation’s Form 990-PF grants-paid schedules, filtered by the controls above.</caption>
+            <thead id="grant-thead">
+              <tr>
+                <th data-sort="year" scope="col" aria-sort="none">Year</th>
+                <th data-sort="recipient" scope="col" aria-sort="none">Recipient</th>
+                <th data-sort="amount" scope="col" class="amt-h" aria-sort="descending">Amount</th>
+                <th data-sort="purpose" scope="col" aria-sort="none">Purpose</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody id="grant-tbody"></tbody>
+          </table>
+        </div>
+        <ul id="grant-cards"></ul>
+        <div class="empty" id="empty" hidden>No grants match this view.</div>
+        <div class="pager">
+          <span id="page-info" aria-live="polite">—</span>
+          <div>
+            <button type="button" id="prev-page">Previous</button>
+            <button type="button" id="next-page">Next</button>
+          </div>
+        </div>
+        <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
+      </div>
+    </section>
+
+    <section id="panel-methodology" role="tabpanel" aria-labelledby="tab-methodology" hidden>
+      <div class="card meth rv">
+        <div class="card-head"><h2>The referee</h2><span class="sub">Halt-on-fail: a year publishes only when it reconciles exactly</span></div>
+        <p>
+          Grant rows come from the Form&nbsp;990-PF grants-paid schedule — Part&nbsp;XIV in current filings,
+          formerly Part&nbsp;XV. For every tax year, the sum of the grant rows must equal Part&nbsp;I,
+          line&nbsp;25, column&nbsp;(d) — charitable disbursements — to the dollar. A year that does not
+          tie is withheld, never estimated. All five available years pass; the same checks re-run in
+          your browser’s console on every load.
+        </p>
+        <div class="tie-cards" id="tie-cards"></div>
+        <h3>Source</h3>
+        <p>
+          IRS TEOS public 990-PF e-file XML for EIN <code>16-1441497</code> —
+          <a href="https://projects.propublica.org/nonprofits/organizations/161441497" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
+          <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
+          Only these five tax periods appear as East Hill 990-PF filings in the live TEOS indexes; the ledger
+          re-issues when the next 990-PF is filed. Object IDs: <code id="obj-ids"></code>
+        </p>
+        <h3>Bridging to other public figures</h3>
+        <p>
+          Summary sites often report a foundation’s <em>total</em> charitable disbursements — the grants
+          this ledger counts (Part&nbsp;I, line&nbsp;25(d)) plus the foundation’s own charitable operating
+          costs (line&nbsp;24(d)). These e-filings do not populate line&nbsp;26(d), so the totals below are computed sums of the two filed lines and are labeled as such:
+        </p>
+        <div class="tie-cards">
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2020</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$642,778</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$391,143</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$1,033,921</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2021</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$549,202</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$426,018</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$975,220</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$640,676</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$444,867</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$1,085,543</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$618,040</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$451,326</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$1,069,366</strong></div></div>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div>
+            <div class="tc-row"><span>Grants · 25(d)</span><strong>$646,199</strong></div>
+            <div class="tc-row"><span>Operating · 24(d)</span><strong>$464,031</strong></div>
+            <div class="tc-row"><span>Total · computed</span><strong>$1,110,230</strong></div></div>
+        </div>
+        <h3>Canonical recipients</h3>
+        <p id="ent-note">—</p>
+        <ul id="ent-table"></ul>
+        <h3>The purpose map</h3>
+        <p>
+          “Where a granted dollar goes” assigns each grant to one category by the words of the filing
+          itself — first the filed purpose, then (only when the purpose names no field) the
+          recipient’s filed name. Every rule is published below; anything no rule matches is left
+          unassigned rather than guessed. The filed purpose text on every ledger row remains the record.
+          On this page there is a third step: when the filed purpose names no field and the recipient’s name matches no published rule, the recipient’s own classification in the IRS Business Master File (its NTEE code) is used — accepted only when the filing’s own recipient state pins the name to exactly one organization, when the name is nationally unique, when every same-named listing carries one classification, or when all listings are chapters of a single group exemption. Names with conflicting listings stay unassigned, as do IRS groups with no honest home in these categories.
+        </p>
+        <div id="cat-map"></div>
+        <h4 style="margin:1.1rem 0 0.3rem; font-size:0.95rem;">Step 3 — the recipient’s IRS classification</h4>
+        <p style="font-size:0.9rem;">13 recipients are grouped this way on this page. The crosswalk from the IRS’s major groups to these categories, in full:</p>
+        <div class="tw" style="overflow-x:auto;"><table class="grant-table" style="font-size:0.85rem;"><thead><tr><th>IRS major group (NTEE)</th><th>Category here</th></tr></thead><tbody><tr><td class="cm-kw">A — Arts</td><td class="cm-cat">Arts & culture</td></tr><tr><td class="cm-kw">B — Education</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">C, D — Environment, animals</td><td class="cm-cat">Environment & animals</td></tr><tr><td class="cm-kw">E–H, N — Health, mental health, disease, research, recreation</td><td class="cm-cat">Health & wellbeing</td></tr><tr><td class="cm-kw">I, K, L, M, P — Legal aid, food, housing, safety, human services</td><td class="cm-cat">Basic needs & response</td></tr><tr><td class="cm-kw">J, S, W — Employment, community improvement, public benefit</td><td class="cm-cat">Community & economic development</td></tr><tr><td class="cm-kw">O — Youth development</td><td class="cm-cat">Education & youth</td></tr><tr><td class="cm-kw">T — Philanthropy & grantmaking</td><td class="cm-cat">Nonprofit capacity & transitions</td></tr><tr><td class="cm-kw">Q, R, U, V, X, Y, Z — International, civil rights, science, social science, religion, other</td><td class="cm-cat">stay in “other”</td></tr></tbody></table></div>
+        <h3>Limitations</h3>
+        <p>
+          Recipient location is the mailing address on the filing, not a service area. Display casing
+          is editorial; hover any name for the as-filed text. Amounts are as filed; no inflation
+          adjustment. Nothing here is an audit, attestation, or opinion — it is a documented
+          reconciliation of the foundation’s own public filings, with the receipts attached.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <canvas class="wave" id="wave-foot" aria-hidden="true"></canvas>
+  <div class="wrap foot-in">
+    <div>Built independently by <strong>Curry Studio</strong> · Joe Curry, North Tonawanda&nbsp;NY · <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">jcurry44.github.io</a> · <a href="mailto:jjcurry027@gmail.com">jjcurry027@gmail.com</a></div>
+    <div>Not affiliated with, commissioned by, or endorsed by East Hill Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
+    <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
+    <nav class="foot-site" aria-label="Site">
+      <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+      <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    </nav>
+  </div>
+</footer>
+
+<button type="button" class="return-chip" id="return-chip" hidden>← Back to overview</button>
+<div class="pf-backdrop" id="pf-backdrop" hidden></div>
+<div class="profile" id="profile" role="dialog" aria-modal="true" aria-labelledby="pf-title" hidden>
+  <button type="button" class="pf-close" id="pf-close" aria-label="Close recipient profile">✕</button>
+  <div class="pf-head">
+    <h2 id="pf-title">—</h2>
+    <div id="pf-sub">—</div>
+  </div>
+  <div class="pf-body">
+    <div id="pf-aliases"></div>
+    <div class="pf-h">Giving by year</div>
+    <div id="pf-years"></div>
+    <div class="pf-h">Every grant</div>
+    <ul id="pf-grants"></ul>
+  </div>
+  <div class="pf-actions">
+    <button type="button" id="pf-all">Open in the ledger</button>
+  </div>
+</div>
+<script>
+window.EASTHILL_DATA={"meta":{"foundation":"East Hill Foundation","ein":"16-1441497","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":183,"grand_total":3096895,"tieout":{"2020":{"object_id":"202123069349101717","grant_count":40,"grant_sum":642778,"line25_col_d":642778,"status":"PASS"},"2021":{"object_id":"202243049349100224","grant_count":34,"grant_sum":549202,"line25_col_d":549202,"status":"PASS"},"2022":{"object_id":"202342849349100014","grant_count":33,"grant_sum":640676,"line25_col_d":640676,"status":"PASS"},"2023":{"object_id":"202402969349100515","grant_count":42,"grant_sum":618040,"line25_col_d":618040,"status":"PASS"},"2024":{"object_id":"202522439349100302","grant_count":34,"grant_sum":646199,"line25_col_d":646199,"status":"PASS"}}},"grants":[{"y":2020,"r":"TOWN OF CLARENCE","a":3000,"p":"MAINTENANCE FOR CLARENCE HISTORICAL SOCIETY BUILDING - YR. 5 OF 5","c":"CLARENCE","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"TWIN CITIES MEALS ON WHEELS","a":9191,"p":"NEW FRONT DOOR, FURBISH LOBBY AND ENTRY AREA","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"GATEWAY HOME - COMFORT CARE INC","a":24000,"p":"ACCESSIBLE PATIO, PORCH, WALKWAYS FOR END OF LIFE HOME","c":"ATTICA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"FAMILY HELP CENTER","a":11000,"p":"RENOVATE ESSENTIAL MEETING ROOM","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"HABITAT FOR HUMANITY BUFFALO INC","a":20000,"p":"CONSTRUCTION FOUNDATION FOR A HOME FOR LOW INCOME FAMILY","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"PROJECT STORK INC THE BABY PANTRY","a":19000,"p":"EDUCATION AND PROGRAM MATERIALS FOR FAMILIES IN NEED","c":"OAKFIELD","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"ALTERNATIVE CARE SERVICES OF WNY","a":2350,"p":"PURCHASE EQUIPMENT AND KITCHEN SUPPLIES","c":"ALDEN","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"BREAD OF LIFE OUTREACH CENTER","a":16819,"p":"RENOVATE BATHROOMS - EQUIPMENT, MATERIALS, FURNITURE","c":"COLDEN","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"CATHOLIC CHARITIES OF BUFFALO","a":14995,"p":"CLOTHING ITEMS FOR NEEDY STUDENTS, HYGIENE PRODUCTS AND PILLOWS","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"CONSUMER CREDIT COUNSELING SERVICE","a":23915,"p":"OFFICE EQUIPMENT","c":"WEST SENECA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF LITTLE PORTION FRIARY","a":16543,"p":"SAFETY UPGRADE - REFINISH WOOD FLOOR, REMOVE CARPET INSTALL VINYL FLOOR","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"GERARD PLACE","a":31000,"p":"DINING AND FOOD DISTRIBUTION SUPPLIES, CLEANING, AND MATERIALS","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"HEARTS AND HANDS - FAITH IN ACTION INC","a":8000,"p":"REIMBURSE VOLUNTEERS MILEAGE FOR TRANSPORTING OLDER ADULTS","c":"AMHERST","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"HOMESPACE","a":16800,"p":"PURCHASE AND INSTALL 8 NEW DOORS","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NIAGARA GOSPEL RESCUE MISSION","a":50000,"p":"ROOF REPAIRS AND REPLACEMENT","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"OLD FIRST WARD COMMUNITY ASSOCIATION","a":12011,"p":"FREEZER, DISHWASHER, TABLES, AND KITCHEN EQUIPMENT","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"PEACE OF THE CITY","a":7000,"p":"FOOD FOR CHILDREN","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"PINNACLE COMMUNITY SERVICES","a":37535,"p":"RENOVATE 2 NEW BATHROOMS AT DOMESTIC VIOLENCE SHELTER","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"RURAL OUTREACH CENTER","a":19381,"p":"WARM JACKETS, SNOW PANTS, AND BOOTS FOR RURAL CHILDREN","c":"EAST AURORA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"SOUTHERN TIER HEALTH CARE SYSTEM INC","a":6750,"p":"PURCHASE 75 CRIBS AND 150 FITTED SHEETS","c":"OLEAN","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"SOC OF SAINT VINCENT DE PAUL OF BUFFALO","a":10000,"p":"FOOD, SUPPLIES AND PPE","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":2000,"p":"PURCHASE 80 PAIRS OF BOOTS FOR CHILDREN IN NEED","c":"LOCKPORT","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"CAROUSEL SOCIETY OF THE NIAGARA FRONTIER","a":12100,"p":"COVID RELIEF ASSISTANCE","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NIAGARA AQUARIUM FOUNDATION","a":65000,"p":"DIET AND NUTRITION PROGRAM FOR AQUARIUM ANIMALS","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"CITY OF NORTH TONAWANDA","a":25000,"p":"RIVERWALK TRAIL SAFETY AND BEAUTIFICATION","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NOR-TON RED JACKET CLUB INC","a":4175,"p":"PURCHASE AND INSTALL NEW FURNACE","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NORTH TONAWANDA FIRE DEPARTMENT","a":4068,"p":"PURCHASE 3 AUTOMATED EXTERNAL DEFIBRILLATORS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NORTH TONAWANDA INTER-CHURCH FOOD PANTRY","a":8145,"p":"PURCHASE AND INSTALL NEW FREEZER","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NORTH TONAWANDA BENEVOLENT ASSOCIATION","a":12000,"p":"PURCHASE WARM JACKETS, SHOES, TOYS, FOOD FOR NEEDY CHILDREN","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"HEART LOVE & SOUL INC","a":15000,"p":"FOOD, SUPPLIES AND EQUIPMENT","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"KEN-TON CLOSET INC","a":7000,"p":"FOOD, PAPER PRODUCTS, GLOVES, CLEANING SUPPLIES","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NORTH TONAWANDA INTER-CHURCH FOOD PANTRY","a":15000,"p":"FOOD, PPE, CLEANING SUPPLIES","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NIAGARA FALLS BOYS & GIRLS CLUB","a":15000,"p":"FOOD, PROGRAM SUPPLIES, PPE, CLEANING SUPPLIES","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"TWIN CITIES MEALS ON WHEELS","a":15000,"p":"CLEANING SUPPLIES, SANITIZERS, FOOD SUPPLIES AND MATERIALS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"ALTERNATIVE CARE SERVICES OF WNY","a":13000,"p":"FOOD, PACKAGING, TRANSPORT BAGS, KITCHEN SUPPLIES, PPE","c":"ALDEN","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"NIAGARA GOSPEL RESCUE MISSION","a":15000,"p":"FOOD AND SUPPLIES","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"YWCA OF THE NIAGARA FRONTIER INC","a":6000,"p":"FOOD, CLOTHING, PPE, LINENS AND SUPPLIES","c":"LOCKPORT","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"KEN-TON MEALS ON WHEELS","a":15000,"p":"SUPPLIES AND EQUIPMENT","c":"TONAWANDA","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY MISSIONS OF NIAGARA FRONTIER","a":15000,"p":"EQUIPMENT AND APPLIANCES","c":"NIAGARA FALLS","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY FOUNDATION FOR GREATER BUFFALO","a":20000,"p":"WNY COVID RELIEF FUND","c":"BUFFALO","s":"NY","e":"","o":"202123069349101717","record_type":"named_recipient"},{"y":2021,"r":"ARC OF GENESEE ORLEANS","a":2100,"p":"PURCHASE 2 ELECTRIC TWO-COMPARTMENT MEAL TRANSPORTERS TO DELIVER HOT MEALS","c":"ALBION","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"BUFFALO ARTS AND TECHNOLOGY CENTER INC","a":20910,"p":"REFRIGERATOR AND 15 WEEKS OF MEALS FOR ADULT WORKFORCE STUDENTS","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"CLARENCE FIRE DISTRICT #1","a":22394,"p":"REPLACEMENT CARDIAC MONITOR/DEFIBRILLATOR","c":"CLARENCE","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"COMPASS HOUSE","a":13000,"p":"FREEZER, MEAT AND FOOD FOR HOMELESS YOUTH","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"BUFFALO CITY MISSION","a":50000,"p":"AIR FILTRATION SYSTEM AT CORNERSTONE MANOR - WOMEN AND CHILDREN'S SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"CORNELL COOPERATIVE EXTENSION","a":20000,"p":"PRODUCE AND SUPPLIES FOR VEGGIE VAN MOBILE MARKET","c":"EAST AURORA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"FEEDMORE WNY","a":30000,"p":"VACUUM, BAND SEALERS, BAGS TO REPACK FOOD, AND FORKLIFT CAGES","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"FAMILY PROMISE OF WESTERN NEW YORK","a":17000,"p":"MEALS AND FOOD FOR HOMELESS FAMILY SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"FRIENDS OF NIGHT PEOPLE","a":20000,"p":"SUPPLIES TO PROVIDE TAKE OUT MEALS FOR THE NEEDY","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"FRIENDS OF LITTLE PORTION FRIARY","a":18260,"p":"IMPROVE SECURITY BY REPLACING 6 DOORS - 2 INTERIOR AND 4 EXTERIOR","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"GATEWAY HOME - COMFORT CARE INC","a":27512,"p":"FACILITY WEATHERPROOFING AND WALKWAY INSTALLATION AT END OF LIFE HOME","c":"ATTICA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"PEACEPRINTS OF WNY","a":21000,"p":"NEW FLOORING AND FURNITURE IN HOME FOR MEN FORMERLY INCARCERATED","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"ROTARY CLUB OF HAMBURG FOUNDATION INC","a":15000,"p":"WINTER JACKETS, BOOTS AND CLOTHING FOR CHILDREN IN NEED","c":"HAMBURG","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"SAVING GRACE OUTREACH","a":40000,"p":"HEATING, ELECTRICAL, FLOORING, WINDOWS AND BATHROOMS AT COMMUNITY CARE CENTER","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"THE SALVATION ARMY (BUFFALO AREA SERVICE)","a":20000,"p":"FOOD, SUPPLIES, EQUIPMENT FOR FOOD DISTRIBUTION","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"THE WESLEYAN CHURCH OF HAMBURG","a":23000,"p":"REMODEL TWO BATHROOMS AT TRADING POST COMMUNITY CARE CENTER","c":"HAMBURG","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"UNITED WAY OF NORTHERN CHAUTAUQUA COUNTY","a":6000,"p":"NEW COATS FOR CHILDREN IN NEED, LAUNDER DONATED USED COATS","c":"DUNKIRK","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"KEN-TON MEALS ON WHEELS","a":8000,"p":"NEW DELIVERY BAGS AND SUPPLIES FOR HOME MEAL DELIVERIES","c":"TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"NORTH TONAWANDA CITY SCHOOL DISTRICT","a":6600,"p":"FINE ARTS CREST AND DISPLAY FOR NEW WALL OF FAME AT HIGH SCHOOL","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"NORTH TONAWANDA BOTANICAL GARDEN","a":9745,"p":"UTILITY VEHICLE","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"RESPONSE TO LOVE CENTER","a":20000,"p":"FOOD, FRESH DAIRY, PRODUCE, KITCHEN AND CLEANING SUPPLIES, PPE","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":12400,"p":"FOOD, DIAPERS AND CLEANING SUPPLIES FOR FAMILIES IN NEED","c":"LOCKPORT","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"NORTH TONAWANDA BENEVOLENT ASSOCIATION","a":14000,"p":"WARM JACKETS, SHOES, TOYS FOOD FOR NEEDY CHILDREN","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"NORTH TONAWANDA FIRE DEPARTMENT","a":4400,"p":"FOUR COMPLETE WATER RESCUE SUITS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"NOR-TON RED JACKET CLUB INC","a":2717,"p":"OUTDOOR PROGRAM EQUIPMENT REPLACEMENT","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"PINNACLE COMMUNITY SERVICES","a":14800,"p":"NEW APPLIANCES FOR COLD STORAGE, FOOD AND CLEANING SUPPLIES","c":"NIAGARA FALLS","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"RURAL OUTREACH CENTER","a":13302,"p":"WINTER JACKETS, BOOTS AND SNOW PANTS FOR CHILDREN IN NEED","c":"EAST AURORA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"RURAL OUTREACH CENTER","a":15305,"p":"FOOD FOR RURAL CHILDREN AND FAMILIES IN NEED","c":"EAST AURORA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"TOWN OF CLARENCE","a":3000,"p":"MAINTENANCE FOR CLARENCE HISTORICAL SOCIETY BUILDING YEAR 1 OF 5","c":"CLARENCE","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"TWIN CITIES MEALS ON WHEELS","a":15000,"p":"DAIRY AND MEAT PRODUCTS FOR SENIOR MEALS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":2000,"p":"PURCHASE 80 PAIRS OF BOOTS FOR CHILDREN IN NEED","c":"LOCKPORT","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"YWCA OF THE NIAGARA FRONTIER INC","a":10000,"p":"FURNITURE, EQUIPMENT FOR PERMANENT HOUSING FOR DOMESTIC VIOLENCE SURVIVORS","c":"LOCKPORT","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"PINNACLE COMMUNITY SERVICES","a":29657,"p":"NEW FLOORING FOR PASSAGE HOUSE SHELTER AND CASEY HOUSE SHELTER","c":"NIAGARA FALLS","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY FOUNDATION FOR GREATER BUFFALO","a":2100,"p":"CONTRIBUTION TO 21ST CENTURY FUND","c":"BUFFALO","s":"NY","e":"","o":"202243049349100224","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY FOUNDATION FOR GREATER BUFFALO","a":10000,"p":"CONTRIBUTION TO BUFFALO TOGETHER COMMUNITY RESPONSE FUND","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF LITTLE PORTION FRIARY","a":15000,"p":"CRITICAL WINDOW UPGRADES IN SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"KEN-TON MEALS ON WHEELS","a":13000,"p":"NEW DOUBLE STACK OVENS","c":"TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"NORTH TONAWANDA BENEVOLENT ASSOCIATION","a":10000,"p":"WARM JACKETS, CLOTHING, BOOTS, SHOES, TOYS FOOD FOR NEEDY CHILDREN","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"NTHS - GIRLS BASKETBALL BOOSTER CLUB","a":8000,"p":"NT HIGH SCHOOL BASKETBALL SHOOTING EQUIPMENT AND SHIRTS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"RESPONSE TO LOVE CENTER","a":10000,"p":"FRESH DAIRY AND PRODUCE FOR FOOD PANTRY","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"RURAL OUTREACH CENTER","a":23000,"p":"WINTER JACKETS, BOOTS AND SNOW PANTS FOR CHILDREN IN NEED","c":"EAST AURORA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"TOWN OF CLARENCE","a":3000,"p":"MAINTENANCE FOR CLARENCE HISTORICAL SOCIETY BUILDING YEAR 2 OF 5","c":"CLARENCE","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"TWIN CITIES MEALS ON WHEELS","a":9000,"p":"PURCHASE FOOD FOR ELDERLY","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":1500,"p":"PURCHASE OF BOOTS FOR SCHOOL CHILDREN IN NEED","c":"LOCKPORT","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"ALTERNATIVE CARE SERVICES OF WNY","a":10000,"p":"KITCHEN APPLIANCES AND SUPPLIES","c":"ALDEN","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"CLARENCE SENIOR CITIZENS INC","a":8000,"p":"COMMERCIAL FREEZER","c":"CLARENCE","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY MISSIONS OF NIAGARA FRONTIER","a":49540,"p":"TRUCK FOR WORKFORCE DEVELOPMENT PROGRAM","c":"NIAGARA FALLS","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"CROSSROADS HOUSE","a":35000,"p":"METAL ROOF FOR HOSPICE HOUSE","c":"BATAVIA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"GENESIS HOUSE OF OLEAN INC","a":25000,"p":"TOWARD HOUSING PURCHASE FOR HOMELESS SHELTER","c":"OLEAN","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"HEARTS FOR THE HOMELESS OF WNY INC","a":30000,"p":"MASONRY REPAIR AND EXTERIOR PAINT","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"HOMESPACE","a":23911,"p":"5 NEW STEEL DOORS AND 5 STORM DOORS","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"KEVIN GUEST HOUSE","a":28765,"p":"NEW PRIVATE BATHROOM AT HOSPITALITY HOUSE","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"NIAGARA FALLS BOYS & GIRLS CLUB","a":30000,"p":"FUTURE FIT CAREER EXPLORATION PROGRAM","c":"NIAGARA FALLS","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"OLD FIRST WARD COMMUNITY ASSOCIATION","a":10000,"p":"REFRIGERATOR AND KITCHEN EQUIPMENT FOR FOOD PANTRY","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"SPCA SERVING ERIE COUNTY","a":10000,"p":"SMALL ANIMAL HABITATS","c":"WEST SENECA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"THE TEACHERS DESK INC","a":12000,"p":"ELECTRIC PALLET LIFT, WHEELS RISERS AND RAMP FOR TRUCK","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"UPWARD DESIGN FOR LIFE CORP","a":10000,"p":"MATTRESSES AND BEDDING","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"MARTIN HOUSE RESTORATION CORPORATION","a":20000,"p":"FOR CAPITAL AND MAINTENANCE COSTS AT VISITORS CENTER YEAR 1 OF 5","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"PEACE OF THE CITY","a":12500,"p":"FURNITURE, EQUIPMENT AND SUPPLIES FOR YOUTH PROGRAM","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"REVIVE WESLEYANTHE TRADING POST","a":15000,"p":"COMMERCIAL STAINLESS STEEL CABINETS, COUNTERS AT THE TRADING POST","c":"SPRINGVILLE","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"BIG BIG TABLE COMMUNITY CAFE INC","a":21960,"p":"COMMERCIAL APPLIANCES, EQUIPMENT AND MEAL TOKENS","c":"BUFFALO","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"CAROUSEL SOCIETY OF THE NIAGARA FRONTIER","a":5000,"p":"TOWARD CONSTRUCTION OF NEW MUSIC ROOM BUILDING","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"NORTH TONAWANDA INTER-CHURCH FOOD PANTRY","a":6000,"p":"FRONT DOOR AND SHELVING FOR STOCK ROOM","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"PROJECT PRIDE OF NORTH TONAWANDA INC","a":5000,"p":"SHED AND CONCRETE PAD BASE FOR GARDEN SUPPLIES","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF NORTH TONAWANDA INTERMEDIATE","a":8000,"p":"CONCRETE BASE PAD FOR NEW PAVILION AT INTERMEDIATE SCHOOL","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"WESTERN NY LAND CONSERVANCY INC","a":90000,"p":"OUTDOOR KITCHEN FOR REFUGEE FARMERS - PROVIDENCE FARM COLLECTIVE YEAR 1 OF 3","c":"EAST AURORA","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2022,"r":"GRAYCLIFF CONSERVANCY INC","a":72500,"p":"GIFT SHOP AND RECEPTION DESK AT NEW VISITORS CENTER YEAR 1 OF 2","c":"DERBY","s":"NY","e":"","o":"202342849349100014","record_type":"named_recipient"},{"y":2023,"r":"FRIENDS OF LITTLE PORTION FRIARY","a":10890,"p":"SMOKE DETECTORS, BED BUG HEAT SYSTEM, MATTRESS COVERS, WASHING MACHINE FOR SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"HOMESPACE","a":30000,"p":"RENOVATE HOUSING UNIT FOR 18-21 YEAR OLD FOSTER YOUTH AND THEIR CHILD/CHILDREN","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"MARTIN HOUSE RESTORATION CORPORATION","a":20000,"p":"FOR CAPITAL AND MAINTENANCE COSTS AT VISITORS CENTER YEAR 2 OF 5","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"NORTH TONAWANDA BENEVOLENT ASSOCIATION","a":10000,"p":"WARM JACKETS, CLOTHING, BOOTS, SHOES, TOYS FOOD FOR NEEDY CHILDREN","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"RESPONSE TO LOVE CENTER","a":20000,"p":"DAIRY AND FRESH PRODUCE FOR FOOD PANTRY/SOUP KITCHEN","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"RURAL OUTREACH CENTER","a":16350,"p":"WARM WINTER CLOTHING, BOOTS FOR CHILDREN AND TEENS IN NEED","c":"EAST AURORA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"TOWN OF CLARENCE","a":3000,"p":"MAINTENANCE FOR CLARENCE HISTORICAL SOCIETY BUILDING YEAR 3 OF 5","c":"CLARENCE","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"TWIN CITIES MEALS ON WHEELS","a":8000,"p":"REFRIGERATOR AND SERVING TRAY FOR HOT FOOD","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"WESTERN NY LAND CONSERVANCY INC","a":80000,"p":"OUTDOOR KITCHEN FOR REFUGEE FARMERS - PROVIDENCE FARM COLLECTIVE YEAR 2 OF 3","c":"EAST AURORA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":1500,"p":"PURCHASE NEW BOOTS FOR FOR CHILDREN AND TEENS","c":"LOCKPORT","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"BUFFALO SUZUKI STRINGS","a":40000,"p":"MATCHING GRANT FOR THE RECONSTRUCTION & RESTORATION OF THE BUILDINGS FACADE","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"FAMILY PROMISE OF WESTERN NEW YORK","a":20000,"p":"MATTRESSES AND APPLIANCES FOR HOMELESS FAMILIES","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"GENESEE ORLEANS MINISTRY OF CONCERN","a":3400,"p":"FURNITURE PROGRAM - FUEL, MAINTENANCE FOR DELIVERY TRUCK","c":"ALBION","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"GERARD PLACE","a":25000,"p":"NEW ENTRY AND SECURITY SYSTEM FOR NEW FAMILY HEALTH CENTER","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"IMAGINE COMMUNITY GARDENS INC","a":4000,"p":"SUPPLIES AND WATER FOR COMMUNITY GARDEN","c":"EAST AMHERST","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"WESTSIDE COMMUNITY SERVICES","a":23000,"p":"FREEZER AND REFRIGERATORS FOR FOOD PANTRY","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"PINNACLE COMMUNITY SERVICES","a":20000,"p":"INSTALL NEW FLOORING AT EMERGENCY SHELTER","c":"NIAGARA FALLS","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"ROTARY CLUB OF HAMBURG FOUNDATION INC","a":20000,"p":"WARM WINTER CLOTHING FOR CHILDREN AND TEENS IN NEED","c":"HAMBURG","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"SOUTHERN TIER HEALTH CARE SYSTEM INC","a":7000,"p":"FOR 75 PORTABLE CRIBS AND 150 FITTED SHEETS","c":"OLEAN","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"TAPESTRY CHARTER SCHOOL","a":15000,"p":"APPLIANCES AND SUPPLIES FOR SCHOOL FOOD PANTRY","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"THE RELIEF ZONE INC","a":4700,"p":"REPLACE DOOR AT CHILD CARE FACILITY","c":"FREWSBURG","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"THE TOOL LIBRARY INC","a":7500,"p":"PURCHASE TOOLS AND STORAGE","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY SERVICES FOR EVERY1 INC","a":9500,"p":"CONVECTION OVEN FOR NEW LYCEUM CENTER","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"FEED716","a":15000,"p":"FOOD/MEALS FOR THE NEEDY","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"FRIENDS OF NIGHT PEOPLE","a":20000,"p":"FOOD, SUPPLIES, CLOTHING EQUIPMENT FOR DISTRIBUTION TO THE HOMELESS","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"HEART LOVE & SOUL INC","a":15000,"p":"REPAIR FOOD STORAGE COOLER, NEW SMALL APPLIANCES, EQUIPMENT TO SERVE THE COMMUNITY","c":"NIAGARA FALLS","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"NIAGARA FRONTIER SEARCH AND RESCUE","a":4200,"p":"GARMIN UNITS, LIFE VETS FOR K-9 SEARCH AND RESCUE","c":"ORCHARD PARK","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"RAHAMA","a":2400,"p":"PLANS FOR RENOVATING SHELTER FOR MUSLIM, IMMIGRANT, REFUGEE SURVIVORS OF DOMESTIC ABUSE","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"SAVING GRACE OUTREACH","a":30000,"p":"RESTROOM RENOVATION AND EQUIPMENT FOR PHASE II OF COMMUNITY CARES CENTER","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"THE SALVATION ARMY (BUFFALO AREA SERVICE)","a":16000,"p":"FREEZER, REFRIGERATOR AND SHELVING","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"URBAN CHRISTIAN MINISTRIES","a":12000,"p":"FREEZERS, FOOD, PERSONAL HYGIENE PRODUCTS AND CLOTHING RACKS","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"BUFFALO FEDERATION OF NEIGHBORHOOD CENTERS","a":3600,"p":"FOOD FOR LOW INCOME EAST SIDE RESIDENTS","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"FAMILY HELP CENTER","a":10000,"p":"RENOVATE AND INSTALL AN INSTRUCTIONAL FULL SERVICE KITCHEN","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"REVIVE WESLEYAN THE TRADING POST","a":10000,"p":"RENOVATE THE TRADING POST'S KITCHEN, FLOORING, LIGHTING CEILING AND STORAGE","c":"SPRINGVILLE","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"NIAGARA AREA HABITAT FOR HUMANITY","a":18000,"p":"HVAC SYSTEM FOR HABITAT HOME","c":"NIAGARA FALLS","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"WNYHEROES INC","a":15000,"p":"EQUIPMENT FOR SERVICE DOG TRAINING AND TECHNOLOGY FOR VIRTUAL TRAINING","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"HANDS 4 HOPE STREET MINISTRY","a":6000,"p":"PERSONAL CARE ITEMS FOR DISTRIBUTION TO NEEDY","c":"ALBION","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"CHILD & FAMILY SERVICES","a":10000,"p":"FURNITURE FOR HAVEN HOUSE SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"CARNEGIE ART CENTER","a":10000,"p":"REFINISH AND SEAL THE MAIN AND EAST GALLERY ORIGINAL FLOORS","c":"N TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"NT BOTANICAL GARDEN ORGANIZATION INC","a":3000,"p":"EXTERIOR IMPROVEMENTS AROUND THE EAST WING OF THE GREENHOUSE BUILDING","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"OLIVER STREET MERCHANTS ASSOCIATION","a":4000,"p":"WINTER DECORATIONS FOR OLIVER STREET","c":"N TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2023,"r":"TWIN CITIES COMMUNITY OUTREACH INC","a":15000,"p":"NEW ROOFTOP HEATING UNIT AND REWORK DUCTWORK","c":"N TONAWANDA","s":"NY","e":"","o":"202402969349100515","record_type":"named_recipient"},{"y":2024,"r":"ALTERNATIVE CARE SERVICES OF WNY","a":13147,"p":"KITCHEN ITEMS, CANNING EQUIPMENT, MICROWAVE, PACKAGING, RACKS","c":"ALDEN","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF LITTLE PORTION FRIARY","a":24000,"p":"CRITICAL UPGRADES, REPAIRS FOR MEN'S SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF NORTH TONAWANDA INTERMEDIATE","a":5000,"p":"OUTDOOR PLAY EQUIPMENT","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"GENESEE ORLEANS MINISTRY OF CONCERN","a":10600,"p":"BEDS, BEDDING, PILLOWS","c":"ALBION","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"GENESIS HOUSE OF OLEAN INC","a":29730,"p":"RENOVATE SECOND FLOOR SHELTER","c":"OLEAN","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"GRAYCLIFF CONSERVANCY INC","a":72500,"p":"GIFT SHOP AND RECEPTION DESK AT NEW VISITORS CENTER YEAR 2 OF 2","c":"DERBY","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"HEARTS FOR THE HOMELESS OF WNY INC","a":16000,"p":"COMMERCIAL KITCHEN RENOVATION","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"MARTIN HOUSE RESTORATION CORPORATION","a":20000,"p":"FOR CAPITAL AND MAINTENANCE COSTS AT VISITORS CENTER YEAR 3 OF 5","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"NORTH TONAWANDA BENEVOLENT ASSOCIATION","a":10000,"p":"WARM JACKET, CLOTHING, BOOTS, SHOES, TOYS FOR NEEDY CHILDREN","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"OLIVER STREET MERCHANTS ASSOCIATION","a":2000,"p":"NEW STREETSCAPE TRASH RECEPTACLES","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"RAHAMA","a":21587,"p":"KITCHEN RENOVATION IN SHELTER","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"REVIVE WESLEYAN THE TRADING POST","a":17000,"p":"RENOVATE TRADING POST'S DINING AND PANTRY AREA CEILINGS, INSULATION, LIGHTING","c":"SPRINGVILLE","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"ROTARY CLUB OF HAMBURG FOUNDATION INC","a":20000,"p":"NEW WINTER CLOTHING FOR CHILDREN AND TEENS IN NEED","c":"HAMBURG","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"RURAL OUTREACH CENTER","a":16920,"p":"NEW WINTER COATS, BOOTS FOR NEEDY CHILDREN","c":"EAST AURORA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"SOUTHERN TIER HEALTH CARE SYSTEM INC","a":4000,"p":"NEW CRIBS AND FITTED SHEETS","c":"OLEAN","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"THE SALVATION ARMY (BUFFALO AREA SERVICE)","a":37000,"p":"RENOVATE COMMUNITY REST ROOMS","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"THE TEACHERS DESK INC","a":35949,"p":"PURCHASE PRE-OWNED TRUCK WITH RAMP","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"THE TOOL LIBRARY INC","a":10000,"p":"PURCHASE STORAGE CONTAINER","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"TOWN OF CLARENCE","a":3000,"p":"MAINTENANCE FOR CLARENCE HISTORICAL SOCIETY BUILDING YEAR 4 OF 5","c":"CLARENCE","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"TWIN CITIES MEALS ON WHEELS","a":8000,"p":"PROTEIN RICH FOODS FOR SENIOR CLIENTS","c":"NORTH TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"WESTERN NY LAND CONSERVANCY INC","a":47500,"p":"NEW GARAGE FOR EQUIPMENT STORAGE","c":"EAST AURORA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"WESTSIDE COMMUNITY SERVICES","a":20766,"p":"SHELVES, RACKS, STORAGE BOXES, SHOPPING CARTS, AC UNIT","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"YOUTH MENTORING SERVICES OF NIAGARA","a":2000,"p":"NEW BOOTS FOR CHILDREN AND YOUTH","c":"LOCKPORT","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"WESTERN NY LAND CONSERVANCY INC","a":80000,"p":"OUTDOOR KITCHEN FOR PROVIDENCE FARM COLLECTIVE YEAR 3 OF 3","c":"EAST AURORA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"RIVIERA THEATER & ORGAN PRESERVATION SOC","a":20000,"p":"NON-ALCOHOL ITEMS FOR NEW CONCESSION AREA","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"CITY OF LOCKPORT HOUSING AUTHORITY","a":4000,"p":"CLEANING ITEMS, SUPPLIES, FIRST AID KITS","c":"LOCKPORT","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"THE SUMMIT CENTER","a":30000,"p":"NEW RUBBER PLAYGROUND SURFACE","c":"GETZVILLE","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"YWCA OF THE NIAGARA FRONTIER INC","a":7500,"p":"FURNITURE AND LANDSCAPING FOR COURTYARD","c":"LOCKPORT","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"716 SQUASH INC","a":5000,"p":"AFTERSCHOOL PROGRAM SUPPORT, FOOD, EQUIPMENT","c":"BUFFALO","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"NIAGARA GOSPEL RESCUE MISSION","a":28000,"p":"PURCHASE PRE-OWNED BOX TRUCK","c":"NIAGARA FALLS","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"NORTH TONAWANDA FIRE DEPARTMENT","a":7000,"p":"PURCHASE ENCLOSED GEAR DRYER AND RACKS","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"RAINIES FOSTER CLOSET INC","a":4000,"p":"NEW CRIBS, CAR SEATS AND BABY ITEMS","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"SPRUCE PARENT TEACHER ORGANIZATION","a":7000,"p":"NEW OUTDOOR BENCHES AND PLAY STATIONS FOR CHILDREN","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"},{"y":2024,"r":"OHIO HOME INTEREST ORGANIZATION","a":7000,"p":"INCLUSIVE PLAYGROUND EQUIPMENT","c":"N TONAWANDA","s":"NY","e":"","o":"202522439349100302","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"GATEWAY HOME - COMFORT CARE INC":"Basic needs & response","HEARTS AND HANDS - FAITH IN ACTION INC":"Basic needs & response","RURAL OUTREACH CENTER":"Basic needs & response","ROTARY CLUB OF HAMBURG FOUNDATION INC":"Nonprofit capacity & transitions","COMMUNITY FOUNDATION FOR GREATER BUFFALO":"Nonprofit capacity & transitions","CLARENCE SENIOR CITIZENS INC":"Basic needs & response","GRAYCLIFF CONSERVANCY INC":"Arts & culture","THE TOOL LIBRARY INC":"Community & economic development","COMMUNITY SERVICES FOR EVERY1 INC":"Basic needs & response","HANDS 4 HOPE STREET MINISTRY":"Basic needs & response","OLIVER STREET MERCHANTS ASSOCIATION":"Community & economic development","TWIN CITIES COMMUNITY OUTREACH INC":"Health & wellbeing","RAINIES FOSTER CLOSET INC":"Basic needs & response"};</script>
+<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
+<script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

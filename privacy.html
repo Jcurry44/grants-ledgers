@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Privacy — The Grants Ledger</title>
+<meta name="description" content="What this site does and does not collect. A static site built from public IRS filings: no accounts, no cookies, no analytics, no forms. Saved lists and notes stay in your own browser and are never transmitted.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
+  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
+  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
+  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+a { color: var(--copper-deep); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.sr-only { position:absolute; width:1px; height:1px; clip-path: inset(50%); overflow:hidden; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
+.cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.4rem,6vh,3.9rem) 0 clamp(1.8rem,4vh,2.6rem); }
+.cover a { color: var(--copper); }
+.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+.lede { max-width: 46rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
+.stamp { font-family: var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--cream-faint); margin-top:1.2rem; }
+.tnav { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
+.tnav .wrap { display:flex; flex-wrap:wrap; gap:.15rem 1.25rem; align-items:center; padding-top:.55rem; padding-bottom:.55rem; }
+.tnav a { font-family: var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color: var(--ink-dim); padding:.2rem 0; border-bottom:2px solid transparent; }
+.tnav a:hover { color: var(--copper-deep); }
+.tnav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--copper); }
+.tnav .sp { margin-left:auto; }
+@media (max-width:719px) { .tnav { position: static; } .tnav .sp { margin-left:0; } }
+section { padding: clamp(2rem,5vh,3.2rem) 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.35rem,2.6vw,1.85rem); letter-spacing:-.015em; margin-bottom:.35rem; }
+h3 { font-family: var(--serif); font-weight:620; font-size:1.05rem; letter-spacing:-.01em; margin:1.5rem 0 .3rem; }
+.sub { color: var(--ink-dim); max-width: 46rem; margin-bottom: 1.3rem; }
+.body { max-width: 46rem; }
+.body p { margin-bottom: .85rem; }
+.body p:last-child { margin-bottom: 0; }
+strong { font-weight: 640; }
+.ledger { display:grid; gap:0; margin-top:.4rem; }
+.row { display:grid; grid-template-columns: minmax(0,1fr); gap:.15rem; padding:.85rem 0; border-bottom:1px solid var(--rule); align-items:start; }
+@media (min-width:760px) { .row { grid-template-columns: 1.35rem 15rem minmax(0,1fr); gap:1rem; } }
+.row .mk { font-family: var(--mono); font-size:.95rem; font-weight:500; line-height:1.4; }
+.row .mk.no { color: var(--cover); }
+.row .mk.yes { color: var(--copper-deep); }
+.row b { font-weight:640; }
+.row span { font-size:.92rem; color: var(--ink-dim); }
+.tw { overflow-x:auto; margin-top:1rem; }
+table { width:100%; border-collapse: collapse; font-size:.9rem; }
+th { text-align:left; font-family: var(--mono); font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; color: var(--ink-dim); font-weight:600; padding:.5rem .55rem; border-bottom:1px solid var(--rule); }
+td { padding:.6rem .55rem; border-bottom:1px solid var(--rule); vertical-align:top; }
+td.k { font-family: var(--mono); font-size:.82rem; white-space:nowrap; }
+.note { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
+.note b { font-family: var(--serif); font-weight:620; display:block; margin-bottom:.3rem; }
+.note p { font-size:.9rem; color: var(--ink-dim); }
+.note p + p { margin-top:.6rem; }
+.pull { font-family: var(--serif); font-size: clamp(1.1rem,2.2vw,1.45rem); line-height:1.35; max-width:42ch; border-left:3px solid var(--copper); padding-left:1.1rem; margin:1.3rem 0; }
+.mono { font-family: var(--mono); font-size:.86rem; }
+footer { border-top:1px solid var(--rule); padding:2rem 0 2.8rem; color: var(--ink-dim); font-size:.86rem; }
+footer a { color: var(--copper-deep); }
+footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.9rem; font-family: var(--mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<header class="cover"><div class="wrap">
+  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Privacy</div>
+  <h1>What this site collects<br>about you: nothing</h1>
+  <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies and no analytics. This page describes the actual data flows, verified against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
+  <p class="stamp">Effective 31 August 2026 · verified against the published source on that date</p>
+</div></header>
+
+<nav class="tnav" aria-label="Trust and policy"><div class="wrap">
+  <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/privacy/" aria-current="page">Privacy</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="sp">Exceptions ↗</a>
+  <a href="https://jcurry44.github.io/grants-ledgers/">The collection ↗</a>
+</div></nav>
+
+<section><div class="wrap">
+  <h2>The short version</h2>
+  <p class="pull">I receive nothing about you. I could not tell you how many people have visited this site, because nothing here measures it.</p>
+  <div class="ledger">
+    <div class="row"><span class="mk no">—</span><div><b>Accounts, logins, sign-ups</b></div><span>None exist. There is nothing on this site to register for.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>Forms of any kind</b></div><span>There is not a single <span class="mono">&lt;form&gt;</span> element on the site. Nothing collects a name, an email address, or any other input.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>Cookies</b></div><span>This site sets no cookies. It never reads or writes <span class="mono">document.cookie</span>.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>Analytics or tracking</b></div><span>No analytics script of any kind is loaded — no Google Analytics, no tag manager, no Plausible, Fathom, Matomo, Hotjar, Segment, Mixpanel or PostHog. No tracking pixel, no beacon, no session recording.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>Advertising or data sales</b></div><span>There is no advertising on this site and no data about visitors to sell, share or transfer, because none is gathered.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>Fingerprinting or cross-site tracking</b></div><span>None. The referrer policy on every page is <span class="mono">strict-origin-when-cross-origin</span>, so the pages you view are not passed along in full to other sites.</span></div>
+    <div class="row"><span class="mk yes">●</span><div><b>Saved lists and notes</b></div><span>Stored in your own browser only, and never sent anywhere. Details below.</span></div>
+    <div class="row"><span class="mk yes">●</span><div><b>Ordinary web-server request logs</b></div><span>Kept by the hosting provider, as with any website. Details below.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What is stored in your browser</h2>
+  <p class="sub">The collection page lets you save foundations and recipients to a list and attach your own notes to them. That is the only feature on the site that remembers anything, and it remembers it on your device.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Stored value</th><th>Where</th><th>What it holds</th><th>Leaves your browser?</th></tr></thead>
+      <tbody>
+        <tr><td class="k">gl_list</td><td>browser <span class="mono">localStorage</span></td><td>The identifiers of the foundations and recipients you saved to your list.</td><td><strong>No.</strong> Never transmitted.</td></tr>
+        <tr><td class="k">gl_notes</td><td>browser <span class="mono">localStorage</span></td><td>The notes you typed against items on your list.</td><td><strong>No.</strong> Never transmitted.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="body" style="margin-top:1.2rem">
+    <p>These two values live in your browser’s local storage for this site only. They are not synchronised to any server, not shared between your devices, and not visible to anyone but you. No copy reaches the maintainer of this site at any point.</p>
+    <p>You can delete them at any time by clearing site data for this domain in your browser settings. They will also be absent in a private window, or in a different browser, or on a different device — which is the ordinary consequence of storing them locally rather than in an account.</p>
+    <p>Exports — the CSV, spreadsheet and report files the site can produce — are generated inside your browser from data already downloaded to it, and are written directly to your device. Nothing about an export is transmitted or recorded.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Who else necessarily sees your request</h2>
+  <p class="sub">Two third parties are involved in serving these pages. Neither is a choice made to gather information, and both are named here so a reviewer does not have to discover them by inspecting the page.</p>
+
+  <div class="note">
+    <b>GitHub Pages — hosting</b>
+    <p>The site is served by GitHub Pages, a static file host operated by GitHub, Inc. Every request for a page, image or data file on this site therefore reaches GitHub’s servers, which receive the request in the ordinary way that any web host does — including your IP address, the file requested, the time, and your browser’s user-agent string. Those logs belong to GitHub and are governed by GitHub’s own privacy practices; the maintainer of this site has no access to them and receives no report derived from them.</p>
+  </div>
+
+  <div class="note">
+    <b>Google Fonts — the three typefaces</b>
+    <p>The pages load their typefaces (Fraunces, Newsreader and IBM Plex Mono) from Google’s font service at <span class="mono">fonts.googleapis.com</span> and <span class="mono">fonts.gstatic.com</span>. Those requests go to Google and, like any web request, carry your IP address and user-agent string. This is the only third-party asset on the site; there is no other external script, stylesheet, image, frame or endpoint anywhere on it.</p>
+    <p>If your organisation’s policy is to avoid third-party font requests, this is the single dependency to raise — the fonts can be self-hosted instead. Say so and it will be changed.</p>
+  </div>
+
+  <div class="body" style="margin-top:1.4rem">
+    <p>Everything else the site loads comes from the site itself. All of its data requests are relative paths to files on this same domain — the collection database, the search index, the map geometry. There is no application programming interface call to any outside service, no content delivery network beyond the host, and no request whose destination is not one of the two above.</p>
+  </div>
+
+  <div class="note">
+    <b>Links that leave the site</b>
+    <p>For completeness: each foundation’s ledger page carries ordinary outbound links to the source record — the foundation’s filings on <span class="mono">irs.gov</span> and its entry on ProPublica’s Nonprofit Explorer — so that any figure can be checked against the original. Those are links, not embedded content. Nothing is requested from either site unless you click, and no frame, script, image or pixel is loaded from them at any time.</p>
+    <p>If you do click, you are on that site under its own policies. Because every page here sets <span class="mono">strict-origin-when-cross-origin</span>, what is passed along is this site’s address, not the particular page you were reading.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>If you email me</h2>
+  <div class="body">
+    <p>Email is the only way to contact this project, and it is the only circumstance in which the maintainer holds anything about you at all: your email address and whatever you chose to write.</p>
+    <p>That correspondence is used to answer you and, where you reported an error, to record what was checked and changed. It is not added to a mailing list — no mailing list exists. It is not used for marketing, not shared with anyone, and not sold. If you would like your correspondence deleted, ask, and it will be.</p>
+    <p class="mono" style="margin-top:1rem"><a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger">jjcurry027@gmail.com</a></p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>About the people named in the data</h2>
+  <div class="body">
+    <p>This site publishes information from Form 990-PF, the annual return that private foundations file with the Internal Revenue Service and which the IRS makes available for public inspection. The foundations, recipient organisations, amounts, purposes and addresses shown are reproduced from those public documents as filed.</p>
+    <p>Nothing is added to them. No filing is enriched with information from another source about any person, no profile of any individual is constructed, and no attempt is made to identify anyone. Where a filing itself names a person or lists an address, that is the public document’s own content, shown as it was filed so that the record can be checked against its source.</p>
+    <p>If you believe something reproduced here from a public filing is being shown in error, write, and it will be looked at against the original filing.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What is deliberately not claimed here</h2>
+  <p class="sub">A trust page is worth less than nothing if it promises a regime that has not been implemented. These are the honest boundaries.</p>
+  <div class="ledger">
+    <div class="row"><span class="mk no">—</span><div><b>No compliance certification</b></div><span>This project holds no SOC 2 report, no ISO 27001 certificate, and no third-party security audit. None has been performed. The security posture is that of a static site with no server, no database, no user accounts and no stored personal data.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>No formal GDPR or CCPA programme</b></div><span>No data-protection officer, representative, or formal request-handling process has been appointed or built. What is true instead is that the site collects no personal data, so there is no store of it to access, port or erase. Correspondence you send by email is the sole exception, and it is deleted on request.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>No data-processing agreement is offered today</b></div><span>Because no visitor data is processed, none has been drafted. If your organisation requires one before using this site, raise it and it will be worked through rather than waved away.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>No cookie banner, because there is nothing to consent to</b></div><span>The absence of a banner here is not an oversight. The site sets no cookies and runs no tracking, so there is no consent to collect.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Changes to this notice</h2>
+  <div class="body">
+    <p>This notice is dated. If the site ever gains something that changes the answer above — analytics, a form, an account system, a hosted service — this page will be updated before that change ships, and the change will be recorded in the <a href="https://jcurry44.github.io/grants-ledgers/changelog/">update history</a> so the difference is visible rather than silent.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="flinks">
+    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+  </div>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings.</p>
+</div></footer>
+
+</body>
+</html>
