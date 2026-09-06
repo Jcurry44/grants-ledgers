@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="SYLVANCHER_DATA" data-slug="sylvancherma" data-n="42" data-grand="6717956" data-recsub="All five years" data-running="to the dollar, five years running." data-names="29 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="SYLVANCHER_DATA" data-slug="sylvancherma" data-n="42" data-grand="6717956" data-recsub="All five years" data-running="to the dollar, five years running." data-names="29 as-filed names" data-rows-embedded="42" data-rows-total="42">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 42 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">23</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $6,717,956, equals Part I line 25(d), $6,717,956 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.SYLVANCHER_DATA={"meta":{"foundation":"Sylvan C Herman Foundation","ein":"20-3265230","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":42,"grand_total":6717956,"tieout":{"2020":{"object_id":"202143169349102404","grant_count":8,"grant_sum":602562,"line25_col_d":602562,"status":"PASS"},"2021":{"object_id":"202223199349104487","grant_count":8,"grant_sum":161400,"line25_col_d":161400,"status":"PASS"},"2022":{"object_id":"202430169349100023","grant_count":11,"grant_sum":2267090,"line25_col_d":2267090,"status":"PASS"},"2023":{"object_id":"202443119349102279","grant_count":10,"grant_sum":1665180,"line25_col_d":1665180,"status":"PASS"},"2024":{"object_id":"202532839349100313","grant_count":5,"grant_sum":2021724,"line25_col_d":2021724,"status":"PASS"}}},"grants":[{"y":2020,"r":"MAYO CLINIC","a":400000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ROCHESTER","s":"MN","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"NATIONAL CONCERT BAND","a":2000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ALEXANDRIA","s":"VA","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"WAY STATION","a":25000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"ACTIVE MINDS","a":35000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"JEWISH FEDERATION OF GREATER WASHINGTON","a":25000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"NORTH BETHEDA","s":"MD","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"TREATMENT ADVOCACY CENTER","a":100000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ARLINGTON","s":"VA","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"HOPE CONNECTIONS FOR CANCER SUPPORT","a":562,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BETHESDA","s":"MD","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2020,"r":"FRIENDSHIP CIRCLE","a":15000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"POTOMAC","s":"MD","e":"","o":"202143169349102404","record_type":"named_recipient"},{"y":2021,"r":"NATIONAL CONCERT BAND","a":2500,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ALEXANDRIA","s":"VA","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"WAY STATION","a":6250,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"ACTIVE MINDS","a":25000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"TREATMENT ADVOCACY CENTER","a":100000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ARLINGTON","s":"VA","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"FRIENDSHIP CIRCLE","a":15000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"POTOMAC","s":"MD","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"SAVE A LIMB FOUNDATION","a":2500,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BALTIMORE","s":"MD","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"CATOCTIN AFFAIR SPONSORSHIP","a":10000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2021,"r":"FOX HAVEN FARM AND LEARNING CENTER","a":150,"p":"TO FULFILL CHARITABLE PURPOSE","c":"JEFFERSON","s":"MD","e":"","o":"202223199349104487","record_type":"named_recipient"},{"y":2022,"r":"National Concert Band","a":2500,"p":"To Fulfill Charitable Purpose","c":"Alexandria","s":"VA","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Active Minds","a":25000,"p":"To fulfill charitable purpose","c":"Washington","s":"DC","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Treatment Advocacy Center","a":143808,"p":"To fulfill Charitable Purpose","c":"Arlington","s":"VA","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Friendship Circle","a":15000,"p":"To fulfill Charitable Purpose","c":"Potomac","s":"MD","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Save a Limb Foundation","a":2500,"p":"To fulfill Charitable Purpose","c":"Baltimore","s":"MD","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Catoctin Affair Sponsorship","a":12000,"p":"To fulfill Charitable Purpose","c":"Frederick","s":"MD","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Meadows Mental Health Policy","a":25000,"p":"To fulfill Charitable Purpose","c":"Dallas","s":"TX","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"J E Herman Public Fund","a":1990782,"p":"To fulfill Charitable Purpose","c":"Washington","s":"DC","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"The Goodness Foundation","a":25000,"p":"To fulfill Charitable Purpose","c":"Charlottesville","s":"VA","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Jewish Federation of G Wash","a":25000,"p":"To fulfill Charitable Purpose","c":"N Bethesda","s":"MD","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2022,"r":"Hope connection for cancer","a":500,"p":"To fulfill charitable purpose","c":"Bethesda","s":"MD","e":"","o":"202430169349100023","record_type":"named_recipient"},{"y":2023,"r":"ACTIVE MINDS","a":25000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"BRAINFUTURES INCORPORATED","a":100000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"LUTHERVILLE TIMONIUM","s":"MD","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"CHARLOTTESVILLE AREA COMMUNITY FOUNDATION","a":103,"p":"TO FULFILL CHARITABLE PURPOSE","c":"CHARLOTTESVILLE","s":"VA","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"FRIENDSHIP CIRCLE","a":15000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"POTOMAC","s":"MD","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"HOPE CONNECTIONS","a":2100,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BETHESDA","s":"MD","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"JOHN E HERMAN PUBLIC FUND","a":1304477,"p":"TO FULFILL CHARITABLE PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL CONCERT BAND","a":4000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ALEXANDRIA","s":"VA","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"SAVE A LIMB FOUNDATION","a":2500,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BETHESDA","s":"MD","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"THE MENTAL HEALTH ASSOCIATION","a":12000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2023,"r":"TREATMENT ADVOCACY CENTER","a":200000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"ARLINGTON","s":"VA","e":"","o":"202443119349102279","record_type":"named_recipient"},{"y":2024,"r":"HOPE CONNECTIONS","a":2100,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BETHESDA","s":"MD","e":"","o":"202532839349100313","record_type":"named_recipient"},{"y":2024,"r":"MORGAN STANLEY GLOBAL IMPACT FUNDING TRUST","a":1999624,"p":"TO FULFILL CHARITABLE PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202532839349100313","record_type":"named_recipient"},{"y":2024,"r":"SAVE A LIMB FOUNDATION","a":2500,"p":"TO FULFILL CHARITABLE PURPOSE","c":"BETHESDA","s":"MD","e":"","o":"202532839349100313","record_type":"named_recipient"},{"y":2024,"r":"THE MENTAL HEALTH ASSOCIATION","a":15000,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202532839349100313","record_type":"named_recipient"},{"y":2024,"r":"FREDERICK RESCUE MISSION INC","a":2500,"p":"TO FULFILL CHARITABLE PURPOSE","c":"FREDERICK","s":"MD","e":"","o":"202532839349100313","record_type":"named_recipient"}]};window.LEDGER_MERGES=["NATIONAL CONCERT BAND","ACTIVE MINDS","TREATMENT ADVOCACY CENTER","FRIENDSHIP CIRCLE","SAVE A LIMB FOUNDATION","CATOCTIN AFFAIR SPONSORSHIP"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"WAY STATION":"Basic needs & response","ACTIVE MINDS":"Health & wellbeing","Active Minds":"Health & wellbeing","JEWISH FEDERATION OF GREATER WASHINGTON":"Nonprofit capacity & transitions","TREATMENT ADVOCACY CENTER":"Health & wellbeing","Treatment Advocacy Center":"Health & wellbeing","BRAINFUTURES INCORPORATED":"Health & wellbeing","CHARLOTTESVILLE AREA COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","MORGAN STANLEY GLOBAL IMPACT FUNDING TRUST":"Nonprofit capacity & transitions","FREDERICK RESCUE MISSION INC":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

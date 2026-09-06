@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="OVERLOOKIN_DATA" data-slug="overlookinte" data-n="51" data-grand="15838107" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="OVERLOOKIN_DATA" data-slug="overlookinte" data-n="51" data-grand="15838107" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names" data-rows-embedded="51" data-rows-total="51">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 51 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">45</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $15,838,107, equals Part I line 25(d), $15,838,107 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.OVERLOOKIN_DATA={"meta":{"foundation":"Overlook International Foundation","ein":"20-1164239","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":51,"grand_total":15838107,"tieout":{"2020":{"object_id":"202113199349109361","grant_count":39,"grant_sum":9793378,"line25_col_d":9793378,"status":"PASS"},"2021":{"object_id":"202203199349110615","grant_count":8,"grant_sum":3389262,"line25_col_d":3389262,"status":"PASS"},"2022":{"object_id":"202313199349109626","grant_count":1,"grant_sum":312133,"line25_col_d":312133,"status":"PASS"},"2023":{"object_id":"202443519349100759","grant_count":1,"grant_sum":10000,"line25_col_d":10000,"status":"PASS"},"2024":{"object_id":"202503179349100135","grant_count":2,"grant_sum":2333334,"line25_col_d":2333334,"status":"PASS"}}},"grants":[{"y":2020,"r":"ADM Capital Foundation","a":200000,"p":"Clean energy roadmap","c":"Quincy","s":"MA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Advanced Energy Economy Institute","a":323500,"p":"Clean energy engagement","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Alliance for Climate Education","a":100000,"p":"the Climate Education","c":"Boulder","s":"CO","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"American Flood Coalition","a":500000,"p":"public awareness about flooding","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"GlobalGiving Foundation Inc","a":1500,"p":"UNRESTRICTED","c":"washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Bipartisan Policy Center Action Inc","a":25000,"p":"UNRESTRICTED","c":"washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"CDP North America","a":170000,"p":"benchmarking on climate change","c":"New York","s":"NY","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Center for International Environmental Law","a":300000,"p":"Climate Change","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Ceres","a":185000,"p":"Clean energy","c":"Boston","s":"MA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Rockefeller Philanthropy Advisor","a":100000,"p":"Climate change communications","c":"new york","s":"NY","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Conservative Energy Network","a":462000,"p":"Clean energy engagement","c":"lansing","s":"MI","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Conservatives for Responsible Stewardship","a":105000,"p":"Clean energy engagement","c":"Oakton","s":"VA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Coz Corporation","a":150000,"p":"SUPPORT for meals to needy driven by pandemic","c":"PETALUMA","s":"CA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Deploy-Us Inc","a":220000,"p":"climate change","c":"Lexington","s":"MA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Earthjustice","a":100000,"p":"climate change","c":"san francisco","s":"CA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Sustainable Markets Foundation","a":13125,"p":"Clean energy","c":"new york","s":"NY","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Energy Foundation International","a":640500,"p":"reducing pollution","c":"san francisco","s":"CA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Environmental Defense Fund","a":510811,"p":"Climate Change","c":"new york","s":"NY","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Environmental Integrity Project","a":50000,"p":"Understanding Climate Change Pollutants","c":"washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Rockefeller Family Fund Inc","a":150000,"p":"Reducing Pollution","c":"new york","s":"NY","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"FOUNDATION INTERNATIONAL LAW OF THE ENVIRONMENT","a":1000000,"p":"Climate Change","c":"","s":"","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Forest Trends","a":15000,"p":"UNRESTRICTED","c":"Washington","s":"MD","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"European Climate Foundation","a":1606083,"p":"SUPPORT THE PROJECTS OF COMMUNICATIONS ON CLIMATE CHANGE THE CLEAN ENERGY","c":"","s":"","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"International Collaborative for Science Education","a":110000,"p":"SUPPORT Maasai stoves and solar project","c":"Annapolis","s":"MD","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"International Marketing Strategies","a":50000,"p":"Support the Climate","c":"stamford","s":"CT","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Clean Air Task Force","a":250000,"p":"clean energy standards","c":"Boston","s":"MD","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Friends of the Earth Australia","a":150000,"p":"Clean energy","c":"","s":"","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"The Partnership Project","a":750000,"p":"Reducing Pollution","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"The Niskanen Center Inc","a":75000,"p":"Support of Environmental Program","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"PSE Healthy Energy","a":149200,"p":"Review of Studies on Pollution","c":"Oakland","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"George Mason University Foundation Inc","a":200000,"p":"climate and clean energy","c":"Fairfax","s":"VA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Rocky Mountain Institute","a":161037,"p":"climate and clean energy","c":"Boulder","s":"CO","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Solutions for Our Climate","a":300000,"p":"Clean energy","c":"","s":"","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Stockholm Environment Institute US","a":4972,"p":"Carbon Analysis","c":"Somerville","s":"MA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Taxpayers for Common Sense","a":160000,"p":"Climate Change Education","c":"Washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Virginia Organizing","a":10000,"p":"Climate change communications.","c":"Charlottesville","s":"VA","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"United Nations Foundation","a":100000,"p":"Climate change communications","c":"washington","s":"DC","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Yale University SCHOOL OF PUBLIC HEALTH","a":295650,"p":"UNRESTRICTED","c":"new haven","s":"CT","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2020,"r":"Yale School of Forestry and Environmental Studies","a":100000,"p":"UNRESTRICTED","c":"NEW HAVEN","s":"CT","e":"","o":"202113199349109361","record_type":"named_recipient"},{"y":2021,"r":"European Climate Foundation","a":1200000,"p":"TO SUPPORT PROJECTS OF COMMUNICATIONS ON CLIMATE CHANGE & CLEAN ENERGY","c":"","s":"","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"International Marketing Strategies","a":60000,"p":"Climate Shipping Support","c":"stamford","s":"CT","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"Stockholm Environment Institute US","a":9943,"p":"CARBON Offset Project Standard","c":"Somerville","s":"MA","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"Virginia Organizing","a":10000,"p":"Climate change communications","c":"Charlottesville","s":"VA","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"Yale University SCHOOL OF PUBLIC HEALTH","a":403769,"p":"Public Health Near Petrochemical Facilities & GENERAL SUPPORT","c":"new haven","s":"CT","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"PLANET LABS","a":1300000,"p":"TO SUPPORT THE ACCELERATING CLIMATE ACTION WITHSATELLITE DATA INITIATIVE","c":"San Francisco","s":"CA","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"Worldview Development USA","a":155000,"p":"UNRESTRICTED","c":"New York","s":"NY","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2021,"r":"WINDWARD FUND","a":250550,"p":"UNRESTRICTED","c":"Washington","s":"DC","e":"","o":"202203199349110615","record_type":"named_recipient"},{"y":2022,"r":"Yale University SCHOOL OF PUBLIC HEALTH","a":312133,"p":"PUBLIC HEALTH RESEARCH & GENERAL SUPPORT","c":"new haven","s":"CT","e":"","o":"202313199349109626","record_type":"named_recipient"},{"y":2023,"r":"the BIODIVERSITY Funders Group","a":10000,"p":"To support the 2023 Climate & Energy Funders Group Program","c":"San Francisco","s":"CA","e":"","o":"202443519349100759","record_type":"named_recipient"},{"y":2024,"r":"THE RAND CORPORATION","a":333334,"p":"To support tTHE PROJECT CANARY","c":"SANTA MONICA","s":"CA","e":"","o":"202503179349100135","record_type":"named_recipient"},{"y":2024,"r":"DOS POR TRES","a":2000000,"p":"TO SUPPORT CHARITABLE PROGRAMS.","c":"BOSTON","s":"MA","e":"","o":"202503179349100135","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"American Flood Coalition":"Environment & animals","CDP North America":"Environment & animals","Ceres":"Environment & animals","Conservative Energy Network":"Environment & animals","Deploy-Us Inc":"Environment & animals","Earthjustice":"Environment & animals","Sustainable Markets Foundation":"Environment & animals","Rockefeller Family Fund Inc":"Nonprofit capacity & transitions","Clean Air Task Force":"Environment & animals","The Partnership Project":"Environment & animals","George Mason University Foundation Inc":"Education & youth","Virginia Organizing":"Community & economic development","THE RAND CORPORATION":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

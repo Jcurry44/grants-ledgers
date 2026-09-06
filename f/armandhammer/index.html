@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ARMANDHAMM_DATA" data-slug="armandhammer" data-n="51" data-grand="4296744" data-recsub="All three years" data-running="to the dollar, three years running." data-names="44 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ARMANDHAMM_DATA" data-slug="armandhammer" data-n="51" data-grand="4296744" data-recsub="All three years" data-running="to the dollar, three years running." data-names="44 as-filed names" data-rows-embedded="51" data-rows-total="51">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">3 / 3 years reconcile · Δ $0</div>
+  <div class="side-foot">3 of 3 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 3/3 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 3 of 3 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 51 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">43</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, three years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $4,296,744, equals Part I line 25(d), $4,296,744 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -414,7 +422,8 @@
 </div>
 <script>
 window.ARMANDHAMM_DATA={"meta":{"foundation":"Armand Hammer Foundation Michael A Hammer","ein":"23-7010813","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022],"grant_count":51,"grand_total":4296744,"tieout":{"2020":{"object_id":"202202229349100305","grant_count":16,"grant_sum":593062,"line25_col_d":593062,"status":"PASS"},"2021":{"object_id":"202213049349101516","grant_count":28,"grant_sum":2870026,"line25_col_d":2870026,"status":"PASS"},"2022":{"object_id":"202533219349106123","grant_count":7,"grant_sum":833656,"line25_col_d":833656,"status":"PASS"}}},"grants":[{"y":2020,"r":"911 AT EASE INTERNATIONAL INC","a":250000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"ARIZONA CHRISTIAN UNIVERSITY","a":10000,"p":"GENERAL FUNDS","c":"GLENDALE","s":"AZ","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"BOYS & GIRLS CLUB OF SB COUNTY","a":68500,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"BUD MINISTRIES INC","a":51921,"p":"GENERAL FUNDS","c":"NASHVILLE","s":"TN","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA AVOCADO FESTIVAL","a":5000,"p":"GENERAL FUNDS","c":"CARPINTERIA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY ENVIRONMENTAL COUNCIL","a":3000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"CSC","a":1121,"p":"GENERAL FUNDS","c":"PHILADELPHIA","s":"PA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"DREAM FOUNDATION","a":15000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"HAMMER MUSEUM","a":50000,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"HOSPICE OF SANTA BARBARA INC","a":10000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"MORIAH BIBLE FELLOWSHIP","a":25000,"p":"GENERAL FUNDS","c":"ORANGE","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"MUSEUM OF BIBLE INC","a":10250,"p":"GENERAL FUNDS","c":"WASHINGTON","s":"DC","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"PEPPERDINE UNIVERSITY","a":50000,"p":"GENERAL FUNDS","c":"MALIBU","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"PETERSEN AUTOMOTIVE MUSEUM","a":30450,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"RODS & ROSES","a":12500,"p":"GENERAL FUNDS","c":"CARPINTERIA","s":"CA","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2020,"r":"TASTE OF THE NFL","a":320,"p":"GENERAL FUNDS","c":"ADINA","s":"MN","e":"","o":"202202229349100305","record_type":"named_recipient"},{"y":2021,"r":"911 AT EASE INTERNATIONAL INC","a":550000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"CHANEL ISLANDS UMPCA","a":2120,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"CHP 11-99 FOUNDATION","a":1000,"p":"GENERAL FUNDS","c":"FULLERTON","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"DREAM FOUNDATION","a":10000,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"EXCHANGE CLUB OF CULVER CITY","a":15000,"p":"EVENT SPONSORSHIP","c":"CULVER CITY","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"GENYOUTH","a":10298,"p":"EVENT SPONSORSHIP","c":"NEW YORK","s":"NY","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"GENYOUTH","a":25500,"p":"EVENT SPONSORSHIP","c":"EDINA","s":"MN","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"GRACE CHRISTAIN ACADAMY","a":1518916,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"KEITH HUDSON MINISTRIES","a":5000,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"LOTUSLAND","a":48000,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MEN'S ARTS COUNCIL","a":35000,"p":"EVENT SPONSORSHIP","c":"PHOENIX","s":"AZ","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MIRACLE FLIGHTS","a":25000,"p":"GENERAL FUNDS","c":"LAS VEGAS","s":"NV","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MONTECITO MOTOR CLASSIC","a":50000,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MORIAH BIBLE FELLOWSHIP","a":20000,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MORNING STAR CHSC","a":10000,"p":"GENERAL FUNDS","c":"SACRAMENTO","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"MUSEUM OF BIBLE","a":15376,"p":"GENERAL FUNDS","c":"OKLAHOMA CITY","s":"OK","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"ONTARIO CHRISTIAN CENTER","a":1050,"p":"GENERAL FUNDS","c":"ONTARIO","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"PEPPERDINE UNIVERSITY","a":100000,"p":"GENERAL FUNDS","c":"MALIBU","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"PETERSEN AUTOMOTIVE MUSEUM","a":321050,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"PROJECT SEVEN INSTITUTE","a":1716,"p":"CSC FILING","c":"WILMINGTON","s":"DE","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"SANTA BARBARA COMMUNITY PRAYER BREAKFAST","a":2500,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"SANTA BARBARA SHERIFF BENEVOLENT POSSE","a":500,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"SCHOLARS INTERNATIONAL","a":25000,"p":"GENERAL FUNDS","c":"","s":"","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"ST LOUIS EAGLE'S BASKETBALL CLUB","a":10000,"p":"GENERAL FUNDS","c":"SAINT LOUIS","s":"MO","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"UNITED BOYS & GIRLS CLUB","a":40000,"p":"EVENT SPONSORSHIP","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"WATER BUFFALO CLUB","a":5000,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"WILDERNESS YOUTH PROJECT","a":7000,"p":"BACK OT NATURE PROGRAM","c":"SANTA BARBARA","s":"CA","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2021,"r":"ARIZONA CHRISTIAN UNIVERSITY","a":15000,"p":"GENERAL FUNDS","c":"GLENDALE","s":"AZ","e":"","o":"202213049349101516","record_type":"named_recipient"},{"y":2022,"r":"GRACE CHRISTIAN ACADEMY","a":773656,"p":"GENERAL FUNDS","c":"SANTA BARBARA","s":"CA","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"CHRIST HOLY SANCTIFIED CHURCH OF AMERICA","a":15000,"p":"GENERAL FUNDS","c":"LOS ANGELES","s":"CA","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"DENNIS TINERINO MINISTRIES","a":5000,"p":"GENERAL FUNDS","c":"NORTHRIDGE","s":"CA","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"THE TRANSFORMING CENTER","a":5000,"p":"GENERAL FUNDS","c":"WHEATON","s":"IL","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"NASHVILLE LIFE CHURCH","a":15000,"p":"GENERAL FUNDS","c":"NASHVILLE","s":"TN","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"RIDGEVIEW HIGH SCHOOL","a":5000,"p":"GENERAL FUNDS","c":"BAKERSFIELD","s":"CA","e":"","o":"202533219349106123","record_type":"named_recipient"},{"y":2022,"r":"WORLD MISSIONS GROUP","a":15000,"p":"GENERAL FUNDS","c":"JENSEN BEACH","s":"FL","e":"","o":"202533219349106123","record_type":"named_recipient"}]};window.LEDGER_MERGES=["MUSEUM OF BIBLE"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"911 AT EASE INTERNATIONAL INC":"Health & wellbeing","ARIZONA CHRISTIAN UNIVERSITY":"Education & youth","CSC":"Basic needs & response","DREAM FOUNDATION":"Education & youth","PEPPERDINE UNIVERSITY":"Education & youth","GENYOUTH":"Nonprofit capacity & transitions","WATER BUFFALO CLUB":"Health & wellbeing"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

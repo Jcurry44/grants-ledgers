@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GEBBIE_DATA" data-slug="gebbie" data-n="64" data-grand="15955685" data-recsub="All five years" data-running="to the dollar, five years running." data-names="20 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GEBBIE_DATA" data-slug="gebbie" data-n="64" data-grand="15955685" data-recsub="All five years" data-running="to the dollar, five years running." data-names="20 as-filed names" data-rows-embedded="64" data-rows-total="64">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 64 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">20</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $15,955,685, equals Part I line 25(d), $15,955,685 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.GEBBIE_DATA={"meta":{"foundation":"The Gebbie Foundation","ein":"16-6050287","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":64,"grand_total":15955685,"tieout":{"2020":{"object_id":"202142999349100309","grant_count":10,"grant_sum":2790390,"line25_col_d":2790390,"status":"PASS"},"2021":{"object_id":"202213189349100336","grant_count":14,"grant_sum":3472112,"line25_col_d":3472112,"status":"PASS"},"2022":{"object_id":"202323129349101352","grant_count":15,"grant_sum":3222335,"line25_col_d":3222335,"status":"PASS"},"2023":{"object_id":"202432979349101108","grant_count":11,"grant_sum":3229193,"line25_col_d":3229193,"status":"PASS"},"2024":{"object_id":"202523089349101142","grant_count":14,"grant_sum":3241655,"line25_col_d":3241655,"status":"PASS"}}},"grants":[{"y":2020,"r":"CHAUTAUQUA INSTITUTION","a":1000,"p":"BELLINGER AWARD","c":"CHAUTAUQUA","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"CHAUTAUQUA REGION COMMUNITY FOUNDATION","a":31000,"p":"COMMUNITY SERVICE GRANTS AND NEY/STINEMAN SCHOLARSHIP FUND","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"CHAUTAUQUA REGION INDUSTRIAL DEVELOPMENT CORP","a":25000,"p":"CHADAKOIN RIVER STRATEGIC BUSINESS PLAN","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"DIRECTORS DISCRETIONARY GRANTS","a":64750,"p":"VARIOUS","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"DREAM IT DO IT WESTERN NEW YORK INC","a":24555,"p":"URBAN DESIGN AND COMMUNITY EVENTS","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"JAMESTOWN CENTER CITY DEVELOPMENT CORP","a":1529102,"p":"ICE ARENA OPERATIONS/CAPITAL IMPROVEMENTS/DEBT SERVICE/ARENA INFILL PROJECT","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"JAMESTOWN RENAISSANCE CORP","a":271800,"p":"OPERATING SUPPORT, URBAN DESIGN PLAN","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"NATIONAL COMEDY CENTER INC","a":739628,"p":"OPERATING SUPPORT, DEBT SERVICE, MARKETING","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"NY FUNDERS ALLIANCE","a":2555,"p":"ANNUAL GRANT","c":"SYRACUSE","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2020,"r":"UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY","a":101000,"p":"CAMPAIGN SUPPORT AND LEADERSHIP CIRCLE","c":"JAMESTOWN","s":"NY","e":"","o":"202142999349100309","record_type":"named_recipient"},{"y":2021,"r":"CHAUTAUQUA FOUNDATION","a":1000,"p":"CEO DISCRETIONARY","c":"CHAUTAUQUA","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"CHAUTAUQUA REGION COMMUNITY FOUNDATION","a":36000,"p":"COMMUNITY SERVICE GRANTS AND NEY/STINEMAN SCHOLARSHIP FUND/BROADBAND FEASIBILITY","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"CHAUTAUQUA REGION INDUSTRIAL DEVELOPMENT CORP","a":115000,"p":"CHADAKOIN RIVER STRATEGIC BUSINESS PLAN","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"DIRECTORS DISCRETIONARY GRANTS","a":54760,"p":"VARIOUS","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"DREAM IT DO IT WESTERN NEW YORK INC","a":98220,"p":"URBAN DESIGN AND COMMUNITY EVENTS","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"INFINITY PERFORMING ARTS PROGRAM INC","a":100000,"p":"INFINITY PEARL CITY CLAY HOUSE","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"JAMESTOWN CENTER CITY DEVELOPMENT CORP","a":1827902,"p":"ICE ARENA OPERATIONS/CAPITAL IMPROVEMENTS/DEBT SERVICE/ARENA INFILL PROJECT","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"JAMESTOWN COMMUNITY COLLEGE FOUNDATION INC","a":57000,"p":"BUILDING FEASIBILITY STUDY","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"JAMESTOWN RENAISSANCE CORP","a":348000,"p":"OPERATING SUPPORT","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"NATIONAL COMEDY CENTER INC","a":641025,"p":"OPERATING SUPPORT, DEBT SERVICE, STAFFING","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"NY FUNDERS ALLIANCE","a":3226,"p":"ANNUAL GRANT","c":"SYRACUSE","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"REG LENNA CENTER FOR THE ARTS","a":38979,"p":"ROOFING","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"THE RESOURCE CENTER","a":50000,"p":"POP UP SHOP","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2021,"r":"UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY","a":101000,"p":"CAMPAIGN SUPPORT AND LEADERSHIP CIRCLE","c":"JAMESTOWN","s":"NY","e":"","o":"202213189349100336","record_type":"named_recipient"},{"y":2022,"r":"CHAUTAUQUA INSTITUTION","a":1000,"p":"BELLINGER AWARD","c":"CHAUTAUQUA","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"CHAUTAUQUA REGION COMMUNITY FOUNDATION","a":31000,"p":"COMMUNITY SERVICE GRANTS AND NEY/STINEMAN SCHOLARSHIP FUND","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"CHAUTAUQUA REGION INDUSTRIAL DEVELOPMENT CORP","a":120000,"p":"CHADAKOIN RIVER STRATEGIC BUSINESS PLAN","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"CITY OF JAMESTOWN URBAN RENEWAL AGENCY","a":10000,"p":"CLEAN AIR CONFERENCE","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"DIRECTORS DISCRETIONARY GRANTS","a":74300,"p":"VARIOUS ORGANIZATIONS AND ECONOMIC DEVELOPMENT","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"DREAM IT DO IT WESTERN NEW YORK INC","a":101465,"p":"URBAN DESIGN AND COMMUNITY EVENTS","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"GLENWOOD CEMETERY FOUNDATION INC","a":2000,"p":"ANNUAL GRANT","c":"LOCKPORT","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"JAMESTOWN CENTER CITY DEVELOPMENT CORP","a":1831751,"p":"ICE ARENA OPERATIONS/CAPITAL IMPROVEMENTS/SINKING FUND-TAXABLE REFUNDING BONDS/ARENA EXPANSION PROJECT","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"JAMESTOWN COMMUNITY COLLEGE FOUNDATION INC","a":-29729,"p":"REFUNDED GRANT BUILDING FEASIBILITY STUDY","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"JAMESTOWN RENAISSANCE CORP","a":471014,"p":"OPERATING SUPPORT; POTTERS TERRACE RECONSTRUCTION","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"NATIONAL COMEDY CENTER INC","a":385244,"p":"OPERATING SUPPORT, DEBT SERVICE, STAFFING","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"NY FUNDERS ALLIANCE","a":3290,"p":"ANNUAL GRANT","c":"SYRACUSE","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"REG LENNA CENTER FOR THE ARTS","a":25000,"p":"THEATRE SOUND, RIGGING, AND LIGHTING","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"THE RESOURCE CENTER","a":95000,"p":"POP UP SHOP","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2022,"r":"UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY","a":101000,"p":"CAMPAIGN SUPPORT AND LEADERSHIP CIRCLE","c":"JAMESTOWN","s":"NY","e":"","o":"202323129349101352","record_type":"named_recipient"},{"y":2023,"r":"CHAUTAUQUA INSTITUTION","a":1000,"p":"BELLINGER AWARD","c":"CHAUTAUQUA","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"CHAUTAUQUA REGION COMMUNITY FOUNDATION","a":31000,"p":"COMMUNITY SERVICE GRANTS AND NEY/STINEMAN SCHOLARSHIP FUND","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"CITY OF JAMESTOWN URBAN RENEWAL AGENCY","a":70000,"p":"URBAN DESIGN","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"DIRECTORS DISCRETIONARY GRANTS","a":87859,"p":"VARIOUS ORGANIZATIONS AND ECONOMIC DEVELOPMENT","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"GLENWOOD CEMETERY FOUNDATION INC","a":2000,"p":"ANNUAL GRANT","c":"LOCKPORT","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"JAMESTOWN CENTER CITY DEVELOPMENT CORP","a":2008828,"p":"ICE ARENA OPERATIONS/CAPITAL IMPROVEMENTS/SINKING FUND-TAXABLE REFUNDING BONDS/ARENA EXPANSION PROJECT","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"JAMESTOWN RENAISSANCE CORP","a":397000,"p":"OPERATING SUPPORT AND PROGRAMS","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL COMEDY CENTER INC","a":468401,"p":"OPERATING AND MARKETING SUPPORT, DEBT SERVICE","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"NY FUNDERS ALLIANCE","a":3355,"p":"ANNUAL GRANT","c":"SYRACUSE","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"THE RESOURCE CENTER","a":58750,"p":"POP UP SHOP","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2023,"r":"UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY","a":101000,"p":"CAMPAIGN SUPPORT AND LEADERSHIP CIRCLE","c":"JAMESTOWN","s":"NY","e":"","o":"202432979349101108","record_type":"named_recipient"},{"y":2024,"r":"CHAUTAUGUA COUNTY COMMUNITY CULTURAL EDUCATIONAL AND PHILANTHROPIC FUND","a":112000,"p":"OPERATIONS","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"CHAUTAUQUA INSTITUTION","a":1000,"p":"BELLINGER AWARD","c":"CHAUTAUQUA","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"CHAUTAUQUA REGION COMMUNITY FOUNDATION","a":31000,"p":"COMMUNITY SERVICE GRANTS AND NEY/STINEMAN SCHOLARSHIP FUND","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"CHAUTAUQUA REGION INDUSTRIAL DEVELOPMENT CORP","a":80000,"p":"CHADAKOIN RIVER STRATEGIC BUSINESS PLAN","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"DIRECTORS AND CEO DISCRETIONARY GRANTS","a":84900,"p":"VARIOUS ORGANIZATIONS AND ECONOMIC DEVELOPMENT","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"GLENWOOD CEMETERY FOUNDATION INC","a":2000,"p":"ANNUAL GRANT","c":"LOCKPORT","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"INFINITY PERFORMING ARTS PROGRAM INC","a":20952,"p":"PEARL CITY CLAY HOUSE MARKETING GRANT","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"JAMESTOWN CENTER CITY DEVELOPMENT CORP","a":2181036,"p":"ICE ARENA OPERATIONS/CAPITAL IMPROVEMENTS/SINKING FUND-TAXABLE REFUNDING BONDS/ARENA EXPANSION PROJECT","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"JAMESTOWN RENAISSANCE CORP","a":114250,"p":"OPERATING SUPPORT AND PROGRAMS","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL COMEDY CENTER INC","a":400075,"p":"DEBT SERVICE AND MARKETING","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"NY FUNDERS ALLIANCE","a":3442,"p":"ANNUAL GRANT","c":"SYRACUSE","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"ROGER TORY INSTITUTE","a":50000,"p":"PHASE I MURAL","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"THE RESOURCE CENTER","a":60000,"p":"CHQ PLUS - OPERATIONAL SUPPORT","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY","a":101000,"p":"CAMPAIGN SUPPORT AND LEADERSHIP CIRCLE","c":"JAMESTOWN","s":"NY","e":"","o":"202523089349101142","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={"Capital & facilities":"DEBT SERVICE|POP UP SHOP|\\bMURAL\\b|URBAN DESIGN","Community & economic development":"CHADAKOIN|STRATEGIC BUSINESS PLAN|COMMUNITY EVENTS","General operating":"CAMPAIGN SUPPORT|LEADERSHIP CIRCLE|ANNUAL GRANT|\\bVARIOUS\\b"};window.LEDGER_NTEE={"CHAUTAUQUA INSTITUTION":"Arts & culture","DREAM IT DO IT WESTERN NEW YORK INC":"Education & youth","UNITED WAY OF SOUTHERN CHAUTAUQUA COUNTY":"Nonprofit capacity & transitions","CHAUTAUQUA FOUNDATION":"Nonprofit capacity & transitions","GLENWOOD CEMETERY FOUNDATION INC":"Nonprofit capacity & transitions","NATIONAL COMEDY CENTER INC":"Arts & culture"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

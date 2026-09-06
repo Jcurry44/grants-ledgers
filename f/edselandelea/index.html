@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="EDSELANDEL_DATA" data-slug="edselandelea" data-n="82" data-grand="160435" data-recsub="All five years" data-running="to the dollar, five years running." data-names="59 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="EDSELANDEL_DATA" data-slug="edselandelea" data-n="82" data-grand="160435" data-recsub="All five years" data-running="to the dollar, five years running." data-names="59 as-filed names" data-rows-embedded="82" data-rows-total="82">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 82 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">59</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $160,435, equals Part I line 25(d), $160,435 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.EDSELANDEL_DATA={"meta":{"foundation":"Edsel and Eleanor Ford House","ein":"38-2218274","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":82,"grand_total":160435,"tieout":{"2020":{"object_id":"202133169349100423","grant_count":10,"grant_sum":8138,"line25_col_d":8138,"status":"PASS"},"2021":{"object_id":"202243199349107004","grant_count":22,"grant_sum":36781,"line25_col_d":36781,"status":"PASS"},"2022":{"object_id":"202500279349100630","grant_count":14,"grant_sum":22943,"line25_col_d":22943,"status":"PASS"},"2023":{"object_id":"202433209349104248","grant_count":17,"grant_sum":47457,"line25_col_d":47457,"status":"PASS"},"2024":{"object_id":"202533179349100538","grant_count":19,"grant_sum":45116,"line25_col_d":45116,"status":"PASS"}}},"grants":[{"y":2020,"r":"CHARLES H WRIGHT MUSEUM","a":250,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF HIGHLAND RECREATION AREA","a":300,"p":"DONATION","c":"HIGHLAND","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"GLEANERS COMMUNITY FOOD BANK OF SE MICHIGAN","a":480,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"GROSSE POINTE CHAMBER FOUNDATION","a":4750,"p":"SPONSORSHIPS","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"GROSSE POINTE FOUNDATION FOR PUBLIC EDUCATION","a":250,"p":"DONATION","c":"GROSSE POINTE","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"HISTORIAL SOCIETY OF MICHIGAN","a":250,"p":"DONATION","c":"LANSING","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"I SUPPORT THE GIRLS","a":495,"p":"DONATION","c":"WHEATON","s":"MD","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"MICHIGAN HUMANITIES COUNCIL","a":250,"p":"DONATION","c":"OKEMOS","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"MOTOR CITIES NATIONAL HERITAGE AREA","a":1000,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2020,"r":"UNITED WAY OF SE MICHIGAN","a":113,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202133169349100423","record_type":"named_recipient"},{"y":2021,"r":"ASCENSION ST JOHN FOUNDATION","a":500,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"BOY SCOUTS TROOP 34","a":500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"CITY OF GROSSE POINTE WOODS","a":2500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"CITY OF ST CLAIR SHORES","a":5000,"p":"CONTRIBUTION","c":"ST CLAIR SHORES","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"COLLEGE OF CREATIVE STUDIES","a":2500,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"GROSSE POINTE CHAMBER OF COMMERCE","a":3000,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"GROSSE POINTE CHAMBER OF COMMERCE","a":2119,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"GROSSE POINTE FOUNDATION FOR PUBLIC EDUCATION","a":250,"p":"SPONSORSHIP","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"GROSSE POINTE LIONS CLUB","a":500,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"GROSSE POINTE SUNRISE ROTARY CLUB","a":425,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"JUNIOR LEAGUE OF DETROIT","a":144,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"LIBRARY OF AMERICAN LANDSCAPE HISTORY (LALH)","a":250,"p":"DONATION","c":"AMHERST","s":"MA","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"LIFE REMODELED","a":1000,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"LINCOLN MOTOR CAR FOUNDATION","a":100,"p":"DONATION","c":"HICKORY CORNERS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"MOTORCITIES NATIONAL HERITAGE","a":1188,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"PARCELLS MIDDLE SCHOOL BAND PROGRAM","a":200,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"SAMARITAS","a":819,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"UNITED WAY OF SE MICHIGAN","a":10,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY LIGGETT SCHOOL","a":250,"p":"SPONSORSHIP","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"VILLAGE OF GROSSE POINTE SHORES","a":15000,"p":"CONTRIBUTION","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"VISTA MARIA","a":250,"p":"DONATION","c":"DEARBORN HEIGHTS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2021,"r":"WE GP","a":276,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202243199349107004","record_type":"named_recipient"},{"y":2022,"r":"ALBERT KAHN LEGACY FOUNDATION","a":1000,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"COLLEGE OF CREATIVE STUDIES","a":2500,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"CONTINENTAL CAFE LLC","a":400,"p":"DONATIONS","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF DETROIT","a":500,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"GROSSE POINTE CHAMBER OF COMMERCE","a":5500,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"GROSSE POINTE FOUNDATION FOR PUBLIC EDUCATION","a":600,"p":"SPONSORSHIP","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"GROSSE POINTE SUNRISE ROTARY CLUB","a":550,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"HISTORICAL SOCIETY OF MICHIGAN","a":1350,"p":"SPONSORSHIP","c":"LANSING","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"MICHIGAN GREEN INDUSTRY ASSOCIATION (MGIA)","a":750,"p":"SPONSORSHIP","c":"BINGHAM FARMS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"NADINE SIEDERS","a":300,"p":"DONATIONS","c":"CLINTON TOWNSHIP","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"NATIONAL ASSOCIATION FOR THE ADVANCEMENT OF COLORED PEOPLE","a":100,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"RACING FOR KIDS FRONT ROW SPONSER","a":1000,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"SAM SANDIFER FUNERAL COSTS","a":8143,"p":"CONTRIBUTION TO SAM SANDIFER","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY LIGGETT SCHOOL","a":250,"p":"PROGRAM SUPPORT DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202500279349100630","record_type":"named_recipient"},{"y":2023,"r":"BERRY COLLEGE","a":630,"p":"DONATION","c":"MT BERRY","s":"GA","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"CITY OF GROSSE PTE WOODS","a":2500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"CITY OF ST CLAIR SHORES","a":5000,"p":"DONATION","c":"ST CLAIR SHORES","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"COLLEGE FOR CREATIVE STUDIES","a":2500,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"FERNDALE COMMUNITY FOUNDATION","a":1000,"p":"SPONSORSHIP","c":"FERNDALE","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"GROSSE POINTE CHAMBER OF COMMERCE","a":8645,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"GROSSE POINTE FOUNDATION FOR PUBLIC EDUCATION","a":500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"GROSSE POINTE HISTORICAL SOCIETY","a":1750,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"HISTORICAL SOCIETY OF MICHIGAN","a":2016,"p":"DONATION","c":"LANSING","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"MACOMB COUNTY HERITAGE ALLIANCE","a":100,"p":"DONATION","c":"CLINTON TOWNSHIP","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"MICHIGAN GREEN INDUSTRY","a":1280,"p":"SPONSORSHIP","c":"BINGHAM FARMS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"MOTORCITIES NATIONAL HERITAGE AREA","a":2000,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"RACING FOR KIDS TO THE HILL","a":1036,"p":"SPONSORSHIP","c":"GROSSE POINTE","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"THE HELM LIFE CENTER","a":1500,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY LIGGETT SCHOOL","a":1500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"VILLAGE OF GROSSE POINTE SHORES","a":15000,"p":"DONATION","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2023,"r":"VILLAGE OF GROSSE POINTE SHORES","a":500,"p":"SPONSORSHIP","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202433209349104248","record_type":"named_recipient"},{"y":2024,"r":"ASE HR MANAGEMENT GROUP INC","a":2000,"p":"SPONSORSHIP","c":"CINCINNATI","s":"OH","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"AZABACHE","a":1500,"p":"SPONSORSHIP","c":"WATERFORD TWP","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"CITY OF GROSSE POINTE WOODS","a":2500,"p":"DONATION","c":"GROSSE POINTE WOODS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"CITY OF ST CLAIR SHORES","a":5000,"p":"DONATION","c":"ST CLAIR SHORES","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"GROSSE POINTE CHAMBER FOUNDATION","a":4600,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"GROSSE POINTE CHAMBER OF COMMERCE","a":2500,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"GROSSE POINTE HISTORICAL SOCIETY","a":1990,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"GROSSE POINTE ROTARY CLUB","a":850,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"GROSSE POINTE WAR MEMORIAL ASSOCIATION","a":1000,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"HISTORICAL SOCIETY OF MICHIGAN","a":2266,"p":"SPONSORSHIP","c":"LANSING","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"MACOMB COUNTY CHAMBER OF COMMERCE","a":1000,"p":"DONATION","c":"MOUNT CLEMENS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"MICHIGAN DEPARTMENT OF ENVIRONMENT GREAT LAKES AND ENERGY","a":250,"p":"SPONSORSHIP","c":"LANSING","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"MICHIGAN GREEN INDUSTRY ASSOCIATION","a":500,"p":"SPONSORSHIP","c":"BINGHAM FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"MICHIGAN SCIENCE CENTER","a":250,"p":"DONATION","c":"DETROIT","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"PRESERVATION TRADES NETWORK","a":1000,"p":"SPONSORSHIP","c":"DETROIT","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"SERVICES FOR OLDER CITIZENS INC","a":1500,"p":"SPONSORSHIP","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"THE FAMILY CENTER OF GROSSE POINTE & HARPER WOODS","a":760,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"VILLAGE OF GROSSE POINTE SHORES","a":15500,"p":"DONATION","c":"GROSSE POINTE SHORES","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"},{"y":2024,"r":"WE GP","a":150,"p":"DONATION","c":"GROSSE POINTE FARMS","s":"MI","e":"","o":"202533179349100538","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"GROSSE POINTE CHAMBER FOUNDATION":"Community & economic development","MICHIGAN HUMANITIES COUNCIL":"Arts & culture","GROSSE POINTE CHAMBER OF COMMERCE":"Community & economic development","SAMARITAS":"Basic needs & response","WE GP":"Community & economic development","ALBERT KAHN LEGACY FOUNDATION":"Arts & culture","FERNDALE COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","GROSSE POINTE WAR MEMORIAL ASSOCIATION":"Arts & culture","MICHIGAN SCIENCE CENTER":"Education & youth","PRESERVATION TRADES NETWORK":"Community & economic development","SERVICES FOR OLDER CITIZENS INC":"Basic needs & response","THE FAMILY CENTER OF GROSSE POINTE & HARPER WOODS":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

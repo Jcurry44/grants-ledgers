@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="PATTERSONF_DATA" data-slug="pattersonfa2" data-n="45" data-grand="34717017" data-recsub="All six years" data-running="to the dollar, six years running." data-names="40 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="PATTERSONF_DATA" data-slug="pattersonfa2" data-n="45" data-grand="34717017" data-recsub="All six years" data-running="to the dollar, six years running." data-names="40 as-filed names" data-rows-embedded="45" data-rows-total="45">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -45,7 +45,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">6 / 6 years reconcile · Δ $0</div>
+  <div class="side-foot">6 of 6 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -82,7 +82,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 6/6 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 6 of 6 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -113,12 +113,19 @@
       <div class="k-hint">Across all 45 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">39</span></button>
@@ -131,13 +138,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -165,6 +174,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, six years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $34,717,017, equals Part I line 25(d), $34,717,017 — a difference of zero dollars, verified.">
@@ -175,20 +196,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -271,6 +278,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -429,7 +437,8 @@
 </div>
 <script>
 window.PATTERSONF_DATA={"meta":{"foundation":"Patterson Family Foundation","ein":"35-6975288","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2018,2020,2021,2022,2023,2024],"grant_count":45,"grand_total":34717017,"tieout":{"2018":{"object_id":"201942819349100704","grant_count":40,"grant_sum":5741250,"line25_col_d":5741250,"status":"PASS"},"2020":{"object_id":"202142749349100404","grant_count":1,"grant_sum":7133302,"line25_col_d":7133302,"status":"PASS"},"2021":{"object_id":"202243129349101434","grant_count":1,"grant_sum":3007750,"line25_col_d":3007750,"status":"PASS"},"2022":{"object_id":"202342909349100014","grant_count":1,"grant_sum":7577000,"line25_col_d":7577000,"status":"PASS"},"2023":{"object_id":"202442229349100014","grant_count":1,"grant_sum":4454305,"line25_col_d":4454305,"status":"PASS"},"2024":{"object_id":"202521359349103807","grant_count":1,"grant_sum":6803410,"line25_col_d":6803410,"status":"PASS"}}},"grants":[{"y":2018,"r":"AMERICAN BOOKSELLERS ASSOCIATION","a":250000,"p":"None Pubhc Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"AMERICAN EXPRESS","a":500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"APPALACHIAN STATE UNIVERSITY FOUNDATION, 'NC","a":60000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"AUTHORS GUILD FOUNDATION","a":1500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"BINC FOUNDATION","a":25000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"EMPORIA STATE UNIVERSITY FOUNDATION","a":90000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"FLORIDA AGRICULTURAL AND MECHANICAL UNIVERSITY","a":2500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"FLORIDA ATLANTIC UNIVERSITY FOUNDATION, INC.","a":120000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"JANAE STEEN","a":2500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MANHATTAN COLLEGE","a":110000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MAYO CLINIC","a":25000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MICHIGAN STATE UNIVERSITY","a":120000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MISSISSIPPI STATE UNIVERSITY FOUNDATION, INC.","a":96000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MONTCLAIR STATE UNIVERSITY FOUNDATION, INC","a":120000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"MORGAN STATE UNIVERSITY FOUNDATION, INC","a":96000,"p":"None Pubhc Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"OUR LADY OF LOURDES HIGH SCHOOL","a":8750,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"PALM BEACH BOOK FESTIVAL","a":10000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"PALM BEACH CIVIC ASSOCIATION","a":10000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"PALM BEACH DAY ACADEMY","a":70000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"ROCHESTER INSTITUTE OF TECHNOLOGY","a":2500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"SCHOLASTIC BOOK CLUBS","a":2000000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"SCHOOL OF THE ARTS FOUNDATION, INC.","a":91000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"TEXAS STATE UNIVERSITY SAN MARCOS","a":96000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"THE GENESEO FOUNDATION, INC","a":96000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"THE UNIVERSITY OF FLORIDA FOUNDATION, INC","a":96000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"THE UNIVERSITY OF FLORIDA FOUNDATION, INC","a":1000000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"THE UT FOUNDATION","a":26000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"THOMAS WALKER","a":2500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"TOUGALOO COLLEGE","a":64000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"TOWSON UNIVERSITY FOUNDATION, INC","a":48000,"p":"None Public Chanty General Suppon","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF ALABAMA","a":111000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF ARKANSAS FOUNDATION","a":93000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF FLORIDA","a":2500,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF IOWA FOUNDATION","a":75000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF PENNSYLVANIA","a":100000,"p":"None Public Chanty General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF SAN FRANCISCO","a":96000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF THE PACIFIC","a":93000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF WASHINGTON FOUNDATION","a":48000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"UNIVERSITY OF WISCONSIN FOUNDATION","a":183000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2018,"r":"VANDERBILT UNIVERSITY","a":200000,"p":"None Public Charity General Support","c":"","s":"","e":"","o":"201942819349100704","record_type":"named_recipient"},{"y":2020,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":7133302,"p":"","c":"","s":"","e":"","o":"202142749349100404","record_type":"unitemized"},{"y":2021,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":3007750,"p":"","c":"","s":"","e":"","o":"202243129349101434","record_type":"unitemized"},{"y":2022,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":7577000,"p":"","c":"","s":"","e":"","o":"202342909349100014","record_type":"unitemized"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":4454305,"p":"","c":"","s":"","e":"","o":"202442229349100014","record_type":"unitemized"},{"y":2024,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":6803410,"p":"","c":"","s":"","e":"","o":"202521359349103807","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

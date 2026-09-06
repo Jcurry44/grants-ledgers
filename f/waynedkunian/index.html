@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="WAYNEDKUNI_DATA" data-slug="waynedkunian" data-n="84" data-grand="24067495" data-recsub="All five years" data-running="to the dollar, five years running." data-names="57 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="WAYNEDKUNI_DATA" data-slug="waynedkunian" data-n="84" data-grand="24067495" data-recsub="All five years" data-running="to the dollar, five years running." data-names="57 as-filed names" data-rows-embedded="84" data-rows-total="84">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 84 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">56</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $24,067,495, equals Part XIV, line 3a, $24,067,495 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.WAYNEDKUNI_DATA={"meta":{"foundation":"Wayne D Kuni and Joan E Kuni","ein":"81-5181832","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":84,"grand_total":24067495,"tieout":{"2020":{"object_id":"202143159349104154","grant_count":4,"grant_sum":3733438,"line25_col_d":3733438,"status":"PASS"},"2021":{"object_id":"202223139349102187","grant_count":4,"grant_sum":28600,"line25_col_d":28600,"status":"PASS"},"2022":{"object_id":"202343149349100519","grant_count":8,"grant_sum":3955409,"line25_col_d":3955409,"status":"PASS"},"2023":{"object_id":"202413169349102031","grant_count":26,"grant_sum":8741990,"line25_col_d":8741990,"status":"PASS"},"2024":{"object_id":"202523109349102007","grant_count":42,"grant_sum":7608058,"line25_col_d":7608058,"status":"PASS"}}},"grants":[{"y":2020,"r":"COMMUNITY FOUNDATION FOR SOUTHWEST WASHINGTON","a":3722438,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202143159349104154","record_type":"named_recipient"},{"y":2020,"r":"EDWARDS CENTER INC","a":5000,"p":"GENERAL SUPPORT","c":"ALOHA","s":"OR","e":"","o":"202143159349104154","record_type":"named_recipient"},{"y":2020,"r":"NORTHWEST DOWN SYNDROME ASSOCIATION","a":5000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202143159349104154","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY FOUNDATION FOR SOUTHWEST WASHINGTON","a":1000,"p":"COVID-19 RELIEF FUND","c":"VANCOUVER","s":"WA","e":"","o":"202143159349104154","record_type":"named_recipient"},{"y":2021,"r":"FOUNDATION FOR THE CHALLENGED","a":5100,"p":"COMMUNITY HOUSING THAT IMPROVES QUALITY OF LIFE FOR PEOPLE WITH DEVELOPMENTAL DISABILITIES","c":"DUBLIN","s":"OH","e":"","o":"202223139349102187","record_type":"named_recipient"},{"y":2021,"r":"HARPER'S PLAYGROUND","a":13500,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202223139349102187","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY VISION INC","a":5000,"p":"SUPPORT DEVELOPMENTALLY DISABLED AND LOW INCOME INDIVIDUALS","c":"PORTLAND","s":"OR","e":"","o":"202223139349102187","record_type":"named_recipient"},{"y":2021,"r":"NORTH POLE STUDIO","a":5000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202223139349102187","record_type":"named_recipient"},{"y":2022,"r":"OREGON HEALTH & SCIENCE UNIVERSITY","a":900001,"p":"TO HELP MAKE A HEALTHIER WORLD THROUGH RESEARCH, HEALTH CARE AND EDUCATION","c":"PORTLAND","s":"OR","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"FRED HUTCHINSON CANCER CENTER","a":850000,"p":"INNOVATIVE RESEARCH AND COMPASSIONATE CARE TO PREVENT AND ELIMATE CANCER AND INFECTION DISEASE","c":"SEATTLE","s":"WA","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF WASHINGTON","a":2182308,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"PHAME ACADEMY","a":3000,"p":"PERFORMANCE PROGRAM","c":"PORTLAND","s":"OR","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"DISABILITY RIGHTS OREGON","a":7500,"p":"TO HELP PEOPLE WITH DISABILITIES","c":"PORTLAND","s":"OR","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY VISION INC","a":5000,"p":"TO ENSURE THAT PEOPLE WITH DISABILITIES DIRECT THEIR OWN LIVES","c":"PORTLAND","s":"OR","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"NORTH POLE STUDIO","a":2600,"p":"INCREASE OPPORTUNITIES FOR ARTISTS WITH AUTISM AND OTHER DISABILITIES","c":"PORTLAND","s":"OR","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY FOUNDATION OF SOUTHWEST WASHINGTON","a":5000,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202343149349100519","record_type":"named_recipient"},{"y":2023,"r":"ADVOCATES FOR LIFE SKILLS AND OPPORTUNITY INC","a":300000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"ALBERTINA KERR CENTERS FOUNDATION INC","a":200,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"ALPHA SUPPORTED LIVING SERVICES","a":150000,"p":"GENERAL SUPPORT","c":"BOTHELL","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"ARC OF SPOKANE","a":20000,"p":"GENERAL SUPPORT","c":"SPOKANE","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"CHILDREN'S CANCER THERAPY DEVELOPMENT INSTITUTE","a":75000,"p":"GENERAL SUPPORT","c":"HILLSBORO","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"CITY OF VANCOUVER","a":101065,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY FOUNDATION OF SOUTHWEST WASHINGTON","a":4650,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY VISION INC","a":3450,"p":"TO ENSURE THAT PEOPLE WITH DISABILITIES DIRECT THEIR OWN LIVES","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"DISABILITY RIGHTS OREGON","a":200,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"EDWARDS CENTER","a":31990,"p":"GENERAL SUPPORT","c":"BEAVERTON","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"EXPONENT PHILANTHROPHY","a":20000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"FRED HUTCHINSON CANCER CENTER","a":1425000,"p":"INNOVATIVE RESEARCH AND COMPASSIONATE CARE TO PREVENT AND ELIMATE CANCER AND INFECTION DISEASE","c":"SEATTLE","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"HORIZON PROJECT INC","a":200000,"p":"GENERAL SUPPORT","c":"MILTONFREEWATER","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"HOUSING OREGON","a":16500,"p":"TO SUPPORT THE HOUSING OREGON CONFERENCE","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"NORTH POLE STUDIO","a":5000,"p":"INCREASE OPPORTUNITIES FOR ARTISTS WITH AUTISM AND OTHER DISABILITIES","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"NW HOUSING ALTERNATIVES","a":200,"p":"GENERAL SUPPORT","c":"MILWAUKIE","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"OLYMPIC NEIGHBORS","a":100000,"p":"GENERAL SUPPORT","c":"CHIMACUM","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"OREGON HEALTH & SCIENCE UNIVERSITY","a":3111208,"p":"TO HELP MAKE A HEALTHIER WORLD THROUGH RESEARCH, HEALTH CARE AND EDUCATION","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"PARKVIEW SERVICES","a":75200,"p":"GENERAL SUPPORT","c":"LYNWOOD","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"PHAME ACADEMY","a":2790,"p":"PERFORMANCE PROGRAM","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"PROVIDENCE PORTLAND MEDICAL FOUNDATION","a":85000,"p":"CANCER RESEARCH","c":"PORTLAND","s":"OR","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"THE ARC OF GRAY'S HARBOR","a":354000,"p":"GENERAL SUPPORT","c":"ABERDEEN","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"THE VANCOUVER SYMPHONY ORCHESTRA","a":25000,"p":"TO SUPPORT THE VANCOUVER SYMPHONY ARTS FESTIVAL","c":"VANCOUVER","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"THE ZAIN JUSTIS FOUNDATION","a":200,"p":"GENERAL SUPPORT","c":"CAMAS","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF WASHINGTON","a":2385337,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2023,"r":"VILLAGE COMMUNITY SERVICES","a":250000,"p":"GENERAL SUPPORT","c":"ARLINGTON","s":"WA","e":"","o":"202413169349102031","record_type":"named_recipient"},{"y":2024,"r":"ALLIANCE OF LOCAL SERVICE ORGANIZATIONS","a":200,"p":"GENERAL SUPPORT","c":"BEND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"ALPHA SUPPORTED LIVING SERVICES","a":25000,"p":"GENERAL SUPPORT","c":"BOTHELL","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"ALBERTINA KERR","a":1500,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION FOR SOUTHWEST WASHINGTON","a":5000,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY HOMES","a":46740,"p":"GENERAL SUPPORT","c":"BOTHELL","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY VISION INC","a":2300,"p":"TO ENSURE THAT PEOPLE WITH DISABILITIES DIRECT THEIR OWN LIVES","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"DISABILITY RIGHTS OREGON","a":10200,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"EDWARDS CENTER","a":27642,"p":"GENERAL SUPPORT","c":"BEAVERTON","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"EVERYBODY ATHELETES","a":20000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"EXCEED ENTERPRISES","a":20000,"p":"GENERAL SUPPORT","c":"MILWAUKIE","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"EXPONENT PHILANTHROPHY","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"FOURTH PLAIN FORWARD","a":161448,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"FRED HUTCHINSON CANCER CENTER","a":898738,"p":"INNOVATIVE RESEARCH AND COMPASSIONATE CARE TO PREVENT AND ELIMATE CANCER AND INFECTION DISEASE","c":"SEATTLE","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"FRIENDSHIP CIRCLE","a":15000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"GERMAINE'S CULINARY INC","a":50000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"HOLLY RIDGE CENTER","a":30000,"p":"GENERAL SUPPORT","c":"BREMERTON","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"HOME LIFE","a":20000,"p":"GENERAL SUPPORT","c":"CORVALLIS","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"HORIZON PROJECT INC","a":200,"p":"GENERAL SUPPORT","c":"MILTONFREEWATER","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"HOUSING OREGON","a":5000,"p":"TO SUPPORT THE HOUSING OREGON CONFERENCE","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"NORTH POLE STUDIO","a":46100,"p":"INCREASE OPPORTUNITIES FOR ARTISTS WITH AUTISM AND OTHER DISABILITIES","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"NORTHWEST ASSOCIATION FOR BLIND ATHLETES","a":500,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"OREGON HEALTH & SCIENCE UNIVERSITY","a":894373,"p":"TO HELP MAKE A HEALTHIER WORLD THROUGH RESEARCH, HEALTH CARE AND EDUCATION","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"OREGON SELF ADVOCACY COALITION","a":200,"p":"GENERAL SUPPORT","c":"SALEM","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"ORION INDUSTRIES","a":15686,"p":"GENERAL SUPPORT","c":"AUBURN","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"PARKVIEW SERVICES","a":50200,"p":"GENERAL SUPPORT","c":"LYNWOOD","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"PEARL BUCK CENTER","a":20000,"p":"GENERAL SUPPORT","c":"EUGENE","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"PHAME ACADEMY","a":102100,"p":"PERFORMANCE PROGRAM","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"POCKET NEIGHBORHOOD FOUNDATION","a":200000,"p":"GENERAL SUPPORT","c":"WALLA WALLA","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"PORTLAND ART MUSUEM","a":25000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"SABIN CDC","a":97500,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"SAMMY'S PLACE","a":283333,"p":"GENERAL SUPPORT","c":"NEHALEM","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"SEATTLE CHILDREN'S HOSPITAL","a":350000,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"SPECIAL OLYMPICS OREGON","a":25000,"p":"GENERAL SUPPORT","c":"BEAVERTON","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"STEPS INC","a":20000,"p":"GENERAL SUPPORT","c":"FARMVILLE","s":"VA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"SWEDISH CANCER INSTITUTE","a":298592,"p":"GENERAL SUPPORT","c":"EDMONDS","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"THE SHADOW PROJECT","a":16000,"p":"GENERAL SUPPORT","c":"PORTLAND","s":"OR","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"TIERRA VILLAGE","a":20000,"p":"GENERAL SUPPORT","c":"LEAVENWORTH","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF WASHINGTON","a":2026766,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF WASHINGTON SCHOOL OF MEDICINE","a":1440000,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"VANCOUVER HOUSING AUTHORITY","a":225000,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"CITY OF VANCOUVER","a":2740,"p":"VANCOUVER MOVIE NIGHT AT FRUIT VALLEY PARK","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"},{"y":2024,"r":"CITY OF VANCOUVER","a":100000,"p":"VANCOUVER PLAYGROUND PROJECT","c":"VANCOUVER","s":"WA","e":"","o":"202523109349102007","record_type":"named_recipient"}]};window.LEDGER_MERGES=["EDWARDS CENTER"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

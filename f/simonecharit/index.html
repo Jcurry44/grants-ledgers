@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="SIMONECHAR_DATA" data-slug="simonecharit" data-n="60" data-grand="21778122" data-recsub="All five years" data-running="to the dollar, five years running." data-names="24 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="SIMONECHAR_DATA" data-slug="simonecharit" data-n="60" data-grand="21778122" data-recsub="All five years" data-running="to the dollar, five years running." data-names="24 as-filed names" data-rows-embedded="60" data-rows-total="60">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 60 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">18</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $21,778,122, equals Part I line 25(d), $21,778,122 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.SIMONECHAR_DATA={"meta":{"foundation":"Simone Charitable Foundation","ein":"82-3971316","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":60,"grand_total":21778122,"tieout":{"2020":{"object_id":"202102359349100710","grant_count":12,"grant_sum":3673394,"line25_col_d":3673394,"status":"PASS"},"2021":{"object_id":"202243199349105559","grant_count":12,"grant_sum":3435001,"line25_col_d":3435001,"status":"PASS"},"2022":{"object_id":"202312019349100316","grant_count":12,"grant_sum":5077522,"line25_col_d":5077522,"status":"PASS"},"2023":{"object_id":"202443209349108709","grant_count":12,"grant_sum":4839761,"line25_col_d":4839761,"status":"PASS"},"2024":{"object_id":"202533009349100423","grant_count":12,"grant_sum":4752444,"line25_col_d":4752444,"status":"PASS"}}},"grants":[{"y":2020,"r":"Alzheimer's Disease Related Disorde","a":200769,"p":"General Support","c":"CHICAGO","s":"IL","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"American Cancer Society Inc","a":576000,"p":"General Support","c":"ATLANTA","s":"GA","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Boys Girls Club of Greater Phoenix","a":475362,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Boys Girls Club of Tucson","a":120000,"p":"General Support","c":"TUCSON","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Boys and Girls Club GREATER Scottsd","a":282017,"p":"General Support","c":"SCOTTSDALE","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Help in Healing Home Foundation","a":90289,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Make-A-Wish Foundation of Arizona","a":225000,"p":"General Support","c":"SCOTTSDALE","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"McKenna Youth Foundation","a":40000,"p":"General Support","c":"CAVE CREEK","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"National Kidney Foundation of Arizo","a":460000,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Parkinson's Foundation Inc","a":500000,"p":"General Support","c":"MIAMI","s":"FL","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"Southwest Human Development","a":428957,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2020,"r":"American Parkinson Disease Assoc","a":275000,"p":"General Support","c":"STATEN ISLAND","s":"NY","e":"","o":"202102359349100710","record_type":"named_recipient"},{"y":2021,"r":"Alzheimer's Disease Related Disorde","a":200000,"p":"Public Awareness Campaign","c":"CHICAGO","s":"IL","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"American Cancer Society Inc","a":500000,"p":"AZ Discovery Boost Grants Program","c":"ATLANTA","s":"GA","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Boys Girls Club of Greater Phoenix","a":250000,"p":"Academic Success STEM program","c":"PHOENIX","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Boys Girls Club of Tucson","a":100000,"p":"Spark Tech Zones Project","c":"TUCSON","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Boys and Girls Club GREATER Scottsd","a":200000,"p":"Power Hour, America Reads, Torch & Keystone Clubs, and SMART Girls","c":"SCOTTSDALE","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Help in Healing Home Foundation","a":40000,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Make-A-Wish Foundation of Arizona","a":250000,"p":"Arizona Wishes","c":"SCOTTSDALE","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"McKenna Youth Foundation","a":30000,"p":"Holiday Party and Bicycles for 250 children","c":"CAVE CREEK","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"National Kidney Foundation of Arizo","a":730000,"p":"Fund the direct aid of kidney patients in Arizona","c":"PHOENIX","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Parkinson's Foundation Inc","a":435001,"p":"Project PDGENEration Initiative Arizona for patients in AZ","c":"MIAMI","s":"FL","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"Southwest Human Development","a":500000,"p":"Birth to Five Center of Excellence, Smooth Way Home","c":"PHOENIX","s":"AZ","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2021,"r":"American Parkinson Disease Assoc","a":200000,"p":"Meet the needs of the underserved PD patients in Arizona through the bilingual referral program and work with Banner Neuro Wellness","c":"STATEN ISLAND","s":"NY","e":"","o":"202243199349105559","record_type":"named_recipient"},{"y":2022,"r":"Alzheimer's Disease Related Disorde","a":292267,"p":"Public Awareness Campaign","c":"CHICAGO","s":"IL","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"American Cancer Society Inc","a":700000,"p":"AZ Discovery Boost Grants Program","c":"ATLANTA","s":"GA","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Boys Girls Club of Greater Phoenix","a":400000,"p":"Academic Success STEM program","c":"PHOENIX","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Boys Girls Club of Tucson","a":250000,"p":"Spark Tech Zones Project","c":"TUCSON","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Boys and Girls Club GREATER Scottsd","a":331811,"p":"Power Hour, America Reads, Torch & Keystone Clubs, and SMART Girls","c":"SCOTTSDALE","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Help in Healing Home Foundation","a":80000,"p":"General Support","c":"PHOENIX","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Make-A-Wish Foundation of Arizona","a":500000,"p":"Arizona Wishes","c":"SCOTTSDALE","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"McKenna Youth Foundation","a":45000,"p":"Holiday Party and Bicycles for 250 children","c":"CAVE CREEK","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"National Kidney Foundation of Arizo","a":900000,"p":"Fund the direct aid of kidney patients in Arizona","c":"PHOENIX","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Parkinson's Foundation Inc","a":478444,"p":"Project PDGENEration Initiative Arizona for patients in AZ","c":"MIAMI","s":"FL","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"Southwest Human Development","a":750000,"p":"Birth to Five Center of Excellence, Smooth Way Home","c":"PHOENIX","s":"AZ","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2022,"r":"American Parkinson Disease Assoc","a":350000,"p":"Meet the needs of the underserved PD patients in Arizona through the bilingual referral program and work with Banner Neuro Wellness","c":"STATEN ISLAND","s":"NY","e":"","o":"202312019349100316","record_type":"named_recipient"},{"y":2023,"r":"ALZHEIMER'S DISEASE & RELATED DISORDERS ASSOCIATION INC","a":605394,"p":"PUBLIC AWARENESS CAMPAIGN","c":"CHICAGO","s":"IL","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN CANCER SOCIETY INC","a":330000,"p":"AZ DISCOVERY BOOAST GRANTS PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN PARKINSON DISEASE ASSOCIATION","a":350000,"p":"MEET THE NEEDS OF THE UNDERSERVED PD PATIENTS IN ARIZONA THROUGH BILINGUAL REFERRAL PROGRAM AND WORK WITH BANNER NEURO WELLNESS","c":"STATEN ISLAND","s":"NY","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"BARROW NEUROLOGICAL FOUNDATION","a":305556,"p":"SUPPORT SPECIALISTS THAT TREAT BRAIN AND SPINE CONDITIONS","c":"PHOENIX","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"BOYS & GIRLS CLUB OF GREATER SCOTTSDALE","a":331811,"p":"POWER HOUR, AMERICAN READS, TORCH AND KEYSTONE CLUBS, AND SMART GIRLS","c":"SCOTTSDALE","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"BOYS & GIRLS CLUB OF THE VALLEY INC","a":400000,"p":"ACADEMIC SUCCESS STEM PROGRAM","c":"PHOENIX","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"BOYS & GIRLS CLUB OF TUCSON","a":250000,"p":"SPARK TECH ZONES PROJECT","c":"TUCSON","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"HELP IN HEALING HOME FOUNDATION","a":80000,"p":"GENERAL SUPPORT","c":"PHOENIX","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"MAKE-A-WISH FOUNDATION OF ARIZONA INC","a":500000,"p":"ARIZONA WISHES","c":"SCOTTSDALE","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"MCKENNA YOUTH FOUNDATION","a":45000,"p":"HOLIDAY PART AND BICYCLES FOR 250 CHILDREN","c":"CAVE CREEEK","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL KIDNEY FOUNDATION OF ARIZONA","a":892000,"p":"FUND THE DIRECT AID OF KIDNEY PATIENTS IN ARIZONA","c":"PHOENIX","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2023,"r":"SOUTHWEST HUMAN DEVELOPMENT","a":750000,"p":"BIRTH TO FIVE CENT OF EXCELLENCE, SMOOTH WAY HOME","c":"PHOENIX","s":"AZ","e":"","o":"202443209349108709","record_type":"named_recipient"},{"y":2024,"r":"ALZHEIMER'S DISEASE & RELATED DISORDERS ASSOCIATION INC","a":402638,"p":"PUBLIC AWARENESS CAMPAIGN","c":"CHICAGO","s":"IL","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN CANCER SOCIETY INC","a":380250,"p":"AZ DISCOVERY BOOST GRANTS PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN PARKINSON DISEASE ASSOCIATION","a":350000,"p":"MEET THE NEEDS OF THE UNDERSERVED PD PATIENTS IN ARIZONA THROUGH BILINGUAL REFERRAL PROGRAM AND WORK WITH BANNER NEURO WELLNESS","c":"STATEN ISLAND","s":"NY","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"BARROW NEUROLOGICAL FOUNDATION","a":355556,"p":"MEDCIAL RESEARCH AND STUDIES FOR PARKINSONS AND ALZHEIMERS","c":"PHOENIX","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF GREATER SCOTTSDALE","a":331000,"p":"POWER HOUR, AMERICAN READS, TORCH AND KEYSTONE CLUBS, AND SMART GIRLS","c":"SCOTTSDALE","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF THE VALLEY INC","a":450000,"p":"ACADEMIC SUCCESS STEM PROGRAM","c":"PHOENIX","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF TUCSON","a":250000,"p":"SPARK TECH ZONES PROJECT","c":"TUCSON","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"HELP IN HEALING HOME FOUNDATION","a":80000,"p":"GENERAL SUPPORT","c":"PHOENIX","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"MAKE-A-WISH FOUNDATION OF ARIZONA INC","a":500000,"p":"ARIZONA WISHES","c":"SCOTTSDALE","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"MCKENNA YOUTH FOUNDATION","a":45000,"p":"HOLIDAY PARTY AND BICYCLES FOR 250 CHILDREN","c":"CAVE CREEEK","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL KIDNEY FOUNDATION OF ARIZONA","a":858000,"p":"FUND THE DIRECT AID OF KIDNEY PATIENTS IN ARIZONA","c":"PHOENIX","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"},{"y":2024,"r":"SOUTHWEST HUMAN DEVELOPMENT","a":750000,"p":"BIRTH TO FIVE CENTER OF EXCELLENCE, SMOOTH WAY HOME","c":"PHOENIX","s":"AZ","e":"","o":"202533009349100423","record_type":"named_recipient"}]};window.LEDGER_MERGES=["AMERICAN CANCER SOCIETY","BOYS GIRLS CLUB OF TUCSON","HELP IN HEALING HOME FOUNDATION","MAKE A WISH FOUNDATION OF ARIZONA","MCKENNA YOUTH FOUNDATION","SOUTHWEST HUMAN DEVELOPMENT"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Boys Girls Club of Tucson":"Education & youth","Make-A-Wish Foundation of Arizona":"Health & wellbeing","MAKE-A-WISH FOUNDATION OF ARIZONA INC":"Health & wellbeing","BARROW NEUROLOGICAL FOUNDATION":"Health & wellbeing"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

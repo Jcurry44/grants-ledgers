@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="KRAFTFAMIL_DATA" data-slug="kraftfamilyf" data-n="70" data-grand="45619672" data-recsub="All five years" data-running="to the dollar, five years running." data-names="55 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="KRAFTFAMIL_DATA" data-slug="kraftfamilyf" data-n="70" data-grand="45619672" data-recsub="All five years" data-running="to the dollar, five years running." data-names="55 as-filed names" data-rows-embedded="70" data-rows-total="70">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -45,7 +45,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -82,7 +82,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -113,12 +113,19 @@
       <div class="k-hint">Across all 70 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">54</span></button>
@@ -131,13 +138,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -165,6 +174,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $45,619,672, equals Part I line 25(d), $45,619,672 — a difference of zero dollars, verified.">
@@ -175,20 +196,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -271,6 +278,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -428,7 +436,8 @@
 </div>
 <script>
 window.KRAFTFAMIL_DATA={"meta":{"foundation":"Kraft Family Foundation","ein":"04-6050716","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":70,"grand_total":45619672,"tieout":{"2020":{"object_id":"202113169349103086","grant_count":1,"grant_sum":7294602,"line25_col_d":7294602,"status":"PASS"},"2021":{"object_id":"202243179349101209","grant_count":1,"grant_sum":10023685,"line25_col_d":10023685,"status":"PASS"},"2022":{"object_id":"202303179349103780","grant_count":66,"grant_sum":9952155,"line25_col_d":9952155,"status":"PASS"},"2023":{"object_id":"202433189349103843","grant_count":1,"grant_sum":9572269,"line25_col_d":9572269,"status":"PASS"},"2024":{"object_id":"202523149349101392","grant_count":1,"grant_sum":8776961,"line25_col_d":8776961,"status":"PASS"}}},"grants":[{"y":2020,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":7294602,"p":"","c":"","s":"","e":"","o":"202113169349103086","record_type":"unitemized"},{"y":2021,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":10023685,"p":"","c":"","s":"","e":"","o":"202243179349101209","record_type":"unitemized"},{"y":2022,"r":"American Academy of Arts & Sciences","a":25000,"p":"Cambridge MA PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"American Academy of Arts & Sciences","a":325,"p":"Cambridge MA PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Anti-Defamation League New England Region Boston","a":10000,"p":"MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Appeal of Conscience Foundation","a":250000,"p":"New York NY PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Bais Yaakov of Boston","a":1800,"p":"Brighton MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Benjamin Franklin Institute of Technology","a":375000,"p":"Boston MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Boston College - Tribute Dinner","a":18000,"p":"Chestnut Hill MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Boys & Girls Club","a":52500,"p":"Boston MA PC Provide emergency assistance","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Boys & Girls Club of Metro South","a":50000,"p":"Taunton MA PC Provide emergency assistance","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Brandeis University","a":250000,"p":"Waltham MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Breast Cancer Research Foundation","a":50000,"p":"Lindenhurst NY PC Medical research","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Brothers for Life","a":50000,"p":"Seattle WA PC Military support","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"CAMERA","a":1000,"p":"Richmond VA PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Catholic Community Fund","a":200000,"p":"Braintree MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Central Park Conservancy","a":25000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Chabad at Chestnut Hill","a":36000,"p":"Chestnut Hill MA PC Scholarships for surnmer youth camps","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Chabad of Southampton Jewish Center","a":57000,"p":"Southampton NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Chabad of Southampton Jewish Center","a":18000,"p":"Southampton FL PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Columbia/Barnard Hillel","a":100000,"p":"New York NY PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Congregation Kehillath Israel","a":77,"p":"Brookline MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Education Alliance","a":50000,"p":"New York NY PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Elton John Aids Foundation","a":300000,"p":"New York NY PC Music","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Elton John Aids Foundation","a":250000,"p":"New York NY PC Music","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Elton John Aids Foundation","a":1000000,"p":"New York PC Music","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Entrepreneurship for All Inc.","a":50000,"p":"Lowell MA PC Music","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Flow Through Contributions from K- I","a":44,"p":"Foxborough MA PC General Support","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Friends of United Hatzalah","a":250000,"p":"New York NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Friends of United Hatzalah","a":100000,"p":"New York NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Friends of the IF L Inc","a":116750,"p":"Tenafly NJ PC Promote athletics","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Friends of the IF L Inc","a":85250,"p":"Tenafly NJ PC Promote athletics","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Friends of the IF L Inc","a":38750,"p":"Tenafly NJ PC Promote athletics","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Greater Grove Hall Main Street","a":24104,"p":"Dorchester MA PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Greater Grove Hall Main Street","a":12305,"p":"Dorchester MA PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Hebrew College","a":100000,"p":"Newton Centre MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Institute for Nonprofit Practice","a":50000,"p":"Dedham MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"International March of the Living, Inc","a":100000,"p":"New York NY PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Israel Tennis & Education Centers Fdn.","a":10000,"p":"Deefield Beach FL PC Promote athletics","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"JARC Florida","a":100000,"p":"Boca Raton FL PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Jewish Theological Seminary","a":12500,"p":"New York NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Jewish Theological Seminary","a":6250,"p":"New York NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Licoln Center Celebration","a":50000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Lincoln Center for Performing Arts","a":35000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Machne Israel","a":100000,"p":"Brooklyn NY PC Religious Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Manhattan Institute for Policy Research","a":25000,"p":"New York NY PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Massachusetts General Hospital","a":4000000,"p":"Boston MA PC Medical research","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Massachusetts Military Support Foundation","a":50000,"p":"Buzzards Bay MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Museum of Fine Arts, Boston","a":10000,"p":"Boston MA PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"New Commonwealth Fund","a":200000,"p":"Boston MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Rhode Island Foundation","a":100000,"p":"Providence RI PC Youth Services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Roxbury Presbyterian Church Social Impact","a":25000,"p":"Roxbury MA PC Human services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Seed Global Health","a":5000,"p":"Boston MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"St. Monica Catholic Schools","a":10000,"p":"Santa Monica PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Temple Emanuel","a":100000,"p":"Newton MA PC Religious","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"Temple Emanuel","a":2500,"p":"Newton MA PC Religious","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Alfred E. Smith Memorial Foundation","a":250000,"p":"New York NY PC Youth Services","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Apollo Theater Foundation","a":100000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Center for Hope and Healing","a":100000,"p":"Lowell MA PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Everglades Foundation","a":100000,"p":"Palmetto Bay FL PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Jewish Museum","a":100000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Milken Institute","a":100000,"p":"Santa Monica PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Rashi School","a":10000,"p":"Dedham MA PC Education","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"The Second Century","a":18000,"p":"Oakland PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"UJA-Federation of New York","a":100000,"p":"New York NY PC Religious","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"UJA-Federation of New York","a":18000,"p":"New York NY PC Religious","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"UJA-Federation of New York","a":18000,"p":"New York NY PC Religious","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2022,"r":"amfAR","a":100000,"p":"New York NY PC Support the arts","c":"","s":"","e":"","o":"202303179349103780","record_type":"named_recipient"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":9572269,"p":"","c":"","s":"","e":"","o":"202433189349103843","record_type":"unitemized"},{"y":2024,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":8776961,"p":"","c":"","s":"","e":"","o":"202523149349101392","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Bais Yaakov of Boston":"Education & youth","Institute for Nonprofit Practice":"Basic needs & response","International March of the Living, Inc":"Education & youth","Massachusetts Military Support Foundation":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

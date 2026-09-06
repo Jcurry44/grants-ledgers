@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="THECHANSOO_DATA" data-slug="thechansoons" data-n="103" data-grand="49989540" data-recsub="All five years" data-running="to the dollar, five years running." data-names="59 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="THECHANSOO_DATA" data-slug="thechansoons" data-n="103" data-grand="49989540" data-recsub="All five years" data-running="to the dollar, five years running." data-names="59 as-filed names" data-rows-embedded="103" data-rows-total="103">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 103 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">55</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $49,989,540, equals Part I line 25(d), $49,989,540 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.THECHANSOO_DATA={"meta":{"foundation":"The Chan Soon-Shion Family Foundation","ein":"26-4384360","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2019,2020,2021,2022,2023],"grant_count":103,"grand_total":49989540,"tieout":{"2019":{"object_id":"202132169349101223","grant_count":22,"grant_sum":6714917,"line25_col_d":6714917,"status":"PASS"},"2020":{"object_id":"202212079349100226","grant_count":18,"grant_sum":8015167,"line25_col_d":8015167,"status":"PASS"},"2021":{"object_id":"202311939349100416","grant_count":28,"grant_sum":13122504,"line25_col_d":13122504,"status":"PASS"},"2022":{"object_id":"202421239349100802","grant_count":16,"grant_sum":15349025,"line25_col_d":15349025,"status":"PASS"},"2023":{"object_id":"202542779349100304","grant_count":19,"grant_sum":6787927,"line25_col_d":6787927,"status":"PASS"}}},"grants":[{"y":2019,"r":"BANK OF AMERICA CHARITABLE GIFT FUND","a":3770000,"p":"CHARITABLE","c":"PROVIDENCE","s":"RI","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"CHILDREN'S DIABETES FOUNDATION","a":5000,"p":"CHARITABLE","c":"DENVER","s":"CO","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"COMMITTEE TO PROTECT JOURNALISTS","a":100000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"GASOL FOUNDATION","a":30000,"p":"CHARITABLE","c":"CHARLOTTESVILE","s":"VA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"ICAHN SCHOOL OF MEDICINE","a":500000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"INTERNATIONAL CENTER FOR JOURNALISTS","a":3500,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"MARYMOUNT HIGH SCHOOL","a":25000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"PARKROSE HIGH SCHOOL","a":10000,"p":"CHARITABLE","c":"PORTLAND","s":"OR","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"RESURRECTION CATHOLIC SCHOOL","a":25000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"ROMAN CATHOLIC ARCHBISHOP OF LA","a":300000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS","a":100000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"ST MARTIN OF TOURS","a":80000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"STANFORD UNIVERSITY","a":30000,"p":"CHARITABLE","c":"STANFORD","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"THE ARCHDIOCESE OF LOS ANGELES","a":1250,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"THE PEOPLE CONCERN","a":5000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"THE POYNTER INSTITUTE","a":25000,"p":"CHARITABLE","c":"PETERSBURG","s":"FL","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"WOMEN'S CANCER RESERACH FUND","a":2500,"p":"CHARITABLE","c":"NEWPORT BEACH","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"JAIN FAMILY INSTITUTE","a":1000000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"SCHWARZMAN SCHOLAR PROGRAM","a":666667,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"HARVARD WESTLAKE SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"RESURRECTION CATHOLIC CHURCH","a":25000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2019,"r":"BEAUTY BUS FOUNDATION","a":1000,"p":"CHARITABLE","c":"SANTA MONICA","s":"CA","e":"","o":"202132169349101223","record_type":"named_recipient"},{"y":2020,"r":"ASU FOUNDATION (MCCAIN INSTITUTE)","a":100000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"BANK OF AMERICA CHARITABLE GIFT FUND","a":5000000,"p":"CHARITABLE","c":"PROVIDENCE","s":"RI","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"CHILDRENS HOSPITAL LOS ANGELES","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"ACADEMY FOUNDATION","a":1000000,"p":"CHARITABLE","c":"BEVERLY HILLS","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"GASOL FOUNDATION","a":50000,"p":"CHARITABLE","c":"CHARLOTTESVILE","s":"VA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"ICAHN SCHOOL OF MEDICINE","a":700000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"INTERNATIONAL CENTER FOR JOURNALISTS","a":3500,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"MARYMOUNT HIGH SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"RACE TO ERASE MS","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"RESURRECTION CATHOLIC SCHOOL","a":50000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"RIGHT TO CARE","a":180000,"p":"CHARITABLE","c":"","s":"","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"ST MARTIN OF TOURS","a":80000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"STANFORD UNIVERSITY","a":10000,"p":"CHARITABLE","c":"STANFORD","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"THE PEOPLE CONCERN","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"SCHWARZMAN SCHOLAR PROGRAM","a":666667,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"HARVARD WESTLAKE SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"RESURRECTION CATHOLIC CHURCH","a":25000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2020,"r":"CHINESE FOR AFFIRMATIVE ACTION (STOP AAPI HATE)","a":100000,"p":"CHARITABLE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202212079349100226","record_type":"named_recipient"},{"y":2021,"r":"ARIZONA STATE UNIVERSITY - MCCAIN INSTITUTE","a":100000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"CHILDRENS HOSPITAL LOS ANGELES","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"GASOL FOUNDATION","a":100000,"p":"CHARITABLE","c":"CHARLOTTESVILE","s":"VA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"ICAHN SCHOOL OF MEDICINE","a":700000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"COMMITTEE TO PROTECT JOURNALISTS","a":25000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"MARYMOUNT HIGH SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"RACE TO ERASE MS","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"RESURRECTION CATHOLIC SCHOOL","a":30000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"ST MARTIN OF TOURS","a":80000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"STANFORD UNIVERSITY","a":10000,"p":"CHARITABLE","c":"STANFORD","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"GAIA VACCINE FOUNDATION","a":40000,"p":"CHARITABLE","c":"PROVIDENCE","s":"RI","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"SCHWARZMAN SCHOLAR PROGRAM","a":666667,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"HARVARD WESTLAKE SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"RESURRECTION CATHOLIC CHURCH","a":25000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"INFECTIOUS DISEASE RESEARCH INSTITUTE","a":9000000,"p":"CHARITABLE","c":"SEATTLE","s":"WA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"LA RAMS FOUNDATION","a":15000,"p":"CHARITABLE","c":"AGOURA HILLS","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"LOS ANGELES FAMILY HOUSING","a":50000,"p":"CHARITABLE","c":"NORTH HOLLYWOOD","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"NATIONAL MUSEUM OF AMERICAN HISTORY","a":100000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"PACIFIC COUNCIL ON INTERNATIONAL POLICY","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS","a":50000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"SAN CARLOS APACHE TRIBE","a":585972,"p":"DONATION AND INSTALLATION OF 200 HYDROPANELS","c":"SAN CARLOS","s":"AZ","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"ST MARTIN IN THE FIELDS CHURCH","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"CUTWINI SCHOOL SOUTH AFRICA","a":403301,"p":"Donation and installation of 150 hydropanels","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"Mtambalala School South Africa","a":107547,"p":"Donation and installation of 40 hydropanels","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"Lujazu Village South Africa","a":241981,"p":"Donation and installation of 90 hydropanels","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"Luphoko Village South Africa","a":322641,"p":"Donation and installation of 120 hydropanels","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"REPUBLIC OF BOTSWANA (LOBU SMALLSTOCK FARM)","a":258890,"p":"Donation and installation of 100 hydropanels","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2021,"r":"SOUTH AFRICAN MEDICAL RESEARCH COUNCIL","a":150505,"p":"BUILDING A VACCINE R&D AND MANUFACTURING WORKFORCE FOR AFRICA","c":"","s":"","e":"","o":"202311939349100416","record_type":"named_recipient"},{"y":2022,"r":"ICAHN SCHOOL OF MEDICINE","a":500000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"RACE TO ERASE MS","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"RESURRECTION CATHOLIC SCHOOL","a":5000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"INFECTIOUS DISEASE RESEARCH INSTITUTE","a":9000000,"p":"CHARITABLE","c":"SEATTLE","s":"WA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"LA RAMS FOUNDATION","a":15000,"p":"CHARITABLE","c":"AGOURA HILLS","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS","a":50000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Mtambalala School South Africa","a":41133,"p":"Donation and installation of 40 hydropanels","c":"","s":"","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"SOUTH AFRICAN MEDICAL RESEARCH COUNCIL","a":1562692,"p":"BUILDING A VACCINE R&D AND MANUFACTURING WORKFORCE FOR AFRICA","c":"","s":"","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Asian Americans Advancing Justice SoCal","a":10000,"p":"CHARITABLE","c":"Los Angeles","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Bank of America Charitable Gift Fund","a":3700000,"p":"CHARITABLE","c":"Boston","s":"MA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"El Segundo Education Foundation","a":25000,"p":"CHARITABLE","c":"El Segundo","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Museum of Chinese in America","a":10000,"p":"CHARITABLE","c":"New York","s":"NY","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"The Music Center","a":50000,"p":"CHARITABLE","c":"Los Angeles","s":"CA","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"CUTWINI SCHOOL SOUTH AFRICA","a":154250,"p":"Donation and installation of 40 hydropanels","c":"","s":"","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Lujazu Village South Africa","a":92550,"p":"Donation and installation of 90 hydropanels","c":"","s":"","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2022,"r":"Luphoko Village South Africa","a":123400,"p":"Donation and installation of 120 hydropanels","c":"","s":"","e":"","o":"202421239349100802","record_type":"named_recipient"},{"y":2023,"r":"RACE TO ERASE MS","a":2000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"RESURRECTION CATHOLIC SCHOOL","a":65000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"LA RAMS FOUNDATION","a":15000,"p":"CHARITABLE","c":"AGOURA HILLS","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS","a":50000,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"SOUTH AFRICAN MEDICAL RESEARCH COUNCIL","a":1104760,"p":"BUILDING A VACCINE R&D AND MANUFACTURING WORKFORCE FOR AFRICA","c":"","s":"","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Bank of America Charitable Gift Fund","a":3500000,"p":"CHARITABLE","c":"Boston","s":"MA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"El Segundo Education Foundation","a":20000,"p":"CHARITABLE","c":"El Segundo","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Children's Hospital Los Angeles","a":20000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Committee to Protect Journalist","a":20000,"p":"CHARITABLE","c":"NEW YORK","s":"NY","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Doctors Without Borders","a":100000,"p":"CHARITABLE","c":"SANTA MONICA","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"GASOL FOUNDATION","a":100000,"p":"CHARITABLE","c":"Los Angeles","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"HARVARD WESTLAKE HIGH SCHOOL","a":10000,"p":"CHARITABLE","c":"STUDIO CITY","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Int'l Center for Journalists","a":9500,"p":"CHARITABLE","c":"WASHINGTON","s":"DC","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Jordan River Foundation","a":1000000,"p":"CHARITABLE","c":"","s":"","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Marymount High School","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Tsinghua Education Foundation N A Inc","a":666667,"p":"CHARITABLE","c":"Milpitas","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"St Martin of Tours","a":80000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Stanford University","a":10000,"p":"CHARITABLE","c":"STANFORD","s":"CA","e":"","o":"202542779349100304","record_type":"named_recipient"},{"y":2023,"r":"Teton Village Special Fire Dist","a":5000,"p":"CHARITABLE","c":"TETON VILLAGE","s":"WY","e":"","o":"202542779349100304","record_type":"named_recipient"}]};window.LEDGER_MERGES=["BANK OF AMERICA CHARITABLE GIFT FUND","MARYMOUNT HIGH SCHOOL","ST MARTIN OF TOURS","STANFORD UNIVERSITY"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"BANK OF AMERICA CHARITABLE GIFT FUND":"Nonprofit capacity & transitions","Bank of America Charitable Gift Fund":"Nonprofit capacity & transitions","GASOL FOUNDATION":"Nonprofit capacity & transitions","THE PEOPLE CONCERN":"Basic needs & response","JAIN FAMILY INSTITUTE":"Education & youth","BEAUTY BUS FOUNDATION":"Health & wellbeing","GAIA VACCINE FOUNDATION":"Health & wellbeing","Jordan River Foundation":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

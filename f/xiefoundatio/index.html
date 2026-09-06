@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="XIEFOUNDAT_DATA" data-slug="xiefoundatio" data-n="56" data-grand="138675463" data-recsub="All five years" data-running="to the dollar, five years running." data-names="16 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="XIEFOUNDAT_DATA" data-slug="xiefoundatio" data-n="56" data-grand="138675463" data-recsub="All five years" data-running="to the dollar, five years running." data-names="16 as-filed names" data-rows-embedded="56" data-rows-total="56">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 56 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">16</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $138,675,463, equals Part I line 25(d), $138,675,463 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.XIEFOUNDAT_DATA={"meta":{"foundation":"Xie Foundation","ein":"27-1208110","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":56,"grand_total":138675463,"tieout":{"2020":{"object_id":"202113029349100541","grant_count":7,"grant_sum":12932820,"line25_col_d":12932820,"status":"PASS"},"2021":{"object_id":"202233059349101733","grant_count":9,"grant_sum":27513514,"line25_col_d":27513514,"status":"PASS"},"2022":{"object_id":"202313109349101621","grant_count":14,"grant_sum":24948415,"line25_col_d":24948415,"status":"PASS"},"2023":{"object_id":"202403189349103835","grant_count":13,"grant_sum":35368429,"line25_col_d":35368429,"status":"PASS"},"2024":{"object_id":"202513099349101821","grant_count":13,"grant_sum":37912285,"line25_col_d":37912285,"status":"PASS"}}},"grants":[{"y":2020,"r":"Stanford University Medical Center","a":522820,"p":"General Purpose.","c":"Redwood City","s":"CA","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"Sacred Heart Schools","a":30000,"p":"Capital Campaign.","c":"Atherton","s":"CA","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"Committee 100 Covid Relief Fund","a":20000,"p":"General Purpose.","c":"New York","s":"NY","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"Leland Stanford Junior University","a":165301,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"Leland Stanford Junior University","a":11984699,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"Harvard University","a":200000,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2020,"r":"New York University","a":10000,"p":"General Purpose.","c":"New York","s":"NY","e":"","o":"202113029349100541","record_type":"named_recipient"},{"y":2021,"r":"Sacred Heart Schools","a":100000,"p":"General Purpose.","c":"Atherton","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Committee of 100 Inc","a":3500,"p":"General Purpose.","c":"New York","s":"NY","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Leland Stanford Junior University","a":6322200,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Leland Stanford Junior University","a":9121050,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Leland Stanford Junior University","a":1345264,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Harvard University","a":200000,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"UC Berkeley Foundation","a":200000,"p":"General Purpose.","c":"Berkeley","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Stanford University","a":50000,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2021,"r":"Leland Stanford Junior University","a":10171500,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202233059349101733","record_type":"named_recipient"},{"y":2022,"r":"Pinewood School","a":70000,"p":"General Purpose.","c":"Los Altos","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":2403234,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":336150,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"President and Fellows of Harvard Un","a":1179,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":517310,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"President and Fellows of Harvard Un","a":198821,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"UC Berkeley Foundation","a":205467,"p":"General Purpose.","c":"Berkeley","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":5602500,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":6188050,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":6629400,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Monterey Peninsula Foundation","a":1916340,"p":"General Purpose.","c":"Monterey","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"American Junior Golf Association","a":200000,"p":"General Purpose.","c":"Braselton","s":"GA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Kiss Institute for Practical Roboti","a":50000,"p":"General Purpose.","c":"Norman","s":"OK","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2022,"r":"Stanford University","a":629964,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202313109349101621","record_type":"named_recipient"},{"y":2023,"r":"Pinewood School","a":50000,"p":"General Purpose.","c":"Los Altos","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Sacred Heart Schools","a":100645,"p":"General Purpose.","c":"Atherton","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Stanford University","a":11174850,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Stanford University","a":15216764,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"New York University","a":30000,"p":"General Purpose.","c":"New York","s":"NY","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Stanford University","a":4817662,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"President and Fellows of Harvard Un","a":2071569,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"UC Berkeley Foundation","a":202589,"p":"General Purpose.","c":"Berkeley","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Stanford University","a":50000,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Monterey Peninsula Foundation","a":1029350,"p":"General Purpose.","c":"Monterey","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"American Junior Golf Association","a":250000,"p":"General Purpose.","c":"Braselton","s":"GA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"Kiss Institute for Practical Roboti","a":275000,"p":"General Purpose.","c":"Norman","s":"OK","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2023,"r":"UC Santa Cruz Foundation","a":100000,"p":"General Purpose.","c":"Santa Cruz","s":"CA","e":"","o":"202403189349103835","record_type":"named_recipient"},{"y":2024,"r":"Pinewood School","a":60000,"p":"General Purpose.","c":"Los Altos","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Pinewood School","a":2530149,"p":"General Purpose.","c":"Los Altos","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Stanford University","a":19782860,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Stanford University","a":11925388,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"President and Fellows of Harvard Un","a":2452800,"p":"General Purpose.","c":"Boston","s":"MA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Fortinet Inc 127633 sh","a":74655,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"UC Berkeley Foundation","a":187700,"p":"General Purpose.","c":"Berkeley","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Stanford University","a":50000,"p":"General Purpose.","c":"Stanford","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"American Junior Golf Association","a":200000,"p":"General Purpose.","c":"Braselton","s":"GA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Kiss Institute for Practical Roboti","a":225000,"p":"General Purpose.","c":"Norman","s":"OK","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"UC Santa Cruz Foundation","a":100000,"p":"General Purpose.","c":"Santa Cruz","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"UC Berkeley Foundation","a":100000,"p":"General Purpose.","c":"Berkeley","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"},{"y":2024,"r":"Pinewood School","a":223733,"p":"General Purpose.","c":"Los Altos","s":"CA","e":"","o":"202513099349101821","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

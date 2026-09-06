@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="BARBARABRU_DATA" data-slug="barbarabrunc" data-n="64" data-grand="61405000" data-recsub="All four years" data-running="to the dollar, four years running." data-names="31 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="BARBARABRU_DATA" data-slug="barbarabrunc" data-n="64" data-grand="61405000" data-recsub="All four years" data-running="to the dollar, four years running." data-names="31 as-filed names" data-rows-embedded="64" data-rows-total="64">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 / 4 years reconcile · Δ $0</div>
+  <div class="side-foot">4 of 4 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4/4 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 64 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">31</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $61,405,000, equals Part I line 25(d), $61,405,000 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -414,7 +422,8 @@
 </div>
 <script>
 window.BARBARABRU_DATA={"meta":{"foundation":"Barbara Brunckhorst Foundation","ein":"86-6502564","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2022,2023,2024],"grant_count":64,"grand_total":61405000,"tieout":{"2021":{"object_id":"202212999349100306","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202322569349100822","grant_count":27,"grant_sum":19980000,"line25_col_d":19980000,"status":"PASS"},"2023":{"object_id":"202412899349100011","grant_count":19,"grant_sum":18205000,"line25_col_d":18205000,"status":"PASS"},"2024":{"object_id":"202512849349100801","grant_count":18,"grant_sum":23220000,"line25_col_d":23220000,"status":"PASS"}}},"grants":[{"y":2022,"r":"Alliance for Open Society Int'l","a":50000,"p":"General Purpose unless otherwise stated","c":"New York","s":"NY","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"American Red Cross","a":50000,"p":"General Purpose unless otherwise stated","c":"Washington","s":"DC","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Capital Region Land Conservancy","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Chesapeake Bay Foundation","a":200000,"p":"General Purpose unless otherwise stated","c":"Annapolis","s":"MD","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Conservation Fund","a":400000,"p":"General Purpose unless otherwise stated","c":"Arlington","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Dogwood Alliance","a":50000,"p":"General Purpose unless otherwise stated","c":"Asheville","s":"NC","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Earth Justice","a":500000,"p":"General Purpose unless otherwise stated","c":"San Francisco","s":"CA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Environmental Defense Fund","a":250000,"p":"General Purpose unless otherwise stated","c":"New York","s":"NY","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Environmental Law Alliance Worldwid","a":75000,"p":"General Purpose unless otherwise stated","c":"Eugene","s":"OR","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Espanola Humane","a":75000,"p":"General Purpose unless otherwise stated","c":"Espanola","s":"NM","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"James River Association","a":75000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Naral-Pro-Choice Virginia Foundatio","a":75000,"p":"General Purpose unless otherwise stated","c":"Alexandria","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Partnership for Smarter Growth","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Partnership Project Inc","a":75000,"p":"General Purpose unless otherwise stated","c":"Washington","s":"DC","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Planned Parenthood of Greater Texas","a":75000,"p":"General Purpose unless otherwise stated","c":"Dallas","s":"TX","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Richmond Animal Welfare Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Rockefeller Philanthropy Advisors","a":100000,"p":"General Purpose unless otherwise stated","c":"New York","s":"NY","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Sierra Club Foundation","a":1300000,"p":"General Purpose unless otherwise stated","c":"Oakland","s":"CA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Southern Environmental Law Center","a":600000,"p":"General Purpose unless otherwise stated","c":"Charlottesville","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Southwestern Medical Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Dallas","s":"TX","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Tramp's Rescue","a":30000,"p":"General Purpose unless otherwise stated","c":"Bowling Green","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Tri Country Animal Rescue","a":375000,"p":"General Purpose unless otherwise stated","c":"Boca Raton","s":"FL","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Union of Concerned Scientists","a":75000,"p":"General Purpose unless otherwise stated","c":"Cambridge","s":"MA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"VIMS Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Gloucester Point","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"VCU School of Medicine","a":15000000,"p":"To Fund the Liver Institute and Endow two Chairs.","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Wildlife Center of Virginia","a":100000,"p":"General Purpose unless otherwise stated","c":"Waynesboro","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2022,"r":"Virginia Conservation Network","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202322569349100822","record_type":"named_recipient"},{"y":2023,"r":"Capital Region Land Conservancy","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Dogwood Alliance","a":50000,"p":"General Purpose unless otherwise stated","c":"Asheville","s":"NC","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Environmental Law Alliance Worldwid","a":75000,"p":"General Purpose unless otherwise stated","c":"Eugene","s":"OR","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Espanola Humane","a":75000,"p":"General Purpose unless otherwise stated","c":"Espanola","s":"NM","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"James River Association","a":75000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Naral-Pro-Choice Virginia Foundatio","a":75000,"p":"General Purpose unless otherwise stated","c":"Alexandria","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Partnership for Smarter Growth","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Partnership Project Inc","a":75000,"p":"General Purpose unless otherwise stated","c":"Washington","s":"DC","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Planned Parenthood of Greater Texas","a":75000,"p":"General Purpose unless otherwise stated","c":"Dallas","s":"TX","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Richmond Animal Welfare Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Rockefeller Philanthropy Advisors","a":100000,"p":"General Purpose unless otherwise stated","c":"New York","s":"NY","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Tramp's Rescue","a":30000,"p":"General Purpose unless otherwise stated","c":"Bowling Green","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Tri Country Animal Rescue","a":25000,"p":"General Purpose unless otherwise stated","c":"Boca Raton","s":"FL","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Union of Concerned Scientists","a":75000,"p":"General Purpose unless otherwise stated","c":"Cambridge","s":"MA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"VIMS Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Gloucester Point","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"VCU School of Medicine","a":17000000,"p":"To Fund the Liver Institute and Endow two Chairs.","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Wildlife Center of Virginia","a":100000,"p":"General Purpose unless otherwise stated","c":"Waynesboro","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"Virginia Conservation Network","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2023,"r":"AASLD","a":25000,"p":"General Purpose unless otherwise stated","c":"Alexandria","s":"VA","e":"","o":"202412899349100011","record_type":"named_recipient"},{"y":2024,"r":"Capital Region Land Conservancy","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Dogwood Alliance","a":50000,"p":"General Purpose unless otherwise stated","c":"Asheville","s":"NC","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Environmental Law Alliance Worldwid","a":75000,"p":"General Purpose unless otherwise stated","c":"Eugene","s":"OR","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Espanola Humane","a":90000,"p":"General Purpose unless otherwise stated","c":"Espanola","s":"NM","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"James River Association","a":75000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"REPRO-Rising Virginia Foundation","a":75000,"p":"General Purpose unless otherwise stated","c":"Alexandria","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Partnership for Smarter Growth","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Partnership Project Inc","a":75000,"p":"Equitable & Just Nat'l Climate Forum","c":"Washington","s":"DC","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Planned Parenthood of Greater Texas","a":75000,"p":"General Purpose unless otherwise stated","c":"Dallas","s":"TX","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Richmond Animal Welfare Foundation","a":100000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Rockefeller Philanthropy Advisors","a":100000,"p":"Just Transition Fund","c":"New York","s":"NY","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Tramp's Rescue","a":30000,"p":"General Purpose unless otherwise stated","c":"Bowling Green","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Union of Concerned Scientists","a":75000,"p":"General Purpose unless otherwise stated","c":"Cambridge","s":"MA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"VA Institute Marine Science Foundat","a":100000,"p":"General Purpose unless otherwise stated","c":"Gloucester Point","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"VCU School of Medicine","a":22000000,"p":"To Fund the Liver Institute and Endow two Chairs.","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Wildlife Center of Virginia","a":100000,"p":"General Purpose unless otherwise stated","c":"Waynesboro","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"Virginia Conservation Network","a":50000,"p":"General Purpose unless otherwise stated","c":"Richmond","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"},{"y":2024,"r":"American Assoc Study of Liver Disea","a":50000,"p":"General Purpose unless otherwise stated","c":"Alexandria","s":"VA","e":"","o":"202512849349100801","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

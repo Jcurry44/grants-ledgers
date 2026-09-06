@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="HOGANFAMIL_DATA" data-slug="hoganfamilyf" data-n="72" data-grand="814731" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="HOGANFAMIL_DATA" data-slug="hoganfamilyf" data-n="72" data-grand="814731" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names" data-rows-embedded="72" data-rows-total="72">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 72 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">44</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $814,731, equals Part I line 25(d), $814,731 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.HOGANFAMIL_DATA={"meta":{"foundation":"Hogan Family Foundation","ein":"36-4254944","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2019,2020,2021,2022,2023],"grant_count":72,"grand_total":814731,"tieout":{"2019":{"object_id":"202132289349101003","grant_count":7,"grant_sum":31436,"line25_col_d":31436,"status":"PASS"},"2020":{"object_id":"202212249349100331","grant_count":11,"grant_sum":58840,"line25_col_d":58840,"status":"PASS"},"2021":{"object_id":"202312249349100401","grant_count":19,"grant_sum":203425,"line25_col_d":203425,"status":"PASS"},"2022":{"object_id":"202402289349100000","grant_count":20,"grant_sum":429030,"line25_col_d":429030,"status":"PASS"},"2023":{"object_id":"202502089349100150","grant_count":15,"grant_sum":92000,"line25_col_d":92000,"status":"PASS"}}},"grants":[{"y":2019,"r":"ANIMAL SERVICE FOUNDATION OF VENTURA COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"VENTURA COUNTY SHERIFF","a":1000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"CHILDREN'S SERVICE AUXILIARY VENTURA COUNTY","a":5000,"p":"GENERAL SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"NAMI VENTURA COUNTY","a":5150,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"SAFE PASSAGE YOUTH FOUNDATON","a":9286,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"THE SALVATION ARMY","a":5000,"p":"GENERAL SUPPORT","c":"LONG BEACH","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2019,"r":"SENIOR CONCERNS","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202132289349101003","record_type":"named_recipient"},{"y":2020,"r":"HOSPICE OF THE CONEJO","a":8000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"CABRILLO MUSIC THEATRE INC","a":20000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"MOVE AMERICA FORWARD","a":1840,"p":"GENERAL SUPPORT","c":"SACRAMENTO","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"BRO ROBERT JUENEMANN-THE MARIANIST COMMUNITY","a":1000,"p":"GENERAL SUPPORT","c":"WEST HILLS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"WESTLAKE WOMEN'S CLUB","a":1000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"CROSSING GUARDIANS","a":6000,"p":"GENERAL SUPPORT","c":"CHULA VISTA","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"NAMI VENTURA COUNTY","a":5000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"SENIOR CONCERNS","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"EASTWOOD RANCH FOUNDATION","a":5000,"p":"GENERAL SUPPORT","c":"AGOURA HILLS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"COLTON PARKS & RECREATION FOUNDATION","a":1000,"p":"GENERAL SUPPORT","c":"COLTON","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2020,"r":"CONEJO FREE CLINIC","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202212249349100331","record_type":"named_recipient"},{"y":2021,"r":"ASSETS SCHOOL","a":10000,"p":"GENERAL SUPPORT","c":"HONOLULU","s":"HI","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"ASSISTANCE DOGS OF HAWAII","a":10000,"p":"GENERAL SUPPORT","c":"MAKAWAO","s":"HI","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"BASIC NEEDS FOUNDATION","a":2000,"p":"GENERAL SUPPORT","c":"HARBOR CITY","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"CABRILLO MUSIC THEATRE","a":20000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"CHIHUAHUAS OF THE VALLEY","a":925,"p":"GENERAL SUPPORT","c":"NEWBURY PARK","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"CHILDREN'S SERVICES AUXILIARY VENTURA","a":7000,"p":"GENERAL SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY CONSCIENCE","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"CONEJO OAKS SYMPHONY","a":5000,"p":"GENERAL SUPPORT","c":"NEWBURY PARK","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"CROSSING GUARDIANS","a":10000,"p":"GENERAL SUPPORT","c":"CHULA VISTA","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"DELANEY'S DOG","a":500,"p":"GENERAL SUPPORT","c":"VAN NUYS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"HOSPICE OF THE CONEJO","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"MARY HEALTH OF THE SICK CONVALESCENT","a":1500,"p":"GENERAL SUPPORT","c":"NEWBURY PARK","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"MERCY MEDICAL ANGELS","a":100000,"p":"GENERAL SUPPORT","c":"NORFOLK","s":"VA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"NAMI VENTURA COUNTY","a":7500,"p":"GENERAL SUPPORT","c":"CA","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"OPCA SHELTER NETWORK ALLIANCE","a":1500,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"SAFE PASSAGE YOUTH FOUNDATON","a":10000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"THE RONALD REAGAN PRESIDENTIAL FOUNDATION","a":5500,"p":"GENERAL SUPPORT","c":"SIMI VALLEY","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"WESTLAKE WOMEN'S CLUB","a":1000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2021,"r":"WORKIN WHISKERS INC","a":1000,"p":"GENERAL SUPPORT","c":"HEMET","s":"CA","e":"","o":"202312249349100401","record_type":"named_recipient"},{"y":2022,"r":"ALFIES KITTEN RESCUE","a":2000,"p":"GENERAL SUPPORT","c":"HUNTINGTON BEACH","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"ASSETS SCHOOL","a":15000,"p":"GENERAL SUPPORT","c":"HONOLULU","s":"HI","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"ASSISTANCE DOGS OF HAWAII","a":20000,"p":"GENERAL SUPPORT","c":"MAKAWAO","s":"HI","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"BOYS & GIRLS CLUB OF GREATER CONEJO VALLEY","a":1000,"p":"GENERAL SUPPORT","c":"WESTLAKE VILLAGE","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"CABRILLO MUSIC THEATRE","a":1030,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S SERVICES AUXILIARY VENTURA","a":250000,"p":"GENERAL SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"CONEJO FREE CLINIC","a":2000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"CONEJO OAKS SYMPHONY","a":2000,"p":"GENERAL SUPPORT","c":"NEWBURY PARK","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"CROSSING GUARDIANS","a":8000,"p":"GENERAL SUPPORT","c":"CHULA VISTA","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS UNITED IN RESCUE","a":2000,"p":"GENERAL SUPPORT","c":"CHICO","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"HOSPICE OF THE CONEJO VALLEY","a":2000,"p":"GENERAL SUPPORTGENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"MARY HEALTH OF THE SICK CONVALESCENT","a":2000,"p":"GENERAL SUPPORT","c":"NEWBURY PARK","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"MAUI HUMANE SOCIETY","a":50000,"p":"GENERAL SUPPORT","c":"PUUNENE","s":"HI","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"NAMI VENTURA COUNTY","a":10000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"SAFE PASSAGE YOUTH FOUNDATON","a":6000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"SENIOR CONCERNS","a":10000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"TEACH SCHOLARS NIGHT","a":10000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"THE RONALD REAGAN PRESIDENTIAL FOUNDATION","a":30000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"WESTLAKE WOMEN CLUB","a":1000,"p":"GENERAL SUPPORT","c":"WESTLAKE VILLAGE","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2022,"r":"WHITE HEART FOUNDATION","a":5000,"p":"GENERAL SUPPORT","c":"AGOURA HILLS","s":"CA","e":"","o":"202402289349100000","record_type":"named_recipient"},{"y":2023,"r":"ASSETS SCHOOL","a":20000,"p":"GENERAL SUPPORT","c":"HONOLULU","s":"HI","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"CONEJO FREE CLINIC","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"CROSSING GUARDIANS","a":13000,"p":"GENERAL SUPPORT","c":"CHULA VISTA","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"HOSPICE OF THE CONEJO VALLEY","a":3500,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"SAFE PASSAGE YOUTH FOUNDATON","a":5000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"SENIOR CONCERNS","a":10000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"TEACH SCHOLARS NIGHT","a":10000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"WESTLAKE WOMEN CLUB","a":1000,"p":"GENERAL SUPPORT","c":"WESTLAKE VILLAGE","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"MAKE-A-WISH HAWAII","a":10000,"p":"GENERAL SUPPORT","c":"HONOLULU","s":"HI","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"PEACEFULL VALLEY DONKEY RESCUE","a":10000,"p":"GENERAL SUPPORT","c":"SAN ANGELO","s":"TX","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"SUNRISE ROTARY FOUNDATION","a":1000,"p":"GENERAL SUPPORT","c":"THOUSAND OAKS","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"TWO HANDS FOUR PAWS FOUNDATION","a":500,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"VENTURA COUNTY ANIMAL REGULATION","a":1000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"VENTURA COUNTY SHERIFF FOUNDATION","a":1000,"p":"GENERAL SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"},{"y":2023,"r":"VENTURA COUNTY SHERIFF'S K-9 FOUNDATION","a":1000,"p":"GENERAL SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202502089349100150","record_type":"named_recipient"}]};window.LEDGER_MERGES=["CABRILLO MUSIC THEATRE"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

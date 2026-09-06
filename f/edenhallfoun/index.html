@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="EDENHALLFO_DATA" data-slug="edenhallfoun" data-n="3" data-grand="36430093" data-recsub="All five years" data-running="to the dollar, five years running." data-names="2 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="EDENHALLFO_DATA" data-slug="edenhallfoun" data-n="4" data-grand="49390234" data-recsub="All five years" data-running="to the dollar, five years running." data-names="3 as-filed names" data-rows-embedded="4" data-rows-total="4">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,10 +7,10 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex, nofollow">
 <title>Eden Hall Foundation — Grants Ledger · 990-PF</title>
-<meta name="description" content="Every grant Eden Hall Foundation reported in its Form 990-PF grants-paid schedule, 2020–2024 — 3 filed rows, $36,430,093, reconciling to Part XIV, line 3a to the dollar. An independent presentation built from public IRS filings.">
+<meta name="description" content="Every grant Eden Hall Foundation reported in its Form 990-PF grants-paid schedule, 2020–2024 — 4 filed rows, $49,390,234, reconciling to Part XIV, line 3a to the dollar. An independent presentation built from public IRS filings.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Eden Hall Foundation — Grants Ledger">
-<meta property="og:description" content="3 filed rows · $36,430,093 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
+<meta property="og:description" content="4 filed rows · $49,390,234 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
 <!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
 <meta property="og:image" content="https://HOST/PATH/og-card.png">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -45,7 +45,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -82,16 +82,16 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
       <div class="grand">
         <div class="g-label">Awarded · five filed years</div>
-        <div class="g-val" id="kpi-total">$36,430,093</div>
+        <div class="g-val" id="kpi-total">$49,390,234</div>
         <div class="g-rule" aria-hidden="true"></div>
-        <div class="g-sub"><span class="tick">✓</span> 3 filed rows paid out · sum equals the filed totals, every year</div>
+        <div class="g-sub"><span class="tick">✓</span> 4 filed rows paid out · sum equals the filed totals, every year</div>
         <div class="g-scope" id="g-scope" hidden></div>
       </div>
     </div>
@@ -105,12 +105,17 @@
     <div class="kpi">
       <div class="k-label">Recipients</div>
       <div class="k-val" id="kpi-orgs">0</div>
-      <div class="k-hint">Organizations the foundation funded · 2 as-filed names</div>
+      <div class="k-hint">Organizations the foundation funded · 3 as-filed names</div>
     </div>
     <div class="kpi">
       <div class="k-label">Median grant</div>
       <div class="k-val" id="kpi-median">—</div>
-      <div class="k-hint">Across all 3 filed rows</div>
+      <div class="k-hint">Across all 4 filed rows</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
     </div>
     <div class="kpi">
       <div class="k-label">Latest year</div>
@@ -118,11 +123,13 @@
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">0</span></button>
-    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">3</span></button>
+    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">4</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
 
@@ -131,13 +138,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -165,30 +174,28 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
-        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $36,430,093, equals Part XIV, line 3a, $36,430,093 — a difference of zero dollars, verified.">
-          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$36,430,093</span></span>
+        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $49,390,234, equals Part XIV, line 3a, $49,390,234 — a difference of zero dollars, verified.">
+          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$49,390,234</span></span>
           <span class="eq-op">=</span>
-          <span class="eq-part"><span class="eq-label">Part XIV, line 3a</span><span class="eq-val" id="eq-b">$36,430,093</span></span>
+          <span class="eq-part"><span class="eq-label">Part XIV, line 3a</span><span class="eq-val" id="eq-b">$49,390,234</span></span>
           <span class="eq-seal" aria-hidden="true">Δ $0 ✓</span>
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -271,6 +278,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -278,7 +286,8 @@
               <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
               <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
               <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-                  <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
+                <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
+              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
             </div>
           </div>
         </div>
@@ -326,7 +335,7 @@
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2021</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$10,437,800</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$10,437,800</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$18,571,800</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$13,360,800</strong></div><div class="tc-row"><span>Difference</span><strong>−$5,211,000</strong></div></div>
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$12,960,141</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$12,960,141</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
-          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$14,702,453</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$14,702,453</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div></div><p>This ledger does not explain the difference, because the filings do not; it shows both filed numbers.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $36,430,093 of the $36,430,093 here (100%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$14,702,453</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$14,702,453</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div></div><p>This ledger does not explain the difference, because the filings do not; it shows both filed numbers.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $49,390,234 of the $49,390,234 here (100%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
         <h3>Source</h3>
         <p>
           IRS TEOS public 990-PF e-file XML for EIN <code>25-1384468</code> —
@@ -425,8 +434,9 @@
   </div>
 </div>
 <script>
-window.EDENHALLFO_DATA={"meta":{"foundation":"Eden Hall Foundation","ein":"25-1384468","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2024],"grant_count":3,"grand_total":36430093,"tieout":{"2020":{"object_id":"202113099349100106","grant_count":1,"grant_sum":11289840,"line25_col_d":11289840,"status":"PASS"},"2021":{"object_id":"202241869349100514","grant_count":1,"grant_sum":10437800,"line25_col_d":10437800,"status":"PASS"},"2022":{"object_id":"202343199349103949","grant_count":0,"grant_sum":18571800,"line25_col_d":18571800,"status":"PASS"},"2023":{"object_id":"202402359349100400","grant_count":0,"grant_sum":12960141,"line25_col_d":12960141,"status":"PASS"},"2024":{"object_id":"202502639349100400","grant_count":1,"grant_sum":14702453,"line25_col_d":14702453,"status":"PASS"}}},"grants":[{"y":2020,"r":"SEE ATTACHED","a":11289840,"p":"VARIOUS","c":"","s":"","e":"","o":"202113099349100106","record_type":"unitemized"},{"y":2021,"r":"SEE ATTACHED","a":10437800,"p":"VARIOUS","c":"","s":"","e":"","o":"202241869349100514","record_type":"unitemized"},{"y":2024,"r":"VARIOUS SEE ATTACHMENT","a":14702453,"p":"Grant payments made in 2024","c":"","s":"","e":"","o":"202502639349100400","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+window.EDENHALLFO_DATA={"meta":{"foundation":"Eden Hall Foundation","ein":"25-1384468","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2023,2024],"grant_count":4,"grand_total":49390234,"tieout":{"2020":{"object_id":"202113099349100106","grant_count":1,"grant_sum":11289840,"line25_col_d":11289840,"status":"PASS"},"2021":{"object_id":"202241869349100514","grant_count":1,"grant_sum":10437800,"line25_col_d":10437800,"status":"PASS"},"2022":{"object_id":"202343199349103949","grant_count":0,"grant_sum":18571800,"line25_col_d":18571800,"status":"PASS"},"2023":{"object_id":"202402359349100400","grant_count":1,"grant_sum":12960141,"line25_col_d":12960141,"status":"PASS"},"2024":{"object_id":"202502639349100400","grant_count":1,"grant_sum":14702453,"line25_col_d":14702453,"status":"PASS"}}},"grants":[{"y":2020,"r":"SEE ATTACHED","a":11289840,"p":"VARIOUS","c":"","s":"","e":"","o":"202113099349100106","record_type":"unitemized"},{"y":2021,"r":"SEE ATTACHED","a":10437800,"p":"VARIOUS","c":"","s":"","e":"","o":"202241869349100514","record_type":"unitemized"},{"y":2024,"r":"VARIOUS SEE ATTACHMENT","a":14702453,"p":"Grant payments made in 2024","c":"","s":"","e":"","o":"202502639349100400","record_type":"unitemized"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":12960141,"p":"","c":"","s":"","e":"","o":"202402359349100400","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

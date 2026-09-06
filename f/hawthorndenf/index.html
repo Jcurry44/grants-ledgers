@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="HAWTHORNDE_DATA" data-slug="hawthorndenf" data-n="99" data-grand="12504506" data-recsub="All five years" data-running="to the dollar, five years running." data-names="82 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="HAWTHORNDE_DATA" data-slug="hawthorndenf" data-n="99" data-grand="12504506" data-recsub="All five years" data-running="to the dollar, five years running." data-names="82 as-filed names" data-rows-embedded="99" data-rows-total="99">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 99 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">78</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $12,504,506, equals Part XIV, line 3a, $12,504,506 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.HAWTHORNDE_DATA={"meta":{"foundation":"Hawthornden Foundation","ein":"52-1324746","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":99,"grand_total":12504506,"tieout":{"2020":{"object_id":"202131339349102033","grant_count":1,"grant_sum":19451,"line25_col_d":19451,"status":"PASS"},"2021":{"object_id":"202221269349100922","grant_count":4,"grant_sum":2241255,"line25_col_d":2241255,"status":"PASS"},"2022":{"object_id":"202343119349101714","grant_count":3,"grant_sum":2142650,"line25_col_d":2142650,"status":"PASS"},"2023":{"object_id":"202433199349103283","grant_count":48,"grant_sum":5632000,"line25_col_d":5632000,"status":"PASS"},"2024":{"object_id":"202503149349101010","grant_count":43,"grant_sum":2469150,"line25_col_d":2469150,"status":"PASS"}}},"grants":[{"y":2020,"r":"JOHN MCCULLOUGH","a":19451,"p":"HAWTHORNDEN PRIZE FOR LITERATURE - ACHIEVEMENT AWARD","c":"","s":"","e":"","o":"202131339349102033","record_type":"named_recipient"},{"y":2021,"r":"NAOISE DOLAN CO HAWTHORNDEN CASTLE","a":21255,"p":"HAWTHORNDEN PRIZE FOR LITERATURE - ACHIEVEMENT AWARD","c":"","s":"","e":"","o":"202221269349100922","record_type":"named_recipient"},{"y":2021,"r":"JLF COLORADO","a":20000,"p":"TO SUPPORT PRODUCTION COSTS OF THE JAIPUR LITERARY FESTIVAL","c":"BOULDER","s":"CO","e":"","o":"202221269349100922","record_type":"named_recipient"},{"y":2021,"r":"COUNCIL OF LITERARY MAGAZINES","a":1100000,"p":"EXPAND REGRANTS PROGRAM BY PROVIDING FUNDS TO LITERARY MAGAZINES AND PRESSES TO SUPPORT PROJECTS THAT BUILD THEIR ORGANIZATIONAL CAPACITY, THEREBY SECURING THEIR FUTURE,AUGMENT COLLECTION OF DIGITAL OFFERING TO COMPLEMENT REGRANTS PROGRAM, PROVIDING PUBLISHERS WITH THE RESOURCES THEY NEED TO THRIVE IN A COMPLEX, INCREASINGLY COMMERCIAL MARKETPLACE; ANDADD CASH PRIZES TO THE FIRECRACKER AWARDS, RAISING THE VISIBILITY OF THIS SINGULAR PROGRAM AND SHINING A BRIGHTER LIGHT ON THOSE PUBLISHERS THAT SERVE AS MODELS FOR EXCELLENCE IN THEIR PUBLISHING PRACTICES.","c":"NEW YORK","s":"NY","e":"","o":"202221269349100922","record_type":"named_recipient"},{"y":2021,"r":"THE ACADEMY OF AMERICAN POETS","a":1100000,"p":"TO EXPAND REGRANTING PROGRAM TO INCLUDE A NEW OPPORTUNITY THAT WILL AWARD REGRANTS OF $5,000, $10,000, $25,000, OR $50,000 TO AT LEAST 50 TO 75 LITERARY ORGANIZATIONS' IN SUPPORT OF THEIR CAPACITY BUILDING INITIATIVES.","c":"NEW YORK","s":"NY","e":"","o":"202221269349100922","record_type":"named_recipient"},{"y":2022,"r":"CHARITIES AID FOUNDATION AMERICA","a":2100000,"p":"TO ORGANIZATIONS SUPPORTING THE LITERARY ARTS.","c":"ALEXANDRIA","s":"VA","e":"","o":"202343119349101714","record_type":"named_recipient"},{"y":2022,"r":"JLF COLORADO","a":35000,"p":"TO SUPPORT PRODUCTION COSTS OF THE JAIPUR LITERARY FESTIVAL","c":"BOULDER","s":"CO","e":"","o":"202343119349101714","record_type":"named_recipient"},{"y":2022,"r":"THE CENTER FOR FICTION","a":7650,"p":"GENERAL CONTRIBUTION","c":"BROOKLYN","s":"NY","e":"","o":"202343119349101714","record_type":"named_recipient"},{"y":2023,"r":"826 NATIONAL","a":40000,"p":"LITERARY ARTS SUPPORT.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"A PUBLIC SPACE LITERARY PROJECTS INC","a":150000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ACTION FOR HOPE","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"","s":"","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ARCHIPELAGO BOOKS","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ART OMI INC","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"GHENT","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"MEXICAN CULTURAL INSTITUTE OF NEW YORK","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"BALDWIN FOR THE ARTS INC","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"BROOKLYN BOOK FESTIVAL","a":30000,"p":"TO SUPPORT PRODUCTION COSTS OF THE BROOKYLN BOOK FESTIVAL","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"BROOKLYN COLLEGE FOUNDATION INC","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"BROOKLYN POETS","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"BROOKLYN RAIL","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ARIZONA STATE UNIVERSITY'S PIPER CENTER FOR CREATIVE WRITING","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"TEMPE","s":"AZ","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"CAVE CANEM FOUNDATION INC","a":150000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"CENTER FOR THE ART OF TRANSLATION","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"CHARITIES AID FOUNDATION AMERICA","a":1295000,"p":"TO ORGANIZATIONS SUPPORTING THE LITERARY ARTS.","c":"ALEXANDRIA","s":"VA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"CITY OF ASYLUM","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"PITTSBURGH","s":"PA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY OF LITERARY MAGAZINES AND PRESSES","a":500000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY REVITALIZATION PARTNERSHIP INC","a":15000,"p":"TO ORGANIZATIONS SUPPORTING THE LITERARY ARTS.","c":"JAMAICA","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"COPPER CANYON PRESS","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"PORT TOWNSEND","s":"WA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA WRITERS INC","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"KENNESAW","s":"GA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"GRAYWOLF PRESS","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"MINNEAPOLIS","s":"MN","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"HAY FESTIVAL FOUNDATION LTD","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"","s":"","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"JLF COLORADO","a":108000,"p":"LITERARY ARTS SUPPORT.","c":"BOULDER","s":"CO","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"KUNDIMAN INC 113 WEST 60TH ST","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"MERCANTILE LIBRARY ASSOCIATION OF THE CITY OF NEW YORK","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"MOLESKINE FOUNDATION INC","a":150000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"MUSLIMS FOR PROGRESSIVE VALUES","a":100000,"p":"LITERARY ARTS SUPPORT.","c":"LOS ANGELES","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL BOOK FOUNDATION","a":500000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"NEW YORK UNIVERSITY","a":24000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"NY WRITERS COALITION","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE UNIVERSITY OF MISSISSIPPI","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"UNIVERSITY","s":"MS","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE ARTS AREA","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"ONTARIO","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"POETRY SOCIETY OF AMERICA","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"PRINCE CLAUS FUND","a":330000,"p":"LITERARY ARTS SUPPORT.","c":"","s":"","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"RESEARCH FOUNDATION OF THE CITY","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ROYAL SHAKESPEARE COMPANY AMERICA INC","a":500000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"SOUTH ASIA SPEAKS","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"DOVER","s":"DE","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"TEACHERS & WRITERS COLLABORATIVE","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE ACADEMY OF AMERICAN POETS","a":500000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE HIGHLIGHTS FOUNDATION INC","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"HONESDALE","s":"PA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE INTERNATIONAL FRIENDS OF THE LONDON LIBRARY","a":60000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE LITQUAKE FOUNDATION","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"THE NATIONAL POETRY SERIES INC","a":100000,"p":"LITERARY ARTS SUPPORT.","c":"PRINCETON","s":"NJ","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"MARA BROCK AKIL'S WRITERS' COLONY FOUNDATION","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"LOS ANGELES","s":"CA","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"URBAN WORD NYC","a":35000,"p":"TO ORGANIZATIONS SUPPORTING THE LITERARY ARTS.","c":"NEW YORK","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"WOODLAND PATTERN INC","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"MILWAUKEE","s":"WI","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"WORDS WITHOUT BORDERS","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2023,"r":"ZOEGLOSSIA","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"LAS CRUCES","s":"NM","e":"","o":"202433199349103283","record_type":"named_recipient"},{"y":2024,"r":"826 NATIONAL","a":40000,"p":"LITERARY ARTS SUPPORT.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"826NYC INC","a":40000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"ARCHIPELAGO BOOKS","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"AUTHORS GUILD FOUNDATION","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"BALDWIN FOR THE ARTS","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"BROOKLYN BOOK FESTIVAL","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"BROOKLYN CARIBBEAN LITERARY FESTIVAL","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"BROOKLYN COLLEGE FOUNDATION INC","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"BROOKLYN POETS INC","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"CAVE CANEM FOUNDATION INC","a":100000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"CITY OF ASYLUM PITTSBURGH","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"PITTSBURGH","s":"PA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"CITY OF ASYLUMDETROIT AKA HAI FOUNDATION","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"DETROIT","s":"MI","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"CHARITIES AID FOUNDATION AMERICA","a":927000,"p":"LITERARY ARTS SUPPORT.","c":"ALEXANDRIA","s":"VA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY OF LITERARY MAGAZINES AND PRESSES","a":75000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"COPPER CANYON PRESS","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"PORT TOWNSEND","s":"WA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"ELIZABETH KOSTOVA FOUNDATION","a":10000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"EYEBEAM ATELIER INC","a":22150,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"INDIGENOUS NATIONS POETS","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"BURLINGTON","s":"WI","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"INTERNATIONAL FRIENDS OF THE LONDON LIBRARY","a":60000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"JLF USA","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"SPOKANE","s":"WA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"KUNDIMAN","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"LITQUAKE FOUNDATION","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"MARA BROCK AKIL'S WRITERS' COLONY FOUNDATION","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"LOS ANGELES","s":"CA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"MARKAZ REVIEW","a":150000,"p":"LITERARY ARTS SUPPORT.","c":"LOS ANGELES","s":"CA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"MEDGAR EVERS COLLEGE CUNY CENTER FOR BLACK LITERATURE","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"MERCANTILE LIBRARY ASSOCIATION OF THE CITY OF NEW YORK AKA CENTER FOR FICTI","a":50000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"MOLESKINE FOUNDATION INC","a":150000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"NEW YORK WRITERS COALITION","a":15000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"SOUTH ASIA SPEAKS","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"DOVER","s":"DE","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"TRANSIT BOOKS","a":25000,"p":"LITERARY ARTS SUPPORT.","c":"BERKELEY","s":"CA","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"WORDS WITHOUT BORDERS","a":75000,"p":"LITERARY ARTS SUPPORT.","c":"BROOKLYN","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"ZOEGLOSSIA","a":35000,"p":"LITERARY ARTS SUPPORT.","c":"LAS CRUCES","s":"NM","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"Y ASHOUR","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"J SMITH","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"L MCINTOSH","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"H ALYAN","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"S ERLICHMAN","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"D AYIVOR","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"M BLITSHTEYN","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"C SHINN","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"A KAVANAGH","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"A NAFIS","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"},{"y":2024,"r":"C DORF","a":5000,"p":"LITERARY ARTS SUPPORT.","c":"NEW YORK","s":"NY","e":"","o":"202503149349101010","record_type":"named_recipient"}]};window.LEDGER_MERGES=["BALDWIN FOR ARTS","BROOKLYN POETS","INTERNATIONAL FRIENDS OF LONDON LIBRARY","LITQUAKE FOUNDATION"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

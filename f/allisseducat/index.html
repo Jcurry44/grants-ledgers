@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ALLISSEDUC_DATA" data-slug="allisseducat" data-n="101" data-grand="28937555" data-recsub="All five years" data-running="to the dollar, five years running." data-names="29 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ALLISSEDUC_DATA" data-slug="allisseducat" data-n="101" data-grand="28937555" data-recsub="All five years" data-running="to the dollar, five years running." data-names="29 as-filed names" data-rows-embedded="101" data-rows-total="101">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 101 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">27</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $28,937,555, equals Part I line 25(d), $28,937,555 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.ALLISSEDUC_DATA={"meta":{"foundation":"Alliss Educational Foundation Equity","ein":"41-6011054","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":101,"grand_total":28937555,"tieout":{"2020":{"object_id":"202103069349100715","grant_count":19,"grant_sum":5300002,"line25_col_d":5300002,"status":"PASS"},"2021":{"object_id":"202243149349101859","grant_count":19,"grant_sum":5865217,"line25_col_d":5865217,"status":"PASS"},"2022":{"object_id":"202323119349102152","grant_count":19,"grant_sum":6000000,"line25_col_d":6000000,"status":"PASS"},"2023":{"object_id":"202423029349101152","grant_count":22,"grant_sum":5853743,"line25_col_d":5853743,"status":"PASS"},"2024":{"object_id":"202543149349102409","grant_count":22,"grant_sum":5918593,"line25_col_d":5918593,"status":"PASS"}}},"grants":[{"y":2020,"r":"UNIVERSITY OF NORTHWESTERN - ST PAUL","a":155153,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"ST MARY'S UNIVERSITY OF MINNESOTA","a":104130,"p":"GENERAL OPERATING","c":"WINONA","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"MINNEAPOLIS COLLEGE OF ART & DESIGN","a":65218,"p":"SCHOLARSHIPS","c":"MINNEAPLIS","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"AUGSBURG COLLEGE","a":218286,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"MINNESOTA STATE SYSTEM","a":895982,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"HAMLINE UNIVERSITY","a":182252,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"MACALESTER COLLEGE","a":206672,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF ST THOMAS","a":609195,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"CONCORDIA COLLEGE","a":187811,"p":"GENERAL OPERATING","c":"MOORHEAD","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"ST OLAF COLLEGE","a":288368,"p":"GENERAL OPERATING","c":"NORTHFIELD","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"CARLETON COLLEGE","a":190392,"p":"SCHOLARSHIPS","c":"NORTHFIELD","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"ST CATHERINE UNIVERSITY","a":188407,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"GUSTAVUS ADOLPHUS COLLEGE","a":219477,"p":"SCHOLARSHIPS","c":"ST PETER","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"CONCORDIA UNIVERSITY","a":236948,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"COLLEGE OF ST SCHOLASTICA","a":192080,"p":"SCHOLARSHIPS","c":"DULUTH","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"BETHEL UNIVERSITY","a":207466,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"COLLEGE OF ST BENEDICT","a":164682,"p":"SCHOLARSHIPS","c":"ST JOSEPH","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF MINNESOTA","a":834018,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2020,"r":"SAINT JOHNS UNIVERSITY","a":153465,"p":"GENERAL OPERATING","c":"COLLEGEVILLE","s":"MN","e":"","o":"202103069349100715","record_type":"named_recipient"},{"y":2021,"r":"CARLETON COLLEGE","a":218104,"p":"SCHOLARSHIPS","c":"NORTHFIELD","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"COLLEGE OF ST SCHOLASTICA","a":195946,"p":"SCHOLARSHIPS","c":"DULUTH","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"GUSTAVUS ADOLPHUS COLLEGE","a":240588,"p":"SCHOLARSHIPS","c":"ST PETER","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"MACALESTER COLLEGE","a":241022,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"ST CATHERINE UNIVERSITY","a":247431,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF NORTHWESTERN - ST PAUL","a":155975,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"BETHEL UNIVERSITY","a":206591,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"CONCORDIA COLLEGE","a":189320,"p":"SCHOLARSHIPS","c":"MOORHEAD","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"CONCORDIA UNIVERSITY","a":215171,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"HAMLINE UNIVERSITY","a":187039,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"MINNEAPOLIS COLLEGE OF ART & DESIGN","a":137666,"p":"SCHOLARSHIPS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"ST JOHN'S UNIVERSITY","a":164447,"p":"SCHOLARSHIPS","c":"COLLEGEVILLE","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"ST OLAF COLLEGE","a":320313,"p":"SCHOLARSHIPS","c":"NORTHFIELD","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MINNESOTA","a":915107,"p":"SCHOLARSHIPS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"ST MARY'S UNIVERSITY OF MINNESOTA","a":106228,"p":"SCHOLARSHIPS","c":"WINONA","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"AUGSBURG COLLEGE","a":231030,"p":"SCHOLARSHIPS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"MINNESOTA STATE SYSTEM","a":1104893,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF ST THOMAS","a":621727,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2021,"r":"COLLEGE OF ST BENEDICT","a":166619,"p":"SCHOLARSHIPS","c":"ST JOSEPH","s":"MN","e":"","o":"202243149349101859","record_type":"named_recipient"},{"y":2022,"r":"AUGSBURG COLLEGE","a":258398,"p":"SCHOLARSHIPS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"COLLEGE OF ST BENEDICT","a":165914,"p":"SCHOLARSHIPS","c":"ST JOSEPH","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"GUSTAVUS ADOLPHUS COLLEGE","a":235625,"p":"SCHOLARSHIPS","c":"ST PETER","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"COLLEGE OF ST SCHOLASTICA","a":194728,"p":"SCHOLARSHIPS","c":"DULUTH","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF NORTHWESTERN ST PAUL","a":153598,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF MINNESOTA","a":931655,"p":"SCHOLARSHIPS","c":"MINNEAPOLIS","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"CONCORDIA COLLEGE","a":205765,"p":"SCHOLARSHIPS","c":"MOORHEAD","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"HAMLINE UNIVERSITY","a":196354,"p":"SCHOLARSHIPS","c":"CHIPPEWA FALLS","s":"WI","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"MINNESOTA STATE SYSTEM","a":1148345,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"CONCORDIA UNIVERSITY","a":240040,"p":"SCHOLARSHIP","c":"ANN ARBOR","s":"MI","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"MACALESTER COLLEGE","a":250265,"p":"SCHOLARSHIP","c":"SAINT PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF ST THOMAS","a":648783,"p":"SCHOLARSHIP","c":"ST PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"ST OLAF COLLEGE","a":351230,"p":"SCHOLARSHIP","c":"NORTHFIELD","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"CARLETON COLLEGE","a":233185,"p":"SCHOLARSHIP","c":"NORTHFIELD","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"ST CATHERINE UNIVERSITY","a":229119,"p":"SCHOLARSHIP","c":"SAINT PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"ST MARYS UNIVERSITY OF MINNESOTA","a":98526,"p":"SCHOLARSHIP","c":"WINONA","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"BETHEL UNIVERSITY","a":204139,"p":"SCHOLARSHIP","c":"SAINT PAUL","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"MINNEAPOLIS COLLEGE OF ART DESIGN","a":80052,"p":"SCHOLARSHIP","c":"MINNEAPOLIS","s":"MN","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2022,"r":"ST JOHNS UNIVERSITY","a":174279,"p":"SCHOLARSHIP","c":"MENIFEE","s":"CA","e":"","o":"202323119349102152","record_type":"named_recipient"},{"y":2023,"r":"HAMLINE UNIVERSITY","a":172498,"p":"SCHOLARSHIPS","c":"CHIPPEWA FALLS","s":"WI","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"AUGSBURG COLLEGE","a":250074,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"COLLEGE OF ST BENEDICT","a":149226,"p":"GENERAL OPERATING","c":"ST JOSEPH","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"COLLEGE OF ST SCHOLASTICA","a":170559,"p":"GENERAL OPERATING","c":"DULUTH","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"MINNEAPOLIS COLLEGE OF ART DESIGN","a":74775,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"BETHEL UNIVERSITY","a":209347,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"ST JOHNS UNIVERSITY","a":156444,"p":"GENERAL OPERATING","c":"MENIFEE","s":"CA","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"CONCORDIA COLLEGE","a":183273,"p":"GENERAL OPERATING","c":"MOORHEAD","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"CONCORDIA UNIVERSITY","a":230788,"p":"GENERAL OPERATING","c":"ANN ARBOR","s":"MI","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"MACALESTER COLLEGE","a":230788,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF ST THOMAS","a":612418,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"ST OLAF COLLEGE","a":327219,"p":"GENERAL OPERATING","c":"NORTHFIELD","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"CARLETON COLLEGE","a":217535,"p":"GENERAL OPERATING","c":"NORTHFIELD","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"ST CATHERINE UNIVERSITY","a":212040,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"ST MARYS UNIVERSITY OF MINNESOTA","a":91798,"p":"GENERAL OPERATING","c":"WINONA","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"MINNESOTA STATE SYSTEM","a":1064990,"p":"SCHOLARSHIPS","c":"ST PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"RED LAKE NATION COLLEGE","a":5000,"p":"GENERAL OPERATING","c":"RED LAKE","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"GUSTAVUS ADOLPHUS COLLEGE","a":444649,"p":"GENERAL OPERATING","c":"SAINT PETER","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NORTHWESTERN ST PAUL","a":144377,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"WHITE EARTH TRIBAL & COMM COLLEGE","a":5000,"p":"GENERAL OPERATING","c":"MAHNOMEN","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MINNESOTA - TWIN CITIES","a":895945,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2023,"r":"LEECH LAKE TRIBAL COLLEGE","a":5000,"p":"GENERAL OPERATING","c":"CASS LAKE","s":"MN","e":"","o":"202423029349101152","record_type":"named_recipient"},{"y":2024,"r":"ST JOHN'S UNIVERSITY","a":153270,"p":"GENERAL OPERATING","c":"COLLEGEVILLE","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"COLLEGE OF ST BENEDICT","a":149534,"p":"GENERAL OPERATING","c":"ST JOSEPH","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"WHITE EARTH TRIBAL AND COMMUNITY COLLEGE","a":6500,"p":"GENERAL OPERATING","c":"MAHNOMEN","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF ST THOMAS","a":666146,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"MINNESOTA STATE SYSTEM","a":1171043,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"ST OLAF COLLEGE","a":351806,"p":"GENERAL OPERATING","c":"NORTHFIELD","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF MINNESOTA","a":912185,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"AUGSBURG COLLEGE","a":261822,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"MACALESTER COLLEGE","a":232486,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"CONCORDIA COLLEGE","a":196119,"p":"GENERAL OPERATING","c":"MOORHEAD","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"COLLEGE OF ST SCHOLASTICA","a":178650,"p":"GENERAL OPERATING","c":"DULUTH","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF NORTHWESTERN - ST PAUL","a":142722,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"BETHEL UNIVERSITY","a":205898,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"LEECH LAKE TRIBAL COLLEGE","a":11500,"p":"GENERAL OPERATING","c":"CASS LAKE","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"CONCORDIA UNIVERSITY","a":252593,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"MINNEAPOLIS COLLEGE OF ART & DESIGN","a":77239,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"GUSTAVUS ADOLPHUS COLLEGE","a":209743,"p":"GENERAL OPERATING","c":"ST PETER","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"RED LAKE NATION COLLEGE","a":6500,"p":"GENERAL OPERATING","c":"RED LAKE","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"CARLETON COLLEGE","a":229190,"p":"GENERAL OPERATING","c":"NORTHFIELD","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"HAMLINE UNIVERSITY","a":183264,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"ST MARY'S UNIVERSITY OF MINNESOTA","a":96247,"p":"GENERAL OPERATING","c":"WINONA","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"},{"y":2024,"r":"ST CATHERINE UNIVERSITY","a":224136,"p":"GENERAL OPERATING","c":"ST PAUL","s":"MN","e":"","o":"202543149349102409","record_type":"named_recipient"}]};window.LEDGER_MERGES=["UNIVERSITY OF NORTHWESTERN ST PAUL","MINNEAPOLIS COLLEGE OF ART DESIGN"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

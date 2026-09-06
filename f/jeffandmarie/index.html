@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="JEFFANDMAR_DATA" data-slug="jeffandmarie" data-n="49" data-grand="74298647" data-recsub="All five years" data-running="to the dollar, five years running." data-names="27 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="JEFFANDMAR_DATA" data-slug="jeffandmarie" data-n="49" data-grand="74298647" data-recsub="All five years" data-running="to the dollar, five years running." data-names="27 as-filed names" data-rows-embedded="49" data-rows-total="49">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 49 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">27</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $74,298,647, equals Part I line 25(d), $74,298,647 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.JEFFANDMAR_DATA={"meta":{"foundation":"Jeff and Marieke Rothschild Foundation","ein":"83-4574297","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":49,"grand_total":74298647,"tieout":{"2020":{"object_id":"202113059349101561","grant_count":2,"grant_sum":240000,"line25_col_d":240000,"status":"PASS"},"2021":{"object_id":"202243199349109399","grant_count":2,"grant_sum":302136,"line25_col_d":302136,"status":"PASS"},"2022":{"object_id":"202333199349101343","grant_count":8,"grant_sum":14786111,"line25_col_d":14786111,"status":"PASS"},"2023":{"object_id":"202423209349103472","grant_count":19,"grant_sum":29857400,"line25_col_d":29857400,"status":"PASS"},"2024":{"object_id":"202513189349105241","grant_count":18,"grant_sum":29113000,"line25_col_d":29113000,"status":"PASS"}}},"grants":[{"y":2020,"r":"KENYAN KIDS FOUNDATION","a":200000,"p":"TRANS NZOIA SCHOOL FEEDING PROGRAM","c":"LOUISVILLE","s":"KY","e":"","o":"202113059349101561","record_type":"named_recipient"},{"y":2020,"r":"KENYAN KIDS FOUNDATION","a":40000,"p":"DAIRY PROJECT","c":"LOUISVILLE","s":"KY","e":"","o":"202113059349101561","record_type":"named_recipient"},{"y":2021,"r":"KENYAN KIDS FOUNDATION","a":200000,"p":"TRANS NZOIA SCHOOL FEEDING PROGRAM","c":"LOUISVILLE","s":"KY","e":"","o":"202243199349109399","record_type":"named_recipient"},{"y":2021,"r":"LAND TRUST OF SANTA CRUZ COUNTY","a":102136,"p":"NATURE CONSERVATION","c":"SANTA CRUZ","s":"CA","e":"","o":"202243199349109399","record_type":"named_recipient"},{"y":2022,"r":"FIAT LUX FOUNDATION","a":125000,"p":"KENYA CHERANGANY HILLS EYE HOSPITAL","c":"PALO ALTO","s":"CA","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"KENYAN KIDS FOUNDATION","a":200000,"p":"SCHOOL FEEDING PROGRAM","c":"LOUISVILLE","s":"KY","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"KENYAN KIDS FOUNDATION","a":75000,"p":"TRANSCEND RUNNING ACADEMY","c":"LOUISVILLE","s":"KY","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"KENYAN KIDS FOUNDATION","a":196866,"p":"EFFICIENT AND SUSTAINABLE MILK PROCESSING","c":"LOUISVILLE","s":"KY","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"LAND TRUST OF SANTA CRUZ COUNTY","a":8114245,"p":"NATURE CONSERVATION","c":"SANTA CRUZ","s":"CA","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"SANTA CRUZ MOUNTAINS TRAIL STEWARDSHIP","a":250000,"p":"COTONI-COAST DAIRIES PROJECT","c":"SANTA CRUZ","s":"CA","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"SECOND HARVEST OF SILICON VALLEY","a":5500000,"p":"CAPITAL CAMPAIGN/OPERATING SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2022,"r":"THE WILD FOUNDATION","a":325000,"p":"BAY OF LIFE PROJECT","c":"BOULDER","s":"CO","e":"","o":"202333199349101343","record_type":"named_recipient"},{"y":2023,"r":"FIAT LUX FOUNDATION","a":200000,"p":"GENERAL SUPPORT","c":"PALO ALTO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"HUMAN RIGHTS WATCH INC","a":300000,"p":"GENERAL SUPPORT & LIFE WITHOUT PAROLE PROJECT","c":"NEW YORK","s":"NY","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"HUMAN RIGHTS WATCH INC","a":100000,"p":"VOICES FOR JUSTICE SILICON VALLEY CELEBRATION","c":"NEW YORK","s":"NY","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"KENYAN KIDS FOUNDATION","a":285000,"p":"TRANSCEND RUNNING ACADEMY","c":"LOUISVILLE","s":"KY","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"KENYAN KIDS FOUNDATION","a":90000,"p":"CO-OPERATIVE DAIRY DEVELOPMENT PROJECT","c":"LOUISVILLE","s":"KY","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"LIFE LAB SCIENCE PROGRAM","a":1000000,"p":"GIANT STEPS: GROWING MORE SCIENTISTS & ENVIRONMENTAL STEWARDS CAMPAIGN","c":"SANTA CRUZ","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"MONTEFIORE MEDICAL CENTER","a":250000,"p":"ALZHEIMER'S DISEASE RESEARCH","c":"BRONX","s":"NY","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL PHILANTHROPIC TRUST","a":2000000,"p":"ICONIQ IMPACT OCEAN CO-LAB","c":"JENKINTOWN","s":"PA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"NEW VENTURE FUND","a":1000000,"p":"CLEAN SLATE INITIATIVE","c":"WASHINGTON","s":"DC","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"NEXTGEN CLIMATE AMERICA INC","a":250000,"p":"CIVIC SPACE FOUNDATION PROJECT","c":"SACRAMENTO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"NP2","a":200000,"p":"GENERAL SUPPORT","c":"GREENBRAE","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"RAINBOW WORLD FUND","a":1500000,"p":"AMERICANS FOR AFGHANS CAMPAIGN","c":"SAN FRANCISCO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"SAN FRANCISCO OPERA ASSOCIATION","a":5000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"SANTA CRUZ MOUNTAINS TRAIL STEWARDSHIP","a":250000,"p":"GENERAL SUPPORT","c":"SANTA CRUZ","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"SECOND HARVEST OF SILICON VALLEY","a":7100000,"p":"CAPITAL CAMPAIGN/OPERATING SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"THE AMERICAS HEPATO-PANCREATO-BILIARY FOUNDATION INC","a":182400,"p":"LATIN AMERICAN HPB SURGERY FELLOWSHIP","c":"PRAIRIE VILLAGE","s":"KS","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA SAN FRANCISCO FOUNDATION","a":150000,"p":"CHANCELLOR'S CIRCLE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA SAN FRANCISCO FOUNDATION","a":5000000,"p":"PARNASSUS CAMPUS AND OPERATIONS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2023,"r":"VANDERBILT UNIVERSITY","a":5000000,"p":"GENERAL SUPPORT","c":"NASHVILLE","s":"TN","e":"","o":"202423209349103472","record_type":"named_recipient"},{"y":2024,"r":"AVINA AMERICAS INC","a":1000000,"p":"MAPBIOMAS WORK ON CLIMATE","c":"WASHINGTON","s":"DC","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"CLEAN SLATE INITIATIVE INC","a":1000000,"p":"AUDACIOUS PROJECT","c":"ORLANDO","s":"FL","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"EVERY CURE INC","a":1000000,"p":"AI PLATFORM FOR DRUG REPURPOSING","c":"NEW YORK","s":"NY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"FOOD FOR EDUCATION FOUNDATION INC","a":1600000,"p":"SCHOOL FEEDING PROGRAMS IN AFRICA","c":"NEW YORK","s":"NY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"GREAT BARRIER REEF FOUNDATION USA INC","a":500000,"p":"SOLUTIONS FOR PROTECTING CORAL REEFS","c":"WASHINGTON","s":"DC","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"HUMAN RIGHTS WATCH INC","a":1000000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"INKOMOKO","a":100000,"p":"IMPROVE LIVES IN ETHIOPIA, KENYA AND SOUTH SUDAN","c":"CLINTON","s":"WA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"KENYAN KIDS FOUNDATION","a":150000,"p":"TRANSCEND RUNNING ACADEMY","c":"LOUISVILLE","s":"KY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"KENYAN KIDS FOUNDATION","a":250000,"p":"CO-OPERATIVE DAIRY DEVELOPMENT PROJECT","c":"LOUISVILLE","s":"KY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"LAND TRUST OF SANTA CRUZ COUNTY","a":1000000,"p":"GENERAL SUPPORT","c":"SANTA CRUZ","s":"CA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"LIFESPAN EXTENSION ADVOCACY FOUNDATION INC","a":263000,"p":"RAPAMYCIN AND EXERCISE PERFORMANCE FOR LONGEVITY RESEARCH PROJECT","c":"SEAFORD","s":"NY","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL PHILANTHROPIC TRUST","a":2000000,"p":"ICONIQ IMPACT OCEAN CO-LAB","c":"JENKINTOWN","s":"PA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"NP2","a":250000,"p":"GENERAL SUPPORT","c":"GREENBRAE","s":"CA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"PRESIDENT & TRUSTEES OF COLBY COLLEGE","a":5000000,"p":"RESIDENCE HALL/RESIDENCE LIFE","c":"WATERVILLE","s":"ME","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"RAINBOW WORLD FUND","a":1000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"REWILD","a":2500000,"p":"GUAFO ISLAND PROJECT","c":"AUSTIN","s":"TX","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"SECOND HARVEST OF SILICON VALLEY","a":5500000,"p":"CAPITAL CAMPAIGN/OPERATING SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202513189349105241","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF CALIFORNIA SAN FRANCISCO FOUNDATION","a":5000000,"p":"PARNASSUS CAMPUS AND OPERATIONS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513189349105241","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"KENYAN KIDS FOUNDATION":"Education & youth","LAND TRUST OF SANTA CRUZ COUNTY":"Environment & animals","SANTA CRUZ MOUNTAINS TRAIL STEWARDSHIP":"Environment & animals","THE WILD FOUNDATION":"Community & economic development","NEW VENTURE FUND":"Environment & animals","RAINBOW WORLD FUND":"Basic needs & response","THE AMERICAS HEPATO-PANCREATO-BILIARY FOUNDATION INC":"Education & youth","UNIVERSITY OF CALIFORNIA SAN FRANCISCO FOUNDATION":"Education & youth","EVERY CURE INC":"Health & wellbeing","GREAT BARRIER REEF FOUNDATION USA INC":"Environment & animals","REWILD":"Environment & animals"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

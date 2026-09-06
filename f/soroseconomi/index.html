@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="SOROSECONO_DATA" data-slug="soroseconomi" data-n="41" data-grand="12110399" data-recsub="All five years" data-running="to the dollar, five years running." data-names="37 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="SOROSECONO_DATA" data-slug="soroseconomi" data-n="41" data-grand="12110399" data-recsub="All five years" data-running="to the dollar, five years running." data-names="37 as-filed names" data-rows-embedded="41" data-rows-total="41">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 41 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">36</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $12,110,399, equals Part I line 25(d), $12,110,399 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.SOROSECONO_DATA={"meta":{"foundation":"Soros Economic Development Fund","ein":"13-3965896","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":41,"grand_total":12110399,"tieout":{"2020":{"object_id":"202103519349100310","grant_count":5,"grant_sum":1032554,"line25_col_d":1032554,"status":"PASS"},"2021":{"object_id":"202203199349110255","grant_count":7,"grant_sum":1050950,"line25_col_d":1050950,"status":"PASS"},"2022":{"object_id":"202303199349107185","grant_count":5,"grant_sum":1625000,"line25_col_d":1625000,"status":"PASS"},"2023":{"object_id":"202423199349106117","grant_count":8,"grant_sum":1911895,"line25_col_d":1911895,"status":"PASS"},"2024":{"object_id":"202523219349103257","grant_count":16,"grant_sum":6490000,"line25_col_d":6490000,"status":"PASS"}}},"grants":[{"y":2020,"r":"NONPROFIT FINANCE FUN","a":400000,"p":"providing relief to the poor and distressed and underprivileged and eliminating prejudice and discrimination by supporting grantee's establishment.","c":"NEW YORK","s":"NY","e":"","o":"202103519349100310","record_type":"named_recipient"},{"y":2020,"r":"AVON MUTUAL LTD","a":243777,"p":"To provide relief to the poor and distressed and underprivileged by funding the establishment of a cooperative banking business","c":"","s":"","e":"","o":"202103519349100310","record_type":"named_recipient"},{"y":2020,"r":"SOUTH WEST MUTUAL LTD","a":243777,"p":"To provide relief to the poor and distressed and underprivileged by funding the establishment of a cooperative banking business","c":"","s":"","e":"","o":"202103519349100310","record_type":"named_recipient"},{"y":2020,"r":"GLOBAL IMPACT INVESTING NETWORK","a":95000,"p":"to establish a platform of collaboration to coordinate the actions of impact investors in responding to the Covid-19 crisis. (the platform initiative)","c":"NEW YORK","s":"NY","e":"","o":"202103519349100310","record_type":"named_recipient"},{"y":2020,"r":"PEARL CAPITAL PARTNERS","a":50000,"p":"The purpose of the grant is to provide relief to the poor and distressed (specifically, small holder farmers).","c":"","s":"","e":"","o":"202103519349100310","record_type":"named_recipient"},{"y":2021,"r":"AVON MUTUAL LTD","a":175475,"p":"To provide relief to the poor and distressed and underprivileged by funding the establishment of a cooperative banking business","c":"","s":"","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"Aswegrow Limited","a":95000,"p":"To provide funding for the professional development of disadvantaged teachers by creating a revenue generating learning platform that will provide a blueprint on effective blended education at school level, and improve the effectiveness of the Grantee's aim to alleviate poverty for disadvantaged populations in the long run.","c":"","s":"","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"Symplifica LLC","a":30000,"p":"To support the implementation of internal diversity, equity and inclusion (\"DEI\") initiatives","c":"","s":"","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"Southwest Mutual LTD","a":175475,"p":"To provide relief to the poor and distressed and underprivileged by funding the establishment of a cooperative banking business","c":"","s":"","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"Hopewell Fund","a":125000,"p":"To provide relief to the poor and distressed and underprivileged by funding the establishment of a cooperative banking business in Southwest England that aims to increase the accessibility of banking services for low-income, under banked or un-banked populations, with a particular focus on Low Income Pensioners and Underserved Adults and certain neighborhoods that are among the most deprived according to the UK Indices of Multiple Deprivation","c":"Washington","s":"DC","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"50Breakthroughs Foundation","a":300000,"p":"To provide bridge funding to close Oxygen Hub's funding gap in its operating and capital expenditures related to the unexpected delays in (i) setting up three (3) medical oxygen plants in Nigeria, Kenya and Ethiopia, and (ii) raising an equity investment round (the \"Initiative\")","c":"Oakland","s":"CA","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2021,"r":"International Development Research Centre (IDRC)","a":150000,"p":"To provide funding for the grantee's research initiative titled Building Alliances to Transform the Care Economy in the Global South through Impact Investing","c":"","s":"","e":"","o":"202203199349110255","record_type":"named_recipient"},{"y":2022,"r":"ASWEGROW LIMITED","a":55000,"p":"TO PROVIDE FUNDING FOR THE PROFESSIONAL DEVELOPMENT OF DISADVANTAGED TEACHERS BY CREATING A REVENUE GENERATING LEARNING PLATFORM THAT WILL PROVIDE A BLUEPRINT ON EFFECTIVE BLENDED EDUCATION AT SCHOOL LEVEL, AND IMPROVE THE EFFECTIVENESS OF THE GRANTEES AIM TO ALLEVIATE POVERTY FOR DISADVANTAGED POPULATIONS IN THE LONG RUN","c":"","s":"","e":"","o":"202303199349107185","record_type":"named_recipient"},{"y":2022,"r":"HALA SYSTEMS INC","a":500000,"p":"TO DEFEND HUMAN RIGHTS AND PROVIDE RELIEF FOR THE DISTRESSED","c":"WILMINGTON","s":"DE","e":"","o":"202303199349107185","record_type":"named_recipient"},{"y":2022,"r":"GLOBAL ACCESS HEALTH","a":400000,"p":"TO PROVIDE RELIEF TO THE POOR AND DISTRESSED BY IMPROVING AFFORDABLE AND EQUITABLE ACCESS TO QUALITY DIAGNOSTICS IN LOWER AND MIDDLE INCOME COUNTRIES (\"LMICS\"), AND FILLING DIAGNOSTIC GAPS FOR EMERGING THREATS, INCLUDING PANDEMIC PREPAREDNESS AND GLOBAL HEALTH SECURITY IN LMICS","c":"","s":"","e":"","o":"202303199349107185","record_type":"named_recipient"},{"y":2022,"r":"LIKER LAND INC","a":250000,"p":"TO SUPPORT THE DEVELOPMENT OF THE INFRASTRUCTURE FOR A MORE ROBUST ECOSYSTEM FOR INDEPENDENT MEDIA","c":"MIDDLETOWN","s":"DE","e":"","o":"202303199349107185","record_type":"named_recipient"},{"y":2022,"r":"MEDIA DEVELOPMENT INVESTMENT FUND","a":420000,"p":"TO SUPPORT INDEPENDENT MEDIA COMPANIES THAT PROVIDE TIMELY, ACCURATE, AND RELEVANT NEWS, INFORMATION AND DEBATE THAT PEOPLE NEED TO BUILD MORE OPEN, EQUITABLE AND FREE THRIVING SOCIETIES","c":"NEW YORK","s":"NY","e":"","o":"202303199349107185","record_type":"named_recipient"},{"y":2023,"r":"REDI INTERNATIONAL","a":10000,"p":"TO PROMOTE ACCESS TO FINANCE FOR THE ROMA COMMUNITY, INCLUDING MICROFINANCE LENDING, WITH THE AIM OF ENDING THE EXCLUSION OF THE ROMA COMMUNITY FROM THE PROVISION OF FINANCIAL SERVICES AND PROVIDING A PATHWAY OUT OF POVERTY.","c":"","s":"","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"NEW VENTURE FUND","a":100000,"p":"PROVIDE GENERAL SUPPORT TO THE U.S. IMPACT INVESTING ALLIANCE FOR A PERIOD OF 12-MONTHS.THE ALLIANCE IS A LEADING ADVOCATE FOR 1) IMPROVING THE IMPACT INVESTMENT POLICY ENVIRONMENT IN THE U.S., 2) CATALYZING THE FLOW OF INSTITUTIONAL CAPITAL FOR IMPACT AND 3) BUILDING THE IMPACT INVESTING FIELD GLOBALLY.","c":"WASHINGTON","s":"DC","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL WOMEN'S HEALTH NETWORK","a":45000,"p":"TO EXAMINE THE FEASIBILITY OF CREATING A NEW KIND OF MEDICAL MALPRACTICE INSURANCE PRODUCT/POOL/COMPANY, TO COVER INDEPENDENT PROVIDERS OF TELEHEALTH-RELATED SERVICES","c":"WASHINGTON","s":"DC","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"HONEYBEE HEALTH INC","a":650000,"p":"TO INCREASE ACCESS TO HEALTH PRODUCTS AND SERVICES TO WOMEN WITH LIMITED ACCESS","c":"CULVER CITY","s":"CA","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"MEDIA DEVELOPMENT INVESTMENT FUND","a":340000,"p":"TO SUPPORT INDEPENDENT MEDIA COMPANIES THAT PROVIDE TIMELY, ACCURATE, AND RELEVANT NEWS, INFORMATION AND DEBATE THAT PEOPLE NEED TO BUILD MORE OPEN, EQUITABLE AND FREE THRIVING SOCIETIES","c":"NEW YORK","s":"NY","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"INTERNATIONAL FINANCE FACILITY FOR EDUCATION","a":150000,"p":"TO SUPPORT AN INNOVATIVE FINANCING PLATFORM SEEKING TO CATALYZE RESOURCES INTO GLOBAL EDUCATION NEEDS.","c":"","s":"","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"ENCOURAGE CAPITAL LLC","a":250000,"p":"TO DEVELOP INNOVATIVE FINANCING PLATFORMS TO COMBAT CLIMATE CHANGE.","c":"NEW YORK","s":"NY","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2023,"r":"OLDUVAI LTD","a":366895,"p":"SUPPORT INDEPENDENT MEDIA COMPANIES THAT PROVIDE TIMELY, ACCURATE AND RELEVANT NEWS, INFORMATION AND DEBATE THAT PEOPLE NEED TO BUILD MORE OPEN, EQUITABLE AND FREE THRIVING SOCIETIES.","c":"","s":"","e":"","o":"202423199349106117","record_type":"named_recipient"},{"y":2024,"r":"INDIEGRAF MEDIA INC","a":250000,"p":"TO SUPPORT AN INNOVATIVE SAAS PLATFORM THAT SUPPORTS INDEPENDENT MEDIA OUTLETS IN NORTH AMERICA.","c":"","s":"","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"THE INTERNATIONAL CENTER FOR TROPICAL AGRICULTURE","a":150000,"p":"TO SUPPLEMENT THE AMAZON BIODIVERSITY FUNDS (ABF) IMPACT DATA.","c":"","s":"","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"SYMPLIFICA","a":100000,"p":"TO FURTHER THE CHARITABLE PURPOSE OF PROVIDING RELIEF TO THE POOR AND DISTRESSED.","c":"","s":"","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"THE GLOBAL STEERING GROUP FOR IMPACT INVESTMENT","a":200000,"p":"TO PROVIDE GENERAL SUPPORT","c":"","s":"","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"FREE DEMOCRACY FOUNDATION","a":250000,"p":"PROJECT SUPPORT TO HELP LAY THE GROUNDWORK FOR COMMERCIAL ACTORS TO SCALE THE MOBILE VOTING AND BROADER VOTER ACCESS LANDSCAPE, LEVERAGING TECHNOLOGY TO ENHANCE CIVIC ENGAGEMENT AND PARTICIPATION.","c":"WASHINGTON","s":"DC","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL WOMEN'S HEALTH NETWORK","a":195000,"p":"TO EXAMINE THE FEASIBILITY OF CREATING A NEW KIND OF MEDICAL MALPRACTICE INSURANCE PRODUCT/POOL/COMPANY MODELED ON PLANNED PARENTHOODS OWN INSURANCE COMPANY, TO COVER THE INDEPENDENT PROVIDERS OF TELEHEALTH-RELATED ABORTION SERVICES TO THOSE IN STATES WHERE ABORTION IS NOT LEGAL","c":"WASHINGTON","s":"DC","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"GENDER IDEAL DBA REPRODUCTIVE & MATERNAL HEALTH","a":100000,"p":"TO SUPPORT A PROJECT TO RATE COMPANIES PERFORMANCE, BENEFITS, AND EQUITY ON REPRODUCTIVE CARE.","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"CONFLUENCE PHILANTHROPY","a":25000,"p":"TO IMPROVE CLIMATE JUSTICE BY RAISING AWARENESS OF THE IMPORTANCE OF INDIGENOUS PEOPLES AND LOCAL COMMUNITIES IN CLIMATE FINANCE AND NATURE BASED SOLUTIONS INVESTMENT ACTIVITIES, HELP BUILD RELATIONSHIPS BETWEEN INDIGENOUS PEOPLES LEADERS AND RELEVANT INVESTMENT ADVISORS, AND TO HELP THE GUARDIANS IMPACT ALLIANCE BUILD MOMENTUM TO RAISE SUPPORT FOR ITS FUTURE CONVENINGS","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"ABORTION COALITION OF TELEMEDICINE","a":1000000,"p":"TO PROVIDE MALPRACTICE INSURANCE FOR SHIELD PROVIDERS ENABLING TELEHEALTH ABORTION ACCESS.","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"REPRODUCTIVE HEALTH INVESTORS ALLIANCE INC","a":250000,"p":"GENERAL SUPPORT FOR RHIA VENTURES AND TARGETED SUPPORT FOR RHIA'S CORPORATE ENGAGEMENT STRATEGY.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"ACUMEN FUND","a":3000000,"p":"TO SUPPORT CLEAN, RENEWABLE ENERGY ACCESS TO COMMUNITIES IN 16 LEAST DEVELOPED AFRICAN COUNTRIES.","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"MAYDAY HEALTH","a":150000,"p":"TO SUPPORT AND ADVANCE REPRODUCTIVE RIGHTS IN THE U.S.","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"THE REIMAGINATION LAB","a":250000,"p":"GENERAL SUPPORT (2024-26) FOR THE REIMAGINATION LAB TO DEVELOP CONSUMER-FACING DIGITAL PRODUCTS TO EXPAND ACCESS TO REPRODUCTIVE HEALTHCARE.","c":"BROOKLYN","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"GLOBAL IMPACT INVESTING NETWORK","a":150000,"p":"TO SUPPORT THREE MAIN ACTIVITIES: DEVELOP FRAMEWORK FOR SOLUTIONS; ALIGN INVESTORS THROUGH THE CLIMATE SOLUTIONS INVESTING FORUM; INITIATE GLOBAL \"CAMPAIGN\" TO FURTHER ACTION IN CLIMATE SOLUTIONS INVESTING.","c":"NEW YORK","s":"NY","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"IPAS","a":150000,"p":"ORGANIZATIONAL SUPPORT TO ASEC TO IMPROVE ACCESS TO EMERGENCY CONTRACEPTION IN THE UNITED STATES.","c":"CHAPEL HILL","s":"NC","e":"","o":"202523219349103257","record_type":"named_recipient"},{"y":2024,"r":"SCROLL MEDIA INC","a":270000,"p":"THE PRIMARY GOALS ARE TO DIVERSIFY AND DEEPEN THREE EXISTING REVENUE STREAMS: MEMBERSHIP; GROUND EVENTS AND ADVERTISING.","c":"ACTION","s":"MA","e":"","o":"202523219349103257","record_type":"named_recipient"}]};window.LEDGER_MERGES=["ASWEGROW LIMITED"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"MEDIA DEVELOPMENT INVESTMENT FUND":"Nonprofit capacity & transitions","CONFLUENCE PHILANTHROPY":"Nonprofit capacity & transitions","GLOBAL IMPACT INVESTING NETWORK":"Nonprofit capacity & transitions"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

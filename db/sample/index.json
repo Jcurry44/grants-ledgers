@@ -1,9 +1,9 @@
 {
  "generated": "2026-09-05",
- "books": 59,
- "foundation_years": 144,
- "rows": 267243,
- "dollars": 6356104517,
+ "books": 61,
+ "foundation_years": 151,
+ "rows": 269859,
+ "dollars": 6505923270,
  "sample": [
   {
    "name": "Howard G. Buffett Foundation",
@@ -25,8 +25,8 @@
    "name": "S & G Foundation",
    "slug": "sgfoundation",
    "year": "2023",
-   "rows": 2,
-   "total": 125578042,
+   "rows": 3,
+   "total": 125578043,
    "file": "sgfoundation-2023.csv"
   },
   {

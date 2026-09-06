@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="TAYLORHOME_DATA" data-slug="taylorhome" data-n="94" data-grand="85616" data-recsub="All five years" data-running="to the dollar, five years running." data-names="62 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="TAYLORHOME_DATA" data-slug="taylorhome" data-n="94" data-grand="85616" data-recsub="All five years" data-running="to the dollar, five years running." data-names="62 as-filed names" data-rows-embedded="94" data-rows-total="94">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 94 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">61</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $85,616, equals Part I line 25(d), $85,616 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.TAYLORHOME_DATA={"meta":{"foundation":"Taylor Home","ein":"02-0222149","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":94,"grand_total":85616,"tieout":{"2020":{"object_id":"202230539349100003","grant_count":2,"grant_sum":6300,"line25_col_d":6300,"status":"PASS"},"2021":{"object_id":"202242499349100504","grant_count":15,"grant_sum":19685,"line25_col_d":19685,"status":"PASS"},"2022":{"object_id":"202332579349100038","grant_count":22,"grant_sum":18669,"line25_col_d":18669,"status":"PASS"},"2023":{"object_id":"202520699349100017","grant_count":28,"grant_sum":19924,"line25_col_d":19924,"status":"PASS"},"2024":{"object_id":"202600159349100305","grant_count":27,"grant_sum":21038,"line25_col_d":21038,"status":"PASS"}}},"grants":[{"y":2020,"r":"BELKNAP MILL","a":3300,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202230539349100003","record_type":"named_recipient"},{"y":2020,"r":"WRIGHT MUSEUM OF WWII","a":3000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202230539349100003","record_type":"named_recipient"},{"y":2021,"r":"SQUAM LAKE SCIENCE CENTER","a":200,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"HOLDERNES","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"NEW HAMPSHIRE BOAT MUSEUM","a":2000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"GILDA'S CLUB NH","a":2000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"GREATER LAKES REGION CHILDRENS AUCTION","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"ADVICE TO THE PLAYERS","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CENTER SANDWICH","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"BELKNAP MILL SOCIETY","a":2250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"THE WINNIPESAUKEE PLAYHOUSE","a":5500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"LACONIA LITTLE LEAGUE","a":350,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"LACONA MIDDLE SCHOOL","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"INTERLAKES COMMUNITY CAREGIVERS","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MOULTONBOROUGH","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"WRIGHT MUSEUM OF WWII","a":2000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"WOLFEBORO AREA CHAMBER OF COMMERCE","a":85,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"NH LONG TERM CARE FOUNDATION","a":2000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"LAKES REGION SYMPHONY ORCHESTRA","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2021,"r":"TANGER OUTLET CENTER","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"TILTON","s":"NH","e":"","o":"202242499349100504","record_type":"named_recipient"},{"y":2022,"r":"TOWN OF WOLFEBORO","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"THE WINNIPESAUKEE PLAYHOUSE","a":950,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"THE VILLAGE PLAYERS","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"ROTARY OF WOLFEBORO","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"POWERHOUSE THEATRE","a":2750,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"NH LONG TERM CARE FOUNDATION","a":3000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"NEW HORIZONS MUSICAL ORGANIZATION","a":240,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"BELMONT","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"NEW HAMPSHIRE BOAT MUSEUM","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"MEREDITH AREA CHAMBER OF COMMERCE","a":275,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"LOU ATHANAS YOUTH BASKETBALL","a":400,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"LEADERSHIP LAKES REGION","a":1500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"LAKES REGION TOURISM ASSOCIATION","a":329,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"TILTON","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"LAKES REGION MENTAL HEALTH CENTER","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"LAKE WINNIPESAUKEE ASSOCIATION","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"KINGSWOOD REGIONAL HIGH SCHOOL","a":425,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"INTER-LAKES HIGH SCHOOL","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"HUOT TECHNICAL CENTER","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"GILDA'S CLUB NH","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF MUSIC","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF GILFORD FOOTBALL","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"CAP BELKNAP MERRIMACK COUNTIES","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2022,"r":"BANK OF NEW HAMPSHIRE","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202332579349100038","record_type":"named_recipient"},{"y":2023,"r":"ALL AMERICAN PUBLISHING","a":295,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"BOISE","s":"ID","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"CARROLL COUNTY 4-H ADVISORY","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"DURHAM","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"CH AUCTION WELLNESS MEMBERSHIP","a":750,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"CLEARLAKES CHORALE","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"EASTERN LAKES REGION HOUSING COALITION","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"HUNTINGTON'S DISEASE SOCIETY OF AMERICA","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"NEW YORK","s":"NY","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"HUOT TECHNICAL CENTER","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"KINGSWOOD SOFTBALL REGIONAL HIGH SCHOOL","a":150,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LACONIA MULTICULTURAL FESTIVAL","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LAKE WINNIPESAUKEE ASSOCIATION","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LAKES REGION CANCER SUPPORT TEAM","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LAKES REGION MENTAL HEALTH CENTER","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LAKES REGION SCHOLARSHIP FUND","a":29,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LEADERSHIP LAKES REGION","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LOON PRESERVATION COMMITTEE","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MOULTONBOROUGH","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"NH LONG TERM CARE FOUNDATION","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"PEMI CHORAL SOCIETY","a":450,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"PLYMOUTH","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"POWERHOUSE THEATRE","a":1500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"THE VILLAGE PLAYERS","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"THE WINNIPESAUKEE PLAYHOUSE","a":1250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MEREDITH","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"TOWN OF WOLFEBORO","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"GRANITE VNA","a":600,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"INTERLAKES COMMUNITY CAREGIVERS INC","a":1500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"MOULTONBOROUGH","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"WRIGHT MUSEUM OF WWII","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"CAMDEN CONFERENCE","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CAMDEN","s":"ME","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"LOU ATHANAS YOUTH BASKETBALL","a":400,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"MASONS & ROTARY OF WOLFEBORO CHARITY GOLF TOURNAMENT","a":300,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2023,"r":"BANK OF NEW HAMPSHIRE","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202520699349100017","record_type":"named_recipient"},{"y":2024,"r":"ALL AMERICAN PUBLISHING","a":295,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"BOISE","s":"ID","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"CLEARLAKES CHORALE","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"HUOT TECHNICAL CENTER","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"LACONIA MULTICULTURAL FESTIVAL","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"LEADERSHIP LAKES REGION","a":1025,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"LOU ATHANAS YOUTH BASKETBALL","a":400,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"NH LONG TERM CARE FOUNDATION","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"POWERHOUSE THEATRE","a":1500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"THE VILLAGE PLAYERS","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"TOWN OF WOLFEBORO","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"WRIGHT MUSEUM OF WWII","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"OSHER AT DARTMOUTH","a":2000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LEBANON","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF GILFORD FOOTBALL","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GILFORD","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"ALZHEIMERS ASSOCIATION","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"GRANITE STATE ELITE SOFTBALL","a":500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"EPSOM","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"DISABLED AMERICAN VETERANS","a":250,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"ERLANGER","s":"KY","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"LAKES REGION CHAMBER OF COMMERCE","a":290,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"WOLFEBORO FESTIVAL OF TREES","a":40,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"CANNON MT SKI AREA","a":45,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"FRANCONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"WINIIPESAUKEE DAR- SH VETERANS FLAGS","a":125,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"GREATER LAKES REGION CHILDRENS AUCTION","a":88,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"LAKES REGION COMMUNITY DEVELOPERS","a":1800,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"NH CENTER FOR NON PROFITS","a":380,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"CONCORD","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"BELKNAP MILL SOCIETY","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"LACONIA","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"NEW HAMPSHIRE BOAT MUSEUM","a":1000,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO FALLS","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"GREAT WATERS","a":2500,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"WOLFEBORO","s":"NH","e":"","o":"202600159349100305","record_type":"named_recipient"},{"y":2024,"r":"MONHONK PRESERVE","a":100,"p":"SUPPORT OF CHARITABLE ORGANIZATION","c":"GARDINER","s":"NY","e":"","o":"202600159349100305","record_type":"named_recipient"}]};window.LEDGER_MERGES=["INTERLAKES COMMUNITY CAREGIVERS"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"ADVICE TO THE PLAYERS":"Arts & culture","BELKNAP MILL SOCIETY":"Arts & culture","THE WINNIPESAUKEE PLAYHOUSE":"Arts & culture","LACONIA LITTLE LEAGUE":"Health & wellbeing","THE VILLAGE PLAYERS":"Arts & culture","LEADERSHIP LAKES REGION":"Education & youth","FRIENDS OF GILFORD FOOTBALL":"Health & wellbeing","LOON PRESERVATION COMMITTEE":"Environment & animals","GRANITE VNA":"Health & wellbeing","LAKES REGION CHAMBER OF COMMERCE":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

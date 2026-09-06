@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="JANEANDDAN_DATA" data-slug="janeanddanie" data-n="76" data-grand="128632384" data-recsub="All five years" data-running="to the dollar, five years running." data-names="43 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="JANEANDDAN_DATA" data-slug="janeanddanie" data-n="76" data-grand="128632384" data-recsub="All five years" data-running="to the dollar, five years running." data-names="43 as-filed names" data-rows-embedded="76" data-rows-total="76">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 76 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">39</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $128,632,384, equals Part I line 25(d), $128,632,384 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.JANEANDDAN_DATA={"meta":{"foundation":"Jane and Daniel Och Family Foundation","ein":"26-3791338","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":76,"grand_total":128632384,"tieout":{"2020":{"object_id":"202133159349103258","grant_count":27,"grant_sum":23188665,"line25_col_d":23188665,"status":"PASS"},"2021":{"object_id":"202243199349109264","grant_count":22,"grant_sum":19641885,"line25_col_d":19641885,"status":"PASS"},"2022":{"object_id":"202323199349107007","grant_count":24,"grant_sum":28419131,"line25_col_d":28419131,"status":"PASS"},"2023":{"object_id":"202403209349108610","grant_count":1,"grant_sum":26506898,"line25_col_d":26506898,"status":"PASS"},"2024":{"object_id":"202523219349108157","grant_count":2,"grant_sum":30875805,"line25_col_d":30875805,"status":"PASS"}}},"grants":[{"y":2020,"r":"American Jewish Committee","a":300000,"p":"General Unrestricted","c":"Millburn","s":"NJ","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Anti-Defamation League","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Aspen Community Foundation","a":200000,"p":"General Unrestricted","c":"Basalt","s":"CO","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Aspen Valley Hospital Foundation","a":50000,"p":"General Unrestricted","c":"Aspen","s":"CO","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Beth El","a":509613,"p":"General Unrestricted","c":"South Orange","s":"NJ","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Birthright Israel Foundation","a":1500000,"p":"General Unrestricted","c":"Hicksville","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Camp Ramah in the Berkshires","a":135000,"p":"General Unrestricted","c":"Wingdale","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"The Community Security Service","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Friends of Schools in the Square","a":345016,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Greater Miami Jewish Federation","a":500000,"p":"General Unrestricted","c":"Miami","s":"FL","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Harlem Village Academies","a":250531,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Health in the Hood","a":100000,"p":"General Unrestricted","c":"Miami","s":"FL","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Hillel the Foundation for Jewish Campus Life","a":110000,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Icahn School of Medicine","a":75000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Jewish Communal Fund","a":520935,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Leadership Conference Education Fund","a":250000,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Mount Sinai Medical Center Foundation","a":100000,"p":"General Unrestricted","c":"Miami Beach","s":"FL","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"New Heights Youth Inc","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"New Venture Fund","a":420000,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"New York Presbyterian Fund Inc","a":4128661,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Robin Hood","a":2500000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"The Museum of Modern Art","a":3273650,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Tides Foundation","a":500000,"p":"General Unrestricted","c":"San Francisco","s":"CA","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"UJA Federation of NY","a":6721396,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"United States Holocaust Memorial Museum","a":200424,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"University of Pennsylvania","a":98439,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2020,"r":"Westchester Reform Temple","a":100000,"p":"General Unrestricted","c":"Scarsdale","s":"NY","e":"","o":"202133159349103258","record_type":"named_recipient"},{"y":2021,"r":"American Jewish Committee","a":300000,"p":"General Unrestricted","c":"Millburn","s":"NJ","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Anti-Defamation League","a":107284,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Beth El","a":129018,"p":"General Unrestricted","c":"South Orange","s":"NJ","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Birthright Israel Foundation","a":1501406,"p":"General Unrestricted","c":"Hicksville","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Facing History and Ourselves","a":50000,"p":"General Unrestricted","c":"Brookline","s":"MA","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Foundation for Jewish Camp","a":50000,"p":"General Unrestricted","c":"New York City","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Friends of Schools in the Square","a":800000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Golda Och Academy","a":1000000,"p":"General Unrestricted","c":"West Orange","s":"NJ","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Harlem Village Academies","a":250953,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Health in the Hood","a":75000,"p":"General Unrestricted","c":"Miami","s":"FL","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Hillel the Foundation for Jewish Campus Life","a":10000,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Icahn School of Medicine","a":53730,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Jewish Communal Fund","a":198789,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Memorial Sloan Kettering Cancer Center","a":127283,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Mount Sinai Medical Center Foundation","a":100000,"p":"General Unrestricted","c":"Miami Beach","s":"FL","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"New York Presbyterian Fund Inc","a":4169632,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"Robin Hood Foundation","a":1250000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"The Community Security Service","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"The Museum of Modern Art","a":3293959,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"UJA Federation of NY","a":5752960,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"United States Holocaust Memorial Museum","a":196871,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2021,"r":"University of Pennsylvania","a":125000,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202243199349109264","record_type":"named_recipient"},{"y":2022,"r":"American Jewish Committee","a":500000,"p":"General Unrestricted","c":"Millburn","s":"NJ","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Anti-Defamation League","a":1000000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Beth El","a":244361,"p":"General Unrestricted","c":"South Orange","s":"NJ","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Birthright Israel Foundation","a":1000000,"p":"General Unrestricted","c":"Hicksville","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Broad Institute","a":200000,"p":"General Unrestricted","c":"Cambridge","s":"MA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Community Security Service","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Facing History and Ourselves","a":56593,"p":"General Unrestricted","c":"Brookline","s":"MA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Golda Och Academy","a":2483558,"p":"General Unrestricted","c":"West Orange","s":"NJ","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Greater Miami Jewish Federation","a":1350000,"p":"General Unrestricted","c":"Miami","s":"FL","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Harlem Village Academies","a":261481,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Icahn School of Medicine","a":21270,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Jewish Funders Network","a":15000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Memorial Sloan Kettering Cancer Center","a":100000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Mount Sinai Medical Center Foundation","a":245000,"p":"General Unrestricted","c":"Miami Beach","s":"FL","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"New York Presbyterian Fund Inc","a":11306560,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Penn Hillel","a":10382,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Robin Hood Foundation","a":720000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"The Miami Foundation","a":100000,"p":"General Unrestricted","c":"Miami","s":"FL","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"The Museum of Modern Art","a":250000,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Trustees of the University of Pennsylvania","a":100000,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"UJA Federation of NY","a":6772799,"p":"General Unrestricted","c":"New York","s":"NY","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"United States Holocaust Memorial Museum","a":1050000,"p":"General Unrestricted","c":"Washington","s":"DC","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Weitzman National Museum of American Jewish History","a":500000,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2022,"r":"Wharton Scholarship","a":32127,"p":"General Unrestricted","c":"Philadelphia","s":"PA","e":"","o":"202323199349107007","record_type":"named_recipient"},{"y":2023,"r":"SEE ATTACHED LIST","a":26506898,"p":"General Purpose","c":"","s":"","e":"","o":"202403209349108610","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED LIST-Cash Charitable Contribution","a":12323930,"p":"General Purpose","c":"","s":"","e":"","o":"202523219349108157","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED LIST-NonCash Charitable Contribution","a":18551875,"p":"GENERAL PURPOSE","c":"","s":"","e":"","o":"202523219349108157","record_type":"unitemized"}]};window.LEDGER_MERGES=["COMMUNITY SECURITY SERVICE"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

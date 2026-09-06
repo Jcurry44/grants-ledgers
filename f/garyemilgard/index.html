@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GARYEMILGA_DATA" data-slug="garyemilgard" data-n="85" data-grand="23575500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="44 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GARYEMILGA_DATA" data-slug="garyemilgard" data-n="85" data-grand="23575500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="44 as-filed names" data-rows-embedded="85" data-rows-total="85">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 85 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">44</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $23,575,500, equals Part I line 25(d), $23,575,500 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.GARYEMILGA_DATA={"meta":{"foundation":"Gary E Milgard Family Foundation-Cari","ein":"81-1292744","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":85,"grand_total":23575500,"tieout":{"2021":{"object_id":"202232949349100018","grant_count":13,"grant_sum":11247500,"line25_col_d":11247500,"status":"PASS"},"2022":{"object_id":"202302909349100130","grant_count":15,"grant_sum":1765000,"line25_col_d":1765000,"status":"PASS"},"2023":{"object_id":"202402259349101650","grant_count":13,"grant_sum":1101000,"line25_col_d":1101000,"status":"PASS"},"2024":{"object_id":"202532949349100328","grant_count":21,"grant_sum":4588000,"line25_col_d":4588000,"status":"PASS"},"2025":{"object_id":"202621059349100957","grant_count":23,"grant_sum":4874000,"line25_col_d":4874000,"status":"PASS"}}},"grants":[{"y":2021,"r":"ASSOCIATED MINISTRIES OF TACOMA-PIERCE CO","a":60000,"p":"PROJECT HOMELESS CONNECT IN PIERCE CO.","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"MAKING A DIFFERENCE FOUNDATION","a":75000,"p":"ELOISE'S COOKING POT FOOD BANK DELIVERY","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"MULTICARE HEALTH FOUNDATION","a":200000,"p":"COMMUNITY BASED COVID-19 VACCINE CLINICS","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"MULTICARE HEALTH FOUNDATION","a":10000000,"p":"MARY BRIDGE HOSPITAL CAPITAL CAMPAIGN","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"NEW PHOEBE HOUSE ASSOCIATION","a":80000,"p":"PHOEBE HOUSE RECOVERY, REUNIFICATION, AND RESILIENCY PROGRAMS.","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"PAGE AHEAD CHILDRENS'S LITERACY PROGRAM","a":2500,"p":"TABLE SPONSORSHIP- BRIONY PENTECOST","c":"SEATTLE","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"OLIVE CREST","a":150000,"p":"HIGH RISK FOSTER CHILDREN AND YOUTH","c":"BELLEVUE","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"YWCA PIERCE COUNTY","a":100000,"p":"EMERGENCY SHELTER","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"BOYS & GIRLS CLUB OF SOUTH PUGET SOUND","a":500000,"p":"GENERAL OPERATING FUND","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"BOYS & GIRLS CLUB OF SOUTH PUGET SOUND","a":30000,"p":"GENERAL OPERATING FUND","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"SOUTH SOUND CARE FOUNDATION","a":10000,"p":"BEER AND BITES FUNDRAISER","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"PEOPLE FOR ANIMAL CARE AND KINDNESS","a":30000,"p":"PIERCE COUNTY CANINE COMPASSION PROJECT","c":"TACOMA","s":"WA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2021,"r":"SOAR","a":10000,"p":"SPAY & NEUTER MOBILE UNIT & MEDICAL CARE","c":"PALM DESERT","s":"CA","e":"","o":"202232949349100018","record_type":"named_recipient"},{"y":2022,"r":"GIG HARBOR PENINSULA FISH FOOD BANK AND COMMUNITY SERVICES","a":50000,"p":"BUILDING THE FUTURE CAMPAIGN","c":"GIG HARBOR","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"EMERGENCY FOOD NETWORK OF TACOMA-PIERCE COUNTY","a":100000,"p":"CO-OP FOOD PURCHASING PROGRAM","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"BOYS & GIRLS CLUB OF SOUTH PUGET SOUND","a":500000,"p":"GENERAL OPERATIONS","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"ASSOCIATED MINISTRIES OF TACOMA-PIERCE CO","a":60000,"p":"PROJECT HOMELESS CONNECT","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"YOUTH MARINE FOUNDATION","a":80000,"p":"NEXT GEN CAMPAIGN","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"PAGE AHEAD CHILDREN'S LITERACY PROGRAM","a":50000,"p":"BOOK UP SUMMER TACOMA","c":"SEATTLE","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"TOY RESCUE MISSION","a":65000,"p":"RENT, UTILITIES, SUPPLIES","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S HOME SOCIETY OF WASHINGTON","a":10000,"p":"KEY PENINSULA FAMILY RESOURCE CTR","c":"VAUGHN","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"YWCA PIERCE COUNTY","a":150000,"p":"LEGAL SERVICES/CHILDREN'S PROGRAM","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"SOUTH SOUND CARE FOUNDATION","a":10000,"p":"BEER & BITES EVENT 2022","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"NOURISH PIERCE COUNTY","a":150000,"p":"GENERAL OPERATING","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"LUTHERAN COMMUNITY SERVICES NW","a":250000,"p":"SENIOR SUPPORT SERVICES","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"YMCA OF PIERCE AND KITSAP COUNTIES","a":250000,"p":"COMMUNITY LEARNING CENTERS","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"PEOPLE FOR ANIMAL CARE AND KINDNESS","a":30000,"p":"PIERCE COUNTY FOOD, VACCINE, SPAY/NEUTER","c":"TACOMA","s":"WA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2022,"r":"SOAR (SOCIETYS OUTKASTS ANIMAL RESCUE)","a":10000,"p":"SPAY/NEUTER, MEDICAL EXPENSES","c":"PALM DESERT","s":"CA","e":"","o":"202302909349100130","record_type":"named_recipient"},{"y":2023,"r":"CHILDREN'S HOME SOCIETY OF WASHINGTON","a":10000,"p":"KEY PENINSULA FAMILY RESOURCE CTR","c":"VAUGHN","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"EMERGENCY FOOD NETWORK OF TACOMA-PIERCE COUNTY","a":100000,"p":"CO-OP FOOD PURCHASING PROGRAM","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"HOPESPARKS FAMILY SERVICES","a":100000,"p":"CHILDREN'S MENTAL HEALTH","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"MAKING A DIFFERENCE FOUNDATION","a":100000,"p":"ELOISE'S COOKING POT","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"NORTHWEST HARVEST","a":10000,"p":"IN HONOR OF DR. JIM VINCENT","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"NOURISH PIERCE COUNTY","a":6000,"p":"FIFTH & FRESCO/MAX & LAUREN THAYER","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"NOURISH PIERCE COUNTY","a":150000,"p":"GENERAL OPERATING","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"PACK-PEOPLE FOR ANIMAL CARE AND KINDNESS","a":100000,"p":"PARTY WITH A PURPOSE GALA","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"SOUTH SOUND CARE FOUNDATION","a":50000,"p":"BEER & BITES 2023","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"STEP BY STEP","a":100000,"p":"MATERNITY SUPPORT SERVICES","c":"MILTON","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"THE GREATER TACOMA COMMUNITY FOUNDATION","a":200000,"p":"PENMET PARKS COMMUNITY RECREATION CTR","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"TOY RESCUE MISSION","a":100000,"p":"OVERHEAD, RESTORE, SHRINKWRAP","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2023,"r":"UNITED WAY OF PIERCE COUNTY","a":75000,"p":"CENTER FOR STRONG FAMILIES","c":"TACOMA","s":"WA","e":"","o":"202402259349101650","record_type":"named_recipient"},{"y":2024,"r":"AMARA","a":50000,"p":"PIERCE COUNTY RESOURCE/SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"ASIA PACIFIC CULTURAL CENTER","a":750000,"p":"ONE HEART ONE HOME NEW BLDG","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"ASSOCIATED MINISTRIES OF TACOMA-PIERCE CO","a":40000,"p":"PROJECT HOMELESS CONNECT","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF SOUTH PUGET SOUND","a":400000,"p":"OPERATIONS/TEEN MENTAL HEALTH","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"CJK COMMUNITY HOMES","a":30000,"p":"MENTAL HEALTH, PEER SUPPORTS","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"CLARK ASSISTANCE FUND","a":300000,"p":"SPAY NEUTER PIERCE COUNTY","c":"BELLINGHAM","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"FOOD BACKPACKS 4 KIDS","a":10000,"p":"SUBARU KIDS CLASSIC GOLF FUNDRAISER","c":"GIG HARBOR","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"GOODROOTS","a":443000,"p":"LOCKER NETWORK PROGRAM","c":"BONNEY LAKE","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"GREENTRIKE","a":300000,"p":"JBLM CHILDREN'S MUSEUM","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"LUTHERAN COMMUNITY SERVICES NW","a":250000,"p":"SENIOR SERVICES/DEMENTIA","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"MAKING A DIFFERENCE FOUNDATION","a":100000,"p":"ELOISE'S COOKING POT FOOD BANK","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"MEDICAL TEAMS INTERNATIONAL","a":100000,"p":"CARE & CONNECT PIERCE COUNTY","c":"PORTLAND","s":"OR","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"NOURISH PIERCE COUNTY","a":165000,"p":"GENERAL OPERATING","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"OLIVE CREST","a":50000,"p":"PIERCE COUNTY MENTAL HEALTH CARE","c":"BELLEVUE","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"PACK-PEOPLE FOR ANIMAL CARE AND KINDNESS","a":200000,"p":"PARTY WITH A PURPOSE MATCH","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"PARTNERS FOR PARKS","a":200000,"p":"H-BARN PROJECT","c":"LACEY","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"SOUTH SOUND CARE FOUNDATION","a":50000,"p":"BEER & BITES 2024","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"STEP BY STEP","a":250000,"p":"DREAMS WORK/EARLY LEARNING CTR","c":"MILTON","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"TACOMAPIERCE COUNTY HABITAT FOR HUMANITY","a":500000,"p":"BUILDING HOPE CAMPAIGN","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"YMCA OF PIERCE AND KITSAP COUNTIES","a":250000,"p":"TACOMA COMMUNITY LEARNING CTRS","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2024,"r":"YWCA PIERCE COUNTY","a":150000,"p":"LEGAL & CHILDREN'S PROGRAMS","c":"TACOMA","s":"WA","e":"","o":"202532949349100328","record_type":"named_recipient"},{"y":2025,"r":"ASSOCIATED MINISTRIES OF TACOMA-PIERCE CO","a":40000,"p":"PROJECT HOMELESS CONNECT","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"BOYS & GIRLS CLUB OF SOUTH PUGET SOUND","a":300000,"p":"GENERAL OPERATIONS","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"EMERGENCY FOOD NETWORK","a":100000,"p":"CO-OP FOOD PURCHASING PROGRAM","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"FOOD BACKPACKS 4 KIDS","a":10000,"p":"KIDS CLASSIC GOLF FUNDRAISER 2025","c":"GIG HARBOR","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"GOODROOTS","a":339000,"p":"LOCKER NETWORK- ROUND TWO","c":"BONNEY LAKE","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"GREENTRIKE","a":10000,"p":"RIGHT TO PLAY GALA 2025","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"HOPESPARKS FAMILY SERVICES","a":250000,"p":"PEDIATRIC HEALTHCARE INTEGRATION","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"KITSAP HUMANE SOCIETY","a":300000,"p":"BOG DOG CRISIS INITIATIVE","c":"SILVERDALE","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"KOREAN WOMEN'S ASSOCIATION","a":100000,"p":"SENIOR WELLNESS PROGRAM","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"MAKING A DIFFERENCE FOUNDATION","a":100000,"p":"ELOISE'S COOKING POT FOOD BANK","c":"SEATTLE","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"MAKING A DIFFERENCE FOUNDATION","a":20000,"p":"PET FOOD-ELOISE FOOD BANK","c":"SEATTLE","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"MEDICAL TEAMS INTERNATIONAL","a":100000,"p":"CARE & CONNECT PIERCE COUNTY","c":"PORTLAND","s":"OR","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"NOURISH PIERCE COUNTY","a":175000,"p":"GENERAL OPERATIONS","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"OLIVE CREST","a":100000,"p":"YOUTH PIERCE COUNTY","c":"BELLEVUE","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"PACK-PEOPLE FOR ANIMAL CARE AND KINDNESS","a":50000,"p":"MEDICAL SUPPORT","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"PACK-PEOPLE FOR ANIMAL CARE AND KINDNESS","a":250000,"p":"PARTY WITH A PURPOSE 2025","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"REBUILDING HOPE","a":150000,"p":"DROP-IN CENTER","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"SOUTH SOUND CARE FOUNDATION","a":50000,"p":"BEER & BITES 2025","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"SUMNER COMMUNITY FOOD BANK","a":80000,"p":"FOOD BANK PROGRAM","c":"SUMNER","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"TACOMA RESCUE MISSION","a":1000000,"p":"SERVICES/SHELTER EXPANSION","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"TOY RESCUE MISSION","a":100000,"p":"RENT, OVERHEAD, SUPPLIES","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"TRA MEDICAL IMAGING FOUNDATION","a":1000000,"p":"MOBILE MAMMONW","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"},{"y":2025,"r":"YMCA OF PIERCE AND KITSAP COUNTIES","a":250000,"p":"COMMUNITY LEARNING CTRS","c":"TACOMA","s":"WA","e":"","o":"202621059349100957","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"NEW PHOEBE HOUSE ASSOCIATION":"Basic needs & response","SOUTH SOUND CARE FOUNDATION":"Health & wellbeing","PEOPLE FOR ANIMAL CARE AND KINDNESS":"Environment & animals","TOY RESCUE MISSION":"Nonprofit capacity & transitions","STEP BY STEP":"Basic needs & response","UNITED WAY OF PIERCE COUNTY":"Nonprofit capacity & transitions","AMARA":"Basic needs & response","CLARK ASSISTANCE FUND":"Environment & animals","GREENTRIKE":"Arts & culture"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

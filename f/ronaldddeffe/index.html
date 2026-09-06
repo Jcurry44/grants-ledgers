@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="RONALDDDEF_DATA" data-slug="ronaldddeffe" data-n="107" data-grand="13514350" data-recsub="All five years" data-running="to the dollar, five years running." data-names="76 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="RONALDDDEF_DATA" data-slug="ronaldddeffe" data-n="107" data-grand="13514350" data-recsub="All five years" data-running="to the dollar, five years running." data-names="76 as-filed names" data-rows-embedded="107" data-rows-total="107">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 107 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">75</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $13,514,350, equals Part XIV, line 3a, $13,514,350 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.RONALDDDEF_DATA={"meta":{"foundation":"Ronald D Deffenbaugh Foundation","ein":"26-6095573","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":107,"grand_total":13514350,"tieout":{"2020":{"object_id":"202133159349103613","grant_count":50,"grant_sum":1856315,"line25_col_d":1856315,"status":"PASS"},"2021":{"object_id":"202213199349103801","grant_count":54,"grant_sum":2507900,"line25_col_d":2507900,"status":"PASS"},"2022":{"object_id":"202333119349100408","grant_count":1,"grant_sum":3339415,"line25_col_d":3339415,"status":"PASS"},"2023":{"object_id":"202433169349100243","grant_count":1,"grant_sum":2705500,"line25_col_d":2705500,"status":"PASS"},"2024":{"object_id":"202543219349101464","grant_count":1,"grant_sum":3105220,"line25_col_d":3105220,"status":"PASS"}}},"grants":[{"y":2020,"r":"WOMEN'S EMPLOYMENT NETWORK","a":20000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"CATHOLIC CHARITIES FOUNDATION","a":85000,"p":"GENERAL OPERATIONS","c":"Alexandria","s":"VA","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Boys Hope Girls Hope of Kansas City","a":25000,"p":"GENERAL OPERATIONS","c":"Leawood","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Carry the Cross Ministries","a":90000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Christmas in October","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Developing Potential Inc (DPI)","a":100000,"p":"GENERAL OPERATIONS","c":"Lees Summit","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Donnelly College","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Drumm Center for Children (Drumm Farm)","a":65000,"p":"GENERAL OPERATIONS","c":"Independence","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Gordon Parks Elementary School","a":20000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Job One Inc","a":51315,"p":"GENERAL OPERATIONS","c":"Independence","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Kansas City Scholars","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Kauffman Center for the Performing Arts","a":20000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Medical Missions Foundation","a":20000,"p":"GENERAL OPERATIONS","c":"Lenexa","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Performing Arts Foundation","a":5000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Sherwood Autism Center","a":65000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"William Jewell College","a":15000,"p":"GENERAL OPERATIONS","c":"Liberty","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Citizens of the World Kansas City","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"GoodLife Innovations Inc","a":65000,"p":"GENERAL OPERATIONS","c":"Lenexa","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"In the Name of GRACE","a":25000,"p":"GENERAL OPERATIONS","c":"Liberty","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Kansas City K-Life","a":20000,"p":"GENERAL OPERATIONS","c":"Prairie Village","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"NourishKC","a":50000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Rockhurst Hurtado Scholars Program","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Seton Center Inc","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Start at Zero","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"The Signatry","a":200000,"p":"GENERAL OPERATIONS","c":"Overland Park","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Welcome House Inc","a":50000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Youthfront","a":30000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Greater Kansas City Community Foundation","a":100000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Down Syndrome Guild of Greater Kansas City","a":150000,"p":"GENERAL OPERATIONS","c":"MISSION","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Oakhill Day School","a":5000,"p":"GENERAL OPERATIONS","c":"GLADSTONE","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"First Call","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Gilda's Club Kansas City","a":10000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Inclusion Connections","a":17000,"p":"GENERAL OPERATIONS","c":"OLATHE","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Family Conservancy","a":25000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Museum at Prairiefire Foundation","a":10000,"p":"GENERAL OPERATIONS","c":"OVERLAND PARK","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Northland Early Education Center","a":5000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Special Olympics Kansas","a":10000,"p":"GENERAL OPERATIONS","c":"MISSION","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Starlight Theatre Association of Kansas City","a":10000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"The Light House Inc","a":63000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"The Willow Domestic Violence Center","a":25000,"p":"GENERAL OPERATIONS","c":"LAWRENCE","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Global Orphan Project","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Mesner Puppet Theater","a":5000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Emmanuel Baptist Church","a":30000,"p":"GENERAL OPERATIONS","c":"OVERLAND PARK","s":"KS","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Kansas City Autism Training Center","a":20000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Tikkun-KC Inc","a":10000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Veterans Community Project","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Englewood Arts","a":10000,"p":"GENERAL OPERATIONS","c":"INDEPENDENCE","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"One Heart Project","a":25000,"p":"GENERAL OPERATIONS","c":"SOUTHLAKE","s":"TX","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Hope Family Care Center","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2020,"r":"Wonderscope Children's Museum","a":5000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202133159349103613","record_type":"named_recipient"},{"y":2021,"r":"WOMEN'S EMPLOYMENT NETWORK","a":25000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"CATHOLIC CHARITIES FOUNDATION","a":85000,"p":"GENERAL OPERATIONS","c":"Alexandria","s":"VA","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Carry the Cross Ministries","a":90000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Donnelly College","a":20000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Drumm Center for Children (Drumm Farm)","a":65000,"p":"GENERAL OPERATIONS","c":"Independence","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Gordon Parks Elementary School","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Job One Inc","a":60400,"p":"GENERAL OPERATIONS","c":"Independence","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Kansas City Scholars","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Performing Arts Foundation","a":7500,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"William Jewell College","a":10000,"p":"GENERAL OPERATIONS","c":"Liberty","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Citizens of the World Kansas City","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"GoodLife Innovations Inc","a":75000,"p":"GENERAL OPERATIONS","c":"Lenexa","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"NourishKC","a":50000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Rockhurst Hurtado Scholars Program","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Seton Center Inc","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Start at Zero","a":15000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"The Signatry","a":210000,"p":"GENERAL OPERATIONS","c":"Overland Park","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Welcome House Inc","a":100000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Youthfront","a":30000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"First Call","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Gilda's Club Kansas City","a":10000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Inclusion Connections","a":25000,"p":"GENERAL OPERATIONS","c":"OLATHE","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Family Conservancy","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Special Olympics Kansas","a":10000,"p":"GENERAL OPERATIONS","c":"MISSION","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Starlight Theatre Association of Kansas City","a":25000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"The Light House Inc","a":70000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Global Orphan Project","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Mesner Puppet Theater","a":5000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Veterans Community Project","a":50000,"p":"GENERAL OPERATIONS","c":"KANSAS CITY","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Academy for the Integrated Arts (AFIA)","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Barstow School","a":75000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Be Free KC","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Community Capital Fund","a":5000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Emerging Builders","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Down Syndrome Innovations","a":600000,"p":"GENERAL OPERATIONS","c":"Mission","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Englewoods Arts","a":10000,"p":"GENERAL OPERATIONS","c":"Independence","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Food Equality Initiative","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Healing House Inc","a":50000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Junior Achievement of Middle America","a":25000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Kansas City Art Institute","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Kansas Chamber Educational Foundation","a":10000,"p":"GENERAL OPERATIONS","c":"Topeka","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Kansas City Symphony","a":15000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Kansas University Endowment Association","a":50000,"p":"GENERAL OPERATIONS","c":"Lawrence","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Lorraine's House","a":20000,"p":"GENERAL OPERATIONS","c":"Mission","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"New Creations 2020 Inc","a":10000,"p":"GENERAL OPERATIONS","c":"Olathe","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"North KC School District Ed Foundation","a":5000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Operation Breakthrough Inc","a":40000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Overland Park Soccer Club","a":10000,"p":"GENERAL OPERATIONS","c":"Overland Park","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Police Athletic Leaque of Kansas City KS","a":125000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Police Athletic Leaque of Kansas City Inc","a":5000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"MO","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Shepherd's Center of Kansas City KS","a":10000,"p":"GENERAL OPERATIONS","c":"Kansas City","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"SOAR Special Needs","a":50000,"p":"GENERAL OPERATIONS","c":"Lenexa","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"War Horses for Veterans","a":25000,"p":"GENERAL OPERATIONS","c":"Stilwell","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2021,"r":"Wildwood Outdoor Education Center","a":20000,"p":"GENERAL OPERATIONS","c":"Lacygne","s":"KS","e":"","o":"202213199349103801","record_type":"named_recipient"},{"y":2022,"r":"SEE ATTACHED STATEMENT","a":3339415,"p":"General Purpose","c":"","s":"","e":"","o":"202333119349100408","record_type":"unitemized"},{"y":2023,"r":"SEE ATTACHED STATEMENT","a":2705500,"p":"GENERAL PURPOSE","c":"","s":"","e":"","o":"202433169349100243","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED STATEMENT","a":3105220,"p":"GENERAL PURPOSE","c":"","s":"","e":"","o":"202543219349101464","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

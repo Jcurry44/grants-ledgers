@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="SMITHBROTH_DATA" data-slug="smithbrother" data-n="56" data-grand="6966515" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="SMITHBROTH_DATA" data-slug="smithbrother" data-n="56" data-grand="6966515" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names" data-rows-embedded="56" data-rows-total="56">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 56 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">39</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $6,966,515, equals Part I line 25(d), $6,966,515 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.SMITHBROTH_DATA={"meta":{"foundation":"Smith Brothers Family Foundation","ein":"84-3726366","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":56,"grand_total":6966515,"tieout":{"2020":{"object_id":"202143199349108019","grant_count":3,"grant_sum":1166754,"line25_col_d":1166754,"status":"PASS"},"2021":{"object_id":"202203199349102460","grant_count":5,"grant_sum":1248935,"line25_col_d":1248935,"status":"PASS"},"2022":{"object_id":"202303199349108995","grant_count":11,"grant_sum":947565,"line25_col_d":947565,"status":"PASS"},"2023":{"object_id":"202510799349101316","grant_count":21,"grant_sum":1698236,"line25_col_d":1698236,"status":"PASS"},"2024":{"object_id":"202503219349102840","grant_count":16,"grant_sum":1905025,"line25_col_d":1905025,"status":"PASS"}}},"grants":[{"y":2020,"r":"PALM BEACH COMMUNITY FOUNDATION","a":1164351,"p":"TO SUPPORT PALM BEACH COMMUNITY FOUNDATION","c":"WEST PALM BEACH","s":"FL","e":"","o":"202143199349108019","record_type":"named_recipient"},{"y":2020,"r":"LOGGERHEAD MARINA LIFE CENTER","a":1875,"p":"TO SUPPORT LOGGERHEAD MARINA LIFE CENTER","c":"JUNO BEACH","s":"FL","e":"","o":"202143199349108019","record_type":"named_recipient"},{"y":2020,"r":"WEST JUPITER COMMUNITY GROUP INC","a":528,"p":"TO SUPPORT WEST JUPITER COMMUNITY GROUP, INC.","c":"JUPITER","s":"FL","e":"","o":"202143199349108019","record_type":"named_recipient"},{"y":2021,"r":"PALM BEACH COMMUNITY FOUNDATION","a":1244513,"p":"TO SUPPORT PALM BEACH COMMUNITY FOUNDATION.","c":"WEST PALM BEACH","s":"FL","e":"","o":"202203199349102460","record_type":"named_recipient"},{"y":2021,"r":"ALZHEIMER'S ASSOCIATION","a":1000,"p":"TO SUPPORT ALZHEIMER'S ASSOCIATION.","c":"CHICAGO","s":"IL","e":"","o":"202203199349102460","record_type":"named_recipient"},{"y":2021,"r":"PLACE OF HOPE","a":1843,"p":"TO SUPPORT PLACE OF HOPE.","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202203199349102460","record_type":"named_recipient"},{"y":2021,"r":"ADOPT A FAMILY","a":579,"p":"TO SUPPORT ADOPT A FAMILY.","c":"LAKE WORTH","s":"FL","e":"","o":"202203199349102460","record_type":"named_recipient"},{"y":2021,"r":"NATIONAL CENTER FOR FAMILIES","a":1000,"p":"TO SUPPORT NATIONAL CENTER FOR FAMILIES.","c":"LOUISVILLE","s":"KY","e":"","o":"202203199349102460","record_type":"named_recipient"},{"y":2022,"r":"PALM BEACH COMMUNITY FOUNDATION","a":899453,"p":"TO SUPPORT PALM BEACH COMMUNITY FOUNDATION.","c":"WEST PALM BEACH","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"THE BENJAMIN SCHOOL","a":250,"p":"TO SUPPORT THE BENJAMIN SCHOOL.","c":"NORTH PALM BEACH","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"STOP CHILDREN'S CANCER INC","a":1000,"p":"TO SUPPORT STOP CHILDREN.","c":"GAINESVILLE","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"SELFLESS LOVE FOUNDATION","a":14000,"p":"TO SUPPORT SELFLESS LOVE FOUNDATION.","c":"JUPITER","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"NATIONAL CENTER FOR FAMILY PHILANTHROPY INC","a":1000,"p":"TO SUPPORT NATIONAL CENTER FOR CHILD.","c":"WASHINGTON","s":"DC","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF MANATEE LAGOON INC","a":500,"p":"TO SUPPORT FRIENDS OF MANATEES.","c":"WEST PALM BEACH","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"BROWN UNIVERSITY","a":25000,"p":"TO SUPPORT BROWN UNIVERSITY.","c":"PROVIDENCE","s":"RI","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"ADOPT A FAMILY OF THE PALM BEACHES INC","a":4255,"p":"TO SUPPORT AAF-HIGHLAND ELEMENTARY CLASSROOM PROJECT.","c":"LAKE WORTH","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"US ROWING","a":500,"p":"TO SUPPORT US ROWING.","c":"PHILADELPHIA","s":"PA","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"WEST JUPITER COMMUNITY CENTER","a":607,"p":"TO SUPPORT WEST JUPITER COMMUNITY CENTER","c":"JUPITER","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2022,"r":"THE FIRST TEE","a":1000,"p":"TO SUPPORT THE FIRST TEE","c":"PONTE VEDRA BEACH","s":"FL","e":"","o":"202303199349108995","record_type":"named_recipient"},{"y":2023,"r":"ADOPT A FAMILY","a":880,"p":"TO SUPPORT ADOPT A FAMILY","c":"LAKE WORTH","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"BROWN UNIVERSITY","a":1000,"p":"TO SUPPORT BROWN UNIVERSITY","c":"PROVIDENCE","s":"RI","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"FRIENDS OF MANATEE LAGOON INC","a":5250,"p":"TO SUPPORT FRIENDS OF MANATEES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"PALM BEACH COMMUNITY FOUNDATION","a":1607003,"p":"TO SUPPORT PALM BEACH COMMUNITY FOUNDATION","c":"WEST PALM BEACH","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"PLACE OF HOPE","a":12046,"p":"DONATION TO SUPPORT YOUTH IN FOSTER CARE","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"SELFLESS LOVE FOUNDATION","a":20000,"p":"TO SUPPORT SELFLESS LOVE FOUNDATION","c":"JUPITER","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"AUDRAIN AUTO MUSEUM","a":7500,"p":"DONATION FOR AUTO HISTORY PRESERVATION","c":"NEWPORT","s":"RI","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"BIG DOG RANCH RESCUE","a":3600,"p":"DONATION TO RESCUE AND REHABILITATE DOGS","c":"LOXAHATCHEE GROVES","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"CHILDREN'S GOLF FDTN","a":1000,"p":"DONATION TO YOUNG PEOPLE FOR EDUCATIONAL PROGRAMS","c":"WEST PALM BEACH","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"CRU DONATIONS","a":500,"p":"DONATION FOR CAMPUS AND ATHLETE MINISTRIES","c":"ORLANDO","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"FL ALLIANCE","a":700,"p":"DONATION TO END HUMAN TRAFFICKING","c":"TALLAHASSEE","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"HEADSTRONG FDTN","a":1000,"p":"DONATION TO SUPPORT PEOPLE WITH CANCER","c":"WOODLYN","s":"PA","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"LEUKEMIA & LYMPHOA","a":1000,"p":"DONATION FOR BLOOD CANCER RESEARCH","c":"RYE BROOK","s":"NY","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"MIRACLE NETWORK","a":1000,"p":"DONATION FOR CHILDREN'S HOSPITALS","c":"SALT LAKE CITY","s":"UT","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"NORTH PALM BEACH ROWING CLUB","a":18500,"p":"DONATION FOR YOUTH ROWING PROGRAM","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"SAVE OUR MUSICIANS","a":15000,"p":"DONATION FOR MUSIC PROGRAMS","c":"JUPITER","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"ST JUDE","a":100,"p":"DONATION FOR CHURCH FOOD BANK","c":"TEQUESTA","s":"FL","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"U OF THE NATIONS KONA","a":307,"p":"DONATION FOR EDUCATION AND MISSIONS","c":"KAILUAKONA","s":"HI","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"UNITED WAY","a":1100,"p":"DONATION FOR COMMUNITY PROGRAMS","c":"ALEXANDRIA","s":"VA","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"XCEL STRATEGIES INC","a":600,"p":"DONATION TO MENTORING PROGRAM","c":"SAVANNAH","s":"GA","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2023,"r":"YWCA DAYTON","a":150,"p":"DONATION FOR PROGRAMS EMPOWERING WOMEN","c":"DAYTON","s":"OH","e":"","o":"202510799349101316","record_type":"named_recipient"},{"y":2024,"r":"ADOPT A FAMILY","a":6000,"p":"TO SUPPORT ADOPT A FAMILY","c":"LAKE WORTH","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"BIG DOG RANCH RESCUE","a":6415,"p":"DONATION TO RESCUE AND REHABILITATE DOGS","c":"LOXAHATCHEE GROVES","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"BROWN UNIVERSITY","a":25000,"p":"TO SUPPORT BROWN UNIVERSITY","c":"PROVIDENCE","s":"RI","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"LEUKEMIA & LYMPHOA","a":1250,"p":"DONATION FOR BLOOD CANCER RESEARCH","c":"RYE BROOK","s":"NY","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"PALM BEACH COMMUNITY FOUNDATION","a":1805059,"p":"TO SUPPORT PALM BEACH COMMUNITY FOUNDATION","c":"WEST PALM BEACH","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"SELFLESS LOVE FOUNDATION","a":10000,"p":"TO SUPPORT SELFLESS LOVE FOUNDATION","c":"JUPITER","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"EDNA W RUNNER","a":5000,"p":"DONATION TO YOUNG PEOPLE FOR EDUCATIONAL PROGRAMS","c":"JUPITER","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"HEALTHCORPS","a":5000,"p":"DONATION TO SUPPORT TEEN HEALTH","c":"NEW YORK","s":"NY","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"NATIONALMALLORG","a":3000,"p":"DONATION TO THE WASHINGTON NATIONAL MALL","c":"WASHINGTON","s":"DC","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"PIPER'S ANGELS FOUNDATION","a":500,"p":"DONATION TO SUPPORT PEOPLE WITH CYSTIC FIBROSIS","c":"JUPITER","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"SALVATION ARMY","a":10000,"p":"TO SUPPORT SALVATION ARMY","c":"ALEXANDRIA","s":"VA","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"THE BENJAMIN SCHOOL","a":5000,"p":"TO SUPPORT STUDENTS AT THE BENJAMIN SCHOOL","c":"NORTH PALM BEACH","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"THE EVERGLADES FOUNDATION INC","a":10000,"p":"DONATION TO SUPPORT RESEARCH IN THE EVERGLADES","c":"PALMETTO BAY","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"THE FIRST TEE","a":1000,"p":"DONATION TO YOUNG PEOPLE FOR EDUCATIONAL PROGRAMS","c":"PONTE VEDRA BEACH","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"WEST JUPITER COMMUNITY GROUP INC","a":100,"p":"DONATION TO YOUNG PEOPLE FOR EDUCATIONAL PROGRAMS","c":"JUPITER","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"},{"y":2024,"r":"WORLD SERIES OF GOLF FDTN","a":11701,"p":"DONATION TO BENEFIT VETERANS AND HEROES","c":"MIAMI","s":"FL","e":"","o":"202503219349102840","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"WEST JUPITER COMMUNITY GROUP INC":"Education & youth","PLACE OF HOPE":"Basic needs & response","SELFLESS LOVE FOUNDATION":"Basic needs & response","NATIONAL CENTER FOR FAMILY PHILANTHROPY INC":"Nonprofit capacity & transitions","FRIENDS OF MANATEE LAGOON INC":"Environment & animals","BIG DOG RANCH RESCUE":"Environment & animals","UNITED WAY":"Nonprofit capacity & transitions"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

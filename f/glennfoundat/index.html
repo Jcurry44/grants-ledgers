@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GLENNFOUND_DATA" data-slug="glennfoundat" data-n="69" data-grand="41316849" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GLENNFOUND_DATA" data-slug="glennfoundat" data-n="69" data-grand="41316849" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names" data-rows-embedded="69" data-rows-total="69">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 69 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">31</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $41,316,849, equals Part I line 25(d), $41,316,849 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.GLENNFOUND_DATA={"meta":{"foundation":"Glenn Foundation for Medical Research","ein":"86-0710305","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":69,"grand_total":41316849,"tieout":{"2020":{"object_id":"202222209349101712","grant_count":14,"grant_sum":8328038,"line25_col_d":8328038,"status":"PASS"},"2021":{"object_id":"202300419349100005","grant_count":11,"grant_sum":5433090,"line25_col_d":5433090,"status":"PASS"},"2022":{"object_id":"202430449349101113","grant_count":13,"grant_sum":8038499,"line25_col_d":8038499,"status":"PASS"},"2023":{"object_id":"202521089349100007","grant_count":18,"grant_sum":10484664,"line25_col_d":10484664,"status":"PASS"},"2024":{"object_id":"202630379349100603","grant_count":13,"grant_sum":9032558,"line25_col_d":9032558,"status":"PASS"}}},"grants":[{"y":2020,"r":"AMERICAN AGING ASSOCIATION","a":5000,"p":"MEDICAL RESEARCH","c":"GRANDVILLE","s":"MI","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN FEDERATION FOR AGING RESEARCH","a":2098750,"p":"MEDICAL RESEARCH","c":"NEW YORK","s":"NY","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"BUCK INSTITUTE","a":400000,"p":"MEDICAL RESEARCH","c":"NOVATO","s":"CA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"FASEB SCIENCE RESEARCH","a":5000,"p":"MEDICAL RESEARCH","c":"ROCKVILLE","s":"MD","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"GERONTOLOGICAL SOCIETY OF AMERICA","a":15000,"p":"MEDICAL RESEARCH","c":"WASHINGTON","s":"DC","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"HARVARD MEDICAL SCHOOL","a":803294,"p":"MEDICAL RESEARCH","c":"BOSTON","s":"MA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"J DAVID GLADSTONE INSTITUTE","a":46607,"p":"MEDICAL RESEARCH","c":"SAN FRANCISCO","s":"CA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":800000,"p":"MEDICAL RESEARCH","c":"CAMBRIDGE","s":"MA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"MAYO CLINIC","a":1000000,"p":"MEDICAL RESEARCH","c":"ROCHESTER","s":"MN","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"OKLAHOMA MEDICAL RESEARCH FOUNDATION","a":12000,"p":"MEDICAL RESEARCH","c":"OKLAHOMA CITY","s":"OK","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"SALK INSTITUTE","a":827086,"p":"MEDICAL RESEARCH","c":"SAN DIEGO","s":"CA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"STANFORD UNIVERSITY","a":800000,"p":"MEDICAL RESEARCH","c":"STANFORD","s":"CA","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF MICHIGAN","a":1600000,"p":"MEDICAL RESEARCH","c":"ANN ARBOR","s":"MI","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2020,"r":"GRANTS RETURNED FROM PRIOR YEAR","a":-84699,"p":"MEDICAL RESEARCH","c":"PHOENIX","s":"AS","e":"","o":"202222209349101712","record_type":"named_recipient"},{"y":2021,"r":"AMERICAN AGING ASSOCIATION","a":10000,"p":"MEDICAL RESEARCH","c":"GRANDVILLE","s":"MI","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"AMERICAN FEDERATION FOR AGING RESEARCH","a":2529389,"p":"MEDICAL RESEARCH","c":"NEW YORK","s":"NY","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"BUCK INSTITUTE","a":400000,"p":"MEDICAL RESEARCH","c":"NOVATO","s":"CA","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"FASEB SCIENCE RESEARCH","a":20000,"p":"MEDICAL RESEARCH","c":"ROCKVILLE","s":"MD","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"GERONTOLOGICAL SOCIETY OF AMERICA","a":15000,"p":"MEDICAL RESEARCH","c":"WASHINGTON","s":"DC","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"SALK INSTITUTE","a":830000,"p":"MEDICAL RESEARCH","c":"SAN DIEGO","s":"CA","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"STANFORD UNIVERSITY","a":800000,"p":"MEDICAL RESEARCH","c":"STANFORD","s":"CA","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"UCSF FOUNDATION","a":25000,"p":"MEDICAL RESEARCH","c":"SAN FRANCISICO","s":"CA","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF WASHINGTON","a":7500,"p":"MEDICAL RESEARCH","c":"SEATTLE","s":"WA","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MICHIGAN","a":800000,"p":"MEDICAL RESEARCH","c":"ANN ARBOR","s":"MI","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2021,"r":"GRANTS RETURNED FROM PRIOR YEAR","a":-3799,"p":"MEDICAL RESEARCH","c":"PHOENIX","s":"AZ","e":"","o":"202300419349100005","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN AGING ASSOCIATION","a":10000,"p":"MEDICAL RESEARCH","c":"GRANDVILLE","s":"MI","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN FEDERATION FOR AGING RESEARCH","a":4157250,"p":"MEDICAL RESEARCH","c":"NEW YORK","s":"NY","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"BUCK INSTITUTE","a":525000,"p":"MEDICAL RESEARCH","c":"NOVATO","s":"CA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"GERONTOLOGICAL SOCIETY OF AMERICA","a":15000,"p":"MEDICAL RESEARCH","c":"WASHINGTON","s":"DC","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"HARVARD MEDICAL SCHOOL","a":800000,"p":"MEDICAL RESEARCH","c":"BOSTON","s":"MA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"HEALTH RESEARCH ALLIANCE","a":3125,"p":"MEDICAL RESEARCH","c":"DURHAM","s":"NC","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"IOWA STATE UNIVERSITY","a":10000,"p":"MEDICAL RESEARCH","c":"AMES","s":"IA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"OKLAHOMA MEDICAL RESEARCH","a":15000,"p":"MEDICAL RESEARCH","c":"OKLAHOMA CITY","s":"OK","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"SALK INSTITUE","a":849544,"p":"MEDICAL RESEARCH","c":"SAN DIEGO","s":"CA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"STANFORD UNIVERSITY","a":825000,"p":"MEDICAL RESEARCH","c":"STANFORD","s":"CA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF WASHINGTON","a":6000,"p":"MEDICAL RESEARCH","c":"SEATTLE","s":"WA","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF MICHIGAN","a":800000,"p":"MEDICAL RESEARCH","c":"ANN ARBOR","s":"MI","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2022,"r":"YALE UNIVERSITY","a":22580,"p":"MEDICAL RESEARCH","c":"NEW HAVEN","s":"CT","e":"","o":"202430449349101113","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN AGING ASSOCIATION","a":12000,"p":"MEDICAL RESEARCH","c":"GRANDVILLE","s":"MI","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN FEDERATION FOR AGING RESEARCH","a":4043604,"p":"MEDICAL RESEARCH","c":"NEW YORK","s":"NY","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"BUCK INSTITUTE","a":1010000,"p":"MEDICAL RESEARCH","c":"NOVATO","s":"CA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"FASEB RESEARCH","a":10000,"p":"MEDICAL RESEARCH","c":"ROCKVILLE","s":"MD","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"GERONTOLOGICAL SOCIETY OF AMERICA","a":15000,"p":"MEDICAL RESEARCH","c":"WASHINGTON","s":"DC","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"HARVARD MEDICAL SCHOOL","a":1000000,"p":"MEDICAL RESEARCH","c":"BOSTON","s":"MA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"HEALTH RESEARCH ALLIANCE","a":6250,"p":"MEDICAL RESEARCH","c":"DURHAM","s":"NC","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"KEYSTONE SYMPOSIUM","a":10000,"p":"MEDICAL RESEARCH","c":"SILVERTHORNE","s":"CO","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"MAYO CLINIC","a":1000000,"p":"MEDICAL RESEARCH","c":"ROCHESTER","s":"MN","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"OHIO STATE UNIVERSITY","a":15000,"p":"MEDICAL RESEARCH","c":"COLUMBUS","s":"OH","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"OKLAHOMA MEDICAL RESEARCH","a":10000,"p":"MEDICAL RESEARCH","c":"OKLAHOMA CITY","s":"OK","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"SALK INSTITUTE","a":812639,"p":"MEDICAL RESEARCH","c":"SAN DEIGO","s":"CA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"SANFORD BURNHAM MEDICAL INSTITUTE","a":5000,"p":"MEDICAL RESEARCH","c":"LA JOLIA","s":"CA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":1000000,"p":"MEDICAL RESEARCH","c":"STANFORD","s":"CA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"TUFTS UNIVERSITY","a":500000,"p":"MEDICAL RESEARCH","c":"BOSTON","s":"MA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"UCONN HEALTH SYMPOSIUM","a":10171,"p":"MEDICAL RESEARCH","c":"FARINGTON","s":"CT","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA REGENTS","a":25000,"p":"MEDICAL RESEARCH","c":"SAN FRANCISO","s":"CA","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MICHIGAN","a":1000000,"p":"MEDICAL RESEARCH","c":"ANN ARBOR","s":"MI","e":"","o":"202521089349100007","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN FEDERATION FOR AGING RESEARCH","a":3898143,"p":"MEDICAL RESEARCH","c":"NEW YORK","s":"NY","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"BUCK INSTITUTE","a":1000000,"p":"MEDICAL RESEARCH","c":"NOVATO","s":"CA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"GERONTOLOGICAL SOCIETY OF AMERICA","a":15000,"p":"MEDICAL RESEARCH","c":"WASHINGTON","s":"DC","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"HARVARD COLLEGE","a":1000000,"p":"MEDICAL RESEARCH","c":"BOSTON","s":"MA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"KEYSTONE SYMPOSIUM","a":10000,"p":"MEDICAL RESEARCH","c":"SILVERTHORNE","s":"CO","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"MAYO CLINIC","a":1000000,"p":"MEDICAL RESEARCH","c":"MINNEAPOLIS","s":"MN","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"SALK INSTITUTE","a":12538,"p":"MEDICAL RESEARCH","c":"LA JOLLA","s":"CA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"STANFORD UNIVERSITY","a":1000000,"p":"MEDICAL RESEARCH","c":"LOS ANGELES","s":"CA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"UCONN HEALTH CENTER","a":10000,"p":"MEDICAL RESEARCH","c":"FARINGTON","s":"CT","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF MICHIGAN","a":1000000,"p":"MEDICAL RESEARCH","c":"ANN ARBOR","s":"MI","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"UCSF FOUNDATION","a":25000,"p":"MEDICAL RESEARCH","c":"SAN FRANCISO","s":"CA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF CHICAGO MARINE BIOLOGY LAB","a":50000,"p":"MEDICAL RESEARCH","c":"WOODS HOLE","s":"MA","e":"","o":"202630379349100603","record_type":"named_recipient"},{"y":2024,"r":"YALE UNIVERSITY","a":11877,"p":"MEDICAL RESEARCH","c":"NEW HAVEN","s":"CT","e":"","o":"202630379349100603","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

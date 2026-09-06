@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ANNASUEAND_DATA" data-slug="annasueandbo" data-n="73" data-grand="17268163" data-recsub="All five years" data-running="to the dollar, five years running." data-names="58 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ANNASUEAND_DATA" data-slug="annasueandbo" data-n="73" data-grand="17268163" data-recsub="All five years" data-running="to the dollar, five years running." data-names="58 as-filed names" data-rows-embedded="73" data-rows-total="73">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 73 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">57</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $17,268,163, equals Part I line 25(d), $17,268,163 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.ANNASUEAND_DATA={"meta":{"foundation":"Anna Sue and Bob Shaw Foundation","ein":"46-1736345","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":73,"grand_total":17268163,"tieout":{"2021":{"object_id":"202213149349103131","grant_count":12,"grant_sum":91200,"line25_col_d":91200,"status":"PASS"},"2022":{"object_id":"202303199349103855","grant_count":20,"grant_sum":1497000,"line25_col_d":1497000,"status":"PASS"},"2023":{"object_id":"202432259349100228","grant_count":2,"grant_sum":4100000,"line25_col_d":4100000,"status":"PASS"},"2024":{"object_id":"202531339349101548","grant_count":10,"grant_sum":4807073,"line25_col_d":4807073,"status":"PASS"},"2025":{"object_id":"202601339349103335","grant_count":29,"grant_sum":6772890,"line25_col_d":6772890,"status":"PASS"}}},"grants":[{"y":2021,"r":"DALTON'S GREATER WORKS INC","a":2500,"p":"SERVICES TO FAMILIES, PROGRAMS/SERVICES","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"PROVIDENCE MINISTRIES INC","a":5000,"p":"YEAR-END GIFT TO SUPPORT FOOD AND CLOTHING MINISTRY","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"NORTHWEST GEORGIA FOOD BANK","a":5000,"p":"SUPPORT FOR YEAR END PROGRAMS","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"GEORGIA FAMILY CONNECTION PARTNERSHIP INC","a":8750,"p":"SUPPPORT FOR INDIGENT FAMILIES","c":"ATLANTA","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"MARINE CORPS LEAGUE","a":3500,"p":"TOYS FOR TOTS CHRISTMAS DRIVE","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"WHITFIELD COUNTY DEPT FAMILYCHILDREN SVCS","a":750,"p":"SUPPORT FOR INDIGENT FAMILIES","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"FAMILY SUPPORT COUNCIL","a":15000,"p":"SUPPORT OF CHILD SEX ABUSE PREVENTION","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"FERST READERS INC","a":16200,"p":"FIRST READERS BOOKS AND SUPPORT FOR CHILDHOOD EDUCATION","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"NORTHWEST GEORGIA REGIONAL LIBRARY","a":10000,"p":"SUPPORT FOR SUMMER READING PROGRAM","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"WHITFIELD COUNTY SCHOOLS","a":12000,"p":"SUPPORT FOR SUMMER LEARNING ACADEMY","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"DALTON PUBLIC SCHOOLS","a":12000,"p":"EARLY CHILDHOOD EDUCATION PROGRAM AND SERVICES","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2021,"r":"THE SALVATION ARMY","a":500,"p":"CHRISTMAS DONATION","c":"DALTON","s":"GA","e":"","o":"202213149349103131","record_type":"named_recipient"},{"y":2022,"r":"DALTON'S GREATER WORKS INC","a":4000,"p":"SERVICES TO FAMILIES, PROGRAMS/SERVICES","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"PROVIDENCE MINISTRIES INC","a":6000,"p":"YEAR-END GIFT TO SUPPORT FOOD AND CLOTHING MINISTRY","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"WHITFIELD COUNTY DEPT FAMILYCHILDREN SVCS","a":1000,"p":"SUPPORT FOR INDIGENT FAMILIES","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"FAMILY SUPPORT COUNCIL","a":17500,"p":"SUPPORT OF CHILD SEX ABUSE PREVENTION","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"FERST READERS INC","a":18000,"p":"FIRST READERS BOOKS AND SUPPORT FOR CHILDHOOD EDUCATION","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"NORTHWEST GEORGIA REGIONAL LIBRARY","a":12500,"p":"SUPPORT FOR SUMMER READING PROGRAM","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"WHITFIELD COUNTY SCHOOLS","a":35000,"p":"SUPPORT FOR SUMMER LEARNING ACADEMY","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"DALTON PUBLIC SCHOOLS","a":35000,"p":"EARLY CHILDHOOD EDUCATION PROGRAM AND SERVICES","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"SHEPHERD CENTER FOUNDATION","a":1000000,"p":"SUPPORT OF PROGRAMS AT SHEPHERD CENTER FOUNDATION","c":"Atlanta","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"Georgia Foundation for Early Care and Learning Inc","a":5000,"p":"Quality Rated 10th Anniversary","c":"ATLANTA","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"City of Refuge","a":100000,"p":"REPLACE WINDOWS","c":"ATLANTA","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"CREATIVE ARTS GUILD","a":7500,"p":"ART EDUCATORS WORKSHOP","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"OSCAR N JONAS FOUNDATION","a":7500,"p":"ART EDUCATION","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"SPECIAL OLYMPICS OF GEORGIA","a":5000,"p":"PROGRAM SUPPORT","c":"NORCROSS","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"DALTON STATE COLLEGE FOUNDATION","a":200000,"p":"KENNETH E. BORING ENGINEERING TECHOLOGY LAB","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY HOUSING RESOURCE CORP","a":10000,"p":"SUPPORT OF PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"ARTISTIC CIVIC THEATRE","a":12000,"p":"SUPPORT OF PROGRAMS AT THE ARTISTIC CIVIC THEATRE","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"MURRAY COUNTY FAMILY CONNECTION","a":1000,"p":"SUPPORT OF PROGRAMS","c":"CHATSWORTH","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"WHITFIELD FAMILY CONNECTIONS","a":10000,"p":"SUPPORT OF PROGRAMS","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2022,"r":"WHITFIELD HEALTHCARE FOUNDATION","a":10000,"p":"FINANCIAL SSISTANCE OF PEEPLES CANCER INSTITUTE","c":"DALTON","s":"GA","e":"","o":"202303199349103855","record_type":"named_recipient"},{"y":2023,"r":"CHRISTIAN HERITAGE FUND","a":1100000,"p":"SUPPORT PROGRAMS OF CHRISTIAN HERITAGE FUND","c":"DALTON","s":"GA","e":"","o":"202432259349100228","record_type":"named_recipient"},{"y":2023,"r":"Hamilton Healthcare System","a":3000000,"p":"SUPPORT FOR HEALTHCARE SYSTEM PROGRAMS","c":"DALTON","s":"GA","e":"","o":"202432259349100228","record_type":"named_recipient"},{"y":2024,"r":"BAYLOR SCHOOL","a":50000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"BOBBY JONES GOLF COURSE FOUNDATION","a":333333,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF DALTON","a":10000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"BRIGHT SCHOOL","a":10000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"CHRISTCHURCH PRESBYTERIAN","a":3762250,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"DALTON STATE COLLEGE","a":25000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"DARLINGTON SCHOOL ENDOWMENT","a":500000,"p":"SUPPORT","c":"ROME","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"GA 4H FOUNDATION","a":10000,"p":"SUPPORT","c":"ATHENS","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"PHILANTHROPY SOUTHEAST","a":6490,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERY OF THE SOUTHEAST","a":100000,"p":"SUPPORT","c":"SIGNAL MOUNTAIN","s":"TN","e":"","o":"202531339349101548","record_type":"named_recipient"},{"y":2025,"r":"BAYLOR SCHOOL","a":100000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"BOYS & GIRLS CLUB OF DALTON","a":50000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"DALTON STATE COLLEGE","a":1500000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"GA 4H FOUNDATION","a":5000,"p":"SUPPORT","c":"ATHENS","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"PHILANTHROPY SOUTHEAST","a":9840,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CHRISTIAN HERITAGE SCHOOL","a":2000000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"WESTWOOD ELEMENTARY SCHOOL","a":101700,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CHILDREN'S HEALTHCARE OF ATLANTA FOUNDATION","a":100000,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"FLOORING CAPITAL DEVELOPMENT CORPORATION","a":100000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN HEART ASSOCIATION","a":81350,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"1ST PRESBYTERIAN OF DALTON","a":150000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CHATTANOOGA AREA FOOD BANK","a":50000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CREATIVE ARTS GUILD","a":60000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"DION FOUNDATION FOR CHILDREN WITH RARE DISEASES","a":50000,"p":"SUPPORT","c":"WALTHAM","s":"MA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"GIRL'S PREPARATORY SCHOOL","a":50000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"SHEPHERD CENTER FOUNDATION","a":50000,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CHI MEMORIAL","a":50000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"ACT (ARTISTIC CIVIC THEATRE COMPANY)","a":25000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CHILDREN'S HOSPITAL ERLANGER","a":25000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"WINSHIP CANCER INSTITUTE OF EMORY UNIVERSITY","a":25000,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"UNITED WAY OF GREATER CHATTANOOGA","a":20000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"SAFER TENNESSEE COALITION","a":20000,"p":"SUPPORT","c":"NASHVILLE","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"JUNIOR ACHIEVEMENT","a":15000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"ATLANTA SPEECH SCHOOL","a":10000,"p":"SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"CREATIVE DISCOVERY MUSEUM","a":10000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"DALTON EDUCATION FOUNDATION","a":5000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"WOMEN'S ENRICHMENT CENTER","a":5000,"p":"SUPPORT","c":"DALTON","s":"GA","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"PEACOCK LEGACY FOUNDATION FUND","a":2000000,"p":"SUPPORT","c":"MELBOURNE","s":"FL","e":"","o":"202601339349103335","record_type":"named_recipient"},{"y":2025,"r":"THE BRIGHT SCHOOL","a":105000,"p":"SUPPORT","c":"CHATTANOOGA","s":"TN","e":"","o":"202601339349103335","record_type":"named_recipient"}]};window.LEDGER_MERGES=["BRIGHT SCHOOL"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"GEORGIA FAMILY CONNECTION PARTNERSHIP INC":"Arts & culture","MARINE CORPS LEAGUE":"Community & economic development","FAMILY SUPPORT COUNCIL":"Basic needs & response","NORTHWEST GEORGIA REGIONAL LIBRARY":"Education & youth","SHEPHERD CENTER FOUNDATION":"Nonprofit capacity & transitions","BOBBY JONES GOLF COURSE FOUNDATION":"Health & wellbeing","PHILANTHROPY SOUTHEAST":"Nonprofit capacity & transitions","FLOORING CAPITAL DEVELOPMENT CORPORATION":"Environment & animals","AMERICAN HEART ASSOCIATION":"Health & wellbeing","DION FOUNDATION FOR CHILDREN WITH RARE DISEASES":"Health & wellbeing","UNITED WAY OF GREATER CHATTANOOGA":"Nonprofit capacity & transitions"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

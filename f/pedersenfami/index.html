@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="PEDERSENFA_DATA" data-slug="pedersenfami" data-n="80" data-grand="12021000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="69 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="PEDERSENFA_DATA" data-slug="pedersenfami" data-n="80" data-grand="12021000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="69 as-filed names" data-rows-embedded="80" data-rows-total="80">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 80 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">68</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $12,021,000, equals Part I line 25(d), $12,021,000 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.PEDERSENFA_DATA={"meta":{"foundation":"Pedersen Family Foundation","ein":"47-1188416","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":80,"grand_total":12021000,"tieout":{"2020":{"object_id":"202211369349100231","grant_count":18,"grant_sum":156000,"line25_col_d":156000,"status":"PASS"},"2021":{"object_id":"202231369349104198","grant_count":18,"grant_sum":180000,"line25_col_d":180000,"status":"PASS"},"2022":{"object_id":"202342239349100209","grant_count":15,"grant_sum":3195000,"line25_col_d":3195000,"status":"PASS"},"2023":{"object_id":"202401359349104300","grant_count":5,"grant_sum":6865000,"line25_col_d":6865000,"status":"PASS"},"2024":{"object_id":"202503209349100660","grant_count":24,"grant_sum":1625000,"line25_col_d":1625000,"status":"PASS"}}},"grants":[{"y":2020,"r":"CASE CENTER FOR ADOPTION SUPPORT & ADOPTION","a":8000,"p":"GENERAL SUPPORT","c":"BURTONSVILLE","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"CATHOLIC CHARITIES DIOCESE OF ARLINGTON","a":10000,"p":"GENERAL SUPPORT","c":"ARLINGTON","s":"VA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"CHILDREN'S HOSPITAL FOUNDATION","a":10000,"p":"GENERAL SUPPORT","c":"SILVER SPRING","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"DONOR SIBLING REGISTRY","a":8000,"p":"GENERAL SUPPORT","c":"NEDERLAND","s":"CO","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"HILLWOOD ESTATE MUSEUM & GARDENS","a":5000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"LITTLE SISTERS OF THE POOR","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"LOUNDON HUNGER RELIEF","a":8000,"p":"GENERAL SUPPORT","c":"LEESBURG","s":"VA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"MANGROVE MIKE'S ENDEAVORS PAYING FORWARD INC","a":8000,"p":"GENERAL SUPPORT","c":"ISLAMORADA","s":"FL","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"MOBILE-HOPEORG","a":8000,"p":"GENERAL SUPPORT","c":"LEESBURG","s":"VA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"MR HOLLAND'S OPUS FOUNDATION","a":5000,"p":"GENERAL SUPPORT","c":"STUDIO CITY","s":"CA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"PAWS OF HONOR","a":8000,"p":"GENERAL SUPPORT","c":"MCLEAN","s":"VA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"PLANNED PARENTHOOD OF MARYLAND","a":5000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"SAINT FRANCIS NEIGHBORHOOD CENTER","a":5000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"THE BALTIMORE RESTAURANT RELIEF FUND","a":10000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"THE FISHING SCHOOL","a":15000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"THE SALVATION ARMY NATIONAL CAPITOL AREA COMMAND","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"SAINT FRANCIS NEIGHBORHOOD CENTER","a":8000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2020,"r":"INNOVATION FLORIDA","a":15000,"p":"CODE SKOOLS INSTRUCTOR","c":"TYSONS CORNER","s":"VA","e":"","o":"202211369349100231","record_type":"named_recipient"},{"y":2021,"r":"CHILDREN'S NATIONAL HOSPITAL FOUNDATION","a":20000,"p":"GENERAL SUPPORT","c":"SILVER SPRING","s":"MD","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"FEEDMORE","a":20000,"p":"GENERAL SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"ST FRANCIS NEIGHBORHOOD CENTER CORPORATION","a":15000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"CHILDRENS INN AT NIH INC","a":10000,"p":"GENERAL SUPPORT","c":"BETHESDA","s":"MD","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"CATHOLIC CHARITIES OF THE DIOCESE OF ARLINGTON INC","a":10000,"p":"GENERAL SUPPORT","c":"ARLINGTON","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"THE HUMANE SOCIETY OF LOUDOUN COUNTY","a":10000,"p":"GENERAL SUPPORT","c":"LEESBURG","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"LITTLE SISTERS OF THE POOR WASHINGTON DC INC","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"SPIRIT OF PLACE - SPIRIT OF DESIGN INC","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"HOPE FOR HENRY FOUNDATION","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"FREEDOM ALLIANCE","a":20000,"p":"GENERAL SUPPORT","c":"DULLES","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"THE CENTER FOR ALEXANDRIAS CHILDREN","a":10000,"p":"GENERAL SUPPORT","c":"ALEXANDRIA","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"FRIENDS OF LOUDOUN COUNTY ANIMAL SERVICES (FLCAS)","a":5000,"p":"GENERAL SUPPORT","c":"BROADLANDS","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"CENTER FOR ADOPTION SUPPORT AND EDUCATION (CASE)","a":5000,"p":"GENERAL SUPPORT","c":"BURTONSVILLE","s":"MD","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"PLANNED PARENTHOOD OF MARYLAND","a":5000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"HELPING HOMELESS FELINES","a":5000,"p":"GENERAL SUPPORT","c":"FAIRFAX","s":"VA","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"CHRIST HOUSE INC","a":5000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"THE HOUSE DC","a":5000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2021,"r":"DONOR SIBLING REGISTRY","a":5000,"p":"GENERAL SUPPORT","c":"NEDERLAND","s":"CO","e":"","o":"202231369349104198","record_type":"named_recipient"},{"y":2022,"r":"FREEDOM ALLIANCE","a":30000,"p":"GENERAL SUPPORT","c":"DULLES","s":"VA","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"FLORIDA KEYS SOCIETY FOR THE PREVENTION OF CRUELTY TO ANIMALS","a":20000,"p":"GENERAL SUPPORT","c":"KEY WEST","s":"FL","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S HOSPITAL FOUNDATION","a":20000,"p":"GENERAL SUPPORT","c":"SILVER SPRING","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"WASHINGTON JESUIT ACADEMY","a":15000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"DONOR SIBLING REGISTRY","a":15000,"p":"GENERAL SUPPORT","c":"NEDERLAND","s":"CO","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"CENTER FOR ADOPTION SUPPORT AND EDUCATION INC","a":15000,"p":"GENERAL SUPPORT","c":"BURTONSVILLE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"ST FRANCIS NEIGHBORHOOD CENTER CORPORATION","a":15000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"NORTHERN VIRGINIA CONSERVATION TRUST","a":10000,"p":"GENERAL SUPPORT","c":"ANNADALE","s":"VA","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"BELIEVE IN TOMORROW CHILDRENS FOUNDATION INC","a":10000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"OCEANA INC","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"COMFORT CASES INC","a":10000,"p":"GENERAL SUPPORT","c":"ROCKVILLE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"UNITED WAY OF COLLIER AND THE KEYS INC","a":10000,"p":"GENERAL SUPPORT","c":"KEY WEST","s":"FL","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"PLANNED PARENTHOOD OF MARYLAND INC","a":10000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"JOHNS HOPKINS UNIVERSITY & MEDICINE","a":3000000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2022,"r":"LITTLE SISTERS OF THE POOR OF WASHINGTON DC","a":5000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202342239349100209","record_type":"named_recipient"},{"y":2023,"r":"ST JUDES CHILDREN RESEARCH HOSPITAL","a":1000000,"p":"GENERAL SUPPORT","c":"MEMPHIS","s":"TN","e":"","o":"202401359349104300","record_type":"named_recipient"},{"y":2023,"r":"ST JUDES CHILDREN RESEARCH HOSPITAL","a":5000000,"p":"GENERAL SUPPORT","c":"MEMPHIS","s":"TN","e":"","o":"202401359349104300","record_type":"named_recipient"},{"y":2023,"r":"ST FRANCIS NEIGHBORHOOD CENTER","a":750000,"p":"GENERAL SUPPORT","c":"BALTIMORE","s":"MD","e":"","o":"202401359349104300","record_type":"named_recipient"},{"y":2023,"r":"ACADEMY OF NEUROSCIENCE FOR ARCHITECTURE","a":100000,"p":"GENERAL SUPPORT","c":"LA JOLLA","s":"CA","e":"","o":"202401359349104300","record_type":"named_recipient"},{"y":2023,"r":"SAFE CHILDREN FOUNDATION","a":15000,"p":"GENERAL SUPPORT","c":"FAIRFAX","s":"VA","e":"","o":"202401359349104300","record_type":"named_recipient"},{"y":2024,"r":"BADGER SIX","a":1100000,"p":"GENERAL USE","c":"TRAVERSE CITY","s":"MI","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"GIRL SECURITY","a":100000,"p":"GENERAL USE","c":"MCLEAN","s":"VA","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"THIRD OPTION","a":100000,"p":"GENERAL USE","c":"RESTON","s":"VA","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"WARRIOR RISING","a":100000,"p":"GENERAL USE","c":"SOUTH JORDAN","s":"UT","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"DR HOLLANDAISE OPUS FOUNDATION","a":5000,"p":"GENERAL USE","c":"BURBANK","s":"CA","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"FREEDOM ALLIANCE","a":20000,"p":"GENERAL USE","c":"WINCHESTER","s":"VA","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"DENNIS LEARY FIREFIGHTER FUND","a":10000,"p":"GENERAL USE","c":"NEW YORK","s":"NY","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"MARYLAND COALITION OF FAMILIES","a":5000,"p":"GENERAL USE","c":"COLUMBIA","s":"MD","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"MIRIAM'S KITCHEN","a":15000,"p":"GENERAL USE","c":"WASHINGTON","s":"DC","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"SUMARITANS PURSE","a":15000,"p":"GENERAL USE","c":"BOONE","s":"NC","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"BONEFISH AND TARPON TRUST","a":10000,"p":"GENERAL USE","c":"MIAMI","s":"FL","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL FISH AND WILDLIFE FOUNDATION","a":5000,"p":"GENERAL USE","c":"WASHINGTON","s":"DC","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"CHESAPEAKE BAY FOUNDATION","a":5000,"p":"GENERAL USE","c":"ANNAPOLIS","s":"MD","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR ADOPTION SUPPORT AND EDUCATION","a":5000,"p":"GENERAL USE","c":"BURTONSVILLE","s":"MD","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"DONOR SIBLING REGISTRY","a":5000,"p":"GENERAL USE","c":"NEDERLAND","s":"CO","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"BULLIS HIGH SCHOOL","a":20000,"p":"GENERAL USE","c":"POTOMAC","s":"MD","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"FORMAN SCHOOL","a":20000,"p":"GENERAL USE","c":"LITCHFIELD","s":"CT","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"MONROE COUNTY SHERIFF'S OFFICE ANIMAL FARM","a":10000,"p":"GENERAL USE","c":"KEY WEST","s":"FL","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"EDUCATIONAL COALITION OF MONROE COUNTY","a":5000,"p":"GENERAL USE","c":"MARATHON","s":"FL","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"ASPCA FLORIDA KEYS","a":15000,"p":"GENERAL USE","c":"KEY WEST","s":"FL","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"SAINT FRANCIS NEIGHBORHOOD CENTER","a":10000,"p":"GENERAL USE","c":"BALTIMORE","s":"MD","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"HIDDEN HARBOUR MARINE ENVIRONMENTAL PROJECT","a":10000,"p":"GENERAL USE","c":"MARATHON","s":"FL","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"PLANNED PARENTHOOD FEDERATION OF AMERICA","a":10000,"p":"GENERAL USE","c":"NEW YORK","s":"NY","e":"","o":"202503209349100660","record_type":"named_recipient"},{"y":2024,"r":"DEFENSE INTELLIGENCE MEMORIAL FOUNDATION","a":25000,"p":"GENERAL USE","c":"TYSONS CORNER","s":"VA","e":"","o":"202503209349100660","record_type":"named_recipient"}]};window.LEDGER_MERGES=["PLANNED PARENTHOOD OF MARYLAND"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"BADGER SIX":"Basic needs & response","WARRIOR RISING":"Nonprofit capacity & transitions","MARYLAND COALITION OF FAMILIES":"Health & wellbeing","BONEFISH AND TARPON TRUST":"Environment & animals","NATIONAL FISH AND WILDLIFE FOUNDATION":"Environment & animals","CHESAPEAKE BAY FOUNDATION":"Environment & animals","DONOR SIBLING REGISTRY":"Basic needs & response","DEFENSE INTELLIGENCE MEMORIAL FOUNDATION":"Education & youth"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

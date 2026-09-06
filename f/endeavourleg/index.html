@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ENDEAVOURL_DATA" data-slug="endeavourleg" data-n="43" data-grand="109075000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="21 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ENDEAVOURL_DATA" data-slug="endeavourleg" data-n="43" data-grand="109075000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="21 as-filed names" data-rows-embedded="43" data-rows-total="43">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 43 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">21</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $109,075,000, equals Part I line 25(d), $109,075,000 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -423,7 +431,8 @@
 </div>
 <script>
 window.ENDEAVOURL_DATA={"meta":{"foundation":"Endeavour Legacy Foundation","ein":"83-1934407","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024],"grant_count":43,"grand_total":109075000,"tieout":{"2020":{"object_id":"202101329349103145","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202230619349100103","grant_count":10,"grant_sum":7275000,"line25_col_d":7275000,"status":"PASS"},"2022":{"object_id":"202333139349100328","grant_count":10,"grant_sum":26384000,"line25_col_d":26384000,"status":"PASS"},"2023":{"object_id":"202403139349102050","grant_count":9,"grant_sum":36600000,"line25_col_d":36600000,"status":"PASS"},"2024":{"object_id":"202533119349101933","grant_count":14,"grant_sum":38816000,"line25_col_d":38816000,"status":"PASS"}}},"grants":[{"y":2021,"r":"BON SECOURS RICHMOND HEALTH CARE FOUNDATION","a":5000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"HAMPDEN-SYDNEY COLLEGE","a":5000,"p":"CHARITABLE SUPPORT","c":"HAMPDENSYDNEY","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"MCV FOUNDATION","a":3000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"MONTPELIER FOUNDATION","a":10000,"p":"CHARITABLE SUPPORT","c":"ORANGE","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"RESOURCES FOR INDEPENDENT LIVING","a":5000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"RICHMOND SYMPHONY","a":700000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"SAINT ANDREW'S SCHOOL","a":50000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"ST CATHERINE'S SCHOOL FOUNDATION","a":3000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"ST CATHERINE'S SCHOOL FOUNDATION","a":50000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2021,"r":"THE NEW COMMUNITY SCHOOL","a":450000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202230619349100103","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S HOSPITAL OF RICHMOND AT VCU","a":6000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S HOSPITAL OF RICHMOND AT VCU","a":334000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"HAMPDEN-SYDNEY COLLEGE","a":5000000,"p":"CHARITABLE SUPPORT","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"MCV FOUNDATION","a":2000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"RICHMOND SYMPHONY","a":1000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"RICHMOND URBAN DANCE","a":50000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"SAINT ANDREW'S SCHOOL","a":3000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"ST CATHERINE'S SCHOOL FOUNDATION","a":4000000,"p":"CHARITABLE SUPPORT","c":"RICHMOND","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"SWEET BRIAR COLLEGE","a":1000000,"p":"CHARITABLE SUPPORT","c":"SWEET BRIAR","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2022,"r":"SWEET BRIAR COLLEGE","a":4000000,"p":"CHARITABLE SUPPORT","c":"SWEET BRIAR","s":"VA","e":"","o":"202333139349100328","record_type":"named_recipient"},{"y":2023,"r":"FEED MORE","a":10000000,"p":"TO ASSIST WITH FEEDMORE'S CAPITAL CAMPAIGN.","c":"RICHMOND","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"HAMPDEN-SYDNEY COLLEGE","a":8500000,"p":"TO SUPPORT ENHANCEMENTS TO HAMPDEN-SYDNEY COLLEGE'S PAULEY SCIENCE CENTER.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"HAMPDEN-SYDNEY COLLEGE","a":10000000,"p":"TO ASSIST WITH COSTS ASSOCIATED WITH HAMPDEN-SYDNEY COLLEGE'S RENOVATION PROJECT OF VENABLE HALL.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"HAMPDEN-SYDNEY COLLEGE","a":4000000,"p":"TO PROVIDE FINANCIAL SUPPOR TO IMPLEMENT HAMPDEN-SYDNEY COLLEGE'S INTEGRATED MARKETING AND ENROLLMENT INITIATIVE.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"MCV FOUNDATION","a":1000000,"p":"DESIGNATED TO SUPPORT THE KENNETH A. ELLENBOGEN CHAIR IN THE MCV FOUNDATION'S SCHOOL OF MEDICINE.","c":"RICHMOND","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"RICHMOND SYMPHONY","a":1500000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF THE RICHMOND SYMPHONY.","c":"RICHMOND","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"SWEET BRIAR COLLEGE","a":1000000,"p":"ANNUAL GIFTING TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF SWEET BRIAR COLLEGE.","c":"SWEET BRIAR","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"THE NEW COMMUNITY SCHOOL","a":100000,"p":"TO PROVIDE SUPPORT FOR THE NEW COMMUNITY SCHOOL'S SHINE FUND.","c":"RICHMOND","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF RICHMOND","a":500000,"p":"TO PROVIDE PROGRAM SUPPORT FOR UNIVERSITY OF RICHMOND'S MCDOWELL INSTITUTE.","c":"UNIVERSITY OF RICHMOND","s":"VA","e":"","o":"202403139349102050","record_type":"named_recipient"},{"y":2024,"r":"BELVEDERE SERIES","a":125000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF THE BELVEDERE SERIES.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"BRANCHES OF THE ARTS","a":125000,"p":"TO SUPPORT LOCAL ARTISTS.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"CHILDREN'S HOSPITAL OF RICHMOND","a":666000,"p":"TO SUPPORT THE VIRGINIA TREATMENT CENTER'S PILOT SCHOLARS PROGRAM","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"HAMPDEN-SYDNEY COLLEGE","a":6650000,"p":"TO ASSIST WITH COSTS ASSOCIATED WITH HAMPDEN-SYDNEY COLLEGE'S RENOVATION PROJECT OF GILMER HALL.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"HAMPDEN-SYDNEY COLLEGE","a":10000000,"p":"TO ASSIST WITH COSTS ASSOCIATED WITH ACADEMIC AND PROGRAMMATIC ENHANCEMENTS NECESSARY TO ESTABLISH AND MAINTAIN A SCHOOL OR SCHOOLS WITHIN THE COLLEGE.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"HAMPDEN-SYDNEY COLLEGE","a":2500000,"p":"TO PROVIDE FINANCIAL SUPPORT TO IMPLEMENT HAMPDEN-SYDNEY COLLEGE'S INTEGRATED MARKETING AND ENROLLMENT INITIATIVE.","c":"HAMPDEN SYDNEY","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"MCV FOUNDATION","a":10000000,"p":"TO SUPPORT THE DIVISION OF UROLOGY AT THE VCU SCHOOL OF MEDICINE THROUGH VCU UROLOGY INITIATIVE.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"RICHMOND SYMPHONY","a":50000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF THE RICHMOND SYMPHONY.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"RICHMOND SYMPHONY","a":160000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF THE RICHMOND SYMPHONY.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"RICHMOND SYMPHONY","a":2000000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS AND FOR SUPPORT FOR THE APPEARANCE OF ITZHAK PERLMAN","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"VCU MASSEY COMPREHENSIVE CANCER CENTER","a":20000,"p":"TO SUPPORT THE MASSEY COMPREHENSIVE CANCER CENTER'S 50TH ANNIVERSARY FUND.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"VENTURE RICHMOND","a":20000,"p":"TO PROVIDE SUPPORT FOR THE 2ND STREET FESTIVAL.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"VIRGINIA MUSEUM OF HISTORY AND CULTURE","a":6000000,"p":"TO PROVIDE START-UP AND ENDOWMENT FUNDS TO SUPPORT THE CREATION AND DISSEMINATION OF CIVICS EDUCATION RESOURCES AND PROGRAMMING FOR STUDENTS.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"},{"y":2024,"r":"VIRGINIA REPERTORY THEATRE","a":500000,"p":"TO SUPPORT THE GENERAL OPERATING FUNCTIONS OF THE VIRGINIA REPERTORY THEATRE.","c":"RICHMOND","s":"VA","e":"","o":"202533119349101933","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"MONTPELIER FOUNDATION":"Arts & culture","RESOURCES FOR INDEPENDENT LIVING":"Basic needs & response","RICHMOND SYMPHONY":"Arts & culture","UNIVERSITY OF RICHMOND":"Education & youth","VENTURE RICHMOND":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

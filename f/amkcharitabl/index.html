@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="AMKCHARITA_DATA" data-slug="amkcharitabl" data-n="27" data-grand="26902500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="18 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="AMKCHARITA_DATA" data-slug="amkcharitabl" data-n="27" data-grand="26902500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="18 as-filed names" data-rows-embedded="27" data-rows-total="27">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 27 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">17</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $26,902,500, equals Part I line 25(d), $26,902,500 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.AMKCHARITA_DATA={"meta":{"foundation":"Amk Charitable Foundation","ein":"46-6844643","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":27,"grand_total":26902500,"tieout":{"2020":{"object_id":"202143499349101209","grant_count":4,"grant_sum":2647500,"line25_col_d":2647500,"status":"PASS"},"2021":{"object_id":"202233199349107398","grant_count":6,"grant_sum":4335000,"line25_col_d":4335000,"status":"PASS"},"2022":{"object_id":"202313199349101436","grant_count":5,"grant_sum":5280000,"line25_col_d":5280000,"status":"PASS"},"2023":{"object_id":"202413199349102506","grant_count":9,"grant_sum":6720000,"line25_col_d":6720000,"status":"PASS"},"2024":{"object_id":"202543219349102929","grant_count":3,"grant_sum":7920000,"line25_col_d":7920000,"status":"PASS"}}},"grants":[{"y":2020,"r":"BLESS USA","a":1907500,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"LIGHTS FOR ORPHANS","a":220000,"p":"HELPING ORPHAN EGYPTIAN GIRLS","c":"PORT WASHINGTON","s":"NY","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"LOVE AND HOPE","a":300000,"p":"EDUCATION, NUTRITION, MEDICAL HELP","c":"CEDAR GROVE","s":"NJ","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"ST MINA MONASTERY","a":220000,"p":"SUPPORT OF RELIGIOUS SERVICES","c":"","s":"","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2021,"r":"BLESS USA","a":4120000,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"COPTIC CHURCH IN HI","a":5000,"p":"PRAY FOR ALL INDIVIDUALS TO COME TOGETHER UNITED IN THE BODY OF CHRIST, TO EXPERIENCE LOVE, LEARNING, AND EDIFICATION THROUGH THE APOSTOLIC, ORTHODOX FAITH","c":"HONOLULU","s":"HI","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"LITTLEST LAMBS","a":50000,"p":"EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY","c":"TYE","s":"NY","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST ANTHONY MONASTERY","a":10000,"p":"DEDICATED TO CHRIST OUR GOD, AND SUPPLICATE HIM ON BEHALF OF THE SALVATION OF THE WHOLE WORLD.","c":"FLORENCE","s":"AZ","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST MARY & ST MERCURIUS","a":50000,"p":"\"PRESENT EVERY MAN PERFECT IN CHRIST JESUS\" (COL 1:28) BY REFLECTING THE LIGHT OF CHRIST AND THE ORTHODOX CHRISTIAN FAITH IN THE WORLD.","c":"CONSHOHOCKEN","s":"PA","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST MARY & ST MARK","a":100000,"p":"PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS.","c":"NEW YORK","s":"NY","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2022,"r":"BLESS USA","a":4130000,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"THE LITTLEST LAMBS","a":50000,"p":"EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY","c":"RYE","s":"NY","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"ST MARY & ST MARK","a":50000,"p":"PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS","c":"NEW YORK","s":"NY","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"ST MARY & ST MERCURIUS","a":50000,"p":"\"PRESENT EVERY MAN PERFECT IN CHRIST JESUS\" (COL 1:28) BY REFLECTING THE LIGHT OF CHRIST AND THE ORTHODOX CHRISTIAN FAITH IN THE WORLD","c":"CONSHOHOCKEN","s":"PA","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"LOVE & HOPE BOLIVIA","a":1000000,"p":"EDUCATION, NUTRITION, MEDICAL HELP","c":"CEDAR GROVE","s":"NJ","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2023,"r":"BLESS USA","a":4970000,"p":"PROVIDE FUNDS TO RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"LOVE & HOPE BOLIVIA","a":1450000,"p":"PROVIDE FUNDS FOR EDUCATION, NUTRITION, MEDICAL HELP.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"SAINT ANTONY MONASTERY","a":20000,"p":"GENERAL OPERATING SUPPORT.","c":"NEWBERRY SPRINGS","s":"CA","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST MARY AND ST MARK'S COPTIC ORTHODOX CHURCH","a":60000,"p":"PROVIDE FUNDS FOR THE ORGANIZATION TO PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS.","c":"NEW YORK","s":"NY","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"THE LITTLEST LAMB","a":100000,"p":"PROVIDE FUNDS TO THE ORGANIZATION TO ENABLE THEM TO CONTINUE EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY.","c":"RYE","s":"NY","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST JOHN THE BAPTIST","a":50000,"p":"GENERAL OPERATING SUPPORT.","c":"MIRAMAR","s":"FL","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"PHOENIX CHILDRENS HOSPITAL FOUNDATION","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"PHOENIX","s":"AZ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST MARY & ST MERCURIUS COPTIC ORTHODOX CHURCH - BRAZIL DIOCESE","a":50000,"p":"GENERAL OPERATING SUPPORT.","c":"BELLEVILLE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"COPTIC ORTHODOX CHURCH OF ST MARK","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"JERSEY CITY","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2024,"r":"BLESS USA","a":3450000,"p":"PROVIDE FUNDS TO RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202543219349102929","record_type":"named_recipient"},{"y":2024,"r":"LOVE & HOPE BOLIVIA","a":4460000,"p":"PROVIDE FUNDS FOR EDUCATION, NUTRITION, MEDICAL HELP.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202543219349102929","record_type":"named_recipient"},{"y":2024,"r":"PHOENIX CHILDRENS HOSPITAL FOUNDATION","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"PHOENIX","s":"AZ","e":"","o":"202543219349102929","record_type":"named_recipient"}]};window.LEDGER_MERGES=["LITTLEST LAMBS"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

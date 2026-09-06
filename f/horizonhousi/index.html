@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="HORIZONHOU_DATA" data-slug="horizonhousi" data-n="73" data-grand="264972" data-recsub="All five years" data-running="to the dollar, five years running." data-names="53 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="HORIZONHOU_DATA" data-slug="horizonhousi" data-n="73" data-grand="264972" data-recsub="All five years" data-running="to the dollar, five years running." data-names="53 as-filed names" data-rows-embedded="73" data-rows-total="73">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 73 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">53</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $264,972, equals Part I line 25(d), $264,972 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -419,7 +427,8 @@
 </div>
 <script>
 window.HORIZONHOU_DATA={"meta":{"foundation":"Horizon Housing Foundation","ein":"74-2979359","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024],"grant_count":73,"grand_total":264972,"tieout":{"2020":{"object_id":"202200459349100110","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202310349349100416","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202400449349100535","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202530459349100233","grant_count":28,"grant_sum":114435,"line25_col_d":114435,"status":"PASS"},"2024":{"object_id":"202640499349100704","grant_count":45,"grant_sum":150537,"line25_col_d":150537,"status":"PASS"}}},"grants":[{"y":2023,"r":"OKLAHOMA STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"STILLWATER","s":"OK","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"LEEWARD COMMUNITY COLLEGE","a":4500,"p":"SCHOLARSHIP GRANT","c":"PEARL CITY","s":"HI","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"MIDDLE GEORGIA STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"MACON","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"KENNESAW STATE UNIVERSITY","a":12000,"p":"SCHOLARSHIP GRANT","c":"KENNESAW","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"SACRED HEARTS ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST CHARLES","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"SAINT OLAF COLLEGE","a":3000,"p":"SCHOLARSHIP GRANT","c":"NORTHFIELD","s":"MN","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"ST JOSEPH PARISH SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"WENTZVILLE","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"ST LOUIS CATHOLIC ACADEMY","a":5600,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"ST LOUIS SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"HONOLULU","s":"HI","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"COLUMBIA COLLEGE","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"NORTH COUNTY CHRISTIAN SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"FLORISSANT","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MISSOURI-COLUMBIA","a":7396,"p":"SCHOLARSHIP GRANT","c":"COLUMBIA","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF GEORGIA","a":1500,"p":"SCHOLARSHIP GRANT","c":"ATHENS","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CARDINAL RITTER COLLEGE PREP HIGH SCHOOL","a":4040,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"ROSATI-KAIN ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CHRISTIAN BROTHERS COLLEGE","a":21000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NORTH CAROLINA AT CHAPEL HILL","a":3000,"p":"SCHOLARSHIP GRANT","c":"CHAPEL HILL","s":"NC","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"MILLIKEN UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"DECATUR","s":"IL","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"GORDON STATE COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"BARNESVILLE","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"AIMS COMMUNITY COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"GREELEY","s":"CO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA STATE UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"ATLANTA","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CENTRAL GEORGIA TECHNICAL COLLEGE","a":3000,"p":"SCHOLARSHIP GRANT","c":"WARNER ROBINS","s":"GA","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CENTRAL METHODIST UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"FAYETTE","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CONSERVE","a":5899,"p":"SCHOLARSHIP GRANT","c":"LAND O LAKES","s":"WI","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"TOWER GROVE CHRISTIAN ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"CROSSROADS COLLEGE PREPARATORY SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"ST CHARLES COMMUNITY COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"COTTLEVILLE","s":"MO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2023,"r":"COLORADO STATE UNIVERSITY GLOBAL CAMPUS","a":1500,"p":"SCHOLARSHIP GRANT","c":"DENVER","s":"CO","e":"","o":"202530459349100233","record_type":"named_recipient"},{"y":2024,"r":"ALBANY STATE UNIVERSITY","a":10500,"p":"SCHOLARSHIP GRANT","c":"ALBANY","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"BENEDICT COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"COLUMBIA","s":"SC","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CARDINAL RITTER COLLEGE PREP HIGH SCHOOL","a":14500,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL GEORGIA TECHNICAL COLLEGE","a":4500,"p":"SCHOLARSHIP GRANT","c":"WARNER ROBINS","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL METHODIST UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"FAYETTE","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CHATTAHOOCHEE TECHNICAL COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"MARIETTA","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CHRISTIAN BROTHERS COLLEGE","a":6000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"COLORADO STATE UNIVERSITY GLOBAL CAMPUS","a":1500,"p":"SCHOLARSHIP GRANT","c":"DENVER","s":"CO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA COLLEGE","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CONCORDE CAREER COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"KANSAS CITY","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"CROSSROADS COLLEGE PREPARATORY SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"FORT VALLEY STATE UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"FORT VALLEY","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"GEORGIA CUMBERLAND ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"CALHOUN","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"GEORGIA SOUTHWESTERN STATE UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"AMERICUS","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"GEORGIA STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ATLANTA","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"GOOD SHEPHERD LUTHERAN SCHOOL","a":1570,"p":"SCHOLARSHIP GRANT","c":"OMAHA","s":"NE","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"GRAND CANYON UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"PHOENIX","s":"AZ","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"JACKSONVILLE STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"JACKSONVILLE","s":"AL","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"KENNESAW STATE UNIVERSITY","a":10500,"p":"SCHOLARSHIP GRANT","c":"KENNESAW","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"LINDENWOOD UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"BELLEVILLE","s":"IL","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"METROPOLITAN COMMUNITY COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"KANSAS CITY","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"MIDDLE GEORGIA STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"MACON","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"MIDLANDS TECHNICAL COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"COLUMBIA","s":"SC","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"MILLIKEN UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"DECATUR","s":"IL","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"NORTH COUNTY CHRISTIAN SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"FLORISSANT","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"OKLAHOMA STATE UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"STILLWATER","s":"OK","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"OMAHA CATHOLIC SCHOOL CONSORTIUM","a":2895,"p":"SCHOLARSHIP GRANT","c":"OMAHA","s":"NE","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"OUR LADY OF LOURDES SCHOOL","a":2572,"p":"SCHOLARSHIP GRANT","c":"OMAHA","s":"NE","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"ROCKHURST UNIVERSITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"KANSAS CITY","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"ROSATI-KAIN ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"RYOGOKU SOCCER ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"KANSAS CITY","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"SACRED HEARTS - GRIFFIN HIGH SCHOOL","a":3000,"p":"SCHOLARSHIP GRANT","c":"SPRINGFIELD","s":"IL","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"SACRED HEARTS ACADEMY","a":3000,"p":"SCHOLARSHIP GRANT","c":"ST CHARLES","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"SAINT OLAF COLLEGE","a":3000,"p":"SCHOLARSHIP GRANT","c":"NORTHFIELD","s":"MN","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"SAVANNAH STATE UNIVERSITY","a":3000,"p":"SCHOLARSHIP GRANT","c":"SAVANNAH","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"SOUTHERN ILLINOIS UNIVERSITY CARBONDALE","a":3000,"p":"SCHOLARSHIP GRANT","c":"CARBONDALE","s":"IL","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"ST CHARLES COMMUNITY COLLEGE","a":6000,"p":"SCHOLARSHIP GRANT","c":"COTTLEVILLE","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"ST LOUIS CATHOLIC ACADEMY","a":7500,"p":"SCHOLARSHIP GRANT","c":"ST LOUIS","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"STATE FAIR COMMUNITY COLLEGE","a":1500,"p":"SCHOLARSHIP GRANT","c":"SEDALIA","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF CENTRAL MISSOURI","a":1500,"p":"SCHOLARSHIP GRANT","c":"WARRENSBURG","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF GEORGIA","a":3000,"p":"SCHOLARSHIP GRANT","c":"ATHENS","s":"GA","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF HAWAII - WEST OAHU","a":6000,"p":"SCHOLARSHIP GRANT","c":"KAPOLEI","s":"HI","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF MISSOURI- KANSAS CITY","a":1500,"p":"SCHOLARSHIP GRANT","c":"KANSAS CITY","s":"MO","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF NORTH CAROLINA AT CHAPEL HILL","a":3000,"p":"SCHOLARSHIP GRANT","c":"CHAPEL HILL","s":"NC","e":"","o":"202640499349100704","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF PHOENIX","a":1500,"p":"SCHOLARSHIP GRANT","c":"GLENDALE","s":"AZ","e":"","o":"202640499349100704","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

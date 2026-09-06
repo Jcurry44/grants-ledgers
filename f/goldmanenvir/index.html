@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GOLDMANENV_DATA" data-slug="goldmanenvir" data-n="51" data-grand="6768374" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GOLDMANENV_DATA" data-slug="goldmanenvir" data-n="51" data-grand="6768374" data-recsub="All five years" data-running="to the dollar, five years running." data-names="45 as-filed names" data-rows-embedded="51" data-rows-total="51">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 51 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">45</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $6,768,374, equals Part I line 25(d), $6,768,374 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.GOLDMANENV_DATA={"meta":{"foundation":"Goldman Environmental Foundation","ein":"94-3094857","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":51,"grand_total":6768374,"tieout":{"2020":{"object_id":"202113199349102381","grant_count":7,"grant_sum":1300000,"line25_col_d":1300000,"status":"PASS"},"2021":{"object_id":"202203199349108500","grant_count":13,"grant_sum":1426615,"line25_col_d":1426615,"status":"PASS"},"2022":{"object_id":"202343189349106704","grant_count":10,"grant_sum":1525000,"line25_col_d":1525000,"status":"PASS"},"2023":{"object_id":"202443209349104994","grant_count":9,"grant_sum":1269759,"line25_col_d":1269759,"status":"PASS"},"2024":{"object_id":"202513169349102331","grant_count":12,"grant_sum":1247000,"line25_col_d":1247000,"status":"PASS"}}},"grants":[{"y":2020,"r":"KRISTAL AMBROSE","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"CHIBEZE EZEKIEL","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"NEMONTE NENQUIMO","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"LEYDY ARACELY PECH MARTIN","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"LUCIE PINSON","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"PAUL SEIN TWA","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2020,"r":"JEWISH COMMUNITY FEDERATION","a":100000,"p":"SUPPORT FOR PAST PRIZE WINNERS ORGANIZATION","c":"SAN FRANCISCO","s":"CA","e":"","o":"202113199349102381","record_type":"named_recipient"},{"y":2021,"r":"JEWISH COMMUNITY FEDERATION","a":189085,"p":"SUPPORT FOR PAST PRIZE WINNERS ORGANIZATION","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"GLORIA MAJIGA-KAMOTO","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"KIMIKO HIRATA","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"LIZ CHICAJE CHURAY","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"MAIDA BILAL","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"SHARON LAVIGNE","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"THAI VAN NGUYEN","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"FRONT LINE DEFENDERS USA FOUNDATION","a":15000,"p":"TO PROVIDE URGENT SUPPORT GRANTS TO PRIZE WINNERS","c":"NEW YORK","s":"NY","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"SHARON C LAVIGNE","a":5000,"p":"HARDSHIP SUPPORT FOLLOWING NATURAL DISASTER (HURRICANE IDA)","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"RODRIGUE MUGARUKA KATEMBO","a":5000,"p":"HARDSHIP SUPPORT FOLLOWING NATURAL DISASTER (VOLCANIC ERUPTION IN DRC)","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"RODRIGUE MUGARUKA KATEMBO","a":5216,"p":"HARDSHIP MEDICAL ASSISTANCE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"FUNDACION ANIDE","a":5000,"p":"ALBERTO CURAMIL - HARDSHIP MEDICAL ASSISTANCE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2021,"r":"ROSA MOSQUERA","a":2314,"p":"LIZ CHICAJE CHURAY - HARDSHIP MEDICAL ASSISTANCE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202203199349108500","record_type":"named_recipient"},{"y":2022,"r":"FRONT LINE DEFENDERS USA FOUNDATION","a":20000,"p":"TO PROVIDE URGENT SUPPORT GRANTS TO PRIZE WINNERS","c":"NEW YORK","s":"NY","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"JEWISH COMMUNITY FEDERATION","a":300000,"p":"SUPPORT FOR PAST PRIZE WINNERS ORGANIZATION","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"ALEX LUCITANTE","a":100000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"ALEXANDRA NARVAEZ","a":100000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"CHIMA WILLIAMS","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"MARJAN MINNESMA","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"NALLELI COBO","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"NIWAT ROYKAEW","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"JULIEN VINCENT","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2022,"r":"ALEXIS MASSOL GONZALEZ","a":5000,"p":"HARDSHIP SUPPORT FOLLOWING NATURAL DISASTER (HURRICANE FIONA)","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343189349106704","record_type":"named_recipient"},{"y":2023,"r":"ZAFER KIZILKAYA","a":233713,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"ALESSANDRA KORAP MUNDURUKU","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"CHILEKWA MUMBA","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"TERO MUSTONEN","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"DELIMA SILALAHI","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"DIANE WILSON","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"FRONT LINE DEFENDERS USA FOUNDATION","a":29046,"p":"TO PROVIDE URGENCT SUPPORT GRANTS TO PRIZE WINNERS","c":"NEW YORK","s":"NY","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"EDUARDO NUGKUAG CABRERA","a":2000,"p":"HARDSHIP AWARD FOR HELP WITH URGENT MEDICAL CARE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2023,"r":"MARIA EUGENIA CHIRIVISTA LECHUGA","a":5000,"p":"HARDSHIP AWARD FOR SUPPORT TO FAMILY IN HONOR OF ISIDRO BALDENEGRO (PW-MEXICO, 2005)","c":"SAN FRANCISCO","s":"CA","e":"","o":"202443209349104994","record_type":"named_recipient"},{"y":2024,"r":"FRONT LINE DEFENDERS USA FOUNDATION","a":20000,"p":"TO PROVIDE URGENCT SUPPORT GRANTS TO PRIZE WINNERS","c":"NEW YORK","s":"NY","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"ENVIRONMENTAL DEFENDERS COLLABORATIVE","a":15000,"p":"GENERAL SUPPORT FOR GRANTMAKING TO PWS REGARDING DEFENSE AND SECURITY","c":"BOULDER","s":"CO","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"NONHLE MBUTHUMA FORSLUND","a":100000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"MARCEL GOMEZ","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"MURRAWAH M P JOHNSON","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"AALOK SHUKLA","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"MARIA TERESA VICENTE GIMENEZ","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"ANDREA VIDAURRE","a":200000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"SINEGUGU ZUKULU","a":100000,"p":"GENERAL SUPPORT FOR ENVIRONMENTAL ACHIEVEMENT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"T DEETE","a":4750,"p":"HARDSHIP AWARD IN WAKE OF SEVERE FLOODING IN NORTHERN THAILAND","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"CAMILA ROSSI","a":2500,"p":"HARDSHIP AWARD FOR SUPPORT OF 2023 PW A. MUNDURUKU MEDICAL EXPENSES","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"},{"y":2024,"r":"A MUNDURUKU","a":4750,"p":"HARDSHIP AWARD IN WAKE OF SEVERE FLOODING IN NORTHERN THAILAND","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513169349102331","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

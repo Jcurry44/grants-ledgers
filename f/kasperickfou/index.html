@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="KASPERICKF_DATA" data-slug="kasperickfou" data-n="100" data-grand="16519711" data-recsub="All five years" data-running="to the dollar, five years running." data-names="44 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="KASPERICKF_DATA" data-slug="kasperickfou" data-n="100" data-grand="16519711" data-recsub="All five years" data-running="to the dollar, five years running." data-names="44 as-filed names" data-rows-embedded="100" data-rows-total="100">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 100 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">43</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $16,519,711, equals Part I line 25(d), $16,519,711 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.KASPERICKF_DATA={"meta":{"foundation":"Kasperick Foundation","ein":"46-4363196","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":100,"grand_total":16519711,"tieout":{"2020":{"object_id":"202232279349100323","grant_count":15,"grant_sum":1540590,"line25_col_d":1540590,"status":"PASS"},"2021":{"object_id":"202302899349101750","grant_count":24,"grant_sum":2969908,"line25_col_d":2969908,"status":"PASS"},"2022":{"object_id":"202422289349100522","grant_count":17,"grant_sum":3633204,"line25_col_d":3633204,"status":"PASS"},"2023":{"object_id":"202540159349100364","grant_count":20,"grant_sum":3839594,"line25_col_d":3839594,"status":"PASS"},"2024":{"object_id":"202630479349100438","grant_count":24,"grant_sum":4536415,"line25_col_d":4536415,"status":"PASS"}}},"grants":[{"y":2020,"r":"ACCION SAN DIEGO","a":50000,"p":"SAN DIEGO MICROCREDIT PROGRAM","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"AFRICAWORKS PARA COMUNIDADES RURAIS","a":200000,"p":"MOZAMBIQUE MICROCREDIT PROGRAM","c":"","s":"","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"BOMA PROJECT","a":290590,"p":"KENYA MICROCREDIT PROGRAM","c":"MANCESTER CENTER","s":"VT","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"CATHOLIC RELIEF SERVICES","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"BALTIMORE","s":"MD","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"FEEDING SAN DIEGO","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"KITCHENS FOR GOOD","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"ONE ACRE FUND US","a":200000,"p":"KENYA MICROCREDIT PROGRAM","c":"HIGHLAND PARK","s":"IL","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"PALMIS MIKWOFINANS SOSYAL","a":200000,"p":"HAITI MICROCREDIT PROGRAM","c":"","s":"","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"SAN DIEGO FOOD BANK","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"SAN DIEGO FOOD SYSTEMS ALLIANCE","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"SAN DIEGO HUNGER COALITION","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"SAN DIEGO RESCUE MISSION","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"ST VINCENT DE PAUL VILLAGE","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF SAN DIEGO","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2020,"r":"WHOLE PLANET FOUNDATION","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"AUSTIN","s":"TX","e":"","o":"202232279349100323","record_type":"named_recipient"},{"y":2021,"r":"AFRICAWORKS PARA COMUNIDADES RURAIS","a":100000,"p":"MICROFINANCE: MOZAMBIQUE.","c":"","s":"","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"BRAC USA","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"NEW YORK","s":"NY","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"CATHOLIC RELIEF SERVICES","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"BALTIMORE","s":"MD","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"ENTREPRENEURS DU MONDE","a":200000,"p":"MICROFINANCE: HAITI, BURKINA FASO.","c":"","s":"","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"FEEDING SAN DIEGO","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"FRIENDSHIP BRIDGE","a":100000,"p":"MICROFINANCE: GUATEMALA","c":"LAKEWOOD","s":"CO","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"GLOBAL IMPACT","a":100000,"p":"AG FINANCE: EL SALVADOR.","c":"ALEXANDRIA","s":"VA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"KITCHENS FOR GOOD","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"MYAGRO FARMS","a":400000,"p":"AG FINANCE: SENEGAL, MALI.","c":"NEW YORK","s":"NY","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"NEW HORIZON ASSOCIATION","a":100000,"p":"MICROFINANCE: EGYPT.","c":"","s":"","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"ONE ACRE FUND US","a":200000,"p":"AG FINANCE: KENYA","c":"HIGHLAND PARK","s":"IL","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"SAN DIEGO CENTER FOR CHILDREN","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"SAN DIEGO FOOD BANK","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"SAN DIEGO FOOD SYSTEMS ALLIANCE","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"SAN DIEGO HUNGER COALITION","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"SAN DIEGO RESCUE MISSION","a":50000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"THE BOMA PROJECT","a":100000,"p":"ULTRA-POOR GRADUATION: KENYA.","c":"WASHINGTON","s":"DC","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"THE BOMA PROJECT","a":137105,"p":"ULTRA-POOR GRADUATION: KENYA.","c":"MANCHESTER CENTER","s":"VT","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"TRICKLE UP","a":275000,"p":"ULTRA-POOR GRADUATION: MEXICO.","c":"NEW YORK","s":"NY","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF SAN DIEGO","a":150000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"SAN DIEGO","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"VILLAGE ENTERPRISE","a":257803,"p":"ULTRA-POOR GRADUATION: MEXICO.","c":"SAN CARLOS","s":"CA","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"VILLAGE ENTERPRISES","a":100000,"p":"ULTRA-POOR GRADUATION: UGANDA.","c":"PORTLAND","s":"OR","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"WHOLE PLANET FOUNDATION","a":200000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"AUSTIN","s":"TX","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2021,"r":"WORKING CAPITAL FOR COMMUNITY NEEDS","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION.","c":"MADISON","s":"WI","e":"","o":"202302899349101750","record_type":"named_recipient"},{"y":2022,"r":"ACCESO IMPACT","a":100000,"p":"AG FINANCE: EL SALVADOR","c":"ALEXANDRIA","s":"VA","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"AFRICAWORKS PARA COMUNIDADES RURAIS","a":100000,"p":"MICROFINANCE: MOZAMBIQUE","c":"","s":"","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"BRAC USA","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"NEW YORK","s":"NY","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"CATHOLIC RELIEF SERVICES","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"BALTIMORE","s":"MD","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"ENTREPRENEURS DU MONDE","a":350000,"p":"MICROFINANCE: MYANMAR, BURKINA FASO","c":"","s":"","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"FRIENDSHIP BRIDGE","a":100000,"p":"MICROFINANCE: GUATEMALA","c":"LAKEWOOD","s":"CO","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"MYAGRO FARMS","a":200000,"p":"AG FINANCE: SENEGAL, MALI","c":"NEW YORK","s":"NY","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"NEW HORIZON ASSOCIATION","a":100000,"p":"MICROFINANCE: EGYPT","c":"","s":"","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"ONE ACRE FUND US","a":100000,"p":"AG FINANCE: KENYA","c":"MADISON","s":"WI","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"SAN DIEGO CENTER FOR CHILDREN","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"SAN DIEGO RESCUE MISSION","a":300000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"THE BOMA PROJECT","a":700117,"p":"ULTRA-POOR GRADUATION: KENYA","c":"MANCHESTER","s":"VT","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"TRICKLE UP PROGRAM","a":275000,"p":"ULTRA-POOR GRADUATION: MEXICO","c":"NEW YORK","s":"NY","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF SAN DIEGO","a":200000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"VILLAGE ENTERPRISES","a":508087,"p":"ULTRA-POOR GRADUATION: MEXICO, UGANDA","c":"SAN CARLOS","s":"CA","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"WHOLE PLANET FOUNDATION","a":200000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"AUSTIN","s":"TX","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2022,"r":"WORKING CAPITAL FOR COMMUNITY NEEDS","a":100000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"MADISON","s":"WI","e":"","o":"202422289349100522","record_type":"named_recipient"},{"y":2023,"r":"AFRICAWORKS PARA COMUNIDADES RURAIS","a":100000,"p":"MICROFINANCE: MOZAMBIQUE","c":"","s":"","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"ALPHA PROJECT","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"BRAC USA","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"NEW YORK","s":"NY","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"CATHOLIC RELIEF SERVICES","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"BALTIMORE","s":"MD","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"CENTRO DE SERVICIOS FINANCIEROS AKA FUNDER","a":200000,"p":"MICROFINANCE: HONDURAS","c":"","s":"","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"ENTREPRENEURS DU MONDE","a":375000,"p":"MICROFINANCE: MYANMAR, BURKINA FASO","c":"","s":"","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"FONDASYON KOLE ZEPOL AKA FONKOZE","a":381260,"p":"ULTRA-POOR GRADUATION: HAITI","c":"","s":"","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"FRIENDSHIP BRIDGE","a":100000,"p":"MICROFINANCE: GUATEMALA","c":"LAKEWOOD","s":"CO","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"LUCKY DUCK FOUNDATION","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"MYAGRO FARMS","a":200000,"p":"AG FINANCE: SENEGAL, MALI","c":"NEW YORK","s":"NY","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"NEW HORIZON ASSOCIATION","a":100000,"p":"MICROFINANCE: EGYPT","c":"","s":"","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"SAN DIEGO CENTER FOR CHILDREN","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"SAN DIEGO RESCUE MISSION","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"ST VINCENT DE PAUL VILLAGE","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"THE BOMA PROJECT","a":300000,"p":"ULTRA-POOR GRADUATION: KENYA","c":"MANCHESTER","s":"VT","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"TRICKLE UP PROGRAM","a":350000,"p":"ULTRA-POOR GRADUATION: INDIA","c":"NEW YORK","s":"NY","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF SAN DIEGO","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"SAN DIEGO","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"VILLAGE ENTERPRISE","a":333334,"p":"ULTRA-POOR GRADUATION: UGANDA","c":"SAN CARLOS","s":"CA","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"WHOLE PLANET FOUNDATION","a":230000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"AUSTIN","s":"TX","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2023,"r":"WORKING CAPITAL FOR COMMUNITY NEEDS","a":130000,"p":"TO SUPPORT ORGANIZATION'S MISSION","c":"MADISON","s":"WI","e":"","o":"202540159349100364","record_type":"named_recipient"},{"y":2024,"r":"ACCESO GLOBAL IMPACT","a":300000,"p":"AG FINANCE: EL SALVADOR","c":"BROOKLYN","s":"NY","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"ALPHA PROJECT","a":100000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"BRAC USA","a":100000,"p":"POVERTY ALLEVIATION THROUGH ECONOMIC OPPORTUNITY","c":"NEW YORK","s":"NY","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC CHARITIES OF SAN DIEGO","a":150000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC RELIEF SERVICES","a":100000,"p":"POVERTY ALLEVIATION THROUGH ECONOMIC OPPORTUNITY","c":"BALTIMORE","s":"MD","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"CAURIE-MF","a":300000,"p":"MICROFINANCE: SENEGAL","c":"","s":"","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"CENTRO DE SERVICIOS FINANCIEROS AKA FUNDER COL MIRAMONTES","a":200000,"p":"MICROFINANCE: HONDURAS","c":"","s":"","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"EAST COUNTY TRANSITIONAL LIVING CENTER","a":150000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"EL CAJON","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"ENTREPRENEURS DU MONDE","a":100000,"p":"MICROFINANCE: SENEGAL","c":"","s":"","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"FRIENDSHIP BRIDGE","a":300000,"p":"MICROFINANCE: GUATEMALA","c":"LAKEWOOD","s":"CO","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"GLOBAL FUND FOR WIDOWS","a":186525,"p":"MICROFINANCE: EGYPT","c":"NEW YORK","s":"NY","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"INKOMOKO","a":200000,"p":"MICROFINANCE: RWANDA","c":"CLINTON","s":"WA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"INTERFAITH COMMUNITY HOUSING","a":150000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"ESCONDIDO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"LUCKY DUCK FOUNDATION","a":100000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"NEW HORIZON ASSOCIATION","a":199890,"p":"MICROFINANCE: EGYPT","c":"","s":"","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"PEOPLE ASSISTING THE HOMELESS","a":100000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"SAN DIEGO RESCUE MISION","a":150000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"ST VINCENT DE PAUL VILLAGE","a":100000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"TRICKLE UP PROGRAM","a":300000,"p":"ULTRA-POOR GRADUATION: INDIA","c":"NEW YORK","s":"NY","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF SAN DIEGO","a":100000,"p":"BIGI INITIATIVE","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"VETERANS VILLAGE OF SAN DIEGO","a":100000,"p":"HOMELESS SOLUTIONS: SAN DIEGO","c":"SAN DIEGO","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"VILLAGE ENTERPRISES","a":300000,"p":"ULTRA-POOR GRADUATION: UGANDA","c":"SAN CARLOS","s":"CA","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"WHOLE PLANET FOUNDATION","a":500000,"p":"POVERTY ALLEVIATION THROUGH ECONOMIC OPPORTUNITY","c":"AUSTIN","s":"TX","e":"","o":"202630479349100438","record_type":"named_recipient"},{"y":2024,"r":"WORKING CAPITAL FOR COMMUNITY NEEDS","a":250000,"p":"MICROFINANCE: LATIN AMERICA","c":"MADISON","s":"WI","e":"","o":"202630479349100438","record_type":"named_recipient"}]};window.LEDGER_MERGES=["BOMA PROJECT"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FEEDING SAN DIEGO":"Basic needs & response","SAN DIEGO RESCUE MISSION":"Basic needs & response","SAN DIEGO CENTER FOR CHILDREN":"Basic needs & response","VILLAGE ENTERPRISES":"Basic needs & response","ACCESO IMPACT":"Basic needs & response","TRICKLE UP PROGRAM":"Community & economic development","LUCKY DUCK FOUNDATION":"Health & wellbeing","GLOBAL FUND FOR WIDOWS":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

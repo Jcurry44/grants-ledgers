@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GOLDENDOME_DATA" data-slug="goldendomefo" data-n="41" data-grand="39910350" data-recsub="All five years" data-running="to the dollar, five years running." data-names="26 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GOLDENDOME_DATA" data-slug="goldendomefo" data-n="41" data-grand="39910350" data-recsub="All five years" data-running="to the dollar, five years running." data-names="26 as-filed names" data-rows-embedded="41" data-rows-total="41">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 41 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">24</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $39,910,350, equals Part I line 25(d), $39,910,350 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.GOLDENDOME_DATA={"meta":{"foundation":"Golden Dome Foundation","ein":"47-3400712","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":41,"grand_total":39910350,"tieout":{"2021":{"object_id":"202223199349103902","grant_count":16,"grant_sum":9948809,"line25_col_d":9948809,"status":"PASS"},"2022":{"object_id":"202311809349100306","grant_count":11,"grant_sum":5824086,"line25_col_d":5824086,"status":"PASS"},"2023":{"object_id":"202442819349100709","grant_count":5,"grant_sum":2696639,"line25_col_d":2696639,"status":"PASS"},"2024":{"object_id":"202532239349100123","grant_count":4,"grant_sum":9429588,"line25_col_d":9429588,"status":"PASS"},"2025":{"object_id":"202601529349100110","grant_count":5,"grant_sum":12011228,"line25_col_d":12011228,"status":"PASS"}}},"grants":[{"y":2021,"r":"Oak Hill Academy","a":100000,"p":"Annual giving fund ensures the level of academic and extracurricular offerings that are essential to the Oak Hill Academy experience.","c":"Lincroft","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Special Needs Dobermans","a":50000,"p":"Special Needs Dobermans has a common goal of helping Senior and special needs Doberman Pinschers.","c":"Aztec","s":"NM","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"University of Notre Dame","a":1800000,"p":"Final Phase II of the Harris Family Track and Field Stadium.","c":"Notre Dame","s":"IN","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Save US Pets Foundation","a":50000,"p":"Helping pet owners who can not afford medical treatment for their pets.","c":"Tinton Falls","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"St John the Baptist Church","a":125000,"p":"Heating repairs.","c":"New York","s":"NY","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Meriden Health Foundation","a":4539286,"p":"Installment Pledge to go towards the Dr. Robert H. Harris Emergency Care Center at Bayshore Medical Center and towards the Dr. Robert H. Harris Scholarship at Ocean Medical Center.","c":"Neptune","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Raine Foundation","a":80000,"p":"To assist children and their families who are in crisis.","c":"Hazlet","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"St Benedict Catholic Church and Sch","a":388928,"p":"Support the pantry and to the school to continue to offer a Catholic Education. Academic, religious and social offerings for the school.","c":"Holmdel","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Allaire Community Farm","a":1665000,"p":"To help fund the organization mission of rescuing animals and training special needs people, equine and animal therapy to the community with special needs, anxiety, depression and PTSD and showing urban and suburban students the importance of healthy eating.","c":"Wall Township","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Autism Speaks","a":25000,"p":"Promoting solutions, across the spectrum and throughout the life span, for the needs of individuals with autism and their families","c":"Princeton","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"No Limits Cafe","a":30000,"p":"They are a lunch cafe with a major difference, they will train and employ adults with Intellectual Disabilities. Their mission is to EMPOWER adults with intellectual disabilities by providing jobs and job training to help them lead fulfilling lives within our community and to increase awareness of their potential.","c":"Red Bank","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Monmouth County SPCA","a":5000,"p":"To protect, care and advoate for all animals.","c":"Eatontown","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"St Peter's Church","a":71400,"p":"Purchase of new organ and air conditioning unit.","c":"Point Pleasant Beach","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Count Basie Center for the Arits","a":13195,"p":"Their mission is to celebrate and share the arts with the community.","c":"Red Bank","s":"NJ","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"University of Pannsylvania","a":6000,"p":"The University of Pennsylvania is a private Ivy League research univeresity in Philadelphia, PA.The purpose of the contribution is to support the academics of the University.","c":"Philadelphia","s":"PA","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2021,"r":"Univ of Penn School of Veterinary M","a":1000000,"p":"The U of Penn School of Veterinary Medicine is an institution for Vet students, a research institution and a hospital for large animals. The purpose of the gift is to support the institutions different causes.","c":"Philadelphia","s":"PA","e":"","o":"202223199349103902","record_type":"named_recipient"},{"y":2022,"r":"The Seeing Eye Inc","a":1800,"p":"The Seeing Eye is a philanthropic organization whose mission is to enhance the independence, dignity, and self-confidence of blind people through the use of Seeing Eye dogs.","c":"Morristown","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Special Needs Dobermans","a":170000,"p":"Special Needs Dobermans has a common goal of helping Senior and special needs Doberman Pinschers.","c":"Aztec","s":"NM","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Save US Pets Foundation","a":50000,"p":"Helping pet owners who can not afford medical treatment for their pets.","c":"Tinton Falls","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Meriden Health Foundation","a":5359286,"p":"Installment Pledge to go towards the Dr. Robert H. Harris Emergency Care Center at Bayshore Medical Center and towards the Dr. Robert H. Harris Scholarship at Ocean Medical Center.","c":"Neptune","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"St Benedict Catholic Church and Sch","a":100000,"p":"Support the pantry and to the school to continue to offer a Catholic Education. Academic, religious and social offerings for the school.","c":"Holmdel","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Allaire Community Farm","a":10000,"p":"To help fund the organization mission of rescuing animals and training special needs people, equine and animal therapy to the community with special needs, anxiety, depression and PTSD and showing urban and suburban students the importance of healthy eating.","c":"Wall Township","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"St Peter's Church","a":28000,"p":"Purchase of new organ and air conditioning unit.","c":"Point Pleasant Beach","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Count Basie Center for the Arits","a":20000,"p":"Their mission is to celebrate and share the arts with the community.","c":"Red Bank","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"St Jude Children's Research Hospita","a":50000,"p":"To suppor St Jude Childen's Research Hospital in their mission to advance cures, and means of prevention, for pediatric catastrophic diseases through research and treatment.","c":"New York","s":"NY","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Marty's Place Senior Dog Sanctuary","a":10000,"p":"Martys Place Senior Dog Sanctuary provides a safe, loving and protected environment for senior dogs that do not have homes. Our residents are older age 7 or beyond and receive the physical and emotional comfort, companionship and enrichment they need to thrive in their golden years. At Martys Place, they find a home for life.","c":"Upper Freehold","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2022,"r":"Breast Intensions Inc","a":25000,"p":"Promotion of health and relief of the distress by assistance to individuals and their families who are diagnosted with or treated for cancer.","c":"Middletown","s":"NJ","e":"","o":"202311809349100306","record_type":"named_recipient"},{"y":2023,"r":"ALLAIRE COMMUNITY FARM","a":17000,"p":"TO HELP FUND THE ORGANIZATION MISSION OF RESCUING ANIMALS AND TRAINING SPECIAL NEEDS PEOPLE, EQUINE AND ANIMAL THERAPY TO THE COMMUNITY WITH SPECIAL NEEDS, ANXIETY, DEPRESSION AND PTSD AND SHOWING URBAN AND SUBURBAN STUDENTS THE IMPORTANCE OF HEALTHY EATING.","c":"WALL","s":"NJ","e":"","o":"202442819349100709","record_type":"named_recipient"},{"y":2023,"r":"MERIDIAN HEALTH FOUNDATION INC","a":1724286,"p":"INSTALLMENT PLEDGE TO GO TOWARDS THE DR. ROBERT H. HARRIS EMERGENCY CARE CENTER AT BAYSHORE MEDICAL CENTER AND TOWARDS THE DR. ROBERT H. HARRIS SCHOLARSHIP AT OCEAN MEDICAL CENTER.","c":"WALL","s":"NJ","e":"","o":"202442819349100709","record_type":"named_recipient"},{"y":2023,"r":"OAK HILL ACADEMY","a":150000,"p":"CHARITABLE DONATION","c":"LINCROFT","s":"NJ","e":"","o":"202442819349100709","record_type":"named_recipient"},{"y":2023,"r":"PARKER FAMILY HEALTH CENTER","a":500000,"p":"CHARITABLE DONATION","c":"RED BANK","s":"NJ","e":"","o":"202442819349100709","record_type":"named_recipient"},{"y":2023,"r":"OTHER CHARITABLE CONTRIBUTIONS","a":305353,"p":"CHARITABLE DONATION","c":"MISCELLANEOUS","s":"NJ","e":"","o":"202442819349100709","record_type":"named_recipient"},{"y":2024,"r":"ALLAIRE COMMUNITY FARM","a":25000,"p":"TO HELP FUND THE ORGANIZATION MISSION OF RESCUING ANIMALS AND TRAINING SPECIAL NEEDS PEOPLE, EQUINE AND ANIMAL THERAPY TO THE COMMUNITY WITH SPECIAL NEEDS, ANXIETY, DEPRESSION AND PTSD AND SHOWING URBAN AND SUBURBAN STUDENTS THE IMPORTANCE OF HEALTHY EATING.","c":"WALL","s":"NJ","e":"","o":"202532239349100123","record_type":"named_recipient"},{"y":2024,"r":"MERIDIAN HEALTH FOUNDATION INC","a":8649285,"p":"INSTALLMENT PLEDGE TO GO TOWARDS THE DR. ROBERT H. HARRIS EMERGENCY CARE CENTER AT BAYSHORE MEDICAL CENTER AND TOWARDS THE DR. ROBERT H. HARRIS SCHOLARSHIP AT OCEAN MEDICAL CENTER.","c":"WALL","s":"NJ","e":"","o":"202532239349100123","record_type":"named_recipient"},{"y":2024,"r":"OAK HILL ACADEMY","a":25000,"p":"CHARITABLE DONATION","c":"LINCROFT","s":"NJ","e":"","o":"202532239349100123","record_type":"named_recipient"},{"y":2024,"r":"OTHER CHARITABLE CONTRIBUTIONS","a":730303,"p":"CHARITABLE DONATION","c":"MISCELLANEOUS","s":"NJ","e":"","o":"202532239349100123","record_type":"named_recipient"},{"y":2025,"r":"ALLAIRE COMMUNITY FARM","a":180000,"p":"TO HELP FUND THE ORGANIZATION MISSION OF RESCUING ANIMALS AND TRAINING SPECIAL NEEDS PEOPLE, EQUINE AND ANIMAL THERAPY TO THE COMMUNITY WITH SPECIAL NEEDS, ANXIETY, DEPRESSION AND PTSD AND SHOWING URBAN AND SUBURBAN STUDENTS THE IMPORTANCE OF HEALTHY EATING.","c":"WALL","s":"NJ","e":"","o":"202601529349100110","record_type":"named_recipient"},{"y":2025,"r":"MERIDIAN HEALTH FOUNDATION INC","a":10649285,"p":"INSTALLMENT PLEDGE TO GO TOWARDS THE DR. ROBERT H. HARRIS EMERGENCY CARE CENTER AT BAYSHORE MEDICAL CENTER AND TOWARDS THE DR. ROBERT H. HARRIS SCHOLARSHIP AT OCEAN MEDICAL CENTER.","c":"WALL","s":"NJ","e":"","o":"202601529349100110","record_type":"named_recipient"},{"y":2025,"r":"OAK HILL ACADEMY","a":95000,"p":"CHARITABLE DONATION","c":"LINCROFT","s":"NJ","e":"","o":"202601529349100110","record_type":"named_recipient"},{"y":2025,"r":"OTHER CHARITABLE CONTRIBUTIONS","a":1076943,"p":"CHARITABLE DONATION","c":"MISCELLANEOUS","s":"NJ","e":"","o":"202601529349100110","record_type":"named_recipient"},{"y":2025,"r":"BAYSHORE MEDICAL CENTER FOUNDATION","a":10000,"p":"CHARITABLE DONATION","c":"EDISON","s":"NJ","e":"","o":"202601529349100110","record_type":"named_recipient"}]};window.LEDGER_MERGES=["OAK HILL ACADEMY","ALLAIRE COMMUNITY FARM"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

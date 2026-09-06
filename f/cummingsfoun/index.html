@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="CUMMINGSFO_DATA" data-slug="cummingsfoun" data-n="44" data-grand="88236695" data-recsub="All five years" data-running="to the dollar, five years running." data-names="35 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="CUMMINGSFO_DATA" data-slug="cummingsfoun" data-n="44" data-grand="88236695" data-recsub="All five years" data-running="to the dollar, five years running." data-names="35 as-filed names" data-rows-embedded="44" data-rows-total="44">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 44 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">35</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $88,236,695, equals Part XIV, line 3a, $88,236,695 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -430,7 +438,8 @@
 </div>
 <script>
 window.CUMMINGSFO_DATA={"meta":{"foundation":"Cummings Foundation","ein":"04-3073023","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":44,"grand_total":88236695,"tieout":{"2020":{"object_id":"202113179349100921","grant_count":15,"grant_sum":117250,"line25_col_d":117250,"status":"PASS"},"2021":{"object_id":"202243199349104374","grant_count":7,"grant_sum":8823,"line25_col_d":8823,"status":"PASS"},"2022":{"object_id":"202323199349104772","grant_count":9,"grant_sum":37022600,"line25_col_d":37022600,"status":"PASS"},"2023":{"object_id":"202423209349107792","grant_count":7,"grant_sum":18366000,"line25_col_d":18366000,"status":"PASS"},"2024":{"object_id":"202533219349108058","grant_count":6,"grant_sum":32722022,"line25_col_d":32722022,"status":"PASS"}}},"grants":[{"y":2020,"r":"CHELMSFORD HIGH SCHOOL","a":100,"p":"Educational Programming","c":"Chelmsford","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF WINTER POND","a":1000,"p":"Conservation Programs","c":"WINCHESTER","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"KATHI GLAVIN HIGGINS SCHOLARSHIP","a":800,"p":"Educational Programming","c":"BILLERICA","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MARLBOROUGH HIGH SCHOOL","a":1100,"p":"Educational Programming","c":"MARLBOROUGH","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MAYOR'S CHARITY RELIEF FUND","a":5000,"p":"Civic Fundraiser","c":"MARLBOROUGH","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MEDICAL MISSIONARIES OF MARY","a":1000,"p":"Religious Program","c":"BRONX","s":"NY","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MISHAWUM CHORAL SOCIETY","a":300,"p":"Cultural Arts Programming","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"PAN MASSACHUSETTS CHALLENGE INC","a":50,"p":"Health Research and Programs","c":"NEEDHAM","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"RISE AGAIN","a":800,"p":"Mental Health Program","c":"N BILLERICA","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"SUPPORTIVE LIVING INC","a":100000,"p":"Brain Injury Residence","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"WINCHESTER MEALS ON WHEELS","a":1000,"p":"Community Welfare Program","c":"WINCHESTER","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"NEW ENGLAND HOME FOR VETERANS","a":500,"p":"Homeless Shelter","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"AIDS ACTIONS COMMITTEE OF MA","a":100,"p":"Health Research and Programs","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"DANA FARBER","a":500,"p":"Health Research and Programs","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2021,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"ARTISTS FOR HUMANITY INC","a":103,"p":"SOCIAL JUSTICE","c":"BOSTON","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"BETTER FUTURE PROJECT INC","a":100,"p":"Conservation Programs","c":"CAMBRIDGE","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"EVENING OF GIVING","a":1400,"p":"Community Welfare Program","c":"MARLBOROUGH","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"NESKAYA INC","a":120,"p":"Cultural Arts Programming","c":"FRANCONIA","s":"NH","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"SOMERVILLE CAMBRIDGE ELDER","a":100,"p":"Elder Services","c":"SOMERVILLE","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"WORCESTER STATE UNIVERSITY","a":2000,"p":"Educational Programing","c":"WORCESTER","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2022,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"ALZHEIMER'S ASSOCIATION","a":2600,"p":"HEALTH RESEARCH AND PROGRAMS","c":"WALTHAM","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"DANA-FARBER CANCER INSTITUTE","a":10000,"p":"HEALTH RESEARCH AND PROGRAMS","c":"BROOKLINE","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS FOREVER","a":1000,"p":"LEADERSHIP PROGRAMS","c":"DURHAM","s":"NH","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER SENIORS ASSOCIATION INC","a":1000,"p":"ELDER SERVICES","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"MEDFORD","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER FOUNDATION FOR EDUCATIONAL EXCELLENCE","a":1000,"p":"EDUCATIONAL PROGRAMMING","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER PUBLIC LIBRARY","a":1000,"p":"EDUCATIONAL PROGRAMMING","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"Oneworld Boston Inc","a":37000000,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2023,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"MEDFORD","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"CUMMINGS FOUNDATION GRANTS INC","a":18350000,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"PLYMOUTH STATE UNIVERSITY","a":2000,"p":"EDUCATIONAL SCHOLARSHIPS","c":"PLYMOUTH","s":"NH","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MASSACHUSETTS-AMHERST","a":2000,"p":"EDUCATIONAL SCHOLARSHIPS","c":"AMHERST","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"VNA HOSPICE CARE INC","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"MAYOR'S CHARITY RELIEF FUND","a":5000,"p":"CIVIC FUNDRAISER","c":"MARLBOROUGH","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2024,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"MISCELLANEOUS COMMUNITY SUPPORT","c":"MEDFORD","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"CUMMINGS FOUNDATION GRANTS INC","a":32713666,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"VNA HOSPICE CARE INC","a":1000,"p":"HEALTHCARE","c":"WOBURN","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"ALZHEIMER'S ASSOCIATION","a":5156,"p":"HEALTHCARE","c":"CHICAGO","s":"IL","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"MARLBOROUGH FIRE DEPARTMENT RELIEF","a":200,"p":"MISCELLANEOUS COMMUNITY SUPPORT","c":"MARLBOROUGH","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF THE MARLBOROUGH SENIORS","a":1000,"p":"HUMAN SERVICES","c":"MARLBOROUGH","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FRIENDS OF WINTER POND":"Environment & animals","SUPPORTIVE LIVING INC":"Basic needs & response","BETTER FUTURE PROJECT INC":"Environment & animals","FRIENDS OF THE MARLBOROUGH SENIORS":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

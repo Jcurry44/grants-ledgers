@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="THESCHIEWE_DATA" data-slug="theschiewetz" data-n="81" data-grand="18338000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="43 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="THESCHIEWE_DATA" data-slug="theschiewetz" data-n="81" data-grand="18338000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="43 as-filed names" data-rows-embedded="81" data-rows-total="81">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 81 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">40</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $18,338,000, equals Part I line 25(d), $18,338,000 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.THESCHIEWE_DATA={"meta":{"foundation":"The Schiewetz Foundation","ein":"31-1812245","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":81,"grand_total":18338000,"tieout":{"2020":{"object_id":"202113129349101061","grant_count":14,"grant_sum":3487000,"line25_col_d":3487000,"status":"PASS"},"2021":{"object_id":"202213189349101521","grant_count":15,"grant_sum":3320500,"line25_col_d":3320500,"status":"PASS"},"2022":{"object_id":"202333109349100618","grant_count":17,"grant_sum":3864500,"line25_col_d":3864500,"status":"PASS"},"2023":{"object_id":"202413109349100706","grant_count":15,"grant_sum":3947500,"line25_col_d":3947500,"status":"PASS"},"2024":{"object_id":"202533089349100238","grant_count":20,"grant_sum":3718500,"line25_col_d":3718500,"status":"PASS"}}},"grants":[{"y":2020,"r":"BOY SCOUTS MIAMI VALLEY COUNCIL","a":350000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"DAYTON HISTORY","a":785000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"VICTORIA THEATRE ASSOCIATION","a":506000,"p":"DAYTON LIVE","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"DAYTON PERFORMING ARTS ALLIANCE","a":500000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"DAYTON SOCIETY OF NATURAL HISTORY","a":41000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"DAYTON WORKFORCE PARTNERSHIPS","a":5000,"p":"GENERAL FUND","c":"MIAMISBURG","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"GOODWILL EASTER SEALS MIAMI VALLEY","a":300000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"MUSE MACHINE","a":25000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"SEEDLING FOUNDATION","a":25000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"TEACH FOR AMERICA","a":150000,"p":"GENERAL FUND","c":"CINCINNATI","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF CINCINNATI FOUNDATION","a":200000,"p":"GENERAL FUND","c":"CINCINNATI","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"WOODLAND ARBORETUM FOUNDATION","a":50000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"YOUNG AMERICA'S FOUNDATION","a":250000,"p":"GENERAL FUND","c":"RESTON","s":"VA","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2020,"r":"YOUNG MENS CHRISTIAN ASSOCIATION (YMCA) GREATER DAYTON","a":300000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202113129349101061","record_type":"named_recipient"},{"y":2021,"r":"BOY SCOUTS MIAMI VALLEY COUNCIL","a":250000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"DAYTON HISTORY","a":1265000,"p":"PERFORMING ARTS FIELD OF INTEREST FUND #1558 & GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"DAYTON PERFORMING ARTS ALLIANCE","a":150000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"DAYTON SOCIETY OF NATURAL HISTORY","a":59000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"DAYTON WORKFORCE PARTNERSHIPS","a":6000,"p":"GENERAL FUND","c":"MIAMISBURG","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"SEEDLING FOUNDATION","a":25000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"TEACH FOR AMERICA","a":150000,"p":"DAYTON PUBLIC SCHOOLS","c":"NEW YORK","s":"NY","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"YOUNG AMERICA'S FOUNDATION","a":250000,"p":"GENERAL FUND","c":"RESTON","s":"VA","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"THE CEDARVILLE UNIVERSITY","a":500000,"p":"ADVANCEMENT FUND","c":"CEDARVILLE","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"DAYTON EARLY COLLEGE ACADEMY INC (DECA)","a":100000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"THE DAYTON FOUNDATION","a":100000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"KETTERING PARKS FOUNDATION","a":300000,"p":"GENERAL FUND","c":"KETTERING","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"AIR CAMP INC","a":140000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"REBUILDING TOGETHER DAYTON INC","a":20000,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2021,"r":"THE PRESIDENTS CLUB INC","a":5500,"p":"GENERAL FUND","c":"DAYTON","s":"OH","e":"","o":"202213189349101521","record_type":"named_recipient"},{"y":2022,"r":"AIR CAMP INC","a":140000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"BOY SCOUTS MIAMI VALLEY COUNCIL","a":280000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"CLOTHES THAT WORK","a":25000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"DAYTON EARLY COLLEGE ACADEMY (DECA)","a":250000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"DAYTON HISTORY","a":700000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"GOODWILL EASTER SEALS MIAMI","a":300000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"MUSE MACHINE","a":25000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"REBUILDING DAYTON TOGETHER INC","a":60000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"WINCARES INC","a":50000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"YOUNG AMERICAS FOUNDATION","a":375000,"p":"GENERAL FUNDING","c":"RESTON","s":"VA","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"YOUNG MENS CHRISTIAN ASSOCIATION OF GREATER DAYTON","a":150000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"STANDING TOGETHER","a":50000,"p":"GENERAL FUNDING","c":"ARLINGTON","s":"VA","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"CARILLON HISTORICAL PARK","a":700000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"THE PRESIDENTS CLUB","a":4500,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"WESTCARE OHIO","a":250000,"p":"GENERAL FUNDING","c":"LAS VEGAS","s":"NV","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"DAYTON SOCIETY OF NATURAL HISTORY (SUNWATCH)","a":55000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2022,"r":"DAYTON PERFORMING ARTS ALLIANCE","a":450000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202333109349100618","record_type":"named_recipient"},{"y":2023,"r":"AIR CAMP INC","a":140000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"BOY SCOUTS MIAMI VALLEY COUNCIL","a":170650,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"CARILLON HISTORICAL PARK","a":1800000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"DAYTON PERFORMING ARTS ALLIANCE","a":360000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"MUSE MACHINE","a":25000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"REBUILDING DAYTON TOGETHER INC","a":100000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"STANDING TOGETHER","a":65000,"p":"GENERAL FUNDING","c":"ARLINGTON","s":"VA","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"WINCARES INC","a":50000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"YOUNG AMERICAS FOUNDATION","a":125000,"p":"GENERAL FUNDING","c":"RESTON","s":"VA","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"YOUNG MENS CHRISTIAN ASSOCIATION OF GREATER DAYTON","a":120000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"KCS FORWARD FOUNDATION","a":48850,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"DAYTON ART INSTITUTE","a":18000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"KETTERING PARKS FOUNDATION","a":400000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"SEEDLING FOUNDATION","a":25000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2023,"r":"DAYTON LIVE","a":500000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202413109349100706","record_type":"named_recipient"},{"y":2024,"r":"AIR CAMP INC","a":280000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"BOY SCOUTS MIAMI VALLEY COUNCIL","a":331000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"CARILLON HISTORICAL PARK","a":100000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"CLOTHES THAT WORK","a":25000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"DAYTON EARLY COLLEGE ACADEMY (DECA)","a":50000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"DAYTON HISTORY","a":500000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"DAYTON LIVE","a":250000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"DAYTON PERFORMING ARTS ALLIANCE","a":475000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"GOODWILL EASTER SEALS MIAMI","a":300000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"MUSE MACHINE","a":50000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"THE PRESIDENTS CLUB","a":5500,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"WINCARES INC","a":2000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"YOUNG AMERICAS FOUNDATION","a":150000,"p":"GENERAL FUNDING","c":"RESTON","s":"VA","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"HUMAN RACE THREATRE COMPANY","a":60000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"VICTORY PROJECT","a":50000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"THE CEDARVILLE UNIVERSITY ADVANCEMENT","a":500000,"p":"GENERAL FUNDING","c":"CEDARVILLE","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"THE DAYTON FOUNDATION INC","a":100000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"KETTERING DEVELOPMENT CORPORATION","a":290000,"p":"GENERAL FUNDING","c":"KETTERING","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"MONTGOMERY COUNTY LAW ENFORCEMENT MEMORIAL ASSOCIATION","a":100000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"},{"y":2024,"r":"THE PERFORMING ARTS FIELD OF INTEREST","a":100000,"p":"GENERAL FUNDING","c":"DAYTON","s":"OH","e":"","o":"202533089349100238","record_type":"named_recipient"}]};window.LEDGER_MERGES=["DAYTON EARLY COLLEGE ACADEMY","DAYTON FOUNDATION","PRESIDENTS CLUB"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"GOODWILL EASTER SEALS MIAMI VALLEY":"Community & economic development","TEACH FOR AMERICA":"Education & youth","UNIVERSITY OF CINCINNATI FOUNDATION":"Nonprofit capacity & transitions","WOODLAND ARBORETUM FOUNDATION":"Environment & animals","THE CEDARVILLE UNIVERSITY":"Education & youth","THE DAYTON FOUNDATION":"Nonprofit capacity & transitions","THE DAYTON FOUNDATION INC":"Nonprofit capacity & transitions","REBUILDING TOGETHER DAYTON INC":"Health & wellbeing","THE PRESIDENTS CLUB INC":"Basic needs & response","THE PRESIDENTS CLUB":"Basic needs & response","CLOTHES THAT WORK":"Basic needs & response","WINCARES INC":"Basic needs & response","WESTCARE OHIO":"Health & wellbeing","KCS FORWARD FOUNDATION":"Education & youth","VICTORY PROJECT":"Basic needs & response","KETTERING DEVELOPMENT CORPORATION":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

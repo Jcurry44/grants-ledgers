@@ -161,15 +161,10 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 
 <section><div class="wrap">
   <h2>About the people named in the data</h2>
-  <div class="body">
-    <p>This site publishes information from Form 990-PF, the annual return that private foundations file with the Internal Revenue Service and which the IRS makes available for public inspection. The foundations, recipient organisations, amounts, purposes and addresses shown are reproduced from those public documents as filed.</p>
-    <p>Nothing is added to them. No filing is enriched with information from another source about any person, no profile of any individual is constructed, and no attempt is made to identify anyone. Where a filing itself names a person or lists an address, that is the public document’s own content, shown as it was filed so that the record can be checked against its source.</p>
-    <p>If you believe something reproduced here from a public filing is being shown in error, write, and it will be looked at against the original filing.</p>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <h2>What is deliberately not claimed here</h2>
+<p>This site publishes information from Form 990-PF, the annual return that private foundations file with the Internal Revenue Service and which the IRS makes available for public inspection. The foundations, recipients, amounts, purposes and addresses shown are reproduced from those public documents as filed. Nothing is added to them. No filing is enriched with information from another source about any person, no profile of any individual is constructed, and no attempt is made to identify anyone.</p>
+<p><strong>Grants to individuals are handled differently from grants to organisations.</strong> Some foundations report scholarships, fellowships, educational loans and hardship grants paid to named people &mdash; students, patients, families, sometimes minors. Those rows are part of the public return and they stay on the foundation&rsquo;s own ledger page, exactly as filed, because every year of that page must still add up to the total the foundation reported. What they do not become is an index. A row that names an individual is left out of the site-wide search, out of the cross-foundation recipient profiles, and out of the bulk download, where it appears only as <code>[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]</code> with its amount, year and purpose intact. At the last build this applied to 33,950 rows across 365 foundations. The rule that decides which rows these are is published in the source code and combines the filer&rsquo;s own choice of the person-name field on the return with a test of the name and the stated purpose; it is deliberately conservative, and a real organisation occasionally falls on the individual side of it.</p>
+<p>If you are named in a filing reproduced here and want the row removed from the ledger page as well, write. It will be taken down while it is looked at against the original filing, and it will not be restored without a reason being given to you.</p>
+<h2>What is deliberately not claimed here</h2>
   <p class="sub">A trust page is worth less than nothing if it promises a regime that has not been implemented. These are the honest boundaries.</p>
   <div class="ledger">
     <div class="row"><span class="mk no">—</span><div><b>No compliance certification</b></div><span>This project holds no SOC 2 report, no ISO 27001 certificate, and no third-party security audit. None has been performed. The security posture is that of a static site with no server, no database, no user accounts and no stored personal data.</span></div>

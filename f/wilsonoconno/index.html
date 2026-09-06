@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="WILSONOCON_DATA" data-slug="wilsonoconno" data-n="32" data-grand="9162840" data-recsub="All four years" data-running="to the dollar, four years running." data-names="24 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="WILSONOCON_DATA" data-slug="wilsonoconno" data-n="32" data-grand="9162840" data-recsub="All four years" data-running="to the dollar, four years running." data-names="24 as-filed names" data-rows-embedded="32" data-rows-total="32">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 / 4 years reconcile · Δ $0</div>
+  <div class="side-foot">4 of 4 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4/4 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 32 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">22</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $9,162,840, equals Part I line 25(d), $9,162,840 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -414,7 +422,8 @@
 </div>
 <script>
 window.WILSONOCON_DATA={"meta":{"foundation":"Wilson-Oconnor Family Foundation","ein":"92-0941333","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024,2025],"grant_count":32,"grand_total":9162840,"tieout":{"2022":{"object_id":"202312689349100316","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202420819349100212","grant_count":1,"grant_sum":150000,"line25_col_d":150000,"status":"PASS"},"2024":{"object_id":"202500929349100630","grant_count":11,"grant_sum":4500000,"line25_col_d":4500000,"status":"PASS"},"2025":{"object_id":"202611409349100806","grant_count":20,"grant_sum":4512840,"line25_col_d":4512840,"status":"PASS"}}},"grants":[{"y":2023,"r":"FIDELITY CHARITABLE","a":150000,"p":"FOR THE BARBARA AND ED WILSON CHARITABLE FUND","c":"BOSTON","s":"MA","e":"","o":"202420819349100212","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN RED CROSS CO CDS GLOBAL","a":250000,"p":"GENERAL SUPPORT FOR U.S. RELIEF","c":"BOONE","s":"IA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"BOCA GRANDE HEALTH CLINIC FOUNDATION INC","a":500000,"p":"TO SUPPORT THE BOCA GRANDE HEALTH CLINIC \"CLINIC OF THE FUTURE\" CAPITAL CAMPAIGN","c":"BOCA GRANDE","s":"FL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC RELIEF SERVICES INC","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"BALTIMORE","s":"MD","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"CHICAGO SKY CARES","a":100000,"p":"GENERAL SUPPORT","c":"CHICAGO","s":"IL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FIDELITY CHARITABLE","a":1200000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FITCHBURG STATE UNIVERSITY FOUNDATION","a":100000,"p":"FOR THE COMMUNITY LITERACY CENTER PROGRAM","c":"FITCHBURG","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF BOCA GRANDE COMMUNITY CENTER INC","a":500000,"p":"TO SUPPORT THE COMMUNITY CENTER OF BOCA GRANDE RENAISSANCE FUND","c":"BOCA GRANDE","s":"FL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"HUMAN RIGHTS WATCH INC","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"NEW YORK","s":"NY","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"PROTECT DEMOCRACY PROJECT","a":100000,"p":"FOR EDUCATIONAL WORK ABOUT PROTECTING DEMOCRACY","c":"WASHINGTON","s":"DC","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"SAVE THE CHILDREN","a":1000000,"p":"TO SUPPORT THE CHILDREN'S EMERGENCY FUND","c":"FAIRFIELD","s":"CT","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"THE DYSLEXIA FOUNDATION INC","a":250000,"p":"$100,000 GENERAL, $100,000 WILL BAKER GRATITUDE FUND, $150,000 WILL BAKER SYMPOSIUM","c":"BOSTON","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN INDEPENDENCE MUSEUM","a":121090,"p":"250 FOR 250 CAPITAL COMPAIGN","c":"EXETER","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN RED CROSS CO CDS GLOBAL","a":250000,"p":"GENERAL SUPPORT FOR U.S. RELIEF","c":"BOONE","s":"IA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"ATKINSON HISTORICAL SOCIETY","a":50000,"p":"ATKINSON CENTER SCHOOL HISTORIC RESTORATION PROJECT","c":"ATKINSON","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"CATHOLIC RELIEF SERVICES","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"BALTIMORE","s":"MD","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"CHICAGO SKY CARES","a":100000,"p":"GENERAL SUPPORT","c":"CHICAGO","s":"IL","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"DREXEL UNIVERSITY","a":691750,"p":"STRUCTURED LITERACY AND EDUCATIONAL LEADERSHIP HUB","c":"PHILADELPHIA","s":"PA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FIDELITY CHARITABLE","a":1000000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FITCHBURG STATE UNIVERSITY FOUNDATION","a":100000,"p":"FOR THE COMMUNITY LITERACY CENTER PROGRAM","c":"FITCHBURG","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FRIENDS OF THE NEW DURHAM 1772 MEETINGHOUSE","a":100000,"p":"1772 MEETINGHOUSE HISTORIC RESTORATION PROJECT","c":"NEW DURHAM","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"HUMAN RIGHTS WATCH","a":250000,"p":"IMMIGRANTS' RIGHTS AND BORDER POLICY IN THE UNITED STATES","c":"NEW YORK","s":"NY","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"INTERNATIONAL DYSLEXIA ASSOCIATION","a":100000,"p":"TO SUPPORT THE STRUCTURED LITERACY BLUEPRINT CAMPAIGN","c":"PIKESVILLE","s":"MD","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"LEAGUE OF WOMEN FOR COMMUNITY SERVICE","a":50000,"p":"LEAGUE OF WOMEN FOR COMMUNITY SERVICE HISTORIC RENOVATION PROJECT","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"MARY AND ELIZA FREEMAN CENTER FOR HISTORY AND COMMUNITY","a":100000,"p":"MARY AND ELIZA FREEMAN HOUSES HISTORIC RENOVATION PROJECT","c":"TRUMBULL","s":"CT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"MASCOMA VALLEY PRESERVATION","a":100000,"p":"GRAFTON CENTER MEETINGHOUSE HISTORIC RENOVATION PROJECT","c":"GRAFTON","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"NEWPORT HISTORICAL SOCIETY","a":100000,"p":"WANTON-LYMAN-HAZARD HOUSE HISTORIC RENOVATION PROJECT","c":"NEWPORT","s":"RI","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"NORWICH COMMUNITY COLLABORATIVE","a":150000,"p":"NORWICH GRANGE HALL HISTORIC RENOVATION PROJECT","c":"NORWICH","s":"VT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"PROTECT DEMOCRACY PROJECT","a":200000,"p":"FOR EDUCATIONAL WORK ABOUT PROTECTING DEMOCRACY","c":"WASHINGTON","s":"DC","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"SAVE THE CHILDREN","a":600000,"p":"TO SUPPORT THE CHILDREN'S EMERGENCY FUND AND SAVE THE CHILDREN ACTION NETWORK (SCAN)","c":"FAIRFIELD","s":"CT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"THE DYSLEXIA FOUNDATION INC","a":100000,"p":"WILL BAKER GRATITUDE ENDOWMENT FUND","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"TOWN OF LEICESTER","a":100000,"p":"RESTORATION OF THE MAY HOUSE IN LEICESTER, MA","c":"LEICESTER","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"}]};window.LEDGER_MERGES=["CATHOLIC RELIEF SERVICES","HUMAN RIGHTS WATCH"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

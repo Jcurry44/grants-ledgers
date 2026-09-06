@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="BROUGHTONF_DATA" data-slug="broughtonfou" data-n="85" data-grand="12008184" data-recsub="All five years" data-running="to the dollar, five years running." data-names="51 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="BROUGHTONF_DATA" data-slug="broughtonfou" data-n="85" data-grand="12008184" data-recsub="All five years" data-running="to the dollar, five years running." data-names="51 as-filed names" data-rows-embedded="85" data-rows-total="85">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 85 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">41</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $12,008,184, equals Part I line 25(d), $12,008,184 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.BROUGHTONF_DATA={"meta":{"foundation":"Broughton Foundation Trust","ein":"75-6395131","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":85,"grand_total":12008184,"tieout":{"2020":{"object_id":"202141039349100309","grant_count":5,"grant_sum":770000,"line25_col_d":770000,"status":"PASS"},"2021":{"object_id":"202231129349100018","grant_count":17,"grant_sum":2552000,"line25_col_d":2552000,"status":"PASS"},"2022":{"object_id":"202341329349102749","grant_count":19,"grant_sum":2205808,"line25_col_d":2205808,"status":"PASS"},"2023":{"object_id":"202411849349100026","grant_count":22,"grant_sum":2635922,"line25_col_d":2635922,"status":"PASS"},"2024":{"object_id":"202501769349101205","grant_count":22,"grant_sum":3844454,"line25_col_d":3844454,"status":"PASS"}}},"grants":[{"y":2020,"r":"WEST TEXAS FOOD BANK","a":150000,"p":"OPERATIONS","c":"MIDLAND","s":"TX","e":"","o":"202141039349100309","record_type":"named_recipient"},{"y":2020,"r":"WESTSIDE COMMUNITY DAYCARE CENTER","a":120000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202141039349100309","record_type":"named_recipient"},{"y":2020,"r":"CASA OF WEST TEXAS","a":150000,"p":"OPERATIONS","c":"MIDLAND","s":"TX","e":"","o":"202141039349100309","record_type":"named_recipient"},{"y":2020,"r":"VICTIM SERVICES","a":100000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202141039349100309","record_type":"named_recipient"},{"y":2020,"r":"STERLING COUNTY VFD","a":250000,"p":"OPERATIONS","c":"STERLING CITY","s":"TX","e":"","o":"202141039349100309","record_type":"named_recipient"},{"y":2021,"r":"WESTSIDE COMMUNITY DAYCARE CENTER","a":60000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"CASA OF WEST TEXAS","a":100000,"p":"OPERATIONS","c":"MIDLAND","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"VICTIM SERVICES","a":150000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"HOWARD COUNTY VOLUNTEER SERVICES","a":250000,"p":"OPERATIONS","c":"COLUMBIA","s":"MD","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"HOWARD COLLEGE","a":330000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"BIG SPRING SENIOR CITIZENS CENTER","a":40000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"BIG SPRING POLICE DEPARTMENT","a":107000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"HOWARD COUNTY SHERIFF","a":60000,"p":"OPERATIONS","c":"BIG SPRING","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"BIG SPRING SYMPHONY","a":5000,"p":"OPERATIONS","c":"BIG SPRINGS","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"WATER VALLEY VOLUNTEER FIRE DEPARTM","a":5000,"p":"OPERATIONS","c":"WATER VALLEY","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"CHILDREN'S MEDICAL CENTER FOUNDATIO","a":390000,"p":"OPERATIONS","c":"DALLAS","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"CONCHO VALLEY HOME FOR GIRLS","a":25000,"p":"OPERATIONS","c":"SAN ANGELO","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"UMC FOUNDATION","a":300000,"p":"OPERATIONS","c":"EL PASO","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"WEST TEXAS COUNSELING GUIDANCE INC","a":110000,"p":"OPERATIONS","c":"SAN ANGELO","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"PARTNERS IN OPPORTUNITY INC","a":250000,"p":"OPERATIONS","c":"MINNETONKA","s":"MN","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"MARTIN COUNTY HOSPITAL DISTRICT","a":250000,"p":"OPERATIONS","c":"STANTON","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2021,"r":"VISITING NURSE ASSOCIATION DALLAS","a":120000,"p":"OPERATIONS","c":"DALLAS","s":"TX","e":"","o":"202231129349100018","record_type":"named_recipient"},{"y":2022,"r":"Westside Community Daycare Center","a":110000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"CASA of West Texas","a":100000,"p":"OPERATIONS","c":"Midland","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Victim Services of Big Spring","a":40000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Howard County Volunteer Fire Dept","a":250000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Big Spring Senior Center","a":20000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Big Spring Police Department","a":28798,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Howard County Sheriff","a":86000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Big Spring Symphony","a":5000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Children's Medical Center","a":300000,"p":"OPERATIONS","c":"Dallas","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Concho Valley Home for Girls","a":20000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"UMC Foundation","a":300000,"p":"OPERATIONS","c":"Lubbock","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"West Texas Counseling Guidance Cent","a":100000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Partners in Opportunity","a":150000,"p":"OPERATIONS","c":"Carmel","s":"CA","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Martin County Hospital District","a":250000,"p":"OPERATIONS","c":"Stanton","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Visiting Nurse Association Dallas","a":40000,"p":"OPERATIONS","c":"Fsllsd","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Big Spring Housing Authority","a":50000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Children's Advocacy Center","a":100000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Friends of the Library of Howard Co","a":6010,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2022,"r":"Joe Arrington Cancer Center","a":250000,"p":"OPERATIONS","c":"Lubbock","s":"TX","e":"","o":"202341329349102749","record_type":"named_recipient"},{"y":2023,"r":"WEST TEXAS FOOD BANK","a":75000,"p":"OPERATIONS","c":"MIDLAND","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Westside Community Daycare Center","a":30000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"CASA of West Texas","a":100000,"p":"OPERATIONS","c":"Midland","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Victim Services of Big Spring","a":100000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Big Spring Police Department","a":101330,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Howard County Sheriff","a":90000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Big Spring Symphony","a":5000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Children's Medical Center","a":500000,"p":"OPERATIONS","c":"Dallas","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Concho Valley Home for Girls","a":20000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"UMC Foundation","a":300000,"p":"OPERATIONS","c":"Lubbock","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"West Texas Counseling Guidance Cent","a":110000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Partners in Opportunity","a":150000,"p":"OPERATIONS","c":"Carmel","s":"CA","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Martin County Hospital District","a":250000,"p":"OPERATIONS","c":"Stanton","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Visiting Nurse Association Dallas","a":40000,"p":"OPERATIONS","c":"Fsllsd","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Big Spring Chamber of Commerce","a":146644,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Children's Advocacy Center","a":100000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Friends of the Library of Howard Co","a":5248,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"City of Big Spring","a":80000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"City of Big Spring Aquatic Center","a":250000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Heritage Museum of Big Spring","a":75000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"Pride Drive Band Boosters","a":7700,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2023,"r":"West Texas Rehabilitation Center","a":100000,"p":"Operations","c":"Abilene","s":"TX","e":"","o":"202411849349100026","record_type":"named_recipient"},{"y":2024,"r":"Big Spring Police Department","a":50780,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Big Spring Symphony","a":5000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Boys Girls Club of Concho Valley","a":20000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"CASA of West Texas","a":100000,"p":"OPERATIONS","c":"Midland","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Children's Advocacy Center","a":100000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Children's Medical Center","a":500000,"p":"OPERATIONS","c":"Dallas","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Concho Valley Home for Girls","a":20000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Cook Children's Health Foundation","a":250000,"p":"Operations","c":"Fort Worth","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Friends of the Library of Howard Co","a":5355,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Howard County Sheriff","a":110000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Howard County Volunteer Fire Dept","a":890000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Howard County Youth Horsman Club","a":98319,"p":"Operations","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Martin County Hospital District","a":250000,"p":"OPERATIONS","c":"Stanton","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Rape Crisis Services of Big Spring","a":100000,"p":"Operations","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"UMC Foundation","a":300000,"p":"OPERATIONS","c":"Lubbock","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Visiting Nurse Association Dallas","a":40000,"p":"OPERATIONS","c":"Fsllsd","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"West Texas Boys Ranch","a":100000,"p":"Operations","c":"San Angelo","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"West Texas Community Mediation Cent","a":50000,"p":"Operations","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"West Texas Counseling Guidance Cent","a":110000,"p":"OPERATIONS","c":"San Angelo","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"West Texas Rehabilitation Center","a":125000,"p":"Operations","c":"Abilene","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"Westside Community Daycare Center","a":120000,"p":"OPERATIONS","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"},{"y":2024,"r":"YMCA Teen Center","a":500000,"p":"Operations","c":"Big Spring","s":"TX","e":"","o":"202501769349101205","record_type":"named_recipient"}]};window.LEDGER_MERGES=["WESTSIDE COMMUNITY DAYCARE CENTER","CASA OF WEST TEXAS","BIG SPRING POLICE DEPARTMENT","HOWARD COUNTY SHERIFF","BIG SPRING SYMPHONY","CONCHO VALLEY HOME FOR GIRLS","UMC FOUNDATION","PARTNERS IN OPPORTUNITY","MARTIN COUNTY HOSPITAL DISTRICT","VISITING NURSE ASSOCIATION DALLAS"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

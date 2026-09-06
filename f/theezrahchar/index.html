@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="THEEZRAHCH_DATA" data-slug="theezrahchar" data-n="67" data-grand="67199819" data-recsub="All five years" data-running="to the dollar, five years running." data-names="38 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="THEEZRAHCH_DATA" data-slug="theezrahchar" data-n="67" data-grand="67199819" data-recsub="All five years" data-running="to the dollar, five years running." data-names="38 as-filed names" data-rows-embedded="67" data-rows-total="67">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 67 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">36</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $67,199,819, equals Part I line 25(d), $67,199,819 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.THEEZRAHCH_DATA={"meta":{"foundation":"The Ezrah Charitable Trust","ein":"81-2608588","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":67,"grand_total":67199819,"tieout":{"2020":{"object_id":"202231049349100913","grant_count":13,"grant_sum":9639273,"line25_col_d":9639273,"status":"PASS"},"2021":{"object_id":"202343179349101969","grant_count":11,"grant_sum":15926044,"line25_col_d":15926044,"status":"PASS"},"2022":{"object_id":"202313179349101916","grant_count":12,"grant_sum":14395717,"line25_col_d":14395717,"status":"PASS"},"2023":{"object_id":"202403209349101880","grant_count":13,"grant_sum":8375348,"line25_col_d":8375348,"status":"PASS"},"2024":{"object_id":"202533209349100123","grant_count":18,"grant_sum":18863437,"line25_col_d":18863437,"status":"PASS"}}},"grants":[{"y":2020,"r":"AMANI FOUNDATION (ST FACE MASK PROJECT)","a":11112,"p":"GENERAL SUPPORT","c":"BROOKLYN","s":"NY","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN JEWISH WORLD SERVICES","a":950000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"CAF AMERICA FOR RAENG","a":54350,"p":"GENERAL SUPPORT","c":"ALEXANDRIA","s":"VA","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"DALBERG CHARITABLE - SAFE HANDS KENYA","a":1000000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"DELTA PHILANTHROPIES","a":2000000,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"DIGITAL DIVIDE DATA","a":653865,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"FOCUSING PHILANTHROPY KRISTOF C19 IMPACT INITIATIVE","a":200000,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF PARIVAAR","a":500000,"p":"GENERAL SUPPORT","c":"SCARSDALE","s":"NY","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"GLOBAL FINANCIAL INTEGRITY (GFI)","a":365000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"KEEP A CHILD ALIVE","a":350000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"ONE ACRE FUND","a":2214500,"p":"GENERAL SUPPORT","c":"HIGHLAND PARK","s":"IL","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"ROOT CAPITAL INC","a":1300446,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2020,"r":"SOUTH AFRICAN EDUCATION AND ENVIRONMENT PROJECT - USA","a":40000,"p":"GENERAL SUPPORT","c":"ANNAPOLIS","s":"MD","e":"","o":"202231049349100913","record_type":"named_recipient"},{"y":2021,"r":"AMERICAN JEWISH WORLD SERVICES","a":950000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"CHARLOTTE CTR LEGAL ADVOC","a":1000,"p":"GENERAL SUPPORT","c":"CHARLOTTE","s":"NC","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"FOCUSING PHILANTHROPY INC","a":279727,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"FRIENDS OF PARIVAAR INC","a":750000,"p":"GENERAL SUPPORT","c":"SCARSDALE","s":"NY","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"KING BAUDOUIN FOUNDOUNDATION","a":1718000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"MYAGRO FARMS","a":300000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"ONE ACRE FUND US","a":6690117,"p":"GENERAL SUPPORT","c":"HIGHLAND PARK","s":"IL","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"RASPBERRY PI FOUNDATION","a":5000000,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"THE NEW HORIZONS FOUNDATION","a":103000,"p":"GENERAL SUPPORT","c":"COLORADO SPRINGS","s":"CO","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"THE RHODES TRUST HORIZON FUND","a":114200,"p":"GENERAL SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2021,"r":"VIA INTERNATIONAL","a":20000,"p":"GENERAL SUPPORT","c":"SAN DIEGO","s":"CA","e":"","o":"202343179349101969","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN JEWISH WORLD SERVICES","a":950000,"p":"GENERAL SUPPORT TO AMERICAN JEWISH WORLD SERVICE'S MISSION TO BUILD A MORE JUST AND EQUITABLE WORLD.","c":"NEW YORK","s":"NY","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN TRUST FOR OXFORD UNIVERSITY (ASSOC OF AMERICAN RHODES SCHOLARS)","a":2000000,"p":"FUNDING TO THE RHODES TRUST FOR THE BENEFIT OF RHODES SCHOLARSHIPS IN AFRICA, WITH A PREFERENCE FOR EAST & WEST AFRICA","c":"VIENNA","s":"VA","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"DIGITAL DIVIDE DATA","a":350000,"p":"GENERAL SUPPORT FOR DDD'S IMPACT SOURCING MODEL, WHICH EMPOWERS INDIVIDUALS AND BUSINESSES TO BREAK DOWN SOCIAL AND ECONOMIC BARRIERS IN UNDERSERVED COMMUNITIES.","c":"NEW YORK","s":"NY","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"FOCUSING PHILANTHROPY INC","a":252756,"p":"FUNDING FOR THE HOLIDAY IMPACT PRIZE FOR NICHOLAS KRISTOF'S SELECTION IN HIS ANNUAL HOLIDAY GIVING COLUMN IN THE NEW YORK TIMES.","c":"SANTA MONICA","s":"CA","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF PARIVAAR INC","a":750000,"p":"GENERAL SUPPORT FOR PARIVAAR'S CARE FOR CHILDREN WHO ARE HIGHLY VULNERABLE TO EXPLOITATION, VICTIMIZATION AND TRAFFICKING.","c":"SCARSDALE","s":"NY","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"KING BAUDOUIN FOUNDATION","a":103780,"p":"GRANT TO FRIENDS OF BUILDHER, EQUIPPING WOMEN IN KENYA WITH ACCREDITED CONSTRUCTION AND MANUFACTURING SKILLS LEADING TO GREATER FINANCIAL PROSPERITY, CHANGING MALE ATTITUDES AND PROMOTING GENDER EQUALITY WITHIN THE CONSTRUCTION INDUSTRY.","c":"NEW YORK","s":"NY","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"MYAGRO FARMS","a":500000,"p":"GENERAL SUPPORT TO MYAGRO'S TECH-ENABLED SAVINGS MODEL THAT EMPOWERS SMALLHOLDER FARM FAMILIES TO GROW THEIR WAY OUT OF HUNGER AND POVERTY.","c":"NEW YORK","s":"NY","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"ONE ACRE FUND US","a":7939181,"p":"GENERAL SUPPORT TO ONE ACRE FUND'S MISSION TO SUPPLY AND SUPPORT SMALLHOLDER FARMERS AND ONE ACRE FUND'S DIGITAL TRANSFORMATION. ALSO, TO SUPPORT SPECIFIC ENDEAVORS TO EXPAND ONE ACRE FUND'S MISSION IN RWANDA, MALAWI, AND KENYA.","c":"HIGHLAND PARK","s":"IL","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"REALL LTD","a":300000,"p":"SUPPORT FOR SMART HAVENS AFRICA WOLOLO PROJECT, PROVIDING LOW COST, SUSTAINABLE HOUSING SOLUTIONS AND POSITIVE SOCIAL IMPACTS THROUGH EMPLOYMENT, HOME OWNERSHIP, FINANCIAL INCLUSION, AND COMMUNITY EMPOWERMENT IN UGANDA.","c":"","s":"","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"ROOT CAPITAL INC","a":1000000,"p":"GENERAL SUPPORT TO ROOT CAPITAL'S WORK PROVIDING FINANCING AND ADVISORY SERVICES TO SMALL AND GROWING AGRICULTURAL BUSINESSES IN THE GLOBAL SOUTH","c":"CAMBRIDGE","s":"MA","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"THE RHODES TRUST CO RHODES HOUSE","a":100000,"p":"PRIZE AND EXPENSE FUNDS FOR THE AANIT PRIZE OF THE MANDELA RHODES FOUNDATION, WHICH SUPPORTS INITIATIVES THAT CAN DELIVER POSITIVE SOCIAL IMPACT FOR AFRICA'S MOST MARGINALIZED POPULATIONS.","c":"","s":"","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2022,"r":"VANGUARD CHARITABLE ENDOWMENT PROGRAM","a":150000,"p":"CONTRIBUTION TO THE EZRAH CHARITABLE DAF FOR CHARITABLE DISTRIBUTIONS","c":"SOUTHEASTERN","s":"PA","e":"","o":"202313179349101916","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN JEWISH WORLD SERVICES","a":950000,"p":"GENERAL SUPPORT TO AMERICAN JEWISH WORLD SERVICE'S MISSION TO BUILD A MORE JUST AND EQUITABLE WORLD.","c":"NEW YORK","s":"NY","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"DIGITAL DIVIDE DATA","a":250000,"p":"GENERAL SUPPORT FOR DDD'S IMPACT SOURCING MODEL, WHICH EMPOWERS INDIVIDUALS AND BUSINESSES TO BREAK DOWN SOCIAL AND ECONOMIC BARRIERS IN UNDERSERVED COMMUNITIES.","c":"NEW YORK","s":"NY","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"FOCUSING PHILANTHROPY INC","a":351781,"p":"UNDERWRITING THE COST OF ADMINISTERING THE NEW YORK TIMES COMMUNITIES FUND AND KRISTOF 2022 HOLIDAY IMPACT PRIZE, IN ORDER FOR 100% OF DONATIONS TO GO TO CHARITY / FUNDING FOR NICHOLAS KRISTOF'S SELECTION IN HIS ANNUAL HOLIDAY GIVING COLUMN IN THE NEW YORK TIMES","c":"SANTA MONICA","s":"CA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"FRIENDS OF PARIVAAR INC","a":750000,"p":"GENERAL SUPPORT FOR PARIVAAR'S CARE FOR CHILDREN IN INDIA WHO ARE HIGHLY VULNERABLE TO EXPLOITATION, VICTIMIZATION AND TRAFFICKING.","c":"SCARSDALE","s":"NY","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"GENERATION YOU EMPLOYED INC","a":500000,"p":"GENERAL SUPPORT FOR GENERATION KENYA'S MISSION TO TRANSFORM EDUCATION TO EMPLOYMENT SYSTEMS TO PREPARE, PLACE AND SUPPORT PEOPLE INTO LIFE-CHANGING CAREERS THAT WOULD OTHERWISE BE INACCESSIBLE.","c":"WASHINGTON","s":"DC","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"MYAGRO FARMS","a":500000,"p":"GENERAL SUPPORT TO MYAGRO'S TECH-ENABLED SAVINGS MODEL THAT EMPOWERS SMALLHOLDER FARM FAMILIES TO GROW THEIR WAY OUT OF HUNGER AND POVERTY.","c":"NEW YORK","s":"NY","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"ON HIS PATH","a":25000,"p":"GENERAL SUPPORT TO ON HIS PATH'S MISSION TO ERADICATE UNTREATED CLUBFOOT, PARTICULARLY IN DEVELOPING COUNTRIES","c":"DANVILLE","s":"IA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"ONE ACRE FUND US","a":3290234,"p":"GENERAL SUPPORT TO ONE ACRE FUND'S MISSION TO SUPPORT SMALLHOLDER FARMERS ACROSS AFRICA WITH INPUT LOANS, AGRICULTURAL ADVICE, AND MARKET ACCESS/SUPPORT FOR ONE ACRE FUND'S DIGITAL TRANSFORMATION AND FOR SPECIFIC ENDEAVOURS TO UNDERWRITE ONE ACRE FUND'S SELF-INSURANCE FUND IN MALAWI.","c":"HIGHLAND PARK","s":"IL","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"PANORAMA GLOBAL","a":150000,"p":"GENERAL SUPPORT TO CASH COALITION'S MISSION TO MAKE REGENERATIVE AGRICULTURE AND CLIMATE ACTION PROFITABLE FOR SMALLHOLDER FARMERS.","c":"SEATTLE","s":"WA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"ROOT CAPITAL INC","a":1000000,"p":"GENERAL SUPPORT TO ROOT CAPITAL'S WORK IN PROVIDING FINANCING AND TECHNICAL ASSISTANCE TO SMALL AND GROWING AGRICULTURAL BUSINESSES IN DEVELOPING ECONOMIES.","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"THE RHODES TRUST CO RHODES HOUSE","a":433333,"p":"FUNDING TO THE RHODES TRUST FOR THE BENEFIT OF RHODES SCHOLARSHIPS IN AFRICA, WITH A PREFERENCE FOR EAST & WEST AFRICA/PRIZE AND EXPENSE FUNDS FOR THE AANIT PRIZE OF THE MANDELA RHODES FOUNDATION, WHICH SUPPORTS INITIATIVES THAT CAN DELIVER POSITIVE SOCIAL IMPACT FOR AFRICA'S MOST MARGINALIZED POPULATIONS.","c":"","s":"","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"VANGUARD CHARITABLE ENDOWMENT PROGRAM","a":150000,"p":"CONTRIBUTION TO THE EZRAH CHARITABLE DAF FOR CHARITABLE DISTRIBUTIONS.","c":"SOUTHEASTERN","s":"PA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2023,"r":"VIA INTERNATIONAL","a":25000,"p":"GENERAL SUPPORT TO VIA INTERNATIONAL'S WORK ENGAGING AND SUPPORTING LEADERS IN EMERGING COMMUNITIES.","c":"SAN DIEGO","s":"CA","e":"","o":"202403209349101880","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN JEWISH WORLD SERVICE INC","a":1050000,"p":"General support to American Jewish World Service's mission to build a more just and equitable world.","c":"New York","s":"NY","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"CLIMATE ACTION FOR SMALLHOLDERS","a":150000,"p":"General support to CASH Coalition's mission to support and share knowledge and best practices with smallholder farmers.","c":"Chestnut Hill","s":"MA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"DIGITAL GREEN FOUNDATION","a":500000,"p":"General support to Digital Green's mission to create a world where farmers use technology and data to build prosperous communities.","c":"San Francisco","s":"CA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"FOCUSING PHILANTHROPY","a":180980,"p":"Contribution to the collaboration with the Nick Kristof 2024 Holdiay Impact Initiative to raise funds for non-profits that are tackling global issues in health, literacy, and human rights.","c":"Santa Monica","s":"CA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"FOCUSING PHILANTHROPY","a":212744,"p":"Contribution to the collaboration with the NYT Communities Fund to support nonprofits to help people improve their circumstances and lead more enriching lives.","c":"Santa Monica","s":"CA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF PARIVAAR","a":750000,"p":"General support for Parivaar's care for children in India who are highly vulnerable to exploitation, victimization and trafficking.","c":"Scarsdale","s":"NY","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"KEEP A CHILD ALIVE","a":300000,"p":"General support to Keep a Child Alive's mission to helping children reach their potential and live healthier, happier lives.","c":"New York","s":"NY","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"MYAGRO FARMS","a":500000,"p":"General support to myAgro's tech-enabled savings model that empowers smallholder farm families to grow their way out of hunger and poverty.","c":"New York","s":"NY","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"ONE ACRE FUND US","a":3000000,"p":"General support to One Acre Fund's mission to supply and support smallholder farmers.","c":"Highland Park","s":"IL","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"ONE ACRE FUND US","a":290234,"p":"Support for specific endeavors to underwrite One Acre Fund's self-insurance fund in Malawi.","c":"Highland Park","s":"IL","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"ONE ACRE FUND US","a":2000000,"p":"Support for One Acre Fund's digital transformation","c":"Highland Park","s":"IL","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"PARTNERS IN FOOD SOLUTIONS","a":500000,"p":"General support to Partners in Food Solutions' mission to enable the transfer of knowledge and expertise to small and growing food companies in Africa.","c":"Edina","s":"MN","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"ROOT CAPITAL INC","a":1000000,"p":"General support to Root Capital's work with small and growing agricultural businesses around the world","c":"Cambridge","s":"MA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"TEAM4TECH FOUNDATION","a":171924,"p":"Contribution to Team4Tech's \"AI Skill-building for Community-Based Education NGOs in Africa\" project from 2024 to 2026.","c":"San Mateo","s":"CA","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"THE RHODES TRUST","a":660322,"p":"Contribution to Rhodes Trust legal costs related to South African schools scholarships.","c":"","s":"","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"THE RHODES TRUST","a":333333,"p":"Funding to The Rhodes Trust for the benefit of Rhodes Scholarships in Africa, with a preference for East & West Africa.","c":"","s":"","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"THE RHODES TRUST","a":113900,"p":"Prize and expense funds for the Aanit Prize of The Mandela Rhodes Foundation, which supports initiatives that can deliver positive social impact for Africa's most marginalized populations.","c":"","s":"","e":"","o":"202533209349100123","record_type":"named_recipient"},{"y":2024,"r":"VANGUARD CHARITABLE ENDOWMENT PROGRAM","a":7150000,"p":"Contribution to The Ezrah Charitable DAF for charitable distributions.","c":"Southeastern","s":"PA","e":"","o":"202533209349100123","record_type":"named_recipient"}]};window.LEDGER_MERGES=["FRIENDS OF PARIVAAR","FOCUSING PHILANTHROPY"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FOCUSING PHILANTHROPY INC":"Nonprofit capacity & transitions","FOCUSING PHILANTHROPY":"Nonprofit capacity & transitions","VANGUARD CHARITABLE ENDOWMENT PROGRAM":"Nonprofit capacity & transitions"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

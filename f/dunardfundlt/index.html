@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="DUNARDFUND_DATA" data-slug="dunardfundlt" data-n="92" data-grand="163676277" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="DUNARDFUND_DATA" data-slug="dunardfundlt" data-n="92" data-grand="163676277" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names" data-rows-embedded="92" data-rows-total="92">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 92 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">38</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $163,676,277, equals Part XIV, line 3a, $163,676,277 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.DUNARDFUND_DATA={"meta":{"foundation":"Dunard Fund Ltd","ein":"98-0087034","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":92,"grand_total":163676277,"tieout":{"2020":{"object_id":"202133199349103388","grant_count":16,"grant_sum":11960177,"line25_col_d":11960177,"status":"PASS"},"2021":{"object_id":"202311189349100536","grant_count":14,"grant_sum":25595000,"line25_col_d":25595000,"status":"PASS"},"2022":{"object_id":"202303189349106280","grant_count":18,"grant_sum":49496000,"line25_col_d":49496000,"status":"PASS"},"2023":{"object_id":"202403189349100300","grant_count":20,"grant_sum":11503100,"line25_col_d":11503100,"status":"PASS"},"2024":{"object_id":"202523189349103137","grant_count":24,"grant_sum":65122000,"line25_col_d":65122000,"status":"PASS"}}},"grants":[{"y":2020,"r":"AMERICAN FRIENDS OF LONDON PHILHARMONIC ORCHESTRA INC","a":65000,"p":"GENERAL SUPPORT","c":"LAWRENCE","s":"NY","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"CATO INSTITUTE","a":20000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"COLBURN SCHOOL","a":2050000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"DANCE DOWNTOWN LA INC","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"LENNOX LIBRARY","a":1000,"p":"GENERAL SUPPORT","c":"LENNOX","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"LOS ANGELES OPERA","a":300000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"LOS ANGELES PHILHARMONIC ASSOCIATION","a":250000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"MARLBORO SCHOOL OF MUSIC INC","a":1520000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"MARY MISS CITY AS A LIVING LABORATORY","a":104199,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"METROPOLITAN MUSEUM OF ART","a":25000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"METROPOLITAN OPERA","a":6550000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"THE MAESTRO FOUNDATION","a":74478,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"THE SALVATION ARMY","a":500,"p":"GENERAL SUPPORT","c":"ALEXANDRIA","s":"VA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"THE UCLA FOUNDATION","a":500000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF ST ANDREWS AMERICAN FOUNDATION INC","a":350000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2020,"r":"USC THORNTON SCHOOL OF MUSIC","a":50000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202133199349103388","record_type":"named_recipient"},{"y":2021,"r":"CATO INSTITUTE","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"COLBURN SCHOOL","a":7250000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"COLBURN SCHOOL","a":10000000,"p":"PAYMENT TO CHARITY THAT IS NOT COUNTED AS A QD SINCE IT FALLS UNDER SECTION 4941.","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"DANCE DOWNTOWN LA INC","a":200000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"LENNOX LIBRARY","a":5000,"p":"GENERAL SUPPORT","c":"LENNOX","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"LOS ANGELES OPERA","a":1300000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"LOS ANGELES PHILHARMONIC ASSOCIATION","a":1500000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"MARLBORO SCHOOL OF MUSIC INC","a":1770000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"METROPOLITAN OPERA","a":3000000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"MUSEUM OF CONTEMPORARY ART","a":10000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"MUSIC INSTITUTE OF CHICAGO","a":100000,"p":"GENERAL SUPPORT","c":"EVANSTON","s":"IL","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"THE AMERICAN IRELAND FUND","a":145000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"THE MUSIC CENTER","a":5000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF ST ANDREWS AMERICAN FOUNDATION INC","a":300000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202311189349100536","record_type":"named_recipient"},{"y":2022,"r":"CATO INSTITUTE","a":10000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"COLBURN SCHOOL","a":37550000,"p":"PAYMENT TO CHARITY THAT IS NOT COUNTED AS A QD SINCE IT FALLS UNDER SECTION 4941.","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"DANCE DOWNTOWN LA INC","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"INSTITUTE OF JUSTICE","a":5000,"p":"GENERAL SUPPORT","c":"ARLINGTON","s":"VA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"LENNOX LIBRARY","a":1000,"p":"GENERAL SUPPORT","c":"LENNOX","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"LOS ANGELES OPERA","a":400000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"LOS ANGELES PHILHARMONIC ASSOCIATION","a":450000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"MARLBORO SCHOOL OF MUSIC INC","a":3010000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"METROPOLITAN MUSEUM OF ART","a":25000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"METROPOLITAN OPERA","a":3000000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"PHILADELPHIA ORCHESTRA ASSOCIATION","a":500000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"THE AMERICAN IRELAND FUND","a":1225000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"THE J PAUL GETTY TRUST","a":50000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"THE MAESTRO FOUNDATION","a":20000,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"THE PHILHARMONIC SYMPHONY SOCIETY OF NY INC","a":500000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"THE UCLA FOUNDATION","a":1500000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF DUBLIN FUND","a":1140000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2022,"r":"YALE UNIVERSITY","a":10000,"p":"YALE SCHOOL OF MUSIC","c":"NEW HAVEN","s":"CT","e":"","o":"202303189349106280","record_type":"named_recipient"},{"y":2023,"r":"AILVIN AILEY DANCE FOUNDATION INC","a":157100,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN FRIENDS OF LONDON PHILHARMONIC ORCHESTRA INC","a":115000,"p":"GENERAL SUPPORT","c":"LAWRENCE","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"CAMERATA PACIFICA","a":15000,"p":"GENERAL SUPPORT","c":"SANTA BARBARA","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"CHAPEL & YORK FOUNDATION INC","a":15000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"COLBURN SCHOOL","a":2550000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"DANCE DOWNTOWN LA INC","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES OPERA","a":1300000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES PHILHARMONIC ASSOCIATION","a":3575000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"MARLBORO SCHOOL OF MUSIC INC","a":1000000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"METROPOLITAN MUSEUM OF ART","a":25000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"METROPOLITAN OPERA","a":600000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"SAN FRANCISCO CHANTICLEER INC","a":25000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"THE AMERICAN IRELAND FUND","a":45000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"THE J PAUL GETTY TRUST","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"LENNOX LIBRARY","a":1000,"p":"GENERAL SUPPORT","c":"LENNOX","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"THE MAESTRO FOUNDATION","a":20000,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"THE PHILHARMONIC SYMPHONY SOCIETY OF NY INC","a":250000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"THE UCLA FOUNDATION","a":500000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF DUBLIN FUND","a":1100000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2023,"r":"YALE UNIVERSITY","a":10000,"p":"YALE SCHOOL OF MUSIC","c":"NEW HAVEN","s":"CT","e":"","o":"202403189349100300","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN FRIENDS OF LES ARTS FLORRISANTS","a":250000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN FRIENDS OF LONDON PHILHARMONIC ORCHESTRA INC","a":184600,"p":"GENERAL SUPPORT","c":"LAWRENCE","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"CATO INSTITUTE","a":110000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"CHAPEL & YORK FOUNDATION INC","a":1750400,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"COLBURN SCHOOL","a":52500000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"DANCE DOWNTOWN LA INC","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF THE ACADEMY OF ST MARTIN IN THE FIELDS","a":80000,"p":"GENERAL SUPPORT","c":"ALEXANDRIA","s":"VA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"HILLSDALE COLLEGE","a":1000,"p":"GENERAL SUPPORT","c":"HILLSDALE","s":"MI","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"LEAGUE OF AMERICAN ORCHESTRAS","a":25000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"LENNOX LIBRARY","a":5000,"p":"GENERAL SUPPORT","c":"LENNOX","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"LOS ANGELES OPERA","a":1300000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"METROPOLITAN MUSEUM OF ART","a":25000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"METROPOLITAN OPERA","a":650000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"MYRIAD USA","a":2760000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"OJAI FESTIVALS LTD","a":50000,"p":"GENERAL SUPPORT","c":"OJAI","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"SALVATION ARMY","a":1000,"p":"GENERAL SUPPORT","c":"SOUTHFIELD","s":"MI","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"SAN FRANCISCO CHANTICLEER INC","a":25000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE AMERICAN IRELAND FUND","a":835000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE CROWN PRINCE FREDRICK FUND","a":1000000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE J PAUL GETTY TRUST","a":100000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE KING'S FOUNDATION AMERICA INC","a":2600000,"p":"GENERAL SUPPORT","c":"ROCHESTER","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE MAESTRO FOUNDATION","a":20000,"p":"GENERAL SUPPORT","c":"SANTA MONICA","s":"CA","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"THE PHILHARMONIC SYMPHONY SOCIETY OF NY INC","a":250000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF DUBLIN FUND","a":500000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202523189349103137","record_type":"named_recipient"}]};window.LEDGER_MERGES=["SALVATION ARMY"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

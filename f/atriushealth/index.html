@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ATRIUSHEAL_DATA" data-slug="atriushealth" data-n="68" data-grand="11986254" data-recsub="All four years" data-running="to the dollar, four years running." data-names="42 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ATRIUSHEAL_DATA" data-slug="atriushealth" data-n="68" data-grand="11986254" data-recsub="All four years" data-running="to the dollar, four years running." data-names="42 as-filed names" data-rows-embedded="68" data-rows-total="68">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 / 4 years reconcile · Δ $0</div>
+  <div class="side-foot">4 of 4 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4/4 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 68 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">42</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $11,986,254, equals Part I line 25(d), $11,986,254 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -419,7 +427,8 @@
 </div>
 <script>
 window.ATRIUSHEAL_DATA={"meta":{"foundation":"Atrius Health Equity Foundation","ein":"26-4517944","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2022,2023,2024,2025],"grant_count":68,"grand_total":11986254,"tieout":{"2022":{"object_id":"202341959349100104","grant_count":1,"grant_sum":444408,"line25_col_d":444408,"status":"PASS"},"2023":{"object_id":"202441309349102904","grant_count":2,"grant_sum":1000000,"line25_col_d":1000000,"status":"PASS"},"2024":{"object_id":"202501329349103935","grant_count":21,"grant_sum":4498330,"line25_col_d":4498330,"status":"PASS"},"2025":{"object_id":"202621289349101202","grant_count":44,"grant_sum":6043516,"line25_col_d":6043516,"status":"PASS"}}},"grants":[{"y":2022,"r":"ATRIUS HEALTH INC","a":444408,"p":"SUPPORT HEALTH INITIATIVES","c":"AUBURNDALE","s":"MA","e":"","o":"202341959349100104","record_type":"named_recipient"},{"y":2023,"r":"THE MASSACHUSETTS LEAGUE OF COMMUNITY HEALTH CENTERS","a":500000,"p":"SUPPORT THE HEALTH EQUITY COMPACT'S WORK","c":"BOSTON","s":"MA","e":"","o":"202441309349102904","record_type":"named_recipient"},{"y":2023,"r":"NEW COMMONWEALTH RACIAL EQUITY AND SOCIAL JUSTICE FUND INC","a":500000,"p":"SUPPORT THE NEW COMMONWEALTH FUND'S GRANTMAKING","c":"ROXBURY","s":"MA","e":"","o":"202441309349102904","record_type":"named_recipient"},{"y":2024,"r":"LYNN COMMUNITY HEALTH CENTER INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"LYNN","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"BROCKTON NEIGHBORHOOD HEALTH CENTER INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"BROCKTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LOWELL COMMUNITY HEALTH CENTER INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"LOWELL","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"DOTHOUSE HEALTH INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"DORCHESTER","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LAWRENCE COMMUNITYWORKS INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"LAWRENCE","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LA COLABORATIVA INC","a":10000,"p":"TO SUPPORT COMPLETION OF FINAL APPLICATION FOR YOUTH AS HEALTH CARE CHANGE AGENTS FUNDING OPPORTUNITY.","c":"CHELSEA","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"NEIGHBORHOOD DEVELOPERS INC","a":50000,"p":"TO SUPPORT THE \"FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT\" PROGRAM.","c":"CHELSEA","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"NEIGHBORHOOD HOUSING SERVICES OF THE SOUTH SHORE INC","a":50000,"p":"TO SUPPORT THE \"FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT\" PROGRAM.","c":"QUINCY","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"URBAN EDGE","a":50000,"p":"TO SUPPORT THE \"FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT\" PROGRAM.","c":"ROXBURY","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LAWRENCE COMMUNITYWORKS INC","a":50000,"p":"TO SUPPORT THE \"FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT\" PROGRAM.","c":"LAWRENCE","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"THE BASE INC","a":200000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS CATALYST\" PROGRAM.","c":"BOSTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"MATTAPAN FOOD AND FITNESS COALITION CO THIRD SECTOR NEW ENGLAND","a":200000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS CATALYST\" PROGRAM.","c":"MATTAPAN","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LAWRENCE COMMUNITYWORKS INC","a":400000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"LAWRENCE","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LA COLABORATIVA INC","a":500000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"CHELSEA","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LOWELL COMMUNITY HEALTH CENTER INC","a":417973,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"LOWELL","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"BROCKTON NEIGHBORHOOD HEALTH CENTER INC","a":500000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"BROCKTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"LYNN COMMUNITY HEALTH CENTER INC","a":500000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"LYNN","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"DOTHOUSE HEALTH INC","a":500000,"p":"TO SUPPORT THE \"YOUTH AS HEALTH CARE CHANGE AGENTS\" PROGRAM.","c":"DORCHESTER","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"HEALTH EQUITY COMPACT INC","a":350000,"p":"TO SUPPORT THE WORK OF THE COMPACT TO ATTAIN HEALTH EQUITY FOR ALL IN MASSACHUSETTS BY DISMANTLING SYSTEMIC BARRIERS AND PROMOTING EQUITABLE STRUCTURES AND PRACTICES.","c":"BOSTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"HEALTH CARE FOR ALL INC","a":482770,"p":"ADDRESSING MEDICAL DEBT IN MASSACHUSETTS COMMUNITIES","c":"BOSTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2024,"r":"HEALTH LAW ADVOCATES INC","a":187587,"p":"ADDRESSING MEDICAL DEBT IN MASSACHUSETTS COMMUNITIES","c":"BOSTON","s":"MA","e":"","o":"202501329349103935","record_type":"named_recipient"},{"y":2025,"r":"ASIAN AMERICAN RESOURCE WORKSHOP INC","a":20000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"ASIAN WOMEN FOR HEALTH INC","a":20000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"BOYS & GIRLS CLUB OF BOSTON","a":200000,"p":"TO SUPPORT GRANTEE'S PARTICIPATION IN THE LIVE LONG AND WELL CATALYST PROGRAM.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"BROCKTON NEIGHBORHOOD HEALTH CENTER INC","a":70000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"BROCKTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"BROCKTON NEIGHBORHOOD HEALTH CENTER INC","a":250000,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"BROCKTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"BROCKTON WORKERS ALLIANCE","a":40000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"BROCKTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"CAMBODIAN MUTUAL ASSISTANCE ASSOCIATION","a":40000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LOWELL","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"CENTER TO SUPPORT IMMIGRANT ORGANIZING","a":15000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"COALITION FOR A BETTER ACRE INC","a":20000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LOWELL","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY HEALTH CENTER OF CAPE COD","a":58000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"MASHPEE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"DOTHOUSE HEALTH INC","a":250000,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"DORCHESTER","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"DOTHOUSE HEALTH INC","a":22000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"DORCHESTER","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"GROUNDWORK SOUTHCOAST INC","a":90000,"p":"TO SUPPORT YOUTH CREATING A HEALTHIER NEW BEDFORD.","c":"NEW BEDFORD","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"HEALTH CARE FOR ALL INC","a":443451,"p":"ADDRESSING MEDICAL DEBT IN MASSACHUSETTS COMMUNITIES","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"HEALTH LAW ADVOCATES INC","a":195396,"p":"ADDRESSING MEDICAL DEBT IN MASSACHUSETTS COMMUNITIES","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"HEALTH LAW ADVOCATES INC","a":100000,"p":"TO SUPPORT THE MEDICAL DEBT CAPACITY-BUILDING PILOT","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"HEALTHFIRST FAMILY CARE","a":26000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"FALL RIVER","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"IMMIGRANT FAMILY SERVICES INSTITUTE","a":50000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"MATTAPAN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"IMMIGRANT FAMILY SERVICES INSTITUTE","a":200000,"p":"TO SUPPORT GRANTEE'S PARTICIPATION IN THE LIVE LONG AND WELL CATALYST PROGRAM.","c":"MATTAPAN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LA COLABORATIVA INC","a":749522,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"CHELSEA","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LAWRENCE COMMUNITYWORKS INC","a":50000,"p":"TO SUPPORT THE FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT PROGRAM.","c":"LAWRENCE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LAWRENCE COMMUNITYWORKS INC","a":382517,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"LAWRENCE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LAWRENCE COMMUNITYWORKS INC","a":35000,"p":"TO SUPPORT THE MEDICAL DEBT CAPACITY-BUILDING PILOT","c":"LAWRENCE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LAWRENCE COMMUNITYWORKS INC","a":25000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LAWRENCE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"LYNN COMMUNITY HEALTH CENTER INC","a":200000,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"LYNN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"MATTAPAN COMMUNITY HEALTH CENTER","a":47000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"MATTAPAN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"MATTAPAN FOOD AND FITNESS COALITION CO THIRD SECTOR NEW ENGLAND","a":140078,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"MATTAPAN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"MERRIMACK VALLEY PROJECT","a":30000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LAWRENCE","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"MIRA COALITION","a":50000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"NEIGHBORHOOD DEVELOPERS INC","a":50000,"p":"TO SUPPORT THE FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT PROGRAM.","c":"CHELSEA","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"NEIGHBORHOOD DEVELOPERS INC","a":35000,"p":"TO SUPPORT THE MEDICAL DEBT CAPACITY-BUILDING PILOT","c":"CHELSEA","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"NEIGHBORWORKS","a":25000,"p":"TO SUPPORT THE FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT PROGRAM.","c":"QUINCY","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"NEW AMERICAN ASSOCIATION OF MASSACHUSETTS INC","a":30000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LYNN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"RAW ART WORKS INC","a":40000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"LYNN","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"SACRED BIRTHING VILLAGE CO ELEPHANT CIRCLE","a":40000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"NEW BEDFORD","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"SOUTHCOAST COMMUNITY FOUNDATION","a":45000,"p":"TO SUPPORT YOUTH BUILDING A HEALTHIER NEW BEDFORD.","c":"NEW BEDFORD","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"THE BASE INC","a":200000,"p":"TO SUPPORT YOUTH AS HEALTH CARE CHANGE AGENTS PROGRAM.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"THE COMMUNITY BUILDERS INC","a":200000,"p":"TO SUPPORT GRANTEE'S PARTICIPATION IN THE LIVE LONG AND WELL CATALYST PROGRAM.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"UNDUE MEDICAL DEBT","a":269552,"p":"TO PURCHASE HOSPITAL AND PROVIDER MEDICAL DEBT OWED BY RESIDENTS OF EASTERN MASSACHUSETTS UNDER 400% OF THE FEDERAL POVERTY LEVEL AND/OR WHERE THE PATIENT DEBT IS MORE THAN 5% OF THEIR INCOME.","c":"LONG ISLAND CITY","s":"NY","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"UNITED WAY OF MASSACHUSETTS BAY","a":1000000,"p":"TO SUPPORT FOOD ACCESS THROUGH THE UNITED RESPONSE FUND.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"UPHAM'S COMMUNITY CARE","a":200000,"p":"TO SUPPORT GRANTEE'S PARTICIPATION IN THE LIVE LONG AND WELL CATALYST PROGRAM.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"UPHAM'S CORNER HEALTH CENTER","a":25000,"p":"TO SUPPORT FAMILY NURSE PRACTITIONER RESIDENCY PROGRAMS AT FEDERALLY QUALIFIED HEALTH CENTERS IN EASTERN MA.","c":"BOSTON","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"URBAN EDGE","a":25000,"p":"TO SUPPORT THE FUNDING FINANCIAL OPPORTUNITY CENTERS TO ADDRESS MEDICAL DEBT PROGRAM.","c":"ROXBURY","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"},{"y":2025,"r":"WALTHAM PARTNERSHIP FOR YOUTH INC","a":40000,"p":"TO SUPPORT COMMUNITY WELL-BEING.","c":"WALTHAM","s":"MA","e":"","o":"202621289349101202","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"ASIAN AMERICAN RESOURCE WORKSHOP INC":"Basic needs & response","BROCKTON WORKERS ALLIANCE":"Basic needs & response","COALITION FOR A BETTER ACRE INC":"Basic needs & response","IMMIGRANT FAMILY SERVICES INSTITUTE":"Basic needs & response","MERRIMACK VALLEY PROJECT":"Community & economic development","NEW AMERICAN ASSOCIATION OF MASSACHUSETTS INC":"Community & economic development","THE COMMUNITY BUILDERS INC":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

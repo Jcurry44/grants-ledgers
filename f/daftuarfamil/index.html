@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="DAFTUARFAM_DATA" data-slug="daftuarfamil" data-n="60" data-grand="11336666" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="DAFTUARFAM_DATA" data-slug="daftuarfamil" data-n="60" data-grand="11336666" data-recsub="All five years" data-running="to the dollar, five years running." data-names="39 as-filed names" data-rows-embedded="60" data-rows-total="60">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 60 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">39</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $11,336,666, equals Part I line 25(d), $11,336,666 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.DAFTUARFAM_DATA={"meta":{"foundation":"Daftuar Family Foundation","ein":"47-4685449","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":60,"grand_total":11336666,"tieout":{"2020":{"object_id":"202103199349106740","grant_count":9,"grant_sum":1253495,"line25_col_d":1253495,"status":"PASS"},"2021":{"object_id":"202233199349103358","grant_count":12,"grant_sum":2448513,"line25_col_d":2448513,"status":"PASS"},"2022":{"object_id":"202303199349106900","grant_count":8,"grant_sum":1504646,"line25_col_d":1504646,"status":"PASS"},"2023":{"object_id":"202413199349103081","grant_count":18,"grant_sum":3753149,"line25_col_d":3753149,"status":"PASS"},"2024":{"object_id":"202503219349103175","grant_count":13,"grant_sum":2376863,"line25_col_d":2376863,"status":"PASS"}}},"grants":[{"y":2020,"r":"GORDON RESEARCH CONFERENCES","a":3430,"p":"2020 LIPIDOMICS GORDON RESEARCH CONFERENCE 8/9/20 - 8/14/20","c":"WEST KINGSTON","s":"RI","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"CITY HARVEST","a":150000,"p":"COVID-19 RELIEF FUND","c":"NEW YORK","s":"NY","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"CARE INC (COOPERATIVE FOR ASSISTANCE AND RELIEF EVERYWHERE INC )","a":50000,"p":"COVID-19 RESPONSE DONATION","c":"ATLANTA","s":"GA","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"KEYSTONE SYMPOSIA OF MOLECULAR AND CELLULAR BIOLOGY","a":2500,"p":"GENERAL FUND","c":"SILVERTHORNE","s":"CO","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"PRESIDENT AND FELLOWS OF HARVARD UNIVERSITY","a":833333,"p":"HARVARD JOHN A. PAULSON SCHOOL OF ENGINEERING AND APPLIED SCIENCES","c":"CAMBRIDGE","s":"MA","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"ICC GREENWICH","a":1000,"p":"INDIA CULTURAL CENTER GREENWICH ANNUAL CONTRIBUTION","c":"GREENWICH","s":"CT","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"THE JUNIOR LEAGUE OF GREENWICH","a":1000,"p":"YOUNG WOMEN'S ORGANIZATION ANNUAL CONTRIBUTION","c":"GREENWICH","s":"CT","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"THE MICROCIRCULATORY SOCIETY INC","a":2000,"p":"2020 ANNUAL CONTRIBUTION FOR MICROCIRCULATORY RESEARCH","c":"COLUMBIA","s":"MO","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF ZURICH","a":210232,"p":"RESEARCH LIPEDEMA ONSET AND PROGRESSION","c":"","s":"","e":"","o":"202103199349106740","record_type":"named_recipient"},{"y":2021,"r":"PRESIDENT AND FELLOWS OF HARVARD UNIVERSITY","a":833333,"p":"HARVARD JOHN A. PAULSON SCHOOL OF ENGINEERING AND APPLIED SCIENCES","c":"CAMBRIDGE","s":"MA","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF ZURICH","a":38137,"p":"RESEARCH LIPEDEMA ONSET AND PROGRESSION","c":"","s":"","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"GREENWICH ACADEMY INC","a":600000,"p":"CENTER FOR MATH EXCELLENCE AS PART OF LEAD THE WAY CAMPAIGN","c":"GREENWICH","s":"CT","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER","a":65426,"p":"RESEARCH PROPOSAL - \"ADIPOSE-DERIVED STEM CELLS ISOLATED FROM ABDOMEN AND THIGH FAT OF LIPEDEMA PATIENTS EXHIBIT DIFFERENTIAL EXPRESSION OF ESSENTIAL REGULATORY GENES\"","c":"FORT WORTH","s":"TX","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF THE PACIFIC WEB DEPOSITORY","a":131858,"p":"RESEARCH PROPOSAL - \"TURNING UP THE HEAT ON LIPEDEMA\"","c":"STOCKTON","s":"CA","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"THE CLEVELAND CLINIC FOUNDATION","a":66385,"p":"RESEARCH PROPOSAL - \"PLATELETS AS BIOSENSORS AND REGULATORS OF METABOLISM IN LIPEDEMA\"","c":"CLEVELAND","s":"OH","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"TEMPLE UNIVERSITY - OF THE COMMONWEALTH SYSTEM OF HIGHER EDUCATION","a":124258,"p":"RESEARCH PROPOSAL - \"CHARACTERIZATION OF BIOTRANSPORT THROUGH ENGINEERED LIPEDEMIC TISSUES\"","c":"PHILADELPHIA","s":"PA","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"ST GEORGE'S UNIVERSITY LONDON","a":174856,"p":"RESEARCH PROPOSAL - \"DECIPHERING THE GENETIC BASIS OF LIPEDEMA\"","c":"","s":"","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"LUDWIG BOLTZMANN INSTITUTE TRAUMATOLOGY","a":121694,"p":"RESEARCH PROPOSAL - \"EV-MIRNAS AS DIAGNOSTIC BIOMARKERS FOR LIPEDEMA\"","c":"","s":"","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"LYSEARCH GMBH","a":42566,"p":"RESEARCH PROPOSAL - \"HOW DOES BARIATRIC SURGERY AFFECT LIPEDEMA\"","c":"","s":"","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"LOUISIANA STATE UNIVERSITY","a":125000,"p":"RESEARCH PROPOSAL - \"A NOVEL APPROACH TO EXAMINE THE ADIPOSE CELLULAR KINETICS OF LIPEDEMA\"","c":"BATON ROUGE","s":"LA","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2021,"r":"WASHINGTON UNIVERSITY","a":125000,"p":"RESEARCH PROPOSAL - \"ADIPOSE TISSUE BIOLOGY AND EFFECT OF WEIGHT LOSS IN WOMEN WITH LIPEDEMA\"","c":"ST LOUIS","s":"MO","e":"","o":"202233199349103358","record_type":"named_recipient"},{"y":2022,"r":"GREENWICH ACADEMY INC","a":600000,"p":"CENTER FOR MATH EXCELLENCE AS PART OF LEAD THE WAY CAMPAIGN","c":"GREENWICH","s":"CT","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"KLINIKUM ERNST VON BERGMANN GEMEINNUTZIGE GMBH","a":156474,"p":"RESEARCH PROPOSAL - \"MORPHOLOGICAL MRI INVESTIGATION OF SUBCUTANEOUS ADIPOSE TISSUE IN LIPEDEMA PATIENTS\"","c":"","s":"","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"TEXAS A & M UNIVERSITY COLLEGE OF MEDICINE","a":133617,"p":"RESEARCH PROPOSAL - \"IMPACT OF COMBINATION THERAPY ON LIPEDEMA PATIENT TISSUE STRESS\"","c":"BRYAN","s":"TX","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"THE RECTOR AND VISITORS OF THE UNIVERSITY OF VIRGINIA","a":96831,"p":"RESEARCH PROPOSAL","c":"CHARLOTTESVILLE","s":"VA","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"THE REGENTS OF THE UNIVERSITY OF CALIFORNIA LOS ANGELES","a":125000,"p":"RESEARCH PROPOSAL - \"MESENCHYMAL PROGENITOR CELLS IN LIPEDEMA\"","c":"LOS ANGELES","s":"CA","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITE LIBRE DE BRUXELLES","a":124921,"p":"RESEARCH PROPOSAL - \"BASIC TOOLBOX FOR LIPEDEMA SYNDROME ASSESSMENT\"","c":"","s":"","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF CHICAGO","a":147140,"p":"RESEARCH PROPOSAL - \"ROLE OF LYMPHATIC CLOTTING AND NEUTROPHIL NETOSIS IN LIPEDEMA\"","c":"CHICAGO","s":"IL","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER","a":120663,"p":"RESEARCH PROPOSAL - \"ESTROGEN SIGNALING IN ADIPOSE TISSUE METABOLISM AND DEVELOPMENT OF LIPEDEMA\"","c":"FORT WORTH","s":"TX","e":"","o":"202303199349106900","record_type":"named_recipient"},{"y":2023,"r":"GREENWICH ACADEMY INC","a":500000,"p":"CENTER FOR MATH EXCELLENCE AS PART OF LEAD THE WAY CAMPAIGN","c":"GREENWICH","s":"CT","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"GREENWICH ACADEMY INC","a":600000,"p":"CENTER FOR MATH EXCELLENCE AS PART OF LEAD THE WAY CAMPAIGN","c":"GREENWICH","s":"CT","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"KLINIKUM ERNST VON BERGMANN GEMEINNUTZIGE GMBH","a":148186,"p":"RESEARCH PROPOSAL - \"MORPHOLOGICAL MRI INVESTIGATION OF SUBCUTANEOUS ADIPOSE TISSUE IN LIPEDEMA PATIENTS\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"LYSEARCH GMBH","a":56201,"p":"RESEARCH PROPOSAL - \"HOW DOES BARIATRIC SURGERY AFFECT LIPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"MACQUARIE UNIVERSITY","a":127802,"p":"RESEARCH PROPOSAL - \"UTILIZING INDOCYANINE GREEN LYMPHOGRAPHY (ICG) AND BIOIMPEDANCE\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"PRESIDENT AND FELLOWS OF HARVARD COLLEGE","a":833334,"p":"EMBEDDED ETHICS FUND AND QUANTUM INITIATIVE FUND","c":"CAMBRIDGE","s":"MA","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"ST GEORGE'S UNIVERSITY LONDON","a":69597,"p":"RESEARCH PROPOSAL - \"DECIPHERING THE GENETIC BASIS OF LIPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"ST VINCENT'S INSTITUTE FOR MEDICAL RESEARCH","a":54070,"p":"RESEARCH PROPOSAL - \"INVESTIGATING A FUNCTIONALLY IMPORTANT POPULATION OF IMMUNE CELLS AS ABIOMARKER AND POTENTIAL THERAPEUTIC TARGET IN LIPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"TEMPLE UNIVERSITY - OF THE COMMONWEALTH SYSTEM OF HIGHER EDUCATION","a":125742,"p":"RESEARCH PROPOSAL - \"CHARACTERIZATION OF BIOTRANSPORT THROUGH ENGINEERED LIPEDEMIC TISSUES\"","c":"PHILADELPHIA","s":"PA","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"THE CLEVELAND CLINIC FOUNDATION","a":59345,"p":"RESEARCH PROPOSAL - \"PLATELETS AS BIOSENSORS AND REGULATORS OF METABOLISM IN LIPEDEMA\"","c":"CLEVELAND","s":"OH","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"THE REGENTS OF THE UNIVERSITY OF CALIFORNIA LOS ANGELES","a":125000,"p":"RESEARCH PROPOSAL - \"MESENCHYMAL PROGENITOR CELLS IN LIPEDEMA\"","c":"LOS ANGELES","s":"CA","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY HOSPITAL COLOGNE","a":21412,"p":"RESEARCH PROPOSAL - \"IDENTIFICATION OF LIPEDEMA-PAIN SPECIFIC SENSORY MEASURES AS BASIS FORFUTURE DIAGNOSTICS\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF LEIPZIG","a":136416,"p":"RESEARCH PROPOSAL - \"MECHANISMS UNDERLYING THE DEVELOPMENT AND CLINICAL MANIFESTATIONS OF LIPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER","a":123750,"p":"RESEARCH PROPOSAL - \"ESTROGEN SIGNALING IN ADIPOSE TISSUE METABOLISM AND DEVELOPMENT OF LIPEDEMA\"","c":"FORT WORTH","s":"TX","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF PADOVA","a":140346,"p":"RESEARCH PROPOSAL - \"ROLE OF FASCIAL ALTERATIONS IN LIPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF THE PACIFIC WEB DEPOSITORY","a":118137,"p":"RESEARCH PROPOSAL - \"TURNING UP THE HEAT ON LIPEDEMA\"","c":"STOCKTON","s":"CA","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF ZURICH","a":159678,"p":"RESEARCH PROPOSAL - \"INVESTIGATING THE DIAGNOSTIC AND THERAPEUTIC POTENTIAL OF CD163 BIOMARKER IN LEPEDEMA\"","c":"","s":"","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2023,"r":"VANDERBILT UNIVERSITY MEDICAL CENTER","a":354133,"p":"RESEARCH PROPOSAL - \"INVESTIGATION OF BIOLOGICAL SAMPLES AND RELATED DATA ABOUT LIPEDEMA\"","c":"NASHVILLE","s":"TN","e":"","o":"202413199349103081","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF THE PACIFIC WEB DEPOSITORY","a":1000,"p":"RESEARCH PROPOSAL - \"TURNING UP THE HEAT ON LIPEDEMA\"","c":"STOCKTON","s":"CA","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"LIPEDEMA CANADA","a":7500,"p":"SUPPORT THE START-UP ACTIVITIES OF LIPEDEMA CANADA","c":"","s":"","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"LUDWIG BOLTZMANN INSTITUTE FOR TRAUMATOLOGY","a":9000,"p":"RESEARCH PROPOSAL - \"EV-MIRNAS AS DIAGNOSTIC BIOMARKERS FOR LIPEDEMA\"","c":"","s":"","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"THE UNIVERSITY OF TEXAS HEALTH SCIENCE CENTER AT HOUSTON","a":48094,"p":"RESEARCH PROPOSAL: CHARACTERIZATION OF LYMPHATIC FUNCTION AND ADIPOSE DEPOSITION IN EARLY LIPEDEMA","c":"HOUSTON","s":"TX","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER","a":56356,"p":"RESEARCH PROPOSAL - \"ESTROGEN SIGNALING IN ADIPOSE TISSUE METABOLISM AND DEVELOPMENT OF LIPEDEMA\"","c":"FORT WORTH","s":"TX","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF CHARITE BERLIN","a":96580,"p":"RESEARCH PROPOSAL: 3D-HISTOPATHOLOGY OF LIPEDEMA","c":"","s":"","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"EXPII INC","a":100000,"p":"SUPPORT LIVE MATH SCHOLARSHIP PROGRAM WHICH FINDS HIGH-MOTIVATION-LOW-ACCESS MIDDLE SCHOOLERS FROM UNDERPRIVILEGED AREAS AND GIVES THEM EXTRAORDINARY MATH COACHING","c":"PITTSBURGH","s":"PA","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"PALO ALTO VETERANS INSTITUTE FOR RESEARCH","a":125000,"p":"RESEARCH PROPOSAL: EXTRACELLULAR MATRIX REMODELING IN LIPDEMA","c":"PALO ALTO","s":"CA","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"LOUISIANA STATE UNIVERSITY","a":125000,"p":"RESEARCH PROPOSAL - \"A NOVEL APPROACH TO EXAMINE THE ADIPOSE CELLULAR KINETICS OF LIPEDEMA\"","c":"STOCKTON","s":"CA","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"WASHINGTON UNIVERSITY","a":125000,"p":"RESEARCH PROPOSAL - \"ADIPOSE TISSUE BIOLOGY AND EFFECT OF WEIGHT LOSS IN WOMEN WITH LIPEDEMA\"","c":"ST LOUIS","s":"MO","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"MAYO CLINIC","a":250000,"p":"SUPPORT TRANSPLANT CENTER, CANCER CENTER, SCIENCE OF AI AND ALIX SCHOOL","c":"ROCHESTER","s":"MN","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"GREENWICH ACADEMY INC","a":600000,"p":"CENTER FOR MATH EXCELLENCE AS PART OF LEAD THE WAY CAMPAIGN","c":"GREENWICH","s":"CT","e":"","o":"202503219349103175","record_type":"named_recipient"},{"y":2024,"r":"PRESIDENT AND FELLOWS OF HARVARD COLLEGE","a":833333,"p":"EMBEDDED ETHICS FUND AND QUANTUM INITIATIVE FUND","c":"CAMBRIDGE","s":"MA","e":"","o":"202503219349103175","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

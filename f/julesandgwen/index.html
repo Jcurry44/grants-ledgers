@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="JULESANDGW_DATA" data-slug="julesandgwen" data-n="82" data-grand="3524556" data-recsub="All five years" data-running="to the dollar, five years running." data-names="65 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="JULESANDGW_DATA" data-slug="julesandgwen" data-n="82" data-grand="3524556" data-recsub="All five years" data-running="to the dollar, five years running." data-names="65 as-filed names" data-rows-embedded="82" data-rows-total="82">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 82 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">63</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $3,524,556, equals Part I line 25(d), $3,524,556 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.JULESANDGW_DATA={"meta":{"foundation":"Jules and Gwen Knapp Charitable Foundation","ein":"36-3381401","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":82,"grand_total":3524556,"tieout":{"2020":{"object_id":"202103159349101915","grant_count":47,"grant_sum":135050,"line25_col_d":135050,"status":"PASS"},"2021":{"object_id":"202330179349100018","grant_count":32,"grant_sum":144056,"line25_col_d":144056,"status":"PASS"},"2022":{"object_id":"202303189349104290","grant_count":1,"grant_sum":225500,"line25_col_d":225500,"status":"PASS"},"2023":{"object_id":"202413479349100001","grant_count":1,"grant_sum":757950,"line25_col_d":757950,"status":"PASS"},"2024":{"object_id":"202533219349107268","grant_count":1,"grant_sum":2262000,"line25_col_d":2262000,"status":"PASS"}}},"grants":[{"y":2020,"r":"JEWISH UNITED FUND","a":50000,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN FRIENDS OF HEBREW UNIVERSITY","a":25000,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JEWISH FEDERATION OF SAN DIEGO COUNTY CA","a":6500,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CONGREGATION SUKKAT SHALOM","a":5650,"p":"GENERAL PURPOSE","c":"WILMETTE","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CONGREGATION BETH EL","a":5050,"p":"GENERAL PURPOSE","c":"PORT STLUCIE","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CHABAD JEWISH CENTER OF MARTIN & ST-LUCIE COUNTY","a":5000,"p":"GENERAL PURPOSE","c":"PALM CITY","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF THE IDF","a":5000,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JEWISH FAMILY SERVICES OF SAN DIEGO","a":5000,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"IMPACT 100 MARTIN","a":3000,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JEWISH COMMUNITY CENTER","a":3000,"p":"GENERAL PURPOSE","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"SAN DEIGO FOOD BANK","a":3000,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"MCGILL UNIVERSITY","a":2000,"p":"GENERAL PURPOSE","c":"","s":"","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"ILLINOIS HOLOCAUST MUSEUM","a":1600,"p":"GENERAL PURPOSE","c":"SKOKIE","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"NORTHWESTERN UNIVERSITY","a":1500,"p":"GENERAL PURPOSE","c":"EVANSTON","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"PRATT UNIVERSITY","a":1450,"p":"GENERAL PURPOSE","c":"BROOKLYN","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"TEMPLE BEIT HA YAM","a":1275,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CLEVELAND CLINIC FLORIDA","a":1250,"p":"GENERAL PURPOSE","c":"WESTON","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"FLORIDA OCEANOGRAPHIC SOCIETY","a":1000,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JACK MILLER CENTER","a":1000,"p":"GENERAL PURPOSE","c":"BALA CYNWYD","s":"PA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"ORT AMERICA INC","a":1000,"p":"GENERAL PURPOSE","c":"BOCA RATON","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"SCRIPPS FOUNDATION","a":1000,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN FRIENDS OF MEGEN DAVID ADOM","a":500,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CHAPMAN UNIVERSITY","a":500,"p":"GENERAL PURPOSE","c":"ORANGE","s":"CA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JEWISH EDUCATIONAL LOAN FOUNDATION","a":500,"p":"GENERAL PURPOSE","c":"DUNWOODY","s":"GA","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"SALVATION ARMY","a":500,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"WXEL TV","a":500,"p":"GENERAL PURPOSE","c":"BOYNTON BEACH","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"LYRIC THEATRE","a":350,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"HIBISCUS HOUSE CHILDREN'S CENTER","a":250,"p":"GENERAL PURPOSE","c":"JENSEN BEACH","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"HOUSE OF HOPE","a":250,"p":"GENERAL PURPOSE","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"JEWISH FAMILY SERVICES OF CHICAGO","a":250,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"SAILFISH POINT FOUNDATION","a":250,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"UNITED WAY","a":250,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"INT'L ASSOC OF MEDICAL TRAVEL","a":200,"p":"GENERAL PURPOSE","c":"NIAGARA FALLS","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"B'NAI BRITH INTERNATIONAL","a":150,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"HILLEL INTERNATIONAL","a":150,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"NORTH SHORE SENIOR CENTER","a":150,"p":"GENERAL PURPOSE","c":"NORTHFIELD","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"ROLFE PANCREATIC CANCER FOUNDATION","a":150,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"USO","a":150,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"100 CLUB OF MARTIN COUNTY","a":100,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"ATLANTIC ORCHESTRA","a":100,"p":"GENERAL PURPOSE","c":"FORT PIERCE","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"CANCER RESEARCH INSTITUTE","a":100,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"LIGHT OF THE WORLD CHARITIES","a":100,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"SAILFISH EMPLOYEE AID FUND","a":100,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"TREASURE COAST HOSPICE","a":100,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"AUXILIARY OF STROGER HOSPITAL","a":50,"p":"GENERAL PURPOSE","c":"CHIGAGO","s":"IL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"PERRIN FAMILY FUND","a":50,"p":"GENERAL PURPOSE","c":"NEW HAVEN","s":"CT","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2020,"r":"FLORIDA SHERIFFS ASSOCIATION","a":25,"p":"GENERAL PURPOSE","c":"TALLAHASSEE","s":"FL","e":"","o":"202103159349101915","record_type":"named_recipient"},{"y":2021,"r":"JEWISH UNITED FUND","a":70000,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"AMERICAN FRIENDS OF HEBREW UNIVERSITY","a":25000,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"JEWISH FEDERATION OF SAN DIEGO COUNTY CA","a":6600,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"CONGREGATION BETH EL","a":5200,"p":"GENERAL PURPOSE","c":"PORT STLUCIE","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"CHABAD JEWISH CENTER OF MARTIN & ST-LUCIE COUNTY","a":1000,"p":"GENERAL PURPOSE","c":"PALM CITY","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"JEWISH FAMILY SERVICES OF SAN DIEGO","a":2306,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"JEWISH COMMUNITY CENTER","a":500,"p":"GENERAL PURPOSE","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"ORT AMERICA INC","a":1000,"p":"GENERAL PURPOSE","c":"BOCA RATON","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"JEWISH EDUCATIONAL LOAN FOUNDATION","a":500,"p":"GENERAL PURPOSE","c":"DUNWOODY","s":"GA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"SALVATION ARMY","a":250,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"WXEL TV","a":500,"p":"GENERAL PURPOSE","c":"BOYNTON BEACH","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"B'NAI BRITH INTERNATIONAL","a":225,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"HILLEL INTERNATIONAL","a":500,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"TREASURE COAST HOSPICE","a":150,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"FLORIDA SHERIFFS ASSOCIATION","a":50,"p":"GENERAL PURPOSE","c":"TALLAHASSEE","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"ALZHEIMER'S ASSOCIATION","a":150,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"BIRTHRIGHT ISRAEL FOUNDATION","a":200,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"BOYS AND GIRLS CLUB","a":250,"p":"GENERAL PURPOSE","c":"ATLANTA","s":"GA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"COUNCIL ON AGING","a":500,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"EVANS SCHOLARS FOUNDATION","a":150,"p":"GENERAL PURPOSE","c":"GLENVIEW","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"MARTIN COUNTY FIREFIGHTERS","a":50,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"MULTIPLE SCLEROSIS SOCIETY","a":100,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"PLANNED PARENTHOOD","a":10000,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"JEWISH NATIONAL FUND INC","a":250,"p":"GENERAL PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"US HOLOCAUST MUSEUM","a":1000,"p":"GENERAL PURPOSE","c":"WASHINGTON","s":"DC","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"VON STEUBEN ALUMNI","a":125,"p":"GENERAL PURPOSE","c":"SKOKIE","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"VISTA HILL","a":2500,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"ROHR CHABAD AT THE UNIVERSITY OF CHICAGO","a":1000,"p":"GENERAL PURPOSE","c":"CHICAGO","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"THE FRIENDS OF VOLUNTEERS IN MEDICINE CLINIC INC","a":1000,"p":"GENERAL PURPOSE","c":"STUART","s":"FL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"NORTHWESTERN UNIVERSITY","a":3000,"p":"GENERAL PURPOSE","c":"EVANSTON","s":"IL","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"HILLEL OF SAN DIEGO","a":5000,"p":"GENERAL PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2021,"r":"IMPACT CUBED (MGSDII PROJECT)","a":5000,"p":"GENERAL PURPOSE","c":"ENCINITAS","s":"CA","e":"","o":"202330179349100018","record_type":"named_recipient"},{"y":2022,"r":"SEE ATTACHED SCHEDULE","a":225500,"p":"GENERAL OPERATIONS","c":"","s":"","e":"","o":"202303189349104290","record_type":"unitemized"},{"y":2023,"r":"SEE DETAILED STATEMENT","a":757950,"p":"GENERAL PURPOSE","c":"PALM BEACH","s":"FL","e":"","o":"202413479349100001","record_type":"unitemized"},{"y":2024,"r":"SEE DETAILED STATEMENT","a":2262000,"p":"GENERAL PURPOSE","c":"PALM BEACH","s":"FL","e":"","o":"202533219349107268","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

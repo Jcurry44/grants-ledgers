@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="APHORISMFO_DATA" data-slug="aphorismfoun" data-n="91" data-grand="125520737" data-recsub="All five years" data-running="to the dollar, five years running." data-names="61 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="APHORISMFO_DATA" data-slug="aphorismfoun" data-n="91" data-grand="125520737" data-recsub="All five years" data-running="to the dollar, five years running." data-names="61 as-filed names" data-rows-embedded="91" data-rows-total="91">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 91 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">61</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $125,520,737, equals Part I line 25(d), $125,520,737 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.APHORISMFO_DATA={"meta":{"foundation":"Aphorism Foundation","ein":"46-4347021","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":91,"grand_total":125520737,"tieout":{"2020":{"object_id":"202103159349102025","grant_count":8,"grant_sum":9594894,"line25_col_d":9594894,"status":"PASS"},"2021":{"object_id":"202243189349106729","grant_count":5,"grant_sum":4484702,"line25_col_d":4484702,"status":"PASS"},"2022":{"object_id":"202343199349103264","grant_count":18,"grant_sum":12846893,"line25_col_d":12846893,"status":"PASS"},"2023":{"object_id":"202403209349104750","grant_count":33,"grant_sum":55144755,"line25_col_d":55144755,"status":"PASS"},"2024":{"object_id":"202543219349100049","grant_count":27,"grant_sum":43449493,"line25_col_d":43449493,"status":"PASS"}}},"grants":[{"y":2020,"r":"BRIGHAM AND WOMEN'S HOSPITAL","a":1000000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"CHAN ZUCKERBERG BIOHUB INC","a":2000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"NEW AMERICA FOUNDATION","a":2000000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"WA","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"NEW VENTURE FUND","a":1000000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"OPPORTUNITYWORK INC","a":2500000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"PAHARA INSTITUTE","a":750000,"p":"GENERAL SUPPORT","c":"WALNUT","s":"CA","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"UC SANTA CRUZ FOUNDATION","a":34503,"p":"GENERAL SUPPORT","c":"SANTA CRUZ","s":"CA","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF TORONTO","a":310391,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202103159349102025","record_type":"named_recipient"},{"y":2021,"r":"BRIGHAM AND WOMEN'S HOSPITAL","a":1000000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202243189349106729","record_type":"named_recipient"},{"y":2021,"r":"CENTER OF COMPLEX INTERVENTIONS","a":1000000,"p":"GENERAL SUPPORT","c":"WELLESLEY","s":"MA","e":"","o":"202243189349106729","record_type":"named_recipient"},{"y":2021,"r":"CHAN ZUCKERBERG BIOHUB INC","a":2000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202243189349106729","record_type":"named_recipient"},{"y":2021,"r":"ROCKEFELLER PHILANTHROPY ADVISORS","a":165000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202243189349106729","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF TORONTO","a":319702,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202243189349106729","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN ACADEMY OF ARTS AND SCIENCES","a":100000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN FRIENDS OF LIBI","a":1000000,"p":"GENERAL SUPPORT","c":"BRIGHTON","s":"MA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"ASPEN INSITUTUTE UK","a":306600,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"CENTER OF COMPLEX INTERVENTIONS","a":1500000,"p":"GENERAL SUPPORT","c":"WELLESLEY","s":"MA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"CENTER ON RURAL INNOVATION","a":500000,"p":"GENERAL SUPPORT","c":"HARTLAND","s":"VT","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"CHAN ZUCKERBERG BIOHUB INC","a":2000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"ENDEAVOR GLOBAL INC","a":50000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"EQUAL JUSTICE INITIATIVE","a":46000,"p":"GENERAL SUPPORT","c":"MONTGOMERY","s":"AL","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"HYPOTHESIS FUND PBLLC","a":800000,"p":"GENERAL SUPPORT","c":"MERCER ISLAND","s":"WA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"KNOWLEDGE FUTURES INC","a":1000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"MADISON SQUARE BOYS & GIRLS CLUB FOUNDATION INC","a":75000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"MERCATUS CENTER INC","a":360000,"p":"GENERAL SUPPORT","c":"ARLINGTON","s":"VA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"NEW AMERICA FOUNDATION","a":2000000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"PLAYERS PHILANTHROPY FUND","a":1000000,"p":"GENERAL SUPPORT","c":"TOWSON","s":"MD","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"PRESIDENT AND FELLORS OF HARVARD COLLEGE","a":1500000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"THE PUTNEY SCHOOL","a":30000,"p":"GENERAL SUPPORT","c":"PUTNEY","s":"VT","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF TORONTO","a":329293,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF WISCONSIN FOUNDATION","a":250000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202343199349103264","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN FRIENDS OF LIBI","a":1000000,"p":"GENERAL SUPPORT","c":"BRIGHTON","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"ASSOCIATION OF MARSHALL SCHOLARS INC","a":538143,"p":"GENERAL SUPPORT","c":"BROOKLYN","s":"NY","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"AUREALIA INSTITUTE INC","a":1000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"B LAB COMPANY","a":1000000,"p":"GENERAL SUPPORT","c":"PHILADELPHIA","s":"PA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"BROWN UNIVERSITY","a":250000,"p":"GENERAL SUPPORT","c":"PROVIDENCE","s":"RI","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"CENTER OF COMPLEX INTERVENTIONS","a":1725000,"p":"GENERAL SUPPORT","c":"WELLESLEY","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"CENTER ON RURAL INNOVATION","a":1000000,"p":"GENERAL SUPPORT","c":"HARTLAND","s":"VT","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"CHOOSE LOVE INC","a":300000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"COMPUTER HISTORY MUSEUM","a":500000,"p":"GENERAL SUPPORT","c":"MOUNTAIN VIEW","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"CORTICO CORPORATION","a":1000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"CZ BIOHUB NETWORK","a":2000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"DAFFY CHARITABLE FUND","a":120000,"p":"GENERAL SUPPORT","c":"LOS ALTOS","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"DARTMOUTH COLLEGE","a":699500,"p":"GENERAL SUPPORT","c":"HANOVER","s":"NH","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"ENDEAVOR GLOBAL INC","a":50000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"EQUAL JUSTICE INITIATIVE","a":200000,"p":"GENERAL SUPPORT","c":"MONTGOMERY","s":"AL","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"FFWD","a":1250000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"FROM THE HEART PRODUCTIONS INC","a":300000,"p":"GENERAL SUPPORT","c":"OXNARD","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"GEORGETOWN UNIVERSITY","a":110000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"HIM FOR HER INC","a":350000,"p":"GENERAL SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"HYPOTHESIS FUND PBLLC","a":1175000,"p":"GENERAL SUPPORT","c":"MERCER ISLAND","s":"WA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"LOCUS SCIENCE FICTION FOUNDATION","a":50000,"p":"GENERAL SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":1840000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"NEW AMERICA FOUNDATION","a":2200000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"PROBABILISTIC COMPUTING FOUNDATION INC","a":14500000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"SCIENCE AND TECHNOLOGY FUTURES INC","a":500000,"p":"GENERAL SUPPORT","c":"CAMRBIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"SCIENCE FOR AMERICA INC","a":6000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"SECOND HARVEST FOOD BANK","a":1880000,"p":"GENERAL SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"SECUREBIO INC","a":1160000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"THE LELAND STANFORD JUNIOR UNIVERSITY","a":10000000,"p":"GENERAL SUPPORT","c":"STANFORD","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"UBI CHARITABLE INC","a":1000000,"p":"GENERAL SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TORONTO","a":339172,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF WISCONSIN FOUNDATION","a":250000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2023,"r":"WOODWELL CLIMATE RESEARCH CENTER INC","a":857940,"p":"GENERAL SUPPORT","c":"FALMOUTH","s":"MA","e":"","o":"202403209349104750","record_type":"named_recipient"},{"y":2024,"r":"ASPEN INSTITUTE","a":100000,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"ASSOCIATION OF MARSHALL SCHOLARS INC","a":1461858,"p":"GENERAL SUPPORT","c":"BROOKLYN","s":"NY","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA UNIVERSITY","a":1000000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"CONNECTED LEARNING ALLIANCE","a":1865000,"p":"GENERAL SUPPORT","c":"DANA POINT","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"CORTICO CORPORATION","a":1000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"CZ BIOHUB NETWORK","a":2000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"DARTMOUTH COLLEGE","a":515835,"p":"GENERAL SUPPORT","c":"HANOVER","s":"NH","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"DOLLAR FOR","a":200000,"p":"GENERAL SUPPORT","c":"VANCOUVER","s":"WA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"EARTH SPECIES PROJECT","a":10005300,"p":"GENERAL SUPPORT","c":"WEST HOLLYWOOD","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"ENDEAVOR GLOBAL INC","a":50000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"FOOD FOR SOUL INC","a":140000,"p":"GENERAL SUPPORT","c":"LIVERPOOL","s":"NY","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"HIM FOR HER INC","a":350000,"p":"GENERAL SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"HYPOTHESIS FUND PBLLC","a":900000,"p":"GENERAL SUPPORT","c":"MERCER ISLAND","s":"WA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"LEADERS IN TECH INC","a":1000000,"p":"GENERAL SUPPORT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"LEADERSHIP NETWORK","a":1200000,"p":"GENERAL SUPPORT","c":"CAROLINA BEACH","s":"NC","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"LIMN","a":100000,"p":"GENERAL SUPPORT","c":"DURHAM","s":"NC","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"LOCUS SCIENCE FICTION FOUNDATION","a":63000,"p":"GENERAL SUPPORT","c":"OAKLAND","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"MANAGEMENT LEADERSHIP FOR TOMORROW","a":500000,"p":"GENERAL SUPPORT","c":"BETHESDA","s":"MD","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":1000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"MATHESAR FOUNDATION INC","a":1498500,"p":"GENERAL SUPPORT","c":"COMMACK","s":"NY","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"NEW AMERICA FOUNDATION","a":2200000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"PROBABILISTIC COMPUTING FOUNDATION INC","a":10000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"SAFECAST GLOBAL","a":50000,"p":"GENERAL SUPPORT","c":"WELLESLEY","s":"MA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"SCIENCE FOR AMERICA INC","a":3000000,"p":"GENERAL SUPPORT","c":"CAMBRIDGE","s":"MA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"SECOND HARVEST FOOD BANK","a":2000000,"p":"GENERAL SUPPORT","c":"SAN JOSE","s":"CA","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF WISCONSIN FOUNDATION","a":250000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202543219349100049","record_type":"named_recipient"},{"y":2024,"r":"US JAPAN RESEARCH INSTITUTE","a":1000000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202543219349100049","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

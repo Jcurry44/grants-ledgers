@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="LUCKYDAYFO_DATA" data-slug="luckydayfoun" data-n="76" data-grand="31644430" data-recsub="All five years" data-running="to the dollar, five years running." data-names="25 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="LUCKYDAYFO_DATA" data-slug="luckydayfoun" data-n="76" data-grand="31644430" data-recsub="All five years" data-running="to the dollar, five years running." data-names="25 as-filed names" data-rows-embedded="76" data-rows-total="76">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 76 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">25</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $31,644,430, equals Part I line 25(d), $31,644,430 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.LUCKYDAYFO_DATA={"meta":{"foundation":"Luckyday Foundation","ein":"64-0617746","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":76,"grand_total":31644430,"tieout":{"2020":{"object_id":"202102869349100740","grant_count":12,"grant_sum":5617154,"line25_col_d":5617154,"status":"PASS"},"2021":{"object_id":"202202249349101405","grant_count":20,"grant_sum":6458384,"line25_col_d":6458384,"status":"PASS"},"2022":{"object_id":"202302429349100755","grant_count":19,"grant_sum":6641334,"line25_col_d":6641334,"status":"PASS"},"2023":{"object_id":"202432269349100663","grant_count":13,"grant_sum":6529206,"line25_col_d":6529206,"status":"PASS"},"2024":{"object_id":"202502399349100020","grant_count":12,"grant_sum":6398352,"line25_col_d":6398352,"status":"PASS"}}},"grants":[{"y":2020,"r":"HINDS COMMUNITY COLLEGE DEVELOPMENT FOUNDATION","a":59520,"p":"TO PROMOTE HIGHER EDUCATION","c":"RAYMOND","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"HOSPICE MINISTRIES INC","a":20000,"p":"PROVIDE SUPPORT AND CARING FOR THE SICK","c":"RIDGELAND","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"MISSISSIPPI FOOD NETWORK","a":20000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"MSU FOUNDATION","a":70000,"p":"TO PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"ST JOHN'S EPISCOPAL CHURCH","a":2000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"ABERDEEN","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"STEWPOT COMMUNITY SERVICES","a":20000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"THE GLEANERS INC","a":20000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"UNIV OF SOUTHERN MS FOUNDATION","a":3203384,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"HATTIESBURG","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":2101000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"MAGNOLIA SPEECH SCHOOL","a":100000,"p":"TO PROVIDE SUPPORT TO BUILD MADISON, MS FACILITY TO BENEFIT CHILDREN WITH COMMUNICATIVE DISORDERS.","c":"JACKSON","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"ST JUDES CHILDREN'S RESEARCH HOSPITAL","a":250,"p":"TO PROVIDE SUPPORT TO CHILDREN'S CANCER RESEARCH HOSPITAL","c":"MEMPHIS","s":"TN","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2020,"r":"THE WILSON RESEARCH FOUNDATION","a":1000,"p":"TO PROVIDE SUPPORT OF REHABILITATION CENTER CLINICAL RESEARCH AND THERAPY","c":"JACKSON","s":"MS","e":"","o":"202102869349100740","record_type":"named_recipient"},{"y":2021,"r":"BUT GOD MINISTRIES","a":25000,"p":"PROVIDE FUNDS TO SUPPORT THE BUILDING OF SUSTAINABLE COMMUNITIES FOR THE POOR","c":"MADISON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"EUDORA WELTY FOUNDATION","a":250000,"p":"PROVIDE FUNDS FOR EDUCATIONAL AND RESEARCH ACTIVITIES TO ENCOURAGE READING AND THE EFFORTS OF YOUNG WRITERS.","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"HINDS COMMUNITY COLLEGE DEVELOPMENT FOUNDATION","a":100000,"p":"TO PROMOTE HIGHER EDUCATION","c":"RAYMOND","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"HOSPICE MINISTRIES INC","a":50000,"p":"PROVIDE SUPPORT AND CARING FOR THE SICK","c":"RIDGELAND","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"LAUREN ROGER'S MUSEUM OF ART","a":50000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"LAUREL","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"MAGNOLIA SPEECH SCHOOL","a":250000,"p":"TO PROVIDE SUPPORT TO BUILD MADISON, MS FACILITY TO BENEFIT CHILDREN WITH COMMUNICATIVE DISORDERS.","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"MS CHILDREN'S MUSEUM","a":150000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS FOR KIDS","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"MISSISSIPPI FOOD NETWORK","a":100000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"MS MUSEUM OF ART","a":150000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"MSU FOUNDATION","a":180000,"p":"TO PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"ST ANDREW'S EPISCOPAL CATHEDRAL","a":150000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"ST JOHN'S EPISCOPAL CHURCH","a":50000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"ABERDEEN","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"STEWPOT COMMUNITY SERVICES","a":300000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"THE GLEANERS INC","a":100000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"THE MUSTARD SEED","a":25000,"p":"PROVIDE FUNDS FOR THE SUPPORT OF A CHRISTIAN COMMUNITY OF ADULTS WITH DEVELOPMENTAL DISABILITIES","c":"BRANDON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"THE WILSON RESEARCH FOUNDATION","a":300000,"p":"TO PROVIDE SUPPORT OF REHABILITATION CENTER CLINICAL RESEARCH AND THERAPY","c":"JACKSON","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"UNIV OF SOUTHERN MS FOUNDATION","a":1388384,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"HATTIESBURG","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":2140000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":600000,"p":"PROVIDE SUPPORT FOR CHILDREN'S OF MISSISSIPPI","c":"UNIVERSITY","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":100000,"p":"PROVIDE SUPPORT FOR THE MIND CENTER","c":"UNIVERSITY","s":"MS","e":"","o":"202202249349101405","record_type":"named_recipient"},{"y":2022,"r":"BUT GOD MINISTRIES","a":25000,"p":"PROVIDE FUNDS TO SUPPORT THE BUILDING OF SUSTAINABLE COMMUNITIES FOR THE POOR","c":"MADISON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"HINDS COMMUNITY COLLEGE DEVELOPMENT FOUNDATION","a":100000,"p":"TO PROMOTE HIGHER EDUCATION","c":"RAYMOND","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"HOSPICE MINISTRIES INC","a":50000,"p":"PROVIDE SUPPORT AND CARING FOR THE SICK","c":"RIDGELAND","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"MISSISSIPPI FOOD NETWORK","a":100000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"MS CHILDREN'S MUSEUM","a":200000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS FOR KIDS","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"MSU FOUNDATION","a":475545,"p":"TO PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"ST ANDREW'S EPISCOPAL CATHEDRAL","a":50000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"ST JOHN'S EPISCOPAL CHURCH","a":50000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"ABERDEEN","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"STEWPOT COMMUNITY SERVICES","a":150000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"THE GLEANERS INC","a":100000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"THE WILSON RESEARCH FOUNDATION","a":150000,"p":"TO PROVIDE SUPPORT OF REHABILITATION CENTER CLINICAL RESEARCH AND THERAPY","c":"JACKSON","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"UNIV OF SOUTHERN MS FOUNDATION","a":2400289,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"HATTIESBURG","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":2420000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":20000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":300000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"KINGSWOOD UNITED METHODIST CHURCH","a":250,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"MOBILE","s":"AL","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"MS ORGAN RECOVERY AGENCY","a":250,"p":"PROVIDE SUPPORT AND CARING FOR THE SICK","c":"FLOWOOD","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"MANNA HOUSE","a":25000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"YAZOO CITY","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2022,"r":"DIXIE NATIONAL RODEO","a":25000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202302429349100755","record_type":"named_recipient"},{"y":2023,"r":"BUT GOD MINISTRIES","a":25000,"p":"PROVIDE FUNDS TO SUPPORT THE BUILDING OF SUSTAINABLE COMMUNITIES FOR THE POOR","c":"MADISON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"DIXIE NATIONAL RODEO","a":25000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"HINDS COMMUNITY COLLEGE DEVELOPMENT FOUNDATION","a":50000,"p":"TO PROMOTE HIGHER EDUCATION","c":"RAYMOND","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"MISSISSIPPI FOOD NETWORK","a":20000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"MS CHILDREN'S MUSEUM","a":25000,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS FOR KIDS","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"MSU FOUNDATION","a":1773917,"p":"TO PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"ST JOHN'S EPISCOPAL CHURCH","a":5000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"ABERDEEN","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"STEWPOT COMMUNITY SERVICES","a":40000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"THE GLEANERS INC","a":15000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"THE WILSON RESEARCH FOUNDATION","a":25000,"p":"TO PROVIDE SUPPORT OF REHABILITATION CENTER CLINICAL RESEARCH AND THERAPY","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"UNIV OF SOUTHERN MS FOUNDATION","a":2400289,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"HATTIESBURG","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":2065000,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2023,"r":"BOYS & GIRLS CLUB OF CENTRAL MS","a":60000,"p":"PROVIDE ASSISTANCE FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202432269349100663","record_type":"named_recipient"},{"y":2024,"r":"DIXIE NATIONAL RODEO","a":7500,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"HINDS COMMUNITY COLLEGE DEVELOPMENT FOUNDATION","a":15000,"p":"TO PROMOTE HIGHER EDUCATION","c":"RAYMOND","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"LAUREN ROGER'S MUSEUM OF ART","a":250,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS","c":"LAUREL","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"MISSISSIPPI FOOD NETWORK","a":6000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"MS CHILDREN'S MUSEUM","a":7500,"p":"TO PROVIDE FUNDS FOR CULTURAL PROGRAMS FOR KIDS","c":"JACKSON","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"MSU FOUNDATION","a":1674813,"p":"TO PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"MISSISSIPPI STATE","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"ST JOHN'S EPISCOPAL CHURCH","a":5000,"p":"PROVIDE FUNDS TO RELIGIOUS ORGANIZATION","c":"ABERDEEN","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"STEWPOT COMMUNITY SERVICES","a":12000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"THE GLEANERS INC","a":15000,"p":"PROVIDE FOOD FOR THE NEEDY","c":"JACKSON","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"THE WILSON RESEARCH FOUNDATION","a":7500,"p":"TO PROVIDE SUPPORT OF REHABILITATION CENTER CLINICAL RESEARCH AND THERAPY","c":"JACKSON","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF MISSISSIPPI FOUNDATION","a":2247500,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"UNIVERSITY","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"},{"y":2024,"r":"USM FOUNDATION- LUCKY DAY SCHOLARS PROGRAM","a":2400289,"p":"PROVIDE SUPPORT FOR HIGHER EDUCATION","c":"HATTIESBURG","s":"MS","e":"","o":"202502399349100020","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

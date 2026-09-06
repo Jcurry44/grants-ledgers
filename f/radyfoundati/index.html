@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="RADYFOUNDA_DATA" data-slug="radyfoundati" data-n="78" data-grand="37140775" data-recsub="All five years" data-running="to the dollar, five years running." data-names="46 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="RADYFOUNDA_DATA" data-slug="radyfoundati" data-n="78" data-grand="37140775" data-recsub="All five years" data-running="to the dollar, five years running." data-names="46 as-filed names" data-rows-embedded="78" data-rows-total="78">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 78 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">46</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $37,140,775, equals Part I line 25(d), $37,140,775 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.RADYFOUNDA_DATA={"meta":{"foundation":"Rady Foundation","ein":"85-0715670","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":78,"grand_total":37140775,"tieout":{"2021":{"object_id":"202241369349105509","grant_count":19,"grant_sum":23632268,"line25_col_d":23632268,"status":"PASS"},"2022":{"object_id":"202321359349106087","grant_count":24,"grant_sum":2534035,"line25_col_d":2534035,"status":"PASS"},"2023":{"object_id":"202411149349102451","grant_count":9,"grant_sum":2943250,"line25_col_d":2943250,"status":"PASS"},"2024":{"object_id":"202510849349100761","grant_count":11,"grant_sum":3943100,"line25_col_d":3943100,"status":"PASS"},"2025":{"object_id":"202601319349104505","grant_count":15,"grant_sum":4088122,"line25_col_d":4088122,"status":"PASS"}}},"grants":[{"y":2021,"r":"Leukemia Lymphoma Society of Canada","a":473,"p":"General Endowment","c":"","s":"","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Jewish Federation of San Diego Coun","a":36000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Planned Parenthood","a":1000,"p":"General Endowment","c":"New York","s":"NY","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Congregation Beth Israel","a":3000,"p":"Hunger Project","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"USO","a":500,"p":"General Endowment","c":"Washington","s":"DC","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Feeding San Diego","a":12500,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"UC San Diego Foundation","a":12500,"p":"Free Clinic Fund","c":"La Jolla","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"ACLU","a":1000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Rady Children's Hospital of San Die","a":100000,"p":"Endowed Chair for Genomics","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Rady Children's Hospital of San Die","a":14889708,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Centre for Analysis of the Radical","a":8000,"p":"General Endowment","c":"","s":"","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Hebrew Free Loan of San Diego","a":50000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Horatio Alger Association","a":77000,"p":"General Endowment","c":"Alexandria","s":"VA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Jewish Family Service","a":1000000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Zoological Society of San Diego","a":650000,"p":"Africa Rocks","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"San Diego Symphony","a":2704500,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Nice Guys Inc","a":10000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"Hillel San Diego","a":58571,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2021,"r":"University of Manitoba","a":4017516,"p":"Rady Health Sciences Endowment","c":"","s":"","e":"","o":"202241369349105509","record_type":"named_recipient"},{"y":2022,"r":"Leukemia Lymphoma Society of Canada","a":395,"p":"General Endowment","c":"","s":"","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Jewish Federation of San Diego Coun","a":36000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Kindness Initiative","a":15000,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Congregation Beth Israel","a":3040,"p":"Hunger Project/Spring Gala","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Access Youth Academy","a":1000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Feeding San Diego","a":2500,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"UC San Diego Foundation","a":2600,"p":"Free Clinic/Moores Cancer Center Funds","c":"La Jolla","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"JDC","a":30000,"p":"General Endowment","c":"New York","s":"NY","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Rady Children's Hospital of San Die","a":100000,"p":"Neuroscience Institute","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Rady Children's Hospital of San Die","a":140000,"p":"Peckham Center for Cancer & Blood Disorders","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Centre for Analysis of the Radical","a":10000,"p":"General Endowment","c":"","s":"","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Hebrew Free Loan of San Diego","a":25000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Horatio Alger Association","a":86000,"p":"Fellowship/Scholarship Program/Awards","c":"Alexandria","s":"VA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Jewish Family Service","a":1000000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"San Diego Police Foundation","a":500,"p":"Africa Rocks","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"JINSA","a":54000,"p":"General Endowment","c":"Washington","s":"DC","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Nice Guys Inc","a":5000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"American Jewish Committee","a":1000,"p":"General Endowment","c":"New York","s":"NY","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Childhelp","a":1000,"p":"General Endowment","c":"Scottsdale","s":"AZ","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Rady Childrens' Hospital of San Die","a":10000,"p":"Celebrating Futures Fund","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Shabbat San Diego","a":500,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"The Salvation Army","a":1000000,"p":"Homeless to Home Fund","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Birthright Israel Foundation","a":10000,"p":"General Endowment","c":"New York","s":"NY","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2022,"r":"Junior Achievement of San Diego Cou","a":500,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202321359349106087","record_type":"named_recipient"},{"y":2023,"r":"UCSD Rady School of Mgt","a":200000,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Jewish Federation- SD","a":40000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Lawrence Family Jewish CC","a":250,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Big BrothersBig Sisters-SD","a":10000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"San Diego Symphony","a":1605000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Horatio Alger Association","a":82000,"p":"Fellowship/Scholarship Program/Awards","c":"Alexandria","s":"VA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Jewish Family Service","a":1000000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"JINSA","a":1000,"p":"General Endowment","c":"Washington","s":"DC","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2023,"r":"Nice Guys Inc","a":5000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202411149349102451","record_type":"named_recipient"},{"y":2024,"r":"Jewish Federation- SD","a":1000000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"San Diego Symphony","a":1610000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Jewish Family Service","a":1000000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Nice Guys Inc","a":2500,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Feeding San Diego","a":5000,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Friends of the IDF","a":15000,"p":"General Endowment","c":"New York","s":"NY","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"UCSD Sullivan Center","a":200000,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"San Diego Air Space Museum","a":100,"p":"General Endowment","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"American Friends of Shamir Medical","a":100000,"p":"General Endowment","c":"Brooklyn","s":"NY","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Congregation Beth Israel","a":500,"p":"Hunger Project","c":"San Diego","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2024,"r":"Kindness Initiative","a":10000,"p":"General Endowment","c":"La Jolla","s":"CA","e":"","o":"202510849349100761","record_type":"named_recipient"},{"y":2025,"r":"Jewish Federation- SD","a":500000,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Jewish Family Service","a":974597,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Nice Guys Inc","a":1875,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"University of CA San Diego","a":200000,"p":"Sullivan Center-Entrepreneurship & Innovation Current Fund","c":"La Jolla","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Congregation Beth Israel","a":200000,"p":"Building Campaign","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Kindness Initiative","a":100000,"p":"General Fund","c":"La Jolla","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Rady Children's Hospital Foundation","a":2000000,"p":"Rady Children's Health","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Friends of United Hatzalah","a":1000,"p":"General Fund","c":"New York","s":"NY","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"San Diego Food Bank","a":2000,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"University of CA San Diego","a":100000,"p":"Evelyn & Ernest Rady Graduate Fellowship Fund","c":"La Jolla","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Clarion Project","a":150,"p":"General Fund","c":"Richardson","s":"TX","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Cygnet Theatre Company","a":1000,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"Rancho Coastal Humane Society","a":500,"p":"General Fund","c":"Encinitas","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"San Diego Police Foundation","a":2000,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"},{"y":2025,"r":"San Diego Automotive Museum","a":5000,"p":"General Fund","c":"San Diego","s":"CA","e":"","o":"202601319349104505","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"San Diego Police Foundation":"Basic needs & response","Kindness Initiative":"Basic needs & response","Friends of United Hatzalah":"Arts & culture","Clarion Project":"Arts & culture","Rancho Coastal Humane Society":"Environment & animals"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

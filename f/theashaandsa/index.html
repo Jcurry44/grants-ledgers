@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="THEASHAAND_DATA" data-slug="theashaandsa" data-n="76" data-grand="11595250" data-recsub="All five years" data-running="to the dollar, five years running." data-names="35 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="THEASHAAND_DATA" data-slug="theashaandsa" data-n="76" data-grand="11595250" data-recsub="All five years" data-running="to the dollar, five years running." data-names="35 as-filed names" data-rows-embedded="76" data-rows-total="76">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 76 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">33</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $11,595,250, equals Part I line 25(d), $11,595,250 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.THEASHAAND_DATA={"meta":{"foundation":"The Asha and Sajjan Agarwal Foundation","ein":"42-1747195","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":76,"grand_total":11595250,"tieout":{"2020":{"object_id":"202132939349101003","grant_count":14,"grant_sum":1032500,"line25_col_d":1032500,"status":"PASS"},"2021":{"object_id":"202203149349103130","grant_count":13,"grant_sum":1300500,"line25_col_d":1300500,"status":"PASS"},"2022":{"object_id":"202323129349102312","grant_count":12,"grant_sum":2203250,"line25_col_d":2203250,"status":"PASS"},"2023":{"object_id":"202443169349100239","grant_count":13,"grant_sum":3364000,"line25_col_d":3364000,"status":"PASS"},"2024":{"object_id":"202543109349101209","grant_count":24,"grant_sum":3695000,"line25_col_d":3695000,"status":"PASS"}}},"grants":[{"y":2020,"r":"Ekal Vidyalaya Foundation of USA","a":387000,"p":"Education and village development in rural areas of India/ Arogya Health Project/ IVD Center","c":"Houston","s":"TX","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Food Bank of Central Eastern NC Inc","a":20000,"p":"General support","c":"Raleigh","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Global Network Foundation Inc","a":25000,"p":"Education SEALA 6 Scholarship Fund","c":"Atlanta","s":"GA","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Hindu Society of North Carolina","a":20000,"p":"Public Awareness of India Community and Rich Heritage","c":"Morrisville","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Hindu American Foundation","a":25500,"p":"Public Awareness of India Community","c":"Washington","s":"DC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"North Carolina Arts in Action Inc","a":2500,"p":"General support","c":"Durham","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Pratham USA","a":50000,"p":"Education in India","c":"Houston","s":"TX","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Schwab Charitable Fund","a":395000,"p":"General support","c":"San Fransisco","s":"CA","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"The Carying Place Inc","a":2500,"p":"Help with short term housing for homeless","c":"Cary","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"The Keswell School","a":10000,"p":"Develop new ways to help autistic individuals","c":"New York","s":"NY","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"The YMCA of the Triangle Area Inc","a":75000,"p":"2020 Annual Campaign - after school programs","c":"Raleigh","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Raleigh Rescue Mission","a":5000,"p":"General support","c":"Raleigh","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Triangle Area Hindu Temple Associat","a":5000,"p":"General support","c":"Cary","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2020,"r":"Note in the Pocket","a":10000,"p":"Provide clothing to needy & homeless children","c":"Raleigh","s":"NC","e":"","o":"202132939349101003","record_type":"named_recipient"},{"y":2021,"r":"Contemporary Art Museum","a":5000,"p":"CAM-To-Go","c":"Raleigh","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Global Network Foundation","a":5000,"p":"India COVID Relief Funds","c":"Atlanta","s":"GA","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Global Network Foundation","a":25000,"p":"Education SEALA 8 Scholarship Fund","c":"Atlanta","s":"GA","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu American Foundation","a":25500,"p":"Educational and advocacy organization","c":"Washington","s":"DC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu American Foundation","a":75000,"p":"Educational and advocacy organization","c":"Washington","s":"DC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu Society of NC","a":10000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu Society of NC","a":5000,"p":"Spiritual Education Fund","c":"Morrisville","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu Society of NC","a":50000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu Society of NC","a":25000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Hindu University of America","a":400000,"p":"Sustenance Funds for the rejuvenation and revitalization of the University","c":"Orlando","s":"FL","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Pratham USA","a":100000,"p":"Education in India","c":"Houston","s":"TX","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"Schwab Charitable Fund","a":525000,"p":"General support","c":"San Francisco","s":"CA","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2021,"r":"YMCA of the Triangle","a":50000,"p":"Supplement learning for students who struggle to reach school-system benchmarks","c":"Raleigh","s":"NC","e":"","o":"202203149349103130","record_type":"named_recipient"},{"y":2022,"r":"Duke University Health System Inc","a":35000,"p":"Patient care, education, and research","c":"Durham","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Ekal Vidyalaya Foundation of USA","a":175000,"p":"Bring education and empowerment to remote rural india","c":"Houston","s":"TX","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Global Network Foundation","a":24250,"p":"Education Scholarship Fund","c":"Atlanta","s":"GA","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Hindu American Foundation","a":125500,"p":"General support","c":"Washington","s":"DC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Hindu Society of NC","a":108500,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Hindu University of America","a":300000,"p":"Education - general university support","c":"Orlando","s":"FL","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Pratham USA","a":50000,"p":"Education in India","c":"Houston","s":"TX","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Raleigh Rescue Mission","a":10000,"p":"Serving the homeless in the Raleigh community","c":"Raleigh","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Schwab Charitable Fund","a":1100000,"p":"General support","c":"San Francisco","s":"CA","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"Sri Venkateswara Temple of North Carolina","a":200000,"p":"For Hindu temple and to uphold Hindu religious activities","c":"Cary","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"The Carying Place","a":25000,"p":"Help for underprivileged families in Wake County","c":"Cary","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2022,"r":"YMCA of the Triangle","a":50000,"p":"To supplement learning for students who struggle to reach school-system benchmarks","c":"Raleigh","s":"NC","e":"","o":"202323129349102312","record_type":"named_recipient"},{"y":2023,"r":"Art of Living Foundation","a":50000,"p":"Educational, charitable and humanitarian projects","c":"Cupertino","s":"CA","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Duke University Health System Inc","a":14000,"p":"Patient care, education, and research","c":"Durham","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Global Hindu Federation","a":125000,"p":"Project to research anti-Indic sentiment","c":"","s":"","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Global Network Foundation","a":25000,"p":"Education SEALA Scholarship Fund","c":"Atlanta","s":"GA","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Hindu American Foundation","a":100000,"p":"General support","c":"Washington","s":"DC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Hindu Society of NC","a":100000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"HinduAction","a":50000,"p":"Education, Advocacy and Leadership","c":"West Chester","s":"OH","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Raleigh Rescue Mission","a":100000,"p":"Serving the homeless in the Raleigh community","c":"Raleigh","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Rishihood Foundation","a":625000,"p":"Development & up-fitting of a Student Resident Facility supporting Rishihood University","c":"","s":"","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Schwab Charitable Fund","a":2000000,"p":"General support","c":"San Francisco","s":"CA","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"UNC Gillings School of Global Public Health","a":25000,"p":"General support","c":"Chapel Hill","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"Vaishnbav Samaj of RTP Inc","a":50000,"p":"Support religious and humantarian activities","c":"Cary","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2023,"r":"YMCA of the Triangle","a":100000,"p":"To supplement learning for students who struggle to reach school-system benchmarks","c":"Raleigh","s":"NC","e":"","o":"202443169349100239","record_type":"named_recipient"},{"y":2024,"r":"Dharma Civilization Foundation","a":65000,"p":"IKS 10 PhD & 5 Post- Doctoral Scholarships","c":"Renton","s":"WA","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Dharma Civilization Foundation","a":25000,"p":"Dharmic solutions to ease personal, professional and societal life","c":"Renton","s":"WA","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Duke University Health System Inc","a":20000,"p":"Patient care, education and research","c":"Durham","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Ekal Vidyalaya Foundation","a":50000,"p":"Bring education and empowerment to remote rural India","c":"Houston","s":"TX","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Global Hindu Federation","a":125000,"p":"Restricted Grant - Project to Research Anti-Indic Sentiment","c":"","s":"","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Global Network Foundation","a":50000,"p":"Education SEALA Scholarship Fund","c":"Atlanta","s":"GA","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Hindu American Foundation","a":100000,"p":"Educational and advocacy organization","c":"Washington","s":"DC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Hindu Society of NC","a":50000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Hindu Society of NC","a":60000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Hindu Society of NC","a":1250000,"p":"Meet religious, cultural, linguistic and spiritual needs, promote India's rich heritage","c":"Morrisville","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Hindu University of America","a":300000,"p":"Sustenance Funds for the rejuvination and revitalization of the University","c":"Orlando","s":"FL","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"HinduAction","a":50000,"p":"Education, Advocacy and Leadership","c":"West Chester","s":"OH","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Pratham USA","a":50000,"p":"Education in India","c":"Houston","s":"TX","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Pratham USA","a":50000,"p":"Education in India","c":"Houston","s":"TX","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Raleigh Rescue Mission","a":50000,"p":"Serving those experiencing homelessness","c":"Raleigh","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Ramakrishna Vedenta Society","a":75000,"p":"Support religious and humantarian activities","c":"Morrisville","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Rishihood Foundation","a":600000,"p":"Restricted Grant - development & up-fitting of Phase 2 of a Student Resident Facility supporting Rishihood University","c":"","s":"","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Schwab Charitable Fund","a":150000,"p":"General support","c":"San Francisco","s":"CA","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Sri Venkateswara Temple of NC","a":150000,"p":"Hindu temple and uphold Hindu religious activities","c":"Cary","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Texas Hindu Campsite Inc","a":100000,"p":"Building a better future for Hindu youth","c":"Sugar Land","s":"TX","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"The Carying Place Inc","a":25000,"p":"Help & equip underpriviledged families in Wake County","c":"Cary","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Vaishnav Samaj orf RTP Inc","a":50000,"p":"Support religious and humantarian activities","c":"Cary","s":"NC","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Vivekananda Yoga University (VaYU)","a":150000,"p":"Provide yoga education and research at the graduate level.","c":"Los Angeles","s":"CA","e":"","o":"202543109349101209","record_type":"named_recipient"},{"y":2024,"r":"Vivekananda Yoga University (VaYU)","a":100000,"p":"Provide yoga education and research at the graduate level.","c":"Los Angeles","s":"CA","e":"","o":"202543109349101209","record_type":"named_recipient"}]};window.LEDGER_MERGES=["GLOBAL NETWORK FOUNDATION","CARYING PLACE"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

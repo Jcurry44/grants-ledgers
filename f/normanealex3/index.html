@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="NORMANEALE_DATA" data-slug="normanealex3" data-n="67" data-grand="17789000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="26 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="NORMANEALE_DATA" data-slug="normanealex3" data-n="67" data-grand="17789000" data-recsub="All five years" data-running="to the dollar, five years running." data-names="26 as-filed names" data-rows-embedded="67" data-rows-total="67">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 67 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">25</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $17,789,000, equals Part I line 25(d), $17,789,000 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.NORMANEALE_DATA={"meta":{"foundation":"Norman E Alexander Family G Foundation","ein":"26-4413332","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":67,"grand_total":17789000,"tieout":{"2020":{"object_id":"202131349349102313","grant_count":14,"grant_sum":5578000,"line25_col_d":5578000,"status":"PASS"},"2021":{"object_id":"202203199349103965","grant_count":14,"grant_sum":2613000,"line25_col_d":2613000,"status":"PASS"},"2022":{"object_id":"202303189349104650","grant_count":11,"grant_sum":3373000,"line25_col_d":3373000,"status":"PASS"},"2023":{"object_id":"202443169349100319","grant_count":13,"grant_sum":2650000,"line25_col_d":2650000,"status":"PASS"},"2024":{"object_id":"202533159349101828","grant_count":15,"grant_sum":3575000,"line25_col_d":3575000,"status":"PASS"}}},"grants":[{"y":2020,"r":"Jewish Museum","a":123000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Columbia University Libraries","a":100000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"American Jewish Committee","a":2020000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"UJA Federation NY","a":2500000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Island Harvest","a":20000,"p":"General","c":"Melville","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Barnard College","a":175000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Hospital for Special Surgery","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"The Jewish Week","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Caramoor Center for Music and the A","a":500000,"p":"General","c":"Katonah","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"HIAS Inc","a":5000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Long Island Cares Inc","a":10000,"p":"General","c":"Freeport","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Maureen's Haven","a":5000,"p":"General","c":"Riverhead","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"Metropolitan NY Coordinating Comm","a":5000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2020,"r":"American Jewish Committee","a":15000,"p":"General","c":"New York","s":"NY","e":"","o":"202131349349102313","record_type":"named_recipient"},{"y":2021,"r":"Jewish Museum","a":73000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"American Jewish Committee","a":70000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"UJA Federation NY","a":115000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Barnard College","a":150000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Hospital for Special Surgery","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Caramoor Center for Music and the A","a":515000,"p":"General","c":"Katonah","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"HIAS Inc","a":15000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Long Island Cares Inc","a":20000,"p":"General","c":"Freeport","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Musicares Foundation Inc","a":5000,"p":"General","c":"Santa Monica","s":"CA","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Columbia Barnard Hillel","a":1500000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Jazz Foundation of America","a":5000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"The Medici Archive Project Inc","a":40000,"p":"General","c":"Babylon","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"Bennington County Coalit for Homele","a":5000,"p":"General","c":"Bennington","s":"VT","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2021,"r":"JTA-MTL","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202203199349103965","record_type":"named_recipient"},{"y":2022,"r":"Jewish Museum","a":73000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Columbia University Libraries","a":1500000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"American Jewish Committee","a":570000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"UJA Federation NY","a":350000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Barnard College","a":650000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Hospital for Special Surgery","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Caramoor Center for Music and the A","a":40000,"p":"General","c":"Katonah","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Long Island Cares Inc","a":25000,"p":"General","c":"Freeport","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"Metropolitan NY Coordinating Comm","a":25000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"The Medici Archive Project Inc","a":40000,"p":"General","c":"Babylon","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2022,"r":"JTA-MJL","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202303189349104650","record_type":"named_recipient"},{"y":2023,"r":"Jewish Museum","a":75000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"American Jewish Committee","a":580000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"UJA Federation NY","a":565000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Barnard College","a":650000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Hospital for Special Surgery","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"The Jewish Week","a":75000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Caramoor Center for Music and the A","a":15000,"p":"General","c":"Katonah","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Long Island Cares Inc","a":15000,"p":"General","c":"Freeport","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Columbia Barnard Hillel","a":60000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Cityparks Fdtn for Central Park","a":10000,"p":"General","c":"New York","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Hillel International","a":500000,"p":"General","c":"Washington","s":"DC","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Long Island Music Hall of Fame","a":15000,"p":"General","c":"Stony Brook","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2023,"r":"Medici Archive Project Inc","a":40000,"p":"General","c":"Babylon","s":"NY","e":"","o":"202443169349100319","record_type":"named_recipient"},{"y":2024,"r":"Jewish Museum","a":575000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"American Jewish Committee","a":675000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"UJA Federation NY","a":600000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Barnard College","a":650000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Hospital for Special Surgery","a":50000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"The Jewish Week","a":75000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Long Island Cares Inc","a":15000,"p":"General","c":"Freeport","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Metropolitan NY Coordinating Comm","a":15000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Musicares Foundation Inc","a":10000,"p":"General","c":"Santa Monica","s":"CA","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Columbia Barnard Hillel","a":325000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Cityparks Fdtn for Central Park","a":10000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Medici Archive Project Inc","a":45000,"p":"General","c":"Babylon","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Institut for the study of Global An","a":510000,"p":"General","c":"Miami Beach","s":"FL","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Parents for Peace","a":10000,"p":"General","c":"Brookline","s":"MA","e":"","o":"202533159349101828","record_type":"named_recipient"},{"y":2024,"r":"Jazz Foundation of America","a":10000,"p":"General","c":"New York","s":"NY","e":"","o":"202533159349101828","record_type":"named_recipient"}]};window.LEDGER_MERGES=["MEDICI ARCHIVE PROJECT"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Island Harvest":"Basic needs & response","Long Island Cares Inc":"Basic needs & response","Musicares Foundation Inc":"Arts & culture","Jazz Foundation of America":"Nonprofit capacity & transitions","The Medici Archive Project Inc":"Arts & culture","Medici Archive Project Inc":"Arts & culture"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

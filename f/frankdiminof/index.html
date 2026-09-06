@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="FRANKDIMIN_DATA" data-slug="frankdiminof" data-n="33" data-grand="24895088" data-recsub="All four years" data-running="to the dollar, four years running." data-names="19 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="FRANKDIMIN_DATA" data-slug="frankdiminof" data-n="33" data-grand="24895088" data-recsub="All four years" data-running="to the dollar, four years running." data-names="19 as-filed names" data-rows-embedded="33" data-rows-total="33">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 / 4 years reconcile · Δ $0</div>
+  <div class="side-foot">4 of 4 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4/4 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 33 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">19</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $24,895,088, equals Part I line 25(d), $24,895,088 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -419,7 +427,8 @@
 </div>
 <script>
 window.FRANKDIMIN_DATA={"meta":{"foundation":"Frank Dimino Family Foundation","ein":"83-1151610","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024],"grant_count":33,"grand_total":24895088,"tieout":{"2021":{"object_id":"202310269349100106","grant_count":4,"grant_sum":6700000,"line25_col_d":6700000,"status":"PASS"},"2022":{"object_id":"202520169349100112","grant_count":9,"grant_sum":5237806,"line25_col_d":5237806,"status":"PASS"},"2023":{"object_id":"202511219349101701","grant_count":9,"grant_sum":6045000,"line25_col_d":6045000,"status":"PASS"},"2024":{"object_id":"202533169349102198","grant_count":11,"grant_sum":6912282,"line25_col_d":6912282,"status":"PASS"}}},"grants":[{"y":2021,"r":"JOE DIMAGGIO CHILDREN'S HOSPITAL FOUNDATION","a":2000000,"p":"GENERAL CHARITABLE PURPOSES","c":"HOLLYWOOD","s":"FL","e":"","o":"202310269349100106","record_type":"named_recipient"},{"y":2021,"r":"PALM BEACH STATE COLLEGE FOUNDATION","a":2000000,"p":"GENERAL CHARITABLE PURPOSES","c":"LAKE WORTH","s":"FL","e":"","o":"202310269349100106","record_type":"named_recipient"},{"y":2021,"r":"THE KING'S ACADEMY","a":1700000,"p":"GENERAL CHARITABLE PURPOSES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202310269349100106","record_type":"named_recipient"},{"y":2021,"r":"JUPITER MEDICAL CENTER","a":1000000,"p":"GENERAL CHARITABLE PURPOSES","c":"JUPITER","s":"FL","e":"","o":"202310269349100106","record_type":"named_recipient"},{"y":2022,"r":"JOE DIMAGGIO CHILDREN'S HOSPITAL FOUNDATION","a":1500000,"p":"GENERAL CHARITABLE PURPOSES","c":"HOLLYWOOD","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"PALM BEACH STATE COLLEGE FOUNDATION","a":1700000,"p":"GENERAL CHARITABLE PURPOSES","c":"LAKE WORTH","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"ITALIAN AMERICAN SPORTS COUNCIL OF ROCHESTER","a":150000,"p":"GENERAL CHARITABLE PURPOSES","c":"ROCHESTER","s":"NY","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"NICKLAUS CHILDREN'S HEALTH CARE FOUNDATION","a":1500000,"p":"GENERAL CHARITABLE PURPOSES","c":"NORTH PALM BEACH","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"MYCLINIC","a":100000,"p":"GENERAL CHARITABLE PURPOSES","c":"JUPITER","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"NEIGBORHOOD STUDIOS OF FAIRFIELD COUNTY","a":150000,"p":"GENERAL CHARITABLE PURPOSES","c":"BRIDGEPOINT","s":"CT","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"OLIVER PATCH PROJECT","a":25000,"p":"GENERAL CHARITABLE PURPOSES","c":"MIAMI","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"THE BOYS AND GIRLS CLUBS OF PALM BEACH COUNTY","a":100000,"p":"GENERAL CHARITABLE PURPOSES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2022,"r":"EDUCATION FOUNDATION OF PALM BEACH COUNTY","a":12806,"p":"GENERAL CHARITABLE PURPOSES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202520169349100112","record_type":"named_recipient"},{"y":2023,"r":"THE BUHITE-DIMINO CORRIDOR FOR ORAL AND MAXILLOFACIAL HEALTH INC","a":100000,"p":"GENERAL CHARITABLE PURPOSES","c":"ROCHESTER","s":"NY","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"JOE DIMAGGIO CHILDREN'S HOSPITAL FOUNDATION","a":1500000,"p":"GENERAL CHARITABLE PURPOSES","c":"HOLLYWOOD","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"LOGGERHEAD MARINE LIFE CENTERINC","a":150000,"p":"GENERAL CHARITABLE PURPOSES","c":"JUPITER","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"NEIGBORHOOD STUDIOS OF FAIRFIELD COUNTY","a":95000,"p":"GENERAL CHARITABLE PURPOSES","c":"BRIDGEPOINT","s":"CT","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"NICKLAUS CHILDREN'S HEALTH CARE FOUNDATION","a":26000,"p":"GENERAL CHARITABLE PURPOSES","c":"NORTH PALM BEACH","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"OLIVER PATCH PROJECT","a":50000,"p":"GENERAL CHARITABLE PURPOSES","c":"MIAMI","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"PALM BEACH STATE COLLEGE FOUNDATION","a":1700000,"p":"GENERAL CHARITABLE PURPOSES","c":"LAKE WORTH","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"THE KING'S ACADEMY","a":2124000,"p":"GENERAL CHARITABLE PURPOSES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2023,"r":"ALUMNI ASSOCIATION OF NAZARETH COLLEGE OF ROCHESTER","a":300000,"p":"GENERAL CHARITABLE PURPOSES","c":"ROCHESTER","s":"NY","e":"","o":"202511219349101701","record_type":"named_recipient"},{"y":2024,"r":"ALUMNI ASSOCIATION OF NAZARETH COLLEGE OF ROCHESTER","a":300000,"p":"GENERAL CHARITABLE PURPOSES","c":"ROCHESTER","s":"NY","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"JOE DIMAGGIO CHILDREN'S HOSPITAL FOUNDATION","a":1500000,"p":"GENERAL CHARITABLE PURPOSES","c":"HOLLYWOOD","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"NICKLAUS CHILDREN'S HEALTH CARE FOUNDATION","a":326000,"p":"GENERAL CHARITABLE PURPOSES","c":"NORTH PALM BEACH","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"OLIVER PATCH PROJECT","a":100000,"p":"GENERAL CHARITABLE PURPOSES","c":"MIAMI","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"PALM BEACH STATE COLLEGE FOUNDATION","a":1400000,"p":"GENERAL CHARITABLE PURPOSES","c":"LAKE WORTH","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"THE KING'S ACADEMY","a":2100000,"p":"GENERAL CHARITABLE PURPOSES","c":"WEST PALM BEACH","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"MY CLINIC","a":275000,"p":"GENERAL CHARITABLE PURPOSES","c":"JUPITER","s":"FL","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"NEIGHBORHOOD STUDIOS OF FAIRFIELD COUNTY INC","a":80000,"p":"GENERAL CHARITABLE PURPOSES","c":"BRIDGEPORT","s":"CT","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"OHLONE COLLEGE FOUNDATION","a":200000,"p":"GENERAL CHARITABLE PURPOSES","c":"FREMONT","s":"CA","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"ITALIAN AMERICAN COMMUNITY CENTER INC","a":580282,"p":"GENERAL CHARITABLE PURPOSES","c":"ROCHESTER","s":"NY","e":"","o":"202533169349102198","record_type":"named_recipient"},{"y":2024,"r":"GENESEE VALLEY CONSERVANCY INC","a":51000,"p":"GENERAL CHARITABLE PURPOSES","c":"GENESEO","s":"NY","e":"","o":"202533169349102198","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"OLIVER PATCH PROJECT":"Basic needs & response","ITALIAN AMERICAN COMMUNITY CENTER INC":"Arts & culture","GENESEE VALLEY CONSERVANCY INC":"Environment & animals"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

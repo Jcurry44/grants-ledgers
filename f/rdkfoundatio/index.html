@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="RDKFOUNDAT_DATA" data-slug="rdkfoundatio" data-n="50" data-grand="44932700" data-recsub="All five years" data-running="to the dollar, five years running." data-names="48 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="RDKFOUNDAT_DATA" data-slug="rdkfoundatio" data-n="50" data-grand="44932700" data-recsub="All five years" data-running="to the dollar, five years running." data-names="48 as-filed names" data-rows-embedded="50" data-rows-total="50">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 50 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">46</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $44,932,700, equals Part I line 25(d), $44,932,700 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.RDKFOUNDAT_DATA={"meta":{"foundation":"Rdk Foundation","ein":"39-1524311","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":50,"grand_total":44932700,"tieout":{"2020":{"object_id":"202133149349101978","grant_count":46,"grant_sum":1457200,"line25_col_d":1457200,"status":"PASS"},"2021":{"object_id":"202331329349102448","grant_count":1,"grant_sum":1992800,"line25_col_d":1992800,"status":"PASS"},"2022":{"object_id":"202421359349103327","grant_count":1,"grant_sum":12055000,"line25_col_d":12055000,"status":"PASS"},"2023":{"object_id":"202511349349104706","grant_count":1,"grant_sum":12381700,"line25_col_d":12381700,"status":"PASS"},"2024":{"object_id":"202631329349103198","grant_count":1,"grant_sum":17046000,"line25_col_d":17046000,"status":"PASS"}}},"grants":[{"y":2020,"r":"PENLAND SCHOOL OF CRAFTS","a":10000,"p":"GENERAL OPERATING","c":"PENLAND","s":"NC","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"NATIONAL COUNCIL ON EDUCATION FOR THE","a":5000,"p":"GENERAL OPERATING","c":"BOULDER","s":"CO","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"SMITH COLLEGE","a":20000,"p":"GENERAL OPERATING","c":"NORTHHAMPTON","s":"ME","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"JOHN MICHAEL KOHLER ARTS CENTER","a":160000,"p":"GENERAL OPERATING","c":"SHEBOYGAN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS ON FRED SMITH WISCONSIN CONCRETE PARK","a":50000,"p":"GENERAL SUPPORT","c":"PHILLIPS","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"INTUIT THE CENTER FOR INTUITIVE AND OUTS","a":3000,"p":"GENERAL OPERATING","c":"CHICAGO","s":"IL","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"PLYMOUTH ARTS FOUNDATION","a":10000,"p":"GENERAL OPERATING","c":"Plymouth","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN CRAFT COUNCIL","a":7000,"p":"GENERAL OPERATING","c":"Minneapolis","s":"MN","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"PECATONICA FOUNDATION","a":55000,"p":"GENERAL OPERATING","c":"JANESVILLE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"NORTHERN CLAY CENTER","a":3000,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"LAKESHORE CHORALE","a":3500,"p":"GENERAL OPERATING","c":"SHEBOYGAN FALLS","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE INSTITUTE OF ART AND DESIGN","a":25000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"ARTS LARGE","a":15000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE BALLET","a":2000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE REPERTORY THEATRE","a":10000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"NICHOLLS STATE UNIVERSITY","a":10000,"p":"GENERAL OPERATING","c":"THIBODAUX","s":"LA","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"TEN CHIMNEYS FOUNDATION","a":5000,"p":"GENERAL OPERATING","c":"GENESEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"CREATION & PRESERVATION PARTNERS","a":600000,"p":"GENERAL OPERATING","c":"SHEBOYGAN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MONROE COUNTY HISTORICAL SOCIETY","a":40000,"p":"GENERAL OPERATING","c":"Monroe","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"EDGEWOOD COLLEGE","a":50000,"p":"GENERAL OPERATING","c":"MADISON","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"AMERICAN PLAYERS THEATRE","a":25000,"p":"GENERAL OPERATING","c":"SPRING GREEN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"THEATER FOR YOUNG AUDIENCES","a":4000,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF SP DINSMOOR'S GARDEN OF EDE","a":10000,"p":"GENERAL OPERATING","c":"LUCAS","s":"KS","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"GEORGES RIVER LAND TRUST","a":45000,"p":"GENERAL OPERATING","c":"ROCKLAND","s":"ME","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"RENAISSANCE THEATERWORKS","a":1500,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"UPAF","a":5000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"CALIFORNIA STATE UNIVERSITY","a":10000,"p":"GENERAL OPERATING","c":"Los Angeles","s":"CA","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"ALDO LEOPOLD FOUNDATION","a":25000,"p":"GENERAL OPERATING","c":"Baraboo","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"COLUMBUS STATE UNIVERSITY","a":15000,"p":"GENERAL OPERATING","c":"COLUMBUS","s":"GA","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"WISCONSIN ACADEMY OF SCIENCES ARTS A","a":10000,"p":"GENERAL OPERATING","c":"Madison","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"SHEBOYGAN SYMPHONY ORCHESTRA","a":10000,"p":"GENERAL OPERATING","c":"SHEBOYGAN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"SHEBOYGAN THEATRE COMPANY","a":3000,"p":"GENERAL OPERATING","c":"SHEBOYGAN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"ARTISTS WORKING IN EDUCATION","a":10000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"ABOVE AND BEYOND CHILDREN'S MUSEUM","a":2700,"p":"GENERAL OPERATING","c":"Sheboygan","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"ARTS WISCONSIN","a":1000,"p":"GENERAL OPERATING","c":"MADISON","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"WALKER ART CENTER","a":2000,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"RACINE ART MUSEUM","a":7500,"p":"GENERAL OPERATING","c":"RACINE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MECIKALSKI STOVEWOOD FOUNDATION","a":5000,"p":"GENERAL OPERATING","c":"Kohler","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF PRAIRIE MOON","a":40000,"p":"GENERAL OPERATING","c":"FOUNTAIN CITY","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"WISCONSIN HISTORICAL FOUNDATION","a":60000,"p":"GENERAL OPERATING","c":"MADISON","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"WOODLAND PATTERN","a":15000,"p":"GENERAL OPERATING","c":"MILWAUKEE","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"LAWRENCE UNIVERSITY","a":30000,"p":"GENERAL OPERATING","c":"Appleton","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"MUSEUM OF WISCONSIN ART","a":15000,"p":"GENERAL OPERATING","c":"West Bend","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"VOLLIS SIMPSON WHIRLIGIG PARK AND MUS","a":10000,"p":"GENERAL OPERATING","c":"Wilson","s":"NC","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"SPRINGFIELD FOUNDATION","a":8000,"p":"GENERAL OPERATING","c":"SPRINGFIELD","s":"OH","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2020,"r":"STEPHANIE H WEILL CENTER FOR THE PERF","a":4000,"p":"GENERAL OPERATING","c":"SHEBOYGAN","s":"WI","e":"","o":"202133149349101978","record_type":"named_recipient"},{"y":2021,"r":"SEE ATTACHED C/O US BANK","a":1992800,"p":"GENERAL OPERATING","c":"","s":"","e":"","o":"202331329349102448","record_type":"unitemized"},{"y":2022,"r":"SEE ATTACHED","a":12055000,"p":"GENERAL OPERATING","c":"","s":"","e":"","o":"202421359349103327","record_type":"unitemized"},{"y":2023,"r":"SEE ATTACHED","a":12381700,"p":"GENERAL OPERATING","c":"","s":"","e":"","o":"202511349349104706","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED","a":17046000,"p":"GENERAL OPERATING","c":"","s":"","e":"","o":"202631329349103198","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

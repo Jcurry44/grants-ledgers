@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="ZORICHFAMI_DATA" data-slug="zorichfamily" data-n="93" data-grand="17579871" data-recsub="All five years" data-running="to the dollar, five years running." data-names="76 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="ZORICHFAMI_DATA" data-slug="zorichfamily" data-n="93" data-grand="17579871" data-recsub="All five years" data-running="to the dollar, five years running." data-names="76 as-filed names" data-rows-embedded="93" data-rows-total="93">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 93 filed rows</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">54</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $17,579,871, equals Part I line 25(d), $17,579,871 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -426,7 +434,8 @@
 </div>
 <script>
 window.ZORICHFAMI_DATA={"meta":{"foundation":"Zorich Family Foundation","ein":"76-0664404","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":93,"grand_total":17579871,"tieout":{"2020":{"object_id":"202113029349101016","grant_count":1,"grant_sum":2930250,"line25_col_d":2930250,"status":"PASS"},"2021":{"object_id":"202233079349101138","grant_count":1,"grant_sum":3460343,"line25_col_d":3460343,"status":"PASS"},"2022":{"object_id":"202343199349107179","grant_count":27,"grant_sum":3283117,"line25_col_d":3283117,"status":"PASS"},"2023":{"object_id":"202500349349100740","grant_count":32,"grant_sum":3702828,"line25_col_d":3702828,"status":"PASS"},"2024":{"object_id":"202503219349102535","grant_count":32,"grant_sum":4203333,"line25_col_d":4203333,"status":"PASS"}}},"grants":[{"y":2020,"r":"See Statement Attached","a":2930250,"p":"Unrestricted Use by Charity","c":"","s":"","e":"","o":"202113029349101016","record_type":"unitemized"},{"y":2021,"r":"See Statement Attached","a":3460343,"p":"Unrestricted Use by Charity","c":"","s":"","e":"","o":"202233079349101138","record_type":"unitemized"},{"y":2022,"r":"NAVY SEAL FOUNDATION","a":10000,"p":"GENERAL CHARITABLE PURPOSE","c":"VIRGINIA BEACH","s":"VA","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"UNITED WAY","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"AUSTIN","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"CHILD ADVOCATE","a":15000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"ST MARTIN EPISCOPAL CHURCH","a":550000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"SWITCH ENERGY ALLIANCE","a":33000,"p":"GENERAL CHARITABLE PURPOSE","c":"AUSTIN","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"HOPE AND HEALING CENTER & INSTITUTE","a":375000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"PRAGER U","a":50000,"p":"GENERAL CHARITABLE PURPOSE","c":"SHERMAN OAKS","s":"CA","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"MEMORIAL HERMANN FOUNDATION","a":25000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"STONEY CREEK RANCH","a":9000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"SMALL STEPS NURTURING CENTER","a":12500,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"SIGMA CHI FOUNDATION","a":30000,"p":"GENERAL CHARITABLE PURPOSE","c":"EVANSTON","s":"IL","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"ARMS WIDE ADOPTION SERVICES","a":4500,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"BAYLOR COLLEGE OF MEDICINE","a":1666,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"UC REGENTS","a":30000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"UCSB FOUNDATION","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"SANTA BARBARA","s":"CA","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"ONE GOAL","a":50000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"STAR OF HOPE","a":110000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"HOUSTON FOOD BANK","a":50000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"WATERSTON (KINGDOM GIVING)","a":647451,"p":"GENERAL CHARITABLE PURPOSE","c":"COLORADO SPRINGS","s":"CO","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"ST FRANCIS EPISCOPAL SCHOOL","a":500000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"ASU","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"TEMPE","s":"AZ","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"CONVENTION OF STATES","a":50000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"FREEDOM FOUNDATION OF TX","a":25000,"p":"GENERAL CHARITABLE PURPOSE","c":"RICHARDSON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"HALFTIME INSTITUTE","a":25000,"p":"GENERAL CHARITABLE PURPOSE","c":"IRVING","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"STAR OF HOPE","a":125000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"SIGMA CHI FOUNDATION","a":5000,"p":"GENERAL CHARITABLE PURPOSE","c":"EVANSTON","s":"IL","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2022,"r":"PLANT WITH PURPOSE","a":50000,"p":"GENERAL CHARITABLE PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202343199349107179","record_type":"named_recipient"},{"y":2023,"r":"Child Advocate","a":15000,"p":"General Charitable Purpose","c":"houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Halftime Institute","a":50000,"p":"General Charitable Purpose","c":"Irving","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Hope and Healing Center & Institute","a":350000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Memorial Hermann Foundation","a":50000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"One Goal","a":50000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Prager U","a":50000,"p":"General Charitable Purpose","c":"sherman oaks","s":"CA","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Small steps nurturing Center","a":25000,"p":"General Charitable Purpose","c":"houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"St Francis Episcopal School","a":500000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"St Martin Episcopal Church","a":600000,"p":"General Charitable Purpose","c":"houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Star of Hope","a":60000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Star of Hope","a":175000,"p":"General Charitable Purpose","c":"houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Switch Energy Alliance","a":100000,"p":"General Charitable Purpose","c":"Austin","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"UCSB Foundation","a":225000,"p":"General Charitable Purpose","c":"Santa Barbara","s":"CA","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"United Way","a":135000,"p":"General Charitable Purpose","c":"austin","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Waterston (Kingdom Giving)","a":501328,"p":"General Charitable Purpose","c":"Colorado Springs","s":"CO","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"The Blue Bird Circle","a":10000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Brain & Behavior","a":105000,"p":"General Charitable Purpose","c":"New York","s":"NY","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Young Life","a":200000,"p":"General Charitable Purpose","c":"Harlan","s":"IA","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Cystic Fibrosis Foundation","a":30000,"p":"General Charitable Purpose","c":"Maryland","s":"MD","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Prostate Cancer Fund","a":10000,"p":"General Charitable Purpose","c":"Centennial","s":"CO","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Yellowstone Academy","a":45000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"American Heart Association","a":2000,"p":"General Charitable Purpose","c":"Dallas","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Camp Allen","a":10000,"p":"General Charitable Purpose","c":"Navasota","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"A Shelter for Cancer Families","a":2500,"p":"General Charitable Purpose","c":"HOuston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Friends of Wycliffe Hall","a":5000,"p":"General Charitable Purpose","c":"Winter Park","s":"FL","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"ProUnitas","a":100000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"New horizans Foundation","a":100000,"p":"General Charitable Purpose","c":"Colorado Springs","s":"CO","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"MD Anderson Cancer Center","a":100000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"One Mind","a":40000,"p":"General Charitable Purpose","c":"Rutherford","s":"CA","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Santa Barbara Mental Wellness Center","a":47500,"p":"General Charitable Purpose","c":"Santa Barbara","s":"CA","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"The Sergio & Angela Garcia Foundation","a":4500,"p":"General Charitable Purpose","c":"New York","s":"NY","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2023,"r":"Girl Scouts of San Jacinto Council","a":5000,"p":"General Charitable Purpose","c":"Houston","s":"TX","e":"","o":"202500349349100740","record_type":"named_recipient"},{"y":2024,"r":"BRAIN & BEHAVIOR","a":105000,"p":"GENERAL CHARITABLE PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"CHILD ADVOCATE","a":15000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"CONNECTIVE TALENT","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"COVENANT HOUSE TEXAS","a":300000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"CYSTIC FIBROSIS FOUNDATION","a":35000,"p":"GENERAL CHARITABLE PURPOSE","c":"MARYLAND","s":"MD","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"EMERALD YOUTH FOUNDATION","a":334000,"p":"GENERAL CHARITABLE PURPOSE","c":"KNOXVILLE","s":"TN","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF WYCLIFFE HALL","a":5000,"p":"GENERAL CHARITABLE PURPOSE","c":"WINTER PARK","s":"FL","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"GIRL SCOUTS OF SAN JACINTO COUNCIL","a":10000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"HALFTIME INSTITUTE","a":25000,"p":"GENERAL CHARITABLE PURPOSE","c":"IRVING","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"HOPE AND HEALING CENTER & INSTITUTE","a":400000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"JACK A VICKERS FOUNDATION","a":25000,"p":"GENERAL CHARITABLE PURPOSE","c":"CASTLE ROCK","s":"CO","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"LOVE HAS NO LIMITS","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"DANA POINT","s":"CA","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"MD ANDERSON CANCER CENTER","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"MEADOWS MENTAL HEALTH POLICY INSTITUTE","a":125000,"p":"GENERAL CHARITABLE PURPOSE","c":"AUSTIN","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"MEMORIAL ASSISTANCE MINISTRIES","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"ONE GOAL","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"PLANT WITH PURPOSE","a":150000,"p":"GENERAL CHARITABLE PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"PROUNITAS","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"SAM HOUSTON AREA COUNCIL SCOUTING AMERICA","a":8333,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"SIGMA CHI FOUNDATION","a":30000,"p":"GENERAL CHARITABLE PURPOSE","c":"EVANSTON","s":"IL","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"SMALL STEPS NURTURING CENTER","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"ST FRANCIS EPISCOPAL SCHOOL","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"ST MARTIN EPISCOPAL CHURCH","a":600000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"ST THOMAS HIGH SCHOOL","a":1000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"STAR OF HOPE","a":300000,"p":"GENERAL CHARITABLE PURPOSE","c":"HOUSTON","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"SWITCH ENERGY ALLIANCE","a":100000,"p":"GENERAL CHARITABLE PURPOSE","c":"AUSTIN","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"THE GOODNESS WEB","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"WAYLAND","s":"MA","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"THOMAS S WATSON SUPPORTING FOUNDATION","a":15000,"p":"GENERAL CHARITABLE PURPOSE","c":"OVERLAND PARK","s":"KS","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"UCSB FOUNDATION","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"SANTA BARBARA","s":"CA","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY","a":110000,"p":"GENERAL CHARITABLE PURPOSE","c":"AUSTIN","s":"TX","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"WATSON YOUTH GOLF FOUNDATION","a":10000,"p":"GENERAL CHARITABLE PURPOSE","c":"OVERLAND PARK","s":"KS","e":"","o":"202503219349102535","record_type":"named_recipient"},{"y":2024,"r":"YOUNG LIFE","a":200000,"p":"GENERAL CHARITABLE PURPOSE","c":"HARLAN","s":"IA","e":"","o":"202503219349102535","record_type":"named_recipient"}]};window.LEDGER_MERGES=["UNITED WAY","CHILD ADVOCATE","ST MARTIN EPISCOPAL CHURCH","SWITCH ENERGY ALLIANCE","HOPE AND HEALING CENTER INSTITUTE","PRAGER U","MEMORIAL HERMANN FOUNDATION","SMALL STEPS NURTURING CENTER","UCSB FOUNDATION","ONE GOAL","STAR OF HOPE","WATERSTON","ST FRANCIS EPISCOPAL SCHOOL","HALFTIME INSTITUTE","BRAIN BEHAVIOR","YOUNG LIFE","CYSTIC FIBROSIS FOUNDATION","FRIENDS OF WYCLIFFE HALL","PROUNITAS","MD ANDERSON CANCER CENTER","GIRL SCOUTS OF SAN JACINTO COUNCIL"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"NAVY SEAL FOUNDATION":"Arts & culture","UNITED WAY":"Nonprofit capacity & transitions","United Way":"Nonprofit capacity & transitions","SWITCH ENERGY ALLIANCE":"Environment & animals","Switch Energy Alliance":"Environment & animals","MEMORIAL HERMANN FOUNDATION":"Health & wellbeing","Memorial Hermann Foundation":"Health & wellbeing","SMALL STEPS NURTURING CENTER":"Education & youth","Small steps nurturing Center":"Education & youth","SIGMA CHI FOUNDATION":"Education & youth","The Blue Bird Circle":"Health & wellbeing","Brain & Behavior":"Health & wellbeing","BRAIN & BEHAVIOR":"Health & wellbeing","Young Life":"Education & youth","YOUNG LIFE":"Education & youth","Cystic Fibrosis Foundation":"Health & wellbeing","CYSTIC FIBROSIS FOUNDATION":"Health & wellbeing","American Heart Association":"Health & wellbeing","ProUnitas":"Education & youth","PROUNITAS":"Education & youth","One Mind":"Health & wellbeing","The Sergio & Angela Garcia Foundation":"Nonprofit capacity & transitions","Girl Scouts of San Jacinto Council":"Education & youth","GIRL SCOUTS OF SAN JACINTO COUNCIL":"Education & youth","COVENANT HOUSE TEXAS":"Basic needs & response","MEMORIAL ASSISTANCE MINISTRIES":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

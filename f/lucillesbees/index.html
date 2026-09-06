@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="LUCILLESBE_DATA" data-slug="lucillesbees" data-n="71" data-grand="55382157" data-recsub="All five years" data-running="to the dollar, five years running." data-names="27 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="LUCILLESBE_DATA" data-slug="lucillesbees" data-n="71" data-grand="55382157" data-recsub="All five years" data-running="to the dollar, five years running." data-names="27 as-filed names" data-rows-embedded="71" data-rows-total="71">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 71 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">24</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $55,382,157, equals Part I line 25(d), $55,382,157 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.LUCILLESBE_DATA={"meta":{"foundation":"Lucille S Beeson Charitable Remainder 66 1055001761","ein":"72-6278911","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":71,"grand_total":55382157,"tieout":{"2021":{"object_id":"202241309349102684","grant_count":13,"grant_sum":11598208,"line25_col_d":11598208,"status":"PASS"},"2022":{"object_id":"202333139349100143","grant_count":13,"grant_sum":10504953,"line25_col_d":10504953,"status":"PASS"},"2023":{"object_id":"202403169349101225","grant_count":13,"grant_sum":10356248,"line25_col_d":10356248,"status":"PASS"},"2024":{"object_id":"202513039349101001","grant_count":15,"grant_sum":10948792,"line25_col_d":10948792,"status":"PASS"},"2025":{"object_id":"202621259349102877","grant_count":17,"grant_sum":11973956,"line25_col_d":11973956,"status":"PASS"}}},"grants":[{"y":2021,"r":"JIMMIE HALE MISSION","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY FOUNDATION OF GREATER","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"THE SALVATION ARMY","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"CANTERBURY UNITED METHODIST CHURCH","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"BIRMINGHAM HUMANE SOCIETY","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"GATEWAY AKA GATEWAY INC FORMERLY FAMILY AND CHILD SERVICES","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"UNITED ABILITY INC","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"JUNIOR LEAGUE OF BIRMINGHAM","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"THE BOYS AND GIRLS RANCHES OF AL AKA AL SHERIFF'S YOUTH RANCHES","a":1229410,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"BIRMINGHAM BOTANICAL SOCIETY INC","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"CHRISTIAN SERVICE MISSION INC","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"BIRMINGHAM ZOO INC","a":498723,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2021,"r":"BAPTIST HEALTH FOUNDATIO","a":1229410,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202241309349102684","record_type":"named_recipient"},{"y":2022,"r":"SALVATION ARMY","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"MISSION CHRISTIAN SERVICE","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"THE BIRMINGHAM ZOO INC","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"GREATER BIRMINGHAM HUMANE SOCIETY","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"UNITED ABILITY INC","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"JUNIOR LEAGUE OF BIRMINGHAM ALABAMA INC","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"CANTERBURY UNITED METHODIST CHURCH","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"JIMMIE HALE MISSION","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"BIRMINGHAM BOTANICAL SOCIETY INC","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"BOYS AND GIRLS RANCHES OF ALABAMA","a":1113525,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"GATEWAY FAMILY AND CHILD SERVICES","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"THE COMMUNITY FOUNDATION OF GREATER BIRM","a":451713,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2022,"r":"BAPTIST HEALTH FOUNDATION INC","a":1113525,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202333139349100143","record_type":"named_recipient"},{"y":2023,"r":"SALVATION ARMY","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"THE BIRMINGHAM ZOO INC","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"GREATER BIRMINGHAM HUMANE SOCIETY","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"UNITED ABILITY INC","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"JUNIOR LEAGUE OF BIRMINGHAM ALABAMA INC","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"CANTERBURY UNITED METHODIST CHURCH","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"JIMMIE HALE MISSION","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"BIRMINGHAM BOTANICAL SOCIETY INC","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"CHRISTIAN SERVICE MISSION","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"BOYS AND GIRLS RANCHES OF ALABAMA","a":1097762,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"GATEWAY FAMILY AND CHILD SERVICES","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"THE COMMUNITY FOUNDATION OF GREATER BIRM","a":445319,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2023,"r":"BAPTIST HEALTH FOUNDATION INC","a":1097762,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202403169349101225","record_type":"named_recipient"},{"y":2024,"r":"SALVATION ARMY","a":1160572,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"MISSION CHRISTIAN SERVICE","a":229412,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"BAPTIST HEALTH FOUNDATION INC","a":595046,"p":"GENERAL OPERATING","c":"JACKSON","s":"MS","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"THE BIRMINGHAM ZOO INC","a":470798,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"GREATER BIRMINGHAM HUMANE SOCIETY","a":470798,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"UNITED ABILITY INC","a":1160572,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"JUNIOR LEAGUE OF BIRMINGHAM ALABAMA INC","a":470798,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"CANTERBURY UNITED METHODIST CHURCH","a":1160572,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"JIMMIE HALE MISSION","a":1160572,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"BIRMINGHAM BOTANICAL SOCIETY INC","a":470798,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"CHRISTIAN SERVICE MISSION","a":241386,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"BOYS AND GIRLS RANCHES OF ALABAMA","a":1160572,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"GATEWAY FAMILY AND CHILD SERVICES","a":1160572,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"THE COMMUNITY FOUNDATION OF GREATER BIRM","a":470798,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2024,"r":"BAPTIST HEALTH FOUNDATION INC","a":565526,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202513039349101001","record_type":"named_recipient"},{"y":2025,"r":"SALVATION ARMY","a":1801209,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"MISSION CHRISTIAN SERVICE C/O TRACY HIPPS","a":230709,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"ABILITY INC","a":751748,"p":"GENERAL OPERATING","c":"HOBBS","s":"NM","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"HEALTH FOUNDATION INC","a":637440,"p":"GENERAL OPERATING","c":"NORTH WILKESBORO","s":"NC","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"THE BIRMINGHAM ZOO INC","a":489294,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"GREATER BIRMINGHAM HUMANE SOCIETY","a":489294,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"UNITED ABILITY INC","a":454415,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"JUNIOR LEAGUE OF BIRMINGHAM ALABAMA INC","a":489294,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"CANTERBURY UNITED METHODIST CHURCH","a":1206164,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"JIMMIE HALE MISSION","a":1206164,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"ALABAMA SHERIFFS YOUTH RANCHES INC","a":637440,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"BIRMINGHAM BOTANICAL SOCIETY INC","a":489294,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"CHRISTIAN SERVICE MISSION","a":258585,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"BOYS AND GIRLS RANCHES OF ALABAMA","a":568724,"p":"GENERAL OPERATING","c":"MONTGOMERY","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"GATEWAY FAMILY AND CHILD SERVICES","a":1206164,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"THE COMMUNITY FOUNDATION OF GREATER BIRM","a":489294,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"},{"y":2025,"r":"BAPTIST HEALTH FOUNDATION INC","a":568724,"p":"GENERAL OPERATING","c":"BIRMINGHAM","s":"AL","e":"","o":"202621259349102877","record_type":"named_recipient"}]};window.LEDGER_MERGES=["SALVATION ARMY","CHRISTIAN SERVICE MISSION","BIRMINGHAM ZOO"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

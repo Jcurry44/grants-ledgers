@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="WELLCOMELE_DATA" data-slug="wellcomeleap" data-n="109" data-grand="71452122" data-recsub="All four years" data-running="to the dollar, four years running." data-names="81 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="WELLCOMELE_DATA" data-slug="wellcomeleap" data-n="109" data-grand="71452122" data-recsub="All four years" data-running="to the dollar, four years running." data-names="81 as-filed names" data-rows-embedded="109" data-rows-total="109">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 / 4 years reconcile · Δ $0</div>
+  <div class="side-foot">4 of 4 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4/4 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 109 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">81</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $71,452,122, equals Part XIV, line 3a, $71,452,122 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -419,7 +427,8 @@
 </div>
 <script>
 window.WELLCOMELE_DATA={"meta":{"foundation":"Wellcome Leap","ein":"84-5192069","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2022,2023],"grant_count":109,"grand_total":71452122,"tieout":{"2020":{"object_id":"202232249349101013","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202330419349100228","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202442289349100029","grant_count":1,"grant_sum":480753,"line25_col_d":480753,"status":"PASS"},"2023":{"object_id":"202512259349100911","grant_count":108,"grant_sum":70971369,"line25_col_d":70971369,"status":"PASS"}}},"grants":[{"y":2022,"r":"STRAND THERAPEUTICS INC","a":480753,"p":"FOR USE IN THE DEVELOPMENT OF MRNA TECHNOLOGIES INTENDED TO FACILITATE EXPANDED ACCESS TO LIFE SAVING TREATMENTS","c":"CAMBRIDGE","s":"MA","e":"","o":"202442289349100029","record_type":"named_recipient"},{"y":2023,"r":"ASTAR RESEARCH","a":1096382,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"BAYLOR COLLEGE OF MEDICINE","a":325574,"p":"1KD TRANSITION","c":"HOUSTON","s":"TX","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"BRIGHAM AND WOMEN'S HOSPITAL","a":720696,"p":"MCPSYCH TRANSITION","c":"BOSTON","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"BRINKWORTH DESIGN LTD","a":987457,"p":"1KD TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"CENTILLION TECHNOLOGY","a":1622399,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"CENTILLION TECHNOLOGY","a":1033711,"p":"R3 TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"CENTRAL INSTITUTE OF MENTAL HEALTH","a":30643,"p":"UA","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"CLARIUS MOBILE HEALTH CORP","a":17028,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"COLUMBIA UNIVERSITY","a":961431,"p":"IN UTERO","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"CORNELL UNIVERSITY","a":3428758,"p":"MCPSYCH","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"DANA FARBER","a":930324,"p":"R3","c":"BOSTON","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"DESIGN-ZYME LLC","a":977836,"p":"UA","c":"LAWRENCE","s":"KS","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"DESIGN-ZYME LLC","a":319423,"p":"SEEDLING 12 DZ IMMUNODOMINANCE","c":"LAWRENCE","s":"KS","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"DNA SCRIPT","a":1082816,"p":"R3 TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"DUKE UNIVERSITY","a":37798,"p":"UA","c":"DURHAM","s":"NC","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"EMORY GENOMICS CORE","a":93334,"p":"HOPE","c":"ATLANTA","s":"GA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"EMORY UNIVERSITY","a":874361,"p":"R3","c":"ATLANTA","s":"GA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"FRONTIER BIO CORPORATION","a":273907,"p":"SAVE","c":"HAYWARD","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"GLENCOE SOFTWARE INCORPORATED","a":42305,"p":"DELTA TISSUE","c":"SEATTLE","s":"WA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"GRENDEL GAMES BV","a":1454723,"p":"SAVE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"HARVARD COLLEGE","a":469345,"p":"HOPE TRANSITION","c":"CAMBRIDGE","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"IDE GROUP INC","a":491623,"p":"IN UTERO","c":"NEWTOWN SQUARE","s":"PA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"IMPERIAL COLLEGE LONDON","a":137188,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"KAROLINSKA","a":16287,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"KIDS OPERATING ROOM","a":819910,"p":"SAVE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"KING'S COLLEGE LONDON","a":1479032,"p":"DELTA TISSUE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"LATTICE AUTOMATION INC","a":70982,"p":"R3 TRANSITION","c":"BOSTON","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"LATTICE AUTOMATION INC","a":44812,"p":"R3","c":"BOSTON","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MAKERERE UNIVERSITY HOSPITAL","a":1359990,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MAKERERE UNIVERSITY HOSPITAL","a":269470,"p":"SAVE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MASS INSTITUTE OF TECHNOLOGY","a":120023,"p":"R3","c":"CAMBRIDGE","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MCLEAN HOSPITAL","a":2439181,"p":"MCPSYCH","c":"BELMONT","s":"ME","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MONASH UNIVERSITY","a":397487,"p":"UA","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MOUNT SINAI","a":346045,"p":"UA","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MOUNT SINAI","a":1163235,"p":"MCPSYCH","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"MOUNT SINAI","a":1172540,"p":"MCPSYCH","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"NANYANG TECHNOLOGICAL UNIVERSITY","a":142818,"p":"1KD TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL UNIVERSITY OF SINGAPORE","a":124038,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"NATURAL AND MEDICAL SCIENCES INSTITUTE AT THE UNIVERSITY OF TUBINGEN","a":316703,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"NATURAL AND MEDICAL SCIENCES INSTITUTE AT THE UNIVERSITY OF TUBINGEN","a":1186,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"NIGHTINGALE LABS CORPORATION","a":643120,"p":"IN UTERO","c":"SOLANA BEACH","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"OXFORD UNIVERSITY","a":729966,"p":"MCPSYCH","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"OXFORD UNIVERSITY","a":93070,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"PANLUMINATE INC","a":498697,"p":"DELTA TISSUE TRANSITION","c":"WEST HAVEN","s":"CT","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"PRINCETON UNIVERSITY","a":499301,"p":"MCPSYCH","c":"PRINCETON","s":"NJ","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"PROCEDURAL LEARNING AND SAFETY","a":1948827,"p":"SAVE","c":"BOSTON","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"RARECYTE INC","a":288876,"p":"IN UTERO","c":"SEATTLE","s":"WA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"RIBOPRO BV","a":1988186,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"RIBOPRO BV","a":648325,"p":"R3 TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"RIKEN","a":3708,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"SIBEL HEALTH INC","a":1421622,"p":"SAVE","c":"NILES","s":"IL","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":741347,"p":"SAVE","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":275836,"p":"1KD","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":1217013,"p":"Q4BIO","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":695202,"p":"R3","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":222095,"p":"SAVE","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":1795268,"p":"SAVE","c":"REDWOOD CITY","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"SURGICAL SAFETY TECHNOLOGIES INC","a":425350,"p":"SAVE","c":"NEW YORK","s":"NY","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"THE MACFARLANE BURNET INSTITUTE FOR MEDICAL RESEARCH & PUBLIC HEALTH","a":13168,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"TRESTLE BIOTHERAPEUTICS","a":669484,"p":"HOPE TRANSITION","c":"SAN DIEGO","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSIDAD DE CHILE","a":46799,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY COLLEGE LONDON","a":956646,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY COLLEGE LONDON","a":62353,"p":"UA","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF AUCKLAND","a":64593,"p":"1KD TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF AUCKLAND","a":179654,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF AUCKLAND","a":259680,"p":"SAVE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF BIRMINGHAM","a":231199,"p":"UA","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF BRITISH COLUMBIA","a":142235,"p":"HOPE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA LOS ANGELES","a":161023,"p":"UA","c":"LOS ANGELES","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA LOS ANGELES","a":2123429,"p":"MCPSYCH","c":"LOS ANGELES","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA SAN DIEGO","a":564749,"p":"UA","c":"LA JOLLA","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA IRVINE","a":384244,"p":"HOPE TRANSITION","c":"IRVINE","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA IRVINE","a":1184618,"p":"HOPE","c":"IRVINE","s":"CA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CAMBRIDGE","a":1347014,"p":"DELTA TISSUE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CAMBRIDGE","a":258488,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CAMBRIDGE","a":773181,"p":"Q4BIO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CAMBRIDGE","a":149026,"p":"R3 TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CAPE TOWN","a":1447647,"p":"DELTA TISSUE TRANSITION","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF COPENHAGEN","a":3798,"p":"Q4BIO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF EDINBURGH","a":1122847,"p":"SAVE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF EDINBURGH","a":988530,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF HELSINKI","a":689982,"p":"MCPSYCH","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF LEICESTER","a":163490,"p":"DR","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MANCHESTER","a":755211,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MASS AMHERST","a":372333,"p":"R3","c":"AMHERST","s":"MA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MICHIGAN","a":641454,"p":"DELTA TISSUE","c":"ANN ARBOR","s":"MI","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MICHIGAN","a":655671,"p":"SEEDLING 19 CD INDEX","c":"ANN ARBOR","s":"MI","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NEW SOUTH WALES","a":1078481,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NOTTINGHAM","a":499023,"p":"IN UTERO","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF PENNSYLVANIA","a":97641,"p":"UA","c":"PHILADELPHIA","s":"PA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF PENNSYLVANIA","a":452586,"p":"R3","c":"PHILADELPHIA","s":"PA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF PENNSYLVANIA","a":1084383,"p":"R3 TRANSITION","c":"PHILADELPHIA","s":"PA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF PITTSBURGH","a":766043,"p":"MCPSYCH","c":"PITTSBURGH","s":"PA","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TENNESSEE","a":354559,"p":"MCPSYCH TRANSITION","c":"KNOXVILLE","s":"TN","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TEXAS HOUSTON","a":436362,"p":"UA","c":"HOUSTON","s":"TX","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TEXAS SAN ANTONIO","a":121670,"p":"UA","c":"SAN ANTONIO","s":"TX","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TRENTO","a":90464,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF UTAH","a":144259,"p":"UA","c":"SALT LAKE CITY","s":"UT","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VANDERBILT UNIVERSITY","a":404241,"p":"MCPSYCH TRANSITION","c":"NASHVILLE","s":"TN","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VANDERBILT UNIVERSITY","a":1360448,"p":"MCPSYCH","c":"NASHVILLE","s":"TN","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VANDERBILT UNIVERSITY","a":1292970,"p":"SAVE","c":"NASHVILLE","s":"TN","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VAXELERON HOLDING BV","a":74157,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VETERNA SRL","a":82897,"p":"R3","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"VLP THERAPEUTICS INC","a":353418,"p":"R3","c":"GAITHERSBURG","s":"MD","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"WASHINGTON UNIVERSITY ST LOUIS","a":688740,"p":"IN UTERO","c":"CLAYTON","s":"MO","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"WELLCOME SANGER INSTITUTE","a":2002033,"p":"DELTA TISSUE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"WYSS CENTER FOR BIO AND NEUROENGINEERING","a":830151,"p":"DELTA TISSUE","c":"","s":"","e":"","o":"202512259349100911","record_type":"named_recipient"},{"y":2023,"r":"YALE UNIVERSITY","a":515687,"p":"DELTA TISSUE TRANSITION","c":"NEW HAVEN","s":"CT","e":"","o":"202512259349100911","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"CORNELL UNIVERSITY":"Education & youth","DUKE UNIVERSITY":"Education & youth","EMORY UNIVERSITY":"Education & youth","PRINCETON UNIVERSITY":"Education & youth","UNIVERSITY OF AUCKLAND":"Education & youth","UNIVERSITY OF BRITISH COLUMBIA":"Education & youth","UNIVERSITY OF PITTSBURGH":"Education & youth","VANDERBILT UNIVERSITY":"Education & youth","YALE UNIVERSITY":"Education & youth"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

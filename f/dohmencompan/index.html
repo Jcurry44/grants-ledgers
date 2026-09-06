@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="DOHMENCOMP_DATA" data-slug="dohmencompan" data-n="43" data-grand="26273480" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="DOHMENCOMP_DATA" data-slug="dohmencompan" data-n="43" data-grand="26273480" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names" data-rows-embedded="43" data-rows-total="43">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 43 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">29</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $26,273,480, equals Part I line 25(d), $26,273,480 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.DOHMENCOMP_DATA={"meta":{"foundation":"Dohmen Company Foundation","ein":"35-2317921","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":43,"grand_total":26273480,"tieout":{"2020":{"object_id":"202123169349104572","grant_count":13,"grant_sum":554335,"line25_col_d":554335,"status":"PASS"},"2021":{"object_id":"202203159349102520","grant_count":20,"grant_sum":1686945,"line25_col_d":1686945,"status":"PASS"},"2022":{"object_id":"202313139349100901","grant_count":6,"grant_sum":15028250,"line25_col_d":15028250,"status":"PASS"},"2023":{"object_id":"202442559349100909","grant_count":1,"grant_sum":8402750,"line25_col_d":8402750,"status":"PASS"},"2024":{"object_id":"202512979349101006","grant_count":3,"grant_sum":601200,"line25_col_d":601200,"status":"PASS"}}},"grants":[{"y":2020,"r":"GREATER MILWAUKEE COMMITTEE","a":250000,"p":"LIGHT THE HOAN CAMPAIGN","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":191835,"p":"GENERAL OPERATIONS","c":"CHICAGO","s":"IL","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"SIXTEENTH STREET COMMUNITY HEALTH CENTERS INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"FEEDING AMERICA EASTERN WISCONSIN INC","a":21000,"p":"$1,000 GRATEFUL PLATE FUNDRAISER, $20,000 GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"FONDY FOOD CENTER INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"GREATER MILWAUKEE SYNOD","a":10000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"GEISINGER HEALTH","a":4000,"p":"FRESH FOOD FARMACY FUND","c":"DANVILLE","s":"PA","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":1000,"p":"MATC HEALTHCARE HEROES FUND","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"TEENS GROW GREENS INC","a":1000,"p":"CHEF'S DINNER SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"PEARLS FOR TEEN GIRLS INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY","a":10000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":2500,"p":"SPONSORSHIP","c":"CHICAGO","s":"IL","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2021,"r":"CITY OF MILWAUKEE","a":2500,"p":"SPONSORSHIP FOR BRONZEVILLE WEEK","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"KINSHIP COMMUNITY FOOD CENTER FKA RIVERWEST FOOD PANTRY","a":300000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY SERVINGS INC","a":15000,"p":"GENERAL SUPPORT","c":"JAMAICA PLAIN","s":"MA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"FOODRIGHT INC","a":70000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"GOD'S LOVE WE DELIVER INC","a":1001000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"GREATER MILWAUKEE FOUNDATION INC","a":100000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"HALYARD PARK ASSOCIATION","a":10000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"HEARTLOVE PLACE INC","a":40000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":1945,"p":"GENERAL OPERATIONS","c":"CHICAGO","s":"IL","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":50000,"p":"MATC HEALTHCARE HEROES FUND","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE CENTER FOR INDEPENDENCE FOUNDATION INC","a":60000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE JEWISH FEDERATION INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"OPEN HAND ATLANTA","a":1000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"PEARLS FOR TEEN GIRLS INC","a":2000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"PROJECT ANGEL HEART","a":1000,"p":"GENERAL SUPPORT","c":"DENVER","s":"CO","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"TEENS GROW GREENS INC","a":15000,"p":"CHEF'S DINNER SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY","a":10000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"CERES COMMUNITY PROJECT","a":1000,"p":"GENERAL SUPPORT","c":"SEBASTOPOL","s":"CA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"WESTCARE WISCONSIN INC","a":1000,"p":"GENERAL SUPPORT","c":"LAS VEGAS","s":"NV","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"WISCONSIN WOMENS BUSINESS INITIATIVE CORPORATION","a":2500,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2022,"r":"CITY OF MILWAUKEE","a":5000,"p":"SPONSORSHIP FOR BRONZEVILLE WEEK","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY SERVINGS INC","a":5000,"p":"GENERAL SUPPORT","c":"JAMAICA PLAIN","s":"MA","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"FOOD FOR HEALTH","a":15000000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"PEARLS FOR TEEN GIRLS INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"TEENS GROW GREENS INC","a":15000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"WESTCARE WISCONSIN INC","a":250,"p":"EARTH DAY CLEANUP PROJECT","c":"LAS VEGAS","s":"NV","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2023,"r":"FOOD FOR HEALTH INC","a":8402750,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Milwauke","s":"WI","e":"","o":"202442559349100909","record_type":"named_recipient"},{"y":2024,"r":"Community Initiatives","a":100000,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Oakland","s":"CA","e":"","o":"202512979349101006","record_type":"named_recipient"},{"y":2024,"r":"Food for Health","a":1200,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Milwaukee","s":"WI","e":"","o":"202512979349101006","record_type":"named_recipient"},{"y":2024,"r":"FoodCorps","a":500000,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Portland","s":"OR","e":"","o":"202512979349101006","record_type":"named_recipient"}]};window.LEDGER_MERGES=["FOOD FOR HEALTH"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"TEENS GROW GREENS INC":"Basic needs & response","PEARLS FOR TEEN GIRLS INC":"Education & youth","THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY":"Environment & animals","INNER-CITY COMPUTER STARS FOUNDATION":"Community & economic development","MILWAUKEE JEWISH FEDERATION INC":"Nonprofit capacity & transitions","WESTCARE WISCONSIN INC":"Health & wellbeing","Community Initiatives":"Nonprofit capacity & transitions","FoodCorps":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

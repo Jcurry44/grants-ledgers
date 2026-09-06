@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="BEDFORDFAL_DATA" data-slug="bedfordfalls" data-n="64" data-grand="70845489" data-recsub="All five years" data-running="to the dollar, five years running." data-names="37 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="BEDFORDFAL_DATA" data-slug="bedfordfalls" data-n="64" data-grand="70845489" data-recsub="All five years" data-running="to the dollar, five years running." data-names="37 as-filed names" data-rows-embedded="64" data-rows-total="64">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 64 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">37</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $70,845,489, equals Part I line 25(d), $70,845,489 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.BEDFORDFAL_DATA={"meta":{"foundation":"Bedford Falls Foundation","ein":"52-6834462","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":64,"grand_total":70845489,"tieout":{"2021":{"object_id":"202223159349102882","grant_count":10,"grant_sum":35283000,"line25_col_d":35283000,"status":"PASS"},"2022":{"object_id":"202343189349105724","grant_count":5,"grant_sum":3810000,"line25_col_d":3810000,"status":"PASS"},"2023":{"object_id":"202401349349104650","grant_count":14,"grant_sum":11218310,"line25_col_d":11218310,"status":"PASS"},"2024":{"object_id":"202531339349104153","grant_count":16,"grant_sum":7950173,"line25_col_d":7950173,"status":"PASS"},"2025":{"object_id":"202601879349100565","grant_count":19,"grant_sum":12584006,"line25_col_d":12584006,"status":"PASS"}}},"grants":[{"y":2021,"r":"CHILDREN'S NATIONAL MEDICAL CENTER","a":250000,"p":"NURSING SCHOLARSHIPS AND FACULTY EXPANSION","c":"WASHINGTON","s":"DC","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"JOHN F KENNEDY CENTER FOR THE PERFORMING ARTS","a":1400000,"p":"SUPPORT NATIONAL AUDIENCE ACCESS TO ARTISTIC PROGRAMMING","c":"WASHINGTON","s":"DC","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"JOHNS HOPKINS UNIVERSITY","a":6000000,"p":"TO SUPPORT SPINE SURGERY PROFESSORSHIP AND TO SUPPORT NURSING SCHOLARSHIP AND FACULTY","c":"BALTIMORE","s":"MD","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"SIBLEY MEMORIAL HOSPITAL","a":333000,"p":"SUPPORT FOR NEUROLOGY DEPARTMENT","c":"WASHINGTON","s":"DC","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"THE CATHOLIC UNIVERSITY OF AMERICA","a":14000000,"p":"TO SUPPORT NURSING SCHOLARS PROGRAM","c":"WASHINGTON","s":"DC","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"TRINITY WASHINGTON UNIVERSITY","a":2000000,"p":"TO SUPPORT NURSING SCHOLARSHIP AND FACILITY","c":"WASHINGTON","s":"DC","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF MARYLAND BALTIMORE FOUNDATION INC","a":4400000,"p":"NURSING AND HEALTH EDUCATION","c":"BALTIMORE","s":"MD","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"UVA HEALTH FOUNDATION","a":4000000,"p":"NURSING AND HEALTH EDUCATION","c":"CHARLOTTESVILLE","s":"VA","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"VIRGINIA COMMONWEALTH UNIVERSITY","a":2000000,"p":"NURSING SCHOLARSHIPS","c":"RICHMOND","s":"VA","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2021,"r":"WETA","a":900000,"p":"TO SUPPORT PUBLIC BROADCASTING AND JOURNALISM","c":"ARLINGTON","s":"VA","e":"","o":"202223159349102882","record_type":"named_recipient"},{"y":2022,"r":"HOWARD UNIVERSITY","a":400000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202343189349105724","record_type":"named_recipient"},{"y":2022,"r":"THE CATHOLIC UNIVERSITY OF AMERICA","a":1000000,"p":"TO SUPPORT THE UNIVERSITY","c":"WASHINGTON","s":"DC","e":"","o":"202343189349105724","record_type":"named_recipient"},{"y":2022,"r":"THE NATIONAL CAPITAL POISON CENTER","a":10000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202343189349105724","record_type":"named_recipient"},{"y":2022,"r":"TRINITY WASHINGTON UNIVERSITY","a":2000000,"p":"TO SUPPORT NURSING SCHOLARSHIP AND FACILITY","c":"WASHINGTON","s":"DC","e":"","o":"202343189349105724","record_type":"named_recipient"},{"y":2022,"r":"WETA","a":400000,"p":"TO SUPPORT PUBLIC BROADCASTING AND JOURNALISM","c":"ARLINGTON","s":"VA","e":"","o":"202343189349105724","record_type":"named_recipient"},{"y":2023,"r":"DUQUESNE UNIVERSITY","a":181310,"p":"TO SUPPORT NURSING EDUCATION","c":"PITTSBURGH","s":"PA","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"HOWARD UNIVERSITY","a":512000,"p":"TO SUPPORT NURSING EDUCATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"JOHNS HOPKINS UNIVERSITY","a":250000,"p":"TO SUPPORT NURSING EDUCATION","c":"BALTIMORE","s":"MD","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL CENTER FOR FAMILY PHILANTHROPY","a":10000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"THE CATHOLIC UNIVERSITY OF AMERICA","a":5250000,"p":"TO SUPPORT NURSING EDUCATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"THE GEORGE WASHINGTON UNIVERSITY","a":125000,"p":"TO SUPPORT NURSING EDUCATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"THE NATIONAL CAPITAL POISON CENTER","a":10000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"TRINITY WASHINGTON UNIVERSITY","a":2250000,"p":"TO SUPPORT NURSING EDUCATION","c":"WASHINGTON","s":"DC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MARYLAND BALTIMORE FOUNDATION INC","a":122500,"p":"TO SUPPORT NURSING EDUCATION","c":"BALTIMORE","s":"MD","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NORTH CAROLINA CHAPEL HILL","a":500000,"p":"TO SUPPORT NURSING EDUCATION","c":"CHAPEL HILL","s":"NC","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"UVA HEALTH FOUNDATION","a":250000,"p":"TO SUPPORT NURSING EDUCATION","c":"CHARLOTTESVILLE","s":"VA","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"VILLANOVA UNIVERSITY","a":250000,"p":"TO SUPPORT NURSING EDUCATION","c":"VILLANOVA","s":"PA","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"VIRGINIA COMMONWEALTH UNIVERSITY","a":1107500,"p":"TO SUPPORT NURSING EDUCATION","c":"RICHMOND","s":"VA","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2023,"r":"WETA","a":400000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"ARLINGTON","s":"VA","e":"","o":"202401349349104650","record_type":"named_recipient"},{"y":2024,"r":"ARCHDIOCESE OF WASHINGTON","a":100000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"HYATTSVILLE","s":"MD","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"BOSTON COLLEGE","a":280468,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHESTNUT HILL","s":"MA","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"CHILDREN'S NATIONAL MEDICAL CENTER","a":207115,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"DUQUESNE UNIVERSITY","a":154740,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"PITTSBURGH","s":"PA","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"EMORY UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"ATLANTA","s":"GA","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"GEORGETOWN UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"GREATER WASHINGTON EDUCATIONAL (WETA)","a":400000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"ARLINGTON","s":"VA","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"HOWARD UNIVERSITY","a":950000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"MEDICAL COLLEGE OF VIRGINIA (VCU)","a":1000000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"RICHMOND","s":"VA","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL CENTER FOR FAMILY PHILANTHROPY","a":10000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"RIVIER UNIVERSITY","a":400000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"NASHUA","s":"NH","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"RUSH UNIVERSITY","a":180067,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHICAGO","s":"IL","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"TRINITY WASHINGTON UNIVERSITY","a":2100000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF ILLINOIS","a":493500,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHAMPAIGN","s":"IL","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF NORTH CAROLINA CHAPEL HILL","a":500000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHAPEL HILL","s":"NC","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2024,"r":"WEST VIRGINIA UNIVERSITY FOUNDATION","a":674283,"p":"TO FURTHER TH EXEMPT PURPOSE OF THE ORGANIZATION","c":"MORGANTOWN","s":"WV","e":"","o":"202531339349104153","record_type":"named_recipient"},{"y":2025,"r":"BOSTON COLLEGE","a":271152,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHESTNUT HILL","s":"MA","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"CAPITAL AREA FOOD BANK","a":2000000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"CATHOLIC CHARITIES OF THE ARCHDIOCESE OF WASHINGTON INC","a":1450000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"CHILDREN'S NATIONAL HOSPITAL","a":207115,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"DUKE UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"DURHAM","s":"NC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"DUQUESNE UNIVERSITY","a":125000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"PITTSBURGH","s":"PA","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"EMORY UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"ATLANTA GA","s":"GA","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"GEORGETOWN UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"HOWARD UNIVERSITY","a":950000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"RIVIER UNIVERSITY","a":585000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"NASHUA","s":"NH","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"RUSH UNIVERSITY MEDICAL CENTER","a":239128,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHICAGO","s":"IL","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"TRINITY WASHINGTON UNIVERSITY","a":2100000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"WASHINGTON","s":"DC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"UNIVERSITY OF ILLINOIS FOUNDATION","a":535500,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHAMPAIGN","s":"IL","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"THE UNIVERSITY OF NORTH CAROLINA AT CHAPEL HILL FOUNDATION INC","a":1000000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"CHAPEL HILL","s":"NC","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"UNIVERSITY OF PENNSYLVANIA","a":128726,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"VANDERBILT UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"NASHVILLE","s":"TN","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"VILLANOVA UNIVERSITY","a":600000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"VILLANOVA","s":"PA","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"WEST VIRGINIA UNIVERSITY FOUNDATION","a":1142385,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"MORGANSTOWN","s":"WV","e":"","o":"202601879349100565","record_type":"named_recipient"},{"y":2025,"r":"YALE UNIVERSITY","a":250000,"p":"TO FURTHER THE EXEMPT PURPOSE OF THE ORGANIZATION","c":"NEW HAVEN","s":"CT","e":"","o":"202601879349100565","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"HOWARD UNIVERSITY":"Education & youth","THE CATHOLIC UNIVERSITY OF AMERICA":"Education & youth","THE NATIONAL CAPITAL POISON CENTER":"Health & wellbeing","NATIONAL CENTER FOR FAMILY PHILANTHROPY":"Nonprofit capacity & transitions","EMORY UNIVERSITY":"Education & youth","GEORGETOWN UNIVERSITY":"Education & youth","RIVIER UNIVERSITY":"Education & youth","CATHOLIC CHARITIES OF THE ARCHDIOCESE OF WASHINGTON INC":"Basic needs & response","DUKE UNIVERSITY":"Education & youth","UNIVERSITY OF ILLINOIS FOUNDATION":"Education & youth","THE UNIVERSITY OF NORTH CAROLINA AT CHAPEL HILL FOUNDATION INC":"Education & youth","VANDERBILT UNIVERSITY":"Education & youth","VILLANOVA UNIVERSITY":"Education & youth","YALE UNIVERSITY":"Education & youth"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

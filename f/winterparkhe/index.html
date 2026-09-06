@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="WINTERPARK_DATA" data-slug="winterparkhe" data-n="48" data-grand="4412393" data-recsub="All five years" data-running="to the dollar, five years running." data-names="20 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="WINTERPARK_DATA" data-slug="winterparkhe" data-n="49" data-grand="5869590" data-recsub="All five years" data-running="to the dollar, five years running." data-names="21 as-filed names" data-rows-embedded="49" data-rows-total="49">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,10 +7,10 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex, nofollow">
 <title>Winter Park Health Foundation — Grants Ledger · 990-PF</title>
-<meta name="description" content="Every grant Winter Park Health Foundation reported in its Form 990-PF grants-paid schedule, 2021–2025 — 48 filed rows, $4,412,393, reconciling to Part XIV, line 3a to the dollar. An independent presentation built from public IRS filings.">
+<meta name="description" content="Every grant Winter Park Health Foundation reported in its Form 990-PF grants-paid schedule, 2021–2025 — 49 filed rows, $5,869,590, reconciling to Part XIV, line 3a to the dollar. An independent presentation built from public IRS filings.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Winter Park Health Foundation — Grants Ledger">
-<meta property="og:description" content="48 filed rows · $4,412,393 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
+<meta property="og:description" content="49 filed rows · $5,869,590 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
 <!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
 <meta property="og:image" content="https://HOST/PATH/og-card.png">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,16 +80,16 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
       <div class="grand">
         <div class="g-label">Awarded · five filed years</div>
-        <div class="g-val" id="kpi-total">$4,412,393</div>
+        <div class="g-val" id="kpi-total">$5,869,590</div>
         <div class="g-rule" aria-hidden="true"></div>
-        <div class="g-sub"><span class="tick">✓</span> 48 filed rows paid out · sum equals the filed totals, every year</div>
+        <div class="g-sub"><span class="tick">✓</span> 49 filed rows paid out · sum equals the filed totals, every year</div>
         <div class="g-scope" id="g-scope" hidden></div>
       </div>
     </div>
@@ -103,12 +103,17 @@
     <div class="kpi">
       <div class="k-label">Recipients</div>
       <div class="k-val" id="kpi-orgs">18</div>
-      <div class="k-hint">Organizations the foundation funded · 20 as-filed names</div>
+      <div class="k-hint">Organizations the foundation funded · 21 as-filed names</div>
     </div>
     <div class="kpi">
       <div class="k-label">Median grant</div>
       <div class="k-val" id="kpi-median">—</div>
-      <div class="k-hint">Across all 48 filed rows</div>
+      <div class="k-hint">Across all 49 filed rows</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
     </div>
     <div class="kpi">
       <div class="k-label">Latest year</div>
@@ -116,11 +121,13 @@
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">18</span></button>
-    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">48</span></button>
+    <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">49</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
 
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,30 +172,28 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
-        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $4,412,393, equals Part XIV, line 3a, $4,412,393 — a difference of zero dollars, verified.">
-          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$4,412,393</span></span>
+        <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $5,869,590, equals Part XIV, line 3a, $5,869,590 — a difference of zero dollars, verified.">
+          <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$5,869,590</span></span>
           <span class="eq-op">=</span>
-          <span class="eq-part"><span class="eq-label">Part XIV, line 3a</span><span class="eq-val" id="eq-b">$4,412,393</span></span>
+          <span class="eq-part"><span class="eq-label">Part XIV, line 3a</span><span class="eq-val" id="eq-b">$5,869,590</span></span>
           <span class="eq-seal" aria-hidden="true">Δ $0 ✓</span>
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -276,7 +284,8 @@
               <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
                 <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
               <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-                <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
+              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
+              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
               <button type="button" class="lt-year" data-y="2025" aria-pressed="false">2025</button>
             </div>
           </div>
@@ -325,7 +334,7 @@
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2022</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$883,875</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$967,325</strong></div><div class="tc-row"><span>Difference</span><strong>+$83,450</strong></div></div>
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2023</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$1,457,197</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$1,457,197</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
           <div class="tie-card"><div class="tc-top"><span class="tc-y">2024</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$1,606,601</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$1,606,601</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div>
-          <div class="tie-card"><div class="tc-top"><span class="tc-y">2025</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$1,244,418</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$1,244,418</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div></div><p>This ledger does not explain the difference, because the filings do not; it shows both filed numbers.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $1,561,374 of the $4,412,393 here (35%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
+          <div class="tie-card"><div class="tc-top"><span class="tc-y">2025</span></div><div class="tc-row"><span>Schedule 3a</span><strong>$1,244,418</strong></div><div class="tc-row"><span>Part I 25(d)</span><strong>$1,244,418</strong></div><div class="tc-row"><span>Difference</span><strong>$0</strong></div></div></div><p>This ledger does not explain the difference, because the filings do not; it shows both filed numbers.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $3,018,571 of the $5,869,590 here (51.4%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
         <h3>Source</h3>
         <p>
           IRS TEOS public 990-PF e-file XML for EIN <code>59-0669460</code> —
@@ -428,8 +437,9 @@
   </div>
 </div>
 <script>
-window.WINTERPARK_DATA={"meta":{"foundation":"Winter Park Health Foundation","ein":"59-0669460","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2021,2022,2024,2025],"grant_count":48,"grand_total":4412393,"tieout":{"2021":{"object_id":"202243569349101209","grant_count":1,"grant_sum":677499,"line25_col_d":677499,"status":"PASS"},"2022":{"object_id":"202342709349100719","grant_count":1,"grant_sum":883875,"line25_col_d":883875,"status":"PASS"},"2023":{"object_id":"202402209349100305","grant_count":0,"grant_sum":1457197,"line25_col_d":1457197,"status":"PASS"},"2024":{"object_id":"202533159349102363","grant_count":27,"grant_sum":1606601,"line25_col_d":1606601,"status":"PASS"},"2025":{"object_id":"202641709349100904","grant_count":19,"grant_sum":1244418,"line25_col_d":1244418,"status":"PASS"}}},"grants":[{"y":2021,"r":"SEE STATEMENT 37","a":677499,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202243569349101209","record_type":"unitemized"},{"y":2022,"r":"SEE STATEMENT 36","a":883875,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202342709349100719","record_type":"unitemized"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":27099,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":28920,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":83500,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":500000,"p":"WOOLLEY FUND- BUILDING","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF CENTRAL FLORIDA","a":2500,"p":"JOE R. LEE CLUB - HOLIDAY FUNDRAISER SUPPORT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":10000,"p":"WELL TOGETHER GRANT AWARD","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":2668,"p":"ARTS AT DAYBREAK","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 18","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 19","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":4750,"p":"HPF SCHOOL NURSING SUPPLIES GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":5182,"p":"HST GRANTS SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":32951,"p":"HPF WPHS LPN GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":41945,"p":"FOCPS SNI GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":172028,"p":"HPF NURSE PRACTITIONER GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":436479,"p":"HPA CHILL GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":15000,"p":"WELL TOGETHER GRANT AWARD","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":24299,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":25000,"p":"WELL TOGETHER GRANT AWARD","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":29000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TOWN OF EATONVILLE","a":2500,"p":"CHRISTMAS ON THE BOULEVARD SUPPORT","c":"EATONVILLE","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TRUE HEALTH","a":25000,"p":"ARTS IN HEALTH","c":"SANFORD","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"VICTORY CUP INITIATIVE INC","a":66000,"p":"WELLTOGETHER GRANT CHALLENGE","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"WINTER PARK PUBLIC LIBRARY","a":12000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-220,"p":"FOCPS SNI GRANT SY 2023-24","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":19390,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":225475,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":90000,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"4R FOUNDATION INC","a":25000,"p":"CARDIAC LIFESTYLE MEDICINE PILOT PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":441752,"p":"CHILL YOUTH MENTAL HEALTH SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":209729,"p":"SCHOOL BASED HEALTH CENTER (SBHC) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":42894,"p":"SCHOOL NURSING INITIATIVE (SNI) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":37500,"p":"FOOD SECURITY STUDENT SCHOOL PANTRIES","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"GRACE MEDICAL HOME INC","a":25701,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"IDEAS FOR US","a":1450,"p":"COMMUNITY EDUCATION GARDEN","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"NEW HOPE FOR KIDS","a":21000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ROLLINS COLLEGE","a":7450,"p":"CAMPUS URBAN FARM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"TOWN OF EATONVILLE","a":5000,"p":"COMMUNITY POOL","c":"EATONVILLE","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"UCF FOUNDATION","a":50000,"p":"HEALTHY LIVING INITIATIVE","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"WINTER PARK PUBLIC LIBRARY","a":3000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-15923,"p":"CHILL YOUTH MENTAL HEALTH SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FAST START MANAGEMENT INC":"Health & wellbeing","NEW HOPE FOR KIDS":"Health & wellbeing","VICTORY CUP INITIATIVE INC":"Nonprofit capacity & transitions"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+window.WINTERPARK_DATA={"meta":{"foundation":"Winter Park Health Foundation","ein":"59-0669460","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2021,2022,2023,2024,2025],"grant_count":49,"grand_total":5869590,"tieout":{"2021":{"object_id":"202243569349101209","grant_count":1,"grant_sum":677499,"line25_col_d":677499,"status":"PASS"},"2022":{"object_id":"202342709349100719","grant_count":1,"grant_sum":883875,"line25_col_d":883875,"status":"PASS"},"2023":{"object_id":"202402209349100305","grant_count":1,"grant_sum":1457197,"line25_col_d":1457197,"status":"PASS"},"2024":{"object_id":"202533159349102363","grant_count":27,"grant_sum":1606601,"line25_col_d":1606601,"status":"PASS"},"2025":{"object_id":"202641709349100904","grant_count":19,"grant_sum":1244418,"line25_col_d":1244418,"status":"PASS"}}},"grants":[{"y":2021,"r":"SEE STATEMENT 37","a":677499,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202243569349101209","record_type":"unitemized"},{"y":2022,"r":"SEE STATEMENT 36","a":883875,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202342709349100719","record_type":"unitemized"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":27099,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":28920,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":83500,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":500000,"p":"WOOLLEY FUND- BUILDING","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF CENTRAL FLORIDA","a":2500,"p":"JOE R. LEE CLUB - HOLIDAY FUNDRAISER SUPPORT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":10000,"p":"WELL TOGETHER GRANT AWARD","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":2668,"p":"ARTS AT DAYBREAK","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 18","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 19","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":4750,"p":"HPF SCHOOL NURSING SUPPLIES GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":5182,"p":"HST GRANTS SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":32951,"p":"HPF WPHS LPN GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":41945,"p":"FOCPS SNI GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":172028,"p":"HPF NURSE PRACTITIONER GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":436479,"p":"HPA CHILL GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":15000,"p":"WELL TOGETHER GRANT AWARD","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":24299,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":25000,"p":"WELL TOGETHER GRANT AWARD","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":29000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TOWN OF EATONVILLE","a":2500,"p":"CHRISTMAS ON THE BOULEVARD SUPPORT","c":"EATONVILLE","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TRUE HEALTH","a":25000,"p":"ARTS IN HEALTH","c":"SANFORD","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"VICTORY CUP INITIATIVE INC","a":66000,"p":"WELLTOGETHER GRANT CHALLENGE","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"WINTER PARK PUBLIC LIBRARY","a":12000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-220,"p":"FOCPS SNI GRANT SY 2023-24","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":19390,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":225475,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":90000,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"4R FOUNDATION INC","a":25000,"p":"CARDIAC LIFESTYLE MEDICINE PILOT PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":441752,"p":"CHILL YOUTH MENTAL HEALTH SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":209729,"p":"SCHOOL BASED HEALTH CENTER (SBHC) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":42894,"p":"SCHOOL NURSING INITIATIVE (SNI) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":37500,"p":"FOOD SECURITY STUDENT SCHOOL PANTRIES","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"GRACE MEDICAL HOME INC","a":25701,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"IDEAS FOR US","a":1450,"p":"COMMUNITY EDUCATION GARDEN","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"NEW HOPE FOR KIDS","a":21000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ROLLINS COLLEGE","a":7450,"p":"CAMPUS URBAN FARM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"TOWN OF EATONVILLE","a":5000,"p":"COMMUNITY POOL","c":"EATONVILLE","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"UCF FOUNDATION","a":50000,"p":"HEALTHY LIVING INITIATIVE","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"WINTER PARK PUBLIC LIBRARY","a":3000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-15923,"p":"CHILL YOUTH MENTAL HEALTH SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":1457197,"p":"","c":"","s":"","e":"","o":"202402209349100305","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FAST START MANAGEMENT INC":"Health & wellbeing","NEW HOPE FOR KIDS":"Health & wellbeing","VICTORY CUP INITIATIVE INC":"Nonprofit capacity & transitions"};</script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

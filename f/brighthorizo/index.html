@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="BRIGHTHORI_DATA" data-slug="brighthorizo" data-n="37" data-grand="35269977" data-recsub="All five years" data-running="to the dollar, five years running." data-names="25 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="BRIGHTHORI_DATA" data-slug="brighthorizo" data-n="37" data-grand="35269977" data-recsub="All five years" data-running="to the dollar, five years running." data-names="25 as-filed names" data-rows-embedded="37" data-rows-total="37">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 37 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">25</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $35,269,977, equals Part I line 25(d), $35,269,977 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.BRIGHTHORI_DATA={"meta":{"foundation":"Bright Horizon Foundation","ein":"13-4121003","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":37,"grand_total":35269977,"tieout":{"2020":{"object_id":"202103199349102910","grant_count":4,"grant_sum":5940000,"line25_col_d":5940000,"status":"PASS"},"2021":{"object_id":"202203199349108620","grant_count":3,"grant_sum":4554192,"line25_col_d":4554192,"status":"PASS"},"2022":{"object_id":"202323199349106142","grant_count":19,"grant_sum":10010000,"line25_col_d":10010000,"status":"PASS"},"2023":{"object_id":"202413209349100926","grant_count":8,"grant_sum":8448775,"line25_col_d":8448775,"status":"PASS"},"2024":{"object_id":"202513219349103591","grant_count":3,"grant_sum":6317010,"line25_col_d":6317010,"status":"PASS"}}},"grants":[{"y":2020,"r":"AMERICANS FOR OXFORD","a":15000,"p":"PROVIDE RESOURCES FOR ARCHITECTURAL JEWELS, SCHOLARSHIPS, ENGINEERING, MEDICAL & SCIENTIFIC LABS","c":"NEW YORK","s":"NY","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"BULLETIN OF THE ATOMIC SCIENTISTS","a":25000,"p":"PROVIDE SCIENTISTS, POLICYMAKERS AND PUBLIC INFO TO REDUCE MAN-MADE THREATS TO OUR EXISTENCE","c":"CHICAGO","s":"IL","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"FIDELITY CHARITABLE GIFT FUND","a":5400000,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"CONSERVE WILDLIFE","c":"BROOKLYN","s":"NY","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2021,"r":"AMERICANS FOR OXFORD","a":15000,"p":"PROVIDE RESOURCES FOR ARCHITECTURAL JEWELS, SCHOLARSHIPS, ENGINEERING, MEDICAL & SCIENTIFIC LABS","c":"NEW YORK","s":"NY","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2021,"r":"FIDELITY CHARITABLE GIFT FUND","a":4039192,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2021,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"CONSERVE WILDLIFE","c":"BROOKLYN","s":"NY","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2022,"r":"AMERICARES FOUNDATION INC","a":50000,"p":"AMERICARES SAVES LIVES AND IMPROVES HEALTH FOR PEOPLE AFFECTED BY POVERTY OR DISASTER SO THEY CAN REACH THEIR FULL POTENTIAL","c":"STAMFORD","s":"CT","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"ARMS CONTROL ASSOCIATION (ACA) TOWARD PHYSICISTS COALITION FOR NUCLEAR THRE","a":25000,"p":"NATIONAL NONPARTISAN MEMBERSHIP ORGANIZATION DEDICATED TO PROMOTING PUBLIC UNDERSTANDING OF AND SUPPORT FOR EFFECTIVE ARMS CONTROL POLICIES","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"BROOKINGS INSTITUTION","a":200000,"p":"THE PURPOSE IS TO CONDUCT IN-DEPTH RESEARCH THAT LEADS TO NEW IDEAS FOR SOLVING PROBLEMS FACING SOCIETY AT THE LOCAL, NATIONAL AND GLOBAL LEVEL","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"CARNEGIE ENDOWMENT FOR INTERNATIONAL PEACE - FOR NUCLEAR DISARMAMENT EFFORT","a":150000,"p":"INTERNATIONAL WORLD PEACE","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"FIDELITY CHARITABLE GIFT FUND","a":3650000,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"INTERNATIONAL CRISIS GROUP","a":500000,"p":"PURPOSE IS TO PREVENT WARS AND SHAPE POLICIES THAT WILL BUILD A MORE PEACEFUL WORLD","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY-FOR SECURITES STUDIES PROGRAM - GIF","a":30000,"p":"INTEGRATION OF TECHNICAL AND POLITICAL ANALYSIS OF NATIONAL AND INTERNATIONAL SECURITY PROBLEMS","c":"CAMBRIDGE","s":"MA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"MEDICINES SANS FRONTIERES","a":100000,"p":"HEALING AND RECOVERY FOR THE BENEFIT OF ALL","c":"SEATTLE","s":"WA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"NATURAL RESOURCES DEFENSE COUNCIL FOR WILDLIFE AND LAND CONSERVATION","a":1000000,"p":"SAFEGUARD THE EARTH AND ENSURE THE RIGHTS OF ALL PEOPLE TO THE AIR, THE WATER, AND THE WILD","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"NUCLEAR THREAT INITIATIVE","a":1000000,"p":"NONPARTISAN GLOBAL SECURITY ORGANIZATION FOCUSED ON REDUCING NUCLEAR AND BIOLOGICAL THREATS IMPERILING HUMANITY","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"PLOUGHSHARES FUND","a":1000000,"p":"DEDICATED TO BUILDING A NUCLEAR WEAPON-FREE WORLD BY SUPPORTING THE SMARTEST PEOPLE WITH THE BEST IDEAS FOR PREVENTING THE SPREAD AND USE OF NUCLEAR WEAPONS, AND PREVENTING CONFLICTS THAT COULD LEAD TO THEIR USE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"PRESIDENT AND FELLOWS OF HARVARD COLLEGE - FOR PROJECT ON MANAGING THE ATOM","a":30000,"p":"RESEARCH ACROSS A BROAD ARRAY OF ACADEMIC DOMAINS","c":"CAMBRIDGE","s":"MA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"ROBIN HOOD FOUNDATION","a":600000,"p":"ROBIN HOOD FUNDS, SUPPORTS, AND CONNECTS COMMUNITY ORGANIZATIONS TO FUEL NEW YORKERS' JOURNEYS TO PERMANENTLY ESCAPE POVERTY","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"THE CARTER CENTER","a":600000,"p":"COMMITTED TO HUMAN RIGHTS AND THE ALLEVIATION OF HUMAN SUFFERING","c":"ATLANTA","s":"GA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"THE TRUST FOR PUBLIC LAND","a":250000,"p":"CREATE PARKS AND PROTECT LAND FOR PEOPLE, ENSURING HEALTHY, LIVABLE COMMUNITIES FOR GENERATIONS TO COME","c":"LOS ANGELES","s":"CA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"TRUSTEES OF PRINCETON UNIVERSITY - SCIENCE AND GLOBAL SECURITY PROGRAM","a":50000,"p":"SCIENCE AND GLOBAL SECURITY","c":"PRINCETON","s":"NJ","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"TRUSTEES OF PRINCETON UNIVERSITY - SCIENCE AND GLOBAL SECURITY PROGRAM","a":25000,"p":"PHYSICIST COALITION FOR NUCLEAR THREAT REDUCTION","c":"PRINCETON","s":"NJ","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"WCS SAVES WILDLIFE AND WILD PLACES WORLDWIDE THROUGH SCIENCE, CONSERVATION ACTION, EDUCATION, AND INSPIRING PEOPLE TO VALUE NATURE","c":"BRONX","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"WILLIAM J BRENNAN JR CENTER FOR JUSTICE INC","a":250000,"p":"IMPROVE OUR SYSTEMS OF DEMOCRACY AND JUSTICE","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2023,"r":"ARMS CONTROL ASSOCIATION (ACA) TOWARD PHYSICISTS COALITION FOR NUCLEAR THRE","a":50000,"p":"NATIONAL NONPARTISAN MEMBERSHIP ORGANIZATION DEDICATED TO PROMOTING PUBLIC UNDERSTANDING OF AND SUPPORT FOR EFFECTIVE ARMS CONTROL POLICIES","c":"WASHINGTON","s":"DC","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"FIDELITY CHARITABLE GIFT FUND","a":4783775,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"JAMES MARTIN CENTER FOR NONPROLIFERATION STUDIES-MIDDLEBURY","a":50000,"p":"CNS STRIVES TO COMBAT THE SPREAD OF WEAPONS OF MASS DESTRUCTION (WMD) BY TRAINING THE NEXT GENERATION OF NONPROLIFERATION SPECIALISTS AND DISSEMINATING TIMELY INFORMATION AND ANALYSIS","c":"MONTEREY","s":"CA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"NEO PHILANTHROPY","a":15000,"p":"BUILD MOVEMENTS FOR JUSTICE, EQUITY AND DIGNITY.","c":"NEW YORK","s":"NY","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"NUCLEAR THREAT INITIATIVE","a":1000000,"p":"NONPARTISAN GLOBAL SECURITY ORGANIZATION FOCUSED ON REDUCING NUCLEAR AND BIOLOGICAL THREATS IMPERILING HUMANITY","c":"WASHINGTON","s":"DC","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"PARTNERS IN HEALTH","a":2000000,"p":"PROVIDE A PREFERENTIAL OPTION FOR THE POOR IN HEALTH CARE","c":"BOSTON","s":"MA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"THE CONSERVATION FUND","a":50000,"p":"PROTECT AMERICA'S MOST CRITICAL LANDS AND WATERS TO PROVIDE GREATER ACCESS TO NATURE, STRENGTHEN LOCAL ECONOMIES AND ENHANCE CLIMATE RESILIENCY.","c":"ARLINGTON","s":"VA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"WCS SAVES WILDLIFE AND WILD PLACES WORLDWIDE THROUGH SCIENCE, CONSERVATION ACTION, EDUCATION, AND INSPIRING PEOPLE TO VALUE NATURE","c":"BRONX","s":"NY","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR HUMANITARIAN DIALOGUE","a":50000,"p":"BUILD PRINCIPLES OF HUMANITY, IMPARTIALITY AND INDEPENDENCE.","c":"","s":"","e":"","o":"202513219349103591","record_type":"named_recipient"},{"y":2024,"r":"FIDELITY CHARITABLE GIFT FUND","a":6252010,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202513219349103591","record_type":"named_recipient"},{"y":2024,"r":"NEO PHILANTHROPY","a":15000,"p":"BUILD MOVEMENTS FOR JUSTICE, EQUITY AND DIGNITY.","c":"NEW YORK","s":"NY","e":"","o":"202513219349103591","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"WILDLIFE CONSERVATION SOCIETY":"Environment & animals","WILLIAM J BRENNAN JR CENTER FOR JUSTICE INC":"Education & youth","NEO PHILANTHROPY":"Community & economic development"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

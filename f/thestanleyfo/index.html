@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="THESTANLEY_DATA" data-slug="thestanleyfo" data-n="85" data-grand="283658" data-recsub="All five years" data-running="to the dollar, five years running." data-names="56 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="THESTANLEY_DATA" data-slug="thestanleyfo" data-n="85" data-grand="283658" data-recsub="All five years" data-running="to the dollar, five years running." data-names="56 as-filed names" data-rows-embedded="85" data-rows-total="85">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 85 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">56</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $283,658, equals Part I line 25(d), $283,658 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.THESTANLEY_DATA={"meta":{"foundation":"The Stanley Foundation","ein":"42-6071036","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":85,"grand_total":283658,"tieout":{"2020":{"object_id":"202133199349107728","grant_count":7,"grant_sum":19850,"line25_col_d":19850,"status":"PASS"},"2021":{"object_id":"202243199349108279","grant_count":10,"grant_sum":45000,"line25_col_d":45000,"status":"PASS"},"2022":{"object_id":"202343199349108799","grant_count":27,"grant_sum":79087,"line25_col_d":79087,"status":"PASS"},"2023":{"object_id":"202432999349100908","grant_count":22,"grant_sum":119211,"line25_col_d":119211,"status":"PASS"},"2024":{"object_id":"202523179349103342","grant_count":19,"grant_sum":20510,"line25_col_d":20510,"status":"PASS"}}},"grants":[{"y":2020,"r":"Community Foundation of Johnson County","a":2500,"p":"COVID-19 fund","c":"Coralville","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Community Foundation of Muscatine County","a":2500,"p":"COVID-19 fund","c":"Muscatine","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Community Foundation of Johnson County","a":5000,"p":"Inclusivity Fund","c":"Coralville","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Community Foundation of Muscatine County","a":5000,"p":"Racial Justice Fund","c":"Muscatine","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Community Foundation of Johnson County","a":1475,"p":"Inclusivity Fund","c":"Coralville","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Community Foundation of Muscatine County","a":2375,"p":"Racial Justice Fund","c":"Muscatine","s":"IA","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2020,"r":"Wyoming Community Foundation","a":1000,"p":"WY Equality Fund","c":"Laramie","s":"WY","e":"","o":"202133199349107728","record_type":"named_recipient"},{"y":2021,"r":"Community Foundation of Johnson County","a":5000,"p":"Inclusivity Fund","c":"Coralville","s":"IA","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Community Foundation of Muscatine County","a":5000,"p":"Racial Justice Fund","c":"Muscatine","s":"IA","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Bulletin of The Atomic Scientists","a":5000,"p":"General Fund","c":"Chicago","s":"IL","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Community Action Southold","a":5000,"p":"General Fund","c":"Greenport","s":"NY","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Chance for Change","a":5000,"p":"General Fund","c":"Bloomfield","s":"NJ","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"NVCC Educational Foundation","a":2500,"p":"Student Emergency Fund","c":"Annandale","s":"VA","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Senior Living Foundation","a":5000,"p":"Foreign Service","c":"Washington","s":"DC","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Support Our Aging Religious","a":2500,"p":"General Fund","c":"Washington","s":"DC","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"University of Maryland College Park","a":5000,"p":"Kelleher Fellowship Fund","c":"College Park","s":"MD","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2021,"r":"Lloyd Ecodistrict","a":5000,"p":"General Fund","c":"Portland","s":"OR","e":"","o":"202243199349108279","record_type":"named_recipient"},{"y":2022,"r":"Women of Color Advancing Peace and Security Wcaps","a":50000,"p":"General Fund","c":"Woodbridge","s":"VA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Community Foundation of Johnson County","a":5000,"p":"Inclusivity Fund","c":"Coralville","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Community Foundation of Muscatine County","a":5000,"p":"Racial Justice Fund","c":"Muscatine","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"It Takes a Village Animal Rescue & Resources","a":2300,"p":"General Fund","c":"Muscatine","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Wyoming Community Foundation","a":2000,"p":"General Fund","c":"Laramie","s":"WY","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Shepherd of the Cross Lutheran Church","a":2000,"p":"General Fund","c":"Muscatine","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Faith Chapel Church","a":2000,"p":"General Fund","c":"Birmingham","s":"AL","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"United Way of Muscatine Iowa Incorporated","a":1640,"p":"General Fund","c":"Muscatine","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Little Big Women","a":1200,"p":"General Fund","c":"Des Moines","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Hotdoghill Sanctuary","a":1000,"p":"General Fund","c":"Spring Grove","s":"VA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Global Zero","a":1000,"p":"General Fund","c":"Washington","s":"DC","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Naturopaths Doctors Without Borders","a":960,"p":"General Fund","c":"Mesa","s":"AZ","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"UNICEF USA Impact Fund for Children Inc","a":600,"p":"General Fund","c":"New York","s":"NY","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Wings of Hope International","a":600,"p":"General Fund","c":"Ankeny","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"World Relief Quad Cities","a":600,"p":"General Fund","c":"Moline","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"The Bail Project Inc","a":498,"p":"General Fund","c":"New York","s":"NY","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Iowa Public Radio","a":440,"p":"General Fund","c":"Des Moines","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Iowa Valley Resource Conservation & Development","a":400,"p":"General Fund","c":"Amana","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Feeding America","a":400,"p":"General Fund","c":"Chicago","s":"IL","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Domestic Violence Intervention Prog","a":227,"p":"General Fund","c":"Iowa City","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Border Angels","a":220,"p":"General Fund","c":"Chula Vista","s":"CA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Duke University","a":200,"p":"General Fund","c":"Durham","s":"NC","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"New Mexico State University","a":200,"p":"General Fund","c":"Las Cruces","s":"NM","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"River Bend Food Bank","a":200,"p":"General Fund","c":"Davenport","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"United Way Quad Cities","a":200,"p":"General Fund","c":"Bettendorf","s":"IA","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Partners In Health","a":102,"p":"General Fund","c":"Brewer","s":"ME","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2022,"r":"Dachshund Rescue South Florida Inc","a":100,"p":"General Fund","c":"Davie","s":"FL","e":"","o":"202343199349108799","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Johnson County","a":5000,"p":"Inclusivity Fund","c":"Coralville","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Muscatine County","a":12400,"p":"Racial Justice Fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"It Takes a Village Animal Rescue & Resources","a":500,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Wyoming Community Foundation","a":2000,"p":"General fund","c":"Laramie","s":"WY","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"United Way of Muscatine Iowa Incorporated","a":200,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Shepherd of the Cross Lutheran Church","a":2000,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Dachshund Rescue South Florida Inc","a":711,"p":"General fund","c":"Davie","s":"FL","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Faith Chapel Church","a":2000,"p":"General fund","c":"Birmingham","s":"AL","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Friends of the Music Hall","a":1500,"p":"General fund","c":"Portsmouth","s":"NH","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Island Safe Harbor Animal Sanctuary Inc","a":100,"p":"General fund","c":"Marblehead","s":"OH","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Flickinger Learning Center","a":10000,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Muscatine Community College Foundation","a":10000,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Meskwaki Settlement School","a":10000,"p":"General fund","c":"Tama","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"National Pearl Button Museum","a":10000,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Muscatine Community YMCA","a":200,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Iowa Nonprofit Alliance","a":1000,"p":"General fund","c":"Cedar Falls","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"National TTT Society","a":1000,"p":"General fund","c":"West Des Moines","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Teachers Unify to End Gun Violence","a":1000,"p":"General fund","c":"Danbury","s":"CT","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Muscatine County","a":12400,"p":"Alexander Clark Project Fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Muscatine County","a":12400,"p":"MCSA Charitable Fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Muscatine County","a":12400,"p":"Friends of Musser Public Library","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Muscatine County","a":12400,"p":"Muscatine Art Center Fund","c":"Muscatine","s":"IA","e":"","o":"202432999349100908","record_type":"named_recipient"},{"y":2024,"r":"Flickinger Learning Center","a":200,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"River Bend Food Bank","a":200,"p":"General fund","c":"Davenport","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Tapestry Farms","a":200,"p":"General fund","c":"Davenport","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"EcoPeace Middle East Environmental NGO Forum","a":200,"p":"General fund","c":"Washington","s":"DC","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"River Action","a":400,"p":"General fund","c":"Davenport","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Bur Oak Land Trust","a":500,"p":"General fund","c":"Iowa City","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Seed Savers Exchange","a":500,"p":"General fund","c":"Decorah","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Peace through Music International","a":500,"p":"General fund","c":"Litchfield Park","s":"AZ","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Iowa City Foreign Relations Council","a":600,"p":"General fund","c":"Iowa City","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Community Foundation of Muscatine County","a":910,"p":"Indigenous Coalition","c":"Muscatine","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Community Foundation of Muscatine County","a":1000,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Community Foundation of Greater Des Moines","a":1000,"p":"Clay County Disaster Fund","c":"Des Moines","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"World Relief Quad Cities","a":1000,"p":"General fund","c":"Moline","s":"IL","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"It Takes a Village Animal Rescue & Resources","a":1500,"p":"General fund","c":"Muscatine","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Mercy Corps","a":1800,"p":"General fund","c":"Boone","s":"IA","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Wyoming Community Foundation","a":2000,"p":"General fund","c":"Laramie","s":"WY","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Faith Chapel Church","a":2000,"p":"General fund","c":"Birmingham","s":"AL","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Nonviolent Peaceforce","a":3000,"p":"General fund","c":"Minneapolis","s":"MN","e":"","o":"202523179349103342","record_type":"named_recipient"},{"y":2024,"r":"Connections for the Homeless","a":3000,"p":"General fund","c":"Evanston","s":"IL","e":"","o":"202523179349103342","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Wyoming Community Foundation":"Nonprofit capacity & transitions","Chance for Change":"Education & youth","Lloyd Ecodistrict":"Community & economic development","Women of Color Advancing Peace and Security Wcaps":"Community & economic development","It Takes a Village Animal Rescue & Resources":"Environment & animals","Little Big Women":"Education & youth","Hotdoghill Sanctuary":"Environment & animals","UNICEF USA Impact Fund for Children Inc":"Nonprofit capacity & transitions","The Bail Project Inc":"Basic needs & response","Iowa Public Radio":"Arts & culture","Iowa Valley Resource Conservation & Development":"Environment & animals","Feeding America":"Basic needs & response","Border Angels":"Basic needs & response","Duke University":"Education & youth","United Way Quad Cities":"Nonprofit capacity & transitions","Dachshund Rescue South Florida Inc":"Environment & animals","Island Safe Harbor Animal Sanctuary Inc":"Environment & animals","Iowa Nonprofit Alliance":"Community & economic development","National TTT Society":"Health & wellbeing","Tapestry Farms":"Basic needs & response","Seed Savers Exchange":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

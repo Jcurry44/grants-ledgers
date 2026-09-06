@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="SORENSONIM_DATA" data-slug="sorensonimpa" data-n="66" data-grand="16140800" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="SORENSONIM_DATA" data-slug="sorensonimpa" data-n="66" data-grand="16140800" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names" data-rows-embedded="66" data-rows-total="66">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 66 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">31</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $16,140,800, equals Part I line 25(d), $16,140,800 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -424,7 +432,8 @@
 </div>
 <script>
 window.SORENSONIM_DATA={"meta":{"foundation":"Sorenson Impact Foundation","ein":"45-3203840","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":66,"grand_total":16140800,"tieout":{"2020":{"object_id":"202143209349100714","grant_count":20,"grant_sum":3203000,"line25_col_d":3203000,"status":"PASS"},"2021":{"object_id":"202233199349110568","grant_count":11,"grant_sum":2512000,"line25_col_d":2512000,"status":"PASS"},"2022":{"object_id":"202343199349108404","grant_count":12,"grant_sum":4472800,"line25_col_d":4472800,"status":"PASS"},"2023":{"object_id":"202443209349108459","grant_count":11,"grant_sum":2350000,"line25_col_d":2350000,"status":"PASS"},"2024":{"object_id":"202523219349108707","grant_count":12,"grant_sum":3603000,"line25_col_d":3603000,"status":"PASS"}}},"grants":[{"y":2020,"r":"New Venture Fund","a":150000,"p":"Impact investing alliance","c":"Washington","s":"DC","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"University of Utah","a":750000,"p":"Impact investing program; opportunity zone program; sponsor Innovation Summit","c":"Salt Lake City","s":"UT","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Village Capital","a":125000,"p":"Black Innovation Alliance","c":"Washington","s":"DC","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Aeris Insight","a":100000,"p":"Development of impact investing measuring tools","c":"Philadelphia","s":"PA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Global Impact Investing Network","a":79000,"p":"Impact performance studies","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Village Capital","a":25000,"p":"Development of platform for connecting impact investors with entreprenuers","c":"Washington","s":"DC","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Village Capital","a":100000,"p":"Development of platform for connecting impact investors with entreprenuers","c":"Washington","s":"DC","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Aeris Insight","a":100000,"p":"Development of impact investing measuring tools (2nd Milestone)","c":"Philadelphia","s":"PA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Mission Investors Exchange","a":35000,"p":"Development of a resource library for organizations to mission align their investments","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Mission Investors Exchange","a":35000,"p":"Development of a resource library for organizations to mission align their investments (milestone)","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Toniic Institute","a":100000,"p":"Development of impact investing dataset and public directory of investments for academic research","c":"San Francicso","s":"CA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Toniic Institute","a":100000,"p":"Development of impact investing dataset and public directory of investments for academic research (milestone)","c":"San Francicso","s":"CA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Global Impact Investing Network","a":25000,"p":"Initiative to mobilize impact investing for Covid-19 crisis","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Global Impact Investing Network","a":79000,"p":"Impact performance studies (milestone)","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Village Capital","a":125000,"p":"Development of platform for connecting impact investors with entreprenuers (milestone)","c":"Washington","s":"DC","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Workforce Professionals Training Institute","a":125000,"p":"Program to help workforce organizations adopt to new digital strategies to prepare low-income job seekers for digital literacy","c":"New York","s":"NY","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"University of Utah","a":775000,"p":"Impact investing program; & TA grant","c":"Salt Lake City","s":"UT","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Social Finance Inc","a":125000,"p":"Develpment of toolkit to enable doner advised funds to offer access to impact-first investments","c":"Boston","s":"MA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"First Step Staffing Inc","a":125000,"p":"Job support for homeless individuals","c":"Atlanta","s":"GA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2020,"r":"Common Future","a":125000,"p":"Pilot test new financial products for underserved communitites","c":"Oakland","s":"CA","e":"","o":"202143209349100714","record_type":"named_recipient"},{"y":2021,"r":"Aeris Insight","a":250000,"p":"Expanding access to impact data for the use of CDFI investments","c":"Philadelphia","s":"PA","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Common Future","a":125000,"p":"Pilot test new financial products for underserved communitites","c":"Oakland","s":"CA","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"First Step Staffing Inc","a":125000,"p":"Job support for homeless individuals","c":"Atlanta","s":"GA","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Global Impact Investing Network","a":227000,"p":"Building racial and diversity metrics into impact investing reporting standards","c":"New York","s":"NY","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"New Venture Fund","a":150000,"p":"Impact investing alliance","c":"Washington","s":"DC","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Social Finance Inc","a":125000,"p":"Develpment of toolkit to enable doner advised funds to offer access to impact-first investments","c":"Boston","s":"MA","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"University of Utah","a":760000,"p":"Impact investing student program; general support","c":"Salt Lake City","s":"UT","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Village Capital","a":250000,"p":"Training for Black entreprenuers","c":"Washington","s":"DC","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Village Capital","a":125000,"p":"Development of platform for connecting impact investors with entreprenuers","c":"Washington","s":"DC","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Workforce Professionals Training Institute","a":125000,"p":"Program to help workforce organizations adopt to new digital strategies to prepare low-income job seekers for digital literacy","c":"New York","s":"NY","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2021,"r":"Council of Development Finance Agencies","a":250000,"p":"Developing financial applications to reduce lending bias","c":"Columbus","s":"OH","e":"","o":"202233199349110568","record_type":"named_recipient"},{"y":2022,"r":"Global Impact Investing Network","a":250000,"p":"Building racial and diversity metrics into impact investing reporting standards","c":"New York","s":"NY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"University of Utah","a":100000,"p":"Impact investing program; opportunity zone program; sponsor Innovation Summit","c":"Salt Lake City","s":"UT","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"University of Utah","a":825000,"p":"Impact investing student program; general support","c":"Salt Lake City","s":"UT","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"Access Ventures","a":75000,"p":"Promoting economic opportunity for disadvantaged groups and providing education","c":"Louisville","s":"KY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"B Lab Company","a":200000,"p":"Development of B Corp certification process and assistance","c":"Berwyn","s":"PA","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"Federation of Appalachian Housing Enterprises","a":250000,"p":"Enhancing home ownership in poor communities","c":"Berea","s":"KY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"North American Students of Cooperation","a":125000,"p":"Convening field-building peer netowrks among workers and co-op organizers","c":"Chicago","s":"IL","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"Transform Finance","a":250000,"p":"Expanding investor education programs to address the wealth gap among disadvantaged populations","c":"New York","s":"NY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"University of Utah","a":22800,"p":"Communications department funding","c":"Salt Lake City","s":"UT","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"University of Utah","a":2000000,"p":"Epicenter building capital campaign","c":"Salt Lake City","s":"UT","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"Vesey Foundation","a":125000,"p":"Providing education and support for Latinx financial assistance programs","c":"Brooklyn","s":"NY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2022,"r":"Womens Refugee Commission","a":250000,"p":"Refugee self-reliance initiative","c":"New York","s":"NY","e":"","o":"202343199349108404","record_type":"named_recipient"},{"y":2023,"r":"Access Ventures","a":175000,"p":"Promoting economic opportunity for disadvantaged groups and providing education","c":"Louisville","s":"KY","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"B Lab Company","a":50000,"p":"Development of B Corp certification process and assistance","c":"Berwyn","s":"PA","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"Community Initiatives","a":200000,"p":"Programs to address systemic and systematic risks including inequality, climate change and biodiversity loss","c":"Oakland","s":"CA","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"Crane Institute of Sustainability","a":100000,"p":"Development of benchmarks for measuring impact for charitable endowments","c":"ManchesterbytheSea","s":"MA","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"New Venture Fund","a":250000,"p":"Impact investing alliance","c":"Washington","s":"DC","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"North American Students of Cooperation","a":125000,"p":"Convening field-building peer netowrks among workers and co-op organizers","c":"Chicago","s":"IL","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"OK Foundation","a":250000,"p":"Creation of job opportunities for hard-of-hearing and deaf individuals","c":"Holladay","s":"UT","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"Ownership America Education Fund","a":125000,"p":"Increasing awareness and acheivability of equitable financial inclusion for business owners","c":"Newburyport","s":"MA","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"Tides Foundation","a":250000,"p":"OutcomesX program enabling markets for social outcomes to scale though in-person gatherings and informational publications","c":"New York","s":"NY","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"University of Utah","a":700000,"p":"Impact investing student program; general support","c":"Salt Lake City","s":"UT","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2023,"r":"Vesey Foundation","a":125000,"p":"Providing education and support for Latinx financial assistance programs","c":"Brooklyn","s":"NY","e":"","o":"202443209349108459","record_type":"named_recipient"},{"y":2024,"r":"University of Utah","a":638000,"p":"Impact investing student program; general support","c":"Salt Lake City","s":"UT","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"The Aspen Institute","a":250000,"p":"Neiborhood real estate ownership project and employee ownership project","c":"Washington","s":"DC","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Rutgers University","a":250000,"p":"Education and research in the area of emloyee ownership and profit sharing models","c":"New Bruswick","s":"NJ","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Realize Impact","a":1000000,"p":"Philantrhopic investment grant for affordable home ownership","c":"Bainbridge Island","s":"WA","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Ownership Works Inc","a":250000,"p":"Research and framework development for home shared ownership projects","c":"New York","s":"NY","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"New Venture Fund","a":75000,"p":"Impact investing alliance","c":"Washington","s":"DC","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"New Venture Fund","a":175000,"p":"Catalytic capital consortium project","c":"Washington","s":"DC","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Lafayettte Square Foundation","a":375000,"p":"Support for projects creating equitable wealth including employee ownership","c":"Miami","s":"FL","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"ImpactAlpha","a":250000,"p":"Providing public education on homeownership, employee ownership and community ownership","c":"Berkeley","s":"CA","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Impact Investing Institute","a":40000,"p":"Development of educational campaign to promote and encourage impact investing to catalyze social change","c":"","s":"","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"Crane Institute of Sustainability","a":50000,"p":"Development of benchmarks for measuring impact for charitable endowments","c":"ManchesterbytheSea","s":"MA","e":"","o":"202523219349108707","record_type":"named_recipient"},{"y":2024,"r":"B Lab Company","a":250000,"p":"Development of B Corp certification process and assistance","c":"Berwyn","s":"PA","e":"","o":"202523219349108707","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"New Venture Fund":"Environment & animals","Village Capital":"Community & economic development","Aeris Insight":"Community & economic development","Global Impact Investing Network":"Nonprofit capacity & transitions","Mission Investors Exchange":"Nonprofit capacity & transitions","Social Finance Inc":"Basic needs & response","Common Future":"Community & economic development","B Lab Company":"Community & economic development","Community Initiatives":"Nonprofit capacity & transitions","Tides Foundation":"Nonprofit capacity & transitions","Realize Impact":"Basic needs & response"};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

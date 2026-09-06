@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="GOFORWARDC_DATA" data-slug="goforwardcha" data-n="101" data-grand="45680801" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="GOFORWARDC_DATA" data-slug="goforwardcha" data-n="101" data-grand="45680801" data-recsub="All five years" data-running="to the dollar, five years running." data-names="31 as-filed names" data-rows-embedded="101" data-rows-total="101">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 101 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">31</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $45,680,801, equals Part I line 25(d), $45,680,801 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -422,7 +430,8 @@
 </div>
 <script>
 window.GOFORWARDC_DATA={"meta":{"foundation":"G O Forward Charitable Tr","ein":"32-6331860","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":101,"grand_total":45680801,"tieout":{"2020":{"object_id":"202141879349100704","grant_count":22,"grant_sum":4500000,"line25_col_d":4500000,"status":"PASS"},"2021":{"object_id":"202221789349100322","grant_count":23,"grant_sum":5400000,"line25_col_d":5400000,"status":"PASS"},"2022":{"object_id":"202321879349100117","grant_count":23,"grant_sum":4200001,"line25_col_d":4200001,"status":"PASS"},"2023":{"object_id":"202500169349100210","grant_count":15,"grant_sum":12955000,"line25_col_d":12955000,"status":"PASS"},"2024":{"object_id":"202610479349100016","grant_count":18,"grant_sum":18625800,"line25_col_d":18625800,"status":"PASS"}}},"grants":[{"y":2020,"r":"AVON OLD FARMS SCHOOL","a":153322,"p":"GENERAL OPERATING","c":"AVON","s":"CT","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"DEFENDERS OF WILDLIFE","a":38331,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"EARTHJUSTICE","a":275980,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"ENVIRONMENTAL DEFENSE FUND","a":114992,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"GRAND TETON NATIONAL PARK FOUNDATION","a":306644,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"GREATER YELLOWSTONE COALITION","a":114991,"p":"GENERAL OPERATING","c":"BOZEMAN","s":"MT","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"NATURAL RESOURCES DEFENSE COUNCIL","a":76661,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"OCEAN CONSERVANCY","a":76661,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"ORDWAY CENTER FOR PERFORMING ARTS","a":850937,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"SCIENCE MUSEUM OF MINNESOTA","a":268313,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"THE NATURE CONSERVANCY","a":268313,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"THE SCHUBERT CLUB","a":306644,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"THE TRUST FOR PUBLIC LAND","a":38330,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WILDERNESS SOCIETY","a":76661,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WOODS HOLE RESEARCH CENTER","a":153322,"p":"GENERAL OPERATING","c":"FALMOUTH","s":"MA","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WORLD RESOURCES INSTITUTE","a":76661,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WORLD WILDLIFE FUND","a":229983,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WYOMING OUTDOOR COUNCIL","a":153322,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"WYOMING WILDERNESS ASSOCIATION","a":306644,"p":"GENERAL OPERATING","c":"SHERIDAN","s":"WY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"YALE SCHOOL OF FORESTRY & ENVIRONMENTAL STUDIES","a":306644,"p":"GENERAL OPERATING","c":"NEW HAVEN","s":"CT","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"JACKSON HOLE LAND TRUST","a":153322,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2020,"r":"TETON YOUTH & FAMILY SERVICES","a":153322,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202141879349100704","record_type":"named_recipient"},{"y":2021,"r":"AVON OLD FARMS SCHOOL","a":183986,"p":"GENERAL OPERATING","c":"AVON","s":"CT","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"DEFENDERS OF WILDLIFE","a":45997,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"EARTHJUSTICE","a":331176,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"ENVIRONMENTAL DEFENSE FUND","a":137990,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"GRAND TETON NATIONAL PARK FOUNDATION","a":367973,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"GREATER YELLOWSTONE COALITION","a":137990,"p":"GENERAL OPERATING","c":"BOZEMAN","s":"MT","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"NATURAL RESOURCES DEFENSE COUNCIL","a":91993,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"OCEAN CONSERVANCY","a":91993,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"ORDWAY CENTER FOR PERFORMING ARTS","a":1021124,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"SCIENCE MUSEUM OF MINNESOTA","a":321976,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"THE NATURE CONSERVANCY","a":91993,"p":"GENERAL OPERATING","c":"MINNEAPOLIS","s":"MN","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"THE SCHUBERT CLUB","a":367973,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"THE TRUST FOR PUBLIC LAND","a":45997,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WILDERNESS SOCIETY","a":91993,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WOODS HOLE RESEARCH CENTER","a":183986,"p":"GENERAL OPERATING","c":"FALMOUTH","s":"MA","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WORLD RESOURCES INSTITUTE","a":91993,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WORLD WILDLIFE FUND","a":275980,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WYOMING OUTDOOR COUNCIL","a":183986,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"WYOMING WILDERNESS ASSOCIATION","a":367973,"p":"GENERAL OPERATING","c":"SHERIDAN","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"YALE SCHOOL OF FORESTRY & ENVIRONMENTAL STUDIES","a":367973,"p":"GENERAL OPERATING","c":"NEW HAVEN","s":"CT","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"JACKSON HOLE LAND TRUST","a":183986,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"TETON YOUTH & FAMILY SERVICES","a":183986,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2021,"r":"THE NATURE CONSERVANCY IN WYOMING","a":229983,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202221789349100322","record_type":"named_recipient"},{"y":2022,"r":"AVON OLD FARMS SCHOOL","a":156734,"p":"GENERAL OPERATING","c":"AVON","s":"CT","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"DEFENDERS OF WILDLIFE","a":39183,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"EARTHJUSTICE","a":226930,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"ENVIRONMENTAL DEFENSE FUND","a":117550,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"GRAND TETON NATIONAL PARK FOUNDATION","a":313467,"p":"GENERAL OPERATING","c":"MOOSE","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"GREATER YELLOWSTONE COALITION","a":117550,"p":"GENERAL OPERATING","c":"BOZEMAN","s":"MT","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"NATURAL RESOURCES DEFENSE COUNCIL","a":78367,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"OCEAN CONSERVANCY","a":78367,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"ORDWAY CENTER FOR PERFORMING ARTS","a":869872,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"SCIENCE MUSEUM OF MINNESOTA","a":232891,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"THE NATURE CONSERVANCY","a":78367,"p":"GENERAL OPERATING","c":"ARLINGTON","s":"VA","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"THE SCHUBERT CLUB","a":244479,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"THE TRUST FOR PUBLIC LAND","a":39183,"p":"GENERAL OPERATING","c":"LOS ANGELES","s":"CA","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WILDERNESS SOCIETY","a":78367,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WORLD RESOURCES INSTITUTE","a":78367,"p":"GENERAL OPERATING","c":"BALTIMORE","s":"MD","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WORLD WILDLIFE FUND","a":235100,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WYOMING OUTDOOR COUNCIL","a":156734,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WYOMING WILDERNESS ASSOCIATION","a":258277,"p":"GENERAL OPERATING","c":"SHERIDAN","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"JACKSON HOLE LAND TRUST","a":101543,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"TETON YOUTH & FAMILY SERVICES","a":101543,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"THE NATURE CONSERVANCY IN WYOMING","a":126929,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"WOODWELL CLIMATE RESEARCH CENTER","a":156734,"p":"GENERAL OPERATING","c":"FALMOUTH","s":"MA","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2022,"r":"YALE UNIVERSITY","a":313467,"p":"GENERAL OPERATING","c":"NEW HAVEN","s":"CT","e":"","o":"202321879349100117","record_type":"named_recipient"},{"y":2023,"r":"EARTHJUSTICE","a":920000,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"ENVIRONMENTAL DEFENSE FUND","a":920000,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"GREATER YELLOWSTONE COALITION","a":920000,"p":"GENERAL OPERATING","c":"BOZEMAN","s":"MT","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"NATURAL RESOURCES DEFENSE COUNCIL","a":920000,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"OCEAN CONSERVANCY","a":920000,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"ORDWAY CENTER FOR PERFORMING ARTS","a":920000,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"THE NATURE CONSERVANCY","a":920000,"p":"GENERAL OPERATING","c":"ARLINGTON","s":"VA","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"THE SCHUBERT CLUB","a":920000,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"WILDERNESS SOCIETY","a":920000,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"WOODS HOLE RESEARCH CENTER","a":920000,"p":"GENERAL OPERATING","c":"FALMOUTH","s":"MA","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"WORLD RESOURCES INSTITUTE","a":920000,"p":"GENERAL OPERATING","c":"BALTIMORE","s":"MD","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"WORLD WILDLIFE FUND","a":920000,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"WYOMING OUTDOOR COUNCIL","a":920000,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"YALE UNIVERSITY","a":920000,"p":"GENERAL OPERATING","c":"NEW HAVEN","s":"CT","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2023,"r":"ECOFLIGHT","a":75000,"p":"GENERAL OPERATING","c":"ASPEN","s":"CO","e":"","o":"202500169349100210","record_type":"named_recipient"},{"y":2024,"r":"EARTHJUSTICE","a":1044700,"p":"GENERAL OPERATING","c":"SAN FRANCISCO","s":"CA","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"ENVIRONMENTAL DEFENSE INCORPORATED","a":1044700,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"GREATER YELLOWSTONE COALITION","a":1044700,"p":"GENERAL OPERATING","c":"BOZEMAN","s":"MT","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"NATURAL RESOURCES DEFENSE COUNCIL","a":1044700,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"OCEAN CONSERVANCY","a":1044700,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"ORDWAY CENTER FOR PERFORMING ARTS","a":1544700,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"THE NATURE CONSERVANCY","a":1044700,"p":"GENERAL OPERATING","c":"ARLINGTON","s":"VA","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"THE SCHUBERT CLUB","a":1044700,"p":"GENERAL OPERATING","c":"SAINT PAUL","s":"MN","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"WILDERNESS SOCIETY","a":1044700,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"WORLD RESOURCES INSTITUTE","a":1044700,"p":"GENERAL OPERATING","c":"BALTIMORE","s":"MD","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"WORLD WILDLIFE FUND","a":1044700,"p":"GENERAL OPERATING","c":"WASHINGTON","s":"DC","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"WYOMING OUTDOOR COUNCIL","a":1044700,"p":"GENERAL OPERATING","c":"LANDER","s":"WY","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"WOODWELL CLIMATE RESEARCH CENTER","a":1044700,"p":"GENERAL OPERATING","c":"FALMOUTH","s":"MA","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"YALE UNIVERSITY","a":1044700,"p":"GENERAL OPERATING","c":"NEW HAVEN","s":"CT","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"EISENHOWER MEDICAL CENTER","a":1000000,"p":"GENERAL OPERATING","c":"RANCHO MIRAGE","s":"CA","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"JACKSON HOLE HISTORICAL SOCIETY AND MUSEUM","a":500000,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"ST JOHN'S HEALTH FOUNDATION","a":1000000,"p":"GENERAL OPERATING","c":"JACKSON","s":"WY","e":"","o":"202610479349100016","record_type":"named_recipient"},{"y":2024,"r":"MEMORIAL SLOAN KETTERING CANCER CENTER","a":1000000,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202610479349100016","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

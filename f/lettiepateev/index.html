@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-blob="LETTIEPATE_DATA" data-slug="lettiepateev" data-n="63" data-grand="128345361" data-recsub="All five years" data-running="to the dollar, five years running." data-names="46 as-filed names">
+<html lang="en" data-withheld="{}" data-blob="LETTIEPATE_DATA" data-slug="lettiepateev" data-n="63" data-grand="128345361" data-recsub="All five years" data-running="to the dollar, five years running." data-names="46 as-filed names" data-rows-embedded="63" data-rows-total="63">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=06fd2e3e35">
+<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">5 / 5 years reconcile · Δ $0</div>
+  <div class="side-foot">5 of 5 years reconciled</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the verified totals; the interactive ledger needs JavaScript.</div>
@@ -80,7 +80,7 @@
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5/5 years reconcile · Δ $0</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
@@ -111,12 +111,19 @@
       <div class="k-hint">Across all 63 grants</div>
     </div>
     <div class="kpi">
+      <div class="k-label">Typical grant</div>
+      <div class="k-val" id="kpi-range">—</div>
+      <div class="k-hint" id="kpi-range-hint">The middle half of named grants</div>
+    </div>
+    <div class="kpi">
       <div class="k-label">Latest year</div>
       <div class="k-val" id="kpi-delta">—</div>
       <div class="k-hint" id="kpi-delta-hint">—</div>
     </div>
   </div>
+  <p class="fit-line" id="fit-line" hidden></p>
 
+  <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
     <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">45</span></button>
@@ -129,13 +136,15 @@
       <div class="card rv">
         <div class="sec-head">
           <span class="snum" aria-hidden="true">I</span>
-          <h2>Disbursements by tax year</h2>
+          <h2>What it funds</h2>
           <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Select a year to scope the page</span>
+          <span class="sub">Where a granted dollar goes, grouped by the filing’s own words — full rule table in Methodology</span>
         </div>
-        <p class="card-lede" id="lede-trend">—</p>
-        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
-          <div id="tr-cards" aria-label="Years at a glance"></div>
+        <p class="card-lede" id="lede-cats">—</p>
+        <div class="dollar-viz">
+          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
+          <div class="cat-rows" id="cat-rows"></div>
+        </div>
       </div>
 
       <div class="grid2">
@@ -163,6 +172,18 @@
         </div>
       </div>
 
+      <div class="card rv">
+        <div class="sec-head">
+          <span class="snum" aria-hidden="true">IV</span>
+          <h2>Disbursements by tax year</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <span class="sub">Select a year to scope the page</span>
+        </div>
+        <p class="card-lede" id="lede-trend">—</p>
+        <div id="trend"><div class="tr-tip" id="tr-tip" aria-hidden="true"></div></div>
+          <div id="tr-cards" aria-label="Years at a glance"></div>
+      </div>
+
       <div class="doctrine-band rv" role="note">
         <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, five years running.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $128,345,361, equals Part I line 25(d), $128,345,361 — a difference of zero dollars, verified.">
@@ -173,20 +194,6 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
-      </div>
-
-      <div class="card rv">
-        <div class="sec-head">
-          <span class="snum" aria-hidden="true">IV</span>
-          <h2>Where a granted dollar goes</h2>
-          <span class="sec-rule" aria-hidden="true"></span>
-          <span class="sub">Grouped by the filing’s own words — full rule table in Methodology</span>
-        </div>
-        <p class="card-lede" id="lede-cats">—</p>
-        <div class="dollar-viz">
-          <div class="penny-grid" id="penny-grid" role="img" aria-label="One granted dollar as one hundred cents."></div>
-          <div class="cat-rows" id="cat-rows"></div>
-        </div>
       </div>
 
       <div class="card rv">
@@ -269,6 +276,7 @@
             </select>
             <span class="lt-spacer" aria-hidden="true"></span>
             <button type="button" id="csv-btn" class="lt-btn" title="Download the rows currently in view">Export CSV</button>
+            <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
           <div class="lt-row">
@@ -420,7 +428,8 @@
 </div>
 <script>
 window.LETTIEPATE_DATA={"meta":{"foundation":"Lettie Pate Evans Foundation","ein":"58-6004644","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":63,"grand_total":128345361,"tieout":{"2021":{"object_id":"202221319349100422","grant_count":11,"grant_sum":23250054,"line25_col_d":23250054,"status":"PASS"},"2022":{"object_id":"202301329349103405","grant_count":13,"grant_sum":25200056,"line25_col_d":25200056,"status":"PASS"},"2023":{"object_id":"202421349349101262","grant_count":17,"grant_sum":29900061,"line25_col_d":29900061,"status":"PASS"},"2024":{"object_id":"202501349349101770","grant_count":12,"grant_sum":28545079,"line25_col_d":28545079,"status":"PASS"},"2025":{"object_id":"202611349349102611","grant_count":10,"grant_sum":21450111,"line25_col_d":21450111,"status":"PASS"}}},"grants":[{"y":2021,"r":"Atlanta Ballet","a":500000,"p":"$5 million campaign to support COVID-19 pandemic recovery, artistic innovation and equitable access to dance education.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Aurora Theatre","a":500000,"p":"Construction of new theater spaces as part of the Lawrenceville Arts Center.","c":"Lawrenceville","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Brenau University","a":1500000,"p":"Support of technology needs as part of $7.9 million campaign to improve campus connectivity and enhance health sciences programs.","c":"Gainesville","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Children's Healthcare of Atlanta","a":6800052,"p":"Pediatric medical residency program conducted by Children's in partnership with the Emory University School of Medicine.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Episcopal High School","a":1000000,"p":"Construction of $18.9 million Health and Wellness Center.","c":"Alexandria","s":"VA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Fernbank Inc","a":1500000,"p":"Operating support in response to the COVID-19 pandemic.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Historic Oakland Foundation","a":750000,"p":"Restoration of East Hill as part of $10 million capital campaign.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Robert W Woodruff Arts Center","a":1200000,"p":"Continuation of Family Fun program on the Woodruff Arts Center campus.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Spelman College","a":6000002,"p":"Construction of the Center for Innovation and the Arts as part of $250 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"The Westminster Schools","a":1000000,"p":"Phase I capital priorities as part of $120 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2021,"r":"Virginia Historical Society","a":2500000,"p":"Construction of the Evans Orientation Theater and renovation of the Evans Gallery as part of $30 million campaign.","c":"Richmond","s":"VA","e":"","o":"202221319349100422","record_type":"named_recipient"},{"y":2022,"r":"Agnes Scott College","a":3500000,"p":"$31.8 million campaign to renovate Main Hall.","c":"Decatur","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"All Saints St Luke's Episcopal Home for the Retired Inc","a":500000,"p":"$7.5 million campaign to acquire greenspace and expand charitable care for residents.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Cherokee County Historical Society","a":300000,"p":"$4.2 million campaign to construct the Cherokee County History Center and Museum.","c":"Canton","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Children's Healthcare of Atlanta Foundation","a":7400051,"p":"Pediatric medical residency program conducted by Children's in partnership with the Emory University School of Medicine.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Episcopal High School","a":1000000,"p":"Construction of $18.9 million Health and Wellness Center.","c":"Alexandria","s":"VA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Holy Innocents' Episcopal School","a":1000000,"p":"$32.5 million campaign to construct new Upper School and Lower School buildings.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Pace Academy","a":1000000,"p":"$33.1 million campaign to construct a new Lower School.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Robert W Woodruff Arts Center Inc","a":1400000,"p":"Continuation of Family Fun program on the Woodruff Arts Center campus.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Spelman College","a":6000005,"p":"Construction of the Center for Innovation and the Arts as part of $250 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"St Pius X Catholic High School","a":600000,"p":"Renovation of the library and campus improvements as part of $12 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"The Columbus Museum","a":1000000,"p":"$24 million campaign to renovate and expand the museum with new gardens, galleries and public spaces.","c":"Columbus","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"The Paideia School","a":1000000,"p":"Construction of junior high building as part of $25 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2022,"r":"Young Harris College","a":500000,"p":"Development of work-study program to improve student success and job readiness.","c":"Young Harris","s":"GA","e":"","o":"202301329349103405","record_type":"named_recipient"},{"y":2023,"r":"Actor's Express","a":150000,"p":"Acquisition of theater equipment as part of $600,000 campaign.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Agnes Scott College","a":3500000,"p":"$31.8 million campaign to renovate Main Hall.","c":"Decatur","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Atlanta Fulton County Zoo","a":8000025,"p":"$22 million campaign to construct the Animal Health Center.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Brewton-Parker College","a":150000,"p":"$2.3 million campaign to construct a nursing building.","c":"Mount Vernon","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Children's Healthcare of Atlanta","a":8000036,"p":"Pediatric medical residency program conducted by Children's in partnership with the Emory University School of Medicine.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Historic Rural Churches of Georgia","a":150000,"p":"Development of the digital Historic Rural Church Archive at Emory University's Pitts Theology Library.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Holy Innocents' Episcopal School","a":1000000,"p":"$32.5 million campaign to construct new Upper School and Lower School buildings.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Moving in the Spirit","a":300000,"p":"$1.6 million campaign to equip theater and teaching studios for youth development dance program.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Pace Academy","a":1000000,"p":"$33.1 million campaign to construct a new Lower School.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Robert W Woodruff Arts Center","a":1400000,"p":"Continuation of Family Fun program on the Woodruff Arts Center campus.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Telfair Museum of Art","a":200000,"p":"Construction of the Telfair Children's Art Museum.","c":"Savannah","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"The Atlanta Opera","a":1300000,"p":"Purchase of equipment as part of $45 million comprehensive campaign.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"The Paideia School","a":1000000,"p":"Construction of junior high building as part of $25 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Trinity School","a":500000,"p":"Support of facility improvements as part of $14.5 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Valdosta State University Foundation","a":1000000,"p":"$18.7 million campaign to construct the Valdosta State University Performing Arts Center.","c":"Valdosta","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Wesleyan College","a":1750000,"p":"Capital projects as part of $25 million campaign to improve facilities and student programs.","c":"Macon","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2023,"r":"Young Harris College","a":500000,"p":"Development of work-study program to improve student success and job readiness.","c":"Young Harris","s":"GA","e":"","o":"202421349349101262","record_type":"named_recipient"},{"y":2024,"r":"Atlanta Botanical Garden","a":10000040,"p":"$150 million campaign to expand the Garden by eight acres and construct a new entrance on the Atlanta Beltline.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Atlanta Contemporary Art Center","a":120000,"p":"Repairs to HVAC system.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Bruton Parish Church","a":500000,"p":"Replacement of HVAC system.","c":"Williamsburg","s":"VA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Children's Healthcare of Atlanta","a":8600012,"p":"Pediatric medical residency program conducted by Children's in partnership with the Emory University School of Medicine.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Gracepoint School","a":500000,"p":"$6.8 million campaign to acquire and renovate a new building for school serving children with dyslexia.","c":"Marietta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Push Push Arts","a":125000,"p":"$954,000 campaign to acquire property for arts campus in downtown College Park.","c":"Decatur","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Robert W Woodruff Arts Center","a":1200026,"p":"Continuation of Family Fun program to expand access to the Woodruff Arts Center campus.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Springer Opera House Arts Association","a":1000000,"p":"$10.7 million campaign to restore the historic Springer Opera House, add a park, and update arts education facilities.","c":"Columbus","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"The Westminster Schools","a":2000001,"p":"Phase III capital priorities as part of $175 million campaign.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Trust for Public Land","a":2000000,"p":"$11.4 million campaign to restore the Prince Hall Masonic Lodge for the Martin Luther King, Jr. National Historic Park.","c":"Atlanta","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Virginia Historical Society","a":1000000,"p":"Growth of the Lettie Pate Evans Exhibition Fund as part of $30 million campaign to commemorate America's 250th anniversary.","c":"Richmond","s":"VA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2024,"r":"Wesleyan School","a":1500000,"p":"Construction of the Young STEM Building as part of $59.9 million comprehensive campaign.","c":"Peachtree Corners","s":"GA","e":"","o":"202501349349101770","record_type":"named_recipient"},{"y":2025,"r":"Atlanta Botanical Garden","a":5000044,"p":"$150 million campaign to expand the Garden by eight acres and construct a new entrance on the Atlanta Beltline.","c":"Atlanta","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Boys Home of Virginia","a":550000,"p":"Support of critical facility needs for residential campus serving at-risk boys.","c":"Covington","s":"VA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Children's Healthcare of Atlanta","a":8600031,"p":"Pediatric medical residency program conducted by Children's in partnership with the Emory University School of Medicine.","c":"Atlanta","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Georgia Historical Society","a":500000,"p":"Expansion of education and outreach programs as part of $30 million comprehensive campaign.","c":"Savannah","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Greater Atlanta Christian School","a":1500000,"p":"Construction of Student Learning Commons as part of $30.82 million campaign.","c":"Norcross","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Lowndes-Valdosta Arts Commission","a":500000,"p":"$8.9 million campaign to construct the Children's Imagination Station at the Turner Center for the Arts.","c":"Valdosta","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Museum of Contemporary Art of Georgia","a":2000000,"p":"$14.5 million campaign to establish a permanent facility at the Goat Farm Arts Center.","c":"Atlanta","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Robert W Woodruff Arts Center","a":1300036,"p":"Continuation of Family Fun program to expand access to the Woodruff Arts Center campus.","c":"Atlanta","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Whitefield Academy","a":1000000,"p":"Construction of Learning Commons as part of $39.2 million campaign.","c":"Smyrna","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"},{"y":2025,"r":"Young Harris College","a":500000,"p":"Development of work-study program to improve student success and job readiness.","c":"Young Harris","s":"GA","e":"","o":"202611349349102611","record_type":"named_recipient"}]};window.LEDGER_MERGES=["ROBERT W WOODRUFF ARTS CENTER"];window.LEDGER_EXTRA_RULES={};</script>
-<script src="../../assets/ledger.js?v=06fd2e3e35"></script>
+<section id="print-report" class="print-report" hidden aria-hidden="true"></section>
+<script src="../../assets/ledger.js?v=443251709f"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
