@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -439,7 +433,7 @@
 <script>
 window.ALVINGOLDF_DATA={"meta":{"foundation":"Alvin Goldfarb Foundation","ein":"43-1621937","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":28,"grand_total":49517694,"tieout":{"2020":{"object_id":"202213129349101496","grant_count":9,"grant_sum":8879146,"line25_col_d":8879146,"status":"PASS"},"2021":{"object_id":"202203189349106550","grant_count":5,"grant_sum":6670142,"line25_col_d":6670142,"status":"PASS"},"2022":{"object_id":"202321599349100317","grant_count":4,"grant_sum":6804350,"line25_col_d":6804350,"status":"PASS"},"2023":{"object_id":"202431659349100523","grant_count":3,"grant_sum":13385751,"line25_col_d":13385751,"status":"PASS"},"2024":{"object_id":"202542329349100504","grant_count":7,"grant_sum":13778305,"line25_col_d":13778305,"status":"PASS"}}},"grants":[{"y":2020,"r":"North Side Community School","a":25000,"p":"TransportationSupport","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Community Impact Network","a":5940008,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Helping Hand Me Downs","a":17494,"p":"Support mothers and their children","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Grace Hill","a":16001,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Equity Homes","a":2361231,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Big Brothers Big Sisters","a":100000,"p":"Mentoring Program","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"The Equity Network","a":228412,"p":"Management Services","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"The Opportunity Trust","a":50000,"p":"Helping children in Normandy Schools Collaborative","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Wyman Center","a":141000,"p":"Normandy Schools Collaborative TPO Program Support","c":"Eureka","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2021,"r":"North Side Community School","a":25000,"p":"TransportationSupport","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Community Impact Network","a":4312594,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Helping Hand Me Downs","a":9696,"p":"Support mothers and their children","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Grace Hill","a":15850,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Equity Homes","a":2307002,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2022,"r":"Community Impact Network","a":3597189,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"Grace Hill","a":15850,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"Equity Homes","a":3091311,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"The Equity Network","a":100000,"p":"Payroll and Managementfor Equity Homes and Community Impact Netword","c":"St Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2023,"r":"Community Impact Network","a":11800058,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2023,"r":"Grace Hill","a":85693,"p":"Development ofWomen's Businesses","c":"Saint Louis","s":"MO","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2023,"r":"Historical Assn of South Haven","a":1500000,"p":"HistoricalPreservation","c":"South Haven","s":"MI","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2024,"r":"Community Impact Network","a":11413425,"p":"Grants Coordination and distribution48 new home infrastructure","c":"Saint Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Grace Hill","a":2963,"p":"Development ofWomens Businesses","c":"Saint Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Beyond Housing Capital Fund","a":700000,"p":"Funds to purchase lotsfor development ofsingle family homes","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"STaR for Early Childhood","a":2117,"p":"Early ChildhoodEducators-","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Beyond Housing","a":154400,"p":"New HomesIniative","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Washington University","a":1500000,"p":"Mitra ResearchLab computationalbiology research","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"The Legacy Center","a":5400,"p":"Youth EducationCenter","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Community Impact Network":"Nonprofit capacity & transitions","Helping Hand Me Downs":"Basic needs & response","The Equity Network":"Education & youth"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

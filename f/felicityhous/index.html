@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.FELICITYHO_DATA={"meta":{"foundation":"Felicity House","ein":"46-3990624","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":23,"grand_total":135598,"tieout":{"2020":{"object_id":"202111629349100501","grant_count":4,"grant_sum":32500,"line25_col_d":32500,"status":"PASS"},"2021":{"object_id":"202212179349100701","grant_count":3,"grant_sum":22500,"line25_col_d":22500,"status":"PASS"},"2022":{"object_id":"202312079349100701","grant_count":4,"grant_sum":25100,"line25_col_d":25100,"status":"PASS"},"2023":{"object_id":"202413059349101606","grant_count":5,"grant_sum":24032,"line25_col_d":24032,"status":"PASS"},"2024":{"object_id":"202502799349101010","grant_count":7,"grant_sum":31466,"line25_col_d":31466,"status":"PASS"}}},"grants":[{"y":2020,"r":"AUTISTIC SELF ADVOCACY NETWORK INC","a":2500,"p":"BRONZE SPONSORSHIP OF 2020 GALA.","c":"WASHINGTON","s":"DC","e":"","o":"202111629349100501","record_type":"named_recipient"},{"y":2020,"r":"ASPERGERAUTISM NETWORK INC","a":5000,"p":"EMERGENCY RESPONSE DUE TO COVID-19.","c":"WATERTOWN","s":"MA","e":"","o":"202111629349100501","record_type":"named_recipient"},{"y":2020,"r":"AUTISTIC WOMEN AND NONBINARY NETWORK","a":15000,"p":"SUPPORT AND DEVELOPMENT WORK FOR BOARD RETREAT/TRAINING.","c":"LINCOLN","s":"NE","e":"","o":"202111629349100501","record_type":"named_recipient"},{"y":2020,"r":"ASPERGERAUTISM NETWORK INC","a":10000,"p":"TO SUPPORT EFFORTS TO OFFER ONLINE SUPPORT GROUPS.","c":"WATERTOWN","s":"MA","e":"","o":"202111629349100501","record_type":"named_recipient"},{"y":2021,"r":"ASPERGERAUTISM NETWORK INC","a":10000,"p":"TO SUPPORT EFFORTS TO OFFER ONLINE SUPPORT GROUPS.","c":"WATERTOWN","s":"MA","e":"","o":"202212179349100701","record_type":"named_recipient"},{"y":2021,"r":"AUTISTIC SELF ADVOCACY NETWORK INC","a":2500,"p":"BRONZE SPONSORSHIP OF 2021 GALA.","c":"WASHINGTON","s":"DC","e":"","o":"202212179349100701","record_type":"named_recipient"},{"y":2021,"r":"AUTISTIC WOMEN AND NONBINARY NETWORK","a":10000,"p":"SUPPORT AND DEVELOPMENT WORK FOR BOARD RETREAT/TRAINING.","c":"LINCOLN","s":"NE","e":"","o":"202212179349100701","record_type":"named_recipient"},{"y":2022,"r":"ASPERGERAUTISM NETWORK INC","a":20000,"p":"SUPPORT PILOT PROGRAM PROVIDING VIRTUAL GROUPS/CONSULT FOR WOMEN DIAGNOSED WITH AUTISM LATER IN LIFE.","c":"WATERTOWN","s":"MA","e":"","o":"202312079349100701","record_type":"named_recipient"},{"y":2022,"r":"AUTISTIC SELF ADVOCACY NETWORK INC","a":2500,"p":"BRONZE SPONSORSHIP OF 2022 ASAN GALA.","c":"WASHINGTON","s":"DC","e":"","o":"202312079349100701","record_type":"named_recipient"},{"y":2022,"r":"MEMORIAL SLOAN KETTERING CANCER CENTER","a":2000,"p":"EMPLOYEE MATCHING GIFT","c":"NEW YORK","s":"NY","e":"","o":"202312079349100701","record_type":"named_recipient"},{"y":2022,"r":"NEW YORK CITY FIREFIGHTERS HOCKEY CLUB","a":600,"p":"EMPLOYEE MATCHING GIFT","c":"STATEN ISLAND","s":"NY","e":"","o":"202312079349100701","record_type":"named_recipient"},{"y":2023,"r":"ASPERGERAUTISM NETWORK INC","a":10000,"p":"TO SUPPORT VIRTUAL GROUPS AND INDIVIDUAL CONSULTATIONS FOR WOMEN DIAGNOSED WITH AUTISM LATER IN LIFE.","c":"WATERTOWN","s":"MA","e":"","o":"202413059349101606","record_type":"named_recipient"},{"y":2023,"r":"SUMMERTIME GALLERY","a":2000,"p":"EMPLOYEE MATCHING GIFT","c":"BROOKLYN","s":"NY","e":"","o":"202413059349101606","record_type":"named_recipient"},{"y":2023,"r":"THE DINNER PARTY LABS","a":432,"p":"EMPLOYEE MATCHING GIFT","c":"SWAMPSCOTT","s":"MA","e":"","o":"202413059349101606","record_type":"named_recipient"},{"y":2023,"r":"NEW YORK CITY FIREFIGHTERS HOCKEY CLUB","a":1600,"p":"EMPLOYEE MATCHING GIFT","c":"STATEN ISLAND","s":"NY","e":"","o":"202413059349101606","record_type":"named_recipient"},{"y":2023,"r":"AUTISTIC WOMEN AND NONBINARY NETWORK","a":10000,"p":"GENERAL SUPPORT","c":"LINCOLN","s":"NE","e":"","o":"202413059349101606","record_type":"named_recipient"},{"y":2024,"r":"ASPERGERAUTISM NETWORK INC","a":10000,"p":"TO SUPPORT VIRTUAL GROUPS/INDIVIDUAL CONSULTATIONS FOR WOMEN DIAGNOSED WITH AUTISM LATE IN LIFE","c":"WATERTOWN","s":"MA","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"AUTISTIC SELF ADVOCACY NETWORK INC","a":2500,"p":"IN SUPPORT OF THE 2024 ASAN GALA","c":"WASHINGTON","s":"DC","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"AUTISTIC WOMEN AND NONBINARY NETWORK INC","a":10000,"p":"GENERAL SUPPORT AND IN SUPPORT OF THE DEVELOPMENT WORK FOR THE BOARD RETREAT","c":"LINCOLN","s":"NE","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"INTERNATIONAL RESCUE COMMITTEE INC","a":2266,"p":"EMPLOYEE MATCHING GIFT","c":"NEW YORK","s":"NY","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"NEW YORK CITY FIREFIGHTER HOCKEY CLUB","a":3700,"p":"EMPLOYEE MATCHING GIFT","c":"STATEN ISLAND","s":"NY","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"NORTH PARK HOCKEY ASSOCIATION","a":1000,"p":"EMPLOYEE MATCHING GIFT","c":"NEW YORK","s":"NY","e":"","o":"202502799349101010","record_type":"named_recipient"},{"y":2024,"r":"SUMMERTIME GALLERY INC","a":2000,"p":"EMPLOYEE MATCHING GIFT","c":"BROOKLYN","s":"NY","e":"","o":"202502799349101010","record_type":"named_recipient"}]};window.LEDGER_MERGES=["AUTISTIC WOMEN AND NONBINARY NETWORK","SUMMERTIME GALLERY"];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

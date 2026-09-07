@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.KEMPERANDL_DATA={"meta":{"foundation":"Kemper and Leila Williams Foundation","ein":"23-7336090","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":22,"grand_total":239386,"tieout":{"2020":{"object_id":"202112219349100901","grant_count":3,"grant_sum":51807,"line25_col_d":51807,"status":"PASS"},"2021":{"object_id":"202232559349100808","grant_count":4,"grant_sum":39633,"line25_col_d":39633,"status":"PASS"},"2022":{"object_id":"202333529349100303","grant_count":5,"grant_sum":46033,"line25_col_d":46033,"status":"PASS"},"2023":{"object_id":"202423549349101107","grant_count":5,"grant_sum":29725,"line25_col_d":29725,"status":"PASS"},"2024":{"object_id":"202502959349100220","grant_count":5,"grant_sum":72188,"line25_col_d":72188,"status":"PASS"}}},"grants":[{"y":2020,"r":"DR THOMAS ADAMS","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2020,"r":"JESSICA MARIE JOHNSON","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"BALTIMORE","s":"MD","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2020,"r":"ST MARY PARISH POLICE JURY","a":46307,"p":"ASSIST IN FUNDING OF PARK OPERATIONS.","c":"FRANKLIN","s":"LA","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2021,"r":"KYLE P JACKSON","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"BERKELEY","s":"CA","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"K STEPHEN PRINCE","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"TAMPA","s":"FL","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"ST MARY PARISH POLICE JURY","a":30133,"p":"ASSIST IN FUNDING OF PARK OPERATIONS.","c":"FRANKLIN","s":"LA","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"PHILLIPPE HALBERT","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW HAVEN","s":"CT","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2022,"r":"KATHRYN OLIVARIUS","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"PALO ALTO","s":"CA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"SUSAN PENMAN","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"DURHAM","s":"NC","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"ELOY DE GUZMAN ROMERO BLANCO","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PITTSBURGH","s":"PA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"WILLIAM D JONES","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"HOUSTON","s":"TX","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"ST MARY PARISH POLICE JURY","a":32533,"p":"ASSIST IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2023,"r":"BENJAMIN GROTH","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"SHARON ANN MURPHY","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"WARWICK","s":"RI","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"ST MARY PARISH POLICE JURY","a":16225,"p":"ASSIST IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"AURELIE GODET","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"ELIZABETH ROUGET","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PRINCETON","s":"NJ","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2024,"r":"ST MARY PARISH POLICE","a":58688,"p":"ASSISTANCE IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JOHN BARDES","a":1500,"p":"WILLIAMS PRIZE WINNER FOR THE PUBLICATION \"\"THE CARCERAL CITY. SLAVERY AND THE MAKING OF MASS INCARCERATION IN NEW ORLEANS, 1803-1930\" - UNC PRESS, 2024","c":"BATON ROUGE","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"ANN NGOC TRAN","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"LOS ANGELES","s":"CA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JULIA BERNIER","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PITTSBURGH","s":"PA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JONATHAN LANDE","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"LAFAYETTE","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

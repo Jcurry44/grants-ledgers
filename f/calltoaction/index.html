@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,13 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-                    <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -306,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -418,7 +415,7 @@
 <script>
 window.CALLTOACTI_DATA={"meta":{"foundation":"Call To Action Foundation","ein":"88-2726669","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024],"grant_count":27,"grand_total":338250,"tieout":{"2022":{"object_id":"202323189349105842","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202630719349100038","grant_count":5,"grant_sum":76000,"line25_col_d":76000,"status":"PASS"},"2024":{"object_id":"202503219349108235","grant_count":22,"grant_sum":262250,"line25_col_d":262250,"status":"PASS"}}},"grants":[{"y":2023,"r":"UTAH FOUNDATION","a":40000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"THE CENTER FOR ECONOMIC OPPORTUNITY AND BELONGING","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"RONALD MCDONALD HOUSE CHARITIES","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"UNITED WAY OF SALT LAKE","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"THE CHILDREN'S CENTER UTAH","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":4750,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"SNOW COLLEGE","a":1250,"p":"GENERAL OPERATING SUPPORT","c":"EPHRAIM","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"HAWKEYE COMMUNITY COLLEGE","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"WATERLOO","s":"IA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF COLORADO BOULDER","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"BOULDER","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF COLORADO BOULDER","a":5500,"p":"GENERAL OPERATING SUPPORT","c":"BOULDER","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO MESA UNIVERSITY","a":15750,"p":"GENERAL OPERATING SUPPORT","c":"GRAND JUNCTION","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO SCHOOL OF MINES","a":19250,"p":"GENERAL OPERATING SUPPORT","c":"GOLDEN","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO SCHOOL OF MINES","a":20750,"p":"GENERAL OPERATING SUPPORT","c":"GOLDEN","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO STATE UNIVERSITY","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"FORT COLLINS","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO STATE UNIVERSITY","a":11500,"p":"GENERAL OPERATING SUPPORT","c":"FORT COLLINS","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"IDAHO STATE UNIVERSITY","a":18500,"p":"GENERAL OPERATING SUPPORT","c":"POCATELLO","s":"ID","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"IOWA CENTRAL COMMUNITY COLLEGE FOUNDATION","a":6750,"p":"GENERAL OPERATING SUPPORT","c":"FORT DODGE","s":"IA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":22500,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":13250,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH TECH UNIVERSITY","a":7000,"p":"GENERAL OPERATING SUPPORT","c":"ST GEORGE","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":17250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":11250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":8250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH VALLEY UNIVERSITY","a":19250,"p":"GENERAL OPERATING SUPPORT","c":"OREM","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":2500,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH JOB OPPORTUNITIES FOUNDATION","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-                <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-              <button type="button" class="lt-year" data-y="2025" aria-pressed="false">2025</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.FILKINSFAM_DATA={"meta":{"foundation":"Filkins Family Foundation","ein":"42-6559796","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":26,"grand_total":68398188,"tieout":{"2021":{"object_id":"202240559349100719","grant_count":6,"grant_sum":78277,"line25_col_d":78277,"status":"PASS"},"2022":{"object_id":"202340409349100629","grant_count":5,"grant_sum":104318,"line25_col_d":104318,"status":"PASS"},"2023":{"object_id":"202410669349100601","grant_count":6,"grant_sum":128795,"line25_col_d":128795,"status":"PASS"},"2024":{"object_id":"202510439349100821","grant_count":4,"grant_sum":33439585,"line25_col_d":33439585,"status":"PASS"},"2025":{"object_id":"202600579349100120","grant_count":5,"grant_sum":34647213,"line25_col_d":34647213,"status":"PASS"}}},"grants":[{"y":2021,"r":"CEDARS-SINAI","a":10307,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"EYE TUMOR RESEARCH FOUNDATION","a":10307,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"GIFT OF SIGHT","a":36214,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"PAULI MURRAY CENTER","a":10307,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"WILLS EYE HOSPITAL","a":5571,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"BABY2BABY","a":5571,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2022,"r":"CEDARS-SINAI","a":10348,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"EYE TUMOR RESEARCH FOUNDATION","a":10348,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"GIFT OF SIGHT","a":67681,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"PAULI MURRAY CENTER","a":10348,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"WILLS EYE HOSPITAL","a":5593,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2023,"r":"CEDARS-SINAI","a":15500,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"EYE TUMOR RESEARCH FOUNDATION","a":15500,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"GIFT OF SIGHT","a":66426,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"PAULI MURRAY CENTER","a":10333,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"WILLS EYE HOSPITAL FOUNDATION","a":5167,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"HIMALAYAN CATARACT PROJECT INC","a":15869,"p":"GENERAL OPERATIONS","c":"WATERBURY","s":"VT","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2024,"r":"HIMALAYAN CATARACT PROJECT INC DBA CURE BLINDNESS PROJECT","a":20612152,"p":"SURGERIES & EQUIPMENT","c":"NORWICH","s":"VT","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"ORBIS","a":10080930,"p":"TREATMENT & PREVENTION OF BLINDNESS","c":"NEW YORK","s":"NY","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"WESTSIDE FOUNDATION","a":2744475,"p":"IMPACT EXCELLENCE CAMPAIGN","c":"OMAHA","s":"NE","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"GRAND FOUNDATION","a":2028,"p":"SPENCER NELSON FUND WINTER PARK SKI COMPETITION CENTER","c":"WINTER PARK","s":"CO","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2025,"r":"METROPOLITAN OMAHA MEDICAL SOCIETY","a":31349,"p":"GENERAL OPERATIONS","c":"OMAHA","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"WESTSIDE FOUNDATION","a":60000,"p":"CAL BENTZ NATATORIUM","c":"OMAHA","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"NANCY LF DAVIS FAMILY FOUNDATION","a":1063280,"p":"GENERAL OPERATIONS","c":"LINCOLN","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"ORBIS","a":12790068,"p":"TREATMENT & PREVENTION OF BLINDNESS","c":"NEW YORK","s":"NY","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"HIMALAYAN CATARACT PROJECT INC DBA CURE BLINDNESS PROJECT","a":20702516,"p":"SURGERIES & EQUIPMENT","c":"NORWICH","s":"VT","e":"","o":"202600579349100120","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

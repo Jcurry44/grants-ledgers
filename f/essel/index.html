@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.ESSEL_DATA={"meta":{"foundation":"Essel Foundation","ein":"13-6191234","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":34,"grand_total":65597001,"tieout":{"2020":{"object_id":"202231059349102158","grant_count":8,"grant_sum":18450000,"line25_col_d":18450000,"status":"PASS"},"2021":{"object_id":"202332719349100513","grant_count":6,"grant_sum":13450001,"line25_col_d":13450001,"status":"PASS"},"2022":{"object_id":"202431359349102018","grant_count":7,"grant_sum":13230000,"line25_col_d":13230000,"status":"PASS"},"2023":{"object_id":"202413209349107236","grant_count":5,"grant_sum":5680000,"line25_col_d":5680000,"status":"PASS"},"2024":{"object_id":"202543219349101899","grant_count":8,"grant_sum":14787000,"line25_col_d":14787000,"status":"PASS"}}},"grants":[{"y":2020,"r":"COLUMBIA UNIVERSITY","a":350000,"p":"UNRESTRICTED GRANT","c":"New York","s":"NY","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"WILLIAMS COLLEGE","a":200000,"p":"UNRESTRICTED GRANT","c":"Williamstown","s":"MA","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"University of Florida","a":50000,"p":"UNRESTRICTED GRANT","c":"GAINESVILLE","s":"FL","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"Trustees Of Columbia University","a":350000,"p":"UNRESTRICTED GIFT","c":"NEW YORK","s":"NE","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":803,"p":"UNRESTRICTED GIFT","c":"BALTIMORE","s":"MD","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":14999197,"p":"UNSRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"BRIAN & BEHAVIOR RESEARCH FOUNDATION","a":3747,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2020,"r":"BRIAN & BEHAVIOR RESEARCH FOUNDATION","a":2496253,"p":"UNSRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202231059349102158","record_type":"named_recipient"},{"y":2021,"r":"WILLIAMS COLLEGE","a":400000,"p":"UNRESTRICTED GRANT","c":"Williamstown","s":"MA","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2021,"r":"Trustees Of Columbia University","a":550000,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NE","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2021,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":23271,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2021,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":9976729,"p":"UNSRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2021,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":35475,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2021,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":2464526,"p":"UNSRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202332719349100513","record_type":"named_recipient"},{"y":2022,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":1468156,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":8531844,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"THE CARTER CENTER INC","a":155000,"p":"UNRESTRICTED GRANT","c":"ATLANTA","s":"GA","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF SOUTH FLORIDA","a":25000,"p":"UNRESTRICTED GRANT","c":"TAMPA","s":"FL","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":8191,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":2491809,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2022,"r":"COLUMBIA UNIVERSITY","a":550000,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202431359349102018","record_type":"named_recipient"},{"y":2023,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":78875,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202413209349107236","record_type":"named_recipient"},{"y":2023,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":4921125,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202413209349107236","record_type":"named_recipient"},{"y":2023,"r":"THE CARTER CENTER INC","a":155000,"p":"UNRESTRICTED GRANT","c":"ATLANTA","s":"GA","e":"","o":"202413209349107236","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF SOUTH FLORIDA","a":25000,"p":"UNRESTRICTED GRANT","c":"TAMPA","s":"FL","e":"","o":"202413209349107236","record_type":"named_recipient"},{"y":2023,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":500000,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202413209349107236","record_type":"named_recipient"},{"y":2024,"r":"THE LIEBER INSTITUTE FOR BRAIN DEVELOPMENT","a":186074,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA UNIVERSITY","a":400000,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"THE CARTER CENTER INC","a":157000,"p":"UNRESTRICTED GRANT","c":"ATLANTA","s":"GA","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"POYNTER INSTITUTE","a":180000,"p":"UNRESTRICTED GRANT","c":"ST PETERSBURG","s":"FL","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION","a":65388,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"SAN FRANCISCO STUDY CENTER","a":50000,"p":"UNRESTRICTED GRANT","c":"SAN FRANCISCO","s":"CA","e":"","o":"202543219349101899","record_type":"named_recipient"},{"y":2024,"r":"BRAIN & BEHAVIOR RESEARCH FOUNDATION-SEE ATTACHED","a":2934612,"p":"UNRESTRICTED GRANT","c":"NEW YORK","s":"NY","e":"","o":"202543219349101899","record_type":"unitemized"},{"y":2024,"r":"THE LIEBER INSTITUTE FOR BRAIN DEV-SEE ATTACHED","a":10813926,"p":"UNRESTRICTED GRANT","c":"BALTIMORE","s":"MD","e":"","o":"202543219349101899","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

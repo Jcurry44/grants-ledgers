@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,13 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-                      <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-              <button type="button" class="lt-year" data-y="2025" aria-pressed="false">2025</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -306,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -416,7 +413,7 @@
 <script>
 window.THEBRUNSON_DATA={"meta":{"foundation":"The Brunson Foundation","ein":"95-4531132","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2024,2025],"grant_count":19,"grand_total":5616270,"tieout":{"2024":{"object_id":"202532099349100613","grant_count":7,"grant_sum":812970,"line25_col_d":812970,"status":"PASS"},"2025":{"object_id":"202641269349104259","grant_count":12,"grant_sum":4803300,"line25_col_d":4803300,"status":"PASS"}}},"grants":[{"y":2024,"r":"Eastwood Ranch Foundation","a":250000,"p":"Animal preservation.","c":"Los Angeles","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"Teaching Everyone Animals Matter","a":30000,"p":"Animal adoption and awareness care","c":"Sacramento","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"Stemulate OC","a":40000,"p":"Education of youth for engineering.","c":"Irvine","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"Taco Bell Foundation","a":240000,"p":"Youth development and education.","c":"Irvine","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"UC Irvine Foundation","a":100000,"p":"Medical research","c":"Irvine","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"St Margaret Episcopal School","a":100000,"p":"Elementary and Secondary Education","c":"San Juan Capistrano","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2024,"r":"Child Guidance Center","a":52970,"p":"Youth program for mental health","c":"Santa Ana","s":"CA","e":"","o":"202532099349100613","record_type":"named_recipient"},{"y":2025,"r":"Eastwood Ranch Foundation","a":150000,"p":"Animal preservation.","c":"Los Angeles","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Teaching Everyone Animals Matter","a":50000,"p":"Animal adoption and awareness care","c":"Sacramento","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Stemulate OC","a":70000,"p":"Education of youth for engineering.","c":"Irvine","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"UC Irvine Foundation","a":3100000,"p":"Medical research","c":"Irvine","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"St Margaret Episcopal School","a":100000,"p":"Elementary and Secondary Education","c":"San Juan Capistrano","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Child Guidance Center","a":97900,"p":"Youth program for mental health","c":"Santa Ana","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Jessie Rees Foundation","a":5000,"p":"Helping children with cancer","c":"Rnch Santa Margarita","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"CHOC Foundation","a":150400,"p":"Support for children in need of hospital care.","c":"Orange","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"4Th Watch Educational Services","a":35000,"p":"Children's education","c":"Gardena","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Boys Girls Club of Whittier","a":20000,"p":"Education, activities and support for children.","c":"Whittier","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Michelson Foundation Animals Founda","a":1000000,"p":"Animal welfare","c":"Culver City","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"},{"y":2025,"r":"Oak Valley College","a":25000,"p":"Equip students to live, learn, and grow in their faith, service, and calling through a Bachelor of Arts in Business framed by a Christian worldview with no student loans.","c":"Rialto","s":"CA","e":"","o":"202641269349104259","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

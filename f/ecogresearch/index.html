@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.ECOGRESEAR_DATA={"meta":{"foundation":"Ecog Research and Education Foundation","ein":"39-1723095","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":15,"grand_total":222500,"tieout":{"2020":{"object_id":"202221329349100322","grant_count":2,"grant_sum":32000,"line25_col_d":32000,"status":"PASS"},"2021":{"object_id":"202311309349101736","grant_count":3,"grant_sum":57500,"line25_col_d":57500,"status":"PASS"},"2022":{"object_id":"202441369349103224","grant_count":3,"grant_sum":42500,"line25_col_d":42500,"status":"PASS"},"2023":{"object_id":"202511359349101361","grant_count":3,"grant_sum":47500,"line25_col_d":47500,"status":"PASS"},"2024":{"object_id":"202601349349100930","grant_count":4,"grant_sum":43000,"line25_col_d":43000,"status":"PASS"}}},"grants":[{"y":2020,"r":"EMORY UNIVERSITY","a":25000,"p":"YOUNG INVESTIGATOR","c":"ATLANTA","s":"GA","e":"","o":"202221329349100322","record_type":"named_recipient"},{"y":2020,"r":"BONNIE KY","a":7000,"p":"YOUNG INVESTIGATOR","c":"PHILADELPHIA","s":"PA","e":"","o":"202221329349100322","record_type":"named_recipient"},{"y":2021,"r":"MASSACHUSETTS GENERAL HOSPITAL","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"BOSTON","s":"MA","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"MAYO CLINIC","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"MINNEAPOLIS","s":"MN","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"CHRISTINE MARIE LOVLY","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"NASHVILLE","s":"TN","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2022,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":10000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"ICAHN SCHOOL OF MEDICINE MT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"JENNIFER EADS","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"VILLANOVA","s":"PA","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2023,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":15000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"BOARD OF TRUSTEES OF THE LELAND STANFORD JUNIOR UNIV","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"REDWOOD CITY","s":"CA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"PATRICK FORDE","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"BALTIMORE","s":"MD","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2024,"r":"HIGHLAND PARK FAMILIES","a":500,"p":"GENERAL DONATION","c":"MANCHESTER","s":"CT","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"RESEARCH AMERICA","a":10000,"p":"GENERAL DONATION","c":"ARLINGTON","s":"VA","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"DUSTIN DEMING","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"DEFOREST","s":"WI","e":"","o":"202601349349100930","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

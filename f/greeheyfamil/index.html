@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -253,6 +253,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -281,16 +282,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -311,9 +302,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -433,7 +427,7 @@
 <script>
 window.GREEHEYFAM_DATA={"meta":{"foundation":"Greehey Family Foundation","ein":"48-1308657","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":5,"grand_total":41266528,"tieout":{"2020":{"object_id":"202133169349102853","grant_count":1,"grant_sum":7484560,"line25_col_d":7484560,"status":"PASS"},"2021":{"object_id":"202223149349103132","grant_count":1,"grant_sum":10128453,"line25_col_d":10128453,"status":"PASS"},"2022":{"object_id":"202313199349103741","grant_count":1,"grant_sum":7809969,"line25_col_d":7809969,"status":"PASS"},"2023":{"object_id":"202443199349100124","grant_count":1,"grant_sum":8786915,"line25_col_d":8786915,"status":"PASS"},"2024":{"object_id":"202523189349101312","grant_count":1,"grant_sum":7056631,"line25_col_d":7056631,"status":"PASS"}}},"grants":[{"y":2020,"r":"SEE ATTACHMENT A","a":7484560,"p":"GENERAL CHARITABLE CONTRIBUTION","c":"","s":"","e":"","o":"202133169349102853","record_type":"unitemized"},{"y":2021,"r":"SEE ATTACHMENT A","a":10128453,"p":"GENERAL CHARITABLE CONTRIBUTION","c":"","s":"","e":"","o":"202223149349103132","record_type":"unitemized"},{"y":2022,"r":"SEE ATTACHMENT A","a":7809969,"p":"GENERAL CHARITABLE CONTRIBUTION","c":"","s":"","e":"","o":"202313199349103741","record_type":"unitemized"},{"y":2023,"r":"SEE ATTACHMENT A","a":8786915,"p":"GENERAL CHARITABLE CONTRIBUTION","c":"","s":"","e":"","o":"202443199349100124","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHMENT A","a":7056631,"p":"GENERAL CHARITABLE CONTRIBUTION","c":"","s":"","e":"","o":"202523189349101312","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

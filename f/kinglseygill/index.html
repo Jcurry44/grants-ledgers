@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.KINGLSEYGI_DATA={"meta":{"foundation":"Kinglsey Gillespie Charitable Trust","ein":"30-6513520","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":30,"grand_total":29427201,"tieout":{"2020":{"object_id":"202103509349101105","grant_count":6,"grant_sum":4852739,"line25_col_d":4852739,"status":"PASS"},"2021":{"object_id":"202243119349101609","grant_count":6,"grant_sum":6416372,"line25_col_d":6416372,"status":"PASS"},"2022":{"object_id":"202313199349102046","grant_count":6,"grant_sum":6627682,"line25_col_d":6627682,"status":"PASS"},"2023":{"object_id":"202432699349100113","grant_count":6,"grant_sum":5388898,"line25_col_d":5388898,"status":"PASS"},"2024":{"object_id":"202513449349100716","grant_count":6,"grant_sum":6141510,"line25_col_d":6141510,"status":"PASS"}}},"grants":[{"y":2020,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":485274,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"THE STAMFORD HOSPITAL","a":2426369,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"FIRST PRESBYTERIAN CHURCH","a":485274,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"STAMFORD ROTARY TRUST FUND","a":485274,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"LONG ISLAND MUSEUM OF AMERICA","a":485274,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"SETAUKET PRESBYTERIAN CHURCH","a":485274,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2021,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":641637,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"THE STAMFORD HOSPITAL","a":3208187,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"FIRST PRESBYTERIAN CHURCH","a":641637,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"STAMFORD ROTARY TRUST FUND","a":641637,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"LONG ISLAND MUSEUM OF AMERICA","a":641637,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"SETAUKET PRESBYTERIAN CHURCH","a":641637,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2022,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":662768,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"THE STAMFORD HOSPITAL","a":3313842,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"FIRST PRESBYTERIAN CHURCH","a":662768,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"STAMFORD ROTARY TRUST FUND","a":662768,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"LONG ISLAND MUSEUM OF AMERICA","a":662768,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"SETAUKET PRESBYTERIAN CHURCH","a":662768,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2023,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":538890,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"THE STAMFORD HOSPITAL","a":2694448,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"FIRST PRESBYTERIAN CHURCH","a":538890,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"STAMFORD ROTARY TRUST FUND","a":538890,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"LONG ISLAND MUSEUM OF AMERICA","a":538890,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"SETAUKET PRESBYTERIAN CHURCH","a":538890,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2024,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":614151,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"THE STAMFORD HOSPITAL","a":3070755,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"FIRST PRESBYTERIAN CHURCH","a":614151,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"STAMFORD ROTARY TRUST FUND","a":614151,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"LONG ISLAND MUSEUM OF AMERICA","a":614151,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"SETAUKET PRESBYTERIAN CHURCH","a":614151,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202513449349100716","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

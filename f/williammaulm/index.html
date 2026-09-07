@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,15 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-                <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -308,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -426,7 +421,7 @@
 <script>
 window.WILLIAMMAU_DATA={"meta":{"foundation":"William Maul Measey Tr","ein":"94-6714956","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024],"grant_count":20,"grand_total":26507008,"tieout":{"2021":{"object_id":"202433529349100018","grant_count":5,"grant_sum":2389234,"line25_col_d":2389234,"status":"PASS"},"2022":{"object_id":"202423529349100107","grant_count":5,"grant_sum":7269070,"line25_col_d":7269070,"status":"PASS"},"2023":{"object_id":"202423529349100502","grant_count":5,"grant_sum":8695413,"line25_col_d":8695413,"status":"PASS"},"2024":{"object_id":"202513179349102586","grant_count":5,"grant_sum":8153291,"line25_col_d":8153291,"status":"PASS"}}},"grants":[{"y":2021,"r":"OLNEY FRIENDS SCHOOL","a":180520,"p":"STUDENT FINANCIAL AID","c":"BARNESVILLE","s":"OH","e":"","o":"202433529349100018","record_type":"named_recipient"},{"y":2021,"r":"GEORGE SCHOOL","a":286708,"p":"STUDENT FINANCIAL AID","c":"NEWTOWN","s":"PA","e":"","o":"202433529349100018","record_type":"named_recipient"},{"y":2021,"r":"WESTTOWN SCHOOL","a":361040,"p":"STUDENT FINANCIAL AID","c":"WEST CHESTER","s":"PA","e":"","o":"202433529349100018","record_type":"named_recipient"},{"y":2021,"r":"SCATTERGOOD FRIENDS SCHOOL","a":233614,"p":"STUDENT FINANCIAL AID","c":"WEST BRANCH","s":"IA","e":"","o":"202433529349100018","record_type":"named_recipient"},{"y":2021,"r":"CORPORATION OF HAVERFORD COLLEGE","a":1327352,"p":"STUDENT FINANCIAL AID","c":"HAVERFORD","s":"PA","e":"","o":"202433529349100018","record_type":"named_recipient"},{"y":2022,"r":"CORPORATION OF HAVERFORD COLLEGE","a":4038372,"p":"STUDENT FINANCIAL AID","c":"HAVERFORD","s":"PA","e":"","o":"202423529349100107","record_type":"named_recipient"},{"y":2022,"r":"GEORGE SCHOOL","a":872289,"p":"STUDENT FINANCIAL AID","c":"NEWTOWN","s":"PA","e":"","o":"202423529349100107","record_type":"named_recipient"},{"y":2022,"r":"OLNEY FRIENDS SCHOOL","a":549217,"p":"STUDENT FINANCIAL AID","c":"BARNESVILLE","s":"OH","e":"","o":"202423529349100107","record_type":"named_recipient"},{"y":2022,"r":"SCATTERGOOD FRIENDS SCHOOL","a":710755,"p":"STUDENT FINANCIAL AID","c":"WEST BRANCH","s":"IA","e":"","o":"202423529349100107","record_type":"named_recipient"},{"y":2022,"r":"WESTTOWN SCHOOL","a":1098437,"p":"STUDENT FINANCIAL AID","c":"WEST CHESTER","s":"PA","e":"","o":"202423529349100107","record_type":"named_recipient"},{"y":2023,"r":"CORPORATION OF HAVERFORD COLLEGE","a":4830785,"p":"STUDENT FINANCIAL AID","c":"HAVERFORD","s":"PA","e":"","o":"202423529349100502","record_type":"named_recipient"},{"y":2023,"r":"GEORGE SCHOOL","a":1043450,"p":"STUDENT FINANCIAL AID","c":"NEWTOWN","s":"PA","e":"","o":"202423529349100502","record_type":"named_recipient"},{"y":2023,"r":"OLNEY FRIENDS SCHOOL","a":656987,"p":"STUDENT FINANCIAL AID","c":"BARNESVILLE","s":"OH","e":"","o":"202423529349100502","record_type":"named_recipient"},{"y":2023,"r":"SCATTERGOOD FRIENDS SCHOOL","a":850217,"p":"STUDENT FINANCIAL AID","c":"WEST BRANCH","s":"IA","e":"","o":"202423529349100502","record_type":"named_recipient"},{"y":2023,"r":"WESTTOWN SCHOOL","a":1313974,"p":"STUDENT FINANCIAL AID","c":"WEST CHESTER","s":"PA","e":"","o":"202423529349100502","record_type":"named_recipient"},{"y":2024,"r":"CORPORATION OF HAVERFORD COLLEGE","a":4529606,"p":"STUDENT FINANCIAL AID","c":"HAVERFORD","s":"PA","e":"","o":"202513179349102586","record_type":"named_recipient"},{"y":2024,"r":"GEORGE SCHOOL","a":978396,"p":"STUDENT FINANCIAL AID","c":"NEWTOWN","s":"PA","e":"","o":"202513179349102586","record_type":"named_recipient"},{"y":2024,"r":"OLNEY FRIENDS SCHOOL","a":616027,"p":"STUDENT FINANCIAL AID","c":"BARNESVILLE","s":"OH","e":"","o":"202513179349102586","record_type":"named_recipient"},{"y":2024,"r":"SCATTERGOOD FRIENDS SCHOOL","a":797209,"p":"STUDENT FINANCIAL AID","c":"WEST BRANCH","s":"IA","e":"","o":"202513179349102586","record_type":"named_recipient"},{"y":2024,"r":"WESTTOWN SCHOOL","a":1232053,"p":"STUDENT FINANCIAL AID","c":"WEST CHESTER","s":"PA","e":"","o":"202513179349102586","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -433,7 +427,7 @@
 <script>
 window.INTERLAKEN_DATA={"meta":{"foundation":"Interlaken Foundation","ein":"52-2339479","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":26,"grand_total":77800000,"tieout":{"2020":{"object_id":"202143199349109364","grant_count":6,"grant_sum":9575000,"line25_col_d":9575000,"status":"PASS"},"2021":{"object_id":"202213499349100801","grant_count":6,"grant_sum":15725000,"line25_col_d":15725000,"status":"PASS"},"2022":{"object_id":"202333199349108828","grant_count":6,"grant_sum":17500000,"line25_col_d":17500000,"status":"PASS"},"2023":{"object_id":"202423209349101907","grant_count":4,"grant_sum":16600000,"line25_col_d":16600000,"status":"PASS"},"2024":{"object_id":"202513219349106586","grant_count":4,"grant_sum":18400000,"line25_col_d":18400000,"status":"PASS"}}},"grants":[{"y":2020,"r":"Community Foundation of Santa Cruz County","a":3000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Santa Cruz","s":"CA","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2020,"r":"HANCOCK SHAKER VILLAGE","a":1125000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"PITTSFIELD","s":"MA","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2020,"r":"WILDLIFE CONSERVATION FUND","a":3700000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Arlington","s":"VA","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2020,"r":"BERKSHIRE EAGLE JOURNALISM INITIATIVE","a":500000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"SHEFFIELD","s":"MA","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2020,"r":"KING BAUDOUIN FOUNDATION US","a":250000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"NEW YORK","s":"NY","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2020,"r":"IMPACT ASSETS","a":1000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"BETHESDA","s":"MD","e":"","o":"202143199349109364","record_type":"named_recipient"},{"y":2021,"r":"Community Foundation of Santa Cruz County","a":2000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Santa Cruz","s":"CA","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2021,"r":"RANK THE VOTE","a":50000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"CAMBRIDGE","s":"MA","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2021,"r":"WILDLIFE CONSERVATION FUND","a":11500000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Washington","s":"DC","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2021,"r":"WESTMINSTER FOUNDATION","a":1875000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"BUFFALO","s":"NY","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2021,"r":"KING BAUDOUIN FOUNDATION US","a":250000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"NEW YORK","s":"NY","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2021,"r":"TRUSTEES OF THE RESERVATION","a":50000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"BOSTON","s":"MA","e":"","o":"202213499349100801","record_type":"named_recipient"},{"y":2022,"r":"Community Foundation of Santa Cruz County","a":4700000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Santa Cruz","s":"CA","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2022,"r":"WILDLIFE CONSERVATION FUND","a":8500000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Washington","s":"DC","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2022,"r":"TRUSTEES OF THE RESERVATION","a":50000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"BOSTON","s":"MA","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2022,"r":"OAK HILL","a":250000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Hanover","s":"NH","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2022,"r":"MAKEWAY DESIGNATED FUND OF RSF SOCIAL FINANCE","a":1000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2022,"r":"WILDLIFE CONSERVATION NETWORK","a":3000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"San Francisco","s":"CA","e":"","o":"202333199349108828","record_type":"named_recipient"},{"y":2023,"r":"Community Foundation of Santa Cruz County","a":6150000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Santa Cruz","s":"CA","e":"","o":"202423209349101907","record_type":"named_recipient"},{"y":2023,"r":"WILDLIFE CONSERVATION NETWORK","a":10000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"San Francisco","s":"CA","e":"","o":"202423209349101907","record_type":"named_recipient"},{"y":2023,"r":"NEW HAMPSHIRE CHARITABLE FOUNDATION","a":250000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"CONCORD","s":"NH","e":"","o":"202423209349101907","record_type":"named_recipient"},{"y":2023,"r":"THE PRESIDENT & TRUSTEE OF WILLIAMS COLLEGE","a":200000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"WILLIAMSTOWN","s":"MA","e":"","o":"202423209349101907","record_type":"named_recipient"},{"y":2024,"r":"Community Foundation of Santa Cruz County","a":7000000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"Santa Cruz","s":"CA","e":"","o":"202513219349106586","record_type":"named_recipient"},{"y":2024,"r":"WILDLIFE CONSERVATION NETWORK","a":10550000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"San Francisco","s":"CA","e":"","o":"202513219349106586","record_type":"named_recipient"},{"y":2024,"r":"RANK THE VOTE INC","a":250000,"p":"FOR THE ORGANIZATION'S CHARITABLE USE","c":"CAMBRIDGE","s":"MA","e":"","o":"202513219349106586","record_type":"named_recipient"},{"y":2024,"r":"UNITE AMERICA INSTITUTE","a":600000,"p":"FOR ORGANIZATION'S CHARITABLE USE","c":"DENVER","s":"CO","e":"","o":"202513219349106586","record_type":"named_recipient"}]};window.LEDGER_MERGES=["RANK VOTE"];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"RANK THE VOTE":"Education & youth","RANK THE VOTE INC":"Education & youth","WESTMINSTER FOUNDATION":"Nonprofit capacity & transitions","WILDLIFE CONSERVATION NETWORK":"Environment & animals","NEW HAMPSHIRE CHARITABLE FOUNDATION":"Nonprofit capacity & transitions","UNITE AMERICA INSTITUTE":"Community & economic development"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,13 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-                  </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -306,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -428,7 +425,7 @@
 <script>
 window.LINCOLNINS_DATA={"meta":{"foundation":"Lincoln Institute of Land Policy","ein":"86-6021106","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021],"grant_count":22,"grand_total":220000,"tieout":{"2020":{"object_id":"202231369349105828","grant_count":15,"grant_sum":150000,"line25_col_d":150000,"status":"PASS"},"2021":{"object_id":"202311359349103281","grant_count":7,"grant_sum":70000,"line25_col_d":70000,"status":"PASS"},"2022":{"object_id":"202421369349106007","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202521269349101822","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2024":{"object_id":"202611339349104346","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"}}},"grants":[{"y":2020,"r":"Pablo Balan","a":10000,"p":"How Informal Institutions Shape Land Formalization in Weak States","c":"Philadelphia","s":"PA","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Jessica Bremner","a":10000,"p":"Regulating Water Access in the Coachella Valley","c":"Hartford","s":"CT","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Natalie McLennan Collar","a":10000,"p":"Identifying Patterns in Fire Disturbed Ecosystems","c":"Lakewood","s":"CO","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Todd Czurylo","a":10000,"p":"The Effect of Tax Increment Financing on Job Creation in Chicago","c":"Chicago","s":"IL","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Ellen Fu","a":10000,"p":"The Incidence of Property Taxes: Evidence from Philadelphia","c":"Philadelphia","s":"PA","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Beatrice Gordon","a":10000,"p":"Socio-Hydrologic Assessment of Agricultural Vulnerability to Changing Snowmelt","c":"Reno","s":"NV","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Kevin Grieco","a":10000,"p":"Rural Property Tax in Sierra Leone","c":"Eastham","s":"MA","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Kelsey Larson","a":10000,"p":"Tax Incentives for Private Land Conservation","c":"Belmont","s":"MA","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Jorge Mesias Moreno","a":10000,"p":"How Water Rights Institutions Affect Water Markets, Land Markets, and Water Access","c":"Tempe","s":"AZ","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Eleanor Rauh","a":10000,"p":"Does Sustainable Agriculture Intensification Exist ?","c":"Phoenix","s":"AZ","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Lidia Gonzalez Malagon","a":10000,"p":"Urban dilemmas in the transfer of building rights in Mexico City","c":"","s":"","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Diana Marcela Paz Gomez","a":10000,"p":"Urban Development Policies Oriented to Metropolitan Mass Transportation System","c":"","s":"","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Frida Sofia Cital Morales","a":10000,"p":"Modeling of Scenarios of Consumptive Water Uses in the Mexicali Valley","c":"","s":"","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Sacha Dray","a":10000,"p":"Use of Property Tax for State and Local Finances in The United States 1790-1940","c":"","s":"","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2020,"r":"Antoine Levy","a":10000,"p":"Essays on the Spatial Consequences of Public Policies","c":"","s":"","e":"","o":"202231369349105828","record_type":"named_recipient"},{"y":2021,"r":"ANNA MARIA BIERBRAUER","a":10000,"p":"WATER CONSERVATION, URBAN HEAT ISLANDS AND EQUITY IN WESTERN USA","c":"DENVER","s":"CO","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"MARISSA MANHEIM","a":10000,"p":"PLANNING FOR POTABLE REUSE OF WASTEWATER IN ARIZONA","c":"TEMPE","s":"AZ","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"ZHACHENG WANG","a":10000,"p":"MONITOR CROPLAND RESPONSE TO WATER SHORTAGE","c":"MESA","s":"AZ","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"HANA MOIDU","a":10000,"p":"SPATIOTEMPORAL DYNAMICS OF INTERMITTENT STREAMS ROLE AS AQUATIC REFUGIA","c":"BERKELEY","s":"CA","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"ECHAVARRIA CANALES","a":10000,"p":"CITIZEN SUPPORT OF LOCAL PROPERTY TAX IN GUATEMALA","c":"SANTA MONICA","s":"CA","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"ANNA ZIFF","a":10000,"p":"EASSAYS IN PLACE-BASED ECONOMIC DEVELOPMENT","c":"CLEMSON","s":"SC","e":"","o":"202311359349103281","record_type":"named_recipient"},{"y":2021,"r":"SIMONE PACI","a":10000,"p":"HOW PROPERTY TAX EQUITY PROTECTS PROGRESSIVE NORMS","c":"NEW YORK","s":"NY","e":"","o":"202311359349103281","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

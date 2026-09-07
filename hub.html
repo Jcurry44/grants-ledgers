@@ -3069,7 +3069,7 @@ table{font-family:var(--text)}
         <span class="rbt">${esc(meta.title)}</span>
         <span class="rbacts">
           <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
-          <button type="button" class="tbtn" data-rprint>Print / PDF</button>
+          <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
           <button type="button" class="tbtn rbx" id="repclose" aria-label="Close report">×</button>
         </span>
       </div>
@@ -3116,7 +3116,7 @@ table{font-family:var(--text)}
       <div class="repnote">Query figures describe the matching named-recipient grant rows; project totals include every filed row. Repeat-recipient shares use each foundation’s full available history, exclude unnamed recipients, and do not estimate renewal probability. Source ledgers disclose adjusted totals (bridges) and unitemized amounts. Prepared from public IRS Form 990-PF filings. Nothing here is an audit.</div>
       <div class="repfoot">
         <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
-        <button type="button" class="tbtn" data-rprint>Print / PDF</button>
+        <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
       </div>
     </div>`;
     // the same two actions live in the sticky bar and at the end of the report, so a
@@ -3128,6 +3128,14 @@ table{font-family:var(--text)}
     }));
     document.querySelectorAll('#pbody [data-rex]').forEach((b) => b.addEventListener('click', () => repExport(b)));
     document.querySelectorAll('#pbody [data-rprint]').forEach((b) => b.addEventListener('click', () => window.print()));
+    // Copy link: the hash already carries the search, so the link reopens it for a colleague
+    document.querySelectorAll('#pbody [data-rlink]').forEach((b) => b.addEventListener('click', () => {
+      const url = location.href;
+      const done = (ok) => { const t = 'Copy link'; b.textContent = ok ? 'Link copied' : 'Copy failed'; setTimeout(() => { b.textContent = t; }, 1600); };
+      const legacy = () => { try { const i = document.createElement('input'); i.value = url; document.body.appendChild(i); i.select(); const ok = document.execCommand('copy'); i.remove(); done(!!ok); } catch (e) { done(false); } };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(() => done(true), legacy);
+      else legacy();
+    }));
     $('repclose').addEventListener('click', closeOvl);
     $('repclose').focus({ preventScroll: true });
   }

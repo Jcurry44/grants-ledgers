@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2019" aria-pressed="false">2019</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.CHRISTINAA_DATA={"meta":{"foundation":"Christina and Robert Dow Foundation","ein":"13-6879648","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2019,2020,2021,2022,2023],"grant_count":21,"grand_total":63470073,"tieout":{"2019":{"object_id":"202102779349100510","grant_count":2,"grant_sum":10614001,"line25_col_d":10614001,"status":"PASS"},"2020":{"object_id":"202222699349100402","grant_count":6,"grant_sum":10540500,"line25_col_d":10540500,"status":"PASS"},"2021":{"object_id":"202322789349100422","grant_count":6,"grant_sum":13520500,"line25_col_d":13520500,"status":"PASS"},"2022":{"object_id":"202422899349101012","grant_count":5,"grant_sum":11118499,"line25_col_d":11118499,"status":"PASS"},"2023":{"object_id":"202512879349100101","grant_count":2,"grant_sum":17676573,"line25_col_d":17676573,"status":"PASS"}}},"grants":[{"y":2019,"r":"CHRISTINA SEIX ACADEMY","a":10611501,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202102779349100510","record_type":"named_recipient"},{"y":2019,"r":"SHILOH COMMUNITY DEVELOPMENT CORPORATION","a":2500,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202102779349100510","record_type":"named_recipient"},{"y":2020,"r":"CASA OF MERCER COUNTY INC","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"EWING","s":"NJ","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2020,"r":"CHRISTINA SEIX ACADEMY","a":9520000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2020,"r":"HOMEFRONT","a":10000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"LAWRENCEVILLE","s":"NJ","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2020,"r":"ISLES","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2020,"r":"TASK","a":500,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2020,"r":"WILLIAMS CANCER FOUNDATION","a":1000000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"FOLEY","s":"AL","e":"","o":"202222699349100402","record_type":"named_recipient"},{"y":2021,"r":"CASA OF MERCER COUNTY INC","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"EWING","s":"NJ","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2021,"r":"CHRISTINA SEIX ACADEMY","a":13400000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2021,"r":"HOMEFRONT","a":10000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"LAWRENCEVILLE","s":"NJ","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2021,"r":"ISLES","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2021,"r":"TASK","a":500,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2021,"r":"THE LINDSAY DOW CHARITABLE GIVING FUND","a":100000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TUXEDO PARK","s":"NY","e":"","o":"202322789349100422","record_type":"named_recipient"},{"y":2022,"r":"CASA OF MERCER COUNTY INC","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"EWING","s":"NJ","e":"","o":"202422899349101012","record_type":"named_recipient"},{"y":2022,"r":"CHRISTINA SEIX ACADEMY","a":11097999,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"EWING","s":"NJ","e":"","o":"202422899349101012","record_type":"named_recipient"},{"y":2022,"r":"HOMEFRONT","a":10000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"LAWRENCEVILLE","s":"NJ","e":"","o":"202422899349101012","record_type":"named_recipient"},{"y":2022,"r":"ISLES","a":5000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202422899349101012","record_type":"named_recipient"},{"y":2022,"r":"TASK","a":500,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"TRENTON","s":"NJ","e":"","o":"202422899349101012","record_type":"named_recipient"},{"y":2023,"r":"CHRISTINA SEIX ACADEMY","a":12426573,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"EWING","s":"NJ","e":"","o":"202512879349100101","record_type":"named_recipient"},{"y":2023,"r":"VANGUARD CHARITABLE ENDOWMENT PROGRAM","a":5250000,"p":"AN UNRESTRICTED GRANT TO FURTHER TO ORGANIZATION'S EXEMPT PURPOSE.","c":"WARWICK","s":"RI","e":"","o":"202512879349100101","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.KAPNICKFOU_DATA={"meta":{"foundation":"Kapnick Foundation Tr","ein":"36-7434011","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":23,"grand_total":34892253,"tieout":{"2020":{"object_id":"202103609349100100","grant_count":1,"grant_sum":6400178,"line25_col_d":6400178,"status":"PASS"},"2021":{"object_id":"202243199349106174","grant_count":1,"grant_sum":7055191,"line25_col_d":7055191,"status":"PASS"},"2022":{"object_id":"202323199349108497","grant_count":19,"grant_sum":6050000,"line25_col_d":6050000,"status":"PASS"},"2023":{"object_id":"202423209349107102","grant_count":1,"grant_sum":6943500,"line25_col_d":6943500,"status":"PASS"},"2024":{"object_id":"202533199349100308","grant_count":1,"grant_sum":8443384,"line25_col_d":8443384,"status":"PASS"}}},"grants":[{"y":2020,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":6400178,"p":"","c":"","s":"","e":"","o":"202103609349100100","record_type":"unitemized"},{"y":2021,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":7055191,"p":"","c":"","s":"","e":"","o":"202243199349106174","record_type":"unitemized"},{"y":2022,"r":"02/08/2022","a":250000,"p":"NONE General Purpose","c":"Naples Botanical Garden, Naples","s":"FL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"03/15/2022","a":10000,"p":"NONE General Purpose","c":"NCH Center for Philanthropy, Naples","s":"FL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"04/04/2022","a":25000,"p":"NONE General Purpose","c":"Network for Teaching Entrepreneurship, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"06/27/2022","a":470000,"p":"NONE General Purpose","c":"Howard University, Washington","s":"DC","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"06/27/2022","a":550000,"p":"NONE General Purpose","c":"The President & Trustees of Williams College, Williamstown","s":"MA","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"06/27/2022","a":500000,"p":"NONE General Purpose","c":"College Summit lnc, Summit","s":"NJ","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"06/27/2022","a":500000,"p":"NONE General Purpose","c":"Icahn School of Medicine at Mount Sinai, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"08/16/2022","a":250000,"p":"NONE General Purpose","c":"The Everglades Foundation, Palmetto Bay","s":"FL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"08/16/2022","a":250000,"p":"NONE General Purpose","c":"Community Foundation of Collier County, Naples","s":"FL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"10/20/2022","a":20000,"p":"NONE General Purpose","c":"Heartland Alliance for Human Needs & Human Rights, Chicago","s":"IL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"11/02/2022","a":250000,"p":"NONE General Purpose","c":"Naples Botanical Garden, Naples","s":"FL","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":200000,"p":"NONE General Purpose","c":"Room to Read, San Francisco","s":"CA","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":500000,"p":"NONE General Purpose","c":"Hospital for Special Surgery Fund lnc, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":750000,"p":"NONE General Purpose","c":"Shed NYC lnc, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":200000,"p":"NONE General Purpose","c":"Shed NYC lnc, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":375000,"p":"NONE General Purpose","c":"Vanderbilt University, Nashville","s":"TN","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/19/2022","a":100000,"p":"NONE General Purpose","c":"Gilman School lnc, Baltimore","s":"MD","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/20/2022","a":800000,"p":"NONE General Purpose","c":"Room to Read, San Francisco","s":"CA","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2022,"r":"12/27/2022","a":50000,"p":"NONE General Purpose","c":"Council on Foreign Relations, New York","s":"NY","e":"","o":"202323199349108497","record_type":"named_recipient"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":6943500,"p":"","c":"","s":"","e":"","o":"202423209349107102","record_type":"unitemized"},{"y":2024,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":8443384,"p":"","c":"","s":"","e":"","o":"202533199349100308","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

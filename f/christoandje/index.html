@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,15 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-                <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -308,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -430,7 +425,7 @@
 <script>
 window.CHRISTOAND_DATA={"meta":{"foundation":"Christo and Jeanne-Claude Foundation","ein":"83-2549505","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024],"grant_count":15,"grand_total":11374395,"tieout":{"2020":{"object_id":"202140859349100809","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202220759349100407","grant_count":2,"grant_sum":38000,"line25_col_d":38000,"status":"PASS"},"2022":{"object_id":"202341049349100704","grant_count":2,"grant_sum":23500,"line25_col_d":23500,"status":"PASS"},"2023":{"object_id":"202500239349100705","grant_count":2,"grant_sum":28000,"line25_col_d":28000,"status":"PASS"},"2024":{"object_id":"202503099349102050","grant_count":9,"grant_sum":11284895,"line25_col_d":11284895,"status":"PASS"}}},"grants":[{"y":2021,"r":"CityArts","a":26000,"p":"General support","c":"New York","s":"NY","e":"","o":"202220759349100407","record_type":"named_recipient"},{"y":2021,"r":"Publicolor","a":12000,"p":"General support","c":"New York","s":"NY","e":"","o":"202220759349100407","record_type":"named_recipient"},{"y":2022,"r":"Cooper Hewitt Museum","a":10000,"p":"General support","c":"New York","s":"NY","e":"","o":"202341049349100704","record_type":"named_recipient"},{"y":2022,"r":"Paris Opera","a":13500,"p":"General support","c":"","s":"","e":"","o":"202341049349100704","record_type":"named_recipient"},{"y":2023,"r":"CITYARTS","a":16000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202500239349100705","record_type":"named_recipient"},{"y":2023,"r":"INDEPENDENT CURATORS INTL","a":12000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202500239349100705","record_type":"named_recipient"},{"y":2024,"r":"CITYARTS","a":4500,"p":"GRANT OF ARTWORK FOR GENERAL OPERATING SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"INDEPENDENT CURATORS INTL","a":1500,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"US DEPARTMENT OF STATE","a":450000,"p":"GRANT OF ARTWORK FOR PERMANENT EXHIBITION IN THE U.S. EMBASSY IN ABU DHABI, UAE","c":"ARLINGTON","s":"VA","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"NSU ART MUSEUM FORT LAUDERDALE","a":8591000,"p":"ARTWORK GRANT FOR LONG TERM EXHIBITION AND RESEARCH PURPOSES AT THE MUSEUM IN CONJUNCTION WITH ACADEMIC PURPOSES AT NOVA SOUTHEASTERN UNIVERSITY","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"SERPENTINE GALLERY TRUST","a":180000,"p":"ARTWORK GRANT FOR LONG TERM EXHIBITION AT THE MUSEUM IN THE UNITED KINGDOM","c":"","s":"","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"NELSON ATKINS MUSEUM","a":2027500,"p":"ARTWORK GRANT FOR EXHIBITION AT THE MUSEUM","c":"KANSAS CITY","s":"MO","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"YALE UNIVERSITY PRESS","a":25000,"p":"GENERAL CHARITABLE SUPPORT","c":"NEW HAVEN","s":"CT","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"NEWPORT ART MUSEUM","a":395,"p":"GENERAL OPERATING SUPPORT","c":"NEWPORT","s":"RI","e":"","o":"202503099349102050","record_type":"named_recipient"},{"y":2024,"r":"DATECRETE STUDIO & LAB FZC","a":5000,"p":"TO SUPPORT A CASH PRIZE FOR A YOUNG ARTIST TO REALIZE A PUBLIC ARTWORK IN THE UAE","c":"","s":"","e":"","o":"202503099349102050","record_type":"named_recipient"}]};window.LEDGER_MERGES=["CITYARTS"];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

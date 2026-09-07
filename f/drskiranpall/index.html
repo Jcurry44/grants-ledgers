@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2019" aria-pressed="false">2019</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.DRSKIRANPA_DATA={"meta":{"foundation":"Drs Kiran & Pallavi Patel 2017 Foundation for Global Understandin","ein":"82-3755232","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2019,2020,2021,2022,2023],"grant_count":31,"grand_total":29941719,"tieout":{"2019":{"object_id":"202142589349100424","grant_count":9,"grant_sum":3725000,"line25_col_d":3725000,"status":"PASS"},"2020":{"object_id":"202212579349100111","grant_count":4,"grant_sum":15350000,"line25_col_d":15350000,"status":"PASS"},"2021":{"object_id":"202312569349100016","grant_count":12,"grant_sum":9390129,"line25_col_d":9390129,"status":"PASS"},"2022":{"object_id":"202432569349101318","grant_count":4,"grant_sum":833590,"line25_col_d":833590,"status":"PASS"},"2023":{"object_id":"202512589349100781","grant_count":2,"grant_sum":643000,"line25_col_d":643000,"status":"PASS"}}},"grants":[{"y":2019,"r":"RICHARD C CONDORELLI MEMORIAL FOUNDATION","a":10000,"p":"GENERAL SUPPORT","c":"NASHUA","s":"NH","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"SHAKTI KRUPA CHARITABLE TRUST","a":1000000,"p":"VARIOUS PERMANENT PROJECTS, I.E., HEALTH, EDUCATION, RURAL DEVELOPMENT AND SOCIAL SERVICE MAINLY FOR THE UPLIFTMENT OF THE RURAL COMMUNITY","c":"","s":"","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"ST JOSEPH'S HOSPITAL OF TAMPA FOUNDATION","a":500000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"MORTON PLAN MEASE FOUNDATION","a":400000,"p":"GENERAL SUPPORT","c":"BELLEAIR","s":"FL","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"AKSHAYA PATRA FOUNDATION","a":55000,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"MAHARISH INTERNATIONAL UNIVERSITY","a":10000,"p":"GENERAL SUPPORT","c":"FAIRFIELD","s":"IA","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"USF FOUNDATION INC","a":150000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"HILLSBOROUGH COMMUNITY COLLEGE FOUNDATION","a":200000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2019,"r":"FLORIDA HOSPITAL TAMPA","a":1400000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202142589349100424","record_type":"named_recipient"},{"y":2020,"r":"SHAKTI KRUPA CHARITABLE TRUST","a":1000000,"p":"VARIOUS PERMANENT PROJECTS, I.E., HEALTH, EDUCATION, RURAL DEVELOPMENT AND SOCIAL SERVICE MAINLY FOR THE UPLIFTMENT OF THE RURAL COMMUNITY","c":"","s":"","e":"","o":"202212579349100111","record_type":"named_recipient"},{"y":2020,"r":"NOVA SOUTHEASTERN UNIVERSITY INC","a":12100000,"p":"GENERAL SUPPORT","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202212579349100111","record_type":"named_recipient"},{"y":2020,"r":"SEWA INTERNATIONAL INC","a":750000,"p":"GENERAL SUPPORT","c":"HOUSTON","s":"TX","e":"","o":"202212579349100111","record_type":"named_recipient"},{"y":2020,"r":"NAADAM","a":1500000,"p":"GENERAL SUPPORT","c":"COPPELL","s":"TX","e":"","o":"202212579349100111","record_type":"named_recipient"},{"y":2021,"r":"NAADAM","a":500000,"p":"GENERAL SUPPORT","c":"COPPELL","s":"TX","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"NOVA SOUTHEASTERN UNIVERSITY INC","a":4000250,"p":"GENERAL SUPPORT","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"SHAKTI KRUPA CHARITABLE TRUST","a":500000,"p":"VARIOUS PERMANENT PROJECTS, I.E., HEALTH, EDUCATION, RURAL DEVELOPMENT AND SOCIAL SERVICE MAINLY FOR THE UPLIFTMENT OF THE RURAL COMMUNITY","c":"","s":"","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"AFRICA COLLEGE FUND","a":50000,"p":"GENERAL SUPPORT","c":"FAIRFEILD","s":"IA","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"FLORIDA HOSPITAL TAMPA","a":1500000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"HILLSBOROUGH COMMUNITY COLLEGE FOUNDATION","a":400000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"HUMAN SERVICE TRUST","a":20000,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"MORTON PLAN MEASE FOUNDATION","a":600000,"p":"GENERAL SUPPORT","c":"BELLEAIR","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"NORTHEAST OHIO MEDICAL UNIVERSITY","a":1078905,"p":"GENERAL SUPPORT","c":"ROOOTSTOWN","s":"OH","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"PATEL INSTITUTE FOR INNOVATION","a":143245,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"ST JOSEPH'S HOSPITAL OF TAMPA FOUNDATION","a":500000,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2021,"r":"USF FOUNDATION INC","a":97729,"p":"GENERAL SUPPORT","c":"TAMPA","s":"FL","e":"","o":"202312569349100016","record_type":"named_recipient"},{"y":2022,"r":"AFRICA COLLEGE FUND","a":112784,"p":"GENERAL SUPPORT","c":"FAIRFEILD","s":"IA","e":"","o":"202432569349101318","record_type":"named_recipient"},{"y":2022,"r":"SHAKTI KRUPA CHARITABLE TRUST","a":300000,"p":"VARIOUS PERMANENT PROJECTS, I.E., HEALTH, EDUCATION, RURAL DEVELOPMENT AND SOCIAL SERVICE MAINLY FOR THE UPLIFTMENT OF THE RURAL COMMUNITY","c":"","s":"","e":"","o":"202432569349101318","record_type":"named_recipient"},{"y":2022,"r":"TIE FOUNDATION","a":102000,"p":"GENERAL SUPPORT","c":"SANTA CLARA","s":"CA","e":"","o":"202432569349101318","record_type":"named_recipient"},{"y":2022,"r":"DR KIRAN C PATEL ELEMENTARY SCHOOL","a":318806,"p":"SCHOOL FURNITURE GRANT","c":"TAMPA","s":"FL","e":"","o":"202432569349101318","record_type":"named_recipient"},{"y":2023,"r":"SHAKTI KRUPA CHARITABLE TRUST","a":625000,"p":"VARIOUS PERMANENT PROJECTS, I.E., HEALTH, EDUCATION, RURAL DEVELOPMENT AND SOCIAL SERVICE MAINLY FOR THE UPLIFTMENT OF THE RURAL COMMUNITY","c":"","s":"","e":"","o":"202512589349100781","record_type":"named_recipient"},{"y":2023,"r":"MAHARISH INTERNATIONAL UNIVERSITY","a":18000,"p":"GENERAL SUPPORT","c":"FAIRFIELD","s":"IA","e":"","o":"202512589349100781","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

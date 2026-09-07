@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -435,7 +429,7 @@
 <script>
 window.GEICOPHILA_DATA={"meta":{"foundation":"Geico Philanthropic Foundation","ein":"52-1202740","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":32,"grand_total":33563472,"tieout":{"2020":{"object_id":"202113169349104451","grant_count":6,"grant_sum":10826179,"line25_col_d":10826179,"status":"PASS"},"2021":{"object_id":"202223049349100102","grant_count":7,"grant_sum":7959086,"line25_col_d":7959086,"status":"PASS"},"2022":{"object_id":"202343209349101464","grant_count":7,"grant_sum":6834950,"line25_col_d":6834950,"status":"PASS"},"2023":{"object_id":"202403209349105805","grant_count":7,"grant_sum":3312686,"line25_col_d":3312686,"status":"PASS"},"2024":{"object_id":"202503209349100380","grant_count":5,"grant_sum":4630571,"line25_col_d":4630571,"status":"PASS"}}},"grants":[{"y":2020,"r":"General Philanthropic Contributions","a":10327716,"p":"Charitable Donations to 5013C organizations","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2020,"r":"George and William B Snyder","a":253200,"p":"Scholarships for Qualified and Approved Applicants","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2020,"r":"Kreeger Scholarship Program","a":4900,"p":"Scholarships for Qualified and Approved Applicants","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2020,"r":"Snyder Family Scholarship Program","a":160243,"p":"Scholarships for Qualified and Approved Applicants","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2020,"r":"Byrne Scholarship Program","a":22980,"p":"Scholarships for Qualified and Approved Applicants","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2020,"r":"Davidson Scholarship Program","a":57140,"p":"Scholarships for Qualified and Approved Applicants","c":"Chevy Chase","s":"MD","e":"","o":"202113169349104451","record_type":"named_recipient"},{"y":2021,"r":"GENERAL PHILANTHROPIC CONTRIBUTIONS","a":7466953,"p":"Charitable Donations to 5013C organizations","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"GEORGE AND WILLIAM B SNYDER","a":237450,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"KREEGER SCHOLARSHIP PROGRAM","a":9000,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"SNYDER FAMILY SCHOLARSHIP PROGRAM","a":146003,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"BYRNE SCHOLARSHIP PROGRAM","a":22980,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"DAVIDSON SCHOLARSHIP PROGRAM","a":52800,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2021,"r":"TONY AND SALLY NICELY SCHOLARSHIP","a":23900,"p":"Scholarships for Qualified and Approved Applicants","c":"CHEVY CHASE","s":"MD","e":"","o":"202223049349100102","record_type":"named_recipient"},{"y":2022,"r":"SNYDER FAMILY SCHOLARSHIP PROGRAM","a":124957,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"BYRNE SCHOLARSHIP PROGRAM","a":21710,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"KREEGER SCHOLARSHIP PROGRAM","a":9025,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"DAVIDSON SCHOLARSHIP PROGRAM","a":55410,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"TONY AND SALLY NICELY SCHOLARSHIP","a":23900,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"GENERAL PHILANTHROPIC CONTRIBUTIONS","a":6378948,"p":"CHARITABLE DONATIONS TO 501C3 ORGANIZATIONS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2022,"r":"GEORGE AND WILLIAM B SNYDER","a":221000,"p":"SCHOLARSHIPS FOR QUALIFIED AND APPROVED APPLICANTS","c":"CHEVY CHASE","s":"MD","e":"","o":"202343209349101464","record_type":"named_recipient"},{"y":2023,"r":"KREEGER SCHOLARSHIP PROGRAM","a":9300,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"BYRNE SCHOLARSHIP PROGRAM","a":18475,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"TONY AND SALLY NICELY SCHOLARSHIP","a":24300,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"DAVIDSON SCHOLARSHIP PROGRAM","a":67665,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"GENERAL PHILANTHROPIC CONTRIBUTIONS","a":2881440,"p":"CONTRIBUTION","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"SNYDER FAMILY SCHOLARSHIP PROGRAM","a":103591,"p":"Grant","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2023,"r":"GEORGE AND WILLIAM B SNYDER","a":207915,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202403209349105805","record_type":"named_recipient"},{"y":2024,"r":"BYRNE SCHOLARSHIP PROGRAM","a":12975,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202503209349100380","record_type":"named_recipient"},{"y":2024,"r":"DAVIDSON SCHOLARSHIP PROGRAM","a":16665,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202503209349100380","record_type":"named_recipient"},{"y":2024,"r":"GENERAL PHILANTHROPIC CONTRIBUTIONS","a":4377985,"p":"CONTRIBUTION","c":"CHEVY CHASE","s":"MD","e":"","o":"202503209349100380","record_type":"named_recipient"},{"y":2024,"r":"SNYDER FAMILY SCHOLARSHIP PROGRAM","a":61836,"p":"Grant","c":"CHEVY CHASE","s":"MD","e":"","o":"202503209349100380","record_type":"named_recipient"},{"y":2024,"r":"GEORGE AND WILLIAM B SNYDER","a":161110,"p":"GRANT","c":"CHEVY CHASE","s":"MD","e":"","o":"202503209349100380","record_type":"named_recipient"}]};window.LEDGER_MERGES=["GENERAL PHILANTHROPIC CONTRIBUTIONS","GEORGE AND WILLIAM B SNYDER","KREEGER SCHOLARSHIP PROGRAM","SNYDER FAMILY SCHOLARSHIP PROGRAM","BYRNE SCHOLARSHIP PROGRAM","DAVIDSON SCHOLARSHIP PROGRAM"];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

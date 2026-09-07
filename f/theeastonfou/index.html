@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.THEEASTONF_DATA={"meta":{"foundation":"The Easton Foundation","ein":"13-3190220","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":21,"grand_total":1186712,"tieout":{"2020":{"object_id":"202230189349100503","grant_count":1,"grant_sum":2500,"line25_col_d":2500,"status":"PASS"},"2021":{"object_id":"202310309349100606","grant_count":3,"grant_sum":155000,"line25_col_d":155000,"status":"PASS"},"2022":{"object_id":"202402389349100100","grant_count":4,"grant_sum":366156,"line25_col_d":366156,"status":"PASS"},"2023":{"object_id":"202510159349100561","grant_count":5,"grant_sum":193737,"line25_col_d":193737,"status":"PASS"},"2024":{"object_id":"202611739349100131","grant_count":8,"grant_sum":469319,"line25_col_d":469319,"status":"PASS"}}},"grants":[{"y":2020,"r":"COALITION FOR THE HOMELESS","a":2500,"p":"TO AID THE HOMELESS","c":"NEW YORK","s":"NY","e":"","o":"202230189349100503","record_type":"named_recipient"},{"y":2021,"r":"COALITION FOR THE HOMELESS","a":2500,"p":"TO AID THE HOMELESS","c":"NEW YORK","s":"NY","e":"","o":"202310309349100606","record_type":"named_recipient"},{"y":2021,"r":"THE ASPEN INSTITUTE","a":2500,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"WASHINGTON","s":"DC","e":"","o":"202310309349100606","record_type":"named_recipient"},{"y":2021,"r":"THE METROPOLITAN MUSEUM OF ART","a":150000,"p":"EXHIBITION OF ART TO THE PUBLIC","c":"NEW YORK","s":"NY","e":"","o":"202310309349100606","record_type":"named_recipient"},{"y":2022,"r":"COALITION FOR THE HOMELESS","a":3225,"p":"TO AID THE HOMELESS","c":"NEW YORK","s":"NY","e":"","o":"202402389349100100","record_type":"named_recipient"},{"y":2022,"r":"THE ASPEN INSTITUTE","a":2500,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"WASHINGTON","s":"DC","e":"","o":"202402389349100100","record_type":"named_recipient"},{"y":2022,"r":"OSTERREICHISCHE GALERIE BELVEDERE(ACADEMIC INSTITUITION)","a":135431,"p":"EXPENSES, TRANSPORTATION, CRATING, INSTALLATION AND INSURANCE TO EXHIBIT THE ART WORK OF LOUISE BOURGEOIS TITLED THE \"CELL(THE LAST CLIMB)\" AT THE BELEVDERE GALERIE","c":"","s":"","e":"","o":"202402389349100100","record_type":"named_recipient"},{"y":2022,"r":"KUNSTMUSEUM BASEL","a":225000,"p":"GIFT OF ART WORK OF LOUISE BOURGEOIS TITLED, \"HE DISAPPEARED INTO COMPLETE SILENCE, 1947-2005\" $100,000GIFT OF ART WORK OF LOUISE BOURGEOIS TITLED, \"THE BIRTH, 2008\"...............................................................................,...125,000","c":"","s":"","e":"","o":"202402389349100100","record_type":"named_recipient"},{"y":2023,"r":"THE ASPEN INSTITUTE","a":13000,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"WASHINGTON","s":"DC","e":"","o":"202510159349100561","record_type":"named_recipient"},{"y":2023,"r":"MUSEUM OF MODERN ART","a":150000,"p":"ART EXHIBITION EXPENSES","c":"NEW YORK","s":"NY","e":"","o":"202510159349100561","record_type":"named_recipient"},{"y":2023,"r":"ST PETERS CHURCH CHELSEA","a":2500,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"NEW YORK","s":"NY","e":"","o":"202510159349100561","record_type":"named_recipient"},{"y":2023,"r":"ART TABLE INC","a":7500,"p":"ADVANCING THE LEADERSHIP OF WOMEN AND NONBINARY PROFESSIONALS IN THE VISUAL ARTS.","c":"NEW YORK","s":"NY","e":"","o":"202510159349100561","record_type":"named_recipient"},{"y":2023,"r":"CHARITIES AID FOUNDATION OF AMERICA","a":20737,"p":"SUPPORT OF ART EXHIBITION OF ART GALLERY OF NEW SOUTH WALES","c":"ALEXANDRIA","s":"VA","e":"","o":"202510159349100561","record_type":"named_recipient"},{"y":2024,"r":"MUSEUM OF MODERN ART","a":150000,"p":"ART EXHIBITION EXPENSES","c":"NEW YORK","s":"NY","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"THE ASPEN INSTITUTE","a":2500,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"WASHINGTON","s":"DC","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"COALITION FOR THE HOMELESS","a":3225,"p":"ASSISTANCE FOR THE HOMELESS","c":"NEW YORK","s":"NY","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"J PAUL GETTY TRUST","a":1000,"p":"LA ARTS COMMUNITY FIRE RELIEF","c":"LOS ANGELES","s":"CA","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR CULTURAL INNOVATION","a":1560,"p":"LA ARTS COMMUNITY FIRE RELIEF FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"ST PETERS CHURCH CHELSEA","a":2569,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"NEW YORK","s":"NY","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"ST PETERS CHURCH CHELSEA - RETURN OF 2024 DONATION","a":-2500,"p":"PHILANTHROPY AND SOCIAL INOVATION","c":"NEW YORK","s":"NY","e":"","o":"202611739349100131","record_type":"named_recipient"},{"y":2024,"r":"MORI ART MUSEUM","a":310965,"p":"ART EXHIBITION EXPENSES","c":"","s":"","e":"","o":"202611739349100131","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

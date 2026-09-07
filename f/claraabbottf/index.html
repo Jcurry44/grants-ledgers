@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.CLARAABBOT_DATA={"meta":{"foundation":"Clara Abbott Foundation","ein":"36-6069632","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":10,"grand_total":57271642,"tieout":{"2020":{"object_id":"202113199349102791","grant_count":2,"grant_sum":9928468,"line25_col_d":9928468,"status":"PASS"},"2021":{"object_id":"202213209349100141","grant_count":2,"grant_sum":14909105,"line25_col_d":14909105,"status":"PASS"},"2022":{"object_id":"202303199349106245","grant_count":2,"grant_sum":9042516,"line25_col_d":9042516,"status":"PASS"},"2023":{"object_id":"202423179349102557","grant_count":2,"grant_sum":10852363,"line25_col_d":10852363,"status":"PASS"},"2024":{"object_id":"202523179349102722","grant_count":2,"grant_sum":12539190,"line25_col_d":12539190,"status":"PASS"}}},"grants":[{"y":2020,"r":"FINANCIAL AID AND EDUCATIONAL SEMINARS SEE STATEMENT 14","a":6657363,"p":"GENERAL ASSISTANCE","c":"GURNEE","s":"IL","e":"","o":"202113199349102791","record_type":"unitemized"},{"y":2020,"r":"SCHOLARSHIP GRANTS SEE STATEMENT 14","a":3271105,"p":"EDUCATIONAL ASSISTANCE","c":"GURNEE","s":"IL","e":"","o":"202113199349102791","record_type":"unitemized"},{"y":2021,"r":"FINANCIAL AID AND EDUCATIONAL SEMINARS SEE STATEMENT 14","a":10844047,"p":"GENERAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202213209349100141","record_type":"unitemized"},{"y":2021,"r":"SCHOLARSHIP GRANTS SEE STATEMENT 14","a":4065058,"p":"EDUCATIONAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202213209349100141","record_type":"unitemized"},{"y":2022,"r":"FINANCIAL AID AND EDUCATIONAL SEMINARS SEE STATEMENT 14","a":4965842,"p":"GENERAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202303199349106245","record_type":"unitemized"},{"y":2022,"r":"SCHOLARSHIP GRANTS SEE STATEMENT 14","a":4076674,"p":"EDUCATIONAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202303199349106245","record_type":"unitemized"},{"y":2023,"r":"FINANCIAL AID AND EDUCATIONAL SEMINARS SEE STATEMENT 15","a":6745711,"p":"GENERAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202423179349102557","record_type":"unitemized"},{"y":2023,"r":"SCHOLARSHIP GRANTS SEE STATEMENT 15","a":4106652,"p":"EDUCATIONAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202423179349102557","record_type":"unitemized"},{"y":2024,"r":"FINANCIAL AID AND EDUCATIONAL SEMINARS SEE STATEMENT 15","a":8085652,"p":"GENERAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202523179349102722","record_type":"unitemized"},{"y":2024,"r":"SCHOLARSHIP GRANTS SEE STATEMENT 15","a":4453538,"p":"EDUCATIONAL ASSISTANCE","c":"ABBOTT PARK","s":"IL","e":"","o":"202523179349102722","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

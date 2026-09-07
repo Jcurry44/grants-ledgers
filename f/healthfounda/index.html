@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -435,7 +429,7 @@
 <script>
 window.HEALTHFOUN_DATA={"meta":{"foundation":"Health Foundation of East Texas","ein":"75-2695524","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":29,"grand_total":30283057,"tieout":{"2020":{"object_id":"202200559349100105","grant_count":12,"grant_sum":7546917,"line25_col_d":7546917,"status":"PASS"},"2021":{"object_id":"202300889349100005","grant_count":6,"grant_sum":4906625,"line25_col_d":4906625,"status":"PASS"},"2022":{"object_id":"202400649349100610","grant_count":5,"grant_sum":5196015,"line25_col_d":5196015,"status":"PASS"},"2023":{"object_id":"202530659349100108","grant_count":3,"grant_sum":5125000,"line25_col_d":5125000,"status":"PASS"},"2024":{"object_id":"202620579349100517","grant_count":3,"grant_sum":7508500,"line25_col_d":7508500,"status":"PASS"}}},"grants":[{"y":2020,"r":"UNIVERSITY OF TEXAS HEALTH SCIENCE","a":6481760,"p":"MEDICAL SCHOOL","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"1 IN 3 FOUNDATION","a":17500,"p":"AWARENESS PROGRAM","c":"FLINT","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"ALZHEIMER'S ALLIANCE OF SMITH COUNT","a":91738,"p":"EXPANSION","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"E TX COUNCIL ALCOHOLISM AND DRUG AB","a":75000,"p":"HOPE PROGRAM","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"EAST TEXAS BAPTIST UNIVERSITY","a":100000,"p":"COUNSELING PROGRAM","c":"MARSHALL","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"EAST TEXAS COMMUNITY CLINIC","a":83333,"p":"ASSISTANCE","c":"ATHENS","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"NEXT STEP COMMUNITY SOLUTIONS","a":216000,"p":"RECOVERY","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"SAMARITAN COUNSELING CENTER","a":96000,"p":"MENTAL HEALTH","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"SMITH COUNTY CHAMPIONS FOR CHILDREN","a":30000,"p":"ASSISTANCE","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"STARBRITE THERAPEUTIC EQUESTRIAN CE","a":50000,"p":"VOLUNTEER COORDINATOR","c":"WHITEHOUSE","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"TEXAS SCOTTISH RITE HOSPITAL","a":255586,"p":"HEALTHCARE","c":"DALLAS","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2020,"r":"THE MENTORING ALLIANCE","a":50000,"p":"EDUCATION","c":"TYLER","s":"TX","e":"","o":"202200559349100105","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF TEXAS HEALTH SCIENCE","a":4458800,"p":"MEDICAL SCHOOL","c":"TYLER","s":"TX","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2021,"r":"EAST TEXAS BAPTIST UNIVERSITY","a":100000,"p":"COUNSELING PROGRAM","c":"MARSHALL","s":"TX","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2021,"r":"EAST TEXAS COMMUNITY CLINIC","a":83334,"p":"ASSISTANCE","c":"ATHENS","s":"TX","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2021,"r":"NEXT STEP COMMUNITY SOLUTIONS","a":253991,"p":"RECOVERY","c":"TYLER","s":"TX","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2021,"r":"CENTER FOR EFFECTIVE PHILANTHROPY","a":500,"p":"EDUCATION","c":"CAMBRIDGE","s":"MA","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2021,"r":"TEXAS 2036","a":10000,"p":"EDUCATION","c":"DALLAS","s":"TX","e":"","o":"202300889349100005","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF TEXAS HEALTH SCIENCE","a":4715000,"p":"MEDICAL SCHOOL","c":"TYLER","s":"TX","e":"","o":"202400649349100610","record_type":"named_recipient"},{"y":2022,"r":"EAST TEXAS COMMUNITY CLINIC","a":250000,"p":"ASSISTANCE","c":"ATHENS","s":"TX","e":"","o":"202400649349100610","record_type":"named_recipient"},{"y":2022,"r":"NEXT STEP COMMUNITY SOLUTIONS","a":225000,"p":"RECOVERY","c":"TYLER","s":"TX","e":"","o":"202400649349100610","record_type":"named_recipient"},{"y":2022,"r":"FOSTERING COLLECTIVE","a":15,"p":"ASSISTANCE","c":"TYLER","s":"TX","e":"","o":"202400649349100610","record_type":"named_recipient"},{"y":2022,"r":"MOSAIC COUNSELING CENTER","a":6000,"p":"ASSISTANCE","c":"TYLER","s":"TX","e":"","o":"202400649349100610","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF TEXAS HEALTH SCIENCE","a":4750000,"p":"MEDICAL SCHOOL PLEDGE","c":"TYLER","s":"TX","e":"","o":"202530659349100108","record_type":"named_recipient"},{"y":2023,"r":"EAST TEXAS COMMUNITY CLINIC","a":100000,"p":"ASSISTANCE","c":"ATHENS","s":"TX","e":"","o":"202530659349100108","record_type":"named_recipient"},{"y":2023,"r":"NEXT STEP COMMUNITY SOLUTIONS","a":275000,"p":"RECOVERY","c":"TYLER","s":"TX","e":"","o":"202530659349100108","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF TEXAS HEALTH SCIENCE","a":7500000,"p":"MEDICAL SCHOOL","c":"TYLER","s":"TX","e":"","o":"202620579349100517","record_type":"named_recipient"},{"y":2024,"r":"MOSAIC COUNSELING CENTER","a":6000,"p":"ASSISTANCE","c":"TYLER","s":"TX","e":"","o":"202620579349100517","record_type":"named_recipient"},{"y":2024,"r":"TYLER AREA BUSINESS EDUCATION COUNC","a":2500,"p":"SUPPORT","c":"TYLER","s":"TX","e":"","o":"202620579349100517","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"1 IN 3 FOUNDATION":"Basic needs & response","EAST TEXAS BAPTIST UNIVERSITY":"Education & youth","NEXT STEP COMMUNITY SOLUTIONS":"Health & wellbeing","SMITH COUNTY CHAMPIONS FOR CHILDREN":"Education & youth","MOSAIC COUNSELING CENTER":"Health & wellbeing"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

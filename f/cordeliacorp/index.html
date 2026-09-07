@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -435,7 +429,7 @@
 <script>
 window.CORDELIACO_DATA={"meta":{"foundation":"Cordelia Corp","ein":"88-0326514","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":34,"grand_total":29511299,"tieout":{"2020":{"object_id":"202200549349100315","grant_count":9,"grant_sum":4831507,"line25_col_d":4831507,"status":"PASS"},"2021":{"object_id":"202300729349100415","grant_count":5,"grant_sum":10665000,"line25_col_d":10665000,"status":"PASS"},"2022":{"object_id":"202401069349100975","grant_count":5,"grant_sum":2189113,"line25_col_d":2189113,"status":"PASS"},"2023":{"object_id":"202541059349101124","grant_count":4,"grant_sum":5150011,"line25_col_d":5150011,"status":"PASS"},"2024":{"object_id":"202631069349100003","grant_count":11,"grant_sum":6675668,"line25_col_d":6675668,"status":"PASS"}}},"grants":[{"y":2020,"r":"TRANSPORTATION ALTERNATIVES","a":300000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"QUEERART INC","a":15000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"HARVARD WESTLAKE SCHOOL","a":225000,"p":"GENERAL","c":"LOS ANGELES","s":"CA","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"NEW YORK CITY BALLET","a":1000000,"p":"ENDOWMENT-UNRESTRICTED","c":"NEW YORK","s":"NY","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"STANFORD UNIVERSITY","a":3125000,"p":"THE FROST AMPHITHEATERRENOVATION PROJECT","c":"STANFORD","s":"CA","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"CHARITIES AID FOUNDATION OF AMERICA","a":60000,"p":"BEDALES SCHOOL","c":"ALEXANDRIA","s":"VA","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"CHARITIES AID FOUNDATION OF AMERICA","a":105000,"p":"THE JOHN BADLEYFOUNDATION","c":"ALEXANDRIA","s":"VA","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"MICHAEL CHEKHOV ASSOCIATION INC","a":1500,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2020,"r":"FLOWTHROUGH FROM SE VII DHC AIV LP","a":7,"p":"GENERAL","c":"SAN FRANCISCO","s":"CA","e":"","o":"202200549349100315","record_type":"named_recipient"},{"y":2021,"r":"TRANSPORTATION ALTERNATIVES","a":500000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202300729349100415","record_type":"named_recipient"},{"y":2021,"r":"STANFORD UNIVERSITY","a":3125000,"p":"THE FROST AMPHITHEATERRENOVATION PROJECT","c":"STANFORD","s":"CA","e":"","o":"202300729349100415","record_type":"named_recipient"},{"y":2021,"r":"YALE UNIVERSITY","a":7000000,"p":"320 YORK STRENOVATIONS","c":"NEW HAVEN","s":"CT","e":"","o":"202300729349100415","record_type":"named_recipient"},{"y":2021,"r":"INTANDEM CYCLING","a":25000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202300729349100415","record_type":"named_recipient"},{"y":2021,"r":"MAYSLES DOCUMENTARY CENTER","a":15000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202300729349100415","record_type":"named_recipient"},{"y":2022,"r":"TRANSPORTATION ALTERNATIVES","a":125000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202401069349100975","record_type":"named_recipient"},{"y":2022,"r":"YALE UNIVERSITY","a":1989103,"p":"320 YORK STRENOVATIONS","c":"NEW HAVEN","s":"CT","e":"","o":"202401069349100975","record_type":"named_recipient"},{"y":2022,"r":"INTANDEM CYCLING","a":25000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202401069349100975","record_type":"named_recipient"},{"y":2022,"r":"NEW YORK CITY BALLET","a":50000,"p":"STRAVINSKYFESTIVAL","c":"NEW YORK","s":"NY","e":"","o":"202401069349100975","record_type":"named_recipient"},{"y":2022,"r":"FLOWTHROUGH FROM SE VII DHC AIV LP","a":10,"p":"GENERAL","c":"SAN FRANCISCO","s":"CA","e":"","o":"202401069349100975","record_type":"named_recipient"},{"y":2023,"r":"TRANSPORTATION ALTERNATIVES","a":125000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202541059349101124","record_type":"named_recipient"},{"y":2023,"r":"INTANDEM CYCLING","a":25000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202541059349101124","record_type":"named_recipient"},{"y":2023,"r":"FLOWTHROUGH FROM SE VII DHC AIV LP","a":11,"p":"GENERAL","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541059349101124","record_type":"named_recipient"},{"y":2023,"r":"ALDER GRADUATE SCHOOL OF EDUCATION","a":5000000,"p":"GENERAL","c":"REDWOOD CITY","s":"CA","e":"","o":"202541059349101124","record_type":"named_recipient"},{"y":2024,"r":"TRANSPORTATION ALTERNATIVES","a":125000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"ALDER GRADUATE SCHOOL OF EDUCATION","a":5000000,"p":"GENERAL","c":"REDWOOD CITY","s":"CA","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"YALE UNIVERSITY","a":1000,"p":"PETER SALOVEY SCHOLARSHIP","c":"NEW HAVEN","s":"CT","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"MARTHA VINEYARD'S HOSPITAL","a":1000000,"p":"GENERAL","c":"OAK BLUFFS","s":"MA","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"ENO RIVER PLAYERS INC","a":10000,"p":"GENERAL","c":"RIDGEWOOD","s":"NY","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL FILM PRESERVATION FOUNDATION","a":10000,"p":"GENERAL","c":"SAN FRANCISCO","s":"CA","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"PACIFIC NORTHWEST BALLET","a":100000,"p":"GENERAL","c":"SEATTLE","s":"WA","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"GRACE CHURCH","a":10000,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"THE FILM FOUNDATION","a":150000,"p":"GENERAL","c":"LOS ANGELES","s":"CA","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN FRIENDS OF THE NATIONAL GALLERY LONDON","a":134834,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202631069349100003","record_type":"named_recipient"},{"y":2024,"r":"THE INTERNATIONAL FRIENDS OF THE LONDON LIBRARY","a":134834,"p":"GENERAL","c":"NEW YORK","s":"NY","e":"","o":"202631069349100003","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"MICHAEL CHEKHOV ASSOCIATION INC":"Arts & culture","INTANDEM CYCLING":"Health & wellbeing","NEW YORK CITY BALLET":"Arts & culture","ENO RIVER PLAYERS INC":"Arts & culture","THE INTERNATIONAL FRIENDS OF THE LONDON LIBRARY":"Education & youth"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -327,6 +327,7 @@
   let returnTo = null; // {tab, scrollY} set when a drill jumps tabs; one click back
   let profileId = null; // open recipient profile
   let pendingRef = null; // {r, pr}: a hash recipient/profile the preview could not resolve yet
+  let recLetter = null, recLetterDefault = 'A', recSort = 'total', recExpanded = false; // Recipients tab
 
   function readHash() {
     const h = location.hash.slice(1);
@@ -350,6 +351,9 @@
     };
     else if (state.r === null && p.rn && !p.q) state.q = p.rn;
     recQ = p.rq || '';
+    recLetter = /^([A-Z#]|\*)$/.test(p.rl || '') ? p.rl : null;
+    recSort = p.rs === 'name' ? 'name' : 'total';
+    recExpanded = p.rx === '1';
     state.q = p.q || '';
     state.min = [0,50000,250000,1000000].includes(+p.min) ? +p.min : 0;
     const catKeys = CAT_SUBJECTS.concat(CAT_MECHANISMS).map((c) => c.key).concat([CAT_OTHER]);
@@ -366,6 +370,9 @@
     if (state.c !== null) parts.push('cat=' + encodeURIComponent(state.c));
     if (state.pr !== null) parts.push('profile=' + encodeURIComponent(state.pr));
     if (recQ) parts.push('rq=' + encodeURIComponent(recQ));
+    if (recLetter && recLetter !== recLetterDefault) parts.push('rl=' + encodeURIComponent(recLetter));
+    if (recSort !== 'total') parts.push('rs=' + recSort);
+    if (recExpanded) parts.push('rx=1');
     if (state.sort !== 'amount-desc') parts.push('sort=' + state.sort);
     if (state.page) parts.push('page=' + (state.page + 1));
     const hash = '#' + parts.join('&');
@@ -1025,11 +1032,13 @@
 
   // ---------- recipients ----------
   let recQ = '';
-  let recLetter = null;
-  let recSort = 'total';
-  let recExpanded = false;
   function renderRecipients() {
     const SY = state.y;
+    // the sort buttons follow the state (a link can arrive with rs=name)
+    [['rs-total', 'total'], ['rs-name', 'name']].forEach(([id, v]) => {
+      const b = $(id); if (!b) return;
+      b.classList.toggle('active', recSort === v); b.setAttribute('aria-pressed', recSort === v ? 'true' : 'false');
+    });
     const sub = document.getElementById('rec-top-sub');
     if (sub) sub.textContent = SY !== null
       ? `Tax year ${SY} \u00b7 select a bar for the full profile`
@@ -1080,16 +1089,15 @@
         groupsAll.get(key).push(e);
       });
       const lettersAvail = [...groupsAll.keys()].sort((a, b) => a.localeCompare(b));
-      if (recLetter !== '*' && (recLetter === null || !groupsAll.has(recLetter))) {
-        recLetter = groupsAll.has('A') ? 'A' : (lettersAvail[0] || '*');
-      }
+      recLetterDefault = groupsAll.has('A') ? 'A' : (lettersAvail[0] || '*');
+      if (recLetter !== '*' && (recLetter === null || !groupsAll.has(recLetter))) recLetter = recLetterDefault;
       const activeL = q ? '*' : recLetter; // a search always looks across every letter
       const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
       alphaEl.hidden = false;
       alphaEl.innerHTML = `<button type="button" data-l="*" class="${activeL === '*' ? 'on' : ''}" aria-pressed="${activeL === '*' ? 'true' : 'false'}" aria-label="Show every letter">All</button>` + letters.map((L) =>
         `<button type="button" data-l="${L}" class="${activeL === L ? 'on' : ''}" aria-pressed="${activeL === L ? 'true' : 'false'}" ${groupsAll.has(L) ? '' : 'disabled'} aria-label="${activeL === L ? 'Show every letter' : 'Show only ' + L}">${L}</button>`).join('');
       alphaEl.querySelectorAll('button[data-l]:not([disabled])').forEach((b) => {
-        b.addEventListener('click', () => { recLetter = b.dataset.l === '*' ? '*' : (recLetter === b.dataset.l ? '*' : b.dataset.l); renderRecipients(); });
+        b.addEventListener('click', () => { recLetter = b.dataset.l === '*' ? '*' : (recLetter === b.dataset.l ? '*' : b.dataset.l); writeHash(false); renderRecipients(); });
       });
       const groups = activeL !== '*' ? new Map([[activeL, groupsAll.get(activeL)]]) : groupsAll;
       if (activeL !== '*') {
@@ -1108,24 +1116,14 @@
       $('rec-rows').innerHTML = slice.map((e, ri) => item(e, ri)).join('') + (showAll ? '' :
         `<li><button type="button" class="show-all" id="rec-more">Show all ${num(list.length)} ${recipWord(list.length)} — top ${N} shown, ${money(list.slice(N).reduce((s,e)=>s+e.total,0))} in the rest</button></li>`);
       const more = document.getElementById('rec-more');
-      if (more) more.addEventListener('click', () => { recExpanded = true; renderRecipients(); });
+      if (more) more.addEventListener('click', () => { recExpanded = true; writeHash(false); renderRecipients(); });
     }
     $('rec-rows').querySelectorAll('.rec-item').forEach((b) => {
       b.addEventListener('click', () => openProfile(b.dataset.ent));
     });
   }
-  $('rs-total').addEventListener('click', () => {
-    recSort = 'total';
-    $('rs-total').classList.add('active'); $('rs-total').setAttribute('aria-pressed','true');
-    $('rs-name').classList.remove('active'); $('rs-name').setAttribute('aria-pressed','false');
-    renderRecipients();
-  });
-  $('rs-name').addEventListener('click', () => {
-    recSort = 'name';
-    $('rs-name').classList.add('active'); $('rs-name').setAttribute('aria-pressed','true');
-    $('rs-total').classList.remove('active'); $('rs-total').setAttribute('aria-pressed','false');
-    renderRecipients();
-  });
+  $('rs-total').addEventListener('click', () => { recSort = 'total'; writeHash(false); renderRecipients(); });
+  $('rs-name').addEventListener('click', () => { recSort = 'name'; writeHash(false); renderRecipients(); });
   let rqTimer = null;
   $('rec-q').addEventListener('input', () => {
     clearTimeout(rqTimer);
@@ -1310,17 +1308,27 @@
       : 'No matching grants';
     $('prev-page').disabled = state.page === 0;
     $('next-page').disabled = to >= rows.length;
+    // long books: First / Last and a typed page number, hidden while two pages are enough
+    lastMaxPage = maxPage;
+    {
+      const many = maxPage >= 2;
+      const wrap = $('page-jump-wrap');
+      if (wrap) {
+        wrap.hidden = !many;
+        $('first-page').hidden = !many; $('last-page').hidden = !many;
+        $('first-page').disabled = state.page === 0; $('last-page').disabled = state.page >= maxPage;
+        const inp = $('page-jump');
+        inp.max = String(maxPage + 1);
+        if (document.activeElement !== inp) inp.value = String(state.page + 1);
+        $('page-total').textContent = num(maxPage + 1);
+      }
+    }
 
     document.querySelectorAll('#grant-thead th[data-sort]').forEach((th) => {
       const s = th.dataset.sort;
       const active = state.sort.startsWith(s + '-');
       th.classList.toggle('sorted', active);
       th.setAttribute('aria-sort', active ? (state.sort.endsWith('asc') ? 'ascending' : 'descending') : 'none');
-    });
-    document.querySelectorAll('.lt-year').forEach((b) => {
-      const on = b.dataset.y === 'all' ? state.y === null : +b.dataset.y === state.y;
-      b.classList.toggle('active', on);
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     renderScopeChips();
     if (typeof setToolsH === 'function') setToolsH();
@@ -1415,22 +1423,39 @@
     box.addEventListener('mousedown', (e) => { const s = e.target.closest('.q-sug'); if (s) { e.preventDefault(); apply(s); } });
     qEl.addEventListener('blur', () => setTimeout(close, 150));
   }
-  document.querySelectorAll('.lt-year').forEach((b) => {
-    b.addEventListener('click', () => {
-      state.y = b.dataset.y === 'all' ? null : (state.y === +b.dataset.y ? null : +b.dataset.y);
-      state.page = 0; writeHash(true); render();
-    });
-  });
   $('clear-all').addEventListener('click', () => {
     state.y = null; state.r = null; state.c = null; state.q = ''; state.min = 0; state.page = 0;
     syncControls(); writeHash(true); render();
   });
+  let lastMaxPage = 0;   // set by renderGrants: the last page index of the current view
   function gotoPage(p) {
-    state.page = p; writeHash(true); renderGrants();
+    state.page = Math.max(0, Math.min(lastMaxPage, p)); writeHash(true); renderGrants();
     $('ledger-top').scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }
   $('prev-page').addEventListener('click', () => { if (state.page > 0) gotoPage(state.page - 1); });
   $('next-page').addEventListener('click', () => gotoPage(state.page + 1));
+  $('first-page').addEventListener('click', () => gotoPage(0));
+  $('last-page').addEventListener('click', () => gotoPage(lastMaxPage));
+  {
+    const inp = $('page-jump');
+    const go = () => {
+      const v = Math.floor(Number(inp.value));
+      if (!Number.isFinite(v) || inp.value === '') { inp.value = String(state.page + 1); return; }
+      gotoPage(v - 1);
+    };
+    inp.addEventListener('change', go);
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); inp.blur(); } });
+  }
+  // "/" focuses the grants search from anywhere on the page (never while typing or in a dialog)
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target;
+    if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+    if (profileId !== null) return;
+    e.preventDefault();
+    if (state.tab !== 'grants') setTab('grants');
+    const q = $('q'); q.focus(); q.select();
+  });
   document.querySelectorAll('#grant-thead th[data-sort]').forEach((th) => {
     const s = th.dataset.sort;
     const act = () => {

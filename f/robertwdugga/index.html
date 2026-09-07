@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,14 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-                <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -307,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -429,7 +425,7 @@
 <script>
 window.ROBERTWDUG_DATA={"meta":{"foundation":"Robert W Duggan Foundation","ein":"82-2151899","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2022,2023],"grant_count":10,"grand_total":6690085,"tieout":{"2020":{"object_id":"202123229349101217","grant_count":2,"grant_sum":250000,"line25_col_d":250000,"status":"PASS"},"2021":{"object_id":"202310749349100221","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202400469349101140","grant_count":6,"grant_sum":1340040,"line25_col_d":1340040,"status":"PASS"},"2023":{"object_id":"202511159349101376","grant_count":2,"grant_sum":5100045,"line25_col_d":5100045,"status":"PASS"},"2024":{"object_id":"202503179349101780","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"}}},"grants":[{"y":2020,"r":"Church of Scientology International","a":200000,"p":"Charitiable Donation","c":"Los Angeles","s":"CA","e":"","o":"202123229349101217","record_type":"named_recipient"},{"y":2020,"r":"United States IAS Members' Trust","a":50000,"p":"Charitable Donation","c":"Los Angeles","s":"CA","e":"","o":"202123229349101217","record_type":"named_recipient"},{"y":2022,"r":"MANHATTAN COLLEGE","a":50040,"p":"EDUCATIONAL SCHOLARSHIPS.","c":"BRONX","s":"NY","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2022,"r":"JUNIPERO SERRA HIGH SCHOOL","a":400000,"p":"2022 FUND A DREAM EVENT.","c":"SAN MATEO","s":"CA","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2022,"r":"THE RIVIERA RIDGE SCHOOL","a":90000,"p":"EDUCATIONAL CONTRIBUTION FOR CO-ED INDEPENDENT DAY SCHOOL FOR JUNIOR KINDERGARTEN THROUGH 8TH GRADE.","c":"SANTA BARBARA","s":"CA","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2022,"r":"THE BOARD OF TRUSTEES OF THE LELAND STANFORD JUNIOR UNIVERSITY","a":100000,"p":"CONTRIBUTION TO THE ROBERT DUGGAN MICROBIOME FUND.","c":"STANFORD","s":"CA","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2022,"r":"CHURCH OF SCIENTOLOGY INTERNATIONAL","a":200000,"p":"RELIGIOUS CONTRIBUTION TOWARDS TORINO IDEAL ORG.","c":"LOS ANGELES","s":"CA","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF CALIFORNIA SANTA BARBARA","a":500000,"p":"CONTRIBUTION TO DILLING YANG STAFF SCHOLARSHIP PROGRAM","c":"SANTA BARBARA","s":"CA","e":"","o":"202400469349101140","record_type":"named_recipient"},{"y":2023,"r":"CLL SOCIETY","a":100000,"p":"TO RAISE AWARENESS AND PROVIDE SUPPORT SERVICES TO THOSE LIVING WITH CHRONIC LYMPHOCYTIC LEUKEMIA.","c":"CHULA VISTA","s":"CA","e":"","o":"202511159349101376","record_type":"named_recipient"},{"y":2023,"r":"ARIAS FOUNDATION FOR PEACE AND HUMAN PROGRESS","a":5000045,"p":"AN ECONOMIC DONATION TO ASSIST IN THE DEVELOPMENT OF THE \"PEACE MUSEUM\" IN SAN JOSE, COSTA RICA.","c":"","s":"","e":"","o":"202511159349101376","record_type":"named_recipient"}]};window.LEDGER_MERGES=["CHURCH OF SCIENTOLOGY INTERNATIONAL"];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

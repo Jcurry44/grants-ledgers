@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.THETESHINS_DATA={"meta":{"foundation":"The Teshinsky Family Foundation","ein":"20-7165016","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":11,"grand_total":12861599,"tieout":{"2020":{"object_id":"202142959349100414","grant_count":1,"grant_sum":1125000,"line25_col_d":1125000,"status":"PASS"},"2021":{"object_id":"202233059349101408","grant_count":1,"grant_sum":1820000,"line25_col_d":1820000,"status":"PASS"},"2022":{"object_id":"202303109349101610","grant_count":3,"grant_sum":2647574,"line25_col_d":2647574,"status":"PASS"},"2023":{"object_id":"202403209349105175","grant_count":3,"grant_sum":3581196,"line25_col_d":3581196,"status":"PASS"},"2024":{"object_id":"202533119349101873","grant_count":3,"grant_sum":3687829,"line25_col_d":3687829,"status":"PASS"}}},"grants":[{"y":2020,"r":"VANGUARD CHARITABLE","a":1125000,"p":"GENERAL OPERATING SUPPORT","c":"WARWICK","s":"RI","e":"","o":"202142959349100414","record_type":"named_recipient"},{"y":2021,"r":"VANGUARD CHARITABLE","a":1820000,"p":"GENERAL OPERATING SUPPORT","c":"WARWICK","s":"RI","e":"","o":"202233059349101408","record_type":"named_recipient"},{"y":2022,"r":"VANGUARD CHARITABLE","a":2400000,"p":"GENERAL OPERATING SUPPORT","c":"WARWICK","s":"RI","e":"","o":"202303109349101610","record_type":"named_recipient"},{"y":2022,"r":"LOST ANGELS CHILDRENS PROJECT INC","a":245374,"p":"GENERAL OPERATING SUPPORT","c":"Lancaster","s":"CA","e":"","o":"202303109349101610","record_type":"named_recipient"},{"y":2022,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":2200,"p":"GENERAL OPERATING SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202303109349101610","record_type":"named_recipient"},{"y":2023,"r":"VANGUARD CHARITABLE","a":3250000,"p":"GENERAL OPERATING SUPPORT","c":"WARWICK","s":"RI","e":"","o":"202403209349105175","record_type":"named_recipient"},{"y":2023,"r":"LOST ANGELS CHILDRENS PROJECT INC","a":330746,"p":"GENERAL OPERATING SUPPORT","c":"Lancaster","s":"CA","e":"","o":"202403209349105175","record_type":"named_recipient"},{"y":2023,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":450,"p":"GENERAL OPERATING SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202403209349105175","record_type":"named_recipient"},{"y":2024,"r":"VANGUARD CHARITABLE","a":3100000,"p":"GENERAL OPERATING SUPPORT","c":"WARWICK","s":"RI","e":"","o":"202533119349101873","record_type":"named_recipient"},{"y":2024,"r":"LOST ANGELS CHILDRENS PROJECT INC","a":585629,"p":"GENERAL OPERATING SUPPORT","c":"Lancaster","s":"CA","e":"","o":"202533119349101873","record_type":"named_recipient"},{"y":2024,"r":"SOUTHERN CALIFORNIA GRANTMAKERS","a":2200,"p":"GENERAL OPERATING SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202533119349101873","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

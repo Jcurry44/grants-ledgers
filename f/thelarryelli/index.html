@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.THELARRYEL_DATA={"meta":{"foundation":"The Larry Ellison Foundation","ein":"94-3269827","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":16,"grand_total":227929170,"tieout":{"2020":{"object_id":"202103169349103380","grant_count":5,"grant_sum":18094513,"line25_col_d":18094513,"status":"PASS"},"2021":{"object_id":"202233189349106228","grant_count":4,"grant_sum":40901000,"line25_col_d":40901000,"status":"PASS"},"2022":{"object_id":"202343179349101834","grant_count":3,"grant_sum":45097156,"line25_col_d":45097156,"status":"PASS"},"2023":{"object_id":"202433189349100808","grant_count":3,"grant_sum":53874000,"line25_col_d":53874000,"status":"PASS"},"2024":{"object_id":"202503169349101225","grant_count":1,"grant_sum":69962501,"line25_col_d":69962501,"status":"PASS"}}},"grants":[{"y":2020,"r":"REACH TO TEACH","a":6500000,"p":"SUPPORT OF REACH TO TEACH 2018-2021","c":"","s":"","e":"","o":"202103169349103380","record_type":"named_recipient"},{"y":2020,"r":"THE TONY BLAIR FOUNDATION","a":10000000,"p":"TO SUPPORT EFFECTIVE GOVERNANCE WORK IN AFRICA","c":"NEW YORK","s":"NY","e":"","o":"202103169349103380","record_type":"named_recipient"},{"y":2020,"r":"BRITISH ASIAN TRUST","a":235513,"p":"CONTRIBUTION TO THE BRITISH ASIAN TRUST","c":"","s":"","e":"","o":"202103169349103380","record_type":"named_recipient"},{"y":2020,"r":"CENTRAL SQUARE FOUNDATION","a":550000,"p":"CONTRIBUTION TO THE GUJARAT EDUCATION FOUNDATION","c":"","s":"","e":"","o":"202103169349103380","record_type":"named_recipient"},{"y":2020,"r":"DIAN FOSSEY GORILLA FUND","a":809000,"p":"CONTRIBUTION TO DIAN FOSSEY GORILLA FUND","c":"ATLANTA","s":"GA","e":"","o":"202103169349103380","record_type":"named_recipient"},{"y":2021,"r":"REACH TO TEACH","a":6500000,"p":"SUPPORT OF REACH TO TEACH 2018-2022","c":"","s":"","e":"","o":"202233189349106228","record_type":"named_recipient"},{"y":2021,"r":"THE TONY BLAIR INSTITUTE","a":33830000,"p":"TO SUPPORT EFFECTIVE GOVERNANCE WORK IN AFRICA","c":"","s":"","e":"","o":"202233189349106228","record_type":"named_recipient"},{"y":2021,"r":"DIAN FOSSEY GORILLA FUND","a":531000,"p":"CONTRIBUTION TO DIAN FOSSEY GORILLA FUND","c":"ATLANTA","s":"GA","e":"","o":"202233189349106228","record_type":"named_recipient"},{"y":2021,"r":"RESOLVE INC","a":40000,"p":"CONTRIBUTION TO RESOLVE, INC.","c":"WASHINGTON","s":"DC","e":"","o":"202233189349106228","record_type":"named_recipient"},{"y":2022,"r":"BRITISH ASIAN TRUST","a":443156,"p":"CONTRIBUTION TO THE BRITISH ASIAN TRUST","c":"","s":"","e":"","o":"202343179349101834","record_type":"named_recipient"},{"y":2022,"r":"THE TONY BLAIR INSTITUTE","a":44000000,"p":"TO SUPPORT EFFECTIVE GOVERNANCE WORK IN AFRICA","c":"","s":"","e":"","o":"202343179349101834","record_type":"named_recipient"},{"y":2022,"r":"DIAN FOSSEY GORILLA FUND","a":654000,"p":"CONTRIBUTION TO DIAN FOSSEY GORILLA FUND","c":"ATLANTA","s":"GA","e":"","o":"202343179349101834","record_type":"named_recipient"},{"y":2023,"r":"REACH TO TEACH","a":500000,"p":"CONTINUED SUPPORT OF REACH TO TEACH 2018-2023","c":"","s":"","e":"","o":"202433189349100808","record_type":"named_recipient"},{"y":2023,"r":"THE TONY BLAIR INSTITUTE","a":52455000,"p":"TO SUPPORT EFFECTIVE GOVERNANCE WORK IN AFRICA","c":"","s":"","e":"","o":"202433189349100808","record_type":"named_recipient"},{"y":2023,"r":"DIAN FOSSEY GORILLA FUND","a":919000,"p":"CONTRIBUTION TO DIAN FOSSEY GORILLA FUND","c":"ATLANTA","s":"GA","e":"","o":"202433189349100808","record_type":"named_recipient"},{"y":2024,"r":"THE TONY BLAIR INSTITUTE","a":69962501,"p":"TO SUPPORT EFFECTIVE GOVERNANCE WORK IN AFRICA","c":"","s":"","e":"","o":"202503169349101225","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

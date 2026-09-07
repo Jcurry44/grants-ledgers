@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.AVENIRFOUN_DATA={"meta":{"foundation":"Avenir Foundation","ein":"84-1245939","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":25,"grand_total":32383641,"tieout":{"2020":{"object_id":"202241369349101804","grant_count":11,"grant_sum":5587070,"line25_col_d":5587070,"status":"PASS"},"2021":{"object_id":"202331359349102803","grant_count":4,"grant_sum":2346571,"line25_col_d":2346571,"status":"PASS"},"2022":{"object_id":"202431349349102083","grant_count":2,"grant_sum":1000000,"line25_col_d":1000000,"status":"PASS"},"2023":{"object_id":"202531359349102428","grant_count":2,"grant_sum":2700000,"line25_col_d":2700000,"status":"PASS"},"2024":{"object_id":"202631359349103418","grant_count":6,"grant_sum":20750000,"line25_col_d":20750000,"status":"PASS"}}},"grants":[{"y":2020,"r":"Arnold Schoenberg Institute","a":100000,"p":"General Operating Fund","c":"","s":"","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Ars Nova Singers Inc","a":100000,"p":"Funding of current operating fund","c":"Boulder","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Central City Opera","a":2324351,"p":"General Operating Funds","c":"Wheat Ridge","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Colorado Ballet","a":20000,"p":"General Operating Funds","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Colorado Symphony Fund","a":542719,"p":"General Operating Funds","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Opera Colorado","a":200000,"p":"General Operating Funds","c":"Englewood","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Pathfinder International","a":200000,"p":"General Operating Funds","c":"Watertown","s":"MA","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"The Denver Art Museum","a":1000000,"p":"Contribution to the Denver Art Museum's Vision 2021 campaign/","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Kulakamala Foundation","a":100000,"p":"Essential supplies","c":"Redding","s":"PA","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Denver Foundation","a":500000,"p":"For the benefit of the Ars Nova Singers Working Capital EndowmentFor the benefit of the Ars Nova Singers Endowment","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame Museum Endowment","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2021,"r":"Central City Opera","a":1446571,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Denver Foundation","a":200000,"p":"For the benefit of the Ars Nova Singers Working Capital Endowment","c":"Denver","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame Museum EndowmentFor the benefit of the Ars Nova Singers Endowment","c":"Denver","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Planned Parenthood Federation of America","a":200000,"p":"General Operating Fund","c":"New York","s":"NY","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2022,"r":"Central City Opera","a":500000,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202431349349102083","record_type":"named_recipient"},{"y":2022,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame and Museum Endowment","c":"Denver","s":"CO","e":"","o":"202431349349102083","record_type":"named_recipient"},{"y":2023,"r":"Central City Opera","a":1200000,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202531359349102428","record_type":"named_recipient"},{"y":2023,"r":"National Mining Hall of Fame and Museum","a":1500000,"p":"For the benefit of the National Mining Hall of Fame and Museum Endowment","c":"Leadville","s":"CO","e":"","o":"202531359349102428","record_type":"named_recipient"},{"y":2024,"r":"American Institute of Physics","a":250000,"p":"Operations","c":"College Park","s":"MD","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Central City Opera","a":500000,"p":"Operations","c":"Arvada","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Colorado Symphony Fund","a":1000000,"p":"To Endowment in memory of Jerome Kern, Chairman Emeritus","c":"Denver","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Kulakamala Foundation","a":8000000,"p":"Purchase of 55 Basket Road Nature CenterOperating Support","c":"Reading","s":"PA","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Santa Fe Opera","a":1000000,"p":"Intial Costs for the Construction of Apprentice Housing","c":"Santa Fe","s":"NM","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"St Martin's Chamber Choir","a":10000000,"p":"Establish the St Martin's Chamber Choir Endowment Fund","c":"Denver","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -846,7 +846,12 @@ select {
 
 /* recipients */
 .q-wrap { position: relative; flex: 1 1 260px; min-width: 0; }
-.q-wrap input { width: 100%; }
+.q-wrap input { width: 100%; padding-right: 2.3rem; }
+/* the keyboard hint in the search box: "/" focuses it from anywhere on the page */
+.q-kbd { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); font: 600 0.68rem/1 var(--mono);
+  color: var(--ink-dim); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 0.2rem 0.4rem; background: var(--sheet); pointer-events: none; }
+.q-wrap:focus-within .q-kbd, .q-wrap input:not(:placeholder-shown) ~ .q-kbd { display: none; }
+@media (pointer: coarse) { .q-kbd { display: none; } .q-wrap input { padding-right: 0.75rem; } }
 .q-suggest {
   position: absolute; top: calc(100% + 5px); left: 0; z-index: 25;
   width: max-content; min-width: 100%; max-width: min(540px, calc(100vw - 28px));
@@ -1080,6 +1085,15 @@ select {
 .pager button { appearance: none; cursor: pointer; background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: var(--r-s); padding: 0 1rem; height: 44px; transition: all var(--dur); }
 .pager button:hover:not(:disabled) { border-color: var(--green); background: var(--green-soft); }
 .pager button:disabled { opacity: 0.35; cursor: not-allowed; }
+/* long books: First / Last and a typed page number beside Previous / Next */
+.pager-nav { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+.page-jump { display: inline-flex; align-items: center; gap: 0.35rem; margin: 0 0.25rem; font: 500 0.8rem/1 var(--sans); color: var(--ink-dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.page-jump input { width: 5ch; padding: 0.3rem 0.3rem; text-align: center; font: 600 0.8rem/1 var(--mono); color: var(--ink);
+  background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: var(--r-s); -moz-appearance: textfield; appearance: textfield; }
+.page-jump input::-webkit-outer-spin-button, .page-jump input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.page-jump input:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; border-color: var(--green); }
+@media (pointer: coarse) { .page-jump input { min-height: 40px; width: 6ch; } }
+@media (max-width: 719px) { .pager { flex-direction: column; align-items: stretch; } .pager-nav { justify-content: center; } }
 .empty { padding: 2.2rem 1rem; text-align: center; color: var(--ink-dim); }
 
 /* methodology */

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -429,7 +423,7 @@
 <script>
 window.BOOTHFOUND_DATA={"meta":{"foundation":"Booth Foundation","ein":"20-0667161","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":38,"grand_total":20637043,"tieout":{"2020":{"object_id":"202143199349103589","grant_count":6,"grant_sum":3356558,"line25_col_d":3356558,"status":"PASS"},"2021":{"object_id":"202433209349102553","grant_count":5,"grant_sum":3591118,"line25_col_d":3591118,"status":"PASS"},"2022":{"object_id":"202511199349100326","grant_count":3,"grant_sum":3398112,"line25_col_d":3398112,"status":"PASS"},"2023":{"object_id":"202531219349101608","grant_count":3,"grant_sum":3856132,"line25_col_d":3856132,"status":"PASS"},"2024":{"object_id":"202503219349102145","grant_count":21,"grant_sum":6435123,"line25_col_d":6435123,"status":"PASS"}}},"grants":[{"y":2020,"r":"HUNINGTON MUSEUM OF ART","a":15000,"p":"GENERAL SUPPORT","c":"HUNTINGTON","s":"WV","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2020,"r":"INTERNATIONAL COOPERATING MINISTRIES","a":550000,"p":"TO BUILD CHURCHES IN AFRICA","c":"HAMPTON","s":"VA","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2020,"r":"JUPITER MEDICAL CENTER","a":20000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2020,"r":"MARTIN HEALTH FOUNDATION","a":10000,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2020,"r":"OUTREACH FOUNDATION OF FIRST PRESBYTERIAN","a":2760058,"p":"PROGRAM FOR DISADVANTAGED PEOPLE","c":"FRANKLIN","s":"TN","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2020,"r":"PLACE OF HOPE","a":1500,"p":"GENERAL SUPPORT","c":"PALM BEACH GARDENS","s":"FL","e":"","o":"202143199349103589","record_type":"named_recipient"},{"y":2021,"r":"INTERNATIONAL COOPERATING MINISTRIES","a":760000,"p":"TO BUILD CHURCHES IN AFRICA","c":"HAMPTON","s":"VA","e":"","o":"202433209349102553","record_type":"named_recipient"},{"y":2021,"r":"JUPITER MEDICAL CENTER","a":20000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202433209349102553","record_type":"named_recipient"},{"y":2021,"r":"OUTREACH FOUNDATION OF FIRST PRESBYTERIAN","a":2800918,"p":"PROGRAM FOR DISADVANTAGED PEOPLE","c":"FRANKLIN","s":"TN","e":"","o":"202433209349102553","record_type":"named_recipient"},{"y":2021,"r":"CLEVELAND CLINIC","a":10000,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202433209349102553","record_type":"named_recipient"},{"y":2021,"r":"MARTIN COUNTY FIRE FIGHTERS","a":200,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202433209349102553","record_type":"named_recipient"},{"y":2022,"r":"JUPITER MEDICAL CENTER","a":20000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202511199349100326","record_type":"named_recipient"},{"y":2022,"r":"OUTREACH FOUNDATION OF FIRST PRESBYTERIAN","a":3368112,"p":"PROGRAM FOR DISADVANTAGED PEOPLE","c":"FRANKLIN","s":"TN","e":"","o":"202511199349100326","record_type":"named_recipient"},{"y":2022,"r":"CLEVELAND CLINIC","a":10000,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202511199349100326","record_type":"named_recipient"},{"y":2023,"r":"JUPITER MEDICAL CENTER","a":50000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202531219349101608","record_type":"named_recipient"},{"y":2023,"r":"OUTREACH FOUNDATION OF FIRST PRESBYTERIAN","a":3806097,"p":"PROGRAM FOR DISADVANTAGED PEOPLE","c":"FRANKLIN","s":"TN","e":"","o":"202531219349101608","record_type":"named_recipient"},{"y":2023,"r":"FRATERNAL ORDER OF POLICE","a":35,"p":"GENERAL SUPPORT","c":"WEST PALM BEACH","s":"FL","e":"","o":"202531219349101608","record_type":"named_recipient"},{"y":2024,"r":"CLEVELAND CLINIC FOUNDATION","a":15000,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"OUTREACH FOUNDATION OF FIRST PRESBY","a":4925123,"p":"PROGRAM FOR DISADVANTAGED PEOPLE","c":"FRANKLIN","s":"TN","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"DERAN WRIGHT","a":78000,"p":"STATUE OF FOUNDER","c":"FORT WORTH","s":"TX","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"LOVE AND HOPE IN ACTION","a":25000,"p":"SUPPORT FOR THE HOMELESS","c":"STUART","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"ATLANTIC CLASSICAL ORCHESTRA","a":45000,"p":"GENERAL SUPPORT","c":"VERO BEACH","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"CARTER HIGH SCHOOL BAND","a":10000,"p":"GENERAL SUPPORT","c":"STRAWBERRY PLAINS","s":"TN","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR COMMUNITY STEWARDSHIP","a":15000,"p":"GENERAL SUPPORT","c":"MADISON","s":"WI","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"CHILDRENS HOSPITAL COLORADO FOUNDAT","a":15000,"p":"GENERAL SUPPORT","c":"DENVER","s":"CO","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"FAMILY PROMISE OF MARTIN CO INC","a":555000,"p":"SHELTER AND CARE FOR NEEDY FAMILIES","c":"STUART","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"HOBE SOUND CHRISTIAN ACADEMY","a":11500,"p":"GENERAL SUPPORT","c":"HOBE SOUND","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"HUNTINGTON MUSEUM OF ART","a":25000,"p":"GENERAL SUPPORT","c":"HUNTINGTON","s":"WV","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"JAMES WHITE'S FORT ASSOCIATION","a":3000,"p":"GENERAL SUPPORT","c":"KNOXVILLE","s":"TN","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"JUPITER MEDICAL CENTER","a":375000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"JUPITER POLICE FOUNDATION","a":5000,"p":"GENERAL SUPPORT","c":"JUPITER","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"LIGHTHOUSE ART CENTER","a":1000,"p":"GENERAL SUPPORT","c":"TEQUESTA","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"ONE LOVE COMMUNITY INC","a":15000,"p":"GENERAL SUPPORT","c":"BROOKLYN","s":"NY","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"PLACE OF HOPE","a":175000,"p":"WELLBEING OF CHILDREN AND FAMILIES","c":"STUART","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"SAMARITANS PURSE","a":100000,"p":"HELPING IN JESUS' NAME","c":"BOONE","s":"NC","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"TREASURE COAST FOOD BANK","a":13000,"p":"GENERAL SUPPORT","c":"FT PIERCE","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"THE ART FOUNDATION OF MC","a":13500,"p":"GENERAL SUPPORT","c":"STUART","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"},{"y":2024,"r":"HELPING PEOPLE SUCCEED","a":15000,"p":"HELP THE DISADVANTAGED","c":"JENSEN BEACH","s":"FL","e":"","o":"202503219349102145","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

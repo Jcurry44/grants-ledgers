@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -429,7 +423,7 @@
 <script>
 window.THEEDWARDL_DATA={"meta":{"foundation":"The Edward Lowe Foundation","ein":"38-2679673","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":27,"grand_total":162866,"tieout":{"2020":{"object_id":"202113169349100301","grant_count":8,"grant_sum":92250,"line25_col_d":92250,"status":"PASS"},"2021":{"object_id":"202213129349100946","grant_count":6,"grant_sum":22456,"line25_col_d":22456,"status":"PASS"},"2022":{"object_id":"202303189349100100","grant_count":3,"grant_sum":12455,"line25_col_d":12455,"status":"PASS"},"2023":{"object_id":"202403199349100000","grant_count":6,"grant_sum":23215,"line25_col_d":23215,"status":"PASS"},"2024":{"object_id":"202543179349104009","grant_count":4,"grant_sum":12490,"line25_col_d":12490,"status":"PASS"}}},"grants":[{"y":2020,"r":"KINEXUS GROUP","a":70000,"p":"GENERAL SUPPORT","c":"BENTON HARBOR","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF CENTRAL FLORIDA RESEARCH FOUNDATION INC","a":10000,"p":"GENERAL SUPPORT","c":"ORLANDO","s":"FL","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"HELPING HANDS OF CASS COUNTY","a":1500,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"ACTION MINISTRIES","a":1100,"p":"GENERAL SUPPORT","c":"DOWAGIAC","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"EDWARDSBURG FOOD PANTRY","a":1100,"p":"GENERAL SUPPORT","c":"EDWARDSBURG","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"MARCELLUS COMMUNITY FOOD PANTRY","a":1100,"p":"GENERAL SUPPORT","c":"MARCELLUS","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"SALVATIUOIN ARMY OF NILES","a":800,"p":"GENERAL SUPPORT","c":"NILES","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2020,"r":"MISCELLANEOUS 500 AND UNDER","a":6650,"p":"GENERAL SUPPORT","c":"SOUTHWEST","s":"MI","e":"","o":"202113169349100301","record_type":"named_recipient"},{"y":2021,"r":"MICHIGAN CELEBRATES SMALL BUSINESS","a":10000,"p":"GENERAL SUPPORT","c":"LANSING","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2021,"r":"HELPING HANDS OF CASS COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2021,"r":"UNITED WAY OF SW MICHIGAN","a":1000,"p":"GENERAL SUPPORT","c":"ST JOSEPH","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2021,"r":"JUNIOR ACHIEVEMENT OF BERRIEN & CASS COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"ST JOSEPH","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2021,"r":"CASS COUNTY FAIR ASSOCIATION","a":916,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2021,"r":"MISCELLANEOUS - 500 AND UNDER","a":8540,"p":"GENERAL SUPPORT","c":"SOUTHWEST","s":"MI","e":"","o":"202213129349100946","record_type":"named_recipient"},{"y":2022,"r":"CASS COUNTY FAIR ASSOCIATION","a":3065,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202303189349100100","record_type":"named_recipient"},{"y":2022,"r":"HELPING HANDS OF CASS COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202303189349100100","record_type":"named_recipient"},{"y":2022,"r":"MISCELLANEOUS - 500 AND UNDER","a":8390,"p":"GENERAL SUPPORT","c":"SOUTHWEST","s":"MI","e":"","o":"202303189349100100","record_type":"named_recipient"},{"y":2023,"r":"MICHIGAN CELEBRATES SMALL BUSINESS","a":10000,"p":"GENERAL SUPPORT","c":"LANSING","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2023,"r":"CASS COUNTY FAIR ASSOCIATION","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2023,"r":"CASS KICKSTART TO CAREERS","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2023,"r":"HELPING HANDS OF CASS COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2023,"r":"HEART OF THE LAKES","a":750,"p":"GENERAL SUPPORT","c":"BAY CITY","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2023,"r":"MISCELLANEOUS - 500 AND UNDER","a":9465,"p":"GENERAL SUPPORT","c":"SOUTHWEST","s":"MI","e":"","o":"202403199349100000","record_type":"named_recipient"},{"y":2024,"r":"CASS COUNTY FAIR ASSOCIATION","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202543179349104009","record_type":"named_recipient"},{"y":2024,"r":"CASS KICKSTART TO CAREERS","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202543179349104009","record_type":"named_recipient"},{"y":2024,"r":"HELPING HANDS OF CASS COUNTY","a":1000,"p":"GENERAL SUPPORT","c":"CASSOPOLIS","s":"MI","e":"","o":"202543179349104009","record_type":"named_recipient"},{"y":2024,"r":"MISCELLANEOUS - 500 AND UNDER","a":9490,"p":"GENERAL SUPPORT","c":"SOUTHWEST","s":"MI","e":"","o":"202543179349104009","record_type":"named_recipient"}]};window.LEDGER_MERGES=["MISCELLANEOUS 500 AND UNDER"];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

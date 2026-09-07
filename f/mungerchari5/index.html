@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=443251709f">
+<link rel="stylesheet" href="../../assets/ledger.css?v=20a74a97ba">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -251,6 +251,7 @@
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
               <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <kbd class="q-kbd" aria-hidden="true">/</kbd>
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -279,16 +280,6 @@
             <button type="button" id="print-btn" class="lt-btn" title="Print a full report for the rows in view — every matching grant, not just this page, with the headline figures and the reconciliation">Print report</button>
             <button type="button" id="link-btn" class="lt-btn" title="Copy a link that reopens this exact view — filters, search, sort and page included">Copy link</button>
           </div>
-          <div class="lt-row">
-            <div class="lt-years" role="group" aria-label="Filter by tax year">
-              <button type="button" class="lt-year" data-y="all" aria-pressed="true">All</button>
-              <button type="button" class="lt-year" data-y="2020" aria-pressed="false">2020</button>
-              <button type="button" class="lt-year" data-y="2021" aria-pressed="false">2021</button>
-              <button type="button" class="lt-year" data-y="2022" aria-pressed="false">2022</button>
-              <button type="button" class="lt-year" data-y="2023" aria-pressed="false">2023</button>
-              <button type="button" class="lt-year" data-y="2024" aria-pressed="false">2024</button>
-            </div>
-          </div>
         </div>
         <div class="table-wrap">
           <table class="grant-table">
@@ -309,9 +300,12 @@
         <div class="empty" id="empty" hidden>No grants match this view.</div>
         <div class="pager">
           <span id="page-info" aria-live="polite">—</span>
-          <div>
+          <div class="pager-nav">
+            <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
+            <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
         </div>
         <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
@@ -431,7 +425,7 @@
 <script>
 window.MUNGERCHAR_DATA={"meta":{"foundation":"Munger Charitable Tr Number Two","ein":"27-6085478","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":21,"grand_total":5714215,"tieout":{"2020":{"object_id":"202132729349101033","grant_count":1,"grant_sum":20000,"line25_col_d":20000,"status":"PASS"},"2021":{"object_id":"202212389349100716","grant_count":1,"grant_sum":21000,"line25_col_d":21000,"status":"PASS"},"2022":{"object_id":"202342239349100919","grant_count":1,"grant_sum":26000,"line25_col_d":26000,"status":"PASS"},"2023":{"object_id":"202402689349100750","grant_count":1,"grant_sum":24000,"line25_col_d":24000,"status":"PASS"},"2024":{"object_id":"202542419349100409","grant_count":17,"grant_sum":5623215,"line25_col_d":5623215,"status":"PASS"}}},"grants":[{"y":2020,"r":"Marlborough School","a":20000,"p":"general support","c":"Los Angeles","s":"CA","e":"","o":"202132729349101033","record_type":"named_recipient"},{"y":2021,"r":"Marlborough School","a":21000,"p":"general support","c":"Los Angeles","s":"CA","e":"","o":"202212389349100716","record_type":"named_recipient"},{"y":2022,"r":"MT VERNON LADIES ASSOCIATION","a":26000,"p":"general support","c":"MOUNT VERNON","s":"VA","e":"","o":"202342239349100919","record_type":"named_recipient"},{"y":2023,"r":"MT VERNON LADIES ASSOCIATION OF THE UNION","a":24000,"p":"GENERAL SUPPORT","c":"MOUNT VERNON","s":"VA","e":"","o":"202402689349100750","record_type":"named_recipient"},{"y":2024,"r":"MT VERNON LADIES ASSOCIATION OF THE UNION","a":401275,"p":"(1) DESCRIPTION: 983 SHARES OF BERKSHIRE HATHAWAY CLASS B SECURITIES (2) BOOK VALUE: $65,202 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 07/05/2024 (6) PURPOSE: GENERAL OPERATING SUPPORT","c":"MOUNT VERNON","s":"VA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"REGENTS OF THE UNIVERSITY OF CALIFORNIA AT BERKELE","a":1000,"p":"CHARITABLE","c":"BERKELEY","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"HARVARD WESTLAKE SCHOOL","a":5000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"ST MATTHEW'S MUSIC GUILD","a":5000,"p":"CHARITABLE","c":"PACIFIC PALISADES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"Rector Wardens & Vestrymen of St Matthews Parish","a":25000,"p":"CHARITABLE","c":"PACIFIC PALISADES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"BOARD OF TRUSTEES OF THE LELAND STANFORD JUNIOR UN","a":20000,"p":"CHARITABLE","c":"STANFORD","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"LAS MADRINAS","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"HENRY E HUNTINGTON LIBRARY AND ART GALLERY","a":25000,"p":"CHARITABLE","c":"SAN MARINO","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"LOS ANGELES PHILHARMONIC ASSOCIATION","a":5000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"JOHN THOMAS DYE SCHOOL","a":10000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"UCLA FOUNDATION","a":60000,"p":"CHARITABLE","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"SIGMA NU EDUCATIONAL FOUNDATION","a":250,"p":"CHARITABLE","c":"LEXINGTON","s":"VA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"HONOLULU MUSEUM OF ART","a":10000,"p":"CHARITABLE","c":"HONOLULU","s":"HI","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"JOHN THOMAS DYE SCHOOL","a":4694673,"p":"(1) DESCRIPTION: 6 SHARES OF BERKSHIRE HATHAWAY CLASS A SECURITIES (2) BOOK VALUE: $3,664,008 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 04/16/2025 (6) PURPOSE: GENERAL OPERATING SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"JOHN THOMAS DYE SCHOOL","a":310161,"p":"(1) DESCRIPTION: 600 SHARES OF BERKSHIRE HATHAWAY CLASS B SECURITIES (2) BOOK VALUE: $58,245 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 04/22/2025 (6) PURPOSE: GENERAL OPERATING SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"MT VERNON LADIES ASSOCIATION OF THE UNION","a":15000,"p":"CHARITABLE","c":"MOUNT VERNON","s":"VA","e":"","o":"202542419349100409","record_type":"named_recipient"},{"y":2024,"r":"REGENTS OF THE UNIVERSITY OF MICHIGAN","a":25856,"p":"(1) DESCRIPTION: 48 SHARES OF BERKSHIRE HATHAWAY CLASS B SECURITIES (2) BOOK VALUE: $22,030 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 05/02/2025 (6) PURPOSE: GENERAL OPERATING SUPPORT","c":"ANN ARBOR","s":"MI","e":"","o":"202542419349100409","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=443251709f"></script>
+<script src="../../assets/ledger.js?v=20a74a97ba"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
