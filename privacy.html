@@ -77,8 +77,8 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <header class="cover"><div class="wrap">
   <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Privacy</div>
   <h1>What this site collects<br>about you: nothing</h1>
-  <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies and no analytics. This page describes the actual data flows, verified against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
-  <p class="stamp">Effective 31 August 2026 · verified against the published source on that date</p>
+  <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies and no analytics. This page describes the actual data flows, checked against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
+  <p class="stamp">Effective 31 August 2026 · checked against the published source on that date</p>
 </div></header>
 
 <nav class="tnav" aria-label="Trust and policy"><div class="wrap">
@@ -136,7 +136,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   <div class="note">
     <b>Google Fonts — the three typefaces</b>
     <p>The pages load their typefaces (Fraunces, Newsreader and IBM Plex Mono) from Google’s font service at <span class="mono">fonts.googleapis.com</span> and <span class="mono">fonts.gstatic.com</span>. Those requests go to Google and, like any web request, carry your IP address and user-agent string. This is the only third-party asset on the site; there is no other external script, stylesheet, image, frame or endpoint anywhere on it.</p>
-    <p>If your organisation’s policy is to avoid third-party font requests, this is the single dependency to raise — the fonts can be self-hosted instead. Say so and it will be changed.</p>
+    <p>If your organization’s policy is to avoid third-party font requests, this is the single dependency to raise — the fonts can be self-hosted instead. Say so and it will be changed.</p>
   </div>
 
   <div class="body" style="margin-top:1.4rem">
@@ -162,14 +162,14 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
   <h2>About the people named in the data</h2>
 <p>This site publishes information from Form 990-PF, the annual return that private foundations file with the Internal Revenue Service and which the IRS makes available for public inspection. The foundations, recipients, amounts, purposes and addresses shown are reproduced from those public documents as filed. Nothing is added to them. No filing is enriched with information from another source about any person, no profile of any individual is constructed, and no attempt is made to identify anyone.</p>
-<p><strong>Grants to individuals are handled differently from grants to organisations.</strong> Some foundations report scholarships, fellowships, educational loans and hardship grants paid to named people &mdash; students, patients, families, sometimes minors. Those rows are part of the public return and they stay on the foundation&rsquo;s own ledger page, exactly as filed, because every year of that page must still add up to the total the foundation reported. What they do not become is an index. A row that names an individual is left out of the site-wide search, out of the cross-foundation recipient profiles, and out of the bulk download, where it appears only as <code>[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]</code> with its amount, year and purpose intact. At the last build this applied to 33,950 rows across 365 foundations. The rule that decides which rows these are is published in the source code and combines the filer&rsquo;s own choice of the person-name field on the return with a test of the name and the stated purpose; it is deliberately conservative, and a real organisation occasionally falls on the individual side of it.</p>
+<p><strong>Grants to individuals are handled differently from grants to organizations.</strong> Some foundations report scholarships, fellowships, educational loans and hardship grants paid to named people &mdash; students, patients, families, sometimes minors. Those rows are part of the public return and they stay on the foundation&rsquo;s own ledger page, exactly as filed, because every year of that page must still add up to the total the foundation reported. What they do not become is an index. A row that names an individual is left out of the site-wide search, out of the cross-foundation recipient profiles, and out of the bulk download, where it appears only as <code>[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]</code> with its amount, year and purpose intact. At the last build this applied to 33,950 rows across 365 foundations. The rule that decides which rows these are is published in the source code and combines the filer&rsquo;s own choice of the person-name field on the return with a test of the name and the stated purpose; it is deliberately conservative, and a real organization occasionally falls on the individual side of it.</p>
 <p>If you are named in a filing reproduced here and want the row removed from the ledger page as well, write. It will be taken down while it is looked at against the original filing, and it will not be restored without a reason being given to you.</p>
 <h2>What is deliberately not claimed here</h2>
   <p class="sub">A trust page is worth less than nothing if it promises a regime that has not been implemented. These are the honest boundaries.</p>
   <div class="ledger">
     <div class="row"><span class="mk no">—</span><div><b>No compliance certification</b></div><span>This project holds no SOC 2 report, no ISO 27001 certificate, and no third-party security audit. None has been performed. The security posture is that of a static site with no server, no database, no user accounts and no stored personal data.</span></div>
-    <div class="row"><span class="mk no">—</span><div><b>No formal GDPR or CCPA programme</b></div><span>No data-protection officer, representative, or formal request-handling process has been appointed or built. What is true instead is that the site collects no personal data, so there is no store of it to access, port or erase. Correspondence you send by email is the sole exception, and it is deleted on request.</span></div>
-    <div class="row"><span class="mk no">—</span><div><b>No data-processing agreement is offered today</b></div><span>Because no visitor data is processed, none has been drafted. If your organisation requires one before using this site, raise it and it will be worked through rather than waved away.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>No formal GDPR or CCPA program</b></div><span>No data-protection officer, representative, or formal request-handling process has been appointed or built. What is true instead is that the site collects no personal data, so there is no store of it to access, port or erase. Correspondence you send by email is the sole exception, and it is deleted on request.</span></div>
+    <div class="row"><span class="mk no">—</span><div><b>No data-processing agreement is offered today</b></div><span>Because no visitor data is processed, none has been drafted. If your organization requires one before using this site, raise it and it will be worked through rather than waved away.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>No cookie banner, because there is nothing to consent to</b></div><span>The absence of a banner here is not an oversight. The site sets no cookies and runs no tracking, so there is no consent to collect.</span></div>
   </div>
 </div></section>
@@ -188,8 +188,9 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20privacy%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/privacy/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
   </div>
-  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings.</p>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 
 </body>

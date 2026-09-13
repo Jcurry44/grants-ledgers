@@ -134,7 +134,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="card">
       <b>Regional associations and philanthropic networks</b>
       <div class="meta">Membership · field research</div>
-      <p>One comparable record across many members, cut by state, city, purpose and year. Because every figure ties to a filed total, a number taken from here can be put in front of a member without a second verification pass.</p>
+      <p>One comparable record across many members, cut by state, city, purpose and year. Because every figure ties to a filed total, a number taken from here can be put in front of a member without checking it twice.</p>
     </div>
     <div class="card">
       <b>Journalists, researchers and nonprofit leaders</b>
@@ -181,15 +181,15 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   <p class="sub">The same seven steps run for every foundation in the collection. Nothing is hand-entered into a page; pages are generated from a frozen template, a per-foundation configuration and the parsed filings, so the whole collection can be rebuilt from source.</p>
   <div class="steps">
     <div class="step"><div><b>Fetch the filings</b><span>The source is the IRS Tax Exempt Organization Search public release of Form 990-PF e-file XML. Filings are pulled from the IRS’s own yearly indexes and archives, keyed by tax period and return type.</span></div></div>
-    <div class="step"><div><b>Parse the grants schedule</b><span>Every grant row is read as filed: recipient name, address, purpose, amount, tax year. Nothing is normalised away at this stage — typos, truncations and run-together names are preserved exactly as the foundation wrote them.</span></div></div>
+    <div class="step"><div><b>Parse the grants schedule</b><span>Every grant row is read as filed: recipient name, address, purpose, amount, tax year. Nothing is normalized away at this stage — typos, truncations and run-together names are preserved exactly as the foundation wrote them.</span></div></div>
     <div class="step"><div><b>Reconcile against the filed total</b><span>The rows are summed and compared to the filed referee line, year by year. A year that ties is eligible to publish. A year that does not tie is withheld, and the difference is recorded for disclosure. This step can only pass or fail; it has no third outcome.</span></div></div>
-    <div class="step"><div><b>Recover what the e-file data does not carry</b><span>Some foundations file a whole year as a single line — “See attached statement” — with the grants themselves in an attachment the IRS publishes only as a scanned image with no text layer. Those pages are read by optical character recognition and, where the software cannot render a figure legibly, by eye from the page image. Recovered years face the same referee as everything else, and are additionally proven against the attachment’s own printed total wherever one is printed. A figure that cannot be read is labelled unread rather than guessed.</span></div></div>
-    <div class="step"><div><b>Resolve recipient identity</b><span>Three tiers, in order: one shared canonical form of the name; identity by EIN, where the as-filed name is matched against the IRS Business Master File and an EIN is assigned only when the filing’s own recipient state pins the name to exactly one organisation or the name is nationally unique; and a short list of reviewed merges, each with a stated reason. Names that resolve to different EINs are never joined. Over-merging is treated as worse than under-merging.</span></div></div>
+    <div class="step"><div><b>Recover what the e-file data does not carry</b><span>Some foundations file a whole year as a single line — “See attached statement” — with the grants themselves in an attachment the IRS publishes only as a scanned image with no text layer. Those pages are read by optical character recognition and, where the software cannot render a figure legibly, by eye from the page image. Recovered years face the same referee as everything else, and are additionally proven against the attachment’s own printed total wherever one is printed. A figure that cannot be read is labeled unread rather than guessed.</span></div></div>
+    <div class="step"><div><b>Resolve recipient identity</b><span>Three tiers, in order: one shared canonical form of the name; identity by EIN, where the as-filed name is matched against the IRS Business Master File and an EIN is assigned only when the filing’s own recipient state pins the name to exactly one organization or the name is nationally unique; and a short list of reviewed merges, each with a stated reason. Names that resolve to different EINs are never joined. Over-merging is treated as worse than under-merging.</span></div></div>
     <div class="step"><div><b>Classify the purpose</b><span>Three published tiers: keywords in the filed purpose text, then the recipient’s filed name, then the recipient’s own classification in the IRS Business Master File — the last accepted only when the match is unambiguous. Where nothing matches, the grant stays in “other” rather than receiving a guess. Every rule a page runs is printed on that page.</span></div></div>
-    <div class="step"><div><b>Verify, then publish</b><span>Each page is checked in a real browser before it ships: the reconciliation badge must read N of N years with a $0 difference, the year controls must match the corpus, the methodology section must carry the withheld notes, and the page must produce zero errors and no sideways scroll on a phone. A pre-deploy gate then checks that the published site actually matches the source files and that the page count matches the registry.</span></div></div>
+    <div class="step"><div><b>Check, then publish</b><span>Each page is checked in a real browser before it ships: the reconciliation badge must read N of N years with a $0 difference, the year controls must match the corpus, the methodology section must carry the withheld notes, and the page must produce zero errors and no sideways scroll on a phone. A pre-deploy gate then checks that the published site actually matches the source files and that the page count matches the registry.</span></div></div>
   </div>
   <div class="note">
-    <b>Why the verification step is written down</b>
+    <b>Why the check-before-publish step is written down</b>
     <p>Every check in step seven exists because its absence once shipped a defect: a canonical URL served a months-old page while deploys reported success, and two sub-pages served stale copies with unrendered template placeholders. The gate is the correction. The <a href="https://jcurry44.github.io/grants-ledgers/changelog/">update history</a> records both.</p>
   </div>
 </div></section>
@@ -227,7 +227,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 
   <div class="lim">
     <b>Recipient identifiers require source review.</b>
-    <span>Some parsed records contain a recipient-EIN field; its source should be checked before treating it as a filed identifier. The collection’s IRS-linked recipient records use inferred matches between filed names and IRS organization records. Matching does not independently verify each grant or resolve every alias.</span>
+    <span>Some parsed records contain a recipient-EIN field; its source should be checked before treating it as a filed identifier. The collection’s IRS-linked recipient records use inferred matches between filed names and IRS organization records. Matching does not independently confirm each grant or resolve every alias.</span>
   </div>
 
   <div class="lim">
@@ -272,12 +272,12 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 
   <div class="lim">
     <b>Amounts are as filed, and filers’ own errors are preserved.</b>
-    <span>No inflation adjustment, no restatement, no netting of refunds — negative rows are real and are carried through. Names truncated mid-word, two organisations run together with no separator, and typos in purpose fields all stand exactly as the foundation filed them, because correcting them silently would make the ledger easier to read and impossible to check against the source. Some foundations file most purposes as a single uninformative word; where the purpose names no field, the ledger reads the recipient’s own filed name instead and says so on the page.</span>
+    <span>No inflation adjustment, no restatement, no netting of refunds — negative rows are real and are carried through. Names truncated mid-word, two organizations run together with no separator, and typos in purpose fields all stand exactly as the foundation filed them, because correcting them silently would make the ledger easier to read and impossible to check against the source. Some foundations file most purposes as a single uninformative word; where the purpose names no field, the ledger reads the recipient’s own filed name instead and says so on the page.</span>
   </div>
 
   <div class="lim">
     <b>Recipient identity fragments, and the collection measures how much.</b>
-    <span>Because most recipients are matched by name, the same organisation can appear under more than one identity. Measured on the 200 recipient identities with the largest dollar totals, 114 of the 179 real organisations among them (63.7%) carry at least one near-duplicate identity under a strict matching rule, and 132 of 179 (73.7%) under a broader one. A further 15.52% of all dollars sit on rows whose “recipient” is a pointer rather than an organisation — “See attached”, “Various”, “Unitemized” and similar — where the filer put the detail somewhere the public copy does not carry.</span>
+    <span>Because most recipients are matched by name, the same organization can appear under more than one identity. Measured on the 200 recipient identities with the largest dollar totals, 114 of the 179 real organizations among them (63.7%) carry at least one near-duplicate identity under a strict matching rule, and 132 of 179 (73.7%) under a broader one. A further 15.52% of all dollars sit on rows whose “recipient” is a pointer rather than an organization — “See attached”, “Various”, “Unitemized” and similar — where the filer put the detail somewhere the public copy does not carry.</span>
   </div>
 </div></section>
 
@@ -328,9 +328,14 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20about%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/about/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
   </div>
   <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
-  <p style="margin-top:.6rem" class="mono">Figures on this page counted from the published collection on 31 August 2026.</p>
+  <!-- Refresh this stamp by hand at each release: read db/coverage.json's "built_at"
+       field (UTC timestamp), format as "D Month YYYY", and paste it into the
+       sentence below. Keep it in sync with the hub's own Coverage & method
+       dialog, which reads the same field. -->
+  <p style="margin-top:.6rem" class="mono">Figures on this page counted from the published collection on 7 September 2026.</p>
 </div></footer>
 
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -94,26 +94,42 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
   <div class="body">
     <p>The Grants Ledger began on <strong>23 August 2026</strong> with a single foundation, and what follows is its complete history — nothing before this list exists. The pace below is real and is not the ongoing rate: the collection was assembled in an intensive build, and it now moves to a monthly refresh cycle described on the <a href="https://jcurry44.github.io/grants-ledgers/about/#maintained">about page</a>.</p>
-    <p>Entries are grouped by day and summarised from the project’s commit history. Figures quoted are the figures recorded at the time of the change.</p>
+    <p>Entries are grouped by day and summarized from the project’s commit history. Figures quoted are the figures recorded at the time of the change.</p>
   </div>
 </div></section>
 
 <section><div class="wrap">
 
       <article class="rel">
-    <div class="reldate">6 Sep 2026<em>Current · individuals, gates, speed</em></div>
+    <div class="reldate">12 Sep 2026<em>Current · the stranger audit</em></div>
+    <div>
+      <h2 class="relh">Twelve strangers went through the site; forty-three things they hit are fixed</h2>
+<p><strong>The search understands the name you type.</strong> &ldquo;Annie E. Casey&rdquo;, &ldquo;Gordon and Betty Moore&rdquo;, &ldquo;Bill &amp; Melinda Gates&rdquo;, &ldquo;Bloomberg Philanthropies&rdquo;, &ldquo;Arnold Ventures&rdquo; and a misspelled &ldquo;oishei foundatoin&rdquo; all resolve to the right ledger. Matching is by word, middle initials and punctuation no longer break it, one typo per word is tolerated, four foundation hits show ranked by filed dollars, and the closest matches appear when nothing matches exactly. Escape keeps what you typed. A foundation can be saved to the shortlist straight from the search box.</p>
+<p><strong>A dead end is now a door.</strong> When a funder is not in the collection, the search says so and offers the same thing the outreach does: name it and one filed year is recovered, free, yours either way. The recovered-rows page opens with the same offer.</p>
+<p><strong>The pilot foundation&rsquo;s page joins the fleet.</strong> The John R. Oishei Foundation ledger, the one page search engines index, was a stale August build that still used the word the terms page forbids. It is now built through the same pipeline as the other 1,951 pages, with the print report, the year rail, the Report a problem link and the current data.</p>
+<p><strong>One word, everywhere.</strong> The forbidden word is gone from the recovered-rows page (42 places), from the reconciliation figure&rsquo;s spoken label on every ledger, from the no-script fallback, and from the privacy, exceptions and about pages. Where a page checks itself against its own code it says checked; where a total equals a filed line it says reconciled. A deploy gate now refuses a build that says otherwise.</p>
+<p><strong>The exceptions page is generated from the same sources as the ledgers.</strong> Every withheld or not-yet-published year and every single-row unitemized year is listed under its foundation, with an anchor, so the withheld chip on a ledger lands on its own entry. The Erie Family Foundation link resolves. The census CSV downloads.</p>
+<p><strong>Numbers that were wrong are right.</strong> Comcast NBCUniversal&rsquo;s recipient count no longer counts a rounding note as a grantee; bracketed annotation rows on four other ledgers are unitemized rows, not recipients; fourteen Burroughs Wellcome rows and one MetLife row that carried a person&rsquo;s name or an invalid code as the location were re-read from the filing or blanked; the Marriott and Caterpillar method notes agree with their own tie-outs; the tie-out&rsquo;s spoken label names the referee the page actually uses; a stale FAIL flag on a reconciling year is recomputed at build. Hellman&rsquo;s three Schwab spellings, its UCSF Foundation mailing variants and an OCR &ldquo;Public Tand&rdquo; are merged after review; the row keeps its filed text and the page says so.</p>
+<p><strong>Ledger pages read cleaner.</strong> &ldquo;What it funds&rdquo; never crowns a residual bucket; the print report carries the unitemized flag the screen carries; the Purpose column is labelled as filed; a filed year with no grants shows as such in the year rail; the Methodology crosswalk lost a placeholder header and both of its tables gained captions; every CSV export opens cleanly in Excel; the page-number box is a real touch target.</p>
+<p><strong>The hub on a phone.</strong> Funder cards no longer overlap or clip; View summary is reachable at every width; the explanation of why the results line differs from the headline total is visible; a saved-funder toast no longer covers a dialog.</p>
+<p><strong>Housekeeping.</strong> One footer wording on every static page, American spelling throughout, the collection date on the about page stamped from the database, and ten new deploy gates (doctrine words, placeholders, bracketed recipients, location codes, static links, downloads, exceptions anchors, roll-up claims, tie-out status, and a live-versus-staged diff run before any outreach).</p>
+    </div>
+  </article>
+
+  <article class="rel">
+    <div class="reldate">6 Sep 2026</div>
     <div>
       <h2 class="relh">Individuals out of the index, no empty tie-out cards, a faster hub and lighter ledgers</h2>
 <p><strong>Named individuals leave the index.</strong> Scholarship, fellowship, loan and hardship grants to named people stay on each foundation&rsquo;s ledger page as filed, so every year still reconciles, and are withheld from search, cross-foundation profiles and the bulk download &mdash; 33,950 rows across 365 foundations. The rule and a removal path are on the <a href="../privacy/">privacy page</a>.</p>
-<p><strong>No tie-out card without rows behind it.</strong> 71 years across 31 foundations showed a filed total as reconciled while the page carried no rows for that year. Each now carries a labelled not-itemized residual, and the deploy gate refuses the case.</p>
-<p><strong>The hub paints faster and reads plainer.</strong> The research list opens from a half-megabyte aggregate instead of a four-megabyte row index; the search index loads on the first keystroke. One name per view, &ldquo;reconciled&rdquo; not &ldquo;verified&rdquo;, &ldquo;matching dollars&rdquo; everywhere the same figure appears, a keyboard-navigable search, and the &ldquo;&#10003; Reconciled&rdquo; mark on every result opens the reconciliation itself.</p>
+<p><strong>No tie-out card without rows behind it.</strong> 71 years across 31 foundations showed a filed total as reconciled while the page carried no rows for that year. Each now carries a labeled not-itemized residual, and the deploy gate refuses the case.</p>
+<p><strong>The hub paints faster and reads plainer.</strong> The research list opens from a half-megabyte aggregate instead of a four-megabyte row index; the search index loads on the first keystroke. One name per view, &ldquo;reconciled&rdquo; is the only word used now, &ldquo;matching dollars&rdquo; everywhere the same figure appears, a keyboard-navigable search, and the &ldquo;&#10003; Reconciled&rdquo; mark on every result opens the reconciliation itself.</p>
 <p><strong>Ledger pages are light and lead with what a foundation funds.</strong> Books over 300 rows embed a preview and fetch the full list on demand (the largest page went from 4.1&nbsp;MB to 110&nbsp;KB); the overview opens with &ldquo;What it funds&rdquo;; focus rings are visible on every green control; phone toolbars no longer pin a third of the screen.</p>
-<p><strong>Location filter vetted.</strong> Recipient state codes are normalised once at build time; the filter reads United States, U.S. territories, Outside the U.S., Location not filed, with no guessed countries.</p>
+<p><strong>Location filter vetted.</strong> Recipient state codes are normalized once at build time; the filter reads United States, U.S. territories, Outside the U.S., Location not filed, with no guessed countries.</p>
 <p><strong>Every ledger answers &ldquo;could we fit&rdquo;.</strong> A Typical grant figure gives the middle half of named grants beside the median, and a one-line note states, from the record alone, what share of last year&rsquo;s recipients were first-time and where the named dollars went. Withheld years now appear in the year rail with their reason, in order, instead of being silently absent; a filing newer than the last reconciled year reads &ldquo;not yet published&rdquo;.</p>
 <p><strong>Explore draws the state you pick.</strong> Selecting a state zooms the map to it and places its foundations as heat dots; a layout bug had left that panel blank. The research brief now carries three example grants for every shortlisted foundation, whether it was saved from the results list or the evidence panel.</p>
 <p><strong>Two more foundations.</strong> Elbridge Stuart Foundation and T. L. L. Temple Foundation, recovered from scanned attachments and reconciled to the dollar, join the fleet: 1,952 foundations, 1,568,035 rows, $308,266,607,168.</p>
 <p><strong>A report you can hand to a director.</strong> &ldquo;Print report&rdquo; on any ledger prints the headline figures, what the foundation funds, its largest recipients, the reconciliation to the filed totals, and every grant in the current scope &mdash; not the one page of sixty the tab happened to show. The year rail now appears as a strip on laptops and tablets where the sidebar does not fit, and a recipient opened from the hub lands on exactly that recipient&rsquo;s merged record.</p>
-<p><strong>Long ledgers page by number.</strong> Books that run to hundreds of pages get First, Last and a typed page number beside Previous and Next. A link now carries the Recipients view as well (letter, sort, and whether the full list is open), the tax-year filter is one control instead of two, and the slash key opens the grant search from anywhere on the page.</p>
+<p><strong>Long ledgers page by number.</strong> Books that run to hundreds of pages get First, Last and a typed page number beside Previous and Next. A link now carries the Recipients view as well (letter, sort, and whether the full list is open), the tax-year filter is one control instead of two, and the slash key opens the grant search from anywhere on the page. Every page now ends with a <em>Report a problem</em> link whose message carries the exact view you were looking at, and the hub&rsquo;s search summary can copy its own link.</p>
     </div>
   </article>
 
@@ -257,10 +273,10 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
         <li><span class="t add">Added</span><div><b>Recovery waves A through D.</b> Bezos (419 rows; 2021 withheld, attachment absent), Musk 2022 (31 rows exact), Roberts (three years; 2021 truncated mid-alphabet, a <span class="stat">$25M</span> residual finding), MetLife (866 rows across three years), Caterpillar (13,736 rows), Amon Carter (581 rows), Pennington (204 rows), Pritzker, Grainger and others.</div></li>
         <li><span class="t fix">Fixed</span><div><b>612 rows across 170 foundations carried a recipient location that was not the recipient’s.</b> A roll-up stub row inherits the <em>filer’s</em> own address, not a grantee’s. Those locations were blanked and the pages rebuilt.</div></li>
         <li><span class="t fix">Fixed</span><div><b>The map was hardcoded to New York.</b> Left over from the collection’s New-York-only period: state shading, and every state zoom, used New York’s geometry. Rebuilt from real home states across 51 jurisdictions, with per-state zoom from actual path geometry.</div></li>
-        <li><span class="t fix">Fixed</span><div><b>Shading no longer relies on colour vision.</b> The map uses a luminance ramp rather than a hue ramp, with a labelled legend.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Shading no longer relies on color vision.</b> The map uses a luminance ramp rather than a hue ramp, with a labeled legend.</div></li>
         <li><span class="t add">Added</span><div><b>The collection page becomes a working instrument.</b> A one-viewport command deck; state dossiers on a real Albers-USA projection with per-city placement for 94.4% of foundations; purpose drill-downs; and a query index of <span class="stat">79,231</span> purpose-by-place-by-funder cells that answers “who funds work like mine”.</div></li>
-        <li><span class="t add">Added</span><div><b>Peer lens.</b> For any organisation, which funders support organisations like it and are not yet funding it — matched on grant scale, so a $25,000 grantee is not shown a billion-dollar funder.</div></li>
-        <li><span class="t add">Added</span><div><b>Findings page, exports and a report builder.</b> The recovery campaign’s catches organised by class; genuine spreadsheet, CSV and printable report exports generated inside the browser.</div></li>
+        <li><span class="t add">Added</span><div><b>Peer lens.</b> For any organization, which funders support organizations like it and are not yet funding it — matched on grant scale, so a $25,000 grantee is not shown a billion-dollar funder.</div></li>
+        <li><span class="t add">Added</span><div><b>Findings page, exports and a report builder.</b> The recovery campaign’s catches organized by class; genuine spreadsheet, CSV and printable report exports generated inside the browser.</div></li>
         <li><span class="t fix">Fixed</span><div><b>The canonical address had been serving a months-old page.</b> Deploys wrote one filename but not the other, so the front door sat on a superseded build while every deploy reported success. Two sub-pages were serving stale copies with unrendered template placeholders. A pre-deploy gate now checks published-versus-source drift, the page-count invariant, visible placeholders and text defects, and refuses the deploy on any of them.</div></li>
       </ul>
     </div>
@@ -284,9 +300,9 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="reldate">29 Aug 2026</div>
     <div>
       <h2 class="relh">The collection crosses 500,000 grants</h2>
-      <p class="rellede">A second recovery campaign closes, and the first foundation is excluded on the grounds that its filings disclose nothing to verify.</p>
+      <p class="rellede">A second recovery campaign closes, and the first foundation is excluded on the grounds that its filings disclose nothing to reconcile.</p>
       <ul class="ch">
-        <li><span class="t add">Added</span><div><b>Recovery campaign complete:</b> <span class="stat">5,059</span> rows, roughly <span class="stat">$390.9M</span>, all exact. Includes a 1,150-cheque register read by eye and a year withheld by its own arithmetic.</div></li>
+        <li><span class="t add">Added</span><div><b>Recovery campaign complete:</b> <span class="stat">5,059</span> rows, roughly <span class="stat">$390.9M</span>, all exact. Includes a 1,150-check register read by eye and a year withheld by its own arithmetic.</div></li>
         <li><span class="t add">Added</span><div><b>Slates 5, 6 and 7 closed.</b> Collection at 294 foundations and <span class="stat">$152.43B</span>; slate 7 settled all 25 targets with zero exclusions.</div></li>
         <li><span class="t add">Added</span><div><b>A foundation excluded, and why.</b> One filer disbursed <span class="stat">$57.7M</span> while filing an empty grants schedule in every year — nothing for a referee to tie. It is named in the exceptions rather than silently absent.</div></li>
       </ul>
@@ -339,11 +355,11 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="reldate">25 Aug 2026</div>
     <div>
       <h2 class="relh">Western New York finished; the fleet becomes rebuildable</h2>
-      <p class="rellede">The first billion reconciled, a third classification tier, and the identity system that stops two organisations from being merged into one.</p>
+      <p class="rellede">The first billion reconciled, a third classification tier, and the identity system that stops two organizations from being merged into one.</p>
       <ul class="ch">
         <li><span class="t add">Added</span><div><b>Western New York complete</b> — 35 ledgers, <span class="stat">$1,084,991,827</span>, every buildable foundation above $10M in assets.</div></li>
         <li><span class="t add">Added</span><div><b>A third classification tier.</b> Grants that keyword and name rules cannot classify are matched to the recipient’s own IRS Business Master File classification, accepted only when unambiguous. On one foundation this cut unclassified grants from 66% to 23.9%.</div></li>
-        <li><span class="t add">Added</span><div><b>Recipient identity becomes a first-class system.</b> Three tiers with one shared normalisation, identity by EIN from the Business Master File, and a short reviewed merge list with stated reasons. Names resolving to different EINs are never joined — a guard that keeps genuinely separate organisations one token apart from collapsing into each other.</div></li>
+        <li><span class="t add">Added</span><div><b>Recipient identity becomes a first-class system.</b> Three tiers with one shared normalization, identity by EIN from the Business Master File, and a short reviewed merge list with stated reasons. Names resolving to different EINs are never joined — a guard that keeps genuinely separate organizations one token apart from collapsing into each other.</div></li>
         <li><span class="t add">Added</span><div><b>New York’s first tranche closed</b> — 23 giants, <span class="stat">118,622</span> grants, <span class="stat">$29,656,404,986</span>. The Ford Foundation goes live.</div></li>
         <li><span class="t fix">Fixed</span><div><b>36 separate repositories become one.</b> Every ledger moves under a single address. The old repositories remain as hash-preserving redirects so links already sent to foundations keep working.</div></li>
         <li><span class="t add">Added</span><div><b>The collection becomes reproducible.</b> Every page rebuilds from a frozen template, a per-foundation configuration and the parsed filings. Proven by rebuilding all 27 existing pages and confirming they came back identical on every metric.</div></li>
@@ -357,12 +373,12 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
       <h2 class="relh">One foundation becomes a collection</h2>
       <p class="rellede">The hub launches, scanned paper is proven recoverable, and the exceptions page — the product’s spine — is published.</p>
       <ul class="ch">
-        <li><span class="t add">Added</span><div><b>Foundations 2 through 14, and the hub.</b> The collection passes <span class="stat">$927,302,618</span> reconciled, with 456 organisations funded by two or more foundations visible for the first time.</div></li>
-        <li><span class="t add">Added</span><div><b>Scanned paper proven recoverable.</b> A foundation that files each entire year as a single line — “see attached statement” — had <span class="stat">3,105</span> grants read out of the scanned attachment and tied to line 25(d) to the dollar. Figures too faint to read are labelled unread rather than guessed.</div></li>
+        <li><span class="t add">Added</span><div><b>Foundations 2 through 14, and the hub.</b> The collection passes <span class="stat">$927,302,618</span> reconciled, with 456 organizations funded by two or more foundations visible for the first time.</div></li>
+        <li><span class="t add">Added</span><div><b>Scanned paper proven recoverable.</b> A foundation that files each entire year as a single line — “see attached statement” — had <span class="stat">3,105</span> grants read out of the scanned attachment and tied to line 25(d) to the dollar. Figures too faint to read are labeled unread rather than guessed.</div></li>
         <li><span class="t add">Added</span><div><b>The first schedule-referee ledger.</b> A foundation whose two filed grant totals disagree in all five years is published against the grants schedule’s own total, with both figures and every difference printed on its face.</div></li>
-        <li><span class="t add">Added</span><div><b>The exceptions page.</b> Every withheld year, every excluded year, every judgement call and every standing limit, in one place.</div></li>
+        <li><span class="t add">Added</span><div><b>The exceptions page.</b> Every withheld year, every excluded year, every judgment call and every standing limit, in one place.</div></li>
         <li><span class="t fix">Fixed</span><div><b>Unclassified grants cut from 50.9% to 6.7%,</b> with every classification rule printed on the page that runs it.</div></li>
-        <li><span class="t fix">Fixed</span><div><b>Accessibility.</b> Zero automated violations, plus a screen-reader walkthrough run by hand, and a dollar-composition graphic redesigned so it decodes without colour vision.</div></li>
+        <li><span class="t fix">Fixed</span><div><b>Accessibility.</b> Zero automated violations, plus a screen-reader walkthrough run by hand, and a dollar-composition graphic redesigned so it decodes without color vision.</div></li>
       </ul>
     </div>
   </article>
@@ -384,7 +400,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
   <div class="note">
     <b>How this page is produced</b>
-    <p>Entries are summarised from the project’s version-control history for the Grants Ledger source tree — 276 recorded changes between 23 August 2026 and 31 August 2026. Routine work is grouped; nothing that changed a published figure, a disclosure, or a stated limit is omitted. Where a change corrected a defect that had reached the live site, the entry says so.</p>
+    <p>Entries are summarized from the project’s version-control history for the Grants Ledger source tree — 276 recorded changes between 23 August 2026 and 31 August 2026. Routine work is grouped; nothing that changed a published figure, a disclosure, or a stated limit is omitted. Where a change corrected a defect that had reached the live site, the entry says so.</p>
     <p>From here the collection moves to the monthly refresh described on the <a href="https://jcurry44.github.io/grants-ledgers/about/#maintained">about page</a>, and this page will record what each refresh changed.</p>
   </div>
 </div></section>
@@ -396,8 +412,9 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20changelog%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/changelog/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
   </div>
-  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings.</p>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

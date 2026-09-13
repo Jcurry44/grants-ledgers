@@ -79,7 +79,13 @@ textarea { resize:vertical; }
 .sug .m { grid-column:1 / -1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--ink-dim);font-size:12px; }
 .sug .v { font-size:13px;font-variant-numeric:tabular-nums; }
 .sug:hover,.sug.on { background:var(--tint); }
+.sugf { display:flex;align-items:center;gap:8px;border-bottom:1px solid #edf1eb; }
+.sugf .sug { border-bottom:0;flex:1;min-width:0; }
+.sugf .addb { flex:0 0 auto;margin-right:14px; }
+.sughead { padding:12px 16px 2px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim); }
 .srchint,.nosug { padding:12px 16px;font-size:12px;color:var(--ink-dim); }.nosug { font-size:14px;color:var(--ink); }
+.nosug b { font-weight:600; }.nsdoor { display:block;margin-top:6px;font-size:12.5px;color:var(--ink-dim);line-height:1.45; }
+.nsdoor a { color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px; }.nsdoor a:hover,.nsdoor a:focus-visible { color:var(--copper-deep,#8a4b12); }
 .sugtog { color:var(--cover);text-decoration:underline;font-size:inherit;padding:0; }
 .workspacebar { display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:22px; }
 .tabs { display:flex;gap:4px;min-width:0;padding:4px;border:1px solid var(--rule);border-radius:10px;background:#edf1eb; }
@@ -124,11 +130,11 @@ textarea { resize:vertical; }
 .resulttotals { display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0; }
 .resulttotals b { font-weight:600;font-size:17px;letter-spacing:-.4px; }
 #qsum { color:var(--ink-dim);font-size:12px; }
-.resulttools { display:flex;align-items:center;gap:10px; }
+.resulttools { display:flex;align-items:center;gap:10px;flex-wrap:wrap; }
 .sortlabel { color:var(--ink-dim);font-size:12px; }
 .qsort { font-size:12px;border:0;background:transparent;max-width:165px;padding:9px 3px;color:var(--ink-dim); }
 .qreportlink { padding:9px;font-size:12px;color:var(--ink-dim); }
-.resultcaption { display:none; }
+
 .evidencetags { display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:12px 0;padding:0; }
 .evidencetags li { padding:5px 8px;border:1px solid #d4e0d2;border-radius:5px;background:white;font-size:12px; }
 .evidencehint { font-size:12px;color:var(--ink-dim); }
@@ -373,7 +379,7 @@ textarea { resize:vertical; }
 .savedreason b { font-weight:550; }.savedreason p { margin:6px 0; }.savedreason small { color:var(--ink-dim);font-size:11px; }
 .repbar { position:sticky;top:59px;z-index:10;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:calc(-1 * var(--pad)) calc(-1 * var(--pad)) 28px;padding:12px var(--pad);background:#fffffff7;border-bottom:1px solid var(--rule);backdrop-filter:blur(8px); }
 .repbar .rbt { font-size:13px;font-weight:550;flex:1;min-width:0;overflow-wrap:anywhere; }
-.rbacts { display:flex;gap:7px;flex-wrap:wrap; }.rbx { display:none; }
+.rbacts { display:flex;gap:7px;flex-wrap:wrap; }
 .rephead { border-bottom:2px solid var(--cover);padding:8px 0 26px;margin-bottom:26px; }
 .rephead h2,.rephead .t { font:490 30px/1.25 var(--serif);letter-spacing:-.7px; }
 .rephead p { font-size:14px;line-height:1.6;margin-top:12px;max-width:80ch; }
@@ -446,7 +452,7 @@ th.amt,td.amt { text-align:right;white-space:nowrap;font-variant-numeric:tabular
  .fidentity { grid-column:1; }.fstats { grid-column:1;grid-row:2;max-width:360px; }
  .fstat { font-size:11px; }.fstat b { display:block;font-size:16px; }.fside { grid-column:2;grid-row:1 / 3; }
  .tablehead { display:none; }#qresults { border-radius:10px; }
- .resulttotals { flex-direction:column;gap:3px; }.qreportlink { display:none; }
+ .resulttotals { flex-direction:column;gap:3px; }
  .dossier { gap:18px; }.atlas-panel-head { align-items:flex-start;flex-direction:column; }.atlas-panel-head .qsel { width:100%;max-width:none; }
  .yearrow { grid-template-columns:38px minmax(0,1fr) 65px;gap:4px 10px; }.yearamount { font-size:12px; }
  .dbar { gap:8px; }.dbar .dn,.dbar .dv { font-size:12px; }.dbar.marked .dv { max-width:90px; }
@@ -613,6 +619,7 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,te
 .slash{color:var(--copper-deep);border-color:#d9b98f;top:18px;font-family:var(--mono)}
 .suggest{background:#fffdf8;border-color:#d6d0bf;border-radius:6px;box-shadow:0 22px 60px #0b241a3d}
 .sug{border-bottom-color:#efe9db}.sug b{font:500 15px/1.3 var(--serif)}.sug .m{font-family:var(--mono);font-size:11.5px}
+.sugf{border-bottom-color:#efe9db}.sughead{font-family:var(--mono)}
 .sug:hover,.sug.on{background:var(--tint)}
 .tots{display:flex;flex-basis:100%;gap:40px;margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
 .tots[data-state=wait]{visibility:hidden}
@@ -737,13 +744,13 @@ table{font-family:var(--text)}
  .micro{font-size:11px}.qfield>span,.eyebrow,.workspace-kicker,th{font-size:11px}
 }
 /* pass 2: desktop stats carry no repeated labels; the action column fits two quiet buttons; phone cover stays compact */
-.tablehead,.fcard{grid-template-columns:minmax(0,1fr) 440px 300px}
+.tablehead,.fcard{grid-template-columns:minmax(0,1fr) 440px 420px}
 .fstat{font-size:0;letter-spacing:0}
 .fstat b{font-size:19px}
 .fside{flex-wrap:nowrap}
 @media(max-width:1100px){.fcard,.tablehead{grid-template-columns:minmax(0,1fr) 360px 200px}.fside{flex-wrap:wrap;justify-content:flex-end}}
 @media(max-width:850px){.fstat{font-size:11px;letter-spacing:.1em}.fcard{grid-template-columns:minmax(0,1fr) 200px}.fside{flex-direction:column;align-items:flex-end;gap:6px}}
-@media(max-width:640px){.tots{flex-basis:auto;width:100%}.workspacehead{min-height:0}.fstat{font-size:11px;letter-spacing:.1em}.fside{flex-direction:row}}
+@media(max-width:640px){.tots{flex-basis:auto;width:100%}.workspacehead{min-height:0}.fstat{font-size:11px;letter-spacing:.1em}.fcard{grid-template-columns:1fr}.fside{flex-direction:column;align-items:stretch}}
 @media(max-width:640px){.searchbox{flex:0 0 auto;width:100%}.workspacehead{padding-bottom:22px}}
 @media print{.workspacehead{background:none;color:var(--ink);margin:0;padding:0 0 16px}.masth,.mastsub{color:var(--ink)}.tots{display:none}}
 </style>
@@ -878,6 +885,7 @@ table{font-family:var(--text)}
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
     <a href="https://jcurry44.github.io/grants-ledgers/ny/">New York</a>
     <a href="db/all-grants.csv.gz">Full dataset ↓</a>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20hub&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A" id="report-link">Report a problem</a>
     <span>By <a href="https://jcurry44.github.io/">Curry Studio</a></span>
   </footer>
 </section>
@@ -981,13 +989,13 @@ table{font-family:var(--text)}
 
   // ---------- identity confidence ----------
   // Coverage is measured per release; identity linkage remains an inference.
-  // An entity id beginning "E" is a filed name canonicalised and then matched to an
-  // IRS-registered organisation in the Business Master File; one beginning "K" is
+  // An entity id beginning "E" is a filed name canonicalized and then matched to an
+  // IRS-registered organization in the Business Master File; one beginning "K" is
   // the canonical name and nothing more. Every recipient aggregate on this page has
-  // to say which of the two it is, in a mark that survives greyscale.
+  // to say which of the two it is, in a mark that survives grayscale.
   const isGov = (id) => String(id || '').charAt(0) === 'E';
-  const GOV_WHY = 'IRS-matched — the recipient name as filed was canonicalised and matched to an IRS-registered organisation in the IRS Business Master File, the IRS’s own public list of registered organizations. This match is inferred from the filed name and IRS organization record; it does not independently confirm every grant or resolve every alias.';
-  const EST_WHY = 'Name-only match — this identity rests on the filed name alone, with no resolved IRS identity. A total added across foundations may split one organisation in two, or hold two same-named organisations as one.';
+  const GOV_WHY = 'IRS-matched — the recipient name as filed was canonicalized and matched to an IRS-registered organization in the IRS Business Master File, the IRS’s own public list of registered organizations. This match is inferred from the filed name and IRS organization record; it does not independently confirm every grant or resolve every alias.';
+  const EST_WHY = 'Name-only match — this identity rests on the filed name alone, with no resolved IRS identity. A total added across foundations may split one organization in two, or hold two same-named organizations as one.';
   function idChip(id, size) {
     const k = size ? ' ' + size : '';
     return isGov(id)
@@ -1026,7 +1034,7 @@ table{font-family:var(--text)}
     ON: ['i', 'Ontario, Canada'], QC: ['i', 'Quebec, Canada'], BC: ['i', 'British Columbia, Canada'],
     // International — confirmed by the rows themselves
     UK: ['i', 'United Kingdom'], GM: ['i', 'Germany'], Chile: ['i', 'Chile'],
-    // Codes that are not a place are normalised away in gen_db.py before they
+    // Codes that are not a place are normalized away in gen_db.py before they
     // reach the registry (RECIPIENT_STATE_FIX). Anything unvetted that slips
     // through fails safe into "Location not filed" rather than a guessed country.
   };
@@ -1099,6 +1107,7 @@ table{font-family:var(--text)}
   function nameDialog(name) { $('ovlcard').setAttribute('aria-label', name); $('dialogcontext').textContent = name; }
   let ovlMode = null, returnFocus = null;
   function openOvl(mode) {
+    clearTimeout(toastTimer); $('toast').hidden = true;
     if ($('ovl').hidden) returnFocus = document.activeElement;
     ovlMode = mode;
     $('ovl').dataset.mode=mode;
@@ -1898,13 +1907,13 @@ table{font-family:var(--text)}
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}
   });
   let toastTimer;
-  function notifySaved(u) {
-    clearTimeout(toastTimer);$('toast').textContent=PICKED.has(u)?'Added to '+PROJ().name+' · '+PICKED.size+' shortlisted':'Removed from shortlist';
+  function notifySaved(u, name) {
+    clearTimeout(toastTimer);$('toast').textContent=PICKED.has(u)?(name?'Added '+name+' · '+PICKED.size+' shortlisted':'Added to '+PROJ().name+' · '+PICKED.size+' shortlisted'):'Removed from shortlist';
     $('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,2800);
   }
   // Use the same filed-name classification as the query index. Every filter
   // intersects on this exact source row; original indices remain stable.
-  const queryPlaceholder = new RegExp("\\bSEE\\b.{0,60}\\b(?:ATTACHED|ATTACHMENTS?|SCHEDULES?|STATEMENTS?|EXHIBITS?|LIST|LISTING|DETAILS?|DETAILED|PDF|SUPPLEMENT)\\b|\\bGRANTS? PAID\\s*[-:]\\s*ATTACHMENT\\b|\\bGRANTS TO VARIOUS\\b|^THE FOUNDATION MAKES ANNUAL GRANTS TO VARIOUS\\b|^\\s*(?:PART XV IS NOT REQUIRED|N/?A REGULATION SECTION|NUMEROUS INDIVIDUALS|MISCELLANEOUS (?:CONTRIBUTIONS|GRANTS))\\b|^\\s*\\[?(?:ATTACHED|ATTACHMENT|SCHEDULE|STATEMENT|EXHIBIT|LISTING)\\b|\\bRECIPIENT STATEMENT ATTACHED\\b|\\b(?:UNITEMIZED|NOT ITEMIZED|ANONYMOUS|WITHHELD|CONFIDENTIAL)\\b|^\\s*(?:NONE|N/?A|MISCELLANEOUS|INDIVIDUALS?|GRANTEES|RECIPIENTS)\\s*$|^\\s*VARIOUS\\b|^\\s*(?:MULTIPLE|OTHER)\\s+(?:GRANTEES|RECIPIENTS|ORGANIZATIONS|GRANTS|CHARITIES)\\b|\\b(?:ELIGIBLE PATIENTS?|SCHOLARSHIP RECIPIENTS?|INDIVIDUAL ASSISTANCE|INDIVIDUAL PATIENT PROGRAMS|INDIVIDUAL SCHOLARSHIPS?|GRANTS TO INDIVIDUALS)\\b|\\b(?:LIST AVAILABLE UPON REQUEST|FULL SCHEDULE KEPT ON FILE|SMALL DISCRETIONARY GRANTS--VARIOUS)\\b",'i');
+  const queryPlaceholder = new RegExp("^\\s*\\[.*\\]\\s*$|\\bSEE\\b.{0,60}\\b(?:ATTACHED|ATTACHMENTS?|SCHEDULES?|STATEMENTS?|EXHIBITS?|LIST|LISTING|DETAILS?|DETAILED|PDF|SUPPLEMENT)\\b|\\bGRANTS? PAID\\s*[-:]\\s*ATTACHMENT\\b|\\bGRANTS TO VARIOUS\\b|^THE FOUNDATION MAKES ANNUAL GRANTS TO VARIOUS\\b|^\\s*(?:PART XV IS NOT REQUIRED|N/?A REGULATION SECTION|NUMEROUS INDIVIDUALS|MISCELLANEOUS (?:CONTRIBUTIONS|GRANTS))\\b|^\\s*\\[?(?:ATTACHED|ATTACHMENT|SCHEDULE|STATEMENT|EXHIBIT|LISTING)\\b|\\bRECIPIENT STATEMENT ATTACHED\\b|\\b(?:UNITEMIZED|NOT ITEMIZED|ANONYMOUS|WITHHELD|CONFIDENTIAL)\\b|^\\s*(?:NONE|N/?A|MISCELLANEOUS|INDIVIDUALS?|GRANTEES|RECIPIENTS)\\s*$|^\\s*VARIOUS\\b|^\\s*(?:MULTIPLE|OTHER)\\s+(?:GRANTEES|RECIPIENTS|ORGANIZATIONS|GRANTS|CHARITIES)\\b|\\b(?:ELIGIBLE PATIENTS?|SCHOLARSHIP RECIPIENTS?|INDIVIDUAL ASSISTANCE|INDIVIDUAL PATIENT PROGRAMS|INDIVIDUAL SCHOLARSHIPS?|GRANTS TO INDIVIDUALS)\\b|\\b(?:LIST AVAILABLE UPON REQUEST|FULL SCHEDULE KEPT ON FILE|SMALL DISCRETIONARY GRANTS--VARIOUS)\\b",'i');
   function namedRecipient(name) {return !queryPlaceholder.test(name||'');}
   function queryEvidenceRows(rows,filters) {
     return rows.map((g,index)=>({g,index})).filter(({g})=>g[3]===filters.cat
@@ -2231,8 +2240,9 @@ table{font-family:var(--text)}
     ];
     return zip(files);
   }
+  function csvBlob(text) { return new Blob(['\uFEFF' + text], { type: 'text/csv;charset=utf-8' }); }
   function download(name, data, mime) {
-    const blob = data instanceof Uint8Array ? new Blob([data], { type: mime }) : new Blob([data], { type: mime });
+    const blob = mime === 'text/csv' ? csvBlob(data) : (data instanceof Uint8Array ? new Blob([data], { type: mime }) : new Blob([data], { type: mime }));
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = name;
@@ -2682,18 +2692,113 @@ table{font-family:var(--text)}
   // ---------- search ----------
   const rmatch = (rg) => region === 'all' || rg.includes(REGION_KEY[region]);
   let sugItems = [];
+  // A stranger types the name they know: "Annie E. Casey", "Gordon and Betty Moore", "Bill & Melinda
+  // Gates", "oishei foundatoin". The filed name carries middle initials, commas and other words, so a
+  // substring test dead-ends half the time. Matching is by token: every typed token must open a token
+  // of the name (initials in the name are simply skipped), one typo per word is tolerated for
+  // foundations, a short alias list maps common names to the filed foundation, and hits are ranked by
+  // match quality then filed dollars.
+  const ALIASES = {
+    'bloomberg philanthropies': 'bloombergfam', 'bloomberg': 'bloombergfam',
+    'arnold ventures': 'lauraandjohn',
+    'bill and melinda gates': 'gatesfoundat', 'bill and melinda gates foundation': 'gatesfoundat', 'bmgf': 'gatesfoundat', 'gates foundation': 'gatesfoundat',
+    'packard foundation': 'davidandluci', 'packard': 'davidandluci',
+    'moore foundation': 'gordoneandbe', 'gordon and betty moore foundation': 'gordoneandbe',
+    'casey foundation': 'annieecaseyf', 'annie e casey foundation': 'annieecaseyf',
+    'rwjf': 'robertwoodjo', 'robert wood johnson': 'robertwoodjo',
+    'macarthur foundation': 'johndcatheri', 'macarthur': 'johndcatheri',
+    'hewlett foundation': 'williamflora', 'hewlett': 'williamflora',
+    'kellogg foundation': 'wkkelloggfou', 'w k kellogg': 'wkkelloggfou', 'wk kellogg': 'wkkelloggfou', 'kellogg': 'wkkelloggfou',
+    'mellon foundation': 'andrewwmello', 'mellon': 'andrewwmello',
+    'helmsley': 'leonamharryb', 'helmsley trust': 'leonamharryb',
+    'knight foundation': 'johnsandjame',
+    'ralph wilson': 'rcwjf', 'ralph c wilson': 'rcwjf', 'ralph c wilson jr': 'rcwjf', 'ralph c wilson jr foundation': 'rcwjf', 'wilson foundation': 'rcwjf',
+    'tower foundation': 'tower', 'peter and elizabeth tower': 'tower',
+    'ford': 'ford', 'ford foundation': 'ford',
+    'rockefeller': 'rockefeller', 'carnegie': 'carnegiecorp', 'kresge': 'kresgefounda', 'walton': 'waltonfamily',
+    'simons': 'simons', 'lilly': 'lillyendowme', 'duke endowment': 'dukeendowmen', 'kenan': 'williamrkena', 'oishei': 'oishei',
+  };
+  const normQ = (s) => String(s || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim();
+  const tokensOf = (s) => normQ(s).split(' ').filter(Boolean);
+  const NAME_TOKENS = new Map();
+  const fTokens = (f) => { let t = NAME_TOKENS.get(f.u); if (!t) { t = tokensOf(f.n + ' ' + (f.s || '')); NAME_TOKENS.set(f.u, t); } return t; };
+  // edit distance with a cap of 2 (adjacent transposition counts one), for short words only
+  function editDist(a, b) {
+    if (a === b) return 0;
+    const n = a.length, m = b.length;
+    if (Math.abs(n - m) > 2) return 3;
+    let prev2 = null, prev = Array.from({ length: m + 1 }, (_, j) => j);
+    for (let i = 1; i <= n; i++) {
+      const cur = [i];
+      let rowMin = i;
+      for (let j = 1; j <= m; j++) {
+        let v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (prev2 && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+        cur[j] = v; if (v < rowMin) rowMin = v;
+      }
+      if (rowMin > 2) return 3;
+      prev2 = prev; prev = cur;
+    }
+    return prev[m];
+  }
+  function tokenHit(qt, nts, fuzzy) {
+    for (const nt of nts) if (nt.startsWith(qt)) return 2;
+    if (fuzzy && qt.length >= 5) {
+      const cap = qt.length >= 8 ? 2 : 1;
+      for (const nt of nts) if (nt.length >= 4 && editDist(qt, nt) <= cap) return 1;
+    }
+    return 0;
+  }
+  function nameScore(qts, nts, fuzzy) {
+    let score = 0;
+    for (const qt of qts) { const h = tokenHit(qt, nts, fuzzy); if (!h) return 0; score += h; }
+    const first = nts[0] === 'the' ? nts[1] : nts[0];
+    if (first && first.startsWith(qts[0])) score += 1;
+    return score;
+  }
+  function foundationHits(qraw) {
+    const qn = normQ(qraw), qts = qn.split(' ').filter(Boolean);
+    if (!qts.length) return [];
+    const alias = ALIASES[qn] || ALIASES[qn.replace(/^the /, '')];
+    const scored = [];
+    for (const f of F) {
+      if (!(region === 'all' || f.r === region)) continue;
+      let s = f.u === alias ? 9 : nameScore(qts, fTokens(f), true);
+      if (!s && f.n.toLowerCase().includes(qn)) s = 1;
+      if (s) scored.push([s, f]);
+    }
+    scored.sort((a, b) => b[0] - a[0] || (b[1].t || 0) - (a[1].t || 0));
+    return scored.slice(0, 4).map((x) => x[1]);
+  }
+  // a multi-word query that opens nothing outright still gets a soft landing: foundations whose
+  // first significant token (after "the") is opened by any one typed token of 4+ letters
+  function closestMatches(qraw) {
+    const qts = tokensOf(qraw).filter((t) => t.length >= 4);
+    if (!qts.length) return [];
+    const hits = [];
+    for (const f of F) {
+      if (!(region === 'all' || f.r === region)) continue;
+      const nts = fTokens(f);
+      const first = nts[0] === 'the' ? nts[1] : nts[0];
+      if (first && qts.some((qt) => first.startsWith(qt))) hits.push(f);
+    }
+    hits.sort((a, b) => (b.t || 0) - (a.t || 0));
+    return hits.slice(0, 4);
+  }
+  const recipMatch = (name, qts) => { const nts = tokensOf(name); return qts.length > 0 && qts.every((qt) => nts.some((nt) => nt.startsWith(qt))); };
   let sugSeq = 0, sugActive = -1;
   async function suggest(qraw) {
     const q = qraw.trim().toLowerCase();
+    const qts = tokensOf(qraw);
     const box = $('suggest');
     const seq = ++sugSeq;
     if (q.length < 2) { hideSuggest(); $('sug-status').textContent = ''; return; }
-    const fhits = F.filter((f) => (region === 'all' || f.r === region) && (f.n.toLowerCase().includes(q) || f.s.toLowerCase().includes(q))).slice(0, 2);
+    const fhits = foundationHits(qraw);
     const pick = [];
     if (!EAGER) await eagerData();
     for (const e2 of EAGER) {
       if (pick.length >= 9) break;
-      if (namedRecipient(e2[1]) && rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && e2[1].toLowerCase().includes(q)) pick.push(e2);
+      if (namedRecipient(e2[1]) && rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && (e2[1].toLowerCase().includes(q) || recipMatch(e2[1], qts))) pick.push(e2);
     }
     let deep = false;
     if (pick.length < 9) {
@@ -2702,35 +2807,55 @@ table{font-family:var(--text)}
       const have = new Set(pick.map((x) => x[0]));
       for (const e2 of shard) {
         if (pick.length >= 9) break;
-        if (namedRecipient(e2[1]) && !have.has(e2[0]) && rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && e2[5].includes(q)) { pick.push(e2); deep = true; }
+        if (namedRecipient(e2[1]) && !have.has(e2[0]) && rmatch(e2[4]) && (!govOnly || isGov(e2[0])) && (e2[5].includes(q) || recipMatch(e2[1], qts))) { pick.push(e2); deep = true; }
       }
     }
     sugItems = pick;
     sugActive = -1;
     $('q').removeAttribute('aria-activedescendant');
     let oi = 0;
-    const fhtml = fhits.map((f) => '<a class="sug" role="option" id="sug-' + (oi++) + '" aria-selected="false" href="https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/"><span class="n">' + esc(f.n) + '</span><span class="amt num">' + moneyC(f.t) + '</span><span class="m">foundation · ' + f.g.toLocaleString('en-US') + ' grants · open its ledger ↗</span></a>').join('');
+    // one foundation row: the link keeps its normal navigation, and a sibling button
+    // offers the shortlist without disturbing it (buttons cannot nest inside anchors)
+    const fndRow = (f) => '<div class="sugf"><a class="sug" role="option" id="sug-' + (oi++) + '" aria-selected="false" href="https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/"><span class="n">' + esc(f.n) + '</span><span class="amt num">' + moneyC(f.t) + '</span><span class="m">foundation · ' + f.g.toLocaleString('en-US') + ' grants · open its ledger ↗</span></a><button type="button" class="addb' + (PICKED.has(f.u) ? ' on' : '') + '" data-add="' + f.u + '" data-name="' + esc(f.n) + '" aria-pressed="' + (PICKED.has(f.u) ? 'true' : 'false') + '">' + (PICKED.has(f.u) ? 'Saved' : 'Save funder') + '</button></div>';
+    const fhtml = fhits.map(fndRow).join('');
+    // no foundation opened the query outright: a query of two or more words still gets a soft
+    // landing, so "Hellman Trust" surfaces Hellman while "zzqx no such funder" still shows nothing
+    const closeHits = (!fhits.length && qts.length >= 2) ? closestMatches(qraw) : [];
+    const closeHtml = closeHits.length ? '<div class="sughead" aria-hidden="true">Closest matches</div>' + closeHits.map(fndRow).join('') : '';
     const rhtml = pick.map((e2) =>
       `<button type="button" class="sug" role="option" id="sug-${oi++}" aria-selected="false" data-e="${e2[0]}">
         <span class="n">${esc(dc(e2[1]))}</span>
         <span class="amt num${sumCls(e2[0])}"${softTip(e2[0])}>${moneyC(e2[2])}</span>
         <span class="m">${e2[3]} ${e2[3] === 1 ? 'foundation' : 'foundations'} ${idChip(e2[0], 'mini')}${isGov(e2[0]) ? ' · <abbr title="IRS Employer Identification Number">EIN</abbr> ' + e2[0].slice(1) : ''}</span>
       </button>`).join('');
-    const none = !(pick.length || fhits.length);
+    const none = !(pick.length || fhits.length || closeHits.length);
     // the listbox holds options only; the empty-state line and the hint sit beside it
-    $('suglist').innerHTML = fhtml + rhtml;
+    $('suglist').innerHTML = fhtml + closeHtml + rhtml;
     $('nosug').hidden = !none;
-    $('nosug').textContent = 'No matches in this scope' + (govOnly ? ' among IRS-matched names' : '') + '.';
+    // a funder that is not here yet is a work order, not a dead end: the no-match state carries the door
+    $('nosug').innerHTML = none ? noMatchDoor(qraw, govOnly) : '';
     $('srchint').innerHTML = (deep ? 'searched the full index · ' : '')
       + '<button type="button" class="sugtog" id="sugidtog" aria-pressed="' + (govOnly ? 'true' : 'false') + '">'
       + (govOnly ? '☑ IRS-matched names only' : '☐ IRS-matched names only')
       + '</button>';
     // one polite announcement per result set, so a screen reader hears the count without leaving the field
     const plural = (n, w) => n.toLocaleString('en-US') + ' ' + w + (n === 1 ? '' : 's');
-    $('sug-status').textContent = none ? 'No matches' : plural(pick.length, 'organization') + ', ' + plural(fhits.length, 'foundation');
+    $('sug-status').textContent = none ? 'No matches' : plural(pick.length, 'organization') + ', ' + plural(fhits.length + closeHits.length, 'foundation');
     box.hidden = false;
     $('q').setAttribute('aria-expanded', 'true');
   }
+  // The no-match state is the sales door. The mail carries the name as typed and the page,
+  // so a reply is a qualified lead and a work order in one line. No price is spoken.
+  function noMatchDoor(qraw, govOnly) {
+    const typed = String(qraw || '').trim().slice(0, 120);
+    const subject = 'Recover a year: ' + typed;
+    const body = 'Foundation: ' + typed + '\nWhy its filings frustrate me: \n\nSent from ' + location.href;
+    const href = 'mailto:jjcurry027@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    return '<b>No matches in this scope' + (govOnly ? ' among IRS-matched names' : '') + '.</b>'
+      + '<span class="nsdoor">Not here yet? <a href="' + href + '" id="nsdoor">Name it</a> and one filed year is recovered for you, free \u2014 yours either way.</span>';
+  }
+  // a mousedown inside the no-match line must not blur the field, or the box closes before the click lands
+  $('nosug').addEventListener('mousedown', (e) => { if (e.target.closest('a')) e.preventDefault(); });
   // arrow keys walk the options; the field keeps focus and points at the active one
   const sugOptions = () => [...$('suglist').querySelectorAll('[role=option]')];
   function setSugActive(i) {
@@ -2766,10 +2891,21 @@ table{font-family:var(--text)}
       if (sugItems.length) openProfile(sugItems[0][0]);
       return;
     }
-    if (e.key === 'Escape') { hideSuggest(); $('q').blur(); }
+    if (e.key === 'Escape') { e.preventDefault(); hideSuggest(); }
   });
   $('suggest').addEventListener('click', (e) => {
     if (e.target.closest('#sugidtog')) { setGovOnly(!govOnly); return; }
+    const add = e.target.closest('[data-add]');
+    if (add) {
+      const u = add.dataset.add;
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; add.classList.remove('on'); add.setAttribute('aria-pressed', 'false'); add.textContent = 'Save funder'; }
+      else { PICKED.add(u); add.classList.add('on'); add.setAttribute('aria-pressed', 'true'); add.textContent = 'Saved'; }
+      saveList();
+      const twin = document.querySelector('#qresults .addb[data-add="' + u + '"]');
+      if (twin) { twin.classList.toggle('on', PICKED.has(u)); twin.textContent = PICKED.has(u) ? 'Saved' : 'Save funder'; }
+      notifySaved(u, add.dataset.name);
+      return;
+    }
     const b = e.target.closest('button.sug');
     if (b) openProfile(b.dataset.e);
   });
@@ -2782,6 +2918,11 @@ table{font-family:var(--text)}
     else if (e.key === 'Escape' && $('mapcard').classList.contains('open') && catSel && $('suggest').hidden) drillCat(catSel);
     else if (e.key === 'Escape' && $('mapcard').classList.contains('open') && citySel && $('suggest').hidden) selectCity(citySel);
     else if (e.key === 'Escape' && $('mapcard').classList.contains('open') && mapSel && $('suggest').hidden) selectState(null);
+  });
+  // "Report a problem": the mail carries the exact view (built at click, so the hash is current)
+  $('report-link').addEventListener('click', () => {
+    $('report-link').href = 'mailto:jjcurry027@gmail.com?subject=' + encodeURIComponent('The Grants Ledger: a problem on the hub')
+      + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat I expected:\n\nWhat happened:\n');
   });
 
   // ---------- profile (overlay) ----------
@@ -2806,7 +2947,7 @@ table{font-family:var(--text)}
     const alias = rec.v.filter((_, i) => i !== rec.d);
     $('pbody').innerHTML = `
       <div class="p-name">${esc(dc(rec.n))}</div>
-      <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· <abbr title="IRS Employer Identification Number">EIN</abbr> ' + id.slice(1) + ' · matched to an IRS-registered organisation' : '· matched by name alone, from the recipient name as filed'}</span></div>
+      <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· <abbr title="IRS Employer Identification Number">EIN</abbr> ' + id.slice(1) + ' · matched to an IRS-registered organization' : '· matched by name alone, from the recipient name as filed'}</span></div>
       ${alias.length ? `<details class="p-alias"><summary>View ${alias.length+1} filed name variants</summary><p>${esc([rec.v[rec.d]||rec.n,...alias].join(' · '))}</p></details>` : ''}
       <div class="p-tot"><b class="num${sumCls(id)}"${softTip(id)}>${money(total)}</b><span>${rows.length} grants · ${byF.size} ${byF.size === 1 ? 'foundation' : 'foundations'} · ${years[0]}–${years[years.length - 1]}${isGov(id) ? '' : ' · name-only match'}</span></div>
       <p class="p-warn">Cross-foundation totals use inferred recipient matches. Check filed names and addresses; aliases can split one organization, and same-named organizations can be combined.</p>
@@ -3005,7 +3146,7 @@ table{font-family:var(--text)}
     const head = 'year,recipient_as_filed,amount,category,state,entity_id';
     const lines = view.map((r) => [r[0], r[5], r[2], REG.cats[r[3]], REG.states[r[4]] || '', r[1]]
       .map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(','));
-    const blob = new Blob([head + String.fromCharCode(10) + lines.join(String.fromCharCode(10))], { type: 'text/csv' });
+    const blob = csvBlob(head + String.fromCharCode(10) + lines.join(String.fromCharCode(10)));
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = (st.slug || 'grants') + '-view.csv';
@@ -3070,7 +3211,6 @@ table{font-family:var(--text)}
         <span class="rbacts">
           <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
           <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
-          <button type="button" class="tbtn rbx" id="repclose" aria-label="Close report">×</button>
         </span>
       </div>
       <div class="rephead">
@@ -3136,8 +3276,6 @@ table{font-family:var(--text)}
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(() => done(true), legacy);
       else legacy();
     }));
-    $('repclose').addEventListener('click', closeOvl);
-    $('repclose').focus({ preventScroll: true });
   }
 
   async function openMethod() {

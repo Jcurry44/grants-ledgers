@@ -153,6 +153,7 @@
     return k.replace(/\s+/g, ' ').trim();
   }
   const REVIEWED = new Set(window.LEDGER_MERGES || []);   // the page's confirmed merges
+  const ALIASES = window.LEDGER_ALIASES || {};            // as-filed name -> the as-filed name it belongs with (reviewed)
   const GRAND = DATA.meta.grand_total;
   // canonical recipients and the derived analytics are built by deriveModel(), below the
   // purpose rules they depend on -- once for an embedded book, twice for a fetched one
@@ -233,15 +234,19 @@
       });
       const clusters = new Map();
       [...byFiled.keys()].forEach((name) => {
-        const k = canonKey(name);
-        const id = REVIEWED.has(k) ? 'k:' + k : 'n:' + name;
+        const target = ALIASES[name] || name;
+        const k = canonKey(target);
+        const id = REVIEWED.has(k) ? 'k:' + k : 'n:' + target;
         if (!clusters.has(id)) clusters.set(id, []);
         clusters.get(id).push(name);
       });
       clusters.forEach((names, id) => {
-        // display name: the variant with the largest dollars (parenthetical stripped for merged)
-        let best = names[0], bestTot = -1;
-        names.forEach((n) => {
+        // display name: the variant with the largest dollars (parenthetical stripped for merged);
+        // a reviewed alias source (an OCR variant, a sponsor's other spelling) never becomes the display
+        const targets = names.filter((n) => !ALIASES[n]);
+        const pool = targets.length ? targets : names;
+        let best = pool[0], bestTot = -1;
+        pool.forEach((n) => {
           const t = byFiled.get(n).reduce((s, g) => s + g.a, 0);
           if (t > bestTot) { bestTot = t; best = n; }
         });
@@ -473,8 +478,8 @@
       <section class="pr-sec pr-rows">
         <h2>Every grant in scope${scope.length ? ' — ' + esc(scope.join(' · ')) : ''}</h2>
         <p class="pr-sub">${num(rows.length)} ${rows.length === 1 ? 'grant' : 'grants'} · ${money(total)}</p>
-        <table class="pr-table"><thead><tr><th>Year</th><th>Recipient</th><th class="num">Amount</th><th>Purpose</th><th>Location</th></tr></thead>
-        <tbody>${rows.map((g) => `<tr><td>${g.y}</td><td>${esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
+        <table class="pr-table"><thead><tr><th>Year</th><th>Recipient</th><th class="num">Amount</th><th>Purpose (as filed)</th><th>Location</th></tr></thead>
+        <tbody>${rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
       </section>
       <footer class="pr-foot">Every figure reconciles to a total the foundation itself filed with the IRS. Historical record, not eligibility; nothing here is an audit. jcurry44.github.io/grants-ledgers</footer>`;
     host.hidden = false; host.setAttribute('aria-hidden', 'false');
@@ -585,10 +590,17 @@
     [document.getElementById('year-rail'), document.getElementById('year-rail-top')].filter(Boolean).forEach((rail) => {
       let withheld = {};
       try { withheld = JSON.parse(document.documentElement.dataset.withheld || '{}'); } catch (e) { withheld = {}; }
-      const railYears = [...new Set([...YEARS, ...Object.keys(withheld).map(Number)])].sort((a, b) => a - b);
+      // a filed year that reconciles at $0 with no grants paid: present in the
+      // tie-out, absent from YEARS (which only counts years with rows). It gets
+      // a flat chip too, never a filter button -- nothing to scope the page to.
+      let zeroYears = {};
+      try { zeroYears = JSON.parse(document.documentElement.dataset.zeroyears || '{}'); } catch (e) { zeroYears = {}; }
+      const railYears = [...new Set([...YEARS, ...Object.keys(withheld).map(Number), ...Object.keys(zeroYears).map(Number)])].sort((a, b) => a - b);
       rail.innerHTML = ['all'].concat(railYears).map((y) => withheld[String(y)]
         ? `<a class="withheld" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}">${y}<small>${withheld[String(y)].kind || 'withheld'}</small></a>`
-        : `<button type="button" data-yr="${y}" aria-pressed="false">${y === 'all' ? 'All' : y}</button>`).join('');
+        : zeroYears[String(y)]
+          ? `<span class="zeroyr" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
+          : `<button type="button" data-yr="${y}" aria-pressed="false">${y === 'all' ? 'All' : y}</button>`).join('');
       rail.addEventListener('click', (e) => {
         const b = e.target.closest('[data-yr]');
         if (!b) return;
@@ -814,11 +826,15 @@
       if (dbEl) dbEl.innerHTML = SY !== null
         ? `Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>tax year ${SY}, to the dollar.</em>`
         : 'Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>' + (document.documentElement.dataset.running || 'to the dollar, five years running.') + '</em>';
+      // the visible card already carries the right referee (Part I 25(d), or
+      // Part XIV line 3a on a schedule-referee book) -- read it back instead
+      // of hard-coding it, so the aria-label never contradicts the card.
+      const refLbl = document.querySelectorAll('#db-eq .eq-part .eq-label')[1]?.textContent || 'Part I line 25(d)';
       $('db-eq').setAttribute('aria-label',
         `Sum of the ${SY !== null ? SY + ' grant schedule' : 'grant schedules'}, ${money(eqA)}, `
         + (eqD === 0
-            ? `equals Part I line 25(d), ${money(eqB)} \u2014 a difference of zero dollars, verified.`
-            : `against Part I line 25(d), ${money(eqB)} \u2014 a difference of ${money(eqD)}, which does not reconcile.`));
+            ? `equals ${refLbl}, ${money(eqB)} \u2014 a difference of zero dollars, reconciled.`
+            : `against ${refLbl}, ${money(eqB)} \u2014 a difference of ${money(eqD)}, which does not reconcile.`));
       $('lede-trend').innerHTML = trendLede + (SY !== null ? ` Viewing <strong>${SY}</strong> \u2014 every panel below is scoped to it.` : '');
       const topN = Math.min(5, sEnts.length);
       const top5 = sEnts.slice(0, 5).reduce((s, e) => s + e.total, 0);
@@ -833,11 +849,21 @@
           : `Giving concentrates among returning grantees: <strong>${num(nrRet)} of ${num(nrAll)}</strong> ${recipWord(nrAll)} in ${nrY} had been funded before.`;
       if (incompleteYear(nrY)) $('lede-newret').textContent = `${nrY} contains unitemized disclosures. New and returning recipient comparisons are unavailable for that year.`;
       if (!sEnts.length) $('lede-conc').textContent = 'No named-recipient detail is available in this scope. The filed total remains available in reconciliation.';
-      const cTop = sCatList.find((c) => c.key !== CAT_OTHER);
-      const cOther = sCatList.find((c) => c.key === CAT_OTHER) || { sum: 0, count: 0 };
+      const CAT_UNITEMIZED = 'Unitemized disclosures';
+      const cTop = sCatList.find((c) => c.key !== CAT_OTHER && c.key !== CAT_UNITEMIZED);
+      const cOtherRow = sCatList.find((c) => c.key === CAT_OTHER) || { sum: 0, count: 0 };
+      const cUnitRow = sCatList.find((c) => c.key === CAT_UNITEMIZED) || { sum: 0, count: 0 };
+      // the residual is never folded together silently -- a book with both an
+      // "other" bucket and unitemized rows names both dollar figures below
+      const cOther = { sum: cOtherRow.sum + cUnitRow.sum, count: cOtherRow.count + cUnitRow.count };
+      const residueClause = cOtherRow.sum > 0 && cUnitRow.sum > 0
+        ? `<strong>${moneyCompact(cOtherRow.sum)}</strong> stays in ${esc(CAT_OTHER.toLowerCase())} and <strong>${moneyCompact(cUnitRow.sum)}</strong> in ${num(cUnitRow.count)} unitemized ${cUnitRow.count === 1 ? 'disclosure' : 'disclosures'} with no recipient named`
+        : cUnitRow.sum > 0
+          ? `<strong>${moneyCompact(cUnitRow.sum)}</strong> stays in ${num(cUnitRow.count)} unitemized ${cUnitRow.count === 1 ? 'disclosure' : 'disclosures'} with no recipient named`
+          : `<strong>${moneyCompact(cOther.sum)}</strong> stays in ${esc(CAT_OTHER.toLowerCase())}`;
       $('lede-cats').innerHTML = !cTop
         ? `No filed purpose here names a field the published rules recognise, so nothing is guessed — all <strong>${moneyCompact(cOther.sum)}</strong> across ${num(cOther.count)} ${grantsWord(cOther.count)} stays in ${esc(CAT_OTHER.toLowerCase())}.`
-        : `<strong>${esc(cTop.key)}</strong> leads at <strong>${moneyCompact(cTop.sum)}</strong> across ${num(cTop.count)} ${grantsWord(cTop.count)}. Where the filing\u2019s words name no field, nothing is guessed \u2014 <strong>${moneyCompact(cOther.sum)}</strong> stays in ${esc(CAT_OTHER.toLowerCase())}.`;
+        : `<strong>${esc(cTop.key)}</strong> leads at <strong>${moneyCompact(cTop.sum)}</strong> across ${num(cTop.count)} ${grantsWord(cTop.count)}. Where the filing\u2019s words name no field, nothing is guessed \u2014 ${residueClause}.`;
       // the heading years follow the data; a record with one grant year has nothing to compare
       const mvCard = $('movers').closest('.card');
       if (mvCard) mvCard.hidden = YEARS.length < 2 || incompleteYear(SY === null ? LATEST : SY) || incompleteYear(sPrev);
@@ -1445,6 +1471,9 @@
     };
     inp.addEventListener('change', go);
     inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); inp.blur(); } });
+    // typing a page number should replace it, not append to whatever page rendered last
+    inp.addEventListener('focus', () => inp.select());
+    inp.addEventListener('click', () => inp.select());
   }
   // "/" focuses the grants search from anywhere on the page (never while typing or in a dialog)
   document.addEventListener('keydown', (e) => {
@@ -1482,7 +1511,7 @@
     };
     const csv = [head].concat(rows.map((g) =>
       [g.y, g.r, (entities.get(aliasToId.get(g.r)) || {}).display || '', g.a, g.p, g.c, g.s, g.o, g.record_type || 'named_recipient'].map(cell).join(','))).join(NLc);
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     const bits = [];
@@ -1495,6 +1524,14 @@
   });
 
   // copy link — full state, success only on confirmed write
+  // "Report it": a mail link that carries the exact view (built at click, so the hash is current)
+  {
+    const rl = $('report-link');
+    if (rl) rl.addEventListener('click', () => {
+      rl.href = 'mailto:jjcurry027@gmail.com?subject=' + encodeURIComponent('The Grants Ledger: a problem on ' + document.title.replace(/\s+/g, ' '))
+        + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat I expected:\n\nWhat happened:\n');
+    });
+  }
   $('link-btn').addEventListener('click', () => {
     writeHash(false);
     const url = location.href;
@@ -1582,9 +1619,10 @@
     if (coverage) {
       const rolled = unitemized.filter((g) => SY === null || g.y === SY);
       coverage.hidden = !rolled.length;
-      coverage.textContent = `${num(scopedNamed.length)} named-recipient rows · ${money(scopedNamed.reduce((sum, g) => sum + g.a, 0))}. `
+      coverage.innerHTML = `${num(scopedNamed.length)} named-recipient rows · ${money(scopedNamed.reduce((sum, g) => sum + g.a, 0))}. `
         + `${num(rolled.length)} unitemized ${rolled.length === 1 ? 'disclosure' : 'disclosures'} · ${money(rolled.reduce((sum, g) => sum + g.a, 0))} retained in filed totals. `
-        + 'Unnamed disclosures are excluded from recipient counts, grant medians and recipient comparisons.';
+        + 'Unnamed disclosures are excluded from recipient counts, grant medians and recipient comparisons.'
+        + ' · <a href="../../recovered/">recover a year like this →</a>';
     }
     if (rowsPending) {   // a median of the largest rows is not the median; the stamp is the only true count
       $('kpi-orgs').textContent = SY === null ? STAMPED_ORGS : '\u2026';
@@ -1801,7 +1839,8 @@
     let s2sum = 0, s2count = 0;
     catTotals.forEach((t) => { s2sum += t.s2sum || 0; s2count += t.s2count || 0; });
     host.innerHTML = `<div class="cm-wrap"><table class="cm-table">
-      <thead><tr><th>Category</th><th>Decided by these words</th><th>Grants</th><th>Dollars</th><th>Share</th></tr></thead>
+      <caption class="sr-only">How every filed purpose is classified into a category on this page.</caption>
+      <thead><tr><th scope="col">Category</th><th scope="col">Decided by these words</th><th scope="col">Grants</th><th scope="col">Dollars</th><th scope="col">Share</th></tr></thead>
       <tbody>
         ${CAT_SUBJECTS.map((c) => row(c, 'field')).join('')}
         ${CAT_MECHANISMS.map((c) => row(c, 'mechanism')).join('')}
