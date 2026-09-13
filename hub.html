@@ -189,6 +189,7 @@ textarea { resize:vertical; }
 .fc .meta { display:block;color:var(--ink-dim);font-size:12px;margin-top:4px; }
 .fc .tie { color:var(--cover);font-size:12px;text-align:right; }
 .fc .tie small { display:block;color:var(--ink-dim);font-size:11px; }
+.fc .fcacts { display:flex;gap:8px;align-items:center; }
 .panehint { color:var(--ink-dim);font-size:14px;max-width:80ch;margin-bottom:20px; }
 .idbar { display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px; }
 .idtog { display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--rule);background:white;border-radius:7px;font-size:12px; }
@@ -500,7 +501,7 @@ th.amt,td.amt { text-align:right;white-space:nowrap;font-variant-numeric:tabular
  .atlas-summary { gap:12px;align-items:flex-start;padding-bottom:20px;margin-top:0;flex-wrap:wrap; }
  .atlas-summary h2 { font-size:25px; }.atlas-summary #dstats { font-size:12px;max-width:100%;line-height:1.6; }
  .atlas-title { flex:1 1 100%; }.atlas-value { text-align:left; }.atlas-value #dfig { font-size:30px; }.atlas-value small { font-size:12px; }
- .atlas-panel { padding:20px; }.atlas-panel-head { flex-direction:row;align-items:center;margin-bottom:18px; }.atlas-panel-head h3 { font-size:15px; }.atlas-panel-head .qsel { width:145px;max-width:50%;font-size:16px;height:44px; }
+ .atlas-panel { padding:20px; }.atlas-panel-head { flex-direction:row;align-items:center;margin-bottom:18px; }.atlas-panel-head h3 { font-size:15px; }.atlas-panel-head .qsel { width:145px;max-width:50%;font-size:16px;height:44px; }.atlas-map .atlas-panel-head { flex-direction:column;align-items:stretch;gap:8px; }.atlas-map .atlas-panel-head h3 { order:2; }.atlas-map .atlas-panel-head label.sr-only { position:static;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;order:0;font-size:13px;font-weight:600;color:var(--ink); }.atlas-map #geo-state { order:1;width:100%;max-width:none;height:48px;font-size:16px; }
  .mapzone { aspect-ratio:975 / 610;max-height:none; }.mapfoot { gap:8px;flex-wrap:wrap;margin-top:12px; }#mapback { padding:10px 12px;min-height:44px; }.maplegend { font-size:11px; }.maplegend i { width:12px; }
  .atlas-map-note { font-size:12px;line-height:1.6;margin-top:14px; }
  .ychart { gap:15px; }.yearrow { grid-template-columns:40px minmax(0,1fr) 72px;gap:4px 10px; }.yearlabel,.yearamount { font-size:13px; }.yearcoverage { font-size:11px; }
@@ -526,7 +527,7 @@ th.amt,td.amt { text-align:right;white-space:nowrap;font-variant-numeric:tabular
  .p-warn { font-size:13px; }.p-tot { margin:18px 0; }.p-tot b { font-size:28px; }.p-tot span { font-size:12px; }
  .peerhead b { font-size:25px; }.peerhead .sub { display:none; }.peerlead { font-size:13px;line-height:1.7; }.peerfilters { grid-template-columns:repeat(2,minmax(0,1fr));gap:14px; }.peerfilters label { font-size:12px; }.peerfilters .qsel { font-size:16px; }
  .prow { grid-template-columns:minmax(0,1fr) auto;gap:14px;padding:18px; }.prow>span:first-child { grid-column:1 / -1; }.prow .pv { grid-column:1;grid-row:2;text-align:left; }.prow .addb { grid-column:2;grid-row:2;min-height:44px; }.prow .pn a { font-size:16px; }.prow .pm { font-size:12px; }.peerevidence { font-size:13px; }
- .fc { padding:16px;grid-template-columns:32px minmax(0,1fr);gap:12px; }.fc .cd { width:32px;height:34px; }.fc .tie { grid-column:2;text-align:left; }.fc .rowsb { display:none; }.fc b { font-size:15px; }.fc .meta { font-size:12px; }
+ .fc { padding:16px;grid-template-columns:32px minmax(0,1fr);gap:12px; }.fc .cd { width:32px;height:34px; }.fc .tie { grid-column:2;text-align:left; }.fc .rowsb { display:none; }.fc .fcacts { grid-column:2;justify-content:flex-start;margin-top:4px; }.fc b { font-size:15px; }.fc .meta { font-size:12px; }
  .phead { gap:10px; }.phead .cnt { flex:1 1 100%; }.phead select { font-size:16px;margin-left:0;max-width:190px; }.phead .tbtn { margin-left:auto; }
  .panehint { font-size:13px;line-height:1.7; }.idlegend { font-size:12px; }.idtog { font-size:12px;text-align:left;min-height:44px; }.wv { padding:16px;gap:10px; }.wv .wn { font-size:14px;min-height:44px;padding:8px 0; }.wv .wm { font-size:12px; }.wv .ws { font-size:13px; }
  .trend { padding:18px;gap:20px; }.trow { grid-template-columns:40px minmax(0,1fr) 95px;gap:10px; }.trow .y,.trow .v { font-size:12px; }.trow .v small { font-size:11px; }.ck { gap:9px;font-size:13px; }.ck .kv { font-size:12px; }
@@ -885,6 +886,7 @@ table{font-family:var(--text)}
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
     <a href="https://jcurry44.github.io/grants-ledgers/ny/">New York</a>
     <a href="db/all-grants.csv.gz">Full dataset ↓</a>
+    <a href="db/README.md">Data dictionary</a>
     <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20hub&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A" id="report-link">Report a problem</a>
     <span>By <a href="https://jcurry44.github.io/">Curry Studio</a></span>
   </footer>
@@ -895,7 +897,7 @@ table{font-family:var(--text)}
     <div class="dcrumb" id="dcrumb"></div>
     <div class="atlas-summary"><div class="atlas-title"><h2 id="dname"></h2><span id="dstats"></span></div><div class="atlas-value"><span id="dfig" class="num"></span><small>Filed grant dollars</small></div></div>
     <section class="atlas-panel atlas-map" aria-label="Foundation locations">
-      <div class="atlas-panel-head"><h3>Foundation locations</h3><label class="sr-only" for="geo-state">Explore a state</label><select class="qsel" id="geo-state"><option value="">All states</option></select></div>
+      <div class="atlas-panel-head"><h3>Foundation locations</h3><label class="sr-only" for="geo-state">Select a state</label><select class="qsel" id="geo-state"><option value="">All states</option></select></div>
       <div class="mapzone"><svg class="usmap" id="usmap" role="img" aria-label="United States map shaded by the filed grant dollars of foundations based in each state"></svg><div class="maptip" id="maptip"></div></div>
       <div class="mapfoot"><span class="maplegend" aria-hidden="true"><span>Less</span><i style="background:#dce6d4"></i><i style="background:#bfd3b1"></i><i style="background:#93b38b"></i><i style="background:#649773"></i><i style="background:#31674b"></i><span>More filed dollars</span></span><button type="button" id="mapback">Reset map</button></div>
       <p class="atlas-map-note">Based on foundation addresses, not the communities their grants serve. <button type="button" class="stagelink" id="heromethod">Coverage & method</button></p>
@@ -1105,10 +1107,15 @@ table{font-family:var(--text)}
   // one name per dialog, read by sighted users and screen readers alike
   const DIALOG_NAME = { l: 'Your shortlist', r: 'Research brief', p: 'Recipient record', x: 'Filed grant rows', m: 'Coverage & method', e: 'Foundation evidence' };
   function nameDialog(name) { $('ovlcard').setAttribute('aria-label', name); $('dialogcontext').textContent = name; }
-  let ovlMode = null, returnFocus = null;
+  let ovlMode = null, returnFocus = null, lastPointerTarget = null;
+  // WebKit does not focus a button on click, so the opener is remembered from the pointer event
+  document.addEventListener('pointerdown', (e) => { lastPointerTarget = e.target.closest('button, a, [tabindex]'); }, true);
   function openOvl(mode) {
     clearTimeout(toastTimer); $('toast').hidden = true;
-    if ($('ovl').hidden) returnFocus = document.activeElement;
+    if ($('ovl').hidden) {
+      const ae = document.activeElement;
+      returnFocus = (ae && ae !== document.body && !$('ovl').contains(ae)) ? ae : lastPointerTarget;
+    }
     ovlMode = mode;
     $('ovl').dataset.mode=mode;
     $('ovlcard').setAttribute('aria-label',DIALOG_NAME[mode]||'Record');
@@ -1226,9 +1233,26 @@ table{font-family:var(--text)}
     const r = (t) => M * 0.03 + M * 0.085 * Math.sqrt(t / vmax);
     const dots = placed.slice().sort((a, b) => b.t - a.t).map((c) =>
       `<circle class="cdot${citySel === c.key ? ' csel' : ''}" data-ck="${c.key}" data-cn="${esc(c.name)}" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${r(c.t).toFixed(1)}"><title>${esc(c.name)} · ${c.n} foundation${c.n === 1 ? '' : 's'} · ${moneyC(c.t)}</title></circle>`).join('');
-    const labels = placed.slice(0, 3).map((c) =>
+    // ascending dollar order: the #1 city is emitted (and painted) last, on top of the others
+    const top3 = placed.slice(0, 3).sort((a, b) => a.t - b.t);
+    const labels = top3.map((c) =>
       `<text class="dlbl" x="${c.x.toFixed(1)}" y="${(c.y - r(c.t) - M * 0.015).toFixed(1)}" text-anchor="middle" font-size="${(M * 0.055).toFixed(1)}">${esc(c.name)}</text>`).join('');
     svg.insertAdjacentHTML('beforeend', `<g id="dotlayer">${dots}${labels}</g>`);
+    // a label that visually overlaps an earlier (lower-dollar, already-placed) one steps clear by
+    // its own rendered height -- measured on the real box, since the CSS font-size (fixed px) can
+    // render far wider than these M-scaled coordinates would suggest on a small, zoomed-in state
+    const lblBoxes = [];
+    svg.querySelectorAll('#dotlayer .dlbl').forEach((t) => {
+      for (let tries = 0; tries < 5; tries++) {
+        const b = t.getBBox();
+        const hit = lblBoxes.find((p) => b.x < p.x + p.width && b.x + b.width > p.x && b.y < p.y + p.height && b.y + b.height > p.y);
+        if (!hit) { lblBoxes.push(b); return; }
+        // clear this specific box exactly, above or below it, rather than guessing a line-height step
+        const dy = b.y <= hit.y ? (hit.y - b.height - 1 - b.y) : (hit.y + hit.height + 1 - b.y);
+        t.setAttribute('y', (parseFloat(t.getAttribute('y')) + dy).toFixed(1));
+      }
+      lblBoxes.push(t.getBBox());
+    });
   }
 
   function selectCity(key, name, silent) {
@@ -1340,6 +1364,8 @@ table{font-family:var(--text)}
       $('dname').textContent = 'United States';
       $('dfig').textContent = moneyC(t.t);
       $('dstats').textContent = t.n.toLocaleString() + ' foundations · ' + t.g.toLocaleString() + ' filed grant rows';
+      // filers whose own address is outside the United States have no home state: named, never mapped
+      { const abroad = F.filter((f) => f.co); if (abroad.length) $('dstats').textContent += ' · ' + abroad.length + ' filed from outside the U.S. (' + moneyC(abroad.reduce((s, f) => s + (f.t || 0), 0)) + ') are not on the map'; }
       // the same AGG.filed counts the Years tab prints — so the first screen discloses
       // a partial year instead of letting 2025 read like a finished one
       const uby = AGG.byYear.all || {};
@@ -1429,7 +1455,9 @@ table{font-family:var(--text)}
     const ranked = lit.slice().sort((a, b) => BY_ST[a].t - BY_ST[b].t);
     const lvOf = {};
     ranked.forEach((ab, i) => { lvOf[ab] = ' lv' + (1 + Math.min(4, Math.floor(i * 5 / Math.max(1, ranked.length)))); });
-    svg.innerHTML = Object.entries(USMAP.states).map(([ab, s]) => {
+    // alphabetical by full state name, so Tab order matches the #geo-state dropdown
+    const stateEntries = Object.entries(USMAP.states).sort((a, b) => stName(a[0]).localeCompare(stName(b[0])));
+    svg.innerHTML = stateEntries.map(([ab, s]) => {
       const on = !!BY_ST[ab];
       const label = on ? stName(ab) + ': ' + stLine(ab) : stName(ab) + ': none yet';
       return '<path class="st' + (on ? ' live' + lvOf[ab] : '') + '" data-ab="' + ab + '" d="' + s.d + '"' +
@@ -1502,6 +1530,7 @@ table{font-family:var(--text)}
       if (!p2) return;
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectState(p2.dataset.ab === mapSel ? null : p2.dataset.ab); }
       else if (e.key === 'Escape') selectState(null);
+      else if (e.key.indexOf('Arrow') === 0) e.preventDefault();
     });
     $('mapback').addEventListener('click', () => selectState(null));
   }
@@ -1637,9 +1666,12 @@ table{font-family:var(--text)}
     $('fleet').insertAdjacentHTML('beforeend', slice.map((f) => `
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" data-st="${f.st || ''}" data-u="${f.u}">
         <span class="cd">${f.c}</span>
-        <span style="min-width:0"><b title="${esc(f.n)}">${esc(f.n)}</b><span class="meta">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${span(f.y)}${f.rn ? ' · Adjusted total' : ''}</span></span>
+        <span style="min-width:0"><b title="${esc(f.n)}">${esc(f.n)}</b><span class="meta">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${span(f.y)}${f.rn ? ' · Reconciles to Part XIV 3a' : ''}</span></span>
         <span class="tie" title="every year reconciles to its filed total${f.rn ? ' — ' + esc(f.rn) : ''}">✓ Reconciled<small>${f.g.toLocaleString('en-US')} · ${moneyC(f.t)}</small></span>
-        <button type="button" class="rowsb" data-rows="${f.u}" title="Browse this foundation's rows here">Browse rows</button>
+        <span class="fcacts">
+          <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}" data-name="${esc(f.n)}" aria-pressed="${PICKED.has(f.u)}">${PICKED.has(f.u) ? 'Saved' : 'Save funder'}</button>
+          <button type="button" class="rowsb" data-rows="${f.u}" title="Browse this foundation's rows here">Browse rows</button>
+        </span>
       </a>`).join(''));
     fleetShown += slice.length;
     $('fmore').hidden = fleetShown >= fleetView.length;
@@ -1665,6 +1697,17 @@ table{font-family:var(--text)}
     document.querySelectorAll('#usmap .st.hl').forEach((el) => el.classList.remove('hl'));
   });
   $('fleet').addEventListener('click', (e) => {
+    const add = e.target.closest('.addb[data-add]');
+    if (add) {
+      e.preventDefault();
+      const u = add.dataset.add;
+      if (PICKED.has(u)) { PICKED.delete(u); delete PROJ().evidence[u]; } else PICKED.add(u);
+      saveList();
+      renderList();
+      syncAddButtons();
+      notifySaved(u, add.dataset.name);
+      return;
+    }
     const b = e.target.closest('.rowsb');
     if (!b) return;
     e.preventDefault();
@@ -2024,7 +2067,7 @@ table{font-family:var(--text)}
       const nG = result.rows.reduce((sum, r) => sum + r[1], 0);
       const sum = result.rows.reduce((sum, r) => sum + r[2], 0);
       $('qcount').textContent = result.rows.length.toLocaleString('en-US') + (result.rows.length === 1 ? ' foundation' : ' foundations');
-      $('qsum').innerHTML = nG.toLocaleString('en-US') + ' matching grants<span class="sumdollars"> · ' + moneyC(sum) + '</span>';
+      $('qsum').innerHTML = nG.toLocaleString('en-US') + (nG === 1 ? ' matching grant' : ' matching grants') + '<span class="sumdollars"> · ' + moneyC(sum) + '</span>';
       $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
       $('qreport').disabled = $('qexport').disabled = !result.rows.length;
       if (!result.rows.length) {
@@ -2070,7 +2113,7 @@ table{font-family:var(--text)}
         </div>
         <div class="fside">
           <button type="button" class="evidencebtn" data-evidence="${fi}">View matching grants <span aria-hidden="true">→</span></button>
-          <button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" aria-label="Reconciliation for ${esc(f.n)}" title="${bridged?'Reconciled · Adjusted total, disclosed on the exceptions page · opens the reconciliation':'Reconciled to IRS filings · opens the reconciliation'}">✓ ${bridged ? 'Adjusted total' : 'Reconciled'}</button>
+          <button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" aria-label="Reconciliation for ${esc(f.n)}" title="${bridged?'Reconciled · Reconciles to Part XIV 3a, disclosed on the exceptions page · opens the reconciliation':'Reconciled to IRS filings · opens the reconciliation'}">✓ ${bridged ? 'Reconciles to Part XIV 3a' : 'Reconciled'}</button>
           <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}" aria-pressed="${PICKED.has(f.u)}">${PICKED.has(f.u) ? 'Saved' : 'Save funder'}</button>
         </div>
       </article>`;
@@ -2134,7 +2177,7 @@ table{font-family:var(--text)}
   function behaviourNote(fi) {
     const b = observedBehaviour(fi);
     if (!b) return '';
-    return `<p class="repnote">${b[0].toLocaleString('en-US')} named recipients observed in TY${b[4]}–${b[5]}. ${b[1] == null
+    return `<p class="repnote">${b[0].toLocaleString('en-US')} named recipients observed in TY${b[4]}–${b[5]} — a fleet cross-match; may differ from the ledger's own reviewed count. ${b[1] == null
       ? 'One filed year is available, so a repeat-recipient share is not reported.'
       : `${b[1]}% appear in more than one filed year. This describes the available history; it is not an award renewal rate.`}</p>`;
   }
@@ -2250,7 +2293,8 @@ table{font-family:var(--text)}
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
   function csv(cols, rows, fmt) {
-    const q = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const defuse = (s) => /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+    const q = (v) => '"' + defuse(String(v == null ? '' : v)).replace(/"/g, '""') + '"';
     const head = cols.map((c) => q(c.h)).join(',');
     const body = rows.map((r) => cols.map((c) => {
       const v = r[c.k];
@@ -2312,7 +2356,7 @@ table{font-family:var(--text)}
     { h: 'Largest grant', k: 'max', type: 'n', w: 15 },
     { h: 'Most recent year', k: 'last', type: 'yr', w: 16 },
     { h: 'Repeat recipients (%)', k: 'renew', type: 'pct', w: 30 },
-    { h: 'Recipient denominator', k: 'recipients', type: 'int', w: 22 },
+    { h: "Recipients (fleet cross-match; may differ from the ledger's own reviewed count)", k: 'recipients', type: 'int', w: 22 },
     { h: 'Observation window', k: 'window', type: 's', w: 22 },
     { h: 'Scope', k: 'scope', type: 's', w: 52 },
     { h: 'Total in scope', k: 'total', type: 'n', w: 22 },
@@ -2325,7 +2369,7 @@ table{font-family:var(--text)}
     const b = observedBehaviour(F.indexOf(f));
     return Object.assign({
       name: f.n, city: f.ci, st: f.st || '', total: f.t,
-      recon: f.rn ? 'reconciled to filed total (adjusted total: ' + f.rn + ')' : 'reconciled to filed total',
+      recon: f.rn ? 'reconciled to filed total (reconciles to Part XIV 3a: ' + f.rn + ')' : 'reconciled to filed total',
       url: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/',
       note: NOTES[f.u] || '',
       renew: b && b[1] != null ? b[1] : '', recipients: b ? b[0] : '',
@@ -2387,15 +2431,21 @@ table{font-family:var(--text)}
     }
     return out;
   }
-  function savedFunderRow(f) {
+  function savedFunderRow(f, fb) {
     const e=PROJ().evidence[f.u];
-    return funderRow(f,e ? {n:e.n,median:e.median,max:e.max,last:e.last,total:e.total,scope:e.scope,
+    if (e) return funderRow(f,{n:e.n,median:e.median,max:e.max,last:e.last,total:e.total,scope:e.scope,
       evidence:'Saved '+(e.saved_at||'date unknown')+(e.recipient_name?' · comparable: '+e.recipient_name:''),
-      note:NOTES[f.u]||''} : {n:f.g,evidence:'Added without a saved matching selection'});
+      note:NOTES[f.u]||''});
+    const fw = fb && fb.get(f.u);
+    return funderRow(f, Object.assign({n:f.g,evidence:'Added without a saved matching selection'}, fw ? {median:fw.median,max:fw.max} : {}));
   }
-  function evidenceSummary(f) {
+  function evidenceSummary(f, fb) {
     const e=PROJ().evidence[f.u];
-    if (!e) return '<span class="lm">No matching selection saved. Add your rationale below.</span>';
+    if (!e) {
+      const fw = fb && fb.get(f.u);
+      if (fw) return `<div class="savedreason"><b>${money(fw.median)} median · ${money(fw.max)} largest grant</b><p>Foundation-wide (no saved matching selection).</p></div>`;
+      return '<span class="lm">No matching selection saved. Add your rationale below.</span>';
+    }
     return `<div class="savedreason"><b>${e.n.toLocaleString('en-US')} matching filed rows · ${money(e.median)} median · latest TY${e.last}</b>
       <p>${e.recipient_name?'Comparable record: '+esc(e.recipient_name)+'. ':''}${esc(e.scope)}</p>
       <small>Saved ${esc(e.saved_at||'date unknown')}${COVERAGE && e.dataset_sha256 && e.dataset_sha256!==COVERAGE.dataset_sha256?' · Earlier collection: recheck the evidence before outreach.':''}</small></div>`;
@@ -2406,9 +2456,20 @@ table{font-family:var(--text)}
     let coverage=null;
     try { coverage=await coverageData(); } catch(e) {}
     const funders=listRows();
+    const fallback = new Map();
     await Promise.all(funders.map(async f=>{
       const ev=p.evidence[f.u];
-      if (!ev || ev.sources?.length) return;
+      if (ev && ev.sources?.length) return;
+      if (!ev) {
+        try {
+          const rows=await prospectData('fnd/'+f.u+'.json');
+          const named=rows.filter(g=>g[6]!=='unitemized');
+          const median=weightedMedian(named.map(g=>[g[2],1]));
+          const max=named.reduce((m,g)=>Math.max(m,g[2]),-Infinity);
+          if (median!=null && isFinite(max)) fallback.set(f.u,{median,max});
+        } catch(e) {}
+        return;
+      }
       const sameData = !!coverage && ev.dataset_sha256===coverage.dataset_sha256;
       try {
         const rows=await prospectData('fnd/'+f.u+'.json');
@@ -2436,13 +2497,13 @@ table{font-family:var(--text)}
       <p>${funders.length} shortlisted ${funders.length===1 ? 'foundation' : 'foundations'} · ${funders.filter(f=>p.evidence[f.u]).length} with saved matching criteria · ${funders.filter(f=>String(NOTES[f.u]||'').trim()).length} with research notes</p></div>
       ${funders.map((f,i)=>{const e=p.evidence[f.u];return `<section class="repsec briefcard"><h3>${i+1}. <a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></h3>
         <p class="briefmeta">${esc(f.ci)}${f.st?', '+esc(f.st):''} · published ledger TY${f.y[0]}–${f.y[f.y.length-1]}</p>
-        ${evidenceSummary(f)}
+        ${evidenceSummary(f, fallback)}
         ${e?.sources?.length?`<ul class="briefsources">${e.sources.map(g=>`<li><a href="${ledgerLink(F.indexOf(f),g.name)}">${esc(dc(g.name))} ↗</a> · ${money(g.amount)} · TY${g.year}</li>`).join('')}</ul>`:e?'<p class="repnote">Individual source examples are unavailable in this snapshot; open the ledger to inspect the selection.</p>':''}
         <p class="briefnote"><b>Research note & next step</b><br>${esc(NOTES[f.u]||'Review current eligibility, application route and fit before outreach.')}</p>
       </section>`;}).join('')}
       <div class="repnote">Historical support is evidence for further research, not a prediction of funding. Recipient identities and sectors may be inferred; confirm the organization and current funder criteria. Each saved selection has its own scope, so its dollar totals are not added into a funding opportunity estimate. ${coverage?'Collection measured '+esc(coverage.built_at.slice(0,10))+'; '+coverage.foundations.toLocaleString('en-US')+' published foundations.':'Current coverage couldn’t load; check the collection before using this brief.'}</div>
     </div>`;
-    $('brief-export').onclick=()=>exportMenu($('brief-export'),()=>({name:slug(p.name)+'-research-brief',cols:FCOLS,rows:funders.map(savedFunderRow)}));
+    $('brief-export').onclick=()=>exportMenu($('brief-export'),()=>({name:slug(p.name)+'-research-brief',cols:FCOLS,rows:funders.map(f=>savedFunderRow(f, fallback))}));
     $('brief-print').onclick=()=>window.print();
     $('brief-back').onclick=()=>{openOvl('l');paintList();};
   }
@@ -2482,7 +2543,7 @@ table{font-family:var(--text)}
         <div class="lrow">
           <span class="cd">${f.c}</span>
           <span><span class="ln"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
-            <span class="lm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]} · ✓ reconciled${f.rn ? ' · Adjusted total' : ''}</span></span>
+            <span class="lm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]} · ✓ reconciled${f.rn ? ' · Reconciles to Part XIV 3a' : ''}</span></span>
           <span class="lv num">${p.evidence[f.u] ? moneyC(p.evidence[f.u].total) : moneyC(f.t)}<small>${p.evidence[f.u] ? 'matching dollars' : 'filed dollars'}</small></span>
           <button type="button" class="rm" data-rm="${f.u}" aria-label="Remove">remove</button>
           <div class="list-evidence">${p.evidence[f.u]?`<details class="savedselection"><summary>${p.evidence[f.u].n.toLocaleString('en-US')} matching grants · ${moneyC(p.evidence[f.u].median)} median</summary>${evidenceSummary(f)}</details>`:evidenceSummary(f)}</div>
@@ -3144,8 +3205,9 @@ table{font-family:var(--text)}
   $('rows').addEventListener('click', (e) => { const b = e.target.closest('.recbtn'); if (b) openProfile(b.dataset.e); });
   $('csv').addEventListener('click', () => {
     const head = 'year,recipient_as_filed,amount,category,state,entity_id';
+    const defuse = (s) => /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
     const lines = view.map((r) => [r[0], r[5], r[2], REG.cats[r[3]], REG.states[r[4]] || '', r[1]]
-      .map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(','));
+      .map((v) => '"' + defuse(String(v)).replace(/"/g, '""') + '"').join(','));
     const blob = csvBlob(head + String.fromCharCode(10) + lines.join(String.fromCharCode(10)));
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -3395,6 +3457,7 @@ table{font-family:var(--text)}
     history.replaceState(null, '', p.length ? '#' + p.join('&') : location.pathname);
   }
   async function readHash() {
+    region = 'all'; govOnly = false; HASHQ = null; mapSel = null; catSel = null;
     const p = Object.fromEntries(location.hash.slice(1).split('&').filter(Boolean).map((kv) => { const i = kv.indexOf('='); return [kv.slice(0, i), decodeURIComponent(kv.slice(i + 1))]; }));
     if (['wny', 'ny'].includes(p.region)) region = p.region;
     if (p.id === 'gov') govOnly = true;
@@ -3425,6 +3488,13 @@ table{font-family:var(--text)}
   }
   setTab('q',true);
   readHash();
+  // a 404 page (or any link) can hand the hub a name to search: #find=<text>
+  {
+    const m = /(?:^#|&)find=([^&]*)/.exec(location.hash);
+    if (m) { const v = decodeURIComponent(m[1]); history.replaceState(null, '', location.pathname + location.search); $('q').value = v; $('q').focus(); suggest(v); }
+  }
+  addEventListener('hashchange', readHash);
+  addEventListener('popstate', readHash);
 })();
 </script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -12,17 +12,16 @@
 <meta property="og:title" content="Philecology Foundation — Grants Ledger">
 <meta property="og:description" content="21 grants · $35,329,182 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/philecologyf/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,9 +323,9 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>How a year is counted</h3>
-        <p>This foundation’s tax year ends June 30, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>A concentrated ledger, complete as filed: this foundation makes a small number of grants, and every year still proves against the filed total to the dollar.</p>
+        <p>This foundation’s tax year ends June 30, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>A concentrated ledger, complete as filed: this foundation makes a small number of grants, and every year still reconciles to the filed total to the dollar.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>20-8987808</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/208987808" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -426,7 +425,7 @@
 <script>
 window.PHILECOLOG_DATA={"meta":{"foundation":"Philecology Foundation","ein":"20-8987808","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":21,"grand_total":35329182,"tieout":{"2020":{"object_id":"202201129349100910","grant_count":2,"grant_sum":2027494,"line25_col_d":2027494,"status":"PASS"},"2021":{"object_id":"202300269349100000","grant_count":2,"grant_sum":120000,"line25_col_d":120000,"status":"PASS"},"2022":{"object_id":"202440479349100814","grant_count":2,"grant_sum":1745688,"line25_col_d":1745688,"status":"PASS"},"2023":{"object_id":"202530509349100208","grant_count":7,"grant_sum":13020587,"line25_col_d":13020587,"status":"PASS"},"2024":{"object_id":"202610279349100756","grant_count":8,"grant_sum":18415413,"line25_col_d":18415413,"status":"PASS"}}},"grants":[{"y":2020,"r":"Amazon Biodiversity Center","a":100000,"p":"Conservation Organization","c":"Washington","s":"DC","e":"","o":"202201129349100910","record_type":"named_recipient"},{"y":2020,"r":"Botanical Research Institute of Texas","a":1927494,"p":"Conservation","c":"Fort Worth","s":"TX","e":"","o":"202201129349100910","record_type":"named_recipient"},{"y":2021,"r":"Amazon Biodiversity Center","a":100000,"p":"Conservation Organization","c":"Washington","s":"DC","e":"","o":"202300269349100000","record_type":"named_recipient"},{"y":2021,"r":"Botanical Research Institute of Texas","a":20000,"p":"Conservation","c":"Fort Worth","s":"TX","e":"","o":"202300269349100000","record_type":"named_recipient"},{"y":2022,"r":"TEXAS CHRISTIAN UNIVERSITY","a":600000,"p":"CHRISTINA AND MARK JOHNSON ENDOWED SCHOLARSHIP","c":"FORT WORTH","s":"TX","e":"","o":"202440479349100814","record_type":"named_recipient"},{"y":2022,"r":"MULTIPURPOSE ARENA FORT WORTH","a":1145688,"p":"MULTIPURPOSE ARENA","c":"FORT WORTH","s":"TX","e":"","o":"202440479349100814","record_type":"named_recipient"},{"y":2023,"r":"MULTIPURPOSE ARENA FORT WORTH","a":1730587,"p":"MULTIPURPOSE ARENA","c":"FORT WORTH","s":"TX","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MIAMI","a":1000000,"p":"KNIGHT CENTER FOR MUSIC INNOVATION","c":"CORAL GABLES","s":"FL","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"MERLIN TUTTLE'S BAT CONSERVATION INC","a":25000,"p":"PHASE II OF BAT SCAN PROJECT","c":"AUSTIN","s":"TX","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"JAZZ ASPEN SNOWMASS","a":815000,"p":"JAZZ ASPEN SNOWMASS ACADEMY","c":"ASPEN","s":"CO","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"THE FROST SCHOOL OF MUSIC AT THE UNIVERSITY OF MIAMI","a":100000,"p":"JAZZ ASPEN SNOWMASS ACADEMY","c":"CORAL GABLES","s":"FL","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"EVENT FACILITIES FORT WORTH INC","a":9100000,"p":"CONTRIBUTION","c":"FORT WORTH","s":"TX","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2023,"r":"NEW YORK BOTANICAL GARDEN","a":250000,"p":"CONTRIBUTION","c":"BRONX","s":"NY","e":"","o":"202530509349100208","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF MIAMI FROST SCHOOL OF MUSIC","a":100000,"p":"JAZZ ASPEN SNOWMASS ACADEMY SUMMER PROGRAM","c":"CORAL GABLES","s":"FL","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"JAZZ ASPEN SNOWMASS","a":815000,"p":"JAZZ ASPEN SNOWMASS ACADEMY","c":"ASPEN","s":"CO","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"THE WILLIAM A FARNSWORTH LIBRARY AND ART MUSEUM","a":400000,"p":"GIFT FOR ACQUISITION OF ARTWORK","c":"ROCKLAND","s":"ME","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"CRYSTAL BRIDGES MUSEUM OF AMERICAN ART INC","a":2000000,"p":"ENDOWMENT FUND","c":"BENTONVILLE","s":"AR","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"MULTIPURPOSE ARENA FORT WORTH","a":1725413,"p":"CONTRIBUTION-INTEREST FORGIVEN","c":"FORT WORTH","s":"TX","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"MULTIPURPOSE ARENA FORT WORTH","a":13000000,"p":"GENERAL","c":"FORT WORTH","s":"TX","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"THE CLIBURN","a":125000,"p":"GENERAL","c":"FORT WORTH","s":"TX","e":"","o":"202610279349100756","record_type":"named_recipient"},{"y":2024,"r":"NEW YORK BOTANICAL GARDEN","a":250000,"p":"BRANCHING OUT CAMPAIGN","c":"BRONX","s":"NY","e":"","o":"202610279349100756","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -12,17 +12,16 @@
 <meta property="og:title" content="John Deere Foundation — Grants Ledger">
 <meta property="og:description" content="19 filed rows · $120,365,251 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/johndeerefou/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EJ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,9 +323,9 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>How a year is counted</h3>
-        <p>This foundation’s tax year ends October 31, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $17,217,090 of the $120,365,251 here (14%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
+        <p>This foundation’s tax year ends October 31, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $17,217,090 of the $120,365,251 here (14%). Those lines are printed exactly as filed and reconcile to the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>36-6051024</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/366051024" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -426,7 +425,7 @@
 <script>
 window.JOHNDEEREF_DATA={"meta":{"foundation":"John Deere Foundation","ein":"36-6051024","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2019,2020,2021,2022,2023],"grant_count":19,"grand_total":120365251,"tieout":{"2019":{"object_id":"202122439349100712","grant_count":1,"grant_sum":17217090,"line25_col_d":17217090,"status":"PASS"},"2020":{"object_id":"202242589349100314","grant_count":5,"grant_sum":20911509,"line25_col_d":20911509,"status":"PASS"},"2021":{"object_id":"202311779349100706","grant_count":4,"grant_sum":21201639,"line25_col_d":21201639,"status":"PASS"},"2022":{"object_id":"202411849349100106","grant_count":4,"grant_sum":26302731,"line25_col_d":26302731,"status":"PASS"},"2023":{"object_id":"202542199349100729","grant_count":5,"grant_sum":34732282,"line25_col_d":34732282,"status":"PASS"}}},"grants":[{"y":2019,"r":"Grants Paid - Attachment 18","a":17217090,"p":"Various - See Attached","c":"Various","s":"IL","e":"","o":"202122439349100712","record_type":"unitemized"},{"y":2020,"r":"AMERICAN ONLINE GIVING FOUNDATION","a":20655187,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"NEWWARK","s":"DE","e":"","o":"202242589349100314","record_type":"named_recipient"},{"y":2020,"r":"CANADA ONLINE GIVING FOUNDATION","a":36925,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202242589349100314","record_type":"named_recipient"},{"y":2020,"r":"GREATER CEDAR VALLEY ALLIANCE","a":100000,"p":"GENERAL FUNDS","c":"WATERLOO","s":"IA","e":"","o":"202242589349100314","record_type":"named_recipient"},{"y":2020,"r":"GREATER DES MOINES PARTNERSHIP","a":100000,"p":"GENERAL FUNDS","c":"DES MOINES","s":"IA","e":"","o":"202242589349100314","record_type":"named_recipient"},{"y":2020,"r":"THE UK ONLINE GIVING FOUNDATION INC","a":19397,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202242589349100314","record_type":"named_recipient"},{"y":2021,"r":"AMERICAN ONLINE GIVING FOUNDATION","a":20905552,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"NEWWARK","s":"DE","e":"","o":"202311779349100706","record_type":"named_recipient"},{"y":2021,"r":"CANADA ONLINE GIVING FOUNDATION","a":34976,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202311779349100706","record_type":"named_recipient"},{"y":2021,"r":"THE UK ONLINE GIVING FOUNDATION INC","a":254317,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202311779349100706","record_type":"named_recipient"},{"y":2021,"r":"HAUS DES STIFTENS GGMBH","a":6794,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202311779349100706","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN ONLINE GIVING FOUNDATION","a":26006743,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"NEWWARK","s":"DE","e":"","o":"202411849349100106","record_type":"named_recipient"},{"y":2022,"r":"CANADA ONLINE GIVING FOUNDATION","a":52987,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202411849349100106","record_type":"named_recipient"},{"y":2022,"r":"HAUS DES STIFTENS GGMBH","a":107222,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202411849349100106","record_type":"named_recipient"},{"y":2022,"r":"THE UK ONLINE GIVING FOUNDATION INC","a":135779,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202411849349100106","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN ONLINE GIVING FOUNDATION","a":33674553,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"NEWWARK","s":"DE","e":"","o":"202542199349100729","record_type":"named_recipient"},{"y":2023,"r":"CANADA ONLINE GIVING FOUNDATION","a":71963,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202542199349100729","record_type":"named_recipient"},{"y":2023,"r":"FONDS DE PARTICIPATION SOLIDAIRE","a":7660,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202542199349100729","record_type":"named_recipient"},{"y":2023,"r":"HAUS DES STIFTENS FUR UNTERNEHMEN & NON-PROFITS GGMBH","a":524748,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202542199349100729","record_type":"named_recipient"},{"y":2023,"r":"THE UK ONLINE GIVING FOUNDATION","a":453358,"p":"GRANTS TO VARIOUS 501(C)(3) PUBLIC CHARITIES","c":"","s":"","e":"","o":"202542199349100729","record_type":"named_recipient"}]};window.LEDGER_MERGES=["UK ONLINE GIVING FOUNDATION"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

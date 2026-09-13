@@ -12,17 +12,16 @@
 <meta property="og:title" content="Kemper and Leila Williams Foundation — Grants Ledger">
 <meta property="og:description" content="22 grants · $239,386 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/kemperandlei/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -326,7 +325,7 @@
         <h3>How a year is counted</h3>
         <p>This foundation’s tax year ends March 31, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>23-7336090</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/237336090" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -426,7 +425,7 @@
 <script>
 window.KEMPERANDL_DATA={"meta":{"foundation":"Kemper and Leila Williams Foundation","ein":"23-7336090","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":22,"grand_total":239386,"tieout":{"2020":{"object_id":"202112219349100901","grant_count":3,"grant_sum":51807,"line25_col_d":51807,"status":"PASS"},"2021":{"object_id":"202232559349100808","grant_count":4,"grant_sum":39633,"line25_col_d":39633,"status":"PASS"},"2022":{"object_id":"202333529349100303","grant_count":5,"grant_sum":46033,"line25_col_d":46033,"status":"PASS"},"2023":{"object_id":"202423549349101107","grant_count":5,"grant_sum":29725,"line25_col_d":29725,"status":"PASS"},"2024":{"object_id":"202502959349100220","grant_count":5,"grant_sum":72188,"line25_col_d":72188,"status":"PASS"}}},"grants":[{"y":2020,"r":"DR THOMAS ADAMS","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2020,"r":"JESSICA MARIE JOHNSON","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"BALTIMORE","s":"MD","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2020,"r":"ST MARY PARISH POLICE JURY","a":46307,"p":"ASSIST IN FUNDING OF PARK OPERATIONS.","c":"FRANKLIN","s":"LA","e":"","o":"202112219349100901","record_type":"named_recipient"},{"y":2021,"r":"KYLE P JACKSON","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"BERKELEY","s":"CA","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"K STEPHEN PRINCE","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"TAMPA","s":"FL","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"ST MARY PARISH POLICE JURY","a":30133,"p":"ASSIST IN FUNDING OF PARK OPERATIONS.","c":"FRANKLIN","s":"LA","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2021,"r":"PHILLIPPE HALBERT","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW HAVEN","s":"CT","e":"","o":"202232559349100808","record_type":"named_recipient"},{"y":2022,"r":"KATHRYN OLIVARIUS","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"PALO ALTO","s":"CA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"SUSAN PENMAN","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"DURHAM","s":"NC","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"ELOY DE GUZMAN ROMERO BLANCO","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PITTSBURGH","s":"PA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"WILLIAM D JONES","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"HOUSTON","s":"TX","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2022,"r":"ST MARY PARISH POLICE JURY","a":32533,"p":"ASSIST IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202333529349100303","record_type":"named_recipient"},{"y":2023,"r":"BENJAMIN GROTH","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"SHARON ANN MURPHY","a":1500,"p":"AWARD BEST PUBLISHED WORK ON LOUISIANA HISTORY.","c":"WARWICK","s":"RI","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"ST MARY PARISH POLICE JURY","a":16225,"p":"ASSIST IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"AURELIE GODET","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"NEW ORLEANS","s":"LA","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2023,"r":"ELIZABETH ROUGET","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PRINCETON","s":"NJ","e":"","o":"202423549349101107","record_type":"named_recipient"},{"y":2024,"r":"ST MARY PARISH POLICE","a":58688,"p":"ASSISTANCE IN FUNDING OF PARK OPERATIONS","c":"FRANKLIN","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JOHN BARDES","a":1500,"p":"WILLIAMS PRIZE WINNER FOR THE PUBLICATION \"\"THE CARCERAL CITY. SLAVERY AND THE MAKING OF MASS INCARCERATION IN NEW ORLEANS, 1803-1930\" - UNC PRESS, 2024","c":"BATON ROUGE","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"ANN NGOC TRAN","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"LOS ANGELES","s":"CA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JULIA BERNIER","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"PITTSBURGH","s":"PA","e":"","o":"202502959349100220","record_type":"named_recipient"},{"y":2024,"r":"JONATHAN LANDE","a":4000,"p":"FELLOWSHIP AWARDED TO SCHOLARS PURSUING RESEARCH PROJECTS.","c":"LAFAYETTE","s":"LA","e":"","o":"202502959349100220","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

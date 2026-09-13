@@ -124,7 +124,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="card">
       <b>Prospect research and advancement</b>
       <div class="meta">Universities · hospitals · consultancies</div>
-      <p>Grant lists that exist only as scanned paper attachments never enter the e-file datasets that screening tools are built on. Those years are recovered here, page by page, and proven against the filing’s own totals — so a foundation that looks quiet in a commercial database can turn out to have a full record.</p>
+      <p>Grant lists that exist only as scanned paper attachments never enter the e-file datasets that screening tools are built on. Those years are recovered here, page by page, and reconciled to the filing’s own totals — so a foundation that looks quiet in a commercial database can turn out to have a full record.</p>
     </div>
     <div class="card">
       <b>Foundation staff and boards</b>
@@ -183,7 +183,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="step"><div><b>Fetch the filings</b><span>The source is the IRS Tax Exempt Organization Search public release of Form 990-PF e-file XML. Filings are pulled from the IRS’s own yearly indexes and archives, keyed by tax period and return type.</span></div></div>
     <div class="step"><div><b>Parse the grants schedule</b><span>Every grant row is read as filed: recipient name, address, purpose, amount, tax year. Nothing is normalized away at this stage — typos, truncations and run-together names are preserved exactly as the foundation wrote them.</span></div></div>
     <div class="step"><div><b>Reconcile against the filed total</b><span>The rows are summed and compared to the filed referee line, year by year. A year that ties is eligible to publish. A year that does not tie is withheld, and the difference is recorded for disclosure. This step can only pass or fail; it has no third outcome.</span></div></div>
-    <div class="step"><div><b>Recover what the e-file data does not carry</b><span>Some foundations file a whole year as a single line — “See attached statement” — with the grants themselves in an attachment the IRS publishes only as a scanned image with no text layer. Those pages are read by optical character recognition and, where the software cannot render a figure legibly, by eye from the page image. Recovered years face the same referee as everything else, and are additionally proven against the attachment’s own printed total wherever one is printed. A figure that cannot be read is labeled unread rather than guessed.</span></div></div>
+    <div class="step"><div><b>Recover what the e-file data does not carry</b><span>Some foundations file a whole year as a single line — “See attached statement” — with the grants themselves in an attachment the IRS publishes only as a scanned image with no text layer. Those pages are read by optical character recognition and, where the software cannot render a figure legibly, by eye from the page image. Recovered years face the same referee as everything else, and are additionally checked against the attachment’s own printed total wherever one is printed. A figure that cannot be read is labeled unread rather than guessed.</span></div></div>
     <div class="step"><div><b>Resolve recipient identity</b><span>Three tiers, in order: one shared canonical form of the name; identity by EIN, where the as-filed name is matched against the IRS Business Master File and an EIN is assigned only when the filing’s own recipient state pins the name to exactly one organization or the name is nationally unique; and a short list of reviewed merges, each with a stated reason. Names that resolve to different EINs are never joined. Over-merging is treated as worse than under-merging.</span></div></div>
     <div class="step"><div><b>Classify the purpose</b><span>Three published tiers: keywords in the filed purpose text, then the recipient’s filed name, then the recipient’s own classification in the IRS Business Master File — the last accepted only when the match is unambiguous. Where nothing matches, the grant stays in “other” rather than receiving a guess. Every rule a page runs is printed on that page.</span></div></div>
     <div class="step"><div><b>Check, then publish</b><span>Each page is checked in a real browser before it ships: the reconciliation badge must read N of N years with a $0 difference, the year controls must match the corpus, the methodology section must carry the withheld notes, and the page must produce zero errors and no sideways scroll on a phone. A pre-deploy gate then checks that the published site actually matches the source files and that the page count matches the registry.</span></div></div>
@@ -291,7 +291,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   </div>
   <div class="note">
     <b>Reporting a suspected error</b>
-    <p>Errors are the one thing this project cannot afford to be casual about, so there is a direct path for them. Email the address above with <span class="mono">Correction</span> in the subject and include: the page URL, the foundation and tax year, the figure you believe is wrong, and what you believe it should be — with the source, ideally the filing itself. Every report is checked against the original filing. If a figure cannot be proven, it is corrected or the year is withheld, and the change is written into the <a href="https://jcurry44.github.io/grants-ledgers/changelog/">update history</a>. Reports from a foundation about its own page go to the front of the queue.</p>
+    <p>Errors are the one thing this project cannot afford to be casual about, so there is a direct path for them. Email the address above with <span class="mono">Correction</span> in the subject and include: the page URL, the foundation and tax year, the figure you believe is wrong, and what you believe it should be — with the source, ideally the filing itself. Every report is checked against the original filing. If a figure cannot be reconciled, it is corrected or the year is withheld, and the change is written into the <a href="https://jcurry44.github.io/grants-ledgers/changelog/">update history</a>. Reports from a foundation about its own page go to the front of the queue.</p>
   </div>
 </div></section>
 
@@ -331,11 +331,13 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20about%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/about/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
   </div>
   <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
-  <!-- Refresh this stamp by hand at each release: read db/coverage.json's "built_at"
-       field (UTC timestamp), format as "D Month YYYY", and paste it into the
-       sentence below. Keep it in sync with the hub's own Coverage & method
-       dialog, which reads the same field. -->
-  <p style="margin-top:.6rem" class="mono">Figures on this page counted from the published collection on 7 September 2026.</p>
+  <p style="margin-top:.6rem" class="mono" id="about-date">Figures on this page counted from the current published collection.</p>
+  <script>(function(){
+    fetch('https://jcurry44.github.io/grants-ledgers/db/coverage.json').then(function(r){return r.json();}).then(function(c){
+      var d = c && c.built_at ? String(c.built_at).slice(0,10) : null;
+      if (d) document.getElementById('about-date').textContent = 'Figures on this page counted from the published collection on ' + d + '.';
+    }).catch(function(){});
+  })();</script>
 </div></footer>
 
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

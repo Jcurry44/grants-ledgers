@@ -9,6 +9,10 @@
   const tieout = DATA.meta.tieout;
   const LATEST = YEARS[YEARS.length - 1];
   const PREV = YEARS.length > 1 ? YEARS[YEARS.length - 2] : null;   // a one-year record has no prior year
+  // the visible tie-card already carries the right referee (Part I 25(d), or
+  // Part XIV line 3a on a schedule-referee book) -- read it back once, here, so
+  // every consumer (aria-label, methodology tie-cards) agrees with the card.
+  const REF_LBL = document.querySelectorAll('#db-eq .eq-part .eq-label')[1]?.textContent || 'Part I line 25(d)';
 
   // ---------- rows ----------
   // A small book embeds every row. A big one embeds a preview (its largest rows) and
@@ -20,11 +24,12 @@
   const ROWS_TOTAL = Number(ROOT_DS.rowsTotal || ROOT_DS.n || DATA.grants.length);
   let rowsPending = ROWS_SRC !== null && DATA.grants.length < ROWS_TOTAL;
   let grants = DATA.grants, namedGrants, unitemized, namedTotal;
+  let namedYears, unitYears;
   let entities, aliasToId, entList, mergedEntities;
   let byYear, median, top5Share, latestDelta;
   let catTotals, catList;
   let firstYearOf, newIn, returningIn, movers;
-  const incompleteYear = (y) => unitemized.some((g) => g.y === y);
+  const incompleteYear = (y) => !namedYears.has(y) && unitYears.has(y);
 
   // ---------- formatting ----------
   // Money is written one way on this page. Filed amounts are whole dollars but derived
@@ -43,17 +48,20 @@
   // Compact money, magnitude-general: K, M, B, T. Three significant figures, and the
   // unit is chosen AFTER rounding, so $999,999,999 promotes to $1.00B instead of
   // printing "$1000M" -- the defect that made a $6,311,161,824 year read "$6311.2M".
-  // Below $10,000 the exact figure is both shorter and truer, so it is printed in full.
+  // Below $1,000 the exact figure is both shorter and truer, so it is printed in full.
+  // $1,000-$9,999 keeps one K decimal ($7.5K, 2 significant figures) rather than
+  // rounding away the only figure that distinguishes it from its neighbors; $10K
+  // and up drops the decimal, as it always has.
   const COMPACT_UNITS = [[1e3, 'K'], [1e6, 'M'], [1e9, 'B'], [1e12, 'T']];
   const moneyCompact = (n) => {
     const v = isFinite(Number(n)) ? Number(n) : 0;
     const a = Math.abs(v);
-    if (a < 1e4) return money(v);
+    if (a < 1e3) return money(v);
     let i = Math.max(0, Math.min(COMPACT_UNITS.length - 1, Math.floor(Math.log10(a) / 3) - 1));
     let s;
     for (;;) {
       const q = a / COMPACT_UNITS[i][0];
-      s = q.toFixed(i === 0 ? 0 : (q < 9.995 ? 2 : 1));
+      s = q.toFixed(i === 0 ? (q < 9.995 ? 1 : 0) : (q < 9.995 ? 2 : 1));
       if (+s < 1000 || i === COMPACT_UNITS.length - 1) break;
       i++;                                              // rounding crossed the unit
     }
@@ -220,6 +228,8 @@
     grants = rows;
     namedGrants = grants.filter((g) => g.record_type !== 'unitemized');
     unitemized = grants.filter((g) => g.record_type === 'unitemized');
+    namedYears = new Set(namedGrants.map((g) => g.y));
+    unitYears = new Set(unitemized.map((g) => g.y));
     namedTotal = namedGrants.reduce((sum, g) => sum + g.a, 0);
     learnAcronyms(grants);
 
@@ -427,10 +437,32 @@
   // what the foundation funds, who it funds most, the reconciliation, and every
   // grant in the current scope -- year, purpose, minimum and search included.
   let printWhenReady = false;
+  let printBusy = false;
+  function setPrintBusy(on) {
+    document.querySelectorAll('#print-btn').forEach((b) => {
+      if (on) {
+        if (b.dataset.label === undefined) b.dataset.label = b.textContent;
+        b.disabled = true;
+        b.textContent = 'Preparing report…';
+      } else {
+        b.disabled = false;
+        if (b.dataset.label !== undefined) b.textContent = b.dataset.label;
+      }
+    });
+  }
   function printReport() {
+    if (printBusy) return;
     if (rowsPending) { printWhenReady = true; const st = document.getElementById('rows-status'); if (st) st.textContent = 'Loading the full grant list before printing…'; return; }
+    // the heaviest book's report freezes the tab for several seconds building this
+    // much HTML; show the busy state before that work starts, and defer the work
+    // one tick so the browser actually paints it first.
+    printBusy = true;
+    setPrintBusy(true);
+    setTimeout(buildPrintReport, 0);
+  }
+  function buildPrintReport() {
     const host = document.getElementById('print-report');
-    if (!host) { window.print(); return; }
+    if (!host) { printBusy = false; setPrintBusy(false); window.print(); return; }
     const h1 = document.querySelector('h1'); const meta = document.querySelector('.hero-meta');
     const rows = viewRows();
     const scope = [];
@@ -442,11 +474,16 @@
     const total = rows.reduce((s, g) => s + g.a, 0);
     const kpi = (id) => { const e = document.getElementById(id); return e ? e.textContent.trim() : '—'; };
     const fit = document.getElementById('fit-line');
+    const srcNote = document.getElementById('src-note');
     const grand = GRAND || 1;
     const cats = catList.slice(0, 8);
     const tops = entList.slice(0, 10);
     const years = Object.keys(tieout).sort();
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    // building the row table for the heaviest books is the actual multi-second cost;
+    // past ~5,000 in-scope rows it is appended in chunks on a timer instead of one
+    // synchronous string join, so the tab keeps responding while it builds.
+    const BIG_ROWS = rows.length > 5000;
     host.innerHTML = `
       <header class="pr-head">
         <div class="pr-brand">The Grants Ledger · reconciled record from IRS Form 990-PF</div>
@@ -479,14 +516,33 @@
         <h2>Every grant in scope${scope.length ? ' — ' + esc(scope.join(' · ')) : ''}</h2>
         <p class="pr-sub">${num(rows.length)} ${rows.length === 1 ? 'grant' : 'grants'} · ${money(total)}</p>
         <table class="pr-table"><thead><tr><th>Year</th><th>Recipient</th><th class="num">Amount</th><th>Purpose (as filed)</th><th>Location</th></tr></thead>
-        <tbody>${rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
+        <tbody id="pr-rows-tbody">${BIG_ROWS ? '' : rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
       </section>
-      <footer class="pr-foot">Every figure reconciles to a total the foundation itself filed with the IRS. Historical record, not eligibility; nothing here is an audit. jcurry44.github.io/grants-ledgers</footer>`;
-    host.hidden = false; host.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('print-report-mode');
-    const done = () => { document.body.classList.remove('print-report-mode'); host.hidden = true; host.setAttribute('aria-hidden', 'true'); window.removeEventListener('afterprint', done); };
-    window.addEventListener('afterprint', done);
-    setTimeout(() => window.print(), 50);
+      <footer class="pr-foot">
+        ${srcNote ? `<p class="pr-src">${srcNote.innerHTML}</p>` : ''}
+        <p>Every figure reconciles to a total the foundation itself filed with the IRS. Historical record, not eligibility; nothing here is an audit. jcurry44.github.io/grants-ledgers</p>
+      </footer>`;
+    const finish = () => {
+      host.hidden = false; host.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('print-report-mode');
+      setPrintBusy(false);
+      const done = () => { document.body.classList.remove('print-report-mode'); host.hidden = true; host.setAttribute('aria-hidden', 'true'); window.removeEventListener('afterprint', done); printBusy = false; setPrintBusy(false); };
+      window.addEventListener('afterprint', done);
+      setTimeout(() => window.print(), 50);
+    };
+    if (BIG_ROWS) {
+      const tbody = document.getElementById('pr-rows-tbody');
+      const STEP = 3000;
+      let ci = 0;
+      const appendChunk = () => {
+        tbody.insertAdjacentHTML('beforeend', rows.slice(ci, ci + STEP).map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join(''));
+        ci += STEP;
+        if (ci < rows.length) setTimeout(appendChunk, 0); else finish();
+      };
+      appendChunk();
+    } else {
+      finish();
+    }
   }
   document.querySelectorAll('#print-btn').forEach((b) => b.addEventListener('click', printReport));
 
@@ -560,6 +616,10 @@
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
       e.preventDefault();
       const n = TABS[(i + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length];
+      setTab(n); $('tab-' + n).focus();
+    } else if (e.key === 'Home' || e.key === 'End') {
+      e.preventDefault();
+      const n = TABS[e.key === 'Home' ? 0 : TABS.length - 1];
       setTab(n); $('tab-' + n).focus();
     }
   });
@@ -826,15 +886,11 @@
       if (dbEl) dbEl.innerHTML = SY !== null
         ? `Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>tax year ${SY}, to the dollar.</em>`
         : 'Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>' + (document.documentElement.dataset.running || 'to the dollar, five years running.') + '</em>';
-      // the visible card already carries the right referee (Part I 25(d), or
-      // Part XIV line 3a on a schedule-referee book) -- read it back instead
-      // of hard-coding it, so the aria-label never contradicts the card.
-      const refLbl = document.querySelectorAll('#db-eq .eq-part .eq-label')[1]?.textContent || 'Part I line 25(d)';
       $('db-eq').setAttribute('aria-label',
         `Sum of the ${SY !== null ? SY + ' grant schedule' : 'grant schedules'}, ${money(eqA)}, `
         + (eqD === 0
-            ? `equals ${refLbl}, ${money(eqB)} \u2014 a difference of zero dollars, reconciled.`
-            : `against ${refLbl}, ${money(eqB)} \u2014 a difference of ${money(eqD)}, which does not reconcile.`));
+            ? `equals ${REF_LBL}, ${money(eqB)} \u2014 a difference of zero dollars, reconciled.`
+            : `against ${REF_LBL}, ${money(eqB)} \u2014 a difference of ${money(eqD)}, which does not reconcile.`));
       $('lede-trend').innerHTML = trendLede + (SY !== null ? ` Viewing <strong>${SY}</strong> \u2014 every panel below is scoped to it.` : '');
       const topN = Math.min(5, sEnts.length);
       const top5 = sEnts.slice(0, 5).reduce((s, e) => s + e.total, 0);
@@ -1161,6 +1217,11 @@
   // ---------- recipient profile drawer ----------
   let lastFocus = null;
   let profileScopeY = null;
+  // WebKit's click focuses the nearest focusable ancestor (MAIN#main), never the
+  // control itself, so a plain activeElement read at open time cannot recover it on
+  // close; a capture-phase listener remembers the actual clicked control instead.
+  let lastClick = { el: null, t: -Infinity };
+  document.addEventListener('click', (e) => { lastClick = { el: e.target.closest('button,[role="button"],a'), t: performance.now() }; }, true);
   const bgInert = (on) => {
     [...document.body.children].forEach((el) => {
       if (el.id === 'profile' || el.id === 'pf-backdrop' || el.tagName === 'SCRIPT' || el.tagName === 'NOSCRIPT') return;
@@ -1175,7 +1236,7 @@
     profileScopeY = state.y;
     state.pr = id;
     if (!fromHash) writeHash(true);
-    if (!wasOpen) lastFocus = document.activeElement;
+    if (!wasOpen) lastFocus = (lastClick.el && performance.now() - lastClick.t < 1000) ? lastClick.el : document.activeElement;
     const per = YEARS.map((y) => ({
       y,
       sum: e.grants.filter((g) => g.y === y).reduce((s, g) => s + g.a, 0),
@@ -1200,7 +1261,7 @@
     $('pf-grants').innerHTML = e.grants.slice().sort((a, b) => b.y - a.y || b.a - a.a).map((g) => `
       <li class="pf-g">
         <span class="pf-gy">${g.y}</span>
-        <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))}</span>
+        <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))} <code class="pf-go" title="Filing reference">${esc(g.o)}</code></span>
         <span class="pf-ga">${money(g.a)}</span>
       </li>`).join('');
     const inY = state.y !== null ? e.grants.filter((g) => g.y === state.y).length : 0;
@@ -1244,8 +1305,12 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (profileId !== null) { closeProfile(); return; }
-      if (state.tab === 'grants' && (state.y !== null || state.r !== null || state.c !== null || state.q || state.min)) {
-        state.y = null; state.r = null; state.c = null; state.q = ''; state.min = 0; state.page = 0;
+      // Escape is not a global "clear every filter" shortcut -- it only clears the
+      // search box when that box has focus (the conventional meaning of Escape in a
+      // text field). #clear-all and each chip's ✕ remain the way to clear a scope
+      // set by year/recipient/category/min-amount from anywhere else on the page.
+      if (state.tab === 'grants' && document.activeElement === $('q') && state.q) {
+        state.q = ''; state.page = 0;
         syncControls(); writeHash(true); render();
       }
     }
@@ -1471,9 +1536,14 @@
     };
     inp.addEventListener('change', go);
     inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); inp.blur(); } });
-    // typing a page number should replace it, not append to whatever page rendered last
+    // input is type=text (WebKit's number-input select() does not select on tap), so
+    // strip anything but digits as the user types
+    inp.addEventListener('input', () => { const d = inp.value.replace(/[^0-9]/g, ''); if (d !== inp.value) inp.value = d; });
+    // typing a page number should replace it, not append to whatever page rendered last.
+    // WebKit focuses the input before its tap finishes, which clears an immediate
+    // select() -- deferring one tick past the tap makes the selection stick.
     inp.addEventListener('focus', () => inp.select());
-    inp.addEventListener('click', () => inp.select());
+    inp.addEventListener('click', () => setTimeout(() => inp.select(), 0));
   }
   // "/" focuses the grants search from anywhere on the page (never while typing or in a dialog)
   document.addEventListener('keydown', (e) => {
@@ -1504,13 +1574,17 @@
     const rows = viewRows();
     const NLc = String.fromCharCode(10);
     const head = 'tax_year,recipient_as_filed,canonical_recipient,amount,purpose_as_filed,city,state,irs_object_id,record_type';
+    // a name or purpose transcribed as filed can begin with a character a spreadsheet
+    // reads as a formula (=, +, -, @) or control code (tab, CR) -- an apostrophe defuses
+    // that read without altering what was filed (OWASP's CSV-injection mitigation).
+    const defuse = (s) => /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
     const cell = (v) => {
       const s = String(v == null ? '' : v);
       return (s.indexOf('"') >= 0 || s.indexOf(',') >= 0 || s.indexOf(NLc) >= 0)
         ? '"' + s.split('"').join('""') + '"' : s;
     };
     const csv = [head].concat(rows.map((g) =>
-      [g.y, g.r, (entities.get(aliasToId.get(g.r)) || {}).display || '', g.a, g.p, g.c, g.s, g.o, g.record_type || 'named_recipient'].map(cell).join(','))).join(NLc);
+      [g.y, defuse(g.r), defuse((entities.get(aliasToId.get(g.r)) || {}).display || ''), g.a, defuse(g.p), defuse(g.c), g.s, g.o, g.record_type || 'named_recipient'].map(cell).join(','))).join(NLc);
     const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -1553,7 +1627,7 @@
         <div class="tie-card">
           <div class="tc-top"><span class="tc-y">${y}</span><span class="mini-seal">${(t.line25_col_d - t.grant_sum) === 0 ? 'Δ $0 ✓' : 'Δ ' + money(t.line25_col_d - t.grant_sum)}</span></div>
           <div class="tc-row"><span>Grant schedule sum</span><strong>${money(t.grant_sum)}</strong></div>
-          <div class="tc-row"><span>Part I line 25 (d)</span><strong>${money(t.line25_col_d)}</strong></div>
+          <div class="tc-row"><span>${esc(REF_LBL)}</span><strong>${money(t.line25_col_d)}</strong></div>
           <div class="tc-row"><span>Grant rows</span><strong>${num(t.grant_count)}</strong></div>
           <div class="tc-row"><span>Δ</span><strong>${money(t.line25_col_d - t.grant_sum)}</strong></div>
           <div class="tc-obj">Object ID <code>${t.object_id}</code></div>
@@ -1607,12 +1681,14 @@
         const byState = new Map();
         namedGrants.forEach((g) => { if (g.s) byState.set(g.s, (byState.get(g.s) || 0) + g.a); });
         const top = [...byState.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
-        const namedSum = namedGrants.reduce((s, g) => s + g.a, 0) || 1;
+        const namedSum = [...byState.values()].reduce((s, v) => s + v, 0) || 1;
         const parts = [];
         if (tot) parts.push(`In ${latest}, ${Math.round(nw / tot * 100)}% of recipients were funded for the first time in this record`);
         if (top.length) parts.push(`${Math.round(top.reduce((s, x) => s + x[1], 0) / namedSum * 100)}% of named dollars went to recipients in ${top.map((x) => x[0]).join(', ')}`);
+        let fitFallback = false;
+        if (!parts.length && !rowsPending) { parts.push(`${latest} contains only unitemized disclosures \u2014 no recipient-level comparison is available for that year`); fitFallback = true; }
         fit.hidden = !parts.length || rowsPending;
-        fit.textContent = parts.length ? parts.join(' \u00b7 ') + '. Historical record, not eligibility.' : '';
+        fit.textContent = !parts.length ? '' : (fitFallback ? parts.join(' \u00b7 ') : parts.join(' \u00b7 ') + '. Historical record, not eligibility.');
       }
     }
     const coverage = document.getElementById('record-coverage');

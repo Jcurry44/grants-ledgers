@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Page not found — The Grants Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root { --green: #1e4634; --green-deep: #14301f; --paper: #f7f4ec; --ink: #1e1a0c; --ink-dim: #5c5747; --rule: #d9d2c0; --copper: #b5762a; --copper-deep: #8a4b12; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.55 "IBM Plex Sans", system-ui, sans-serif; }
+  .top { background: var(--green); color: #fff; padding: 0 max(28px, calc((100vw - 1100px) / 2)); height: 72px; display: flex; align-items: center; gap: 14px; }
+  .top a { color: #fff; text-decoration: none; font: 600 22px/1 "Fraunces", Georgia, serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--copper-deep); }
+  h1 { font: 500 44px/1.1 "Fraunces", Georgia, serif; margin: 12px 0 18px; letter-spacing: -.01em; }
+  p { margin: 0 0 14px; max-width: 62ch; }
+  .find { display: flex; gap: 10px; margin: 26px 0 8px; }
+  .find input { flex: 1; font: inherit; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
+  .find button, .links a { font: 600 15px/1 "IBM Plex Sans", system-ui, sans-serif; }
+  .find button { padding: 12px 18px; border: 0; border-radius: 8px; background: var(--green); color: #fff; cursor: pointer; }
+  .find button:hover { background: var(--green-deep); }
+  .hint { color: var(--ink-dim); font-size: 14px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--rule); }
+  .links a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+  footer { color: var(--ink-dim); font-size: 13px; margin-top: 48px; }
+  footer a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="top"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a></header>
+<main id="main">
+  <div class="eyebrow">Not found</div>
+  <h1>That page is not in the collection</h1>
+  <p>The address may have changed, or the link was typed by hand. Every foundation ledger lives at <code>/f/&lt;foundation&gt;/</code>, and the quickest way back is to search the foundation by name.</p>
+  <form class="find" action="https://jcurry44.github.io/grants-ledgers/" method="get" onsubmit="location.href='https://jcurry44.github.io/grants-ledgers/#find='+encodeURIComponent(this.q.value);return false;">
+    <label class="sr-only" for="q" style="position:absolute;left:-9999px">Search foundations</label>
+    <input id="q" name="q" type="search" placeholder="Search a foundation by name…" autocomplete="off">
+    <button type="submit">Find it</button>
+  </form>
+  <p class="hint">Not in the 1,952 yet? Name it on the hub and one filed year is recovered for you, free.</p>
+  <nav class="links" aria-label="Site">
+    <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/#tab=f">Foundation directory</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered rows</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+  </nav>
+  <footer>A documented reconciliation of public filings, not an audit. Built independently by Curry Studio, Joe Curry, North Tonawanda NY. <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20broken%20link&amp;body=Page%3A%20%0A%0AWhere%20I%20came%20from%3A%20%0A">Report a broken link</a></footer>
+</main>
+</body>
+</html>

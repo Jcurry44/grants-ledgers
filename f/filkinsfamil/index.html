@@ -12,17 +12,16 @@
 <meta property="og:title" content="Filkins Family Foundation — Grants Ledger">
 <meta property="og:description" content="26 grants · $68,398,188 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/filkinsfamil/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EF%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,9 +323,9 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>A short, complete book</h3>
-        <p>A concentrated ledger, complete as filed: this foundation makes a small number of grants, and every year still proves against the filed total to the dollar.</p>
+        <p>A concentrated ledger, complete as filed: this foundation makes a small number of grants, and every year still reconciles to the filed total to the dollar.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>42-6559796</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/426559796" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -426,7 +425,7 @@
 <script>
 window.FILKINSFAM_DATA={"meta":{"foundation":"Filkins Family Foundation","ein":"42-6559796","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":26,"grand_total":68398188,"tieout":{"2021":{"object_id":"202240559349100719","grant_count":6,"grant_sum":78277,"line25_col_d":78277,"status":"PASS"},"2022":{"object_id":"202340409349100629","grant_count":5,"grant_sum":104318,"line25_col_d":104318,"status":"PASS"},"2023":{"object_id":"202410669349100601","grant_count":6,"grant_sum":128795,"line25_col_d":128795,"status":"PASS"},"2024":{"object_id":"202510439349100821","grant_count":4,"grant_sum":33439585,"line25_col_d":33439585,"status":"PASS"},"2025":{"object_id":"202600579349100120","grant_count":5,"grant_sum":34647213,"line25_col_d":34647213,"status":"PASS"}}},"grants":[{"y":2021,"r":"CEDARS-SINAI","a":10307,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"EYE TUMOR RESEARCH FOUNDATION","a":10307,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"GIFT OF SIGHT","a":36214,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"PAULI MURRAY CENTER","a":10307,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"WILLS EYE HOSPITAL","a":5571,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2021,"r":"BABY2BABY","a":5571,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202240559349100719","record_type":"named_recipient"},{"y":2022,"r":"CEDARS-SINAI","a":10348,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"EYE TUMOR RESEARCH FOUNDATION","a":10348,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"GIFT OF SIGHT","a":67681,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"PAULI MURRAY CENTER","a":10348,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2022,"r":"WILLS EYE HOSPITAL","a":5593,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202340409349100629","record_type":"named_recipient"},{"y":2023,"r":"CEDARS-SINAI","a":15500,"p":"GENERAL OPERATIONS","c":"LOS ANGELES","s":"CA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"EYE TUMOR RESEARCH FOUNDATION","a":15500,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"GIFT OF SIGHT","a":66426,"p":"GENERAL OPERATIONS","c":"ELKHORN","s":"NE","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"PAULI MURRAY CENTER","a":10333,"p":"GENERAL OPERATIONS","c":"DURHAM","s":"NC","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"WILLS EYE HOSPITAL FOUNDATION","a":5167,"p":"GENERAL OPERATIONS","c":"PHILADELPHIA","s":"PA","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2023,"r":"HIMALAYAN CATARACT PROJECT INC","a":15869,"p":"GENERAL OPERATIONS","c":"WATERBURY","s":"VT","e":"","o":"202410669349100601","record_type":"named_recipient"},{"y":2024,"r":"HIMALAYAN CATARACT PROJECT INC DBA CURE BLINDNESS PROJECT","a":20612152,"p":"SURGERIES & EQUIPMENT","c":"NORWICH","s":"VT","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"ORBIS","a":10080930,"p":"TREATMENT & PREVENTION OF BLINDNESS","c":"NEW YORK","s":"NY","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"WESTSIDE FOUNDATION","a":2744475,"p":"IMPACT EXCELLENCE CAMPAIGN","c":"OMAHA","s":"NE","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2024,"r":"GRAND FOUNDATION","a":2028,"p":"SPENCER NELSON FUND WINTER PARK SKI COMPETITION CENTER","c":"WINTER PARK","s":"CO","e":"","o":"202510439349100821","record_type":"named_recipient"},{"y":2025,"r":"METROPOLITAN OMAHA MEDICAL SOCIETY","a":31349,"p":"GENERAL OPERATIONS","c":"OMAHA","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"WESTSIDE FOUNDATION","a":60000,"p":"CAL BENTZ NATATORIUM","c":"OMAHA","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"NANCY LF DAVIS FAMILY FOUNDATION","a":1063280,"p":"GENERAL OPERATIONS","c":"LINCOLN","s":"NE","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"ORBIS","a":12790068,"p":"TREATMENT & PREVENTION OF BLINDNESS","c":"NEW YORK","s":"NY","e":"","o":"202600579349100120","record_type":"named_recipient"},{"y":2025,"r":"HIMALAYAN CATARACT PROJECT INC DBA CURE BLINDNESS PROJECT","a":20702516,"p":"SURGERIES & EQUIPMENT","c":"NORWICH","s":"VT","e":"","o":"202600579349100120","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

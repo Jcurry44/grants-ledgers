@@ -12,17 +12,16 @@
 <meta property="og:title" content="S & G Foundation — Grants Ledger">
 <meta property="og:description" content="11 filed rows · $524,983,584 · five filed years, each reconciling to Part XIV, line 3a exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/sgfoundation/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -305,7 +304,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -328,7 +327,7 @@
         <h3>How this book was read, and what it is</h3>
         <p>This foundation’s tax year ends June 30, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>Three of the five years' recipient lists were recovered from the IRS's scanned copies — the machine-readable filings carry only two roll-up lines per year (a cash stub and a stock stub, which together equal the filed total in every year). What the pages show is a stock-to-donor-advised-fund pipeline: the overwhelming share of each year moves as appreciated securities — Vanguard, Mastercard, American Express, Berkshire lots — into Fidelity Charitable and the Goldman Sachs Philanthropy Fund, where the public record ends. 2021 was a six-month transition period (the foundation moved its fiscal year from June to December), and its cash section prints only a total over blank paper — that $78,500 is carried as one labeled row. 2023's stock rows print whole dollars against a total with cents, leaving the year one dollar over the cash line; the rows are transcribed as printed and the dollar is bridged below. 2022's statement is absent from every public copy of that return — all 33 pages inventoried — so that year stays as the two filed roll-up lines, as does the most recent year, whose scanned copy is not posted yet. One $100,000 line on 2020's attachment — professional fees to a named individual — is excluded because the filing's own arithmetic excludes it from grants: it sits in the expense line, not line 25.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>36-4193183</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/364193183" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -428,7 +427,7 @@
 <script>
 window.SGFOUNDATI_DATA={"meta":{"foundation":"S & G Foundation","ein":"36-4193183","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":11,"grand_total":524983584,"tieout":{"2020":{"object_id":"364193183_2020 990PF (IRS scan)","grant_count":24,"grant_sum":81195350,"line25_col_d":81195350,"status":"PASS"},"2021":{"object_id":"364193183_2021 990PF (IRS scan)","grant_count":10,"grant_sum":103495937,"line25_col_d":103495937,"status":"PASS"},"2022":{"object_id":"202323199349104827","grant_count":2,"grant_sum":80795294,"line25_col_d":80795294,"status":"PASS"},"2023":{"object_id":"364193183_2023 990PF (IRS scan)","grant_count":3,"grant_sum":125578043,"line25_col_d":125578043,"status":"PASS"},"2024":{"object_id":"202523219349106362","grant_count":2,"grant_sum":133918960,"line25_col_d":133918960,"status":"PASS"}}},"grants":[{"y":2020,"r":"VARIOUS CASH (SEE ATTACHMENT)","a":404000,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202200949349100855","record_type":"unitemized"},{"y":2020,"r":"VARIOUS STOCK (SEE ATTACHMENT)","a":80791350,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202200949349100855","record_type":"unitemized"},{"y":2021,"r":"VARIOUS CASH (SEE ATTACHMENT)","a":78500,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202203149349102135","record_type":"unitemized"},{"y":2021,"r":"VARIOUS STOCK (SEE ATTACHMENT)","a":103417437,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202203149349102135","record_type":"unitemized"},{"y":2022,"r":"VARIOUS - CASH (SEE STATEMENT)","a":51178842,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202323199349104827","record_type":"unitemized"},{"y":2022,"r":"VARIOUS - STOCK (SEE STATEMENT)","a":29616452,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202323199349104827","record_type":"unitemized"},{"y":2023,"r":"VARIOUS - CASH (SEE STATEMENT)","a":14932478,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202403209349107025","record_type":"unitemized"},{"y":2023,"r":"VARIOUS - STOCK (SEE STATEMENT)","a":110645564,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202403209349107025","record_type":"unitemized"},{"y":2024,"r":"VARIOUS - CASH (SEE STATEMENT)","a":40103542,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202523219349106362","record_type":"unitemized"},{"y":2024,"r":"VARIOUS - STOCK (SEE STATEMENT)","a":93815418,"p":"GENERAL CHARITABLE PURPOSES","c":"","s":"","e":"","o":"202523219349106362","record_type":"unitemized"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":1,"p":"","c":"","s":"","e":"","o":"364193183_2023 990PF (IRS scan)","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

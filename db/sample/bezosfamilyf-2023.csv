@@ -1,4 +1,4 @@
-foundation,tax_year,recipient,amount,purpose,city,state,irs_object_id
+foundation,tax_year,recipient,amount,purpose,city,state,source_ref
 Bezos Family Foundation,2023,ANEW,128500,General Support,Tukwila,WA,pdf:912073258_202312
 Bezos Family Foundation,2023,ANEW,130000,General Support,Tukwila,WA,pdf:912073258_202312
 Bezos Family Foundation,2023,Abriendo Puertas/ Opening Doors,256,General Support,San Francisco,CA,pdf:912073258_202312
@@ -208,7 +208,7 @@ Bezos Family Foundation,2023,Tools of the Mind,529667,General Support,Shirley,MA
 Bezos Family Foundation,2023,Transcend,2537772,General Support,Hastings-on-Hudson,NY,pdf:912073258_202312
 Bezos Family Foundation,2023,Transcend,247020,General Support,Hastings-on-Hudson,NY,pdf:912073258_202312
 Bezos Family Foundation,2023,Treehouse,250000,General Support,Seattle,WA,pdf:912073258_202312
-Bezos Family Foundation,2023,TtÃ¥waxt Birth Justice Center,27000,General Support,Wapato,WA,pdf:912073258_202312
+Bezos Family Foundation,2023,Ttåwaxt Birth Justice Center,27000,General Support,Wapato,WA,pdf:912073258_202312
 Bezos Family Foundation,2023,UNICEF USA,54032,General Support,New York,NY,pdf:912073258_202312
 Bezos Family Foundation,2023,UNICEF USA,1992611,General Support,New York,NY,pdf:912073258_202312
 Bezos Family Foundation,2023,UNICEF USA,278301,General Support,New York,NY,pdf:912073258_202312

@@ -12,17 +12,16 @@
 <meta property="og:title" content="Hector and Gloria Lopez Foundation — Grants Ledger">
 <meta property="og:description" content="21 grants · $24,311,607 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/hectorandglo/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,7 +323,7 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>81-4706788</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/814706788" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -424,7 +423,7 @@
 <script>
 window.HECTORANDG_DATA={"meta":{"foundation":"Hector and Gloria Lopez Foundation","ein":"81-4706788","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2022,2023,2024],"grant_count":21,"grand_total":24311607,"tieout":{"2020":{"object_id":"202101309349101685","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202212999349100771","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202342969349100629","grant_count":4,"grant_sum":3815060,"line25_col_d":3815060,"status":"PASS"},"2023":{"object_id":"202443139349100839","grant_count":8,"grant_sum":9659278,"line25_col_d":9659278,"status":"PASS"},"2024":{"object_id":"202503149349102395","grant_count":9,"grant_sum":10837269,"line25_col_d":10837269,"status":"PASS"}}},"grants":[{"y":2022,"r":"University of Texas Foundation","a":2099700,"p":"Funding for scholarships","c":"Austin","s":"TX","e":"","o":"202342969349100629","record_type":"named_recipient"},{"y":2022,"r":"Texas A&M San Antonio Foundation","a":1708860,"p":"Funding for scholarships","c":"San Antonio","s":"TX","e":"","o":"202342969349100629","record_type":"named_recipient"},{"y":2022,"r":"University of Texas","a":5000,"p":"Texas Education Consortium for Male Students of Color","c":"Austin","s":"TX","e":"","o":"202342969349100629","record_type":"named_recipient"},{"y":2022,"r":"Southern Brooks Volunteer Fire Department","a":1500,"p":"General support","c":"Encino","s":"TX","e":"","o":"202342969349100629","record_type":"named_recipient"},{"y":2023,"r":"University of Texas Foundation","a":2657606,"p":"Funding for scholarships","c":"Austin","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"Austin Community Foundation","a":1059502,"p":"Funding for scholarships","c":"Austin","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"St Edward's University","a":2134381,"p":"Funding for scholarships","c":"Austin","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"Texas A&M University-Kingsville Foundation Inc","a":1476820,"p":"Funding for scholarships","c":"Kingsville","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"Texas State University Development Foundation","a":1794469,"p":"Funding for scholarships","c":"San Marcos","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"Texas Higher Education Foundation","a":530000,"p":"Improved outcomes for Texas students through enhanced data resources and training for administrators","c":"Austin","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"Southern Brooks Volunteer Fire Department","a":1500,"p":"General support","c":"Encino","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2023,"r":"University of Texas","a":5000,"p":"Texas Education Consortium for Male Students of Color","c":"Austin","s":"TX","e":"","o":"202443139349100839","record_type":"named_recipient"},{"y":2024,"r":"St Mary's University of San Antonio","a":2525010,"p":"Funding for scholarships","c":"San Antonio","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"University of Incarnate Word","a":2477933,"p":"Funding for scholarships","c":"San Antonio","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Our Lady of the Lake University","a":2235266,"p":"Funding for scholarships","c":"San Antonio","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Univeristy of Texas Foundation","a":1685251,"p":"Funding for scholarships","c":"Austin","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Texas A&M - Corpus Christi Foundation","a":1645809,"p":"Funding for scholarships","c":"Corpus Christi","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Excelencia in Education","a":250000,"p":"Funding for research","c":"Washington","s":"DC","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Excelencia in Education","a":12500,"p":"General support","c":"Washington","s":"DC","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Con Mi MADRE","a":5000,"p":"General support","c":"Austin","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"},{"y":2024,"r":"Southern Brooks Volunteer Fire Department","a":500,"p":"General support","c":"Encino","s":"TX","e":"","o":"202503149349102395","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

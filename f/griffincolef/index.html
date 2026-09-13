@@ -12,17 +12,16 @@
 <meta property="og:title" content="Griffin-Cole Fund — Grants Ledger">
 <meta property="og:description" content="5 filed rows · $19,890,900 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/griffincolef/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 <style>.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
@@ -305,7 +304,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -326,9 +325,9 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>How a year is counted</h3>
-        <p>This foundation’s tax year ends July 31, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $19,890,900 of the $19,890,900 here (100%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
+        <p>This foundation’s tax year ends July 31, so year labels here always follow the filing, never the calendar. Every year reconciles to the filed total to the dollar.</p><p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $19,890,900 of the $19,890,900 here (100%). Those lines are printed exactly as filed and reconcile to the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>13-7109406</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/137109406" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -428,7 +427,7 @@
 <script>
 window.GRIFFINCOL_DATA={"meta":{"foundation":"Griffin-Cole Fund","ein":"13-7109406","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":5,"grand_total":19890900,"tieout":{"2020":{"object_id":"202241669349100814","grant_count":1,"grant_sum":1317250,"line25_col_d":1317250,"status":"PASS"},"2021":{"object_id":"202311659349100711","grant_count":1,"grant_sum":3852250,"line25_col_d":3852250,"status":"PASS"},"2022":{"object_id":"202431699349100728","grant_count":1,"grant_sum":5012650,"line25_col_d":5012650,"status":"PASS"},"2023":{"object_id":"202501679349100365","grant_count":1,"grant_sum":4444250,"line25_col_d":4444250,"status":"PASS"},"2024":{"object_id":"202601669349100710","grant_count":1,"grant_sum":5264500,"line25_col_d":5264500,"status":"PASS"}}},"grants":[{"y":2020,"r":"SEE ATTACHED","a":1317250,"p":"FOR GENERAL PURPOSES","c":"","s":"","e":"","o":"202241669349100814","record_type":"unitemized"},{"y":2021,"r":"SEE ATTACHED","a":3852250,"p":"FOR GENERAL PURPOSES","c":"","s":"","e":"","o":"202311659349100711","record_type":"unitemized"},{"y":2022,"r":"SEE ATTACHED","a":5012650,"p":"FOR GENERAL PURPOSES","c":"","s":"","e":"","o":"202431699349100728","record_type":"unitemized"},{"y":2023,"r":"SEE ATTACHED","a":4444250,"p":"GENERAL PURPOSES","c":"","s":"","e":"","o":"202501679349100365","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED","a":5264500,"p":"GENERAL PURPOSES","c":"","s":"","e":"","o":"202601669349100710","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -12,17 +12,16 @@
 <meta property="og:title" content="H&H Evergreen Foundation — Grants Ledger">
 <meta property="og:description" content="27 grants · $820,994,484 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/hhevergreenf/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,7 +323,7 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>46-5066162</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/465066162" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -428,7 +427,7 @@
 <script>
 window.HHEVERGREE_DATA={"meta":{"foundation":"H&H Evergreen Foundation","ein":"46-5066162","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2022,2023,2024,2025],"grant_count":27,"grand_total":820994484,"tieout":{"2020":{"object_id":"202111269349102941","grant_count":4,"grant_sum":55748609,"line25_col_d":55748609,"status":"PASS"},"2022":{"object_id":"202421159349101832","grant_count":7,"grant_sum":179770765,"line25_col_d":179770765,"status":"PASS"},"2023":{"object_id":"202411359349105691","grant_count":5,"grant_sum":183666500,"line25_col_d":183666500,"status":"PASS"},"2024":{"object_id":"202541419349100919","grant_count":6,"grant_sum":223673460,"line25_col_d":223673460,"status":"PASS"},"2025":{"object_id":"202641339349103004","grant_count":5,"grant_sum":178135150,"line25_col_d":178135150,"status":"PASS"}}},"grants":[{"y":2020,"r":"STANFORD UNIVERSITY","a":78000,"p":"COVID-19 MEDICAL","c":"STANFORD","s":"CA","e":"","o":"202111269349102941","record_type":"named_recipient"},{"y":2020,"r":"CITY OF EAST PALO ALTO POLICE DEPAR","a":125000,"p":"CHARITY & PUBLIC SAFETY","c":"EAST PALO ALTO","s":"CA","e":"","o":"202111269349102941","record_type":"named_recipient"},{"y":2020,"r":"CRUTCHES 4 KIDS","a":200000,"p":"CHARITY","c":"NEW YORK","s":"NY","e":"","o":"202111269349102941","record_type":"named_recipient"},{"y":2020,"r":"SCHWAB CHARITABLE DONOR ADVISED FUN","a":55345609,"p":"CHARITY (STATEMENT 6)","c":"SAN FRANCISCO","s":"CA","e":"","o":"202111269349102941","record_type":"named_recipient"},{"y":2022,"r":"CITY OF EAST PALO ALTO POLICE DEPARTMENT","a":150000,"p":"CHARITY & PUBLIC SAFETY","c":"EAST PALO ALTO","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"GLIDE FOUNDATIO","a":19000100,"p":"CHARITY","c":"San Francisco","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"MONTEREY PENINSULA FOUNDATION","a":32500,"p":"CHARITY","c":"Monterey","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"SALK INSTITUTE","a":-268156,"p":"MEDICAL & CHARITY","c":"La Jolla","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"SCHWAB CHARITABLE (DONOR ADVISED FUND)","a":160504921,"p":"CHARITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"BING NURSERY SCHOOL STANFORD UNIVERSITY","a":1400,"p":"CHARITY","c":"STANFORD","s":"CA","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2022,"r":"JUSTIN THOMAS FOUNDATION INC","a":350000,"p":"CHARITY","c":"Washington","s":"DC","e":"","o":"202421159349101832","record_type":"named_recipient"},{"y":2023,"r":"CITY OF EAST PALO ALTO POLICE DEPARTMENT","a":150000,"p":"CHARITY & PUBLIC SAFETY","c":"EAST PALO ALTO","s":"CA","e":"","o":"202411359349105691","record_type":"named_recipient"},{"y":2023,"r":"MONTEREY PENINSULA FOUNDATION","a":50000,"p":"CHARITY","c":"Monterey","s":"CA","e":"","o":"202411359349105691","record_type":"named_recipient"},{"y":2023,"r":"SCHWAB CHARITABLE (DONOR ADVISED FUND)","a":183260000,"p":"CHARITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202411359349105691","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":106500,"p":"CHARITY","c":"STANFORD","s":"CA","e":"","o":"202411359349105691","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CALIFORNIA BERKELEY","a":100000,"p":"EDUCATION","c":"BERKELEY","s":"CA","e":"","o":"202411359349105691","record_type":"named_recipient"},{"y":2024,"r":"EAST PALO ALTO POLICE DEPARTMENT","a":150000,"p":"CHARITY & PUBLIC SAFETY","c":"EAST PALO ALTO","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2024,"r":"MONTEREY PENINSULA FOUNDATION","a":95000,"p":"CHARITY","c":"Monterey","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2024,"r":"SCHWAB CHARITABLE (DONOR ADVISED FUND)","a":220729960,"p":"CHARITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2024,"r":"ATHERTON POLICE OFFICERS ASSOCIATION","a":100000,"p":"CHARITY","c":"MENLO PARK","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2024,"r":"LELAND STANFORD JUNIOR UNIVERSITY","a":98500,"p":"THE VARSITY GOLF TRAINING COMPLEX","c":"STANFORD","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2024,"r":"CHARITYBUZZ","a":2500000,"p":"CHARITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202541419349100919","record_type":"named_recipient"},{"y":2025,"r":"SCHWAB CHARITABLE (DONOR ADVISED FUND)","a":177858500,"p":"CHARITY","c":"SAN FRANCISCO","s":"CA","e":"","o":"202641339349103004","record_type":"named_recipient"},{"y":2025,"r":"CHP 11-99 FOUNDATION","a":20150,"p":"CHARITY AND PUBLIC SAFETY","c":"COSTA MESA","s":"CA","e":"","o":"202641339349103004","record_type":"named_recipient"},{"y":2025,"r":"GOLF DIVERSITY PROGRAM","a":29000,"p":"CHARITY AND SPORT","c":"PORTLAND","s":"OR","e":"","o":"202641339349103004","record_type":"named_recipient"},{"y":2025,"r":"EAST PALO ALTO POLICE DEPARTMENT","a":150000,"p":"PUBLIC SAFETY","c":"EAST PALO ALTO","s":"CA","e":"","o":"202641339349103004","record_type":"named_recipient"},{"y":2025,"r":"MONTEREY PENINSULA FOUNDATION","a":77500,"p":"CHARITY","c":"MONTEREY","s":"CA","e":"","o":"202641339349103004","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"CRUTCHES 4 KIDS":"Health & wellbeing","MONTEREY PENINSULA FOUNDATION":"Nonprofit capacity & transitions","JUSTIN THOMAS FOUNDATION INC":"Nonprofit capacity & transitions"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -12,17 +12,16 @@
 <meta property="og:title" content="Mary Parker Foundation 25167-0 — Grants Ledger">
 <meta property="og:description" content="25 filed rows · $19,023,762 · five filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/maryparkerfo/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,9 +323,9 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>About the roll-up lines</h3>
-        <p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $15,372,562 of the $19,023,762 here (81%). Those lines are printed exactly as filed and prove against the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
+        <p>Part of this foundation's grantmaking is reported as roll-up lines pointing to filed attachments rather than itemized recipients — $15,372,562 of the $19,023,762 here (81%). Those lines are printed exactly as filed and reconcile to the filed totals like everything else; the machine-readable filings do not itemize them. Where the IRS's rendered copies carry the underlying lists, this ledger recovers them over time.</p>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>59-2708325</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/592708325" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -430,7 +429,7 @@
 <script>
 window.MARYPARKER_DATA={"meta":{"foundation":"Mary Parker Foundation 25167-0","ein":"59-2708325","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":25,"grand_total":19023762,"tieout":{"2020":{"object_id":"202131269349102563","grant_count":21,"grant_sum":1651200,"line25_col_d":1651200,"status":"PASS"},"2021":{"object_id":"202213189349106346","grant_count":1,"grant_sum":1000000,"line25_col_d":1000000,"status":"PASS"},"2022":{"object_id":"202303189349101220","grant_count":1,"grant_sum":1000000,"line25_col_d":1000000,"status":"PASS"},"2023":{"object_id":"202433179349102748","grant_count":1,"grant_sum":7233406,"line25_col_d":7233406,"status":"PASS"},"2024":{"object_id":"202513179349102091","grant_count":1,"grant_sum":8139156,"line25_col_d":8139156,"status":"PASS"}}},"grants":[{"y":2020,"r":"ALZHEIMER'S ASSOC-FL GULF COAST CHAPTER","a":5000,"p":"GENERAL","c":"CLEARWATER","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"BOYS AND GIRLS CLUB OF MANATEE COUNTY","a":5700,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"CENTERSTONE OF FLORIDA INC","a":5000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY COALITION ON HOMELESSNESS","a":145000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"COMMUNITY HAVEN FOR ADULTS AND CHILDREN WITH DISABILITIES","a":7500,"p":"GENERAL","c":"SARASOTA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"EASTER SEALS OF SOUTHWEST FLORIDA","a":5000,"p":"GENERAL","c":"SARASOTA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"FIRST UNITED METHODIST CHURCH","a":5000,"p":"GENERAL","c":"PENSACOLA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"HONOR SANCTUARY INC","a":5000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"INSTRIDE THERAPY INC","a":2000,"p":"GENERAL","c":"NOKOMIS","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"MANATEE COMMUNITY FOUNDATION","a":50000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"MANATEE COUNTY LITERACY","a":1000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"MANATEE RIVER PRAM FLEET","a":20000,"p":"GENERAL","c":"PALMETTO","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"MOTE MARINE LABORATORY INC","a":1000000,"p":"GENERAL","c":"SARASOTA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"NEURO CHALLENGE FOUNDATION FOR PARKINSON'S","a":5000,"p":"GENERAL","c":"SARASOTA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"SALVATION ARMY OF MANATEE COUNTY","a":5000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"TAKE STOCK IN CHILDREN OF FLORIDA","a":50000,"p":"GENERAL","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"THE BISHOP MUSEUM OF SCIENCE AND NATURE","a":200000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"UNITED WAY SUNCOAST","a":25000,"p":"GENERAL","c":"TAMPA","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF FLORIDA FOUNDATION","a":100000,"p":"GENERAL","c":"GAINESVILLE","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"WE CARE MANATEE INC","a":5000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2020,"r":"WOMEN'S RESOURCE CENTER","a":5000,"p":"GENERAL","c":"BRADENTON","s":"FL","e":"","o":"202131269349102563","record_type":"named_recipient"},{"y":2021,"r":"MOTE MARINE LABORATORY INC","a":1000000,"p":"GENERAL","c":"SARASOTA","s":"FL","e":"","o":"202213189349106346","record_type":"named_recipient"},{"y":2022,"r":"MOTE MARINE LABORATORY INC","a":1000000,"p":"CHARITABLE","c":"SARASOTA","s":"FL","e":"","o":"202303189349101220","record_type":"named_recipient"},{"y":2023,"r":"SEE ATTACHED LIST OF 2023 GRANTS","a":7233406,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202433179349102748","record_type":"unitemized"},{"y":2024,"r":"SEE ATTACHED LIST OF 2024 GRANTS","a":8139156,"p":"GENERAL SUPPORT","c":"","s":"","e":"","o":"202513179349102091","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"CENTERSTONE OF FLORIDA INC":"Health & wellbeing","MANATEE COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","UNITED WAY SUNCOAST":"Nonprofit capacity & transitions","UNIVERSITY OF FLORIDA FOUNDATION":"Education & youth","WE CARE MANATEE INC":"Health & wellbeing"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

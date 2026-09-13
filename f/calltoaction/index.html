@@ -12,17 +12,16 @@
 <meta property="og:title" content="Call To Action Foundation — Grants Ledger">
 <meta property="og:description" content="27 grants · $338,250 · three filed years, each reconciling to Part I line 25(d) exactly. Computed from the foundation’s own public 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<!-- At deploy: uncomment og:image with the ABSOLUTE hosted URL (scrapers reject relative paths).
-<meta property="og:image" content="https://HOST/PATH/og-card.png">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
--->
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/f/calltoaction/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23d19049'%3EC%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=8df4363830">
+<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -303,7 +302,7 @@
           <div class="pager-nav">
             <button type="button" id="first-page" hidden aria-label="First page">First</button>
             <button type="button" id="prev-page">Previous</button>
-            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="number" id="page-jump" min="1" step="1" inputmode="numeric" aria-label="Go to page"> of <span id="page-total">1</span></label>
+            <label class="page-jump" id="page-jump-wrap" hidden>Page <input type="text" id="page-jump" min="1" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Go to page"> of <span id="page-total">1</span></label>
             <button type="button" id="next-page">Next</button>
             <button type="button" id="last-page" hidden aria-label="Last page">Last</button>
           </div>
@@ -324,7 +323,7 @@
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>Source</h3>
-        <p>
+        <p id="src-note">
           IRS TEOS public 990-PF e-file XML for EIN <code>88-2726669</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/882726669" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
@@ -416,7 +415,7 @@
 <script>
 window.CALLTOACTI_DATA={"meta":{"foundation":"Call To Action Foundation","ein":"88-2726669","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024],"grant_count":27,"grand_total":338250,"tieout":{"2022":{"object_id":"202323189349105842","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202630719349100038","grant_count":5,"grant_sum":76000,"line25_col_d":76000,"status":"PASS"},"2024":{"object_id":"202503219349108235","grant_count":22,"grant_sum":262250,"line25_col_d":262250,"status":"PASS"}}},"grants":[{"y":2023,"r":"UTAH FOUNDATION","a":40000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"THE CENTER FOR ECONOMIC OPPORTUNITY AND BELONGING","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"RONALD MCDONALD HOUSE CHARITIES","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"UNITED WAY OF SALT LAKE","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2023,"r":"THE CHILDREN'S CENTER UTAH","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202630719349100038","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":4750,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"SNOW COLLEGE","a":1250,"p":"GENERAL OPERATING SUPPORT","c":"EPHRAIM","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"HAWKEYE COMMUNITY COLLEGE","a":1000,"p":"GENERAL OPERATING SUPPORT","c":"WATERLOO","s":"IA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF COLORADO BOULDER","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"BOULDER","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF COLORADO BOULDER","a":5500,"p":"GENERAL OPERATING SUPPORT","c":"BOULDER","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO MESA UNIVERSITY","a":15750,"p":"GENERAL OPERATING SUPPORT","c":"GRAND JUNCTION","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO SCHOOL OF MINES","a":19250,"p":"GENERAL OPERATING SUPPORT","c":"GOLDEN","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO SCHOOL OF MINES","a":20750,"p":"GENERAL OPERATING SUPPORT","c":"GOLDEN","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO STATE UNIVERSITY","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"FORT COLLINS","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"COLORADO STATE UNIVERSITY","a":11500,"p":"GENERAL OPERATING SUPPORT","c":"FORT COLLINS","s":"CO","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"IDAHO STATE UNIVERSITY","a":18500,"p":"GENERAL OPERATING SUPPORT","c":"POCATELLO","s":"ID","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"IOWA CENTRAL COMMUNITY COLLEGE FOUNDATION","a":6750,"p":"GENERAL OPERATING SUPPORT","c":"FORT DODGE","s":"IA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":22500,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":13250,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH TECH UNIVERSITY","a":7000,"p":"GENERAL OPERATING SUPPORT","c":"ST GEORGE","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":17250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":11250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH STATE UNIVERSITY","a":8250,"p":"GENERAL OPERATING SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH VALLEY UNIVERSITY","a":19250,"p":"GENERAL OPERATING SUPPORT","c":"OREM","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF UTAH","a":2500,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"},{"y":2024,"r":"UTAH JOB OPPORTUNITIES FOUNDATION","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"SALT LAKE CITY","s":"UT","e":"","o":"202503219349108235","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=8df4363830"></script>
+<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
