@@ -148,6 +148,12 @@
     out = out.replace(/([\/-])(\w)/g, (m, d, c) => d + c.toUpperCase());
     return lead + out + trail;
   }).join(' ');
+  // The one human-readable string a masked row's name may ever show. Every render
+  // site checks record_type itself and prints this -- never dc(g.r) or esc(g.r) --
+  // so the raw internal MASK sentinel (title-cased by dc() into something worse)
+  // never reaches the page, matching what about.html already promises visitors.
+  const MASKED_LABEL = 'Individual recipient (name withheld)';
+  const MASKED_TITLE = 'The filing names a person here (scholarship, fellowship, hardship or similar); this site withholds every name it publishes. Amount, year, purpose and state are unchanged, so there is no recipient profile to open.';
 
   // ---------- canonical recipients ----------
   // Reviewed merges only: identical org filed under name variants (parenthetical
@@ -165,6 +171,49 @@
   const GRAND = DATA.meta.grand_total;
   // canonical recipients and the derived analytics are built by deriveModel(), below the
   // purpose rules they depend on -- once for an embedded book, twice for a fetched one
+
+  // ---------- receipts (ux-ledger-02) ----------
+  // Every published year already carries a real filing reference (tieout[y].object_id, and
+  // each grant row's own `o`). An e-filed one is a bare TEOS object id -- always a real,
+  // linkable ProPublica record for this EIN, so it always gets a link. A recovered (scanned)
+  // one reads "<ein>_<period>_990PF (IRS scan)" on the tie-out, or "pdf:<ein>_<period>" /
+  // "char500:..." on a row -- linked only when a real source URL is on file for that tax
+  // period (window.LEDGER_SCAN_URLS, keyed YYYYMM); never guessed at.
+  const EIN_DIGITS = String(DATA.meta.ein || '').replace(/\D/g, '');
+  const SCAN_URLS = window.LEDGER_SCAN_URLS || {};
+  function receiptFor(raw) {
+    const s = String(raw || '');
+    if (!s) return null;
+    if (/^\d+$/.test(s)) return EIN_DIGITS ? { href: `https://projects.propublica.org/nonprofits/organizations/${EIN_DIGITS}/${s}/full`, scan: false } : null;
+    const m = s.match(/_(\d{6})(?:_|$)/);
+    return (m && SCAN_URLS[m[1]]) ? { href: SCAN_URLS[m[1]], scan: true } : null;
+  }
+  // renders a linked receipt when one resolves, the same plain caption otherwise -- so a
+  // reader can never tell "no link yet" from "we withheld a link", only see the receipt.
+  function receiptMark(raw, cls, label) {
+    const r = receiptFor(raw);
+    const text = esc(label !== undefined ? label : raw);
+    const clsAttr = cls ? ` class="${cls}"` : '';
+    return r
+      ? `<a${clsAttr} href="${r.href}" target="_blank" rel="noopener" title="${r.scan ? 'Open the scanned filing' : 'Open on ProPublica'}">${text}</a>`
+      : `<code${clsAttr}>${text}</code>`;
+  }
+  // withheld / $0-filed years, parsed once and shared by the year rail, the moat note and
+  // the overview's tie-out exceptions -- one source, so every surface names the same years.
+  const WITHHELD = (() => { try { return JSON.parse(document.documentElement.dataset.withheld || '{}'); } catch (e) { return {}; } })();
+  const ZEROYRS = (() => { try { return JSON.parse(document.documentElement.dataset.zeroyears || '{}'); } catch (e) { return {}; } })();
+
+  // ---------- ux-ledger-05: tiny books ----------
+  // Fewer than 10 named-recipient rows, or a single "recipient" that reads like the
+  // schedule's own line label (a data-lane miss this page still has to render safely
+  // around): a median, a typical-grant range and a concentration share all say more
+  // about arithmetic on one or two numbers than about the foundation's giving, so they
+  // are suppressed in favor of the plain totals and a one-line reason.
+  const SCHEDULE_LABEL_RX = /^(GRANTS?\s+(PAID|APPROVED|AWARDED)|STATEMENT|SCHEDULE|SEE\s+(ATTACHED|SCHEDULE|STATEMENT)|SUPPLEMENTARY\s+INFORMATION)\b/i;
+  function isTiny() {
+    if (namedGrants.length < 10) return true;
+    return entList.length <= 3 && entList.some((e) => SCHEDULE_LABEL_RX.test(e.display));
+  }
 
   // purpose taxonomy — two published steps. Step 1: keywords in the filed purpose,
   // field categories before mechanism categories (a scholarship for a science hall
@@ -239,6 +288,14 @@
     {
       const byFiled = new Map();
       namedGrants.forEach((g) => {
+        // A masked individual's g.r is the same literal MASK sentinel across every
+        // masked row in the book: grouping it here would fold every scholarship,
+        // hardship and medical recipient into one fake "recipient" that dominates
+        // Top recipients, Concentration and the recipient profile modal. Their
+        // dollars still count in byYear/catTotals/median (computed from grants/
+        // namedGrants directly, not from entities) -- they just never become a
+        // single rankable, clickable entity.
+        if (g.record_type === 'individual_masked') return;
         if (!byFiled.has(g.r)) byFiled.set(g.r, []);
         byFiled.get(g.r).push(g);
       });
@@ -509,14 +566,14 @@
       </section>
       <section class="pr-sec">
         <h2>Reconciliation to the filed totals</h2>
-        <table class="pr-table"><thead><tr><th>Tax year</th><th class="num">Rows</th><th class="num">Rows sum</th><th class="num">Filed line 25(d)</th><th>Result</th></tr></thead>
-        <tbody>${years.map((y) => { const t = tieout[y]; const d = (t.line25_col_d || 0) - (t.grant_sum || 0); return `<tr><td>${esc(y)}</td><td class="num">${num(t.grant_count || 0)}</td><td class="num">${money(t.grant_sum || 0)}</td><td class="num">${money(t.line25_col_d || 0)}</td><td>${d === 0 ? 'matches exactly' : 'differs by ' + money(Math.abs(d))}</td></tr>`; }).join('')}</tbody></table>
+        <table class="pr-table"><thead><tr><th>Tax year</th><th class="num">Rows</th><th class="num">Rows sum</th><th class="num">Filed ${esc(REF_LBL)}</th><th>Result</th><th>Object ID</th></tr></thead>
+        <tbody>${years.map((y) => { const t = tieout[y]; const d = (t.line25_col_d || 0) - (t.grant_sum || 0); return `<tr><td>${esc(y)}</td><td class="num">${num(t.grant_count || 0)}</td><td class="num">${money(t.grant_sum || 0)}</td><td class="num">${money(t.line25_col_d || 0)}</td><td>${d === 0 ? `matches ${esc(REF_LBL)} exactly` : 'differs from ' + esc(REF_LBL) + ' by ' + money(Math.abs(d))}</td><td>${receiptMark(t.object_id, 'pr-obj')}</td></tr>`; }).join('')}</tbody></table>
       </section>
       <section class="pr-sec pr-rows">
         <h2>Every grant in scope${scope.length ? ' — ' + esc(scope.join(' · ')) : ''}</h2>
         <p class="pr-sub">${num(rows.length)} ${rows.length === 1 ? 'grant' : 'grants'} · ${money(total)}</p>
         <table class="pr-table"><thead><tr><th>Year</th><th>Recipient</th><th class="num">Amount</th><th>Purpose (as filed)</th><th>Location</th></tr></thead>
-        <tbody id="pr-rows-tbody">${BIG_ROWS ? '' : rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
+        <tbody id="pr-rows-tbody">${BIG_ROWS ? '' : rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
       </section>
       <footer class="pr-foot">
         ${srcNote ? `<p class="pr-src">${srcNote.innerHTML}</p>` : ''}
@@ -535,7 +592,7 @@
       const STEP = 3000;
       let ci = 0;
       const appendChunk = () => {
-        tbody.insertAdjacentHTML('beforeend', rows.slice(ci, ci + STEP).map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join(''));
+        tbody.insertAdjacentHTML('beforeend', rows.slice(ci, ci + STEP).map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join(''));
         ci += STEP;
         if (ci < rows.length) setTimeout(appendChunk, 0); else finish();
       };
@@ -647,20 +704,20 @@
   }
   {
     // the sidebar rail (>=1100px) and the top rail (below it) are the same control
+    const withheld = WITHHELD, zeroYears = ZEROYRS;
+    // ux-ledger-04: a filed year read from the paper filing, not an e-file, carries a
+    // non-numeric object id ("<ein>_<period>_990PF (IRS scan)") -- the year rail is where
+    // a skeptic's eye already is, so its tooltip says so per year, not only in Methodology.
+    const scanYears = new Set(Object.keys(tieout)
+      .filter((y) => { const o = tieout[y].object_id; return o && !/^\d+$/.test(String(o)); })
+      .map(Number));
     [document.getElementById('year-rail'), document.getElementById('year-rail-top')].filter(Boolean).forEach((rail) => {
-      let withheld = {};
-      try { withheld = JSON.parse(document.documentElement.dataset.withheld || '{}'); } catch (e) { withheld = {}; }
-      // a filed year that reconciles at $0 with no grants paid: present in the
-      // tie-out, absent from YEARS (which only counts years with rows). It gets
-      // a flat chip too, never a filter button -- nothing to scope the page to.
-      let zeroYears = {};
-      try { zeroYears = JSON.parse(document.documentElement.dataset.zeroyears || '{}'); } catch (e) { zeroYears = {}; }
       const railYears = [...new Set([...YEARS, ...Object.keys(withheld).map(Number), ...Object.keys(zeroYears).map(Number)])].sort((a, b) => a - b);
       rail.innerHTML = ['all'].concat(railYears).map((y) => withheld[String(y)]
         ? `<a class="withheld" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}">${y}<small>${withheld[String(y)].kind || 'withheld'}</small></a>`
         : zeroYears[String(y)]
           ? `<span class="zeroyr" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
-          : `<button type="button" data-yr="${y}" aria-pressed="false">${y === 'all' ? 'All' : y}</button>`).join('');
+          : `<button type="button" data-yr="${y}" aria-pressed="false"${scanYears.has(y) ? ' title="Read from the paper filing — absent from every e-file dataset"' : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
       rail.addEventListener('click', (e) => {
         const b = e.target.closest('[data-yr]');
         if (!b) return;
@@ -673,6 +730,57 @@
     document.querySelectorAll('.side-nav [data-tab]').forEach((b) =>
       b.addEventListener('click', () => { returnTo = null; updateReturnChip(); setTab(b.dataset.tab); }));
     syncSide();
+
+    // ux-ledger-04: the moat, said where the buyer is already looking -- under the badge,
+    // not seven clicks into Methodology.
+    const moatEl = $('moat-note');
+    if (moatEl && scanYears.size) {
+      const nFiled = Object.keys(tieout).length;
+      moatEl.hidden = false;
+      const nScan = numWord(scanYears.size);
+      moatEl.innerHTML = `${nScan.charAt(0).toUpperCase() + nScan.slice(1)} of ${numWord(nFiled)} filed ${plural(nFiled, 'year')} ${scanYears.size === 1 ? 'was' : 'were'} `
+        + `read from the paper filing — absent from every e-file dataset. `
+        + `<a href="../../recovered/#${esc(document.documentElement.dataset.slug || '')}">How we recovered ${scanYears.size === 1 ? 'it' : 'them'} →</a>`;
+    }
+
+    // ux-ledger-10: the shortened hero lede's own link into Methodology (mirrors db-method).
+    const lm = $('lede-method');
+    if (lm) lm.addEventListener('click', (e) => {
+      e.preventDefault(); setTab('methodology');
+      window.scrollTo({ top: 0, behavior: reducedMotion() ? 'auto' : 'smooth' });
+    });
+
+    // ux-ledger-03: the one conversion moment -- built once, from the page's own title
+    // and address, never a new service or a price (OBA rule: no price on this page).
+    {
+      const h1El = document.querySelector('h1');
+      const foundation = (h1El ? h1El.textContent : document.title).replace(/\s+/g, ' ').trim();
+      const pageUrl = location.href.split('#')[0];
+      const mailto = (subject, body) => 'mailto:jjcurry027@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const recover = $('cta-recover');
+      if (recover) recover.href = mailto('Recover a year of grants — starting point: ' + foundation,
+        'Foundation: ' + foundation + '\nPage: ' + pageUrl + '\n\nWhat’s hard to find:\n');
+      const claim = $('cta-claim');
+      if (claim) claim.href = mailto('Keep ' + foundation + ' current', 'Page: ' + pageUrl + '\n\n');
+    }
+
+    // ux-ledger-01: the specific break, named where a skeptic reads first, not two tabs
+    // away. Reuses the exact "why" text the year-rail chip's own title already carries,
+    // so the two surfaces never disagree.
+    {
+      const ex = $('db-except');
+      const slug = esc(document.documentElement.dataset.slug || '');
+      const lines = [];
+      Object.keys(withheld).sort().forEach((y) => {
+        const w = withheld[y] || {};
+        const label = w.kind === 'not yet published' ? 'not yet published' : 'withheld';
+        lines.push(`<p>TY${esc(y)} ${label} — ${esc(w.why || 'named on the exceptions page.')} <a href="../../exceptions/#${slug}">why →</a></p>`);
+      });
+      Object.keys(zeroYears).sort().forEach((y) => {
+        lines.push(`<p>TY${esc(y)} filed $0 — the return is in the record; no grants were paid that year.</p>`);
+      });
+      if (ex) { ex.innerHTML = lines.join(''); ex.hidden = !lines.length; }
+    }
   }
 
   // ---------- overview ----------
@@ -829,6 +937,9 @@
   function renderOverview() {
     // the global year scope: one state.y drives every panel below the cover
     const SY = state.y;
+    // ux-ledger-05: a book with too few named rows publishes concentration, new-vs-
+    // returning and biggest-changes as if they were findings on statistical noise.
+    const tiny = isTiny();
     const S_GRAND = SY === null ? GRAND : byYear[SY].sum;
     const sEnts = SY === null ? entList
       : entList.map((e) => {
@@ -922,7 +1033,7 @@
         : `<strong>${esc(cTop.key)}</strong> leads at <strong>${moneyCompact(cTop.sum)}</strong> across ${num(cTop.count)} ${grantsWord(cTop.count)}. Where the filing\u2019s words name no field, nothing is guessed \u2014 ${residueClause}.`;
       // the heading years follow the data; a record with one grant year has nothing to compare
       const mvCard = $('movers').closest('.card');
-      if (mvCard) mvCard.hidden = YEARS.length < 2 || incompleteYear(SY === null ? LATEST : SY) || incompleteYear(sPrev);
+      if (mvCard) mvCard.hidden = tiny || YEARS.length < 2 || incompleteYear(SY === null ? LATEST : SY) || incompleteYear(sPrev);
       const mvY = SY !== null ? SY : LATEST, mvP = SY !== null ? sPrev : PREV;
       const mvH = document.getElementById('movers-h');
       if (mvH) mvH.textContent = `Biggest changes · ${mvY}`;
@@ -938,33 +1049,39 @@
         db.addEventListener('click', (e) => { e.preventDefault(); setTab('methodology'); window.scrollTo({ top: 0, behavior: reducedMotion() ? 'auto' : 'smooth' }); });
       }
     })();
-    // concentration
-    $('conc-share').textContent = S_NAMED ? share(sTop5Sum, S_NAMED) : '—';
-    $('conc-bar').style.width = barPct(sTop5Sum, S_NAMED).toFixed(1) + '%';
-    const cTopN = Math.min(5, sEnts.length);
-    const cRest = Math.max(0, sEnts.length - cTopN);   // 'the other -3' can never render
-    $('conc-hint').textContent = cRest === 0
-      ? `${cTopN} ${orgsWord(cTopN)} — every organization funded${SY !== null ? ' in ' + SY : ''}`
-      : cRest === 1
-        ? `${cTopN} ${orgsWord(cTopN)} — the other one holds the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`
-        : `${cTopN} ${orgsWord(cTopN)} — the other ${num(cRest)} share the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`;
-    if (!sEnts.length) $('conc-hint').textContent = 'Recipient concentration is unavailable';
-    else if (unitemized.length) $('conc-hint').textContent += ' · share of named-recipient dollars';
-    // the largest recipients behind the number — they arrive one by one
-    const top5list = sEnts.slice(0, 5);
-    const maxT5 = top5list.length ? top5list[0].total : 0;   // an empty scope has no leader
-    $('conc-top5').setAttribute('aria-label', cTopN === 1 ? 'The largest recipient' : `The ${numWord(cTopN)} largest recipients`);
-    $('conc-top5').innerHTML = top5list.map((e, i) => barRow(
-      `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}`,
-      e.total, maxT5,
-      { cls: 'is-btn stacked', attrs: `style="--i:${i}" data-ent="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(dc(e.display))}, ${money(e.total)}, ${share(e.total, S_NAMED, ' percent')} of named-recipient dollars${SY !== null ? ' in ' + SY : ''}. Opens the profile."`,
-        val: `${money(e.total)}` }
-    )).join('');
-    $('conc-top5').querySelectorAll('.bar-row').forEach((r) => {
-      const go = () => openProfile(r.dataset.ent);
-      r.addEventListener('click', go);
-      r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
-    });
+    // ux-ledger-05: hide the two cards whose numbers are noise on a tiny book (their
+    // shared grid is not left visibly empty -- neither renders a border of its own).
+    { const concCard = $('conc-share').closest('.card'); if (concCard) concCard.hidden = tiny; }
+    { const nrCard = $('newret').closest('.card'); if (nrCard) nrCard.hidden = tiny; }
+    if (!tiny) {
+      // concentration
+      $('conc-share').textContent = S_NAMED ? share(sTop5Sum, S_NAMED) : '—';
+      $('conc-bar').style.width = barPct(sTop5Sum, S_NAMED).toFixed(1) + '%';
+      const cTopN = Math.min(5, sEnts.length);
+      const cRest = Math.max(0, sEnts.length - cTopN);   // 'the other -3' can never render
+      $('conc-hint').textContent = cRest === 0
+        ? `${cTopN} ${orgsWord(cTopN)} — every organization funded${SY !== null ? ' in ' + SY : ''}`
+        : cRest === 1
+          ? `${cTopN} ${orgsWord(cTopN)} — the other one holds the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`
+          : `${cTopN} ${orgsWord(cTopN)} — the other ${num(cRest)} share the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`;
+      if (!sEnts.length) $('conc-hint').textContent = 'Recipient concentration is unavailable';
+      else if (unitemized.length) $('conc-hint').textContent += ' · share of named-recipient dollars';
+      // the largest recipients behind the number — they arrive one by one
+      const top5list = sEnts.slice(0, 5);
+      const maxT5 = top5list.length ? top5list[0].total : 0;   // an empty scope has no leader
+      $('conc-top5').setAttribute('aria-label', cTopN === 1 ? 'The largest recipient' : `The ${numWord(cTopN)} largest recipients`);
+      $('conc-top5').innerHTML = top5list.map((e, i) => barRow(
+        `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}`,
+        e.total, maxT5,
+        { cls: 'is-btn stacked', attrs: `style="--i:${i}" data-ent="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(dc(e.display))}, ${money(e.total)}, ${share(e.total, S_NAMED, ' percent')} of named-recipient dollars${SY !== null ? ' in ' + SY : ''}. Opens the profile."`,
+          val: `${money(e.total)}` }
+      )).join('');
+      $('conc-top5').querySelectorAll('.bar-row').forEach((r) => {
+        const go = () => openProfile(r.dataset.ent);
+        r.addEventListener('click', go);
+        r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      });
+    }
 
     // the granted dollar as one hundred pennies — cents by largest remainder, so they sum to exactly 100
     (function () {
@@ -1261,7 +1378,7 @@
     $('pf-grants').innerHTML = e.grants.slice().sort((a, b) => b.y - a.y || b.a - a.a).map((g) => `
       <li class="pf-g">
         <span class="pf-gy">${g.y}</span>
-        <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))} <code class="pf-go" title="Filing reference">${esc(g.o)}</code></span>
+        <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))} ${receiptFor(g.o) ? receiptMark(g.o, 'pf-go') : `<code class="pf-go" title="Filing reference">${esc(g.o)}</code>`}</span>
         <span class="pf-ga">${money(g.a)}</span>
       </li>`).join('');
     const inY = state.y !== null ? e.grants.filter((g) => g.y === state.y).length : 0;
@@ -1373,7 +1490,9 @@
         <td><button type="button" class="ycell" data-y="${g.y}" aria-label="Filter to tax year ${g.y}">${g.y}</button></td>
         <td>${g.record_type === 'unitemized'
           ? `<span class="recip-flat" style="font-weight:600" title="${UNITEMIZED_TITLE}">${esc(dc(g.r))} · unitemized disclosure</span>`
-          : `<button type="button" class="recip" data-rec="${esc(g.r)}" title="As filed: ${esc(g.r)}">${esc(dc(g.r))}</button>`}</td>
+          : g.record_type === 'individual_masked'
+            ? `<span class="recip-flat" style="font-weight:600" title="${esc(MASKED_TITLE)}">${esc(MASKED_LABEL)}</span>`
+            : `<button type="button" class="recip" data-rec="${esc(g.r)}" title="As filed: ${esc(g.r)}">${esc(dc(g.r))}</button>`}</td>
         <td class="amt">${money(g.a)}</td>
         <td class="purpose" title="As filed: ${esc(g.p)}">${esc(dc(g.p))}</td>
         <td class="loc">${esc([dc(g.c || ''), g.s].filter(Boolean).join(', '))}</td>
@@ -1383,12 +1502,14 @@
       <li class="gcard" style="--ri:${Math.min(ri, 12)}">
         ${g.record_type === 'unitemized'
           ? `<div class="gcard-flat" style="padding:0.85rem 0.35rem;border-bottom:1px solid var(--rule)" title="${UNITEMIZED_TITLE}">`
-          : `<button type="button" class="gcard-btn" data-rec="${esc(g.r)}" aria-label="${esc(dc(g.r))}, ${money(g.a)}, ${g.y}. Opens the recipient profile.">`}
+          : g.record_type === 'individual_masked'
+            ? `<div class="gcard-flat" style="padding:0.85rem 0.35rem;border-bottom:1px solid var(--rule)" title="${esc(MASKED_TITLE)}">`
+            : `<button type="button" class="gcard-btn" data-rec="${esc(g.r)}" aria-label="${esc(dc(g.r))}, ${money(g.a)}, ${g.y}. Opens the recipient profile.">`}
           <div class="gc-top"><span class="gc-y">${g.y}</span><span class="gc-a">${money(g.a)}</span></div>
-          <div class="gc-r">${esc(dc(g.r))}${g.record_type === 'unitemized' ? ' · unitemized disclosure' : ''}</div>
+          <div class="gc-r">${g.record_type === 'individual_masked' ? esc(MASKED_LABEL) : esc(dc(g.r))}${g.record_type === 'unitemized' ? ' · unitemized disclosure' : ''}</div>
           <div class="gc-p">${esc(dc(g.p))}</div>
           <div class="gc-l">${esc([dc(g.c || ''), g.s].filter(Boolean).join(', '))}</div>
-        ${g.record_type === 'unitemized' ? '</div>' : '</button>'}
+        ${g.record_type === 'unitemized' || g.record_type === 'individual_masked' ? '</div>' : '</button>'}
       </li>`).join('');
     $('empty').hidden = slice.length > 0;
 
@@ -1584,7 +1705,7 @@
         ? '"' + s.split('"').join('""') + '"' : s;
     };
     const csv = [head].concat(rows.map((g) =>
-      [g.y, defuse(g.r), defuse((entities.get(aliasToId.get(g.r)) || {}).display || ''), g.a, defuse(g.p), defuse(g.c), g.s, g.o, g.record_type || 'named_recipient'].map(cell).join(','))).join(NLc);
+      [g.y, defuse(g.record_type === 'individual_masked' ? MASKED_LABEL : g.r), defuse((entities.get(aliasToId.get(g.r)) || {}).display || ''), g.a, defuse(g.p), defuse(g.c), g.s, g.o, g.record_type || 'named_recipient'].map(cell).join(','))).join(NLc);
     const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -1630,7 +1751,7 @@
           <div class="tc-row"><span>${esc(REF_LBL)}</span><strong>${money(t.line25_col_d)}</strong></div>
           <div class="tc-row"><span>Grant rows</span><strong>${num(t.grant_count)}</strong></div>
           <div class="tc-row"><span>Δ</span><strong>${money(t.line25_col_d - t.grant_sum)}</strong></div>
-          <div class="tc-obj">Object ID <code>${t.object_id}</code></div>
+          <div class="tc-obj">Object ID ${receiptMark(t.object_id, '')}</div>
         </div>`;
     }).join('');
     $('ent-table').innerHTML = mergedEntities.map((e) => `
@@ -1664,31 +1785,54 @@
     const mid = Math.floor(namedAmounts.length / 2);
     $('kpi-median').textContent = !namedAmounts.length ? '—' : money(namedAmounts.length % 2
       ? namedAmounts[mid] : (namedAmounts[mid - 1] + namedAmounts[mid]) / 2);
-    $('kpi-median').parentElement.querySelector('.k-hint').textContent =
-      `${num(scopedNamed.length)} named-recipient rows${SY === null ? ', all filed years' : ' in ' + SY}`;
+    // ux-ledger-05: too few named rows for a median, a range or a concentration share
+    // to mean anything -- the total above stays exact; the interior statistics don't
+    // pretend to describe a shape with one or two points.
+    const tiny = isTiny();
+    const tinyHint = tiny ? `Too few named-recipient rows (${num(namedGrants.length)}, fewer than 10) for this figure` : null;
+    if (tiny) {
+      $('kpi-median').textContent = '\u2014';
+      $('kpi-median').parentElement.querySelector('.k-hint').textContent = tinyHint;
+    } else {
+      $('kpi-median').parentElement.querySelector('.k-hint').textContent =
+        `${num(scopedNamed.length)} named-recipient rows${SY === null ? ', all filed years' : ' in ' + SY}`;
+    }
     $('kpi-orgs').parentElement.querySelector('.k-hint').textContent =
       `Named recipients${SY === null ? ', all filed years' : ' in ' + SY}`;
+    const tinyNote = document.getElementById('tiny-note');
+    if (tinyNote) {
+      tinyNote.hidden = !tiny;
+      if (tiny) tinyNote.textContent = `${num(namedGrants.length)} named-recipient ${namedGrants.length === 1 ? 'row is' : 'rows are'} too few for a median, a typical-grant range or a recipient-concentration share to mean anything. The totals above are exact; those figures are withheld rather than shown misleadingly precise.`;
+    }
     // Typical grant: the middle half of named grants (25th to 75th percentile).
     // A range says more to a grant writer than one median; "could we fit" starts here.
     {
-      const q = (arr, p) => { if (!arr.length) return null; const i = (arr.length - 1) * p; const lo = Math.floor(i), hi = Math.ceil(i); return arr[lo] + (arr[hi] - arr[lo]) * (i - lo); };
-      const q1 = q(namedAmounts, 0.25), q3 = q(namedAmounts, 0.75);
+      const rangeHintEl = document.getElementById('kpi-range-hint');
       const el = $('kpi-range');
-      if (el) el.textContent = q1 === null ? '\u2014' : (q1 === q3 ? moneyCompact(q1) : moneyCompact(q1) + '\u2013' + moneyCompact(q3));
       const fit = $('fit-line');
-      if (fit) {
-        const latest = LATEST, nw = newIn[latest] || 0, ret = returningIn[latest] || 0, tot = nw + ret;
-        const byState = new Map();
-        namedGrants.forEach((g) => { if (g.s) byState.set(g.s, (byState.get(g.s) || 0) + g.a); });
-        const top = [...byState.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
-        const namedSum = [...byState.values()].reduce((s, v) => s + v, 0) || 1;
-        const parts = [];
-        if (tot) parts.push(`In ${latest}, ${Math.round(nw / tot * 100)}% of recipients were funded for the first time in this record`);
-        if (top.length) parts.push(`${Math.round(top.reduce((s, x) => s + x[1], 0) / namedSum * 100)}% of named dollars went to recipients in ${top.map((x) => x[0]).join(', ')}`);
-        let fitFallback = false;
-        if (!parts.length && !rowsPending) { parts.push(`${latest} contains only unitemized disclosures \u2014 no recipient-level comparison is available for that year`); fitFallback = true; }
-        fit.hidden = !parts.length || rowsPending;
-        fit.textContent = !parts.length ? '' : (fitFallback ? parts.join(' \u00b7 ') : parts.join(' \u00b7 ') + '. Historical record, not eligibility.');
+      if (tiny) {
+        if (el) el.textContent = '\u2014';
+        if (rangeHintEl) rangeHintEl.textContent = tinyHint;
+        if (fit) fit.hidden = true;
+      } else {
+        const q = (arr, p) => { if (!arr.length) return null; const i = (arr.length - 1) * p; const lo = Math.floor(i), hi = Math.ceil(i); return arr[lo] + (arr[hi] - arr[lo]) * (i - lo); };
+        const q1 = q(namedAmounts, 0.25), q3 = q(namedAmounts, 0.75);
+        if (el) el.textContent = q1 === null ? '\u2014' : (q1 === q3 ? moneyCompact(q1) : moneyCompact(q1) + '\u2013' + moneyCompact(q3));
+        if (rangeHintEl) rangeHintEl.textContent = 'The middle half of named grants';
+        if (fit) {
+          const latest = LATEST, nw = newIn[latest] || 0, ret = returningIn[latest] || 0, tot = nw + ret;
+          const byState = new Map();
+          namedGrants.forEach((g) => { if (g.s) byState.set(g.s, (byState.get(g.s) || 0) + g.a); });
+          const top = [...byState.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+          const namedSum = [...byState.values()].reduce((s, v) => s + v, 0) || 1;
+          const parts = [];
+          if (tot) parts.push(`In ${latest}, ${Math.round(nw / tot * 100)}% of recipients were funded for the first time in this record`);
+          if (top.length) parts.push(`${Math.round(top.reduce((s, x) => s + x[1], 0) / namedSum * 100)}% of named dollars went to recipients in ${top.map((x) => x[0]).join(', ')}`);
+          let fitFallback = false;
+          if (!parts.length && !rowsPending) { parts.push(`${latest} contains only unitemized disclosures \u2014 no recipient-level comparison is available for that year`); fitFallback = true; }
+          fit.hidden = !parts.length || rowsPending;
+          fit.textContent = !parts.length ? '' : (fitFallback ? parts.join(' \u00b7 ') : parts.join(' \u00b7 ') + '. Historical record, not eligibility.');
+        }
       }
     }
     const coverage = document.getElementById('record-coverage');
@@ -1733,7 +1877,7 @@
         gs.innerHTML = `<span class="gs-label">In ${SY}</span><span class="gs-val">${money(byYear[SY].sum)}</span><span class="gs-meta">${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${(() => {
           const ty = tieout[String(SY)];
           const d = ty ? ty.line25_col_d - ty.grant_sum : 0;
-          return d === 0 ? 'Δ $0 vs line 25(d)' : 'Δ ' + money(d) + ' vs line 25(d)';
+          return (d === 0 ? 'Δ $0 vs ' : 'Δ ' + money(d) + ' vs ') + REF_LBL;
         })()}</span>`;
       }
     }

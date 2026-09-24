@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Jubilee&nbsp;Foundation</h1>
         <p class="hero-meta">Pasco, WA · EIN <code>91-1693752</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 28 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 28 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Jubilee Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.JUBILEEFOU_DATA={"meta":{"foundation":"Jubilee Foundation","ein":"91-1693752","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2022,2023,2024],"grant_count":33,"grand_total":3632830,"tieout":{"2020":{"object_id":"202123159349103692","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202213149349103101","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202303189349105770","grant_count":30,"grant_sum":3030778,"line25_col_d":3030778,"status":"PASS"},"2023":{"object_id":"202413169349101566","grant_count":1,"grant_sum":600000,"line25_col_d":600000,"status":"PASS"},"2024":{"object_id":"202523169349100647","grant_count":2,"grant_sum":2052,"line25_col_d":2052,"status":"PASS"}}},"grants":[{"y":2022,"r":"ALARM","a":46610,"p":"GENDER EQUITY, RECONCILIATION & PARTNERSHIPS CURRICULUM DEVELOPMENT","c":"RICHARDSON","s":"TX","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"AMEXTRA (ASOCIACION MEXICANA DE TRANSFORMACION RURAL Y URBANA AC)","a":86200,"p":"CAMBIANDO VIDAS, TRANSFORMANDO COMUNIDADES EN OCOSINGO, CHIAPAS","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"AMEXTRA (ASOCIACION MEXICANA DE TRANSFORMACION RURAL Y URBANA AC)","a":97012,"p":"CAMBIANDO VIDAS, TRANSFORMANDO COMUNIDADES EN GUERRERO","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"BEYOND BORDERS","a":200000,"p":"MODEL COMMUNITY INITIATIVE ON LA GONAVE 2021-2024","c":"NORRISTOWN","s":"PA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"CAPABLE","a":150000,"p":"COHORT 3 CAPABLE GRADUATION PROGRAM","c":"ORANGE","s":"CA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"CATHOLIC RELIEF SERVICES","a":304471,"p":"PREVENTING CHILD MIGRATION AND ENHANCING DIGNITY AMONG FAMILIES AND YOUTH PHASE III","c":"BALTIMORE","s":"MD","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"CATHOLIC RELIEF SERVICES","a":230379,"p":"CHANGING THE WAY WE CARE, HAITI","c":"BALTIMORE","s":"MD","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"COFHED","a":50000,"p":"TRAIN THE TRAINER COMMUNITY ENGAGEMENT CATALYSTS 2021-2024","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"EL POZO DE VIDA","a":30000,"p":"LA MERCED ANTI-HUMAN TRAFFICKING COMMUNITY PROJECT","c":"SANTA ANA","s":"CA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"FAMILY LEARNING CENTER","a":200000,"p":"NEW FLC - CHURCH REFUGEE FACILITY","c":"KENNEWICK","s":"WA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"FLORESTA USA","a":80000,"p":"RESTORING LIVES AND LAND IN THE HAITI BORDER REGION PLANT WITH PURPOSE","c":"SAN DIEGO","s":"CA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"GLOBAL GRASSROOTS","a":60000,"p":"PLACE-BASED IMPACT","c":"PORTSMOUTH","s":"NH","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"GROUNDSWELL INTERNATIONAL","a":60000,"p":"BUILDING FOOD SOVEREIGNTY","c":"WASHINGTON","s":"DC","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"IDEAS COMUNITARIAS","a":45000,"p":"SCHOOL FOR THE COMMON GOOD- MIXTEC REGION & CENTRAL VALLEY IN MEXICO STRENGHENING CONNECTIONS","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS OF JITOKEZE INTERNATIONAL","a":50000,"p":"EMPOWERING VULNERABLE WOMEN IN WEST POKOT KENYA","c":"WAYNE","s":"PA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"MENNONITE CENTRAL COMMITTEE","a":80000,"p":"FOOD ASSISTANCE PROGRAM FOR DROUGHT IN TURKANA","c":"AKRON","s":"PA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"SHIVI DEVELOPMENT SOCIETY","a":85000,"p":"PROMOTING PEACE AND GENDER JUSTICE IN BUNDI DISTRICT","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"NEW ROOTS HAITI","a":60000,"p":"DREAM CENTER YEAR 2","c":"RIDGEFIELD","s":"WA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"OPPORTUNITY INTERNATIONAL","a":200000,"p":"THRIVING RURAL COMMUNITIES IN UGANDA","c":"CHICAGO","s":"IL","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"PLANT WITH PURPOSE","a":100000,"p":"TRANSFORMING RURAL COMMUNITIES IN SOUTHERN MEXICO","c":"SAN DIEGO","s":"CA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"RAISING VOICES","a":127100,"p":"SASA THE POPCORN BEGINS TO POP","c":"","s":"","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"SPARK MICROGRANTS","a":75000,"p":"FACILITATED COLLECTIVE ACTION PROCESS IN THE WEST NILE","c":"NEW YORK","s":"NY","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"THE BOSTON FOUNDATION","a":75000,"p":"HAITI DEVEOLOPEMENT INSTITUTE BUILDING COMMUNITIES BY SUPPORTING LOCAL ORGS AND LEADERS","c":"BOSTON","s":"MA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"THE BOSTON FOUNDATION","a":99000,"p":"HAITI DEVELOPMENT INST. MP3K ENABLING COMMUNITY AG PRODUCTION IN CAMP PERRIN","c":"BOSTON","s":"MA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"THE BOSTON FOUNDATION","a":55000,"p":"HAITI DEVELOPMENT INST. OPAGMA RICE SECTOR IN MANICHE FOOD SECURITY & SUSTAINABLE AG","c":"BOSTON","s":"MA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"THE CHAIN COLLABORATIVE","a":35000,"p":"INVESTMENT PARTNERSHIP WITH NOW AFRICA INIATIVE","c":"KENNETT SQUARE","s":"PA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"WORLD RELIEF","a":125000,"p":"CHURCH EMPOWERMENT ZONES AND YOUTH ENGAGEMENT IN LES CAYES","c":"BALTIMORE","s":"MD","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"WORLD RELIEF","a":125000,"p":"CHURCH EMPOWERMENT ZONES KAJIADO","c":"BALTIMORE","s":"MD","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"WORLD RENEW","a":50006,"p":"BUILDING RESILIENCE IN KATILU","c":"GRAND RAPIDS","s":"MI","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2022,"r":"WORLD VISION","a":50000,"p":"WORLD VISION HAITI EMPOWERED WORLDVIEW","c":"TACOMA","s":"WA","e":"","o":"202303189349105770","record_type":"named_recipient"},{"y":2023,"r":"PASCO SCHOOL DISTRICT","a":600000,"p":"DONATION FOR LAKE VIEW EARLY LEARNING CENTER CAPITAL PROJECT","c":"PASCO","s":"WA","e":"","o":"202413169349101566","record_type":"named_recipient"},{"y":2024,"r":"BLUE MOUNTAIN COUNCIL BSA","a":2000,"p":"DONATION FOR 2025 COUNCIL LEADERSHIP BREAKFAST","c":"KENNEWICK","s":"WA","e":"","o":"202523169349100647","record_type":"named_recipient"},{"y":2024,"r":"ELIJAH FAMILY HOMES","a":52,"p":"DONATION","c":"KENNEWICK","s":"WA","e":"","o":"202523169349100647","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"EL POZO DE VIDA":"Nonprofit capacity & transitions","FRIENDS OF JITOKEZE INTERNATIONAL":"Nonprofit capacity & transitions","RAISING VOICES":"Arts & culture","ELIJAH FAMILY HOMES":"Basic needs & response"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

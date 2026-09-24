@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Jeff Green Family&nbsp;Foundation</h1>
         <p class="hero-meta">El Segundo, CA · EIN <code>85-1347482</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 17 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 17 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Jeff Green Family Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.JEFFGREENF_DATA={"meta":{"foundation":"Jeff Green Family Foundation","ein":"85-1347482","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024],"grant_count":34,"grand_total":9511430,"tieout":{"2020":{"object_id":"202143199349106029","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202203199349105225","grant_count":3,"grant_sum":792855,"line25_col_d":792855,"status":"PASS"},"2022":{"object_id":"202333199349108233","grant_count":10,"grant_sum":1973266,"line25_col_d":1973266,"status":"PASS"},"2023":{"object_id":"202412709349100316","grant_count":10,"grant_sum":3298842,"line25_col_d":3298842,"status":"PASS"},"2024":{"object_id":"202542869349100144","grant_count":11,"grant_sum":3446467,"line25_col_d":3446467,"status":"PASS"}}},"grants":[{"y":2021,"r":"RUTH CHEATHAM FOUNDATION COLLEGE FUND","a":500055,"p":"(1) DESCRIPTION: 868 SHARES OF THE TRADE DESK, INC. SECURITIES (2) BOOK VALUE: $712,541 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 05/27/2021 (6) PURPOSE: GENERAL OPERATING SUPPORT","c":"DALLAS","s":"TX","e":"","o":"202203199349105225","record_type":"named_recipient"},{"y":2021,"r":"CALIFORNIA STATE UNIVERSITY CHANNEL ISLANDS","a":247800,"p":"SCHOLARSHIP SUPPORT FOR ACADEMIC YEAR 2021-22","c":"CAMARILLO","s":"CA","e":"","o":"202203199349105225","record_type":"named_recipient"},{"y":2021,"r":"POLICING EQUITY","a":45000,"p":"TO FUND THE COST-BENEFIT ANALYSIS THAT WILL INFORM THE DESIGN AND BUILD OF ITHACA'S NEW MODEL OF PUBLIC SAFETY.","c":"LOS ANGELES","s":"CA","e":"","o":"202203199349105225","record_type":"named_recipient"},{"y":2022,"r":"RUTH CHEATHAM FOUNDATION COLLEGE FUND","a":187500,"p":"SCHOLARSHIP SUPPORT","c":"DALLAS","s":"TX","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"CALIFORNIA STATE UNIVERSITY CHANNEL ISLANDS","a":72449,"p":"SCHOLARSHIP SUPPORT AND PEER TO PEER SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"CALIFORNIA STATE UNIVERSITY CHANNEL ISLANDS","a":607257,"p":"1) DESCRIPTION: 8,100 SHARES OF THE TRADE DESK, INC. SECURITIES (2) BOOK VALUE: $664,929 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 02/23/2022 (6) PURPOSE: SCHOLARSHIP SUPPORT AND PEER TO PEER SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"Equality UTAH FOUNDATION","a":15000,"p":"UKRAINE RELIEF EFFORTS","c":"salt lake city","s":"UT","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"Equality UTAH FOUNDATION","a":600060,"p":"1) DESCRIPTION: 8,004 SHARES OF THE TRADE DESK, INC. SECURITIES (2) BOOK VALUE: $657,048 (3) METHOD USED TO DETERMINE BOOK VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE RECEIVED BY THE FOUNDATION. (4) METHOD USED TO DETERMINE FAIR MARKET VALUE: AVERAGE OF THE HIGH/LOW ON THE DATE THE SECURITIES WERE DONATED. (5) DATE OF THE GIFT: 02/23/2022 (6) PURPOSE: To support the business equality leadership program, the QTALK event and the Scholarship Program","c":"SALT LAKE CITY","s":"UT","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"LUMINARIES INC","a":100000,"p":"To support the mission of delivering survivorship solutions to the geographic and economically disadvantaged cancer survivors around the world","c":"NORTHFIELD","s":"IL","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"sunstone education foundation incorporated","a":200000,"p":"TO SUPPORT THE MISSION OF BRINGING TOGETHER TRADITIONAL AND NON-TRADITIONAL LATTER-DAY SAINTS","c":"salt lake city","s":"UT","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"PINKARD YOUTH INSTITUTE","a":10000,"p":"HBCU Tour","c":"OXNARD","s":"CA","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"BIRZEIT UNIVERSITY FUND","a":10000,"p":"Samira Khatib Tuffaha Endowed Scholarship","c":"ROYAL OAK","s":"MI","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2022,"r":"EQUALITY UTAH FOUNDATION","a":171000,"p":"Scholarship Program","c":"SALT LAKE CITY","s":"UT","e":"","o":"202333199349108233","record_type":"named_recipient"},{"y":2023,"r":"RUTH CHEATHAM FOUNDATION COLLEGE FUND","a":479000,"p":"SCHOLARSHIP SUPPORT","c":"DALLAS","s":"TX","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIA STATE UNIVERSITY CHANNEL ISLANDS","a":2258997,"p":"SCHOLARSHIP SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"CALIFORNIA STATE UNIVERSITY NORTHRIDGE FOUNDATION","a":26845,"p":"support the analysis of the CSUN Scholarship Program","c":"NORTHRIDGE","s":"CA","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"LUMINARIES INC","a":208000,"p":"To support the mission of delivering survivorship solutions to the geographic and economically disadvantaged cancer survivors around the world","c":"NORTHFIELD","s":"IL","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"sunstone education foundation incorporated","a":250000,"p":"TO SUPPORT THE MISSION OF BRINGING TOGETHER TRADITIONAL AND NON-TRADITIONAL LATTER-DAY SAINTS","c":"salt lake city","s":"UT","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"PINKARD YOUTH INSTITUTE","a":11000,"p":"HBCU Tour","c":"OXNARD","s":"CA","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"BIRZEIT UNIVERSITY FUND","a":10000,"p":"Samira Khatib Tuffaha Endowed Scholarship","c":"ROYAL OAK","s":"MI","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"MAYO CLINIC","a":10000,"p":"Center for Individualized Medicine","c":"ROCHESTER","s":"MN","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"BUILDON INC","a":40000,"p":"GENERAL OPERATING SUPPORT","c":"STAMFORD","s":"CT","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2023,"r":"VENTURA BREAKERS BASKETBALL CLUB","a":5000,"p":"GENERAL OPERATING SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202412709349100316","record_type":"named_recipient"},{"y":2024,"r":"RUTH CHEATHAM FOUNDATION COLLEGE FUND","a":1200000,"p":"SCHOLARSHIP SUPPORT","c":"DALLAS","s":"TX","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"ICAHN School of Medicine at mount Sinai","a":1000000,"p":"TO SUPPORT RESEARCH INTO NEW THERAPIES FOR NEURODEGENERATIVE DISEASE","c":"NEW YORK","s":"NY","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"Ventura Breakers Basketball Club","a":7500,"p":"GENERAL OPERATING SUPPORT","c":"VENTURA","s":"CA","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"LUMINARIES INC","a":250000,"p":"To support the mission of delivering survivorship solutions to the geographic and economically disadvantaged cancer survivors around the world","c":"NORTHFIELD","s":"IL","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"sunstone education foundation incorporated","a":250000,"p":"TO SUPPORT THE MISSION OF BRINGING TOGETHER TRADITIONAL AND NON-TRADITIONAL LATTER-DAY SAINTS","c":"salt lake city","s":"UT","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"buildon INC","a":40000,"p":"GENERAL OPERATING SUPPORT","c":"stamford","s":"CT","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"GoFundMeorg","a":100000,"p":"Hurricane Fund","c":"west hollywood","s":"CA","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"kakenya center for excellence","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"arlington","s":"VA","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"amref health africa inc","a":40000,"p":"GENERAL OPERATING SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"the brighton jones richer life foundation","a":25000,"p":"GENERAL OPERATING SUPPORT","c":"seattle","s":"WA","e":"","o":"202542869349100144","record_type":"named_recipient"},{"y":2024,"r":"CALIFORNIA STATE UNIVERSITY CHANNEL ISLANDS","a":508967,"p":"SCHOLARSHIP SUPPORT","c":"CAMARILLO","s":"CA","e":"","o":"202542869349100144","record_type":"named_recipient"}]};window.LEDGER_MERGES=["EQUALITY UTAH FOUNDATION","BUILDON","VENTURA BREAKERS BASKETBALL CLUB"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

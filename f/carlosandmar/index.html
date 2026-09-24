@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Carlos and Marguerite Mason&nbsp;Foundation</h1>
         <p class="hero-meta">Saint Louis, MO · EIN <code>58-1996431</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 18 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 18 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Carlos and Marguerite Mason Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.CARLOSANDM_DATA={"meta":{"foundation":"Carlos and Marguerite Mason Foundation","ein":"58-1996431","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":44,"grand_total":24512014,"tieout":{"2020":{"object_id":"202123159349103347","grant_count":10,"grant_sum":4652014,"line25_col_d":4652014,"status":"PASS"},"2021":{"object_id":"202203139349101650","grant_count":8,"grant_sum":4460000,"line25_col_d":4460000,"status":"PASS"},"2022":{"object_id":"202313149349100101","grant_count":9,"grant_sum":5700000,"line25_col_d":5700000,"status":"PASS"},"2023":{"object_id":"202412979349100801","grant_count":7,"grant_sum":4600000,"line25_col_d":4600000,"status":"PASS"},"2024":{"object_id":"202522839349101002","grant_count":10,"grant_sum":5100000,"line25_col_d":5100000,"status":"PASS"}}},"grants":[{"y":2020,"r":"THE UNIVERSITY OF GEORGIA","a":953795,"p":"SCHOLARSHIP","c":"ATHENS","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"GEORGIA HEALTH SCIENCES UNIVERSITY FOUNDATION","a":465000,"p":"KIDNEY TRANSPLANT PROGRAMS","c":"AUGUST","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"ENDURING HEARTS INC","a":50000,"p":"GENERAL OPERATING","c":"MARIETTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"ATLANTA RONALD MCDONALD HOUSE","a":25000,"p":"ADOPT A FAMILY PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"CHILDREN'S HEALTHCARE OF ATLANTA","a":150000,"p":"VARIOUS HEALTHCARE PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"GEORGIA TRANSPLANT FOUNDATION","a":2000000,"p":"FINANCIAL ASSISTANCE","c":"ATLANTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"EMORY UNIVERSITY","a":780000,"p":"SCHOLARSHIP","c":"ATLANTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"AUGUSTA UNIVERSITY","a":128219,"p":"SCHOLARSHIP","c":"AUGUSTA","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"JEFFREY CAMPBELL EVANS FOUNDATION INC","a":25000,"p":"GENERAL OPERATING","c":"BALL GROUND","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2020,"r":"ANGEL FLIGHT SOARS INC","a":75000,"p":"GENERAL OPERATING","c":"CHAMBLEE","s":"GA","e":"","o":"202123159349103347","record_type":"named_recipient"},{"y":2021,"r":"GEORGIA HEALTH SCIENCES","a":525000,"p":"KIDNEY TRANSPLANT PROGRAMS","c":"AUGUST","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"ENDURING HEARTS INC","a":120000,"p":"GENERAL OPERATING","c":"MARIETTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"PIEDMONT HEALTHCARE FOUNDATION INC","a":800000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"ATLANTA RONALD MCDONALD HOUSE","a":50000,"p":"ADOPT A FAMILY PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"CHILDREN'S HEALTHCARE OF ATLANTA","a":100000,"p":"VARIOUS HEALTHCARE PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"GEORGIA TRANSPLANT FOUNDATION","a":2000000,"p":"FINANCIAL ASSISTANCE","c":"ATLANTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"EMORY UNIVERSITY","a":790000,"p":"SCHOLARSHIP","c":"ATLANTA","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2021,"r":"ANGEL FLIGHT SOARS INC","a":75000,"p":"GENERAL OPERATING","c":"CHAMBLEE","s":"GA","e":"","o":"202203139349101650","record_type":"named_recipient"},{"y":2022,"r":"GEORGIA HEALTH SCIENCES","a":425000,"p":"KIDNEY TRANSPLANT PROGRAMS","c":"AUGUST","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"ENDURING HEARTS INC","a":120000,"p":"GENERAL SUPPORT","c":"MARIETTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"EMORY UNIVERSITY","a":525000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"PIEDMONT HEALTHCARE FOUNDATION INC","a":800000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"ATLANTA RONALD MCDONALD HOUSE","a":30000,"p":"ADOPT A FAMILY PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF GEORGIA RESEARCH FOUNDATIO","a":800000,"p":"GENERAL SUPPORT","c":"ATHENS","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"ANGEL FLIGHT SOARS INC","a":100000,"p":"GENERAL SUPPORT","c":"CHAMBLEE","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"CHILDREN'S HEALTHCARE OF ATLANTA","a":1000000,"p":"VARIOUS HEALTHCARE PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2022,"r":"GEORGIA TRANSPLANT FOUNDATION","a":1900000,"p":"FINANCIAL ASSISTANCE","c":"ATLANTA","s":"GA","e":"","o":"202313149349100101","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA HEALTH SCIENCES LIBRARY ASSOCIATION","a":325000,"p":"GENERAL OPERATING","c":"ATLANTA","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"ATLANTA RONALD MCDONALD HOUSE","a":30000,"p":"ADOPT A FAMILY PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF GEORGIA RESEARCH FOUNDATIO","a":650000,"p":"GENERAL SUPPORT","c":"ATHENS","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"ANGEL FLIGHT SOARS INC","a":123000,"p":"GENERAL SUPPORT","c":"CHAMBLEE","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"CHILDREN'S HEALTHCARE OF ATLANTA","a":1100000,"p":"VARIOUS HEALTHCARE PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA TRANSPLANT FOUNDATION","a":2300000,"p":"FINANCIAL ASSISTANCE","c":"ATLANTA","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2023,"r":"AUGUSTA UNIVERSITY FOUNDATION INC","a":72000,"p":"GENERAL OPERATING","c":"AUGUSTA","s":"GA","e":"","o":"202412979349100801","record_type":"named_recipient"},{"y":2024,"r":"CHILDRENS HEALTHCARE OF ATLANTA INC","a":500000,"p":"GENERAL OPERATING","c":"ATLANTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"THE GEORGIA HEALTH SCIENCES FOUNDATION","a":250000,"p":"GENERAL OPERATING","c":"NEW YORK","s":"NY","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"ENDURING HEARTS INC","a":100000,"p":"GENERAL OPERATING","c":"MARIETTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"EMORY UNIVERSITY","a":400000,"p":"GENERAL OPERATING","c":"ATLANTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"ATLANTA RONALD MCDONALD HOUSE CHARITIES","a":500000,"p":"ADOPT A FAMILY PROGRAM","c":"ATLANTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF GEORGIA RESEARCH FOUNDATIO","a":650000,"p":"GENERAL SUPPORT","c":"ATHENS","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"ANGEL FLIGHT SOARS INC","a":150000,"p":"GENERAL SUPPORT","c":"CHAMBLEE","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"CHILDRENS HEALTHCARE OF ATLANTA","a":350000,"p":"VARIOUS HEALTHCARE PROGRAMS","c":"ATLANTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"GEORGIA TRANSPLANT FOUNDATION INC","a":2050000,"p":"FINANCIAL ASSISTANCE","c":"ROSWELL","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"},{"y":2024,"r":"AUGUSTA UNIVERSITY FOUNDATION INC","a":150000,"p":"GENERAL OPERATING","c":"AUGUSTA","s":"GA","e":"","o":"202522839349101002","record_type":"named_recipient"}]};window.LEDGER_MERGES=["GEORGIA TRANSPLANT FOUNDATION","CHILDRENS HEALTHCARE OF ATLANTA"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"GEORGIA TRANSPLANT FOUNDATION":"Health & wellbeing","GEORGIA TRANSPLANT FOUNDATION INC":"Health & wellbeing","CHILDRENS HEALTHCARE OF ATLANTA":"Health & wellbeing"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

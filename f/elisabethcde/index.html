@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Elisabeth C Deluca&nbsp;Foundation</h1>
         <p class="hero-meta">Pompano Beach, FL · EIN <code>30-1214067</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 27 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 27 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Elisabeth C Deluca Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.ELISABETHC_DATA={"meta":{"foundation":"Elisabeth C Deluca Foundation","ein":"30-1214067","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2022,2023,2024],"grant_count":43,"grand_total":31028544,"tieout":{"2020":{"object_id":"202143219349100314","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2021":{"object_id":"202233339349100703","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202313189349101551","grant_count":10,"grant_sum":2730000,"line25_col_d":2730000,"status":"PASS"},"2023":{"object_id":"202530839349100518","grant_count":14,"grant_sum":13980500,"line25_col_d":13980500,"status":"PASS"},"2024":{"object_id":"202543219349100124","grant_count":19,"grant_sum":14318044,"line25_col_d":14318044,"status":"PASS"}}},"grants":[{"y":2022,"r":"BOYS & GIRLS CLUB OF MILFORD INCORPORATED","a":60000,"p":"BOYS & GIRLS CLUB OF MILFORD GENERAL AFTER SCHOOL PROGRAMMING","c":"MILFORD","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"FLORIDA ATLANTIC UNIVERSITY FOUNDATION INC","a":1000000,"p":"TRAINING A NURSING WORKFORCE TO MEET THE NEEDS OF BROWARD POPULATIONS","c":"BOCA RATON","s":"FL","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"GATEWAY COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"EXPANDING SUPPORT FOR CAREERS AND VOCATIONS","c":"NEW HAVEN","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"HOUSATONIC COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"PROVIDING VOCATIONAL SCHOLARSHIPS FOR CAREERS","c":"BRIDGEPORT","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"JAMIE A HULLEY ARTS FOUNDATION","a":50000,"p":"EXPANDING OPPORTUNITIES IN THE ARTS","c":"ORANGE","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"JUNIOR ACHIEVEMENT OF GREATER FAIRFIELD COUNTY","a":60000,"p":"DEVELOPING 21ST CENTURY CAREER READINESS SKILLS","c":"BRIDGEPORT","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"MERCY LEARNING CENTER OF BRIDGEPORT INCORPORATED","a":1000000,"p":"ENDOWMENT FOR SUSTAINABILITY","c":"BRIDGEPORT","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"NORWALK COMMUNITY COLLEGE FOUNDATION","a":150000,"p":"ALLIED HEALTH PROGRAMS FOR WORKFORCE DEVELOPMENT IN FAIRFIELD COUNTY","c":"NORWALK","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"SPECIAL OLYMPICS CONNECTICUT INC","a":50000,"p":"SUPPORTING SPECIAL OLYMPICS ATHLETES AND PARTICIPANTS","c":"HAMDEN","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2022,"r":"WAKEMAN MEMORIAL ASSOCIATION INC","a":60000,"p":"SMILOW-BURROUGHS CLUBHOUSE OUT OF SCHOOL PROGRAM","c":"FAIRFIELD","s":"CT","e":"","o":"202313189349101551","record_type":"named_recipient"},{"y":2023,"r":"BOYS & GIRLS CLUB OF MILFORD INCORPORATED","a":60000,"p":"BOYS & GIRLS CLUB OF MILFORD GENERAL AFTER SCHOOL PROGRAMMING","c":"MILFORD","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"GATEWAY COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"EXPANDING SUPPORT FOR CAREERS AND VOCATIONS","c":"NEW HAVEN","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"HOUSATONIC COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"PROVIDING VOCATIONAL SCHOLARSHIPS FOR CAREERS","c":"BRIDGEPORT","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"JUNIOR ACHIEVEMENT OF GREATER FAIRFIELD COUNTY","a":60000,"p":"DEVELOPING 21ST CENTURY CAREER READINESS SKILLS","c":"BRIDGEPORT","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"NORWALK COMMUNITY COLLEGE FOUNDATION","a":150000,"p":"ALLIED HEALTH PROGRAMS FOR WORKFORCE DEVELOPMENT IN FAIRFIELD COUNTY","c":"NORWALK","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"WAKEMAN MEMORIAL ASSOCIATION INC","a":60000,"p":"SMILOW-BURROUGHS CLUBHOUSE OUT OF SCHOOL PROGRAM","c":"BRIDGEPORT","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"YALE NEW HAVEN HOSPITAL","a":440500,"p":"FOR INNOVATION AND EXCELLENCE IN PATIENT CARE, TEACHING, RESEARCH AND SERVICE TO OUR COMMUNITIES","c":"NEW HAVEN","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"THE CONNECTICUT HOSPICE INC","a":100000,"p":"TO HELP PROVIDE CUSTOMIZED SERVICES AND THERAPIES THAT AREN'T COMPLETELY COVERED BY MEDICAID, MEDICARE, OR PRIVATE INSURANCE.","c":"BRANFORD","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF CONNECTICUT FOUNDATION INC","a":9800000,"p":"TO TRANSFORM LIVES BY PROVIDING RESOURCES FOR STUDENT SCHOLARSHIPS, FUNDING THE RESEARCH OF OUR RENOWNED SCHOLARS AND PROFESSORS, FACILITATING THE DISCOVERY OF INNOVATIVE TREATMENTS AND CURES FOR DISEASES, AND DRIVING ECONOMIC DEVELOPMENT THAT MAKES A POSITIVE DIFFERENCE THROUGHOUT CONNECTICUT","c":"STORRS","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"SAVE THE KID FUND INC","a":10000,"p":"TO ENRICH THE LIVES OF CHILDREN AND YOUNG ADULTS WITH DISABILITIES UP TO AGE 22 IN CONNECTICUT, RHODE ISLAND AND FLORIDA","c":"EAST LYME","s":"CT","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITY HEALTH CENTER NETWORK","a":100000,"p":"TO PROVIDE EXCELLENT, AFFORDABLE CARE FOR UNDERSERVED COMMUNITIES OF THE EAST BAY","c":"SAN LEANDRO","s":"CA","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"LIFELONG MEDICAL CARE","a":100000,"p":"TO PROVIDE HIGH-QUALITY HEALTH, DENTAL, AND SOCIAL SERVICES TO UNDERSERVED PEOPLE OF ALL AGES; CREATE MODELS OF CARE FOR THE ELDERLY, PEOPLE WITH DISABILITIES AND FAMILIES; AND ADVOCATE FOR CONTINUOUS IMPROVEMENTS IN THE HEALTH OF OUR COMMUNITIES.","c":"BERKELEY","s":"CA","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"PHI THETA KAPPA FOUNDATION","a":2000000,"p":"TO SECURE THE FINANCIAL RESOURCES TO SUPPORT THE VALUES, VISION, AND PRIORITIES OF PHI THETA KAPPA HONOR SOCIETY","c":"JACKSON","s":"MS","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2023,"r":"STRADA EDUCATION FOUNDATION INC","a":800000,"p":"TO EMPOWER ALL LEARNERS AND THOSE WHO SERVE THEM, AND TO PROVIDE CRITICAL RESOURCES, EDUCATIONAL SUPPORT, AND CAREER EXPERIENCES LEADING TO EQUITABLE EDUCATION AND EMPLOYMENT PATHWAYS.","c":"INDIANAPOLIS","s":"IN","e":"","o":"202530839349100518","record_type":"named_recipient"},{"y":2024,"r":"NURSING LEGACY INSTITUTE","a":100000,"p":"CHIEF NURSING OFFICER INSTITUTE SCHOLARSHIPS","c":"AUSTIN","s":"TX","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"CAREERVILLAGE INC","a":1143646,"p":"CAREERVILLAGE NURSING SLATE: AI CAREER COACH","c":"PALO ALTO","s":"CA","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"MERCY SHIPS","a":50000,"p":"MERCY SHIPS","c":"LINDALE","s":"TX","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"SPECIAL OLYMPICS CONNECTICUT INC","a":50000,"p":"SUPPORTING SPECIAL OLYMPICS ATHLETES AND PARTICIPANTS","c":"HAMDEN","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY HEALTH CENTER NETWORK INC","a":100000,"p":"COMMUNITY NURSE RESIDENCY MODEL SUPPORT - PHASE 1 AND 2","c":"SAN LEANDRO","s":"CA","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"LIFELONG MEDICAL CARE","a":300000,"p":"COMMUNITY NURSE RESIDENCY MODEL SUPPORT - PHASE 1 AND 2","c":"BERKELEY","s":"CA","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"YALE NEW HAVEN HOSPITAL","a":145000,"p":"SMILOW ONCOLOGY NURSING FUND SUPPORT FOR EDUCATION","c":"NEW HAVEN","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF CONNECTICUT FOUNDATION INCORPORATED","a":8300000,"p":"SCHOOL OF NURSING","c":"STORRS","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"JUNIOR ACHIEVEMENT OF GREATER FAIRFIELD COUNTY","a":60000,"p":"DEVELOPING 21ST CENTURY CAREER READINESS SKILLS","c":"SHELTON","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"WGU CORPORATION","a":1000000,"p":"SOUTHEAST REGION NURSING LAB","c":"SALT LAKE CITY","s":"UT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"SPECIAL OLYMPICS FLORIDA INC","a":200000,"p":"HELPING ATHLETES WITH IDD IMPROVE HEALTH OUTCOMES","c":"CLERMONT","s":"FL","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"HOUSATONIC COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"PROVIDING VOCATIONAL SCHOLARSHIPS FOR CAREERS","c":"BRIDGEPORT","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF MILFORD INCORPORATED","a":60000,"p":"BOYS & GIRLS CLUB OF MILFORD GENERAL AFTER SCHOOL PROGRAMMING","c":"MILFORD","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"ART PREVAILS PROJECT","a":43000,"p":"EXPANDING ACCESS TO THE LITERARY AND PERFORMING ARTS","c":"FORT LAUDERDALE","s":"FL","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"WAKEMAN MEMORIAL ASSOCIATION INC","a":60000,"p":"SMILOW-BURROUGHS CLUBHOUSE OUT OF SCHOOL PROGRAM","c":"BRIDGEPORT","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"FUTURO HEALTH","a":1561398,"p":"DEVELOPING THE ALLIED HEALTH AND NURSING WORKFORCE IN CONNECTICUT AND FLORIDA","c":"SACRAMENTO","s":"CA","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"GATEWAY COMMUNITY COLLEGE FOUNDATION INC","a":150000,"p":"EXPANDING SUPPORT FOR CAREERS AND VOCATIONS","c":"NEW HAVEN","s":"CT","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"PHI THETA KAPPA FOUNDATION","a":550000,"p":"DELUCA ADN NURSING SCHOLARSHIP","c":"JACKSON","s":"MS","e":"","o":"202543219349100124","record_type":"named_recipient"},{"y":2024,"r":"STRADA COLLABORATIVE INC","a":295000,"p":"FUTURE OF THE SOUTH FLORIDA WORKFORCE STORYTELLING PROJECT","c":"INDIANAPOLIS","s":"IN","e":"","o":"202543219349100124","record_type":"named_recipient"}]};window.LEDGER_MERGES=["COMMUNITY HEALTH CENTER NETWORK"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

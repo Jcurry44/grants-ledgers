@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Boeing Company Charitable&nbsp;Trust</h1>
         <p class="hero-meta">Chicago, IL · EIN <code>91-6056738</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 49 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 49 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2021–2025. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Boeing Company Charitable Trust. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.BOEINGCOMP_DATA={"meta":{"foundation":"Boeing Company Charitable Trust","ein":"91-6056738","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":58,"grand_total":23256728,"tieout":{"2021":{"object_id":"202231329349103423","grant_count":14,"grant_sum":5355000,"line25_col_d":5355000,"status":"PASS"},"2022":{"object_id":"202321849349100217","grant_count":9,"grant_sum":5223728,"line25_col_d":5223728,"status":"PASS"},"2023":{"object_id":"202401659349100725","grant_count":8,"grant_sum":3183000,"line25_col_d":3183000,"status":"PASS"},"2024":{"object_id":"202522259349101002","grant_count":15,"grant_sum":4400000,"line25_col_d":4400000,"status":"PASS"},"2025":{"object_id":"202631289349102948","grant_count":12,"grant_sum":5095000,"line25_col_d":5095000,"status":"PASS"}}},"grants":[{"y":2021,"r":"AMERICAN NATIONAL RED CROSS-HARVEY","a":1105000,"p":"GENERAL","c":"CHICAGO","s":"IL","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"SAMARITAN'S PURSE","a":50000,"p":"GENERAL","c":"Carol Stream","s":"IL","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"COMMONWEALTH OF KENTUCKY","a":200000,"p":"GENERAL","c":"Frankfort","s":"KY","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"HUMANE SOCIETY OF THE US","a":50000,"p":"GENERAL","c":"Washington","s":"DC","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"AMERICARES FOUNDATION INC","a":200000,"p":"GENERAL","c":"Stamford","s":"CT","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"COMBINED ARMS","a":50000,"p":"GENERAL","c":"Houston","s":"TX","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"GREATER NEW ORLEANS FOUNDATION","a":100000,"p":"GENERAL","c":"New Orleans","s":"LA","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"BAYOU COMMUNITY FOUNDATION","a":100000,"p":"GENERAL","c":"Houma","s":"LA","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"FOOD BANK OF SOUTH JERSEY","a":75000,"p":"GENERAL","c":"Pennsauken","s":"NJ","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY FOOD BANK INC","a":75000,"p":"GENERAL","c":"Fort Worth","s":"TX","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"WORLD CENTRAL KITCHEN INC","a":100000,"p":"GENERAL","c":"Washington","s":"DC","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"WASHINGTON STATE","a":2500000,"p":"GENERAL","c":"Seattle","s":"WA","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"FEEDING AMERICA","a":250000,"p":"GENERAL","c":"Chicago","s":"IL","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2021,"r":"COOPERATIVE FOR ASSISTANCE AND RELIEF EVERYWHERE (CARE)","a":500000,"p":"GENERAL","c":"Washington","s":"DC","e":"","o":"202231329349103423","record_type":"named_recipient"},{"y":2022,"r":"CARE","a":1100000,"p":"GENERAL","c":"ATLANTA","s":"GA","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"AMERICAN NATIONAL RED CROSS","a":550000,"p":"GENERAL","c":"WASHINGTON","s":"DC","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"GLOBALGIVING FOUNDATION","a":100000,"p":"GENERAL","c":"WASHINGTON","s":"DC","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"AMERICARES FOUNDATION INC","a":750000,"p":"GENERAL","c":"Stamford","s":"CT","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"FEEDING AMERICA","a":450000,"p":"GENERAL","c":"Chicago","s":"IL","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"KIDSAVE INTERNATIONAL INC","a":100000,"p":"GENERAL","c":"Culver City","s":"CA","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"SALVATION ARMY WORLD SERVICE OFFICE","a":73728,"p":"GENERAL","c":"Alexandria","s":"VA","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"WASHINGTON STEM CENTER","a":2000000,"p":"GENERAL","c":"Seattle","s":"WA","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2022,"r":"CERDAS FOUNDATION","a":100000,"p":"GENERAL","c":"Seattle","s":"WA","e":"","o":"202321849349100217","record_type":"named_recipient"},{"y":2023,"r":"CARE","a":150000,"p":"GENERAL","c":"ATLANTA","s":"GA","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN NATIONAL RED CROSS","a":1608000,"p":"GENERAL","c":"WASHINGTON","s":"DC","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"SAMARITAN'S PURSE","a":50000,"p":"GENERAL","c":"Boone","s":"NC","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"FEEDING AMERICA","a":100000,"p":"GENERAL","c":"Chicago","s":"IL","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN FRIENDS OF MAGEN DAVID ADOM","a":500000,"p":"GENERAL","c":"New York","s":"NY","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN FRIENDS OF NATAL","a":500000,"p":"GENERAL","c":"New York","s":"NY","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"COMMUNITIES FOUNDATION OF TEXAS","a":25000,"p":"GENERAL","c":"Dallas","s":"TX","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2023,"r":"HAWAII COMMUNITY FOUNDATION","a":250000,"p":"GENERAL","c":"HONOLULU","s":"HI","e":"","o":"202401659349100725","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN NATIONAL RED CROSS","a":1025000,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"BRAZIL FOUNDATION","a":200000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"CARE","a":100000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"THE BLACKBAUD GIVING FUND","a":1500000,"p":"GENERAL SUPPORT","c":"CHARLESTON","s":"SC","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"COMBINED ARMS","a":75000,"p":"GENERAL SUPPORT","c":"Houston","s":"TX","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"LOWCOUNTRY FOOD BANK","a":100000,"p":"GENERAL SUPPORT","c":"NORTH CHARLESTON","s":"SC","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"NORTH CAROLINA COMMUNITY FOUNDATION","a":250000,"p":"GENERAL SUPPORT","c":"RALEIGH","s":"NC","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"NORTHSHORE COMMUNITY FOUNDATION","a":100000,"p":"GENERAL SUPPORT","c":"COVINGTON","s":"LA","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"PRECINT2GETHER INC","a":50000,"p":"GENERAL SUPPORT","c":"WEBSTER","s":"TX","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"HOUSTON FOOD BANK","a":75000,"p":"GENERAL SUPPORT","c":"HOUSTON","s":"TX","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"TSCRA DISASTER RELIEF FUND","a":175000,"p":"GENERAL SUPPORT","c":"FORT WORTH","s":"TX","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"THE COMMUNITY FOUNDATION OF SOUTHERN NEW MEXICO","a":50000,"p":"GENERAL SUPPORT","c":"LAS CRUCES","s":"NM","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"UNITED FOOD BANK","a":100000,"p":"GENERAL SUPPORT","c":"MESA","s":"AZ","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"FOOD LIFELINE","a":100000,"p":"GENERAL SUPPORT","c":"SEATTLE","s":"WA","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2024,"r":"FLORIDA DISASTER FUND","a":500000,"p":"GENERAL SUPPORT","c":"TALLAHASSEE","s":"FL","e":"","o":"202522259349101002","record_type":"named_recipient"},{"y":2025,"r":"GREATER WASHINGTON COMMUNITY FDN","a":30000,"p":"AA5342 AND ARMY BLACK","c":"WASHINGTON","s":"DC","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"LOS ANGELES FIRE DEPARTAMENT FOUNDATION","a":100000,"p":"CA WILDFIRE RELIEF EFFORTS","c":"LOS ANGELES","s":"CA","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"THE SALVATION ARMY - MIDLAND DIVISION","a":100000,"p":"MISSOURI TORNADO RELIEF","c":"ST LOUIS","s":"MO","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"URBAN LEAGUE OF METROPOLITAN ST LOUIS INC","a":100000,"p":"TORNADO DISASTER RELIEF","c":"ST LOUIS","s":"MO","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"WICHITA FOUNDATION","a":15000,"p":"AA5342 AND ARMY BLACK","c":"WICHITA","s":"KS","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN RED CROSS KENTUCKY REGION","a":700000,"p":"DISASTER RELIEF FOR","c":"LOUISVILLE","s":"KY","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"THE SALVATION ARMY METROPOLITAN AREA","a":100000,"p":"KERR COUNTY FLOOD RELIEF","c":"KERRVILLE","s":"TX","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION OF THE TEXAS HILL COUNTRY","a":100000,"p":"KERR COUNTY FLOOD RELIEF","c":"KERRVILLE","s":"TX","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION OF SNOHOMISH COUNTY","a":250000,"p":"FLOOD RELIEFE IN PUGET","c":"EVERETT","s":"WA","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"CALIFORNIA SCIENCE CENTER FOUNDATION","a":3100000,"p":"ENDEAVOUR LACAMPAIGN","c":"LOS ANGELES","s":"CA","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"LOS ANGELES REGIONAL FOOD BANK","a":200000,"p":"CA WILDFIRE RELIEF EFFORTS","c":"VERNON","s":"CA","e":"","o":"202631289349102948","record_type":"named_recipient"},{"y":2025,"r":"CALIFORNIA COMMUNITY FOUNDATION","a":300000,"p":"CA WILDFIRE RELIEF EFFORTS","c":"LOS ANGELES","s":"CA","e":"","o":"202631289349102948","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"COMBINED ARMS":"Community & economic development","GREATER NEW ORLEANS FOUNDATION":"Nonprofit capacity & transitions","BAYOU COMMUNITY FOUNDATION":"Community & economic development","FEEDING AMERICA":"Basic needs & response","AMERICAN NATIONAL RED CROSS":"Basic needs & response","COMMUNITIES FOUNDATION OF TEXAS":"Nonprofit capacity & transitions","HAWAII COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","GREATER WASHINGTON COMMUNITY FDN":"Nonprofit capacity & transitions","WICHITA FOUNDATION":"Nonprofit capacity & transitions","COMMUNITY FOUNDATION OF SNOHOMISH COUNTY":"Nonprofit capacity & transitions","CALIFORNIA SCIENCE CENTER FOUNDATION":"Arts & culture"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Wilson-Oconnor Family&nbsp;Foundation</h1>
         <p class="hero-meta">Reston, VA · EIN <code>92-0941333</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 22 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 22 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2022–2025. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -385,7 +399,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Wilson-Oconnor Family Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -419,7 +433,7 @@
 <script>
 window.WILSONOCON_DATA={"meta":{"foundation":"Wilson-Oconnor Family Foundation","ein":"92-0941333","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024,2025],"grant_count":32,"grand_total":9162840,"tieout":{"2022":{"object_id":"202312689349100316","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2023":{"object_id":"202420819349100212","grant_count":1,"grant_sum":150000,"line25_col_d":150000,"status":"PASS"},"2024":{"object_id":"202500929349100630","grant_count":11,"grant_sum":4500000,"line25_col_d":4500000,"status":"PASS"},"2025":{"object_id":"202611409349100806","grant_count":20,"grant_sum":4512840,"line25_col_d":4512840,"status":"PASS"}}},"grants":[{"y":2023,"r":"FIDELITY CHARITABLE","a":150000,"p":"FOR THE BARBARA AND ED WILSON CHARITABLE FUND","c":"BOSTON","s":"MA","e":"","o":"202420819349100212","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN RED CROSS CO CDS GLOBAL","a":250000,"p":"GENERAL SUPPORT FOR U.S. RELIEF","c":"BOONE","s":"IA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"BOCA GRANDE HEALTH CLINIC FOUNDATION INC","a":500000,"p":"TO SUPPORT THE BOCA GRANDE HEALTH CLINIC \"CLINIC OF THE FUTURE\" CAPITAL CAMPAIGN","c":"BOCA GRANDE","s":"FL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC RELIEF SERVICES INC","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"BALTIMORE","s":"MD","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"CHICAGO SKY CARES","a":100000,"p":"GENERAL SUPPORT","c":"CHICAGO","s":"IL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FIDELITY CHARITABLE","a":1200000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FITCHBURG STATE UNIVERSITY FOUNDATION","a":100000,"p":"FOR THE COMMUNITY LITERACY CENTER PROGRAM","c":"FITCHBURG","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF BOCA GRANDE COMMUNITY CENTER INC","a":500000,"p":"TO SUPPORT THE COMMUNITY CENTER OF BOCA GRANDE RENAISSANCE FUND","c":"BOCA GRANDE","s":"FL","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"HUMAN RIGHTS WATCH INC","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"NEW YORK","s":"NY","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"PROTECT DEMOCRACY PROJECT","a":100000,"p":"FOR EDUCATIONAL WORK ABOUT PROTECTING DEMOCRACY","c":"WASHINGTON","s":"DC","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"SAVE THE CHILDREN","a":1000000,"p":"TO SUPPORT THE CHILDREN'S EMERGENCY FUND","c":"FAIRFIELD","s":"CT","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2024,"r":"THE DYSLEXIA FOUNDATION INC","a":250000,"p":"$100,000 GENERAL, $100,000 WILL BAKER GRATITUDE FUND, $150,000 WILL BAKER SYMPOSIUM","c":"BOSTON","s":"MA","e":"","o":"202500929349100630","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN INDEPENDENCE MUSEUM","a":121090,"p":"250 FOR 250 CAPITAL COMPAIGN","c":"EXETER","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"AMERICAN RED CROSS CO CDS GLOBAL","a":250000,"p":"GENERAL SUPPORT FOR U.S. RELIEF","c":"BOONE","s":"IA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"ATKINSON HISTORICAL SOCIETY","a":50000,"p":"ATKINSON CENTER SCHOOL HISTORIC RESTORATION PROJECT","c":"ATKINSON","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"CATHOLIC RELIEF SERVICES","a":250000,"p":"GENERAL SUPPORT IN NORTH AMERICA","c":"BALTIMORE","s":"MD","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"CHICAGO SKY CARES","a":100000,"p":"GENERAL SUPPORT","c":"CHICAGO","s":"IL","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"DREXEL UNIVERSITY","a":691750,"p":"STRUCTURED LITERACY AND EDUCATIONAL LEADERSHIP HUB","c":"PHILADELPHIA","s":"PA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FIDELITY CHARITABLE","a":1000000,"p":"GENERAL SUPPORT","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FITCHBURG STATE UNIVERSITY FOUNDATION","a":100000,"p":"FOR THE COMMUNITY LITERACY CENTER PROGRAM","c":"FITCHBURG","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"FRIENDS OF THE NEW DURHAM 1772 MEETINGHOUSE","a":100000,"p":"1772 MEETINGHOUSE HISTORIC RESTORATION PROJECT","c":"NEW DURHAM","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"HUMAN RIGHTS WATCH","a":250000,"p":"IMMIGRANTS' RIGHTS AND BORDER POLICY IN THE UNITED STATES","c":"NEW YORK","s":"NY","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"INTERNATIONAL DYSLEXIA ASSOCIATION","a":100000,"p":"TO SUPPORT THE STRUCTURED LITERACY BLUEPRINT CAMPAIGN","c":"PIKESVILLE","s":"MD","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"LEAGUE OF WOMEN FOR COMMUNITY SERVICE","a":50000,"p":"LEAGUE OF WOMEN FOR COMMUNITY SERVICE HISTORIC RENOVATION PROJECT","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"MARY AND ELIZA FREEMAN CENTER FOR HISTORY AND COMMUNITY","a":100000,"p":"MARY AND ELIZA FREEMAN HOUSES HISTORIC RENOVATION PROJECT","c":"TRUMBULL","s":"CT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"MASCOMA VALLEY PRESERVATION","a":100000,"p":"GRAFTON CENTER MEETINGHOUSE HISTORIC RENOVATION PROJECT","c":"GRAFTON","s":"NH","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"NEWPORT HISTORICAL SOCIETY","a":100000,"p":"WANTON-LYMAN-HAZARD HOUSE HISTORIC RENOVATION PROJECT","c":"NEWPORT","s":"RI","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"NORWICH COMMUNITY COLLABORATIVE","a":150000,"p":"NORWICH GRANGE HALL HISTORIC RENOVATION PROJECT","c":"NORWICH","s":"VT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"PROTECT DEMOCRACY PROJECT","a":200000,"p":"FOR EDUCATIONAL WORK ABOUT PROTECTING DEMOCRACY","c":"WASHINGTON","s":"DC","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"SAVE THE CHILDREN","a":600000,"p":"TO SUPPORT THE CHILDREN'S EMERGENCY FUND AND SAVE THE CHILDREN ACTION NETWORK (SCAN)","c":"FAIRFIELD","s":"CT","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"THE DYSLEXIA FOUNDATION INC","a":100000,"p":"WILL BAKER GRATITUDE ENDOWMENT FUND","c":"BOSTON","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"},{"y":2025,"r":"TOWN OF LEICESTER","a":100000,"p":"RESTORATION OF THE MAY HOUSE IN LEICESTER, MA","c":"LEICESTER","s":"MA","e":"","o":"202611409349100806","record_type":"named_recipient"}]};window.LEDGER_MERGES=["CATHOLIC RELIEF SERVICES","HUMAN RIGHTS WATCH"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

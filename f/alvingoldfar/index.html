@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Alvin Goldfarb&nbsp;Foundation</h1>
         <p class="hero-meta">Saint Louis, MO · EIN <code>43-1621937</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 15 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 15 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -399,7 +413,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Alvin Goldfarb Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -433,7 +447,7 @@
 <script>
 window.ALVINGOLDF_DATA={"meta":{"foundation":"Alvin Goldfarb Foundation","ein":"43-1621937","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":28,"grand_total":49517694,"tieout":{"2020":{"object_id":"202213129349101496","grant_count":9,"grant_sum":8879146,"line25_col_d":8879146,"status":"PASS"},"2021":{"object_id":"202203189349106550","grant_count":5,"grant_sum":6670142,"line25_col_d":6670142,"status":"PASS"},"2022":{"object_id":"202321599349100317","grant_count":4,"grant_sum":6804350,"line25_col_d":6804350,"status":"PASS"},"2023":{"object_id":"202431659349100523","grant_count":3,"grant_sum":13385751,"line25_col_d":13385751,"status":"PASS"},"2024":{"object_id":"202542329349100504","grant_count":7,"grant_sum":13778305,"line25_col_d":13778305,"status":"PASS"}}},"grants":[{"y":2020,"r":"North Side Community School","a":25000,"p":"TransportationSupport","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Community Impact Network","a":5940008,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Helping Hand Me Downs","a":17494,"p":"Support mothers and their children","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Grace Hill","a":16001,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Equity Homes","a":2361231,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Big Brothers Big Sisters","a":100000,"p":"Mentoring Program","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"The Equity Network","a":228412,"p":"Management Services","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"The Opportunity Trust","a":50000,"p":"Helping children in Normandy Schools Collaborative","c":"Saint Louis","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2020,"r":"Wyman Center","a":141000,"p":"Normandy Schools Collaborative TPO Program Support","c":"Eureka","s":"MO","e":"","o":"202213129349101496","record_type":"named_recipient"},{"y":2021,"r":"North Side Community School","a":25000,"p":"TransportationSupport","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Community Impact Network","a":4312594,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Helping Hand Me Downs","a":9696,"p":"Support mothers and their children","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Grace Hill","a":15850,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2021,"r":"Equity Homes","a":2307002,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202203189349106550","record_type":"named_recipient"},{"y":2022,"r":"Community Impact Network","a":3597189,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"Grace Hill","a":15850,"p":"Support mothers andtheir children","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"Equity Homes","a":3091311,"p":"Community Building &Economic Development","c":"Saint Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2022,"r":"The Equity Network","a":100000,"p":"Payroll and Managementfor Equity Homes and Community Impact Netword","c":"St Louis","s":"MO","e":"","o":"202321599349100317","record_type":"named_recipient"},{"y":2023,"r":"Community Impact Network","a":11800058,"p":"Grants Coordination and distribution","c":"Saint Louis","s":"MO","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2023,"r":"Grace Hill","a":85693,"p":"Development ofWomen's Businesses","c":"Saint Louis","s":"MO","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2023,"r":"Historical Assn of South Haven","a":1500000,"p":"HistoricalPreservation","c":"South Haven","s":"MI","e":"","o":"202431659349100523","record_type":"named_recipient"},{"y":2024,"r":"Community Impact Network","a":11413425,"p":"Grants Coordination and distribution48 new home infrastructure","c":"Saint Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Grace Hill","a":2963,"p":"Development ofWomens Businesses","c":"Saint Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Beyond Housing Capital Fund","a":700000,"p":"Funds to purchase lotsfor development ofsingle family homes","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"STaR for Early Childhood","a":2117,"p":"Early ChildhoodEducators-","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Beyond Housing","a":154400,"p":"New HomesIniative","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"Washington University","a":1500000,"p":"Mitra ResearchLab computationalbiology research","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"},{"y":2024,"r":"The Legacy Center","a":5400,"p":"Youth EducationCenter","c":"St Louis","s":"MO","e":"","o":"202542329349100504","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"Community Impact Network":"Nonprofit capacity & transitions","Helping Hand Me Downs":"Basic needs & response","The Equity Network":"Education & youth"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Glenstone&nbsp;Foundation</h1>
         <p class="hero-meta">Potomac, MD · EIN <code>20-5938416</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 30 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 30 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Glenstone Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.GLENSTONEF_DATA={"meta":{"foundation":"Glenstone Foundation","ein":"20-5938416","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":50,"grand_total":38227538,"tieout":{"2020":{"object_id":"202113029349100321","grant_count":10,"grant_sum":5280455,"line25_col_d":5280455,"status":"PASS"},"2021":{"object_id":"202203089349101505","grant_count":10,"grant_sum":8510012,"line25_col_d":8510012,"status":"PASS"},"2022":{"object_id":"202323039349100752","grant_count":10,"grant_sum":6320299,"line25_col_d":6320299,"status":"PASS"},"2023":{"object_id":"202423169349101402","grant_count":13,"grant_sum":2824691,"line25_col_d":2824691,"status":"PASS"},"2024":{"object_id":"202533079349101263","grant_count":7,"grant_sum":15292081,"line25_col_d":15292081,"status":"PASS"}}},"grants":[{"y":2020,"r":"Foundation for Contemporary Arts","a":75000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Manna Food Center","a":3184,"p":"FEED THE HUNGRY","c":"Silver Spring","s":"MD","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Mount Desert 365","a":490497,"p":"GENERAL SUPPORT","c":"Northeast Harbor","s":"ME","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"United Way of National Capital Area","a":4730,"p":"GENERAL SUPPORT","c":"Washington","s":"DC","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Anyone Can Fly Foundation Inc","a":5000,"p":"SUPPORT THE ARTS","c":"Englewood","s":"NJ","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"National Gallery of Art","a":4547044,"p":"SUPPORT THE ARTS","c":"Washington","s":"DC","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"United States Artists","a":100000,"p":"SUPPORT THE ARTS","c":"Chicago","s":"IL","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Washington Project for the Arts","a":25000,"p":"SUPPORT THE ARTS","c":"Washington","s":"DC","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Alliance for Global Justice Corp","a":15000,"p":"GENERAL SUPPORT","c":"Tucson","s":"AZ","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2020,"r":"Museum of Contemporary Art","a":15000,"p":"SUPPORT THE ARTS","c":"Chicago","s":"IL","e":"","o":"202113029349100321","record_type":"named_recipient"},{"y":2021,"r":"Foundation for Contemporary Arts","a":50000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Manna Food Center","a":2400,"p":"FEED THE HUNGRY","c":"Silver Spring","s":"MD","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Food and Friends Inc","a":1600,"p":"FEED THE HUNGRY","c":"Washington","s":"DC","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"United Way of National Capital Area","a":6012,"p":"GENERAL SUPPORT","c":"Washington","s":"DC","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Metropolitan Museum of Art","a":50000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"National Gallery of Art","a":3150000,"p":"SUPPORT THE ARTS","c":"Washington","s":"DC","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Hammer Museum","a":15000,"p":"SUPPORT THE ARTS","c":"Los Angeles","s":"CA","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Shelburne Museum","a":10000,"p":"SUPPORT THE ARTS","c":"Shelburne","s":"VT","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Scotland AME Church","a":225000,"p":"GENERAL SUPPORT","c":"Potomac","s":"MD","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2021,"r":"Studio Museum Harlem","a":5000000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202203089349101505","record_type":"named_recipient"},{"y":2022,"r":"Foundation for Contemporary Arts","a":50000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"City Kids Wilderness Project","a":4068,"p":"FEED THE HUNGRY","c":"Washington","s":"DC","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Anyone Can Fly Foundation Inc","a":17635,"p":"FEED THE HUNGRY","c":"Englewood","s":"NJ","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"United Way of National Capital Area","a":6986,"p":"GENERAL SUPPORT","c":"Washington","s":"DC","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Ars Nova Workshop Inc","a":200,"p":"SUPPORT THE ARTS","c":"Philadelphia","s":"PA","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"National Gallery of Art","a":727500,"p":"SUPPORT THE ARTS","c":"Washington","s":"DC","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Audubon Naturalist Society of Central Atlantic States","a":70,"p":"SUPPORT THE ARTS","c":"Chevy Chase","s":"MD","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Shelburne Museum","a":10000,"p":"SUPPORT THE ARTS","c":"Shelburne","s":"VT","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Scotland AME Church","a":503840,"p":"GENERAL SUPPORT","c":"Potomac","s":"MD","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2022,"r":"Studio Museum Harlem","a":5000000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202323039349100752","record_type":"named_recipient"},{"y":2023,"r":"Foundation for Contemporary Arts","a":144000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Universities at Shady Grove Foundation","a":5000,"p":"GENERAL SUPPORT","c":"Rockville","s":"MD","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Greater Washington Community Foundation","a":100,"p":"FEED THE HUNGRY","c":"Washington","s":"DC","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"United Way of National Capital Area","a":7969,"p":"GENERAL SUPPORT","c":"Washington","s":"DC","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Myriad USA Inc","a":32622,"p":"GENERAL SUPPORT","c":"NY","s":"NY","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"National Gallery of Art","a":1080000,"p":"SUPPORT THE ARTS","c":"Washington","s":"DC","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Storm King Art Center","a":100000,"p":"SUPPORT THE ARTS","c":"New Windsor","s":"NY","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Shelburne Museum","a":10000,"p":"SUPPORT THE ARTS","c":"Shelburne","s":"VT","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Scotland AME Church","a":775000,"p":"GENERAL SUPPORT","c":"Potomac","s":"MD","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Bethesda Community Baseball Club","a":25000,"p":"SUPPORT THE ARTS","c":"Rockville","s":"MD","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Contemporary Arts Center","a":20000,"p":"SUPPORT THE ARTS","c":"Houston","s":"TX","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Solomon Guggenheim Foundation","a":25000,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2023,"r":"Baltimore Museum of Art","a":600000,"p":"SUPPORT THE ARTS","c":"Baltimore","s":"MD","e":"","o":"202423169349101402","record_type":"named_recipient"},{"y":2024,"r":"AMERICAN FUND FOR THE SOUTHBANK CENTRE","a":50252,"p":"SUPPORT THE ARTS","c":"NY","s":"NY","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL FOUNDATION FOR ADVANCEMENT OF THE ARTS","a":50000,"p":"GENERAL SUPPORT","c":"MIAMI","s":"FL","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"UNITED WAY OF NATIONAL CAPITAL AREA","a":10829,"p":"GENERAL SUPPORT","c":"WASHINGTON","s":"DC","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL GALLERY OF ART","a":1800000,"p":"SUPPORT THE ARTS","c":"WASHINGTON","s":"DC","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"SHELBURNE MUSEUM","a":10000,"p":"SUPPORT THE ARTS","c":"SHELBURNE","s":"VT","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"SCOTLAND AME CHURCH","a":1500000,"p":"GENERAL SUPPORT","c":"POTOMAC","s":"MD","e":"","o":"202533079349101263","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION TO COMBAT ANTISEMITISM","a":11871000,"p":"COMMUNITY SUPPORT ADDRESS INEQUALITY","c":"FOXBOROUGH","s":"MA","e":"","o":"202533079349101263","record_type":"named_recipient"}]};window.LEDGER_MERGES=["UNITED WAY OF NATIONAL CAPITAL AREA","NATIONAL GALLERY OF ART","SHELBURNE MUSEUM","SCOTLAND AME CHURCH"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

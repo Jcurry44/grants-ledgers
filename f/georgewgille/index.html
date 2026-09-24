@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>George W Gillemot&nbsp;Foundation</h1>
         <p class="hero-meta">Reno, NV · EIN <code>43-2058994</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 15 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 15 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by George W Gillemot Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.GEORGEWGIL_DATA={"meta":{"foundation":"George W Gillemot Foundation","ein":"43-2058994","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":25,"grand_total":5212862,"tieout":{"2020":{"object_id":"202112859349100706","grant_count":2,"grant_sum":18002,"line25_col_d":18002,"status":"PASS"},"2021":{"object_id":"202223079349100527","grant_count":2,"grant_sum":4501,"line25_col_d":4501,"status":"PASS"},"2022":{"object_id":"202323149349101822","grant_count":6,"grant_sum":39500,"line25_col_d":39500,"status":"PASS"},"2023":{"object_id":"202433069349101028","grant_count":8,"grant_sum":1321634,"line25_col_d":1321634,"status":"PASS"},"2024":{"object_id":"202503189349104780","grant_count":7,"grant_sum":3829225,"line25_col_d":3829225,"status":"PASS"}}},"grants":[{"y":2020,"r":"FERRELLGAS PARTNERS LP PASSTHROUGH CHARITABLE CONTRIBUTION","a":2,"p":"CHARITABLE CONTRIBUTION PASSTHROUGH PARTNERSHIP INVESTMENT","c":"LIBERTY","s":"MO","e":"","o":"202112859349100706","record_type":"named_recipient"},{"y":2020,"r":"BISHOP MANOGUE HIGH SCHOOL","a":18000,"p":"PROVIDE SUPPORT FOR LOCAL CATHOLIC MINISTIRES AND YOUTH EDUCATION","c":"RENO","s":"NV","e":"","o":"202112859349100706","record_type":"named_recipient"},{"y":2021,"r":"PATHWAYS TO AVIATION","a":4500,"p":"PROVIDE SOLUTIONS TO THE AVIATION INDUSTRY WORKFORCE NEEDS BY INFORMING, INSPIRING AND ENGAGING ITS FUTURE LABOR FORCE","c":"RENO","s":"NV","e":"","o":"202223079349100527","record_type":"named_recipient"},{"y":2021,"r":"FERRELLGAS PARTNERS LP PASSTHROUGH CHARITABLE CONTRIBUTION","a":1,"p":"CHARITABLE CONTRIBUTION PASSTHROUGH PARTNERSHIP INVESTMENT","c":"LIBERTY","s":"MO","e":"","o":"202223079349100527","record_type":"named_recipient"},{"y":2022,"r":"NEVADA HUMANE SOCIETY","a":4500,"p":"PROMOTING ANIMAL WELFARE WHILE FINDING HOMES, AND PROVIDING CARE FOR HOMELESS PETS IN NORTHERN NEVADA","c":"RENO","s":"NV","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2022,"r":"PATHWAYS TO AVIATION","a":5000,"p":"PROVIDE SOLUTIONS TO THE AVIATION INDUSTRY WORKFORCE NEEDS BY INFORMING, INSPIRING AND ENGAGING ITS FUTURE LABOR FORCE","c":"RENO","s":"NV","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2022,"r":"GUIDE DOGS FOR THE BLIND","a":10000,"p":"HARNESS THE POWER OF PARTNERSHIPS, CONNECTING PEOPLE, DOGS, AND COMMUNITIES TO TRANSFORM THE LIVES OF INDIVIDUALS WITH VISUAL IMPAIRMENTS","c":"SAN RAFAEL","s":"CA","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2022,"r":"BISHOP MANOGUE CATHOLIC HIGH SCHOOL","a":10000,"p":"A CO-EDUCATIONAL HIGH SCHOOL IN PARTNERSHIP WITH PARENTS IS COMMITTED TO FOSTERING CHRISTIAN VALUES, ACADEMIC EXCELLENCE, AND LIFE-LONG SERVICE IN A FAITH-CENTERED COMMUNITY","c":"RENO","s":"NV","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF NEVADA RENO FOUNDATION","a":5000,"p":"THE FOUNDATION RECEIVES, INVESTS AND ADMINISTERS FUNDS TO BENEFIT THE UNIVERSITY OF NEVADA, RENO, WHILE HONORING THE PHILANTHROPIC INTENT OF ITS DONORS","c":"RENO","s":"NV","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2022,"r":"WASHOE COUNTY SCHOOL DISTRICT","a":5000,"p":"CREATING AN EDUCATION SYSTEM WHERE ALL STUDENTS ACHIEVE ACADEMIC SUCCESS, DEVELOP PERSONAL AND CIVIC RESPONSIBILITY, AND ACHIEVE CAREER AND COLLEGE READINESS FOR THE 21ST CENTURY","c":"RENO","s":"NV","e":"","o":"202323149349101822","record_type":"named_recipient"},{"y":2023,"r":"BISHOP MANOGUE CATHOLIC HIGH SCHOOL","a":216550,"p":"A CO-EDUCATIONAL HIGH SCHOOL IN PARTNERSHIP WITH PARENTS IS COMMITTED TO FOSTERING CHRISTIAN VALUES, ACADEMIC EXCELLENCE, AND LIFE-LONG SERVICE IN A FAITH-CENTERED COMMUNITY","c":"RENO","s":"NV","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"GUIDE DOGS FOR THE BLIND","a":25000,"p":"HARNESS THE POWER OF PARTNERSHIPS, CONNECTING PEOPLE, DOGS, AND COMMUNITIES TO TRANSFORM THE LIVES OF INDIVIDUALS WITH VISUAL IMPAIRMENTS","c":"SAN RAFAEL","s":"CA","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF NEVADA RENO FOUNDATION","a":1013590,"p":"THE FOUNDATION RECEIVES, INVESTS AND ADMINISTERS FUNDS TO BENEFIT THE UNIVERSITY OF NEVADA, RENO, WHILE HONORING THE PHILANTHROPIC INTENT OF ITS DONORS","c":"RENO","s":"NV","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"WASHOE COUNTY SCHOOL DISTRICT","a":40000,"p":"CREATING AN EDUCATION SYSTEM WHERE ALL STUDENTS ACHIEVE ACADEMIC SUCCESS, DEVELOP PERSONAL AND CIVIC RESPONSIBILITY, AND ACHIEVE CAREER AND COLLEGE READINESS FOR THE 21ST CENTURY","c":"RENO","s":"NV","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"ENERGY TRANSFER LP-PASSTHROUGH CHARITABLE CONTRIBUTION","a":7,"p":"CHARITABLE CONTRIBUTION PASSTHROUGH INVESTMENT","c":"DALLAS","s":"TX","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"NUSTAR ENERGY LP-PASSTHROUGH CHARITABLE CONTRIBUTION","a":1475,"p":"CHARITABLE CONTRIBUTION PASSTHROUGH INVESTMENT","c":"SAN ANTONIO","s":"TX","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"PLAINS ALL AMERICAN PIPELINE LP-PASSTHROUGH CHARITABLE CONTRIBUTION","a":12,"p":"CHARITABLE CONTRIBUTION PASSTHROUGH INVESTMENT","c":"HOUSTON","s":"TX","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2023,"r":"CHALLENGER LEARNING CENTER OF NORTHERN NEVADA","a":25000,"p":"DEVELOPONG AEROSPACE/STEM OUTREACH AND EDUCATIONAL PROJECTS FOR STUDENTS, SCHOOLS, AND EDUCATIONAL ORGANIZATIONS ACROSS NORTHER NEVADA","c":"RENO","s":"NV","e":"","o":"202433069349101028","record_type":"named_recipient"},{"y":2024,"r":"BISHOP MANOGUE CATHOLIC HIGH SCHOOL","a":56725,"p":"A CO-EDUCATIONAL HIGH SCHOOL IN PARTNERSHIP WITH PARENTS IS COMMITTED TO FOSTERING CHRISTIAN VALUES, ACADEMIC EXCELLENCE, AND LIFE-LONG SERVICE IN A FAITH-CENTERED COMMUNITY","c":"RENO","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF NEVADA RENO FOUNDATION","a":3500000,"p":"THE FOUNDATION RECEIVES, INVESTS AND ADMINISTERS FUNDS TO BENEFIT THE UNIVERSITY OF NEVADA, RENO, WHILE HONORING THE PHILANTHROPIC INTENT OF ITS DONORS","c":"RENO","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"WASHOE COUNTY SCHOOL DISTRICT","a":200000,"p":"CREATING AN EDUCATION SYSTEM WHERE ALL STUDENTS ACHIEVE ACADEMIC SUCCESS, DEVELOP PERSONAL AND CIVIC RESPONSIBILITY, AND ACHIEVE CAREER AND COLLEGE READINESS FOR THE 21ST CENTURY","c":"RENO","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"PATHWAYS TO AVIATION","a":47500,"p":"DEVELOPING AVIATION OUTREACH AND EDUCATION PROJECTS FOR STUDENTS TO FACILITATE EDUCATIONAL SUCCESS, LABOR FORCE GROWTH, AND ECONOMIC VITALITY","c":"RENO","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"JWOOD RAW ELEMENTARY SCHOOL","a":12500,"p":"CREATING AN EDUCATION SYSTEM WHERE ALL STUDENTS ACHIEVE ACADEMIC SUCCESS, AND DEVELOP PERSONAL AND CIVIC RESPONSIBILITY IN THE STUDIES OF AVIALTION RELATED PROGRAMS","c":"RENO","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"AOPA FOUNDATION INC","a":10000,"p":"TO EDUCATE THE PUBLIC ON GENERAL AVIATION'S VALUE, IMPROVE AVIATION SAFETY, PRESERVE COMMUNITY AIRPORTS, AND ENCOURAGE PEOPLE TO LEARN TO FLY, ALL TO ENSURE THE FUTURE OF GENERAL AVIATION","c":"FREDERICK","s":"MD","e":"","o":"202503189349104780","record_type":"named_recipient"},{"y":2024,"r":"PARTNERS FOR COMMUNITYFYRE ROBOTICS","a":2500,"p":"ADVANCE EDUCATION PROGRAMS AND EXPERIENCES THROUGHOUT THE NOTHERN NEVADA COMMUNITY","c":"CARSON CITY","s":"NV","e":"","o":"202503189349104780","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

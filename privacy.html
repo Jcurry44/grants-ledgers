@@ -7,8 +7,16 @@
 <meta name="color-scheme" content="light">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Privacy — The Grants Ledger</title>
-<meta name="description" content="What this site does and does not collect. A static site built from public IRS filings: no accounts, no cookies, no analytics, no forms. Saved lists and notes stay in your own browser and are never transmitted.">
+<meta name="description" content="What this site does and does not collect. A static site built from public IRS filings: no accounts, no cookies, no forms, and a single cookie-free page-counter script that records no personal data. Saved lists and notes stay in your own browser and are never transmitted.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy — The Grants Ledger">
+<meta property="og:description" content="What this site does and does not collect, checked against its own code so a reviewer can check the claim.">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/privacy/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -77,7 +85,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <header class="cover"><div class="wrap">
   <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Privacy</div>
   <h1>What this site collects<br>about you: nothing</h1>
-  <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies and no analytics. This page describes the actual data flows, checked against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
+  <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies, and the one analytics script it loads is a cookie-free page counter that records no personal data. This page describes the actual data flows, checked against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
   <p class="stamp">Effective 31 August 2026 · checked against the published source on that date</p>
 </div></header>
 
@@ -92,12 +100,12 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 
 <section><div class="wrap">
   <h2>The short version</h2>
-  <p class="pull">I receive nothing about you. I could not tell you how many people have visited this site, because nothing here measures it.</p>
+  <p class="pull">I receive nothing that identifies you. A page counter tells me, in aggregate, whether a page is being read — never who read it.</p>
   <div class="ledger">
     <div class="row"><span class="mk no">—</span><div><b>Accounts, logins, sign-ups</b></div><span>None exist. There is nothing on this site to register for.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Forms of any kind</b></div><span>There is not a single <span class="mono">&lt;form&gt;</span> element on the site. Nothing collects a name, an email address, or any other input.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Cookies</b></div><span>This site sets no cookies. It never reads or writes <span class="mono">document.cookie</span>.</span></div>
-    <div class="row"><span class="mk no">—</span><div><b>Analytics or tracking</b></div><span>No analytics script of any kind is loaded — no Google Analytics, no tag manager, no Plausible, Fathom, Matomo, Hotjar, Segment, Mixpanel or PostHog. No tracking pixel, no beacon, no session recording.</span></div>
+    <div class="row"><span class="mk yes">●</span><div><b>Analytics: a cookie-free page counter</b></div><span>Every page loads a small script from <a href="https://www.goatcounter.com/">GoatCounter</a> that counts page views without cookies or personal data. Details below. No other analytics or tracking script of any kind runs here — no Google Analytics, no tag manager, no Plausible, Fathom, Matomo, Hotjar, Segment, Mixpanel or PostHog. No tracking pixel, no beacon, no session recording.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Advertising or data sales</b></div><span>There is no advertising on this site and no data about visitors to sell, share or transfer, because none is gathered.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Fingerprinting or cross-site tracking</b></div><span>None. The referrer policy on every page is <span class="mono">strict-origin-when-cross-origin</span>, so the pages you view are not passed along in full to other sites.</span></div>
     <div class="row"><span class="mk yes">●</span><div><b>Saved lists and notes</b></div><span>Stored in your own browser only, and never sent anywhere. Details below.</span></div>
@@ -126,7 +134,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 
 <section><div class="wrap">
   <h2>Who else necessarily sees your request</h2>
-  <p class="sub">Two third parties are involved in serving these pages. Neither is a choice made to gather information, and both are named here so a reviewer does not have to discover them by inspecting the page.</p>
+  <p class="sub">Three third parties are involved in serving and measuring these pages. None is a choice made to gather information beyond what is stated below, and all three are named here so a reviewer does not have to discover them by inspecting the page.</p>
 
   <div class="note">
     <b>GitHub Pages — hosting</b>
@@ -134,8 +142,13 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   </div>
 
   <div class="note">
+    <b>GoatCounter — a page counter, not a tracker</b>
+    <p>Every page loads a small script from GoatCounter (<span class="mono">gc.zgo.at/count.js</span>), a page-view counter built specifically to avoid personal data. On each page view it records the page path, the referring page, a coarse browser/screen-size category, and the visitor’s country derived from the IP address — GoatCounter does not store the IP address itself. It sets no cookie, cannot tell one visitor’s repeat views from another’s, and does not build a profile of anyone. Its own privacy policy is at <span class="mono">goatcounter.com/privacy</span>. This is the sole purpose it serves here: knowing, in aggregate, whether a page is being read.</p>
+  </div>
+
+  <div class="note">
     <b>Google Fonts — the three typefaces</b>
-    <p>The pages load their typefaces (Fraunces, Newsreader and IBM Plex Mono) from Google’s font service at <span class="mono">fonts.googleapis.com</span> and <span class="mono">fonts.gstatic.com</span>. Those requests go to Google and, like any web request, carry your IP address and user-agent string. This is the only third-party asset on the site; there is no other external script, stylesheet, image, frame or endpoint anywhere on it.</p>
+    <p>The pages load their typefaces (Fraunces, Newsreader and IBM Plex Mono) from Google’s font service at <span class="mono">fonts.googleapis.com</span> and <span class="mono">fonts.gstatic.com</span>. Those requests go to Google and, like any web request, carry your IP address and user-agent string. Together with GoatCounter above, these are the only third-party assets on the site; there is no other external script, stylesheet, image, frame or endpoint anywhere on it.</p>
     <p>If your organization’s policy is to avoid third-party font requests, this is the single dependency to raise — the fonts can be self-hosted instead. Say so and it will be changed.</p>
   </div>
 
@@ -162,7 +175,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
   <h2>About the people named in the data</h2>
 <p>This site publishes information from Form 990-PF, the annual return that private foundations file with the Internal Revenue Service and which the IRS makes available for public inspection. The foundations, recipients, amounts, purposes and addresses shown are reproduced from those public documents as filed. Nothing is added to them. No filing is enriched with information from another source about any person, no profile of any individual is constructed, and no attempt is made to identify anyone.</p>
-<p><strong>Grants to individuals are handled differently from grants to organizations.</strong> Some foundations report scholarships, fellowships, educational loans and hardship grants paid to named people &mdash; students, patients, families, sometimes minors. Those rows are part of the public return and they stay on the foundation&rsquo;s own ledger page, exactly as filed, because every year of that page must still add up to the total the foundation reported. What they do not become is an index. A row that names an individual is left out of the site-wide search, out of the cross-foundation recipient profiles, and out of the bulk download, where it appears only as <code>[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]</code> with its amount, year and purpose intact. At the last build this applied to 33,950 rows across 365 foundations. The rule that decides which rows these are is published in the source code and combines the filer&rsquo;s own choice of the person-name field on the return with a test of the name and the stated purpose; it is deliberately conservative, and a real organization occasionally falls on the individual side of it.</p>
+<p><strong>Grants to individuals are handled differently from grants to organizations.</strong> Some foundations report scholarships, fellowships, educational loans and hardship grants paid to named people &mdash; students, patients, families, sometimes minors. Those rows are part of the public return, and their amount, year, purpose and state are published exactly as filed, so every year of that page still adds up to the total the foundation reported. What is withheld is the name, and only the name &mdash; everywhere the site publishes. A row that names an individual reads <code>Individual recipient (name withheld)</code> on the foundation&rsquo;s own ledger page, its printed report and its CSV export; in the site-wide search, the cross-foundation recipient profiles, the bulk export and the data files behind the pages it carries the placeholder <code>[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]</code>. Either way the recipient&rsquo;s city is blanked too, so the row cannot be re-identified by location. At the last build this applied to 33,682 rows across 318 foundations. The rule that decides which rows these are is published in the source code and combines the filer&rsquo;s own choice of the person-name field on the return with a test of the name and the stated purpose; it is deliberately conservative, and a real organization occasionally falls on the individual side of it.</p>
 <p>If you are named in a filing reproduced here and want the row removed from the ledger page as well, write. It will be taken down while it is looked at against the original filing, and it will not be restored without a reason being given to you.</p>
 <h2>What is deliberately not claimed here</h2>
   <p class="sub">A trust page is worth less than nothing if it promises a regime that has not been implemented. These are the honest boundaries.</p>

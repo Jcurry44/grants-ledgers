@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Kinglsey Gillespie Charitable&nbsp;Trust</h1>
         <p class="hero-meta">Dallas, TX · EIN <code>30-6513520</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 7 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 7 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Kinglsey Gillespie Charitable Trust. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.KINGLSEYGI_DATA={"meta":{"foundation":"Kinglsey Gillespie Charitable Trust","ein":"30-6513520","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":30,"grand_total":29427201,"tieout":{"2020":{"object_id":"202103509349101105","grant_count":6,"grant_sum":4852739,"line25_col_d":4852739,"status":"PASS"},"2021":{"object_id":"202243119349101609","grant_count":6,"grant_sum":6416372,"line25_col_d":6416372,"status":"PASS"},"2022":{"object_id":"202313199349102046","grant_count":6,"grant_sum":6627682,"line25_col_d":6627682,"status":"PASS"},"2023":{"object_id":"202432699349100113","grant_count":6,"grant_sum":5388898,"line25_col_d":5388898,"status":"PASS"},"2024":{"object_id":"202513449349100716","grant_count":6,"grant_sum":6141510,"line25_col_d":6141510,"status":"PASS"}}},"grants":[{"y":2020,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":485274,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"THE STAMFORD HOSPITAL","a":2426369,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"FIRST PRESBYTERIAN CHURCH","a":485274,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"STAMFORD ROTARY TRUST FUND","a":485274,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"LONG ISLAND MUSEUM OF AMERICA","a":485274,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2020,"r":"SETAUKET PRESBYTERIAN CHURCH","a":485274,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202103509349101105","record_type":"named_recipient"},{"y":2021,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":641637,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"THE STAMFORD HOSPITAL","a":3208187,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"FIRST PRESBYTERIAN CHURCH","a":641637,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"STAMFORD ROTARY TRUST FUND","a":641637,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"LONG ISLAND MUSEUM OF AMERICA","a":641637,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2021,"r":"SETAUKET PRESBYTERIAN CHURCH","a":641637,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202243119349101609","record_type":"named_recipient"},{"y":2022,"r":"MASSACHUSETTS INSTITUTE OF TECH","a":662768,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"THE STAMFORD HOSPITAL","a":3313842,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"FIRST PRESBYTERIAN CHURCH","a":662768,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"STAMFORD ROTARY TRUST FUND","a":662768,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"LONG ISLAND MUSEUM OF AMERICA","a":662768,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2022,"r":"SETAUKET PRESBYTERIAN CHURCH","a":662768,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202313199349102046","record_type":"named_recipient"},{"y":2023,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":538890,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"THE STAMFORD HOSPITAL","a":2694448,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"FIRST PRESBYTERIAN CHURCH","a":538890,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"STAMFORD ROTARY TRUST FUND","a":538890,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"LONG ISLAND MUSEUM OF AMERICA","a":538890,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2023,"r":"SETAUKET PRESBYTERIAN CHURCH","a":538890,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202432699349100113","record_type":"named_recipient"},{"y":2024,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY","a":614151,"p":"UNRESTRICTED GENERAL","c":"CAMBRIDGE","s":"MA","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"THE STAMFORD HOSPITAL","a":3070755,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"FIRST PRESBYTERIAN CHURCH","a":614151,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"STAMFORD ROTARY TRUST FUND","a":614151,"p":"UNRESTRICTED GENERAL","c":"STAMFORD","s":"CT","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"LONG ISLAND MUSEUM OF AMERICA","a":614151,"p":"UNRESTRICTED GENERAL","c":"STONY BROOK","s":"NY","e":"","o":"202513449349100716","record_type":"named_recipient"},{"y":2024,"r":"SETAUKET PRESBYTERIAN CHURCH","a":614151,"p":"UNRESTRICTED GENERAL","c":"SETAUKET","s":"NY","e":"","o":"202513449349100716","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

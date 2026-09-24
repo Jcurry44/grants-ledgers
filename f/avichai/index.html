@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>The Avi Chai&nbsp;Foundation</h1>
         <p class="hero-meta">New York, NY · EIN <code>13-3252800</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 8 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 8 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -395,7 +409,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by The Avi Chai Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -429,7 +443,7 @@
 <script>
 window.AVICHAI_DATA={"meta":{"foundation":"The Avi Chai Foundation","ein":"13-3252800","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":20,"grand_total":71442869,"tieout":{"2020":{"object_id":"202143169349102659","grant_count":8,"grant_sum":15840446,"line25_col_d":15840446,"status":"PASS"},"2021":{"object_id":"202223209349100312","grant_count":3,"grant_sum":10358488,"line25_col_d":10358488,"status":"PASS"},"2022":{"object_id":"202313199349107201","grant_count":4,"grant_sum":11590453,"line25_col_d":11590453,"status":"PASS"},"2023":{"object_id":"202403199349101440","grant_count":3,"grant_sum":17448136,"line25_col_d":17448136,"status":"PASS"},"2024":{"object_id":"202513179349101586","grant_count":2,"grant_sum":16205346,"line25_col_d":16205346,"status":"PASS"}}},"grants":[{"y":2020,"r":"PARDES INSTITUTE OF JEWISH STUDIES NORTH AMERICA","a":360000,"p":"GRANT TO SUPPORT JEWISH EDUCATION","c":"NEW YORK","s":"NY","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"AVI CHAI ISRAEL","a":14098767,"p":"GRANT TO SUPPORT JEWISH EDUCATION PROGRAMS IN ISRAEL.THE GRANT AMOUNT HAS BEEN REDUCED BY $250,000 OF WHICH THE GRANTEE DID NOT SPEND OUT OF CORPUS AND THEREFORE THE FOUNDATION HAS NOT INCLUDED AS A QUALIFIED DISTRIBUTION.","c":"","s":"","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"AVI CHAI ISRAEL","a":46093,"p":"GRANT FOR THE USE OF A PROPERTY IN JERUSALEM, TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES","c":"","s":"","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"PRIZMAH CENTER FOR JEWISH DAY SCHOOLS","a":1000000,"p":"GRANT TO ENHANCE JEWISH EDUCATION IN JEWISH DAY SCHOOLS","c":"NEW YORK","s":"NY","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"ISRAEL EDUCATION RESOURCE CENTER","a":193000,"p":"GRANT TO ENHANCE ISRAEL EDUCATION IN JEWISH DAY SCHOOLS","c":"ATLANTA","s":"GA","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"GEORGE WASHINGTON UNIVERSITY","a":86,"p":"GRANT TO ENHANCE THE QUALITY OF JEWISH EDUCATION","c":"WASHINGTON","s":"DC","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"JTA-MJL NEW CORP","a":50000,"p":"JEWISH EDUCATION PROJECT","c":"NEW YORK","s":"NY","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2020,"r":"JEWISH FUNDERS NETWORK","a":92500,"p":"GRANT TO IMPROVE THE PHILANTHROPIC FIELD BY IMPROVING COMMUNICATIONS AND RELATIONS BETWEEN GRANT MAKERS AND GRANTEES","c":"NEW YORK","s":"NY","e":"","o":"202143169349102659","record_type":"named_recipient"},{"y":2021,"r":"AVI CHAI ISRAEL","a":9233488,"p":"GRANT TO SUPPORT JEWISH EDUCATION PROGRAMS IN ISRAEL.THE GRANT AMOUNT HAS BEEN REDUCED BY $100,000 OF WHICH THE GRANTEE DID NOT SPEND OUT OF CORPUS AND THEREFORE THE FOUNDATION HAS NOT INCLUDED AS A QUALIFIED DISTRIBUTION.NAME OR RECIPIENT - AVI CHAI ISRAELGRANT FOR THE USE OF A PROPERTY IN JERUSALEM, TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES. THE VALUE OF THE USE OF THE PROPERTY FOR 2021 WAS $49,121.","c":"","s":"","e":"","o":"202223209349100312","record_type":"named_recipient"},{"y":2021,"r":"PRIZMAH CENTER FOR JEWISH DAY SCHOOLS","a":1000000,"p":"GRANT TO ENHANCE JEWISH EDUCATION IN JEWISH DAY SCHOOLS","c":"NEW YORK","s":"NY","e":"","o":"202223209349100312","record_type":"named_recipient"},{"y":2021,"r":"JEWISH FUNDERS NETWORK","a":125000,"p":"GRANT TO IMPROVE THE PHILANTHROPIC FIELD BY IMPROVING COMMUNICATIONS AND RELATIONS BETWEEN GRANT MAKERS AND GRANTEES","c":"NEW YORK","s":"NY","e":"","o":"202223209349100312","record_type":"named_recipient"},{"y":2022,"r":"AVI CHAI ISRAEL","a":10290453,"p":"GRANT TO SUPPORT JEWISH EDUCATION PROGRAMS IN ISRAEL.THE GRANT AMOUNT HAS BEEN REDUCED BY $100,000 OF WHICH THE GRANTEE DID NOT SPEND OUT OF CORPUS AND THEREFORE THE FOUNDATION HAS NOT INCLUDED AS A QUALIFIED DISTRIBUTION.NAME OR RECIPIENT - AVI CHAI ISRAELGRANT FOR THE USE OF A PROPERTY IN JERUSALEM, TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES. THE VALUE OF THE USE OF THE PROPERTY FOR 2022 WAS $47,255.","c":"","s":"","e":"","o":"202313199349107201","record_type":"named_recipient"},{"y":2022,"r":"BEIT AVI CHAI","a":500000,"p":"GRANT TO SUPPORT A PROJECT TO PROVIDE WORLDWIDE AUDIENCES WITH THE OPPORTUNITY TO LEARN ABOUT HIDDEN JEWISH TREASURES IN EUROPE THAT WILL ENRICH THEIR APPRECIATION FOR JEWISH HISTORY AND CULTURE.","c":"","s":"","e":"","o":"202313199349107201","record_type":"named_recipient"},{"y":2022,"r":"BEIT AVI CHAI","a":300000,"p":"GRANT TO SUPPORT AN ONLINE PROGRAM THAT FOCUSES ON INTERWEAVING JEWISH TEXTS WITH EUROPEAN ART AND CULTURE.","c":"","s":"","e":"","o":"202313199349107201","record_type":"named_recipient"},{"y":2022,"r":"PRIZMAH CENTER FOR JEWISH DAY SCHOOLS","a":500000,"p":"GRANT TO ENHANCE JEWISH EDUCATION IN JEWISH DAY SCHOOLS.","c":"NEW YORK","s":"NY","e":"","o":"202313199349107201","record_type":"named_recipient"},{"y":2023,"r":"AVI CHAI ISRAEL","a":16597836,"p":"GRANT TO SUPPORT JEWISH EDUCATION PROGRAMS IN ISRAEL. THE GRANT AMOUNT HAS BEEN REDUCED BY $100,000 OF WHICH THE GRANTEE DID NOT SPEND OUT OF CORPUS AND THEREFORE THE FOUNDATION HAS NOT INCLUDED AS A QUALIFIED DISTRIBUTION. NAME OR RECIPIENT - AVI CHAI ISRAEL GRANT FOR THE USE OF A PROPERTY IN JERUSALEM, TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES. THE VALUE OF THE USE OF THE PROPERTY FOR 2023 WAS $43,038","c":"","s":"","e":"","o":"202403199349101440","record_type":"named_recipient"},{"y":2023,"r":"BEIT AVI CHAI","a":500000,"p":"GRANT TO SUPPORT A PROJECT TO PROVIDE WORLDWIDE AUDIENCES WITH THE OPPORTUNITY TO LEARN ABOUT HIDDEN JEWISH TREASURES IN EUROPE THAT WILL ENRICH THEIR APPRECIATION FOR JEWISH HISTORY AND CULTURE.","c":"","s":"","e":"","o":"202403199349101440","record_type":"named_recipient"},{"y":2023,"r":"BEIT AVI CHAI","a":350300,"p":"GRANT TO SUPPORT AN ONLINE PROGRAM THAT FOCUSES ON INTERWEAVING JEWISH TEXTS WITH EUROPEAN ART AND CULTURE.","c":"","s":"","e":"","o":"202403199349101440","record_type":"named_recipient"},{"y":2024,"r":"AVI CHAI ISRAEL","a":15565346,"p":"GRANT TO SUPPORT JEWISH EDUCATION PROGRAMS IN ISRAEL. THE GRANT AMOUNT HAS BEEN REDUCED BY $100,000 OF WHICH THE GRANTEE DID NOT SPEND OUT OF CORPUS AND THEREFORE THE FOUNDATION HAS NOT INCLUDED AS A QUALIFIED DISTRIBUTION. NAME OF RECIPIENT - AVI CHAI ISRAEL GRANT FOR THE USE OF A PROPERTY IN JERUSALEM, TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES. THE VALUE OF THE USE OF THE PROPERTY FOR 2024 WAS $42,895","c":"","s":"","e":"","o":"202513179349101586","record_type":"named_recipient"},{"y":2024,"r":"PARDES INSTITUTE OF JEWISH STUDIES NORTH AMERICA","a":640000,"p":"GRANT TO SUPPORT JEWISH EDUCATION.","c":"NEW YORK","s":"NY","e":"","o":"202513179349101586","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

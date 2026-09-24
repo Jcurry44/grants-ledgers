@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Iris&nbsp;Foundation</h1>
         <p class="hero-meta">New York, NY · EIN <code>13-6977690</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 12 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 12 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Iris Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.IRISFOUNDA_DATA={"meta":{"foundation":"Iris Foundation","ein":"13-6977690","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":23,"grand_total":53607418,"tieout":{"2020":{"object_id":"202201329349104310","grant_count":4,"grant_sum":12000541,"line25_col_d":12000541,"status":"PASS"},"2021":{"object_id":"202331819349100108","grant_count":4,"grant_sum":10063088,"line25_col_d":10063088,"status":"PASS"},"2022":{"object_id":"202411589349101401","grant_count":7,"grant_sum":11808317,"line25_col_d":11808317,"status":"PASS"},"2023":{"object_id":"202511819349100106","grant_count":4,"grant_sum":10693927,"line25_col_d":10693927,"status":"PASS"},"2024":{"object_id":"202611879349100571","grant_count":4,"grant_sum":9041545,"line25_col_d":9041545,"status":"PASS"}}},"grants":[{"y":2020,"r":"BARD COLLEGE","a":11863041,"p":"ON GOING ACTIVITIES","c":"ANNANDALE ON HUDSON","s":"NY","e":"","o":"202201329349104310","record_type":"named_recipient"},{"y":2020,"r":"METROPOLITAN MUSEUM OF ART","a":125000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202201329349104310","record_type":"named_recipient"},{"y":2020,"r":"NEW YORK UNIVERSITY - ISAW","a":5000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202201329349104310","record_type":"named_recipient"},{"y":2020,"r":"THE WOLFSONIAN FLORIDA INTERNATIONAL UNIVERSITY","a":7500,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"MIAMI BEACH","s":"FL","e":"","o":"202201329349104310","record_type":"named_recipient"},{"y":2021,"r":"BARD COLLEGE","a":9944088,"p":"ON GOING ACTIVITIESON GOING ACTIVITIES","c":"ANNANDALE ON HUDSON","s":"NY","e":"","o":"202331819349100108","record_type":"named_recipient"},{"y":2021,"r":"METROPOLITAN MUSEUM OF ART","a":105000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202331819349100108","record_type":"named_recipient"},{"y":2021,"r":"THE FRICK COLLECTION","a":6500,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202331819349100108","record_type":"named_recipient"},{"y":2021,"r":"THE WOLFSONIAN FLORIDA INTERNATIONAL UNIVERSITY","a":7500,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"MIAMI BEACH","s":"FL","e":"","o":"202331819349100108","record_type":"named_recipient"},{"y":2022,"r":"AAMC FOUNDATION","a":1500,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"ARS BREVIS FOUNDATION","a":15000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"BARD COLLEGE","a":11671317,"p":"ON GOING ACTIVITIESON GOING ACTIVITIES","c":"ANNANDALE ON HUDSON","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"METROPOLITAN MUSEUM OF ART","a":100000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"NEW YORK UNIVERSITY - ISAW","a":10000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"THE FRICK COLLECTION","a":3000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2022,"r":"THE WOLFSONIAN FLORIDA INTERNATIONAL UNIVERSITY","a":7500,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"MIAMI BEACH","s":"FL","e":"","o":"202411589349101401","record_type":"named_recipient"},{"y":2023,"r":"ROYAL OAK FOUNDATION INC EIN 23-7349380","a":5000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202511819349100106","record_type":"named_recipient"},{"y":2023,"r":"BARD COLLEGE EIN 14-17130334","a":10673927,"p":"ONGOING ACTIVITIES","c":"ANNANDALE ON HUDSON","s":"NY","e":"","o":"202511819349100106","record_type":"named_recipient"},{"y":2023,"r":"THE METROPOLITAN MUSEUM OF ART EIN 13-1624086","a":5000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202511819349100106","record_type":"named_recipient"},{"y":2023,"r":"FLORIDA INTERNATIONAL FOUNDATION INC (WOLFSONIAN) EIN 86-2799015","a":10000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"MIAMI BEACH","s":"FL","e":"","o":"202511819349100106","record_type":"named_recipient"},{"y":2024,"r":"BARD COLLEGE EIN 14-17130334","a":8893360,"p":"ONGOING ACTIVITIES","c":"ANNANDALE ON HUDSON","s":"NY","e":"","o":"202611879349100571","record_type":"named_recipient"},{"y":2024,"r":"ROYAL OAK FOUNDATION INC EIN 23-7349380","a":5000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202611879349100571","record_type":"named_recipient"},{"y":2024,"r":"FRICK COLLECTION EIN 13-1624012","a":3000,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202611879349100571","record_type":"named_recipient"},{"y":2024,"r":"THE METROPOLITAN MUSEUM OF ART EIN 13-1624086","a":140185,"p":"UNRESTRICTED GIFT FOR DONEE'S EXEMPT PURPOSE","c":"NEW YORK","s":"NY","e":"","o":"202611879349100571","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

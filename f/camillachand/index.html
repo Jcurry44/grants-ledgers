@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Camilla Chandler Family Foundation&nbsp;11-10-1994</h1>
         <p class="hero-meta">Los Angeles, CA · EIN <code>95-6979804</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 24 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 24 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -395,7 +409,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Camilla Chandler Family Foundation 11-10-1994. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -429,7 +443,7 @@
 <script>
 window.CAMILLACHA_DATA={"meta":{"foundation":"Camilla Chandler Family Foundation 11-10-1994","ein":"95-6979804","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2022,2023,2024],"grant_count":41,"grand_total":22925000,"tieout":{"2020":{"object_id":"202230339349100008","grant_count":10,"grant_sum":2025000,"line25_col_d":2025000,"status":"PASS"},"2021":{"object_id":"202340329349100759","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2022":{"object_id":"202440229349100754","grant_count":9,"grant_sum":3625000,"line25_col_d":3625000,"status":"PASS"},"2023":{"object_id":"202540159349100354","grant_count":11,"grant_sum":4600000,"line25_col_d":4600000,"status":"PASS"},"2024":{"object_id":"202600239349100405","grant_count":11,"grant_sum":12675000,"line25_col_d":12675000,"status":"PASS"}}},"grants":[{"y":2020,"r":"J PAUL GETTY TRUST","a":25000,"p":"CONSERVATION INSTITUTE","c":"LOS ANGELES","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"NORTHWEST MARITIME CENTER","a":1000000,"p":"SWAN HOTEL","c":"PORT TOWNSEND","s":"WA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"TRINITY SCHOOL","a":10000,"p":"GENERAL SUPPORT","c":"MENLO PARK","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"SYNAPSE SCHOOL","a":10000,"p":"GENERAL SUPPORT","c":"MENLO PARK","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"CENTER FOR EARLY EDUCATION","a":10000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"DIMENSIONS DANCE THEATER","a":630000,"p":"GENERAL SUPPORTCapacity Building & Programming","c":"OAKLAND","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"THE NATURE CONSERVANCY","a":300000,"p":"DANGERMOUND PRESERVE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"GREEN DOT PUBLIC SCHOOLS","a":10000,"p":"CORO SUMMER PROGRAM","c":"LOS ANGELES","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"LONG BEACH UNITY FESTIVAL INC","a":20000,"p":"GENERAL SUPPORT","c":"LONG BEACH","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2020,"r":"PILGRIM SCHOOL","a":10000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202230339349100008","record_type":"named_recipient"},{"y":2022,"r":"THE GETTY CONSERVATION INSTITUTE","a":25000,"p":"J PAUL GETTY TRUST","c":"LOS ANGELES","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"THE PILGRIM FUND","a":25000,"p":"PILGRIM FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"UCLA FOUNDATION","a":25000,"p":"GEFFEN ACADEMY FUND","c":"PASADENA","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"WOODSIDE PRIORY SCHOOL","a":25000,"p":"GENERAL SUPPORT","c":"PORTOLA VALLEY","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"TRINITY SCHOOL","a":25000,"p":"GENERAL SUPPORT","c":"MENLO PARK","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"NORTHWEST MARITIME CENTER","a":500000,"p":"GENERAL SUPPORT","c":"PORT TOWNSEND","s":"WA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"JEFFERSON LAND TRUST","a":500000,"p":"LOOK TO THE LAND CAMPAIGN","c":"PORT TOWNSEND","s":"WA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"WELLESLEY COLLEGE","a":1500000,"p":"GENERAL SUPPORT","c":"WELLESLEY","s":"MA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2022,"r":"THE NATURE CONSERVANCY","a":1000000,"p":"FUNDING THE RESEARCH CENTER AT THE DANGERMOND PRESERVE","c":"SACRAMENTO","s":"CA","e":"","o":"202440229349100754","record_type":"named_recipient"},{"y":2023,"r":"JEFFERSON LAND TRUST","a":500000,"p":"LOOK TO THE LAND CAMPAIGN","c":"PORT TOWNSEND","s":"WA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"NORTHWEST MARITIME CENTER","a":1000000,"p":"FUND BLUE SCHOOLS INITIATIVE","c":"PORT TOWNSEND","s":"WA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"THE GETTY CONSERVATION INSTITUTE","a":25000,"p":"J PAUL GETTY TRUST","c":"LOS ANGELES","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"THE NATURE CONSERVANCY","a":500000,"p":"FUNDING THE RESEARCH CENTER AT THE DANGERMOND PRESERVE","c":"SACRAMENTO","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"NORTHWEST SCHOOL OF WOODEN BOATBUILDING","a":200000,"p":"GENERAL SUPPORT","c":"PORT HADLOCKIRONDALE","s":"WA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"JEFFERSON HEALTHCARE FOUNDATION","a":100000,"p":"GENERAL SUPPORT","c":"PORT TOWNSEND","s":"WA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"UCLA FOUNDATION","a":25000,"p":"GEFFEN ACADEMY FUND","c":"PASADENA","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"WOODSIDE PRIORY SCHOOL","a":25000,"p":"GENERAL SUPPORT","c":"PORTOLA VALLEY","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"LOS ANGELES RIVER REVITALIZATION CORPORATION","a":200000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"CORO SOUTHERN CALIFORNIA INC","a":25000,"p":"GENERAL SUPPORT","c":"LOS ANGELES","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2023,"r":"DOWNTOWN WOMEN'S CENTER","a":2000000,"p":"THE CAMILLA CHANDLER WALKWAY","c":"LOS ANGELES","s":"CA","e":"","o":"202540159349100354","record_type":"named_recipient"},{"y":2024,"r":"CORO SOUTHERN CALIFORNIA INC","a":150000,"p":"CORO'S BUSINESS PLAN","c":"LOS ANGELES","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL LINKS TRUST","a":250000,"p":"FRIENDS OF PORT TOWNSEND GOLF PARK - GENERAL SUPPORT","c":"TOWNSEND","s":"WA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"HABITAT FOR HUMANITY OF EAST JEFFERSON COUNTY","a":2000000,"p":"GENERAL SUPPORT","c":"PORT TOWNSEND","s":"WA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"JEFFERSON LAND TRUST","a":2000000,"p":"PROTECTION OF QUIMPER WILDLIFE CORRIDOR","c":"PORT TOWNSEND","s":"WA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"NORTHWEST MARITIME CENTER","a":1000000,"p":"FUND BLUE SCHOOLS INITIATIVE","c":"PORT TOWNSEND","s":"WA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"J PAUL GETTY TRUST","a":25000,"p":"CONSERVATION INSTITUTE","c":"LOS ANGELES","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"INTERNATIONAL COMMUNITY FOUNDATION","a":150000,"p":"\"CAMPANA AGUA DE LA SIERRA\" SPECIAL FUND #10674","c":"NATIONAL CITY","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"UCLA FOUNDATION","a":50000,"p":"GEFFEN ACADEMY FUND","c":"PASADENA","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"WOODSIDE PRIORY SCHOOL","a":50000,"p":"GENERAL SUPPORT","c":"PORTOLA VALLEY","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"J PAUL GETTY TRUST","a":6000000,"p":"MIA CHANDLER ENDOWMENT FOR SCHOOL VISITS FUND","c":"LOS ANGELES","s":"CA","e":"","o":"202600239349100405","record_type":"named_recipient"},{"y":2024,"r":"WELLESLEY COLLEGE","a":1000000,"p":"CAMILLA CHANDLER CENTER FOR THE ENVIRONMENT","c":"WELLESLEY","s":"MA","e":"","o":"202600239349100405","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"J PAUL GETTY TRUST":"Nonprofit capacity & transitions","NORTHWEST MARITIME CENTER":"Arts & culture","CORO SOUTHERN CALIFORNIA INC":"Community & economic development","INTERNATIONAL COMMUNITY FOUNDATION":"Nonprofit capacity & transitions"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Lampert Fam Foundation Uta&nbsp;121500</h1>
         <p class="hero-meta">San Francisco, CA · EIN <code>36-7335154</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 13 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 13 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -399,7 +413,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Lampert Fam Foundation Uta 121500. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -433,7 +447,7 @@
 <script>
 window.LAMPERTFAM_DATA={"meta":{"foundation":"Lampert Fam Foundation Uta 121500","ein":"36-7335154","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":24,"grand_total":21694175,"tieout":{"2020":{"object_id":"202123199349106887","grant_count":2,"grant_sum":1025000,"line25_col_d":1025000,"status":"PASS"},"2021":{"object_id":"202213199349104796","grant_count":5,"grant_sum":4085000,"line25_col_d":4085000,"status":"PASS"},"2022":{"object_id":"202313189349103526","grant_count":5,"grant_sum":5625000,"line25_col_d":5625000,"status":"PASS"},"2023":{"object_id":"202403189349102795","grant_count":8,"grant_sum":5799175,"line25_col_d":5799175,"status":"PASS"},"2024":{"object_id":"202513199349100111","grant_count":4,"grant_sum":5160000,"line25_col_d":5160000,"status":"PASS"}}},"grants":[{"y":2020,"r":"The San Francisco Foundation","a":1000000,"p":"Paid to The San Francisco Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202123199349106887","record_type":"named_recipient"},{"y":2020,"r":"DuSault Engineering LLC","a":25000,"p":"Paid to DuSault Engineering as part of a co-op program with the Illinois Institute of Technology to prototype and analyze the development of alternative bridge building with the focus on building more cost effectively.","c":"Libertyville","s":"IL","e":"","o":"202123199349106887","record_type":"named_recipient"},{"y":2021,"r":"The San Francisco Foundation","a":2000000,"p":"Paid to The San Francisco Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202213199349104796","record_type":"named_recipient"},{"y":2021,"r":"Boyd Group for Creative Solutions","a":2000,"p":"Paid to Boyd Group for Creative Solutions to help further its cause.","c":"Cody","s":"WY","e":"","o":"202213199349104796","record_type":"named_recipient"},{"y":2021,"r":"Thomas & Eva Fong Foundation","a":1000,"p":"Paid to Thomas & Eva Fong Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202213199349104796","record_type":"named_recipient"},{"y":2021,"r":"Vanguard Charitable Endowment Plan","a":2000000,"p":"Paid to Vanguard Charitable Endowment Plan to help further its cause.","c":"Malvern","s":"PA","e":"","o":"202213199349104796","record_type":"named_recipient"},{"y":2021,"r":"INTERNATIONAL BANK FOR RECONSTRUCTION AN","a":82000,"p":"HONDURAS SAFER MUNI PROJ - EVALUATING IMPACT OF COG. BEHAVIOR THERAPY ON YOUTH IN JOB TRAINING","c":"WASHINGTON DC","s":"DC","e":"","o":"202213199349104796","record_type":"named_recipient"},{"y":2022,"r":"The San Francisco Foundation","a":1700000,"p":"Paid to The San Francisco Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202313189349103526","record_type":"named_recipient"},{"y":2022,"r":"Boyd Group for Creative Solutions","a":2000,"p":"Paid to Boyd Group for Creative Solutions to help further its cause.","c":"Cody","s":"WY","e":"","o":"202313189349103526","record_type":"named_recipient"},{"y":2022,"r":"Vanguard Charitable Endowment Plan","a":3300000,"p":"Paid to Vanguard Charitable Endowment Plan to help further its cause.","c":"Malvern","s":"PA","e":"","o":"202313189349103526","record_type":"named_recipient"},{"y":2022,"r":"INTERNATIONAL BANK FOR RECONSTRUCTION AN","a":373000,"p":"HONDURAS SAFER MUNI PROJ - EVALUATING IMPACT OF COG. BEHAVIOR THERAPY ON YOUTH IN JOB TRAINING","c":"WASHINGTON DC","s":"DC","e":"","o":"202313189349103526","record_type":"named_recipient"},{"y":2022,"r":"S1 Industries PBC Inc","a":250000,"p":"Paid to S1 Industries PBC, Inc. to help further its cause.","c":"Winchester","s":"MA","e":"","o":"202313189349103526","record_type":"named_recipient"},{"y":2023,"r":"The San Francisco Foundation","a":500000,"p":"Paid to The San Francisco Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"Boyd Group for Creative Solutions","a":5000,"p":"Paid to Boyd Group for Creative Solutions to help further its cause.","c":"Cody","s":"WY","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"Vanguard Charitable Endowment Plan","a":2000000,"p":"Paid to Vanguard Charitable Endowment Plan to help further its cause.","c":"Malvern","s":"PA","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"Essential Impact Inc","a":917000,"p":"Paid to Essential Impact Inc for Creative Solutions to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"The Tides Foundation","a":1700000,"p":"Paid to The Tides Foundation to help further its cause.","c":"San Francisco","s":"CA","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"Healthy Entrepreneurs Foundation","a":277175,"p":"Paid to Healthy Entrepreneurs Foundation to help further its cause.","c":"","s":"","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"African Center for Technical Training","a":300000,"p":"Paid to African Center for Technical Training to help further their efforts in empowering artisans by continuously providing world-class, demand-driven, competency-based, hands-on training and the 21st century business skills required to power Africa's Industrial Transformation.","c":"","s":"","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2023,"r":"UrbanBetter","a":100000,"p":"Paid to UrbanBetter Foundation to help further its efforts to provide equitable access to health-enabling natural and built environments, conspire with an equip partners across sectors, and inspire to shift and shape norms to health-proof the future of cities.","c":"","s":"","e":"","o":"202403189349102795","record_type":"named_recipient"},{"y":2024,"r":"Tides Foundation","a":2000000,"p":"PAID TO THE TIDES FOUNDATION TO HELP FURTHER ITS CAUSE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513199349100111","record_type":"named_recipient"},{"y":2024,"r":"The San Francisco Foundation","a":1000000,"p":"PAID TO THE SAN FRANCISCO FOUNDATION TO HELP FURTHER ITS CAUSE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202513199349100111","record_type":"named_recipient"},{"y":2024,"r":"Vanguard Charitable Endowment Plan","a":2060000,"p":"Paid to Vanguard Charitable Endowment Plan to Help Further it's Cause.","c":"MALVERN","s":"PA","e":"","o":"202513199349100111","record_type":"named_recipient"},{"y":2024,"r":"Community Finance Inc","a":100000,"p":"To help by hiring staff and setting up Partnerships to fuel growth. Giving Credit is a platform to facilitate peer lending with the broader mission to advance the field of community finance.","c":"Malden","s":"MA","e":"","o":"202513199349100111","record_type":"named_recipient"}]};window.LEDGER_MERGES=["TIDES FOUNDATION"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"The San Francisco Foundation":"Nonprofit capacity & transitions","Essential Impact Inc":"Basic needs & response","The Tides Foundation":"Nonprofit capacity & transitions","Tides Foundation":"Nonprofit capacity & transitions"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

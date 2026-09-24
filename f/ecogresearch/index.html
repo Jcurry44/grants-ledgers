@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="ECOGRESEAR_DATA" data-slug="ecogresearch" data-n="15" data-grand="222500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="14 as-filed names" data-rows-embedded="15" data-rows-total="15">
+<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="ECOGRESEAR_DATA" data-slug="ecogresearch" data-n="15" data-grand="222500" data-recsub="All five years" data-running="to the dollar, five years running." data-names="10 as-filed names" data-rows-embedded="15" data-rows-total="15">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Ecog Research and Education&nbsp;Foundation</h1>
         <p class="hero-meta">Philadelphia, PA · EIN <code>39-1723095</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 14 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 9 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -101,8 +102,8 @@
   <div class="sheet-kpis" role="group" aria-label="Headline figures">
     <div class="kpi">
       <div class="k-label">Recipients</div>
-      <div class="k-val" id="kpi-orgs">14</div>
-      <div class="k-hint">Organizations the foundation funded · 14 as-filed names</div>
+      <div class="k-val" id="kpi-orgs">9</div>
+      <div class="k-hint">Organizations the foundation funded · 10 as-filed names</div>
     </div>
     <div class="kpi">
       <div class="k-label">Median grant</div>
@@ -121,11 +122,12 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
-    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">14</span></button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">9</span></button>
     <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">15</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Ecog Research and Education Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,9 +437,9 @@
   </div>
 </div>
 <script>
-window.ECOGRESEAR_DATA={"meta":{"foundation":"Ecog Research and Education Foundation","ein":"39-1723095","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":15,"grand_total":222500,"tieout":{"2020":{"object_id":"202221329349100322","grant_count":2,"grant_sum":32000,"line25_col_d":32000,"status":"PASS"},"2021":{"object_id":"202311309349101736","grant_count":3,"grant_sum":57500,"line25_col_d":57500,"status":"PASS"},"2022":{"object_id":"202441369349103224","grant_count":3,"grant_sum":42500,"line25_col_d":42500,"status":"PASS"},"2023":{"object_id":"202511359349101361","grant_count":3,"grant_sum":47500,"line25_col_d":47500,"status":"PASS"},"2024":{"object_id":"202601349349100930","grant_count":4,"grant_sum":43000,"line25_col_d":43000,"status":"PASS"}}},"grants":[{"y":2020,"r":"EMORY UNIVERSITY","a":25000,"p":"YOUNG INVESTIGATOR","c":"ATLANTA","s":"GA","e":"","o":"202221329349100322","record_type":"named_recipient"},{"y":2020,"r":"BONNIE KY","a":7000,"p":"YOUNG INVESTIGATOR","c":"PHILADELPHIA","s":"PA","e":"","o":"202221329349100322","record_type":"named_recipient"},{"y":2021,"r":"MASSACHUSETTS GENERAL HOSPITAL","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"BOSTON","s":"MA","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"MAYO CLINIC","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"MINNEAPOLIS","s":"MN","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"CHRISTINE MARIE LOVLY","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"NASHVILLE","s":"TN","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2022,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":10000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"ICAHN SCHOOL OF MEDICINE MT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"JENNIFER EADS","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"VILLANOVA","s":"PA","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2023,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":15000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"BOARD OF TRUSTEES OF THE LELAND STANFORD JUNIOR UNIV","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"REDWOOD CITY","s":"CA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"PATRICK FORDE","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"BALTIMORE","s":"MD","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2024,"r":"HIGHLAND PARK FAMILIES","a":500,"p":"GENERAL DONATION","c":"MANCHESTER","s":"CT","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"RESEARCH AMERICA","a":10000,"p":"GENERAL DONATION","c":"ARLINGTON","s":"VA","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"DUSTIN DEMING","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"DEFOREST","s":"WI","e":"","o":"202601349349100930","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
+window.ECOGRESEAR_DATA={"meta":{"foundation":"Ecog Research and Education Foundation","ein":"39-1723095","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":15,"grand_total":222500,"tieout":{"2020":{"object_id":"202221329349100322","grant_count":2,"grant_sum":32000,"line25_col_d":32000,"status":"PASS"},"2021":{"object_id":"202311309349101736","grant_count":3,"grant_sum":57500,"line25_col_d":57500,"status":"PASS"},"2022":{"object_id":"202441369349103224","grant_count":3,"grant_sum":42500,"line25_col_d":42500,"status":"PASS"},"2023":{"object_id":"202511359349101361","grant_count":3,"grant_sum":47500,"line25_col_d":47500,"status":"PASS"},"2024":{"object_id":"202601349349100930","grant_count":4,"grant_sum":43000,"line25_col_d":43000,"status":"PASS"}}},"grants":[{"y":2020,"r":"EMORY UNIVERSITY","a":25000,"p":"YOUNG INVESTIGATOR","c":"ATLANTA","s":"GA","e":"","o":"202221329349100322","record_type":"named_recipient"},{"y":2020,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":7000,"p":"YOUNG INVESTIGATOR","c":"","s":"PA","e":"","o":"202221329349100322","record_type":"individual_masked"},{"y":2021,"r":"MASSACHUSETTS GENERAL HOSPITAL","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"BOSTON","s":"MA","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"MAYO CLINIC","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"MINNEAPOLIS","s":"MN","e":"","o":"202311309349101736","record_type":"named_recipient"},{"y":2021,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"","s":"TN","e":"","o":"202311309349101736","record_type":"individual_masked"},{"y":2022,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":10000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"ICAHN SCHOOL OF MEDICINE MT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202441369349103224","record_type":"named_recipient"},{"y":2022,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"","s":"PA","e":"","o":"202441369349103224","record_type":"individual_masked"},{"y":2023,"r":"THOMAS JEFFERSON UNIVERSITY FDN","a":15000,"p":"GENERAL DONATION","c":"PHILADELPHIA","s":"PA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"BOARD OF TRUSTEES OF THE LELAND STANFORD JUNIOR UNIV","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"REDWOOD CITY","s":"CA","e":"","o":"202511359349101361","record_type":"named_recipient"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"","s":"MD","e":"","o":"202511359349101361","record_type":"individual_masked"},{"y":2024,"r":"HIGHLAND PARK FAMILIES","a":500,"p":"GENERAL DONATION","c":"MANCHESTER","s":"CT","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"RESEARCH AMERICA","a":10000,"p":"GENERAL DONATION","c":"ARLINGTON","s":"VA","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI","a":25000,"p":"YOUNG INVESTIGATOR AWARD","c":"NEW YORK","s":"NY","e":"","o":"202601349349100930","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":7500,"p":"YOUNG INVESTIGATOR AWARD","c":"","s":"WI","e":"","o":"202601349349100930","record_type":"individual_masked"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

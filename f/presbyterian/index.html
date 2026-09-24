@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-withheld="{&quot;2024&quot;: {&quot;kind&quot;: &quot;withheld&quot;, &quot;why&quot;: &quot;Part XIV 3b approval lines were imported as 3a grants. With the 3b line removed the remaining row still exceeds the filed line 25(d) by $200,000, which no demonstrated mechanism explains, so the year is withheld rather than published.&quot;}}" data-zeroyears="{&quot;2023&quot;: {&quot;line25_col_d&quot;: 0}}" data-blob="PRESBYTERI_DATA" data-slug="presbyterian" data-n="3" data-grand="26724565" data-recsub="All four years" data-running="to the dollar, four years running." data-names="2 as-filed names" data-rows-embedded="3" data-rows-total="3">
+<html lang="en" data-withheld="{&quot;2024&quot;: {&quot;kind&quot;: &quot;withheld&quot;, &quot;why&quot;: &quot;Part XIV 3b approval lines were imported as 3a grants. With the 3b line removed the remaining row still exceeds the filed line 25(d) by $200,000, which no demonstrated mechanism explains, so the year is withheld rather than published.&quot;}}" data-zeroyears="{&quot;2023&quot;: {&quot;line25_col_d&quot;: 0}}" data-blob="PRESBYTERI_DATA" data-slug="presbyterian" data-n="3" data-grand="26724565" data-recsub="All four years" data-running="to the dollar for 4 of 5 filed years — 1 withheld." data-names="2 as-filed names" data-rows-embedded="3" data-rows-total="3">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -42,7 +42,7 @@
     <div class="ss-rail" id="year-rail"></div>
     <p class="ss-note">Scopes every tab. Methodology always shows all filed years.</p>
   </div>
-  <div class="side-foot">4 of 4 years reconciled</div>
+  <div class="side-foot">4 of 5 filed years reconciled · 1 withheld</div>
 </aside>
 <noscript>
 <div style="max-width:900px;margin:0 auto;padding:0.75rem 1.25rem;font:0.85rem/1.5 sans-serif;color:#f2efe4;background:#1e4634">JavaScript is off — the headline figures are the reconciled totals; the interactive ledger needs JavaScript.</div>
@@ -72,15 +72,16 @@
         <h1>Presbyterian Health&nbsp;Foundation</h1>
         <p class="hero-meta">Oklahoma City, OK · EIN <code>73-0709836</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — payments to 1 named organization and amounts disclosed without recipient detail,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — payments to 1 named organization and amounts disclosed without recipient detail,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2023. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
-          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 4 years reconciled · to the dollar</button>
+          <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 4 of 5 filed years reconciled · 1 withheld</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -184,7 +186,7 @@
       </div>
 
       <div class="doctrine-band rv" role="note">
-        <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar, four years running.</em></div>
+        <div class="db-line">Every number on this page reconciles to the foundation’s own filed totals — <em>to the dollar for 4 of 5 filed years — 1 withheld.</em></div>
         <div class="db-eq" id="db-eq" role="img" aria-label="Sum of the grant schedules, $26,724,565, equals Part XIV, line 3a, $26,724,565 — a difference of zero dollars.">
           <span class="eq-part"><span class="eq-label">Σ grant schedules</span><span class="eq-val" id="eq-a">$26,724,565</span></span>
           <span class="eq-op">=</span>
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -318,7 +332,7 @@
           Grant rows come from the Form&nbsp;990-PF grants-paid schedule — Part&nbsp;XIV in current filings,
           formerly Part&nbsp;XV. For every tax year, the sum of the grant rows must equal Part&nbsp;I,
           line&nbsp;25, column&nbsp;(d) — charitable disbursements — to the dollar. A year that does not
-          tie is withheld, never estimated. All four available years pass; the same checks re-run in
+          tie is withheld, never estimated. 4 of 5 available years pass — 1 withheld; the same checks re-run in
           your browser’s console on every load.
         </p>
         <div class="tie-cards" id="tie-cards"></div>
@@ -329,7 +343,7 @@
           IRS TEOS public 990-PF e-file XML for EIN <code>73-0709836</code> —
           <a href="https://projects.propublica.org/nonprofits/organizations/730709836" target="_blank" rel="noopener">the filings on ProPublica ↗</a> ·
           <a href="https://www.irs.gov/charities-non-profits/form-990-series-downloads" target="_blank" rel="noopener">IRS 990 downloads ↗</a>.
-          Only these four tax periods appear as Presbyterian Health 990-PF filings in the live TEOS indexes; the ledger
+          Only these five tax periods — 1 withheld from this ledger — appear as Presbyterian Health 990-PF filings in the live TEOS indexes; the ledger
           re-issues when the next 990-PF is filed. Object IDs: <code id="obj-ids"></code>
         </p>
         <h3>Bridging to other public figures</h3>
@@ -387,7 +401,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Presbyterian Health Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2023 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -421,7 +435,7 @@
 <script>
 window.PRESBYTERI_DATA={"meta":{"foundation":"Presbyterian Health Foundation","ein":"73-0709836","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022],"grant_count":3,"grand_total":26724565,"tieout":{"2020":{"object_id":"202232149349100318","grant_count":1,"grant_sum":8642871,"line25_col_d":8642871,"status":"PASS"},"2021":{"object_id":"202341879349101109","grant_count":1,"grant_sum":9669442,"line25_col_d":9669442,"status":"PASS"},"2022":{"object_id":"202512209349100516","grant_count":1,"grant_sum":8412252,"line25_col_d":8412252,"status":"PASS"},"2023":{"object_id":"202540439349100014","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"}}},"grants":[{"y":2020,"r":"SEE ATTACHMENT","a":8642871,"p":"SEE ATTACHMENT","c":"","s":"","e":"","o":"202232149349100318","record_type":"unitemized"},{"y":2021,"r":"SEE ATTACHMENT","a":9669442,"p":"SEE ATTACHMENT","c":"","s":"","e":"","o":"202341879349101109","record_type":"unitemized"},{"y":2022,"r":"GRANTS PAID DURING THE YEAR","a":8412252,"p":"PROGRAM SUPPORT","c":"VARIOUS","s":"OK","e":"","o":"202512209349100516","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

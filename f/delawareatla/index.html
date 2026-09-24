@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Delaware Atlantis&nbsp;Foundation</h1>
         <p class="hero-meta">Pennington, NJ · EIN <code>27-6372427</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 16 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 16 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Delaware Atlantis Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.DELAWAREAT_DATA={"meta":{"foundation":"Delaware Atlantis Foundation","ein":"27-6372427","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":35,"grand_total":18458700,"tieout":{"2020":{"object_id":"202230699349101108","grant_count":3,"grant_sum":913000,"line25_col_d":913000,"status":"PASS"},"2021":{"object_id":"202300699349100635","grant_count":8,"grant_sum":1076000,"line25_col_d":1076000,"status":"PASS"},"2022":{"object_id":"202430609349100613","grant_count":5,"grant_sum":1013000,"line25_col_d":1013000,"status":"PASS"},"2023":{"object_id":"202530939349101803","grant_count":7,"grant_sum":5565000,"line25_col_d":5565000,"status":"PASS"},"2024":{"object_id":"202640999349100834","grant_count":12,"grant_sum":9891700,"line25_col_d":9891700,"status":"PASS"}}},"grants":[{"y":2020,"r":"DELAWARE COMMUNITY FOUNDATION","a":278000,"p":"ATLANTIS FUND","c":"WILMINGTON","s":"DE","e":"","o":"202230699349101108","record_type":"named_recipient"},{"y":2020,"r":"BEEBE MEDICAL FOUNDATION","a":350000,"p":"UNRESTRICTED GENERAL","c":"LEWES","s":"DE","e":"","o":"202230699349101108","record_type":"named_recipient"},{"y":2020,"r":"UNIVERSITY OF DELAWARE","a":285000,"p":"UNRESTRICTED GENERAL","c":"NEWARK","s":"DE","e":"","o":"202230699349101108","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF DELAWARE","a":25000,"p":"APIARY PROGRAM","c":"NEWARK","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"DELAWARE COMMUNITY FOUNDATION","a":626000,"p":"ATLANTIS FUND","c":"WILMINGTON","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"CHILDREN'S BEACH HOUSE","a":35000,"p":"UNRESTRICTED GENERAL","c":"WILMINGTON","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"DELAWARE ACADEMY OF MEDICINE","a":157500,"p":"UNRESTRICTED GENERAL","c":"NEWARK","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"BEEBE MEDICAL FOUNDATION","a":157500,"p":"FAMILY RESIDENCY PROGRAM","c":"LEWES","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"SUSSEX COUNTY HABITAT FOR HUMANITY","a":10000,"p":"UNRESTRICTED GENERAL","c":"GEORGETOWN","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF DELAWARE","a":15000,"p":"GO BABY GO","c":"NEWARK","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2021,"r":"THE NEMOURS CHILDREN'S HOSPITAL","a":50000,"p":"UNRESTRICTED GENERAL","c":"WILMINGTON","s":"DE","e":"","o":"202300699349100635","record_type":"named_recipient"},{"y":2022,"r":"DELAWARE COMMUNITY FOUNDATION","a":305000,"p":"ATLANTIS FUND","c":"WILMINGTON","s":"DE","e":"","o":"202430609349100613","record_type":"named_recipient"},{"y":2022,"r":"DELAWARE BOTANIC GARDENS","a":50000,"p":"UNRESTRICTED GENERAL","c":"OCEAN VIEW","s":"DE","e":"","o":"202430609349100613","record_type":"named_recipient"},{"y":2022,"r":"BEEBE MEDICAL FOUNDATION","a":275000,"p":"SUSSEX SUPPORTS BEEBE","c":"LEWES","s":"DE","e":"","o":"202430609349100613","record_type":"named_recipient"},{"y":2022,"r":"UNIVERSITY OF DELAWARE","a":333000,"p":"VEHICLES, UPGRADES, LAB","c":"NEWARK","s":"DE","e":"","o":"202430609349100613","record_type":"named_recipient"},{"y":2022,"r":"THE NEMOURS CHILDREN'S HOSPITAL","a":50000,"p":"NCCW - MILFORD CLINICAL","c":"WILMINGTON","s":"DE","e":"","o":"202430609349100613","record_type":"named_recipient"},{"y":2023,"r":"UNITED SERVICE ORGANIZATIONS","a":25000,"p":"DOVER, DELAWARE PROGRAMS","c":"ARLINGTON","s":"VA","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"DELAWARE COMMUNITY FOUNDATION","a":465000,"p":"ATLANTIS FUND","c":"WILMINGTON","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"DELAWARE BOTANIC GARDENS","a":500000,"p":"UNRESTRICTED GENERAL","c":"OCEAN VIEW","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"DELAWARE TECHNICAL EDUCATIONAL FDN","a":100000,"p":"SCHOLARSHIPS","c":"DOVER","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"BEEBE MEDICAL FOUNDATION","a":2050000,"p":"CANCER CTR, RESIDENT","c":"LEWES","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF DELAWARE","a":2225000,"p":"CREAMERY, BOTANIC GDN,","c":"NEWARK","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2023,"r":"NEMOURS CHILDREN'S HEALTH","a":200000,"p":"MILFORD CLINIC THERAPY","c":"WILMINGTON","s":"DE","e":"","o":"202530939349101803","record_type":"named_recipient"},{"y":2024,"r":"UNITED SERVICE ORGANIZATIONS","a":50000,"p":"DOVER, DELAWARE PROGRAMS","c":"ARLINGTON","s":"VA","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"BLOOD CENTER UNITED","a":200000,"p":"PATIENT SUPPORT FUND","c":"WASHINGTON","s":"DC","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"LA RED HEALTH CENTER INC","a":100000,"p":"UNRESTRICTED GENERAL","c":"GEORGETOWN","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"DELAWARE COMMUNITY FOUNDATION","a":640700,"p":"ATLANTIS FUND","c":"WILMINGTON","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"DELAWARE BOTANIC GARDENS","a":50000,"p":"UNRESTRICTED GENERAL","c":"OCEAN VIEW","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"SUSSEX COUNTY ANIMAL ASSOCIATION","a":50000,"p":"UNRESTRICTED GENERAL","c":"SEAFORD","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"CHILDREN'S BEACH HOUSE","a":150000,"p":"CHILD DEVELOPMENT CTR","c":"LEWES","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"DELAWARE TECHNICAL EDUCATIONAL FDN","a":100000,"p":"NURSING SCHOLARSHIPS","c":"DOVER","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"LOWER SUSSEX LITTLE LEAGUE","a":50000,"p":"UNRESTRICTED GENERAL","c":"OCEAN VIEW","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"BEEBE HEALTHCARE MEDICAL FOUNDATION","a":5350000,"p":"CANCER CTR, RES PHYSICIANS,","c":"LEWES","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF DELAWARE","a":2351000,"p":"CREAMERY, BOTANIC GDN,","c":"NEWARK","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"},{"y":2024,"r":"NEMOURS CHILDREN'S HEALTH","a":800000,"p":"MILFORD CLINIC EXPANSION","c":"WILMINGTON","s":"DE","e":"","o":"202640999349100834","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Dohmen Company&nbsp;Foundation</h1>
         <p class="hero-meta">Milwaukee, WI · EIN <code>35-2317921</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 29 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 29 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Dohmen Company Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.DOHMENCOMP_DATA={"meta":{"foundation":"Dohmen Company Foundation","ein":"35-2317921","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":43,"grand_total":26273480,"tieout":{"2020":{"object_id":"202123169349104572","grant_count":13,"grant_sum":554335,"line25_col_d":554335,"status":"PASS"},"2021":{"object_id":"202203159349102520","grant_count":20,"grant_sum":1686945,"line25_col_d":1686945,"status":"PASS"},"2022":{"object_id":"202313139349100901","grant_count":6,"grant_sum":15028250,"line25_col_d":15028250,"status":"PASS"},"2023":{"object_id":"202442559349100909","grant_count":1,"grant_sum":8402750,"line25_col_d":8402750,"status":"PASS"},"2024":{"object_id":"202512979349101006","grant_count":3,"grant_sum":601200,"line25_col_d":601200,"status":"PASS"}}},"grants":[{"y":2020,"r":"GREATER MILWAUKEE COMMITTEE","a":250000,"p":"LIGHT THE HOAN CAMPAIGN","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":191835,"p":"GENERAL OPERATIONS","c":"CHICAGO","s":"IL","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"SIXTEENTH STREET COMMUNITY HEALTH CENTERS INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"FEEDING AMERICA EASTERN WISCONSIN INC","a":21000,"p":"$1,000 GRATEFUL PLATE FUNDRAISER, $20,000 GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"FONDY FOOD CENTER INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":20000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"GREATER MILWAUKEE SYNOD","a":10000,"p":"GENERAL OPERATIONS","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"GEISINGER HEALTH","a":4000,"p":"FRESH FOOD FARMACY FUND","c":"DANVILLE","s":"PA","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":1000,"p":"MATC HEALTHCARE HEROES FUND","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"TEENS GROW GREENS INC","a":1000,"p":"CHEF'S DINNER SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"PEARLS FOR TEEN GIRLS INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY","a":10000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2020,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":2500,"p":"SPONSORSHIP","c":"CHICAGO","s":"IL","e":"","o":"202123169349104572","record_type":"named_recipient"},{"y":2021,"r":"CITY OF MILWAUKEE","a":2500,"p":"SPONSORSHIP FOR BRONZEVILLE WEEK","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"KINSHIP COMMUNITY FOOD CENTER FKA RIVERWEST FOOD PANTRY","a":300000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"COMMUNITY SERVINGS INC","a":15000,"p":"GENERAL SUPPORT","c":"JAMAICA PLAIN","s":"MA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"FOODRIGHT INC","a":70000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"GOD'S LOVE WE DELIVER INC","a":1001000,"p":"GENERAL SUPPORT","c":"NEW YORK","s":"NY","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"GREATER MILWAUKEE FOUNDATION INC","a":100000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"HALYARD PARK ASSOCIATION","a":10000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"HEARTLOVE PLACE INC","a":40000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"INNER-CITY COMPUTER STARS FOUNDATION","a":1945,"p":"GENERAL OPERATIONS","c":"CHICAGO","s":"IL","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE AREA TECHNICAL COLLEGE FOUNDATION INC","a":50000,"p":"MATC HEALTHCARE HEROES FUND","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE CENTER FOR INDEPENDENCE FOUNDATION INC","a":60000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"MILWAUKEE JEWISH FEDERATION INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"OPEN HAND ATLANTA","a":1000,"p":"GENERAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"PEARLS FOR TEEN GIRLS INC","a":2000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"PROJECT ANGEL HEART","a":1000,"p":"GENERAL SUPPORT","c":"DENVER","s":"CO","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"TEENS GROW GREENS INC","a":15000,"p":"CHEF'S DINNER SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY","a":10000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"CERES COMMUNITY PROJECT","a":1000,"p":"GENERAL SUPPORT","c":"SEBASTOPOL","s":"CA","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"WESTCARE WISCONSIN INC","a":1000,"p":"GENERAL SUPPORT","c":"LAS VEGAS","s":"NV","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2021,"r":"WISCONSIN WOMENS BUSINESS INITIATIVE CORPORATION","a":2500,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202203159349102520","record_type":"named_recipient"},{"y":2022,"r":"CITY OF MILWAUKEE","a":5000,"p":"SPONSORSHIP FOR BRONZEVILLE WEEK","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"COMMUNITY SERVINGS INC","a":5000,"p":"GENERAL SUPPORT","c":"JAMAICA PLAIN","s":"MA","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"FOOD FOR HEALTH","a":15000000,"p":"GENERAL SUPPORT","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"PEARLS FOR TEEN GIRLS INC","a":3000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"TEENS GROW GREENS INC","a":15000,"p":"SPONSORSHIP","c":"MILWAUKEE","s":"WI","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2022,"r":"WESTCARE WISCONSIN INC","a":250,"p":"EARTH DAY CLEANUP PROJECT","c":"LAS VEGAS","s":"NV","e":"","o":"202313139349100901","record_type":"named_recipient"},{"y":2023,"r":"FOOD FOR HEALTH INC","a":8402750,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Milwauke","s":"WI","e":"","o":"202442559349100909","record_type":"named_recipient"},{"y":2024,"r":"Community Initiatives","a":100000,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Oakland","s":"CA","e":"","o":"202512979349101006","record_type":"named_recipient"},{"y":2024,"r":"Food for Health","a":1200,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Milwaukee","s":"WI","e":"","o":"202512979349101006","record_type":"named_recipient"},{"y":2024,"r":"FoodCorps","a":500000,"p":"ADVANCING THE MISSION OF DOHMEN COMPANY FOUNDATION","c":"Portland","s":"OR","e":"","o":"202512979349101006","record_type":"named_recipient"}]};window.LEDGER_MERGES=["FOOD FOR HEALTH"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"TEENS GROW GREENS INC":"Basic needs & response","PEARLS FOR TEEN GIRLS INC":"Education & youth","THE ZOOLOGICAL SOCIETY OF MILWAUKEE COUNTY":"Environment & animals","INNER-CITY COMPUTER STARS FOUNDATION":"Community & economic development","MILWAUKEE JEWISH FEDERATION INC":"Nonprofit capacity & transitions","WESTCARE WISCONSIN INC":"Health & wellbeing","Community Initiatives":"Nonprofit capacity & transitions","FoodCorps":"Basic needs & response"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

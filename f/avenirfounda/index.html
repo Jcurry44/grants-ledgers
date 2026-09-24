@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Avenir&nbsp;Foundation</h1>
         <p class="hero-meta">Lakewood, CO · EIN <code>84-1245939</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 15 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 15 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Avenir Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.AVENIRFOUN_DATA={"meta":{"foundation":"Avenir Foundation","ein":"84-1245939","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":25,"grand_total":32383641,"tieout":{"2020":{"object_id":"202241369349101804","grant_count":11,"grant_sum":5587070,"line25_col_d":5587070,"status":"PASS"},"2021":{"object_id":"202331359349102803","grant_count":4,"grant_sum":2346571,"line25_col_d":2346571,"status":"PASS"},"2022":{"object_id":"202431349349102083","grant_count":2,"grant_sum":1000000,"line25_col_d":1000000,"status":"PASS"},"2023":{"object_id":"202531359349102428","grant_count":2,"grant_sum":2700000,"line25_col_d":2700000,"status":"PASS"},"2024":{"object_id":"202631359349103418","grant_count":6,"grant_sum":20750000,"line25_col_d":20750000,"status":"PASS"}}},"grants":[{"y":2020,"r":"Arnold Schoenberg Institute","a":100000,"p":"General Operating Fund","c":"","s":"","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Ars Nova Singers Inc","a":100000,"p":"Funding of current operating fund","c":"Boulder","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Central City Opera","a":2324351,"p":"General Operating Funds","c":"Wheat Ridge","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Colorado Ballet","a":20000,"p":"General Operating Funds","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Colorado Symphony Fund","a":542719,"p":"General Operating Funds","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Opera Colorado","a":200000,"p":"General Operating Funds","c":"Englewood","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Pathfinder International","a":200000,"p":"General Operating Funds","c":"Watertown","s":"MA","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"The Denver Art Museum","a":1000000,"p":"Contribution to the Denver Art Museum's Vision 2021 campaign/","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Kulakamala Foundation","a":100000,"p":"Essential supplies","c":"Redding","s":"PA","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Denver Foundation","a":500000,"p":"For the benefit of the Ars Nova Singers Working Capital EndowmentFor the benefit of the Ars Nova Singers Endowment","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2020,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame Museum Endowment","c":"Denver","s":"CO","e":"","o":"202241369349101804","record_type":"named_recipient"},{"y":2021,"r":"Central City Opera","a":1446571,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Denver Foundation","a":200000,"p":"For the benefit of the Ars Nova Singers Working Capital Endowment","c":"Denver","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame Museum EndowmentFor the benefit of the Ars Nova Singers Endowment","c":"Denver","s":"CO","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2021,"r":"Planned Parenthood Federation of America","a":200000,"p":"General Operating Fund","c":"New York","s":"NY","e":"","o":"202331359349102803","record_type":"named_recipient"},{"y":2022,"r":"Central City Opera","a":500000,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202431349349102083","record_type":"named_recipient"},{"y":2022,"r":"Denver Foundation","a":500000,"p":"For the benefit of the National Mining Hall of Fame and Museum Endowment","c":"Denver","s":"CO","e":"","o":"202431349349102083","record_type":"named_recipient"},{"y":2023,"r":"Central City Opera","a":1200000,"p":"General Operating Funds and matching endowment fund","c":"Wheat Ridge","s":"CO","e":"","o":"202531359349102428","record_type":"named_recipient"},{"y":2023,"r":"National Mining Hall of Fame and Museum","a":1500000,"p":"For the benefit of the National Mining Hall of Fame and Museum Endowment","c":"Leadville","s":"CO","e":"","o":"202531359349102428","record_type":"named_recipient"},{"y":2024,"r":"American Institute of Physics","a":250000,"p":"Operations","c":"College Park","s":"MD","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Central City Opera","a":500000,"p":"Operations","c":"Arvada","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Colorado Symphony Fund","a":1000000,"p":"To Endowment in memory of Jerome Kern, Chairman Emeritus","c":"Denver","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Kulakamala Foundation","a":8000000,"p":"Purchase of 55 Basket Road Nature CenterOperating Support","c":"Reading","s":"PA","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"Santa Fe Opera","a":1000000,"p":"Intial Costs for the Construction of Apprentice Housing","c":"Santa Fe","s":"NM","e":"","o":"202631359349103418","record_type":"named_recipient"},{"y":2024,"r":"St Martin's Chamber Choir","a":10000000,"p":"Establish the St Martin's Chamber Choir Endowment Fund","c":"Denver","s":"CO","e":"","o":"202631359349103418","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

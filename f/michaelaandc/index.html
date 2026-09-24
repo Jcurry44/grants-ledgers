@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Michael A and Connie V Joines Family&nbsp;Foundation</h1>
         <p class="hero-meta">Granger, IN · EIN <code>47-2581672</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 28 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 28 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Michael A and Connie V Joines Family Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.MICHAELAAN_DATA={"meta":{"foundation":"Michael A and Connie V Joines Family Foundation","ein":"47-2581672","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":40,"grand_total":9290297,"tieout":{"2020":{"object_id":"202141349349103154","grant_count":1,"grant_sum":10000,"line25_col_d":10000,"status":"PASS"},"2021":{"object_id":"202213189349107261","grant_count":1,"grant_sum":325000,"line25_col_d":325000,"status":"PASS"},"2022":{"object_id":"202323189349105322","grant_count":8,"grant_sum":720000,"line25_col_d":720000,"status":"PASS"},"2023":{"object_id":"202433189349103643","grant_count":12,"grant_sum":5860010,"line25_col_d":5860010,"status":"PASS"},"2024":{"object_id":"202502969349100885","grant_count":18,"grant_sum":2375287,"line25_col_d":2375287,"status":"PASS"}}},"grants":[{"y":2020,"r":"CATHOLIC RELIEF SERVICES","a":10000,"p":"CHARITABLE","c":"BALTIMORE","s":"MD","e":"","o":"202141349349103154","record_type":"named_recipient"},{"y":2021,"r":"CATHOLIC RELIEF SERVICES","a":325000,"p":"CHARITABLE","c":"BALTIMORE","s":"MD","e":"","o":"202213189349107261","record_type":"named_recipient"},{"y":2022,"r":"ANDEAN HEALTH AND DEVELOPMENT","a":100000,"p":"MEDICAL","c":"MADISON","s":"WI","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"BOYS AND GIRLS CLUB","a":25000,"p":"CHARITABLE","c":"SOUTH BEND","s":"IN","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"CATHOLIC RELIEF SERVICES","a":325000,"p":"CHARITABLE","c":"BALTIMORE","s":"MD","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"DIOCESE OF FORT WAYNE SOUTH BEND","a":75000,"p":"RELIGIOUS","c":"FORT WAYNE","s":"IN","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"FELLOWSHIP OF CATHOLIC UNIVERSITY STUDENTS","a":20000,"p":"RELIGIOUS","c":"GOLDEN","s":"CO","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"HOLY CROSS FOREIGN MISSION INC","a":25000,"p":"RELIGIOUS","c":"NOTRE DAME","s":"IN","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"LOVE WITHOUT BOUNDARIES","a":50000,"p":"CHARITABLE","c":"EDMOND","s":"OK","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2022,"r":"POTAWATOMI ZOOLOGICAL SOCIETY","a":100000,"p":"CHARITABLE","c":"SOUTH BEND","s":"IN","e":"","o":"202323189349105322","record_type":"named_recipient"},{"y":2023,"r":"ANDEAN HEALTH AND DEVELOPMENT","a":150000,"p":"MEDICAL","c":"MADISON","s":"WI","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"CHANGING GEARS","a":20000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"CHRIST THE KING CHURCH","a":1000000,"p":"RELIGIOUS","c":"SOUTH BEND","s":"IN","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"CHURCHES ACTIVE IN NORTHSIDE","a":20000,"p":"RELIGIOUS","c":"CINCINNATI","s":"OH","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"EDESIA INC","a":300000,"p":"CHARITABLE","c":"NORTH KINGSTOWN","s":"RI","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"INDIANA UNIVERSITY FOUNDATION","a":205000,"p":"EDUCATIONAL","c":"INDIANAPOLIS","s":"IN","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"KENYA WORKS INC","a":223250,"p":"CHARITABLE","c":"APPLETON","s":"WI","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"LOVE WITHOUT BOUNDARIES","a":128800,"p":"CHARITABLE","c":"EDMOND","s":"OK","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"NOTRE DAME UNIVERSITY","a":3750000,"p":"EDUCATIONAL","c":"SOUTH BEND","s":"IN","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"PROTEUS INC","a":10000,"p":"CHARITABLE","c":"DES MOINES","s":"IA","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"THE METANOIA PROJECT","a":34960,"p":"CHARITABLE","c":"CLEVELAND","s":"OH","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2023,"r":"VILLAGE TO VILLAGE INTERNATIONAL","a":18000,"p":"CHARITABLE","c":"SOUTH BEND","s":"IN","e":"","o":"202433189349103643","record_type":"named_recipient"},{"y":2024,"r":"ANDEAN HEALTH AND DEVELOPMENT","a":100000,"p":"MEDICAL","c":"MADISON","s":"WI","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC CHARITIES OF SOUTHWEST OHIO","a":250000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC RELIEF SERVICES","a":317455,"p":"CHARITABLE","c":"BALTIMORE","s":"MD","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"CHANGING GEARS","a":30000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"CHURCHES ACTIVE IN NORTHSIDE - CAIN","a":25000,"p":"RELIGIOUS","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"CLOVERNOOK CENTER FOR THE BLIND","a":36500,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"COMBONI MISSIONARIES OF THE HEART OF JESUS","a":40000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"DISMAS HOUSE OF INDIANA INC","a":57250,"p":"CHARITABLE","c":"SOUTH BEND","s":"IN","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"EDESIA INC","a":100000,"p":"CHARITABLE","c":"NORTH KINGSTOWN","s":"RI","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"HAPPEN INC","a":27000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"KENYA WORKS INC","a":170147,"p":"CHARITABLE","c":"APPLETON","s":"WI","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"LOVE WITHOUT BOUNDARIES","a":232435,"p":"CHARITABLE","c":"EDMOND","s":"OK","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"MAKE A WISH FOUNDATION","a":100000,"p":"CHARITABLE","c":"COLUMBUS","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"NOTRE DAME UNIVERSITY","a":587500,"p":"EDUCATIONAL","c":"SOUTH BEND","s":"IN","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"ONESKY","a":90000,"p":"CHARITABLE","c":"BERKELEY","s":"CA","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"PEOPLE WORKING COOPERATIVELY","a":40000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"STRATEGIES TO END HOMELESSNESS","a":160000,"p":"CHARITABLE","c":"CINCINNATI","s":"OH","e":"","o":"202502969349100885","record_type":"named_recipient"},{"y":2024,"r":"VILLAGE TO VILLAGE INTERNATIONAL","a":12000,"p":"CHARITABLE","c":"SOUTH BEND","s":"IN","e":"","o":"202502969349100885","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"POTAWATOMI ZOOLOGICAL SOCIETY":"Environment & animals","EDESIA INC":"Basic needs & response","KENYA WORKS INC":"Education & youth","PROTEUS INC":"Community & economic development","THE METANOIA PROJECT":"Basic needs & response","VILLAGE TO VILLAGE INTERNATIONAL":"Basic needs & response","DISMAS HOUSE OF INDIANA INC":"Basic needs & response","HAPPEN INC":"Basic needs & response","PEOPLE WORKING COOPERATIVELY":"Basic needs & response"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

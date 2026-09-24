@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="MINORITYTE_DATA" data-slug="minoritytele" data-n="30" data-grand="742639" data-recsub="All two years" data-running="to the dollar, two years running." data-names="20 as-filed names" data-rows-embedded="30" data-rows-total="30">
+<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="MINORITYTE_DATA" data-slug="minoritytele" data-n="30" data-grand="742639" data-recsub="All two years" data-running="to the dollar, two years running." data-names="13 as-filed names" data-rows-embedded="30" data-rows-total="30">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Minority Television&nbsp;Project</h1>
         <p class="hero-meta">San Mateo, CA · EIN <code>94-2975155</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 20 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 12 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2023–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 2 of 2 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -101,8 +102,8 @@
   <div class="sheet-kpis" role="group" aria-label="Headline figures">
     <div class="kpi">
       <div class="k-label">Recipients</div>
-      <div class="k-val" id="kpi-orgs">20</div>
-      <div class="k-hint">Organizations the foundation funded · 20 as-filed names</div>
+      <div class="k-val" id="kpi-orgs">12</div>
+      <div class="k-hint">Organizations the foundation funded · 13 as-filed names</div>
     </div>
     <div class="kpi">
       <div class="k-label">Median grant</div>
@@ -121,11 +122,12 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
-    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">20</span></button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">12</span></button>
     <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">30</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -377,7 +391,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Minority Television Project. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -409,9 +423,9 @@
   </div>
 </div>
 <script>
-window.MINORITYTE_DATA={"meta":{"foundation":"Minority Television Project","ein":"94-2975155","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024],"grant_count":30,"grand_total":742639,"tieout":{"2023":{"object_id":"202403209349108730","grant_count":13,"grant_sum":364815,"line25_col_d":364815,"status":"PASS"},"2024":{"object_id":"202503229349101450","grant_count":17,"grant_sum":377824,"line25_col_d":377824,"status":"PASS"}}},"grants":[{"y":2023,"r":"CAMEGIE MELLON UNIVERSITY","a":17638,"p":"SCHOLARSHIP FOR SELAM GANO","c":"PITTSBURGH","s":"PA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"FOOTHILL COLLEGE","a":8136,"p":"SCHOLARSHIP FOR BEATRICE BORKER","c":"LOS ALTOS HILLS","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA INSTITUTE OF TECH","a":45000,"p":"SCHOLARSHIP FOR JONATHAN RHONE","c":"ATLANTA","s":"GA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":133833,"p":"SCHOLARSHIP-KUMBONG, ALFORD,AGHA OKO","c":"STANFORD","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"THE OHIO STATE UNIVERSITY","a":64404,"p":"SCHOLARSHIP FOR LIDIYA ATSIBEHA","c":"COLUMBUS","s":"OH","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"THE UNIVERSITY OF CHICAGO","a":26414,"p":"SCHOLARSHIP FOR BRUNO FELALAGA","c":"CHICAGO","s":"IL","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"BEATRICE BORKER","a":35087,"p":"SCHOLARSHIP - FOR FOOTHILL COLLEGE","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"BRUNO FELALAFA","a":5550,"p":"SCHOLARSHIP -UNIVERSITY OF CHICAGO","c":"CHICAGO","s":"IL","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"JOHNATHAN RHONE","a":10000,"p":"SCHOLARSHIP - GA INST TECH","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"KOJO EGYIR VANDY","a":2355,"p":"SCHOLARSHIP-UNIVERSITY OF ILLINOIS","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"LIDIYA BERIHUN","a":2213,"p":"SCHOLARSHIP - OHIO STATE UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"MAHILET ADEM","a":2000,"p":"SCHOLARSHIP- STANFORD UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"WILLIAM SANDS","a":12185,"p":"SCHOLARSHIP FOR CORNEL UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2024,"r":"CAMEGIE MELLON UNIVERSITY","a":30138,"p":"SCHOLARSHIP SELAM GANO;N JANGHA","c":"PITTSBURGH","s":"PA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"FOOTHILL COLLEGE","a":9588,"p":"SCHOLARSHIP FOR BEATRICE BORKER","c":"LOS ALTOS HILLS","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"STANFORD UNIVERSITY","a":47903,"p":"SCHOLARSHIP-LEWIS, GENTLES, SIBHATU","c":"STANFORD","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"THE OHIO STATE UNIVERSITY","a":41169,"p":"SCHOLARSHIP FOR LIDIYA ATSIBEHA","c":"COLUMBUS","s":"OH","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"THE UNIVERSITY OF CHICAGO","a":81751,"p":"SCHOLARSHIP FOR BRUNO FELALAGA","c":"CHICAGO","s":"IL","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"BEATRICE BORKER","a":34208,"p":"SCHOLARSHIP - FOR FOOTHILL COLLEGE","c":"PALO ALTO","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"BRUNO FELALAFA","a":1500,"p":"SCHOLARSHIP -UNIVERSITY OF CHICAGO","c":"CHICAGO","s":"IL","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"KOJO EGYIR VANDY","a":16200,"p":"SCHOLARSHIP-UNIVERSITY OF ILLINOIS","c":"PALO ALTO","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"LIDIYA BERIHUN","a":999,"p":"SCHOLARSHIP - OHIO STATE UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"WILLIAM SANDS","a":12186,"p":"SCHOLARSHIP FOR CORNEL UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"UC REGENTS","a":1736,"p":"FOR BEATRICE BORKER","c":"SANTA CRUZ","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"SAN JOSE STATE UNIVERSITY","a":10060,"p":"FOR BEATRICE BORKER","c":"SAN JOSE","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"BINIYAM LOMBE","a":1214,"p":"SCHOLARSHIP FOR YALE UNIVERSITY","c":"PALO ALTO","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"YALE UNIVERSITY","a":25000,"p":"FOR BINIYAM LOLISO LOMBE","c":"NEW HAVEN","s":"CT","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA UNIVERSITY","a":25000,"p":"SCHOLARSHIP","c":"NEW YORK","s":"NY","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF ILLINOIS","a":20351,"p":"SCHOLARSHIP FOR KOJO VANDY","c":"URBANA","s":"IL","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"VIRGINIA TECH","a":18821,"p":"SCHOLARSHIP FOR LWAM AREGAWI HAILE","c":"BLACKSBURG","s":"VA","e":"","o":"202503229349101450","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
+window.MINORITYTE_DATA={"meta":{"foundation":"Minority Television Project","ein":"94-2975155","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2023,2024],"grant_count":30,"grand_total":742639,"tieout":{"2023":{"object_id":"202403209349108730","grant_count":13,"grant_sum":364815,"line25_col_d":364815,"status":"PASS"},"2024":{"object_id":"202503229349101450","grant_count":17,"grant_sum":377824,"line25_col_d":377824,"status":"PASS"}}},"grants":[{"y":2023,"r":"CAMEGIE MELLON UNIVERSITY","a":17638,"p":"SCHOLARSHIP FOR SELAM GANO","c":"PITTSBURGH","s":"PA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"FOOTHILL COLLEGE","a":8136,"p":"SCHOLARSHIP FOR BEATRICE BORKER","c":"LOS ALTOS HILLS","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"GEORGIA INSTITUTE OF TECH","a":45000,"p":"SCHOLARSHIP FOR JONATHAN RHONE","c":"ATLANTA","s":"GA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":133833,"p":"SCHOLARSHIP-KUMBONG, ALFORD,AGHA OKO","c":"STANFORD","s":"CA","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"THE OHIO STATE UNIVERSITY","a":64404,"p":"SCHOLARSHIP FOR LIDIYA ATSIBEHA","c":"COLUMBUS","s":"OH","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"THE UNIVERSITY OF CHICAGO","a":26414,"p":"SCHOLARSHIP FOR BRUNO FELALAGA","c":"CHICAGO","s":"IL","e":"","o":"202403209349108730","record_type":"named_recipient"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":35087,"p":"SCHOLARSHIP - FOR FOOTHILL COLLEGE","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":5550,"p":"SCHOLARSHIP -UNIVERSITY OF CHICAGO","c":"","s":"IL","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":10000,"p":"SCHOLARSHIP - GA INST TECH","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":2355,"p":"SCHOLARSHIP-UNIVERSITY OF ILLINOIS","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":2213,"p":"SCHOLARSHIP - OHIO STATE UNIVERSITY","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":2000,"p":"SCHOLARSHIP- STANFORD UNIVERSITY","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2023,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":12185,"p":"SCHOLARSHIP FOR CORNEL UNIVERSITY","c":"","s":"CA","e":"","o":"202403209349108730","record_type":"individual_masked"},{"y":2024,"r":"CAMEGIE MELLON UNIVERSITY","a":30138,"p":"SCHOLARSHIP SELAM GANO;N JANGHA","c":"PITTSBURGH","s":"PA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"FOOTHILL COLLEGE","a":9588,"p":"SCHOLARSHIP FOR BEATRICE BORKER","c":"LOS ALTOS HILLS","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"STANFORD UNIVERSITY","a":47903,"p":"SCHOLARSHIP-LEWIS, GENTLES, SIBHATU","c":"STANFORD","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"THE OHIO STATE UNIVERSITY","a":41169,"p":"SCHOLARSHIP FOR LIDIYA ATSIBEHA","c":"COLUMBUS","s":"OH","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"THE UNIVERSITY OF CHICAGO","a":81751,"p":"SCHOLARSHIP FOR BRUNO FELALAGA","c":"CHICAGO","s":"IL","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":34208,"p":"SCHOLARSHIP - FOR FOOTHILL COLLEGE","c":"","s":"CA","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":1500,"p":"SCHOLARSHIP -UNIVERSITY OF CHICAGO","c":"","s":"IL","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":16200,"p":"SCHOLARSHIP-UNIVERSITY OF ILLINOIS","c":"","s":"CA","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":999,"p":"SCHOLARSHIP - OHIO STATE UNIVERSITY","c":"","s":"CA","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":12186,"p":"SCHOLARSHIP FOR CORNEL UNIVERSITY","c":"","s":"CA","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"UC REGENTS","a":1736,"p":"FOR BEATRICE BORKER","c":"SANTA CRUZ","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"SAN JOSE STATE UNIVERSITY","a":10060,"p":"FOR BEATRICE BORKER","c":"SAN JOSE","s":"CA","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":1214,"p":"SCHOLARSHIP FOR YALE UNIVERSITY","c":"","s":"CA","e":"","o":"202503229349101450","record_type":"individual_masked"},{"y":2024,"r":"YALE UNIVERSITY","a":25000,"p":"FOR BINIYAM LOLISO LOMBE","c":"NEW HAVEN","s":"CT","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"COLUMBIA UNIVERSITY","a":25000,"p":"SCHOLARSHIP","c":"NEW YORK","s":"NY","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF ILLINOIS","a":20351,"p":"SCHOLARSHIP FOR KOJO VANDY","c":"URBANA","s":"IL","e":"","o":"202503229349101450","record_type":"named_recipient"},{"y":2024,"r":"VIRGINIA TECH","a":18821,"p":"SCHOLARSHIP FOR LWAM AREGAWI HAILE","c":"BLACKSBURG","s":"VA","e":"","o":"202503229349101450","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

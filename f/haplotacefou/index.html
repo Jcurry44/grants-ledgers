@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Haplotace&nbsp;Foundation</h1>
         <p class="hero-meta">Birmingham, AL · EIN <code>63-1182139</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 8 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 8 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2021–2025. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Haplotace Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.HAPLOTACEF_DATA={"meta":{"foundation":"Haplotace Foundation","ein":"63-1182139","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":51,"grand_total":157525987,"tieout":{"2021":{"object_id":"202231629349100303","grant_count":2,"grant_sum":380000,"line25_col_d":380000,"status":"PASS"},"2022":{"object_id":"202333199349106623","grant_count":2,"grant_sum":447500,"line25_col_d":447500,"status":"PASS"},"2023":{"object_id":"202442849349101514","grant_count":4,"grant_sum":1743500,"line25_col_d":1743500,"status":"PASS"},"2024":{"object_id":"202532319349100323","grant_count":21,"grant_sum":47197833,"line25_col_d":47197833,"status":"PASS"},"2025":{"object_id":"202601709349100110","grant_count":22,"grant_sum":107757154,"line25_col_d":107757154,"status":"PASS"}}},"grants":[{"y":2021,"r":"PRESBYTERIAN CHURCH OF AMERICA FOUNDATION ATLANTA GA","a":243500,"p":"EXEMPT PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202231629349100303","record_type":"named_recipient"},{"y":2021,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":136500,"p":"EXEMPT PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202231629349100303","record_type":"named_recipient"},{"y":2022,"r":"PRESBYTERIAN CHURCH OF AMERICA FOUNDATION","a":311000,"p":"EXEMPT PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202333199349106623","record_type":"named_recipient"},{"y":2022,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":136500,"p":"EXEMPT PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202333199349106623","record_type":"named_recipient"},{"y":2023,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":80500,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202442849349101514","record_type":"named_recipient"},{"y":2023,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":908000,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202442849349101514","record_type":"named_recipient"},{"y":2023,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":750000,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202442849349101514","record_type":"named_recipient"},{"y":2023,"r":"MISSION INCREASE","a":5000,"p":"CHARITABLE PURPOSES","c":"PORTLAND","s":"OR","e":"","o":"202442849349101514","record_type":"named_recipient"},{"y":2024,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":112400,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":859440,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":1600000,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":4576175,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":5963006,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":235567,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":847840,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":1118900,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":4923538,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":3682281,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":73350,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":5578517,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":10976358,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":2000000,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":1749628,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"WALKER AREA COMMUNITY FOUNDATION","a":120000,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"WALKER AREA COMMUNITY FOUNDATION","a":304000,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"WALKER AREA COMMUNITY FOUNDATION","a":1750583,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":220000,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":496250,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2024,"r":"WALKER AREA COMMUNITY FOUNDATION","a":10000,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202532319349100323","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":29470968,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":800000,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":4648803,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":1731930,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION GREATER BIRMINGHAM","a":2610556,"p":"CHARITABLE PURPOSES","c":"BIRMINGHAM","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":800000,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":9896214,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":24172198,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":14449375,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"PRESBYTERIAN CHURCH IN AMERICA FOUNDATION INC","a":9309658,"p":"CHARITABLE PURPOSES","c":"LAWRENCEVILLE","s":"GA","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":711488,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":2054284,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":452760,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"THE CENTRAL ALABAMA COMMUNITY FOUNDATION","a":125000,"p":"CHARITABLE PURPOSES","c":"MONTGOMERY","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"WALKER AREA COMMUNITY FOUNDATION","a":178150,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"WALKER AREA COMMUNITY FOUNDATION","a":1218760,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"WALKER AREA COMMUNITY FOUNDATION","a":60000,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"WALKER AREA COMMUNITY FOUNDATION","a":300000,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"WALKER AREA COMMUNITY FOUNDATION","a":869900,"p":"CHARITABLE PURPOSES","c":"JASPER","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION SOUTH ALABAMA","a":3055000,"p":"CHARITABLE PURPOSES","c":"MOBILE","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION SOUTH ALABAMA","a":98250,"p":"CHARITABLE PURPOSES","c":"MOBILE","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"},{"y":2025,"r":"COMMUNITY FOUNDATION SOUTH ALABAMA","a":743860,"p":"CHARITABLE PURPOSES","c":"MOBILE","s":"AL","e":"","o":"202601709349100110","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

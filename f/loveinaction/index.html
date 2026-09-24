@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Love in&nbsp;Action</h1>
         <p class="hero-meta">Colorado Springs, CO · EIN <code>84-1285975</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 24 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 24 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Love in Action. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.LOVEINACTI_DATA={"meta":{"foundation":"Love in Action","ein":"84-1285975","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022],"grant_count":30,"grand_total":31381350,"tieout":{"2020":{"object_id":"202231529349101113","grant_count":18,"grant_sum":4101000,"line25_col_d":4101000,"status":"PASS"},"2021":{"object_id":"202311589349100116","grant_count":10,"grant_sum":11527850,"line25_col_d":11527850,"status":"PASS"},"2022":{"object_id":"202431709349100953","grant_count":2,"grant_sum":15752500,"line25_col_d":15752500,"status":"PASS"},"2023":{"object_id":"202601389349100130","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2024":{"object_id":"202621489349100507","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"}}},"grants":[{"y":2020,"r":"Ligonier Ministries","a":850000,"p":"operations","c":"Sanford","s":"FL","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Augustine Institute","a":830000,"p":"operations","c":"Greenwood Village","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Focus on the Family","a":600000,"p":"operations","c":"Colorado springs","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Global Media Outreach","a":635000,"p":"operations","c":"Dallas","s":"TX","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"ACE Colorado Scholarship Program","a":450000,"p":"operations","c":"Greenwood Village","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Hope International","a":150000,"p":"operations","c":"Lancaster","s":"PA","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"First Pres Church Colo Spgs","a":200000,"p":"operations","c":"Colorado Springs","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Jesus Film-Campus Crusade","a":100000,"p":"operations","c":"Orlando","s":"FL","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Wellspring Castle Rock CO","a":100000,"p":"operations","c":"Castle Rock","s":"CA","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Morning Star Development","a":50000,"p":"operations","c":"Colorado springs","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Hope Haven","a":25000,"p":"operations","c":"Rock Valley","s":"IA","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Teen Challenge AZ","a":25000,"p":"operations","c":"Tucson","s":"AZ","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Little Light House Tulsa OK","a":21000,"p":"operations","c":"Tulsa","s":"OK","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Love Justice International","a":20000,"p":"operations","c":"Lincoln","s":"NE","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Pikes Peak Citizens for Life","a":10000,"p":"operations","c":"Colorado Springs","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Truth for Life","a":10000,"p":"operations","c":"Cleveland","s":"OH","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Ministry in the Marketplace (formerly CBMC)","a":5000,"p":"operations","c":"Colorado Springs","s":"CO","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2020,"r":"Harvest Bridge","a":20000,"p":"operations","c":"Grove City","s":"PA","e":"","o":"202231529349101113","record_type":"named_recipient"},{"y":2021,"r":"Augustine Institute","a":418000,"p":"To fund the distribution of Christian educational materials.","c":"Greenwood Village","s":"CO","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Ligonier Ministries","a":475000,"p":"To fund the distribution of Christian educational materials.","c":"Sanford","s":"FL","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Global Media Outreach","a":485000,"p":"To fund the distribution of Christian educational materials.","c":"Plano","s":"TX","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Focus on the Family","a":494500,"p":"To fund the distribution of Christian educational materials.","c":"Colorado Springs","s":"CO","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Love Justice International","a":10000,"p":"To fund the distribution of Christian educational materials.","c":"Lincoln","s":"NE","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Stand Together Trust","a":1000000,"p":"To fund the distribution of Christian educational materials.","c":"Baltimore","s":"MD","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Destiny & Discernment Fund","a":8610000,"p":"To fund the distribution of Christian educational materials.","c":"Overland Park","s":"KS","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Mater Filius","a":25000,"p":"To fund the distribution of Christian educational materials.","c":"Colorado Springs","s":"CO","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Saint Gabriel the Archangel","a":5000,"p":"To fund the distribution of Christian educational materials.","c":"Colorado Springs","s":"CO","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2021,"r":"Arthritis Foundation Inc","a":5350,"p":"Research for the treatment of Arthritis.","c":"Atlanta","s":"GA","e":"","o":"202311589349100116","record_type":"named_recipient"},{"y":2022,"r":"DESTINY & DISCERNMENT FUND","a":15750000,"p":"TO FUND THE DISTRIBUTION OF CHRISTIAN EDUCATIONAL MATERIALS.","c":"OVERLAND PARK","s":"KS","e":"","o":"202431709349100953","record_type":"named_recipient"},{"y":2022,"r":"MINISTRY IN THE MARKETPLACE","a":2500,"p":"TO FUND CHRISTIAN EDUCATION MINISTRY","c":"COLORARDO SPRINGS","s":"CO","e":"","o":"202431709349100953","record_type":"named_recipient"}]};window.LEDGER_MERGES=["DESTINY DISCERNMENT FUND"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

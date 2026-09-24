@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Bright Horizon&nbsp;Foundation</h1>
         <p class="hero-meta">Princeton, NJ · EIN <code>13-4121003</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 25 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 25 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Bright Horizon Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.BRIGHTHORI_DATA={"meta":{"foundation":"Bright Horizon Foundation","ein":"13-4121003","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":37,"grand_total":35269977,"tieout":{"2020":{"object_id":"202103199349102910","grant_count":4,"grant_sum":5940000,"line25_col_d":5940000,"status":"PASS"},"2021":{"object_id":"202203199349108620","grant_count":3,"grant_sum":4554192,"line25_col_d":4554192,"status":"PASS"},"2022":{"object_id":"202323199349106142","grant_count":19,"grant_sum":10010000,"line25_col_d":10010000,"status":"PASS"},"2023":{"object_id":"202413209349100926","grant_count":8,"grant_sum":8448775,"line25_col_d":8448775,"status":"PASS"},"2024":{"object_id":"202513219349103591","grant_count":3,"grant_sum":6317010,"line25_col_d":6317010,"status":"PASS"}}},"grants":[{"y":2020,"r":"AMERICANS FOR OXFORD","a":15000,"p":"PROVIDE RESOURCES FOR ARCHITECTURAL JEWELS, SCHOLARSHIPS, ENGINEERING, MEDICAL & SCIENTIFIC LABS","c":"NEW YORK","s":"NY","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"BULLETIN OF THE ATOMIC SCIENTISTS","a":25000,"p":"PROVIDE SCIENTISTS, POLICYMAKERS AND PUBLIC INFO TO REDUCE MAN-MADE THREATS TO OUR EXISTENCE","c":"CHICAGO","s":"IL","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"FIDELITY CHARITABLE GIFT FUND","a":5400000,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2020,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"CONSERVE WILDLIFE","c":"BROOKLYN","s":"NY","e":"","o":"202103199349102910","record_type":"named_recipient"},{"y":2021,"r":"AMERICANS FOR OXFORD","a":15000,"p":"PROVIDE RESOURCES FOR ARCHITECTURAL JEWELS, SCHOLARSHIPS, ENGINEERING, MEDICAL & SCIENTIFIC LABS","c":"NEW YORK","s":"NY","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2021,"r":"FIDELITY CHARITABLE GIFT FUND","a":4039192,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2021,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"CONSERVE WILDLIFE","c":"BROOKLYN","s":"NY","e":"","o":"202203199349108620","record_type":"named_recipient"},{"y":2022,"r":"AMERICARES FOUNDATION INC","a":50000,"p":"AMERICARES SAVES LIVES AND IMPROVES HEALTH FOR PEOPLE AFFECTED BY POVERTY OR DISASTER SO THEY CAN REACH THEIR FULL POTENTIAL","c":"STAMFORD","s":"CT","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"ARMS CONTROL ASSOCIATION (ACA) TOWARD PHYSICISTS COALITION FOR NUCLEAR THRE","a":25000,"p":"NATIONAL NONPARTISAN MEMBERSHIP ORGANIZATION DEDICATED TO PROMOTING PUBLIC UNDERSTANDING OF AND SUPPORT FOR EFFECTIVE ARMS CONTROL POLICIES","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"BROOKINGS INSTITUTION","a":200000,"p":"THE PURPOSE IS TO CONDUCT IN-DEPTH RESEARCH THAT LEADS TO NEW IDEAS FOR SOLVING PROBLEMS FACING SOCIETY AT THE LOCAL, NATIONAL AND GLOBAL LEVEL","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"CARNEGIE ENDOWMENT FOR INTERNATIONAL PEACE - FOR NUCLEAR DISARMAMENT EFFORT","a":150000,"p":"INTERNATIONAL WORLD PEACE","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"FIDELITY CHARITABLE GIFT FUND","a":3650000,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"INTERNATIONAL CRISIS GROUP","a":500000,"p":"PURPOSE IS TO PREVENT WARS AND SHAPE POLICIES THAT WILL BUILD A MORE PEACEFUL WORLD","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"MASSACHUSETTS INSTITUTE OF TECHNOLOGY-FOR SECURITES STUDIES PROGRAM - GIF","a":30000,"p":"INTEGRATION OF TECHNICAL AND POLITICAL ANALYSIS OF NATIONAL AND INTERNATIONAL SECURITY PROBLEMS","c":"CAMBRIDGE","s":"MA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"MEDICINES SANS FRONTIERES","a":100000,"p":"HEALING AND RECOVERY FOR THE BENEFIT OF ALL","c":"SEATTLE","s":"WA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"NATURAL RESOURCES DEFENSE COUNCIL FOR WILDLIFE AND LAND CONSERVATION","a":1000000,"p":"SAFEGUARD THE EARTH AND ENSURE THE RIGHTS OF ALL PEOPLE TO THE AIR, THE WATER, AND THE WILD","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"NUCLEAR THREAT INITIATIVE","a":1000000,"p":"NONPARTISAN GLOBAL SECURITY ORGANIZATION FOCUSED ON REDUCING NUCLEAR AND BIOLOGICAL THREATS IMPERILING HUMANITY","c":"WASHINGTON","s":"DC","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"PLOUGHSHARES FUND","a":1000000,"p":"DEDICATED TO BUILDING A NUCLEAR WEAPON-FREE WORLD BY SUPPORTING THE SMARTEST PEOPLE WITH THE BEST IDEAS FOR PREVENTING THE SPREAD AND USE OF NUCLEAR WEAPONS, AND PREVENTING CONFLICTS THAT COULD LEAD TO THEIR USE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"PRESIDENT AND FELLOWS OF HARVARD COLLEGE - FOR PROJECT ON MANAGING THE ATOM","a":30000,"p":"RESEARCH ACROSS A BROAD ARRAY OF ACADEMIC DOMAINS","c":"CAMBRIDGE","s":"MA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"ROBIN HOOD FOUNDATION","a":600000,"p":"ROBIN HOOD FUNDS, SUPPORTS, AND CONNECTS COMMUNITY ORGANIZATIONS TO FUEL NEW YORKERS' JOURNEYS TO PERMANENTLY ESCAPE POVERTY","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"THE CARTER CENTER","a":600000,"p":"COMMITTED TO HUMAN RIGHTS AND THE ALLEVIATION OF HUMAN SUFFERING","c":"ATLANTA","s":"GA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"THE TRUST FOR PUBLIC LAND","a":250000,"p":"CREATE PARKS AND PROTECT LAND FOR PEOPLE, ENSURING HEALTHY, LIVABLE COMMUNITIES FOR GENERATIONS TO COME","c":"LOS ANGELES","s":"CA","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"TRUSTEES OF PRINCETON UNIVERSITY - SCIENCE AND GLOBAL SECURITY PROGRAM","a":50000,"p":"SCIENCE AND GLOBAL SECURITY","c":"PRINCETON","s":"NJ","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"TRUSTEES OF PRINCETON UNIVERSITY - SCIENCE AND GLOBAL SECURITY PROGRAM","a":25000,"p":"PHYSICIST COALITION FOR NUCLEAR THREAT REDUCTION","c":"PRINCETON","s":"NJ","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"WCS SAVES WILDLIFE AND WILD PLACES WORLDWIDE THROUGH SCIENCE, CONSERVATION ACTION, EDUCATION, AND INSPIRING PEOPLE TO VALUE NATURE","c":"BRONX","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2022,"r":"WILLIAM J BRENNAN JR CENTER FOR JUSTICE INC","a":250000,"p":"IMPROVE OUR SYSTEMS OF DEMOCRACY AND JUSTICE","c":"NEW YORK","s":"NY","e":"","o":"202323199349106142","record_type":"named_recipient"},{"y":2023,"r":"ARMS CONTROL ASSOCIATION (ACA) TOWARD PHYSICISTS COALITION FOR NUCLEAR THRE","a":50000,"p":"NATIONAL NONPARTISAN MEMBERSHIP ORGANIZATION DEDICATED TO PROMOTING PUBLIC UNDERSTANDING OF AND SUPPORT FOR EFFECTIVE ARMS CONTROL POLICIES","c":"WASHINGTON","s":"DC","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"FIDELITY CHARITABLE GIFT FUND","a":4783775,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"JAMES MARTIN CENTER FOR NONPROLIFERATION STUDIES-MIDDLEBURY","a":50000,"p":"CNS STRIVES TO COMBAT THE SPREAD OF WEAPONS OF MASS DESTRUCTION (WMD) BY TRAINING THE NEXT GENERATION OF NONPROLIFERATION SPECIALISTS AND DISSEMINATING TIMELY INFORMATION AND ANALYSIS","c":"MONTEREY","s":"CA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"NEO PHILANTHROPY","a":15000,"p":"BUILD MOVEMENTS FOR JUSTICE, EQUITY AND DIGNITY.","c":"NEW YORK","s":"NY","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"NUCLEAR THREAT INITIATIVE","a":1000000,"p":"NONPARTISAN GLOBAL SECURITY ORGANIZATION FOCUSED ON REDUCING NUCLEAR AND BIOLOGICAL THREATS IMPERILING HUMANITY","c":"WASHINGTON","s":"DC","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"PARTNERS IN HEALTH","a":2000000,"p":"PROVIDE A PREFERENTIAL OPTION FOR THE POOR IN HEALTH CARE","c":"BOSTON","s":"MA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"THE CONSERVATION FUND","a":50000,"p":"PROTECT AMERICA'S MOST CRITICAL LANDS AND WATERS TO PROVIDE GREATER ACCESS TO NATURE, STRENGTHEN LOCAL ECONOMIES AND ENHANCE CLIMATE RESILIENCY.","c":"ARLINGTON","s":"VA","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2023,"r":"WILDLIFE CONSERVATION SOCIETY","a":500000,"p":"WCS SAVES WILDLIFE AND WILD PLACES WORLDWIDE THROUGH SCIENCE, CONSERVATION ACTION, EDUCATION, AND INSPIRING PEOPLE TO VALUE NATURE","c":"BRONX","s":"NY","e":"","o":"202413209349100926","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR HUMANITARIAN DIALOGUE","a":50000,"p":"BUILD PRINCIPLES OF HUMANITY, IMPARTIALITY AND INDEPENDENCE.","c":"","s":"","e":"","o":"202513219349103591","record_type":"named_recipient"},{"y":2024,"r":"FIDELITY CHARITABLE GIFT FUND","a":6252010,"p":"FACILITATE, SUPPORT AND INCREASE CHARITABLE ACTIVITIES","c":"CINCINNATI","s":"OH","e":"","o":"202513219349103591","record_type":"named_recipient"},{"y":2024,"r":"NEO PHILANTHROPY","a":15000,"p":"BUILD MOVEMENTS FOR JUSTICE, EQUITY AND DIGNITY.","c":"NEW YORK","s":"NY","e":"","o":"202513219349103591","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"WILDLIFE CONSERVATION SOCIETY":"Environment & animals","WILLIAM J BRENNAN JR CENTER FOR JUSTICE INC":"Education & youth","NEO PHILANTHROPY":"Community & economic development"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

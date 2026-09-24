@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Jane and John Justin&nbsp;Foundation</h1>
         <p class="hero-meta">Fort Worth, TX · EIN <code>75-2442749</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 15 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 15 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2021–2025. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Jane and John Justin Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.JANEANDJOH_DATA={"meta":{"foundation":"Jane and John Justin Foundation","ein":"75-2442749","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2021,2022,2023,2024,2025],"grant_count":40,"grand_total":31824575,"tieout":{"2021":{"object_id":"202221319349104552","grant_count":7,"grant_sum":6822775,"line25_col_d":6822775,"status":"PASS"},"2022":{"object_id":"202301189349100530","grant_count":9,"grant_sum":6114050,"line25_col_d":6114050,"status":"PASS"},"2023":{"object_id":"202421319349100727","grant_count":8,"grant_sum":5994500,"line25_col_d":5994500,"status":"PASS"},"2024":{"object_id":"202531349349100113","grant_count":8,"grant_sum":6878000,"line25_col_d":6878000,"status":"PASS"},"2025":{"object_id":"202621319349102037","grant_count":8,"grant_sum":6015250,"line25_col_d":6015250,"status":"PASS"}}},"grants":[{"y":2021,"r":"Marbridge Foundation","a":350000,"p":"General FundEducation","c":"Manchaca","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Marbridge Foundation","a":420008,"p":"Covid-19Fundting forPersonal Protection Equipment","c":"Manchaca","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Alliance for Children","a":666667,"p":"Capital CampaignReconfigure building","c":"Fort Worth","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Texas Christian University","a":736100,"p":"ScholarshipFundingJustin Scholar","c":"Fort Worth","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Southwestern Stock Show","a":50000,"p":"ProgramFunding12/31/2021","c":"Fort Worth","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Texas Health Resources","a":4400000,"p":"Capital ImprovementNew Building","c":"Arlington","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2021,"r":"Make-A-Wish of North Texas","a":200000,"p":"Tarrant CountyWishes Funded","c":"Addison","s":"TX","e":"","o":"202221319349104552","record_type":"named_recipient"},{"y":2022,"r":"Marbridge Foundation","a":350000,"p":"General FundEducation","c":"Manchaca","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Marbridge Foundation","a":360000,"p":"Capital CampaignNew Equine StablesEquine therapy","c":"Manchaca","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Citizens Support Group for","a":113850,"p":"Capital CampaignRepair, stalls, runs and add horses","c":"Fort Worth","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Texas Christian University","a":1472200,"p":"ScholarshipFundingJustin Scholar","c":"Fort Worth","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Safe City Commission (FWDP","a":38000,"p":"Fund the startup Canine Unitof CIT","c":"Hemphill","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Texas Health Resources","a":1750000,"p":"Capital ImprovementNew Building","c":"Arlington","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Justin Cowboy Crisis","a":355000,"p":"Support injuredCowboys","c":"Fort Worth","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"SafeHaven of Tarrant County","a":75000,"p":"Develop tool to aidDomestic Violence","c":"Arlington","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2022,"r":"Cook Children's Health Foundation","a":1600000,"p":"Capital CampaignNew Builidng","c":"Fort Worth","s":"TX","e":"","o":"202301189349100530","record_type":"named_recipient"},{"y":2023,"r":"Marbridge Foundation","a":350000,"p":"General FundEducation","c":"Manchaca","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Marbridge Foundation","a":360000,"p":"Capital CampaignNew Equine StablesEquine therapy","c":"Manchaca","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Cook Children's Health Foundation","a":3200000,"p":"Capital CampaignJustin NeurosciencInstitute","c":"Fort Worth","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Fort Worth Muesum of","a":1050000,"p":"Capital CampaignRebuild Omni","c":"Fort Worth","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Safe City Commission (FWDP","a":19000,"p":"Fund the startup Canine Unitof CIT","c":"Hemphill","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Texas Health Resources","a":500000,"p":"Capital ImprovementNew Building","c":"Arlington","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"Justin Cowboy Crisis","a":350500,"p":"Support injuredCowboys","c":"Fort Worth","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2023,"r":"SafeHaven of Tarrant County","a":165000,"p":"Develop tool to aidDomestic Violence","c":"Arlington","s":"TX","e":"","o":"202421319349100727","record_type":"named_recipient"},{"y":2024,"r":"Marbridge Foundation","a":400000,"p":"General FundEducation","c":"Manchaca","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Women's Center of Tarrant County","a":350000,"p":"Play it safe","c":"Fort Worth","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Cook Children's Health Foundation","a":1600000,"p":"Capital CampaignJustin NeurosciencInstitute","c":"Fort Worth","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Fort Worth Muesum of","a":3150000,"p":"Capital CampaignRebuild Omni","c":"Fort Worth","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Safe City Commission (FWDP","a":63000,"p":"Fund the startup Canine Unitof CIT","c":"Hemphill","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"SafeHaven of Tarrant County","a":160000,"p":"Develop tool to aidDomestic Violence","c":"Arlington","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Alliance for Children","a":155000,"p":"Crimes againstChilrenFWPD equipment","c":"Fort Worth","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2024,"r":"Texas Christain University","a":1000000,"p":"Athletic complexUpgrade","c":"Fort Worth","s":"TX","e":"","o":"202531349349100113","record_type":"named_recipient"},{"y":2025,"r":"Marbridge Foundation","a":405000,"p":"General FundEducation","c":"Manchaca","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Women's Center of Tarrant County","a":425000,"p":"Play it safe","c":"Fort Worth","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Cook Children's Health Foundation","a":3200000,"p":"Capital CampaignJustin NeurosciencInstitute","c":"Fort Worth","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Citizens Support Group","a":450000,"p":"FWPD MountedPatrol Move exercise wheel","c":"Fort Worth","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Citizens Support Group","a":200000,"p":"Fund the startup Canine Unitof CIT","c":"Hemphill","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"SafeHaven of Tarrant County","a":300000,"p":"Develop tool to aidDomestic Violence","c":"Arlington","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Alliance for Children","a":15000,"p":"Crimes againstChilrenFWPD equipment","c":"Fort Worth","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"},{"y":2025,"r":"Texas Christain University","a":1020250,"p":"Athletic complexUpgrade","c":"Fort Worth","s":"TX","e":"","o":"202621319349102037","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

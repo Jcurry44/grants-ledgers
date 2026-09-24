@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Bastian Family Charitable&nbsp;Foundaton</h1>
         <p class="hero-meta">Centerville, UT · EIN <code>27-1271726</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 21 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 21 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Bastian Family Charitable Foundaton. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.BASTIANFAM_DATA={"meta":{"foundation":"Bastian Family Charitable Foundaton","ein":"27-1271726","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":48,"grand_total":10936715,"tieout":{"2020":{"object_id":"202121829349100802","grant_count":6,"grant_sum":1919701,"line25_col_d":1919701,"status":"PASS"},"2021":{"object_id":"202233069349100513","grant_count":7,"grant_sum":2097200,"line25_col_d":2097200,"status":"PASS"},"2022":{"object_id":"202313129349101651","grant_count":12,"grant_sum":2674467,"line25_col_d":2674467,"status":"PASS"},"2023":{"object_id":"202433199349105663","grant_count":11,"grant_sum":2459950,"line25_col_d":2459950,"status":"PASS"},"2024":{"object_id":"202523169349102567","grant_count":12,"grant_sum":1785397,"line25_col_d":1785397,"status":"PASS"}}},"grants":[{"y":2020,"r":"JORDAN EDUCATION FOUNDATION","a":13500,"p":"EDUCATION","c":"WEST JORDAN","s":"UT","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2020,"r":"OPERATION SMILE","a":5000,"p":"PROVIDE CORRECTIVE ORAL SURGERY","c":"VIRGINIA BEACH","s":"VA","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2020,"r":"UTAH STATE UNIVERSITY","a":1750000,"p":"SUPPORT AG CENTER DEVELOPMENT","c":"LOGAN","s":"UT","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2020,"r":"LDS PHILANTHROPIES","a":15000,"p":"HUMANITARIAN AND EDUCATIONAL","c":"PROVO","s":"UT","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2020,"r":"UTAH FOOD BANK","a":100000,"p":"FIGHTING HUNGER STATEWIDE","c":"SOUTH SALT LAKE","s":"UT","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2020,"r":"SHELTER THE HOMELESS","a":36201,"p":"HOMELESS SHELTERS","c":"SALT LAKE CITY","s":"UT","e":"","o":"202121829349100802","record_type":"named_recipient"},{"y":2021,"r":"JORDAN EDUCATION FOUNDATION","a":13500,"p":"EDUCATION","c":"WEST JORDAN","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"OPERATION SMILE","a":5000,"p":"PROVIDE CORRECTIVE ORAL SURGERY","c":"VIRGINIA BEACH","s":"VA","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"UTAH STATE UNIVERSITY","a":1949763,"p":"SUPPORT AG CENTER DEVELOPMENT","c":"LOGAN","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"UTAH STATE UNIVERSITY","a":21498,"p":"SUPPORT AG CENTER DEVELOPMENT","c":"LOGAN","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"LDS PHILANTHROPIES","a":5000,"p":"HUMANITARIAN AND EDUCATIONAL","c":"PROVO","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"UTAH FOOD BANK","a":66439,"p":"FIGHTING HUNGER STATEWIDE","c":"SOUTH SALT LAKE","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2021,"r":"HUNTS FOR THE BRAVE","a":36000,"p":"OUTDOORS RECREATION FOR ARMED FORCES","c":"NORTH OGDEN","s":"UT","e":"","o":"202233069349100513","record_type":"named_recipient"},{"y":2022,"r":"JORDAN EDUCATION FOUNDATION","a":19000,"p":"EDUCATION","c":"WEST JORDAN","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"OPERATION SMILE","a":5000,"p":"PROVIDE CORRECTIVE ORAL SURGERY","c":"VIRGINIA BEACH","s":"VA","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"UTAH STATE UNIVERSITY","a":2500000,"p":"SUPPORT AG CENTER DEVELOPMENT","c":"LOGAN","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"LDS PHILANTHROPIES","a":2500,"p":"HUMANITARIAN AND EDUCATIONAL","c":"PROVO","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"HUNTS FOR THE BRAVE","a":36000,"p":"OUTDOORS RECREATION FOR ARMED FORCES","c":"NORTH OGDEN","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"SALT LAKE CITY JR LIVESTOCK PROGRAM","a":83950,"p":"PROMOTE LIVESTOCK EVENTS FOR YOUTH.","c":"RIVERTON","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"NORTHERN UTAH PROTECTIVE ASSOCIATIO","a":5000,"p":"LIVESTOCK PRESERVATION.","c":"DEWEYVILLE","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"STEPHEN SILLER TUNNEL TO TOWERS","a":2500,"p":"HONOR SACRIFICE OF 9/11 FIREFIGHTER.","c":"STATEN ISLAND","s":"NY","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"FIVE FOR THE FIGHT","a":1781,"p":"SUPPORT CANCER RESEARCH","c":"PROVO","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"THE MICHAEL J FOX FOUNDATION","a":1781,"p":"SEARCHING FOR CURE FOR PARKINSON'S","c":"NEW YORK","s":"NY","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"JOHN HOPKINS MEDICINE","a":1781,"p":"MEDICAL RESEARCH","c":"BALTIMORE","s":"MD","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2022,"r":"UTAH FOOD BANK","a":15174,"p":"FIGHTING HUNGER STATEWIDE","c":"SOUTH SALT LAKE","s":"UT","e":"","o":"202313129349101651","record_type":"named_recipient"},{"y":2023,"r":"UTAH STATE UNIVERSITY","a":2290800,"p":"SUPPORT AG CENTER DEVELOPMENT","c":"LOGAN","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"SALT LAKE CITY JR LIVESTOCK PROGRA","a":95350,"p":"PROMOTE LIVESTOCK EVENTS FOR YOUTH","c":"RIVERTON","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"OPERATION SMILE","a":5000,"p":"PROVIDE CORRECTIVE ORAL SURGERY","c":"VIRGINIA BEACH","s":"VA","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"LDS PHILANTHROPIES","a":2500,"p":"HUMANITARIAN & EDUCATIONAL SUPPORT","c":"PROVO","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"JORDAN EDUCATION FOUNDATION","a":19000,"p":"EDUCATION","c":"WEST JORDAN","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"JOHN HOPKINS UNIVERSITY","a":1800,"p":"MEDICAL RESEARCH","c":"BALTIMORE","s":"MD","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"HUNTS FOR THE BRAVE","a":36000,"p":"OUTDOOR RECREATION FOR ARMED FORCES","c":"NORTH OGDEN","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"TUNNEL TO TOWERS FOUNDATION","a":2500,"p":"SUPPORT FIRST RESPONDERS","c":"STATEN ISLAND","s":"NY","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"THE SALVATION ARMY","a":1800,"p":"HUMANITARIAN & EDUCATIONAL SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"NATIONAL SCLERODERMA FOUNDATION","a":200,"p":"MEDICAL RESEARCH","c":"DANVERS","s":"MA","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2023,"r":"NORTHERN UTAH PROTECTION ASSOCIATIO","a":5000,"p":"LIVESTOCK PRESERVATION","c":"DEWEYVILLE","s":"UT","e":"","o":"202433199349105663","record_type":"named_recipient"},{"y":2024,"r":"Utah State University","a":1579233,"p":"Support Ag Center Development","c":"Logan","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"SLC Jr Livestock Program","a":125364,"p":"Youth Ag Education","c":"Riverton","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Operation Smile","a":5000,"p":"Provide Corrective Oral Surgery","c":"Virginia Beach","s":"VA","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Jordan Education Foundation","a":19000,"p":"Education","c":"West Jordan","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"John Hopkins University","a":1800,"p":"Medical Research","c":"Baltimore","s":"MD","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Hunts for the Brave","a":36000,"p":"Outdoor Recreation for Armed Forces","c":"North Ogden","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Tunnel to Towers Foundation","a":2500,"p":"Support First Responders","c":"Staten Island","s":"NY","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Northern Utah Protection Associatio","a":5000,"p":"Livestock Preservation","c":"Deweyville","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Michael J Fox Foundation","a":3600,"p":"Medical Research","c":"New York","s":"NY","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"For the Fight","a":3600,"p":"Medical Research","c":"Provo","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"LDS Philanthropies","a":2500,"p":"Humanitarian & Educational Support","c":"Provo","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"},{"y":2024,"r":"Salvation Army","a":1800,"p":"Humanitarian & Educational Support","c":"Salt Lake City","s":"UT","e":"","o":"202523169349102567","record_type":"named_recipient"}]};window.LEDGER_MERGES=["JORDAN EDUCATION FOUNDATION","OPERATION SMILE","UTAH STATE UNIVERSITY","LDS PHILANTHROPIES","HUNTS FOR BRAVE","MICHAEL J FOX FOUNDATION","JOHN HOPKINS UNIVERSITY","TUNNEL TO TOWERS FOUNDATION","SALVATION ARMY","NORTHERN UTAH PROTECTION ASSOCIATIO"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

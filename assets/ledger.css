@@ -103,7 +103,8 @@ a:hover { color: var(--copper-deep); }
   .hero .lede { order: 4; font-size: 0.98rem; margin-bottom: 1.1rem; }
   .hero .hero-actions { order: 5; flex-direction: column; align-items: stretch; }
   .hero .hero-actions .btn-primary, .hero .hero-actions .badge-tie { justify-content: center; text-align: center; width: 100%; }
-  .hero .hero-cred { order: 6; margin-top: 0.9rem; }
+  .hero .hero-note { order: 6; }
+  .hero .hero-cred { order: 7; margin-top: 0.9rem; }
   .cover { padding-bottom: 3.4rem; }
   .topbar .tb-meta { display: none; }
 }
@@ -118,6 +119,8 @@ h1 {
 .hero-meta code { font-family: var(--mono); font-size: 0.78rem; color: var(--cream-dim); }
 .lede { font-family: var(--body-f); color: var(--cream-dim); font-size: 1.04rem; line-height: 1.6; max-width: 46rem; margin: 0 0 1.35rem; }
 .lede strong { color: var(--cream); font-weight: 500; }
+.lede a { color: var(--cream-dim); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.lede a:hover { color: var(--cream); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; }
 .hero-note { font-size: 0.78rem; color: rgba(246, 239, 221, 0.82); margin-top: 0.6rem; max-width: 72ch; }
 .hero-note[hidden] { display: none; }
@@ -201,25 +204,36 @@ h1 {
   overflow: hidden;
 }
 @media (max-width: 1099px) { .sheet-kpis { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 719px) { .sheet-kpis { grid-template-columns: 1fr; } }
+/* ux-ledger-08: a 1-column stack at <=719px was what pushed the tab bar 1.8 screens
+   down on a phone; the 2x2 grid the 1099px rule already uses stays in force here too. */
 /* the one-line answer to "could we fit", under the headline figures */
 .fit-line { margin: 0.9rem 0 0; font: 500 0.92rem/1.5 var(--sans); color: var(--ink-dim); max-width: 72ch; }
-/* a filed year the ledger does not publish: present in the rail, never silently absent */
+.fit-line[hidden] { display: none; }
+/* a filed year the ledger does not publish: present in the rail, never silently absent.
+   ux-ledger-01: this chip renders inside #year-rail, the SIDEBAR rail on the dark cover
+   background (>=1100px) -- var(--ink-dim) is a light-background color and read at 1.34:1
+   there (9.28px label too). Use the sidebar's own light-on-dark palette instead, the same
+   one .ss-rail already uses at a verified 7.18:1, and size the label >=11px. */
 #year-rail .withheld { display: inline-flex; flex-direction: column; align-items: center; gap: 0;
-  border: 1px dashed #b9b3a3; color: var(--ink-dim); text-decoration: none; opacity: 0.85; }
-#year-rail .withheld small { font: 500 0.58rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
-#year-rail .withheld:hover { color: var(--ink); border-style: solid; }
+  border: 1px dashed rgba(246, 239, 221, 0.45); color: rgba(246, 239, 221, 0.85); text-decoration: none; opacity: 1; }
+#year-rail .withheld small { font: 600 0.7rem/1.15 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: rgba(246, 239, 221, 0.85); }
+#year-rail .withheld:hover { color: #f6efdd; border-style: solid; border-color: rgba(246, 239, 221, 0.7); }
 /* a filed year that reconciles at $0 with no grants paid: same flat, non-interactive treatment as .withheld, but its own class -- it was not withheld */
 #year-rail .zeroyr { display: inline-flex; flex-direction: column; align-items: center; gap: 0;
-  border: 1px dashed #b9b3a3; color: var(--ink-dim); opacity: 0.85; }
-#year-rail .zeroyr small { font: 500 0.58rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  border: 1px dashed rgba(246, 239, 221, 0.4); color: rgba(246, 239, 221, 0.78); opacity: 1; }
+#year-rail .zeroyr small { font: 600 0.7rem/1.15 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: rgba(246, 239, 221, 0.78); }
 .kpi { padding: 1.25rem 1.5rem 1.3rem; position: relative; }
 .kpi + .kpi::before {
   content: ""; position: absolute; left: 0; top: 1.1rem; bottom: 1.1rem;
   width: 1px; background: var(--rule);
 }
 @media (max-width: 719px) {
-  .kpi + .kpi::before { left: 1.5rem; right: 1.5rem; top: 0; bottom: auto; width: auto; height: 1px; }
+  /* 2x2 grid: a right divider on the left column, a top divider on the second row,
+     replacing the single-column top-border pattern the 1-col stack used to need */
+  .kpi { padding: 1.05rem 1.15rem 1.1rem; border-right: 1px solid transparent; border-top: 1px solid transparent; }
+  .kpi + .kpi::before { content: none; }
+  .kpi:nth-child(odd) { border-right-color: var(--rule); }
+  .kpi:nth-child(n+3) { border-top-color: var(--rule); }
 }
 .kpi .k-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
 .kpi .k-val {
@@ -271,6 +285,20 @@ h1 {
   .tabs { gap: 0; }
   .tab { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.72rem 0.1rem 0.8rem; font-size: 0.76rem; }
   .tab .tcount { display: none; }
+}
+@media (max-width: 1099px) {
+  /* ux-ledger-08: the tab bar used to sit after the KPI strip, the fit-line AND the
+     year rail -- 1.8 screens down on a phone. Nothing but the KPI sheet now sits above
+     it; the sheet's own -3.4rem overlap onto the cover is untouched (order:0, unmoved). */
+  main { display: flex; flex-direction: column; }
+  .sheet-kpis { order: 0; }
+  #tablist { order: 1; }
+  /* #record-coverage is inserted at runtime, right after .sheet-kpis (ledger.js), on any
+     book with unitemized disclosures -- it needs the same order as the other post-tab
+     notes or it reintroduces exactly the gap ux-ledger-08 removes. */
+  #fit-line, #tiny-note, #record-coverage { order: 2; }
+  #year-rail-top { order: 3; }
+  main > section { order: 4; }
 }
 
 /* the sidebar — the desktop app shell, cut from the same cloth as the cover */
@@ -641,6 +669,48 @@ select {
 .doctrine-band .db-sub { font-size: 0.8rem; color: var(--cream-dim); max-width: 72ch; }
 .doctrine-band .db-sub a { color: var(--cream); }
 .doctrine-band .db-sub code { font-family: var(--mono); font-size: 0.74rem; color: var(--cream-dim); }
+/* ux-ledger-01: the specific break, named in the one place a skeptic reads first --
+   not two tabs away in Methodology. Reuses .db-sub's own type so it reads as one voice. */
+.doctrine-band .db-except { margin-top: 0.55rem; font-size: 0.8rem; color: var(--cream-dim); max-width: 72ch; }
+.doctrine-band .db-except[hidden] { display: none; }
+.doctrine-band .db-except p { margin: 0.2rem 0; }
+.doctrine-band .db-except a { color: var(--cream); }
+
+/* ux-ledger-04: the moat, said where the buyer is already looking -- under the badge,
+   not only seven clicks into Methodology. Shares .hero-note's cover-dark type. */
+.moat-note { }
+.moat-note a { color: var(--copper-bright); font-weight: 600; text-decoration: none; }
+.moat-note a:hover { text-decoration: underline; }
+
+/* ux-ledger-02: the receipt, linked. Same small caption type either way -- a link
+   never has to shout to be a link. */
+.tc-obj a, .pf-go, a.pf-go { color: inherit; text-decoration: none; }
+.tc-obj a { text-decoration: underline; text-underline-offset: 2px; color: var(--copper-deep); }
+.tc-obj a:hover { color: var(--copper); }
+a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; background: var(--copper-soft); }
+.pr-table a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ux-ledger-05: a tiny book says plainly why a stat is withheld, in the same voice
+   the KPI hints already use -- never a blank dash with no reason. */
+.k-hint.k-hint-why { font-style: italic; }
+.stat-suppressed { font-size: 0.86rem; color: var(--ink-dim); margin: 0; }
+
+/* ux-ledger-03: one quiet strip, not a banner -- the sheet's own tint, a hairline
+   rule between its two lines, nothing louder than the cards around it. */
+.cta-band {
+  background: var(--tint);
+  border-radius: var(--r);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  padding: 1.15rem 1.4rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+.cta-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.35rem 1.5rem; }
+.cta-row p { margin: 0; font-family: var(--body-f); font-size: 0.95rem; line-height: 1.5; color: var(--ink-dim); max-width: 50ch; }
+.cta-row p strong { color: var(--ink); font-weight: 500; }
+.cta-row + .cta-row { padding-top: 0.85rem; border-top: 1px solid var(--rule); }
+.cta-link { flex: none; font-family: var(--sans); font-weight: 600; font-size: 0.84rem; color: var(--copper-deep); text-decoration: none; white-space: nowrap; }
+.cta-link:hover { color: var(--copper); text-decoration: underline; }
+@media print { .cta-band { display: none !important; } }
 
 /* the equation that performs itself */
 .db-eq {

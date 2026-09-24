@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Paces&nbsp;Foundation</h1>
         <p class="hero-meta">Smyrna, GA · EIN <code>58-1949667</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — payments to 12 named organizations and amounts disclosed without recipient detail,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — payments to 12 named organizations and amounts disclosed without recipient detail,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -399,7 +413,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Paces Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -433,7 +447,7 @@
 <script>
 window.PACESFOUND_DATA={"meta":{"foundation":"Paces Foundation","ein":"58-1949667","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":18,"grand_total":93077,"tieout":{"2020":{"object_id":"202201999349101005","grant_count":3,"grant_sum":35250,"line25_col_d":35250,"status":"PASS"},"2021":{"object_id":"202243199349108604","grant_count":1,"grant_sum":2000,"line25_col_d":2000,"status":"PASS"},"2022":{"object_id":"202333189349102413","grant_count":4,"grant_sum":13602,"line25_col_d":13602,"status":"PASS"},"2023":{"object_id":"202443199349104454","grant_count":3,"grant_sum":4000,"line25_col_d":4000,"status":"PASS"},"2024":{"object_id":"202523239349100027","grant_count":7,"grant_sum":38225,"line25_col_d":38225,"status":"PASS"}}},"grants":[{"y":2020,"r":"PEACHTREE PRESBYTERIAN CHURCH","a":250,"p":"HUMANITARIAN AID AND SUPPORT","c":"ATLANTA","s":"GA","e":"","o":"202201999349101005","record_type":"named_recipient"},{"y":2020,"r":"NORTH GEORGIA COMMUNITY FOUNDATION","a":25000,"p":"HUMANITARIAN AID AND SUPPORT","c":"GAINESVILLE","s":"GA","e":"","o":"202201999349101005","record_type":"named_recipient"},{"y":2020,"r":"BROWNSVILLE ASSEMBLY OF GOD","a":10000,"p":"HUMANITARIAN AID AND SUPPORT","c":"PENSACOLA","s":"GA","e":"","o":"202201999349101005","record_type":"named_recipient"},{"y":2021,"r":"BROWNSVILLE ASSEMBLY OF GOD","a":2000,"p":"HUMANITARIAN AID AND SUPPORT","c":"PENSACOLA","s":"GA","e":"","o":"202243199349108604","record_type":"named_recipient"},{"y":2022,"r":"BROWNSVILLE ASSEMBLY OF GOD","a":10000,"p":"HUMANITARIAN AID AND SUPPORT","c":"PENSACOLA","s":"GA","e":"","o":"202333189349102413","record_type":"named_recipient"},{"y":2022,"r":"COBB SHERIFFS FOUNDATION","a":2500,"p":"HUMANITARIAN AID AND SUPPORT","c":"MARIETTA","s":"GA","e":"","o":"202333189349102413","record_type":"named_recipient"},{"y":2022,"r":"ROME CHILDREN'S ACADEMY","a":1000,"p":"HUMANITARIAN AID AND SUPPORT","c":"ROME","s":"GA","e":"","o":"202333189349102413","record_type":"named_recipient"},{"y":2022,"r":"ST JUDE CHILDREN'S RESEARCH HOSPITAL","a":102,"p":"HUMANITARIAN AID AND SUPPORT","c":"MEMPHIS","s":"TN","e":"","o":"202333189349102413","record_type":"named_recipient"},{"y":2023,"r":"Food for Kids at Cooper Green","a":500,"p":"Humanitarian Aid and Support","c":"Birmingham","s":"AL","e":"","o":"202443199349104454","record_type":"named_recipient"},{"y":2023,"r":"Feller Park Neighborhood Association","a":2000,"p":"Humanitarian Aid and Support","c":"Atlanta","s":"GA","e":"","o":"202443199349104454","record_type":"named_recipient"},{"y":2023,"r":"Rome Children's Academy","a":1500,"p":"Humanitarian Aid and Support","c":"Rome","s":"GA","e":"","o":"202443199349104454","record_type":"named_recipient"},{"y":2024,"r":"Feller Park Neighborhood Association","a":3000,"p":"Humanitarian Aid and Support","c":"Atlanta","s":"GA","e":"","o":"202523239349100027","record_type":"named_recipient"},{"y":2024,"r":"Densho","a":30000,"p":"Humanitarian Aid and Support","c":"Seattle","s":"WA","e":"","o":"202523239349100027","record_type":"named_recipient"},{"y":2024,"r":"Brownsville Assembly of God","a":3000,"p":"Humanitarian Aid and Support","c":"Pensacola","s":"FL","e":"","o":"202523239349100027","record_type":"named_recipient"},{"y":2024,"r":"Alabama Affordable Housing Association","a":2000,"p":"Humanitarian Aid and Support","c":"Tuscaloosa","s":"AL","e":"","o":"202523239349100027","record_type":"named_recipient"},{"y":2024,"r":"Equipping the Saints","a":100,"p":"Humanitarian Aid and Support","c":"Weyers Cave","s":"VA","e":"","o":"202523239349100027","record_type":"named_recipient"},{"y":2024,"r":"Miscellaneous","a":100,"p":"Humanitarian Aid and Support","c":"Smyrna","s":"GA","e":"","o":"202523239349100027","record_type":"unitemized"},{"y":2024,"r":"Georiga Sheriff's Association","a":25,"p":"Humanitarian Aid and Support","c":"Madison","s":"GA","e":"","o":"202523239349100027","record_type":"named_recipient"}]};window.LEDGER_MERGES=["BROWNSVILLE ASSEMBLY OF GOD","ROME CHILDREN S ACADEMY"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"NORTH GEORGIA COMMUNITY FOUNDATION":"Nonprofit capacity & transitions","COBB SHERIFFS FOUNDATION":"Nonprofit capacity & transitions","Densho":"Arts & culture"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

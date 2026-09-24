@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Winter Park Health&nbsp;Foundation</h1>
         <p class="hero-meta">Winter Park, FL · EIN <code>59-0669460</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — payments to 18 named organizations and amounts disclosed without recipient detail,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — payments to 18 named organizations and amounts disclosed without recipient detail,
+          reconciled to its own filed total, to the dollar, for tax
           years 2021–2025. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -399,7 +413,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Winter Park Health Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2025 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -433,7 +447,7 @@
 <script>
 window.WINTERPARK_DATA={"meta":{"foundation":"Winter Park Health Foundation","ein":"59-0669460","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2021,2022,2023,2024,2025],"grant_count":49,"grand_total":5869590,"tieout":{"2021":{"object_id":"202243569349101209","grant_count":1,"grant_sum":677499,"line25_col_d":677499,"status":"PASS"},"2022":{"object_id":"202342709349100719","grant_count":1,"grant_sum":883875,"line25_col_d":883875,"status":"PASS"},"2023":{"object_id":"202402209349100305","grant_count":1,"grant_sum":1457197,"line25_col_d":1457197,"status":"PASS"},"2024":{"object_id":"202533159349102363","grant_count":27,"grant_sum":1606601,"line25_col_d":1606601,"status":"PASS"},"2025":{"object_id":"202641709349100904","grant_count":19,"grant_sum":1244418,"line25_col_d":1244418,"status":"PASS"}}},"grants":[{"y":2021,"r":"SEE STATEMENT 37","a":677499,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202243569349101209","record_type":"unitemized"},{"y":2022,"r":"SEE STATEMENT 36","a":883875,"p":"SEE ATTACHED","c":"","s":"","e":"","o":"202342709349100719","record_type":"unitemized"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":27099,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":28920,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":83500,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA A","a":500000,"p":"WOOLLEY FUND- BUILDING","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"BOYS & GIRLS CLUB OF CENTRAL FLORIDA","a":2500,"p":"JOE R. LEE CLUB - HOLIDAY FUNDRAISER SUPPORT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":10000,"p":"WELL TOGETHER GRANT AWARD","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":2668,"p":"ARTS AT DAYBREAK","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 18","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FAST START MANAGEMENT INC","a":2500,"p":"FAST START 19","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":4750,"p":"HPF SCHOOL NURSING SUPPLIES GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":5182,"p":"HST GRANTS SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":32951,"p":"HPF WPHS LPN GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":41945,"p":"FOCPS SNI GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":172028,"p":"HPF NURSE PRACTITIONER GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":436479,"p":"HPA CHILL GRANT SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":15000,"p":"WELL TOGETHER GRANT AWARD","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"GRACE MEDICAL HOME INC","a":24299,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":25000,"p":"WELL TOGETHER GRANT AWARD","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"NEW HOPE FOR KIDS","a":29000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TOWN OF EATONVILLE","a":2500,"p":"CHRISTMAS ON THE BOULEVARD SUPPORT","c":"EATONVILLE","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"TRUE HEALTH","a":25000,"p":"ARTS IN HEALTH","c":"SANFORD","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"VICTORY CUP INITIATIVE INC","a":66000,"p":"WELLTOGETHER GRANT CHALLENGE","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"WINTER PARK PUBLIC LIBRARY","a":12000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2024,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-220,"p":"FOCPS SNI GRANT SY 2023-24","c":"ORLANDO","s":"FL","e":"","o":"202533159349102363","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":19390,"p":"CARL J. BRUNOEHLER SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":225475,"p":"LOLA E. NOWERS SCHOLARSHIPS","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ADVENTHEALTH FOUNDATION - WINTER PARK SUNSYSTEM DEVELOPMENT CORP DBA","a":90000,"p":"KELEMEN MEMORIAL FUND","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTER FOR CHANGE","a":25000,"p":"HEART HEALTH BP PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CENTRAL FLORIDA VOCAL ARTS","a":25000,"p":"PERFORMING ARTS CURRICULUM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"CREALDE SCHOOL OF ART","a":5000,"p":"STORYTELLERS","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"4R FOUNDATION INC","a":25000,"p":"CARDIAC LIFESTYLE MEDICINE PILOT PROGRAM","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":441752,"p":"CHILL YOUTH MENTAL HEALTH SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":209729,"p":"SCHOOL BASED HEALTH CENTER (SBHC) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":42894,"p":"SCHOOL NURSING INITIATIVE (SNI) SY 2025-26","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":37500,"p":"FOOD SECURITY STUDENT SCHOOL PANTRIES","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"GRACE MEDICAL HOME INC","a":25701,"p":"MOBILE MEDICAL UNIT","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"IDEAS FOR US","a":1450,"p":"COMMUNITY EDUCATION GARDEN","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"NEW HOPE FOR KIDS","a":21000,"p":"GRIEF SUPPORT","c":"MAITLAND","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"ROLLINS COLLEGE","a":7450,"p":"CAMPUS URBAN FARM","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"TOWN OF EATONVILLE","a":5000,"p":"COMMUNITY POOL","c":"EATONVILLE","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"UCF FOUNDATION","a":50000,"p":"HEALTHY LIVING INITIATIVE","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"WINTER PARK PUBLIC LIBRARY","a":3000,"p":"FAMILY PLACE LIBRARY","c":"WINTER PARK","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2025,"r":"FOUNDATION FOR ORANGE COUNTY PUBLIC SCHOOLS","a":-15923,"p":"CHILL YOUTH MENTAL HEALTH SY 2024-25","c":"ORLANDO","s":"FL","e":"","o":"202641709349100904","record_type":"named_recipient"},{"y":2023,"r":"[NOT ITEMIZED IN FILED SCHEDULE]","a":1457197,"p":"","c":"","s":"","e":"","o":"202402209349100305","record_type":"unitemized"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FAST START MANAGEMENT INC":"Health & wellbeing","NEW HOPE FOR KIDS":"Health & wellbeing","VICTORY CUP INITIATIVE INC":"Nonprofit capacity & transitions"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

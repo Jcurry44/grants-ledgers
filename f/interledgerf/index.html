@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="INTERLEDGE_DATA" data-slug="interledgerf" data-n="13" data-grand="1461624" data-recsub="The single filed year" data-running="to the dollar, in the single filed year." data-names="13 as-filed names" data-rows-embedded="13" data-rows-total="13">
+<html lang="en" data-withheld="{}" data-zeroyears="{}" data-blob="INTERLEDGE_DATA" data-slug="interledgerf" data-n="13" data-grand="1461624" data-recsub="The single filed year" data-running="to the dollar, in the single filed year." data-names="7 as-filed names" data-rows-embedded="13" data-rows-total="13">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Interledger&nbsp;Foundation</h1>
         <p class="hero-meta">Tampa, FL · EIN <code>84-2364885</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 13 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 6 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           year 2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> The single filed year reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -101,8 +102,8 @@
   <div class="sheet-kpis" role="group" aria-label="Headline figures">
     <div class="kpi">
       <div class="k-label">Recipients</div>
-      <div class="k-val" id="kpi-orgs">13</div>
-      <div class="k-hint">Organizations the foundation funded · 13 as-filed names</div>
+      <div class="k-val" id="kpi-orgs">6</div>
+      <div class="k-hint">Organizations the foundation funded · 7 as-filed names</div>
     </div>
     <div class="kpi">
       <div class="k-label">Median grant</div>
@@ -121,11 +122,12 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
-    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">13</span></button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">6</span></button>
     <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">13</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -375,7 +389,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Interledger Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -407,9 +421,9 @@
   </div>
 </div>
 <script>
-window.INTERLEDGE_DATA={"meta":{"foundation":"Interledger Foundation","ein":"84-2364885","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2024],"grant_count":13,"grand_total":1461624,"tieout":{"2024":{"object_id":"202523189349102827","grant_count":13,"grant_sum":1461624,"line25_col_d":1461624,"status":"PASS"}}},"grants":[{"y":2024,"r":"XIAOJI SONG","a":12500,"p":"FUTURE MONEY COHORT 2023 - GRANTEE","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"FYNBOS TECHNOLOGIES LLC","a":320533,"p":"INTERLEDGER WALLET SERVICES, GRANT AWARD - PROVISION OF ILP ENABLED WALLET","c":"NEW YORK","s":"NY","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"THITSAWORKS PTE LTD","a":250000,"p":"IT IMPLEMENTATION, SUPPORT, CONSULTANCY SERVICE FOR CREDIT UNION SECTOR","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"UCHI UCHIBEKE","a":250000,"p":"ILP-ENABLED FINANCIAL SERVICES GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"STICHTING WAAG SOCIETY","a":45000,"p":"TRUST BASED BANKING PROJECT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"MYWALLETGURU LLC","a":423300,"p":"DEVELOPMENT AND INTEGRATION OF A PAYMENT STREAMING PLATFORM","c":"HOLLYWOOD","s":"FL","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"SNAKE NATION PTY LTD","a":20000,"p":"2024 INTERLEDGER SUMMIT COMMUNITY PARTNERSHIP GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"AYDEN FERDELINE","a":30291,"p":"AMBASSADOR AWARDS - 2024","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"PETER-PAUL KOCH WEBONTWIKKELING","a":10000,"p":"COMMUNITY ABASSADOR GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"DIGITAL DISCRETION COMPANY INC","a":30000,"p":"ILF AMBASSADOR - PRIVACY FRAMEWORK AND OUTREACH","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"VICTORIA COKER","a":30000,"p":"COMMUNITY AMBASSADOR","c":"BROOKLYN","s":"NY","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"SANTOSH VISWANATHAM","a":10000,"p":"PAYMENT FOR INTERLEDGER FOUNDATION SERVICES: OPEN-SOURCE AMBASSADOR","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"SMRITI PARSHEERA","a":30000,"p":"RESEARCH ON DIGITAL ACCESS AND FINANCIAL INCLUSION IN INDIA","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
+window.INTERLEDGE_DATA={"meta":{"foundation":"Interledger Foundation","ein":"84-2364885","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2024],"grant_count":13,"grand_total":1461624,"tieout":{"2024":{"object_id":"202523189349102827","grant_count":13,"grant_sum":1461624,"line25_col_d":1461624,"status":"PASS"}}},"grants":[{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":12500,"p":"FUTURE MONEY COHORT 2023 - GRANTEE","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"FYNBOS TECHNOLOGIES LLC","a":320533,"p":"INTERLEDGER WALLET SERVICES, GRANT AWARD - PROVISION OF ILP ENABLED WALLET","c":"NEW YORK","s":"NY","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"THITSAWORKS PTE LTD","a":250000,"p":"IT IMPLEMENTATION, SUPPORT, CONSULTANCY SERVICE FOR CREDIT UNION SECTOR","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":250000,"p":"ILP-ENABLED FINANCIAL SERVICES GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"STICHTING WAAG SOCIETY","a":45000,"p":"TRUST BASED BANKING PROJECT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"MYWALLETGURU LLC","a":423300,"p":"DEVELOPMENT AND INTEGRATION OF A PAYMENT STREAMING PLATFORM","c":"HOLLYWOOD","s":"FL","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"SNAKE NATION PTY LTD","a":20000,"p":"2024 INTERLEDGER SUMMIT COMMUNITY PARTNERSHIP GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":30291,"p":"AMBASSADOR AWARDS - 2024","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":10000,"p":"COMMUNITY ABASSADOR GRANT","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"DIGITAL DISCRETION COMPANY INC","a":30000,"p":"ILF AMBASSADOR - PRIVACY FRAMEWORK AND OUTREACH","c":"","s":"","e":"","o":"202523189349102827","record_type":"named_recipient"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":30000,"p":"COMMUNITY AMBASSADOR","c":"","s":"NY","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":10000,"p":"PAYMENT FOR INTERLEDGER FOUNDATION SERVICES: OPEN-SOURCE AMBASSADOR","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"},{"y":2024,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":30000,"p":"RESEARCH ON DIGITAL ACCESS AND FINANCIAL INCLUSION IN INDIA","c":"","s":"","e":"","o":"202523189349102827","record_type":"individual_masked"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

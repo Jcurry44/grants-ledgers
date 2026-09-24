@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Amk Charitable&nbsp;Foundation</h1>
         <p class="hero-meta">Henderson, NV · EIN <code>46-6844643</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 17 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 17 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -389,7 +403,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Amk Charitable Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,7 +437,7 @@
 <script>
 window.AMKCHARITA_DATA={"meta":{"foundation":"Amk Charitable Foundation","ein":"46-6844643","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":27,"grand_total":26902500,"tieout":{"2020":{"object_id":"202143499349101209","grant_count":4,"grant_sum":2647500,"line25_col_d":2647500,"status":"PASS"},"2021":{"object_id":"202233199349107398","grant_count":6,"grant_sum":4335000,"line25_col_d":4335000,"status":"PASS"},"2022":{"object_id":"202313199349101436","grant_count":5,"grant_sum":5280000,"line25_col_d":5280000,"status":"PASS"},"2023":{"object_id":"202413199349102506","grant_count":9,"grant_sum":6720000,"line25_col_d":6720000,"status":"PASS"},"2024":{"object_id":"202543219349102929","grant_count":3,"grant_sum":7920000,"line25_col_d":7920000,"status":"PASS"}}},"grants":[{"y":2020,"r":"BLESS USA","a":1907500,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"LIGHTS FOR ORPHANS","a":220000,"p":"HELPING ORPHAN EGYPTIAN GIRLS","c":"PORT WASHINGTON","s":"NY","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"LOVE AND HOPE","a":300000,"p":"EDUCATION, NUTRITION, MEDICAL HELP","c":"CEDAR GROVE","s":"NJ","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2020,"r":"ST MINA MONASTERY","a":220000,"p":"SUPPORT OF RELIGIOUS SERVICES","c":"","s":"","e":"","o":"202143499349101209","record_type":"named_recipient"},{"y":2021,"r":"BLESS USA","a":4120000,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"COPTIC CHURCH IN HI","a":5000,"p":"PRAY FOR ALL INDIVIDUALS TO COME TOGETHER UNITED IN THE BODY OF CHRIST, TO EXPERIENCE LOVE, LEARNING, AND EDIFICATION THROUGH THE APOSTOLIC, ORTHODOX FAITH","c":"HONOLULU","s":"HI","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"LITTLEST LAMBS","a":50000,"p":"EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY","c":"TYE","s":"NY","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST ANTHONY MONASTERY","a":10000,"p":"DEDICATED TO CHRIST OUR GOD, AND SUPPLICATE HIM ON BEHALF OF THE SALVATION OF THE WHOLE WORLD.","c":"FLORENCE","s":"AZ","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST MARY & ST MERCURIUS","a":50000,"p":"\"PRESENT EVERY MAN PERFECT IN CHRIST JESUS\" (COL 1:28) BY REFLECTING THE LIGHT OF CHRIST AND THE ORTHODOX CHRISTIAN FAITH IN THE WORLD.","c":"CONSHOHOCKEN","s":"PA","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2021,"r":"ST MARY & ST MARK","a":100000,"p":"PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS.","c":"NEW YORK","s":"NY","e":"","o":"202233199349107398","record_type":"named_recipient"},{"y":2022,"r":"BLESS USA","a":4130000,"p":"RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT","c":"CEDAR GROVE","s":"NJ","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"THE LITTLEST LAMBS","a":50000,"p":"EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY","c":"RYE","s":"NY","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"ST MARY & ST MARK","a":50000,"p":"PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS","c":"NEW YORK","s":"NY","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"ST MARY & ST MERCURIUS","a":50000,"p":"\"PRESENT EVERY MAN PERFECT IN CHRIST JESUS\" (COL 1:28) BY REFLECTING THE LIGHT OF CHRIST AND THE ORTHODOX CHRISTIAN FAITH IN THE WORLD","c":"CONSHOHOCKEN","s":"PA","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2022,"r":"LOVE & HOPE BOLIVIA","a":1000000,"p":"EDUCATION, NUTRITION, MEDICAL HELP","c":"CEDAR GROVE","s":"NJ","e":"","o":"202313199349101436","record_type":"named_recipient"},{"y":2023,"r":"BLESS USA","a":4970000,"p":"PROVIDE FUNDS TO RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"LOVE & HOPE BOLIVIA","a":1450000,"p":"PROVIDE FUNDS FOR EDUCATION, NUTRITION, MEDICAL HELP.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"SAINT ANTONY MONASTERY","a":20000,"p":"GENERAL OPERATING SUPPORT.","c":"NEWBERRY SPRINGS","s":"CA","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST MARY AND ST MARK'S COPTIC ORTHODOX CHURCH","a":60000,"p":"PROVIDE FUNDS FOR THE ORGANIZATION TO PASSIONATELY ENGAGING BELIEVERS ON THEIR JOURNEY OF FAITH TO REACH ETERNAL LIFE WITH JESUS.","c":"NEW YORK","s":"NY","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"THE LITTLEST LAMB","a":100000,"p":"PROVIDE FUNDS TO THE ORGANIZATION TO ENABLE THEM TO CONTINUE EMPOWERING CHILDREN OF EGYPT TO GROW INTO LEADING, RESPONSIBLE MEMBERS OF THE EGYPTIAN SOCIETY.","c":"RYE","s":"NY","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST JOHN THE BAPTIST","a":50000,"p":"GENERAL OPERATING SUPPORT.","c":"MIRAMAR","s":"FL","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"PHOENIX CHILDRENS HOSPITAL FOUNDATION","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"PHOENIX","s":"AZ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"ST MARY & ST MERCURIUS COPTIC ORTHODOX CHURCH - BRAZIL DIOCESE","a":50000,"p":"GENERAL OPERATING SUPPORT.","c":"BELLEVILLE","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2023,"r":"COPTIC ORTHODOX CHURCH OF ST MARK","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"JERSEY CITY","s":"NJ","e":"","o":"202413199349102506","record_type":"named_recipient"},{"y":2024,"r":"BLESS USA","a":3450000,"p":"PROVIDE FUNDS TO RAISE AWARENESS IN THE UNITED STATES ABOUT THE CONDITIONS OF NEEDY COPTS IN EGYPT.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202543219349102929","record_type":"named_recipient"},{"y":2024,"r":"LOVE & HOPE BOLIVIA","a":4460000,"p":"PROVIDE FUNDS FOR EDUCATION, NUTRITION, MEDICAL HELP.","c":"CEDAR GROVE","s":"NJ","e":"","o":"202543219349102929","record_type":"named_recipient"},{"y":2024,"r":"PHOENIX CHILDRENS HOSPITAL FOUNDATION","a":10000,"p":"GENERAL OPERATING SUPPORT.","c":"PHOENIX","s":"AZ","e":"","o":"202543219349102929","record_type":"named_recipient"}]};window.LEDGER_MERGES=["LITTLEST LAMBS"];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

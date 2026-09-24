@@ -7,8 +7,17 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#163527">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>The Grants Ledger — a reconciled record of grantmaking by 1,952 major U.S. foundations</title>
-<meta name="description" content="A reconciled record of grantmaking from 1,952 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
+<title>The Grants Ledger — a reconciled record of grantmaking by 1,935 major U.S. foundations</title>
+<meta name="description" content="A reconciled record of grantmaking from 1,935 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
+<link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jcurry44.github.io/grants-ledgers/">
+<meta property="og:title" content="The Grants Ledger — major U.S. foundations, reconciled to the dollar">
+<meta property="og:description" content="A reconciled record of grantmaking by major U.S. private foundations, rebuilt from each foundation's own public IRS 990-PF filings — every included year reconciles to the filed total, to the dollar.">
+<meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -489,7 +498,10 @@ th.amt,td.amt { text-align:right;white-space:nowrap;font-variant-numeric:tabular
  .qmorefilters.open { display:grid; }.qmorefilters .qfield:first-child { grid-column:1 / -1; }
  .filterdone { display:block;grid-column:1 / -1;padding:12px;border-radius:7px;background:var(--cover);color:white;font-size:14px; }
  .activefilters { gap:6px;margin-top:12px; }.filterchip,.stchip,.qreset { font-size:11px;min-height:40px;padding:8px 12px; }
- .qmeta { gap:10px;align-items:center;margin:22px 0 14px; }.resulttotals { display:block;flex:1; }.resulttotals b { font-size:16px; }.resulttotals #qsum { display:none; }
+ /* ux-hub-04 / ux-perf-a11y-01 / buyer-journey-02: stack the count and the sort control instead of
+    forcing them into the same row, where the sort control's fixed width squeezed the count text
+    until it wrapped and printed across the sort label */
+ .qmeta { flex-direction:column;align-items:flex-start;gap:6px;margin:16px 0 12px; }.resulttotals { display:block;flex:none;width:100%; }.resulttotals b { font-size:16px;white-space:nowrap; }.resulttotals #qsum { display:none; }
  .resulttools { gap:4px; }.sortlabel { display:none; }.qsort { max-width:155px;font-size:16px;padding:10px 0; }.resulttools .expwrap { display:none; }
  .fcard { display:grid;grid-template-columns:1fr;gap:18px;padding:20px;border-bottom:1px solid var(--rule); }
  .fidentity { grid-column:1;grid-row:1; }.fcard .nm { font-size:17px;font-weight:550;line-height:1.35; }.fcard .where { font-size:12px;margin-top:6px; }
@@ -606,13 +618,20 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,te
 .skiplink{background:var(--copper-bright);color:#163527}
 /* masthead: a full-bleed cover band carrying the thesis, the search and the fleet figures */
 .left{padding-top:0}
-.workspacehead{position:relative;flex-wrap:wrap;align-items:flex-end;margin:0 calc(50% - 50vw) 28px;padding:46px calc(50vw - 50% + 28px) 34px;
+.workspacehead{position:relative;z-index:30;flex-wrap:wrap;align-items:flex-end;margin:0 calc(50% - 50vw) 28px;padding:46px calc(50vw - 50% + 28px) 34px;
  background:linear-gradient(180deg,#1e4634 0%,#163527 100%);color:#f2efe4;isolation:isolate}
 .workspacehead::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
  background:radial-gradient(900px 260px at 88% 120%,rgba(209,144,73,.16),transparent 62%),radial-gradient(700px 240px at 8% -30%,rgba(255,255,255,.05),transparent 60%)}
 .mast{max-width:660px}
 .masth{font:600 48px/1.02 var(--serif);letter-spacing:-1.3px;color:#f6efdd;font-variation-settings:"opsz" 120;text-wrap:balance}
 .mastsub{font:400 18px/1.45 var(--body);color:#cfd9cd;margin-top:12px;max-width:54ch;text-wrap:pretty}
+.mastclaim{font:400 14.5px/1.6 var(--text);color:#cfd9cd;margin-top:12px;max-width:56ch}
+.mastclaimlink{display:inline;color:var(--copper-bright);font:inherit;font-weight:600;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.mastclaimlink:hover{color:#e0a45e}
+.masttry{margin-top:12px;font:500 11.5px/1 var(--mono);letter-spacing:.03em;color:#a9b7a8;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mastclaimphone{display:none;font:400 13.5px/1.3 var(--text);color:#cfd9cd;margin-top:6px;max-width:58ch}
+.trychip{color:#f2efe4;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:6px 13px;font:500 11.5px var(--mono);letter-spacing:.02em;cursor:pointer}
+.trychip:hover{background:rgba(255,255,255,.18);border-color:var(--copper-bright);color:var(--copper-bright)}
 .searchbox{flex:0 1 470px}
 #q{height:54px;padding:12px 44px 12px 46px;background:#fffdf8;border:1px solid var(--copper-bright);border-radius:6px;box-shadow:0 12px 34px #0b241a40;font:400 16px var(--text);color:var(--ink)}
 #q::placeholder{color:#6f7a6a}
@@ -724,18 +743,28 @@ table{font-family:var(--text)}
 /* phone */
 @media(max-width:640px){
  .top{background:var(--cover-deep);border-bottom-color:#2b5a45}
- .topnav{background:#163527f5;border-top-color:#2b5a45;box-shadow:none;backdrop-filter:none}
+ .topnav{background:#163527;border-top-color:#2b5a45;box-shadow:none;backdrop-filter:none}
  .topnav button{color:#a9b7a8;font-size:11px!important;letter-spacing:.08em}
  .topnav button.on{color:#f6efdd;background:transparent}.topnav button.on::before{background:var(--copper-bright)}
  .listbtn .cnt{background:var(--copper-bright);color:#163527;border-color:#163527}
- .workspacehead{margin:0 -20px 20px;padding:28px 20px 24px;gap:16px}
- .masth{font-size:34px;letter-spacing:-1px}.mastsub{font-size:15px;margin-top:8px}
+ .workspacehead{margin:0 -20px 10px;padding:16px 20px 10px;gap:8px}
+ .masth{font-size:30px;letter-spacing:-1px}.mastsub{font-size:15px;margin-top:4px}
+ /* the hero trust sentence and try-chips (ux-hub-01) are a desktop enhancement: on phone every px
+    above the fold is already spoken for by the qmeta/bottom-bar fixes below, and the header's own
+    info icon (#aboutbtn) already opens the same Coverage & method dialog. .masth drops 34->30 and
+    the phone claim below (ux-hub-04 repair pass) is trimmed to margin-top:4 to hold the fixed
+    bottom bar clear of the first result -- see ux-perf-a11y-02/ux-hub-10 below. */
+ .mastclaim{display:none}.masttry{display:none}.mastclaimphone{display:block;margin-top:4px}
  #q{height:50px;font-size:16px;padding-left:44px}
- .tots{gap:16px;margin-top:18px;padding-top:14px;justify-content:space-between}.tots .num{font-size:21px}.tots span{font-size:11px;line-height:1.3;letter-spacing:.1em}
+ .tots{gap:10px;margin-top:10px;padding-top:8px;justify-content:space-between}.tots .num{font-size:21px}.tots span{font-size:11px;line-height:1.3;letter-spacing:.1em}
  .viewselect select{font-family:var(--serif);font-size:18px;font-weight:600;border-bottom-color:var(--copper)}
- .filterbar{background:transparent}.filtertoggle{border-radius:4px;border-color:#d6d0bf;background:#fffdf8;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+ /* ux-perf-a11y-02 / ux-hub-10: the fixed bottom tab bar hid the first result on initial load with
+    zero scroll -- these three trims claw back the ~70px it takes so the top result clears the bar */
+ .workspacebar{margin-bottom:6px}
+ .filterbar{background:transparent;padding:6px 0}.filtertoggle{border-radius:4px;border-color:#d6d0bf;background:#fffdf8;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase}
  .filtertoggle[aria-expanded=true]{background:var(--cover);border-color:var(--cover)}
  .qmorefilters{border-radius:6px;background:var(--sheet);border-color:var(--rule)}.filterdone{border-radius:4px;background:var(--cover);font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+ .qmeta{margin:8px 0 4px}
  .resulttotals b{font-size:22px}.qsort{font-family:var(--text);text-transform:none;letter-spacing:0;font-size:15px}
  .fcard{padding:18px 0 20px;gap:14px}.fcard .nm{font-size:19px}.fcard .mag{max-width:none;margin-top:10px}
  .fstats{grid-column:1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}.fstat b{font-size:19px}
@@ -783,6 +812,8 @@ table{font-family:var(--text)}
     <div class="mast">
       <h1 class="masth" id="viewtitle">Find funders</h1>
       <p class="mastsub" id="viewdescription">Find relevant grant history. Build an informed shortlist.</p>
+      <p class="mastclaim" id="mastclaim">Grant ledgers for <span class="heroCount" id="heroN3">1,935</span> major U.S. foundations, rebuilt from their own IRS 990-PF filings — every year reconciles to the filed total, to the dollar; exceptions disclosed. <button type="button" id="heroreconcile" class="mastclaimlink">How it reconciles →</button></p>
+      <p class="mastclaimphone" id="mastclaimphone"><span class="heroCount">1,935</span> foundations, rebuilt from their IRS 990-PF filings and reconciled to the dollar, every year. <button type="button" id="heroreconcilephone" class="mastclaimlink">How it reconciles →</button></p>
     </div>
     <div class="searchbox">
       <svg class="searchicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
@@ -791,6 +822,7 @@ table{font-family:var(--text)}
       <span class="slash" aria-hidden="true">/</span>
       <div class="suggest" id="suggest" hidden><div id="suglist" role="listbox" aria-label="Suggestions"></div><div class="nosug" id="nosug" hidden></div><div class="srchint" id="srchint"></div></div>
       <span class="sr-only" id="sug-status" role="status" aria-live="polite"></span>
+      <p class="masttry" id="masttry">Try <button type="button" class="trychip" data-try="Hellman">Hellman</button> · <button type="button" class="trychip" data-try="Harvard">Harvard</button> · <button type="button" class="trychip" data-try="Gates">Gates</button></p>
     </div>
   </div>
   <div class="workspacebar">
@@ -830,7 +862,7 @@ table{font-family:var(--text)}
             <span class="expwrap"><button type="button" class="tbtn" id="qexport">Export ▾</button></span>
           </div>
         </div>
-        <div class="resultcaption"><span><i aria-hidden="true"></i> Matching grants · historical evidence, not eligibility</span><p class="qex" id="qex"><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,952</span> foundations ↗</button></p></div>
+        <div class="resultcaption"><span><i aria-hidden="true"></i> Matching grants · historical evidence, not eligibility</span><p class="qex" id="qex"><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,935</span> foundations ↗</button></p></div>
       </div>
       <div class="tablehead" aria-hidden="true"><span>Foundation</span><div class="metriclabels"><span>Matching dollars</span><span>Matching grants</span><span>Median grant</span><span>Latest year</span></div><span></span></div>
       <div class="flist" id="qresults" style="margin-top:0.6rem"></div>
@@ -880,7 +912,7 @@ table{font-family:var(--text)}
   </div>
   <div id="tickhost"></div>
   <footer class="micro">
-    <span class="coveragefoot"><span id="heroN2">1,952</span> foundation ledgers · Reconciled to IRS filings · <button type="button" id="mastmethod">Coverage & method</button></span>
+    <span class="coveragefoot"><span id="heroN2">1,935</span> foundation ledgers · Reconciled to IRS filings · <button type="button" id="mastmethod">Coverage & method</button></span>
     <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
     <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
@@ -901,7 +933,7 @@ table{font-family:var(--text)}
       <div class="mapzone"><svg class="usmap" id="usmap" role="img" aria-label="United States map shaded by the filed grant dollars of foundations based in each state"></svg><div class="maptip" id="maptip"></div></div>
       <div class="mapfoot"><span class="maplegend" aria-hidden="true"><span>Less</span><i style="background:#dce6d4"></i><i style="background:#bfd3b1"></i><i style="background:#93b38b"></i><i style="background:#649773"></i><i style="background:#31674b"></i><span>More filed dollars</span></span><button type="button" id="mapback">Reset map</button></div>
       <p class="atlas-map-note">Based on foundation addresses, not the communities their grants serve. <button type="button" class="stagelink" id="heromethod">Coverage & method</button></p>
-      <span id="heroN" hidden>1,952</span><span id="mapstat" hidden></span>
+      <span id="heroN" hidden>1,935</span><span id="mapstat" hidden></span>
     </section>
     <section class="atlas-panel atlas-years" aria-label="Filed grant dollars by year"><div class="atlas-panel-head"><h3>Filed grant dollars by year</h3></div><div class="ychart" id="dyears"></div><div class="ynote" id="dyearsnote" hidden></div></section>
     <section class="atlas-panel" aria-label="Grant purposes"><h3 class="dh" id="dcatsh">Grant purposes</h3><div class="dlist" id="dcats"></div></section>
@@ -971,7 +1003,7 @@ table{font-family:var(--text)}
   (function(){ var s=document.querySelector('.skiplink'), t=document.getElementById('panelbody'); if(s&&t){ s.addEventListener('click', function(e){ e.preventDefault(); t.focus({ preventScroll: true }); t.scrollIntoView({ block: 'start' }); }); } })();
 </script>
 <script>
-/*DBVER-START*/window.DBV='dfa39e1e34';/*DBVER-END*/
+/*DBVER-START*/window.DBV='c30d33667d';/*DBVER-END*/
 (async () => {
   const $ = (id) => document.getElementById(id);
   const money = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US');
@@ -1615,6 +1647,7 @@ table{font-family:var(--text)}
     const nAll = REG.totals.all.n.toLocaleString('en-US');
     $('heroN').textContent = nAll;
     $('heroN2').textContent = nAll;
+    document.querySelectorAll('.heroCount').forEach((el) => { el.textContent = nAll; });
     $('mapcardsum').textContent = nAll + ' foundations · ' + moneyC(REG.totals.all.t);
   }
   $('regions').addEventListener('click', (e) => {
@@ -1690,7 +1723,7 @@ table{font-family:var(--text)}
   }
   $('fmore').addEventListener('click', moreFleet);
   // the panel is the scroller on a desktop; on a phone the document is, and using the
-  // panel as the root there would make one glance load all 1,952 cards at once
+  // panel as the root there would make one glance load all 1,935 cards at once
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => {
     es.forEach((en) => { if (en.isIntersecting && !$('fmore').hidden) moreFleet(); });
   }, { root: null, rootMargin: '400px' }) : null;
@@ -2765,6 +2798,7 @@ table{font-family:var(--text)}
   // ---------- search ----------
   const rmatch = (rg) => region === 'all' || rg.includes(REGION_KEY[region]);
   let sugItems = [];
+  let curFhits = []; // the current query's exact foundation hits, kept for the Enter key (ux-hub-05)
   // A stranger types the name they know: "Annie E. Casey", "Gordon and Betty Moore", "Bill & Melinda
   // Gates", "oishei foundatoin". The filed name carries middle initials, commas and other words, so a
   // substring test dead-ends half the time. Matching is by token: every typed token must open a token
@@ -2845,8 +2879,12 @@ table{font-family:var(--text)}
   }
   // a multi-word query that opens nothing outright still gets a soft landing: foundations whose
   // first significant token (after "the") is opened by any one typed token of 4+ letters
+  // generic words ("foundation", "trust"...) open almost every filed name's first token, which
+  // buried real misses ("Buffalo Family Foundation") under unrelated funders that merely also have
+  // "Foundation" first (ux-hub-03) -- strip them before matching
+  const CLOSEMATCH_STOP = new Set(['foundation', 'foundations', 'trust', 'fund', 'charitable', 'family', 'inc', 'the']);
   function closestMatches(qraw) {
-    const qts = tokensOf(qraw).filter((t) => t.length >= 4);
+    const qts = tokensOf(qraw).filter((t) => t.length >= 4 && !CLOSEMATCH_STOP.has(t));
     if (!qts.length) return [];
     const hits = [];
     for (const f of F) {
@@ -2865,8 +2903,9 @@ table{font-family:var(--text)}
     const qts = tokensOf(qraw);
     const box = $('suggest');
     const seq = ++sugSeq;
-    if (q.length < 2) { hideSuggest(); $('sug-status').textContent = ''; return; }
+    if (q.length < 2) { curFhits = []; sugItems = []; hideSuggest(); $('sug-status').textContent = ''; return; }
     const fhits = foundationHits(qraw);
+    curFhits = fhits;
     const pick = [];
     if (!EAGER) await eagerData();
     for (const e2 of EAGER) {
@@ -2891,22 +2930,28 @@ table{font-family:var(--text)}
     // offers the shortlist without disturbing it (buttons cannot nest inside anchors)
     const fndRow = (f) => '<div class="sugf"><a class="sug" role="option" id="sug-' + (oi++) + '" aria-selected="false" href="https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/"><span class="n">' + esc(f.n) + '</span><span class="amt num">' + moneyC(f.t) + '</span><span class="m">foundation · ' + f.g.toLocaleString('en-US') + ' grants · open its ledger ↗</span></a><button type="button" class="addb' + (PICKED.has(f.u) ? ' on' : '') + '" data-add="' + f.u + '" data-name="' + esc(f.n) + '" aria-pressed="' + (PICKED.has(f.u) ? 'true' : 'false') + '">' + (PICKED.has(f.u) ? 'Saved' : 'Save funder') + '</button></div>';
     const fhtml = fhits.map(fndRow).join('');
-    // no foundation opened the query outright: a query of two or more words still gets a soft
-    // landing, so "Hellman Trust" surfaces Hellman while "zzqx no such funder" still shows nothing
-    const closeHits = (!fhits.length && qts.length >= 2) ? closestMatches(qraw) : [];
-    const closeHtml = closeHits.length ? '<div class="sughead" aria-hidden="true">Closest matches</div>' + closeHits.map(fndRow).join('') : '';
     const rhtml = pick.map((e2) =>
       `<button type="button" class="sug" role="option" id="sug-${oi++}" aria-selected="false" data-e="${e2[0]}">
         <span class="n">${esc(dc(e2[1]))}</span>
         <span class="amt num${sumCls(e2[0])}"${softTip(e2[0])}>${moneyC(e2[2])}</span>
         <span class="m">${e2[3]} ${e2[3] === 1 ? 'foundation' : 'foundations'} ${idChip(e2[0], 'mini')}${isGov(e2[0]) ? ' · <abbr title="IRS Employer Identification Number">EIN</abbr> ' + e2[0].slice(1) : ''}</span>
       </button>`).join('');
+    // no foundation opened the query outright: a query of two or more words still gets a soft
+    // landing, so "Hellman Trust" surfaces Hellman while "zzqx no such funder" still shows nothing.
+    // Rendered after any exact recipient rows, never before them -- a fuzzy foundation guess never
+    // outranks a real recipient match (ux-hub-06).
+    const closeHits = (!fhits.length && qts.length >= 2) ? closestMatches(qraw) : [];
+    const closeHtml = closeHits.length ? '<div class="sughead" aria-hidden="true">Closest matches</div>' + closeHits.map(fndRow).join('') : '';
     const none = !(pick.length || fhits.length || closeHits.length);
+    // the door is the sales hook for a foundation query that misses outright (ux-hub-03): show it
+    // whenever no foundation matched exactly and no recipient row matched either, even when a fuzzy
+    // "closest match" is displayed above it -- a fuzzy guess is not the funder they typed
+    const showDoor = !fhits.length && !pick.length;
     // the listbox holds options only; the empty-state line and the hint sit beside it
-    $('suglist').innerHTML = fhtml + closeHtml + rhtml;
-    $('nosug').hidden = !none;
+    $('suglist').innerHTML = fhtml + rhtml + closeHtml;
+    $('nosug').hidden = !showDoor;
     // a funder that is not here yet is a work order, not a dead end: the no-match state carries the door
-    $('nosug').innerHTML = none ? noMatchDoor(qraw, govOnly) : '';
+    $('nosug').innerHTML = showDoor ? noMatchDoor(qraw, govOnly) : '';
     $('srchint').innerHTML = (deep ? 'searched the full index · ' : '')
       + '<button type="button" class="sugtog" id="sugidtog" aria-pressed="' + (govOnly ? 'true' : 'false') + '">'
       + (govOnly ? '☑ IRS-matched names only' : '☐ IRS-matched names only')
@@ -2961,6 +3006,9 @@ table{font-family:var(--text)}
     if (e.key === 'Enter') {
       const opts = sugOptions();
       if (open && sugActive >= 0 && opts[sugActive]) { e.preventDefault(); opts[sugActive].click(); return; }
+      // ux-hub-05: with nothing arrowed to, Enter used to only ever open a recipient -- a plain
+      // foundation query like "hellman" did nothing. The top foundation hit (rendered first) wins.
+      if (curFhits.length) { e.preventDefault(); location.href = 'https://jcurry44.github.io/grants-ledgers/f/' + curFhits[0].u + '/'; return; }
       if (sugItems.length) openProfile(sugItems[0][0]);
       return;
     }
@@ -3384,16 +3432,26 @@ table{font-family:var(--text)}
   $('aboutbtn').addEventListener('click', openMethod);
   $('heromethod').addEventListener('click', openMethod);
   $('mastmethod').addEventListener('click', openMethod);
+  $('heroreconcile').addEventListener('click', openMethod);
+  $('heroreconcilephone').addEventListener('click', openMethod);
+  // ux-hub-01: example query chips under the search box hand a stranger a working query
+  $('masttry').addEventListener('click', (e) => {
+    const b = e.target.closest('.trychip');
+    if (!b) return;
+    const v = b.dataset.try;
+    $('q').value = v;
+    $('q').focus();
+    suggest(v);
+  });
 
   // ---------- findings ticker ----------
   const FINDINGS = [
     { u: 'novartispati', t: '$14.6 billion filed as “Various individuals”', s: 'A pharmaceutical patient-assistance foundation: its grants line is free medicine to patients, and the ledger says exactly that instead of pretending it is grantmaking.' },
-    { u: 'pncfoundatio', t: '$367 million itemized in no public filing', s: 'Every year of this bank foundation says “see attached” — and the attachment reaches no public copy of any return. Checked page by page.' },
-    { u: 'muskfoundati', t: '$89.9 million to “The Foundation” of Houston', s: 'The Musk Foundation’s largest rows cite an Attachment A that is absent from every public copy. The year still proves to the dollar.' },
+    { u: 'muskfoundati', t: '$89.9 million to “The Foundation” of Houston', s: 'The Musk Foundation’s largest rows cite an Attachment A that is absent from every public copy. The year still reconciles to the dollar.' },
     { u: 'johnsonjohns', t: '187,513 rows read from 2,547 scanned pages', s: 'J&J’s matching-gift registers, down to a genuine 78-cent gift — and the registers miss the filer’s own subtotals, each gap named on the page.' },
     { u: 'bezosfamilyf', t: 'A $1,533,193 arithmetic error, disclosed', s: 'The Bezos Family Foundation’s 2023 attachment sums its own book-value column wrong. Left exactly as filed, and said out loud.' },
     { u: 'robertsfound', t: 'A register cut off mid-alphabet', s: 'The Roberts Foundation’s 2021 sheet ends after “Mc” in every public copy — $25.0 million carried as one labeled line, not guessed.' },
-    { u: 'jwillardanda', t: '$141.2 million paid; zero recipients public', s: 'The Marriott Foundation’s grant lists never reach the public record — proven by the filings’ own arithmetic, not assumed.' },
+    { u: 'jwillardanda', t: '$141.2 million paid; zero recipients public', s: 'The Marriott Foundation’s grant lists never reach the public record — the filings’ own arithmetic still reconciles to the dollar, not assumed.' },
     { u: 'hellmanfound', t: 'The software read $2,500 as $500', s: 'Caught by checking the ink to the left of the digits. The Hellman Foundation’s four scanned years reconcile exactly — 947 rows.' },
   ];
   let tIdx = 0, tTimer = null;

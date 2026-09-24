@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Calder&nbsp;Foundation</h1>
         <p class="hero-meta">New York, NY · EIN <code>13-3466986</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 8 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 7 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -101,7 +102,7 @@
   <div class="sheet-kpis" role="group" aria-label="Headline figures">
     <div class="kpi">
       <div class="k-label">Recipients</div>
-      <div class="k-val" id="kpi-orgs">8</div>
+      <div class="k-val" id="kpi-orgs">7</div>
       <div class="k-hint">Organizations the foundation funded · 8 as-filed names</div>
     </div>
     <div class="kpi">
@@ -121,11 +122,12 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
     <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
-    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">8</span></button>
+    <button class="tab" role="tab" id="tab-recipients" aria-controls="panel-recipients" aria-selected="false">Recipients <span class="tcount">7</span></button>
     <button class="tab" role="tab" id="tab-grants" aria-controls="panel-grants" aria-selected="false">Grants <span class="tcount">10</span></button>
     <button class="tab" role="tab" id="tab-methodology" aria-controls="panel-methodology" aria-selected="false">Methodology</button>
   </div>
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Calder Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -423,9 +437,9 @@
   </div>
 </div>
 <script>
-window.CALDER_DATA={"meta":{"foundation":"Calder Foundation","ein":"13-3466986","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2024],"grant_count":10,"grand_total":326758,"tieout":{"2020":{"object_id":"202233189349105348","grant_count":2,"grant_sum":9444,"line25_col_d":9444,"status":"PASS"},"2021":{"object_id":"202300749349100425","grant_count":3,"grant_sum":64327,"line25_col_d":64327,"status":"PASS"},"2022":{"object_id":"202401799349100105","grant_count":1,"grant_sum":44440,"line25_col_d":44440,"status":"PASS"},"2023":{"object_id":"202531959349100623","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2024":{"object_id":"202631969349100903","grant_count":4,"grant_sum":208547,"line25_col_d":208547,"status":"PASS"}}},"grants":[{"y":2020,"r":"RENSSELAER POLYTECHNIC INSTITUTE","a":5000,"p":"TO SUPPORT ART PROGRAMS","c":"TROY","s":"NY","e":"","o":"202233189349105348","record_type":"named_recipient"},{"y":2020,"r":"COHERENCE LAB","a":4444,"p":"TO SUPPORT PROTECTING ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202233189349105348","record_type":"named_recipient"},{"y":2021,"r":"COHERENCE LAB","a":57772,"p":"TO SUPPORT PROTECTING ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202300749349100425","record_type":"named_recipient"},{"y":2021,"r":"CAMPANIA AERO SARAYUKI","a":1000,"p":"TO SUPPORT AIR AMBULANCE FOR PUEBLOS INDIGENAS AMAZONICOS","c":"","s":"","e":"","o":"202300749349100425","record_type":"named_recipient"},{"y":2021,"r":"JOSHUA MORIN","a":5555,"p":"TREE SCHOOL GRANT","c":"WASHINGTON","s":"DC","e":"","o":"202300749349100425","record_type":"named_recipient"},{"y":2022,"r":"COHERENCE LAB","a":44440,"p":"TO SUPPORT THE PROTECTION OF ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202401799349100105","record_type":"named_recipient"},{"y":2024,"r":"BEYELER MUSEUM AG","a":118000,"p":"GIFT/DONATION OF PROPERTY:DESCRIPTION - ALEXANDER CALDER, ORIGINAL WORK OF ART, \"UNTITLED,\" 1971, GOUACHE AND INK ON PAPER.BOOK VALUE - $35,000METHOD FOR BOOK VALUE - RECORDED AT THE DONATION VALUE WHEN CONTRBUTED TO CALDER FOUNDATIONMETHOD FOR FAIR MARKET VALUE - COMPARABLE SALESDATE OF GIFT - 07/02/2025THE CALDER FOUNDATION DONATED THE ARTIST'S, ALEXANDER CALDER, ORIGINAL WORK OF ART, \"UNTITLED,\" 1971, GOUACHE AND INK ON PAPER, TO THE FOUNDATION BEYELER TO BE SOLD AT THE BEYELER FOUNDATION'S SUMMER NIGHT'S GALA AUCTION HELD ON SEPTEMBER 6, 2025. THE PROCEEDS FROM THE AUCTION ARE TO SUPPORT THE BEYELER MUSEUM'S WIDE-RANGING EXHIBITION PROGRAM. THE GRANT IS INTENDED EXCLUSIVELY TO FURTHER CHARITABLE AND EDUCATIONAL PURPOSES DESCRIBED IN SECTION 170(C)(2)(B)","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"MUSEE DE L'ARMEE","a":48325,"p":"GIFT/DONATION OF PROPERTY:DESCRIPTION - ALEXANDER CALDER, (1898-1976), BROCHE A LA CROIX DE LORRAINE. LORRAINE CROSS BROOCH, C.1942 SILVER AND STEEL WIRE.BOOK VALUE - $65,000METHOD FOR BOOK VALUE - RECORDED AT THE DONATION VALUE WHEN CONTRBUTED TO CALDER FOUNDATIONMETHOD FOR FAIR MARKET VALUE - COMPARABLE SALESDATE OF GIFT - 07/02/2025CALDER FOUNDATION DONATED AN EXCEPTIONAL WORK LORRAINE CROSS BROOCH BY ALEXANDER CALDER IN HONOR OF MR. ALFRED PACQUEMENT TO ENRICH THE MUSEE DE L'ARMEE'S COLLECTIONS IN PERFECT HARMONY AND COMPLEMENTARITY WITH THEIR ACQUISITION OF FRANCE FOREVER MOBILE, A PIECE OF MAJOR HERITAGE INTEREST IN 2020. THIS DONATION WAS MADE FOLLOWING THE FAVORABLE OPINION ISSUED BY MUSEE DE L'ARMEE'S CONSERVATION COMMITTEE ON DECEMBER 07, 2023 AND THE FAVORABLE OPINION ISSUED BY THE SCIENTIFIC COLLECTIONS COMMITTEE ON MARCH 21, 2024.","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"RESIMAR REGENERANDO DE SIERRA A MAR ASOCIACIN CIVIL","a":20000,"p":"LA TORTUGA VIVA, TURTLE SANCTUARY AT PLAYA VIVA. THE REPLACEMENT ATV FOR THE MARINE LIFE.","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"KOGIA FOUNDATION","a":22222,"p":"REVOLUTIONIZE THE FIELD OF NATURE CONSERVATION COMMUNICATION THROUGH FREE MEDIA LIBRARY AND IMPACT-FOCUSED STORYTELLING.","c":"HAIKU","s":"HI","e":"","o":"202631969349100903","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
+window.CALDER_DATA={"meta":{"foundation":"Calder Foundation","ein":"13-3466986","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2024],"grant_count":10,"grand_total":326758,"tieout":{"2020":{"object_id":"202233189349105348","grant_count":2,"grant_sum":9444,"line25_col_d":9444,"status":"PASS"},"2021":{"object_id":"202300749349100425","grant_count":3,"grant_sum":64327,"line25_col_d":64327,"status":"PASS"},"2022":{"object_id":"202401799349100105","grant_count":1,"grant_sum":44440,"line25_col_d":44440,"status":"PASS"},"2023":{"object_id":"202531959349100623","grant_count":0,"grant_sum":0,"line25_col_d":0,"status":"PASS"},"2024":{"object_id":"202631969349100903","grant_count":4,"grant_sum":208547,"line25_col_d":208547,"status":"PASS"}}},"grants":[{"y":2020,"r":"RENSSELAER POLYTECHNIC INSTITUTE","a":5000,"p":"TO SUPPORT ART PROGRAMS","c":"TROY","s":"NY","e":"","o":"202233189349105348","record_type":"named_recipient"},{"y":2020,"r":"COHERENCE LAB","a":4444,"p":"TO SUPPORT PROTECTING ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202233189349105348","record_type":"named_recipient"},{"y":2021,"r":"COHERENCE LAB","a":57772,"p":"TO SUPPORT PROTECTING ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202300749349100425","record_type":"named_recipient"},{"y":2021,"r":"CAMPANIA AERO SARAYUKI","a":1000,"p":"TO SUPPORT AIR AMBULANCE FOR PUEBLOS INDIGENAS AMAZONICOS","c":"","s":"","e":"","o":"202300749349100425","record_type":"named_recipient"},{"y":2021,"r":"[INDIVIDUAL RECIPIENT - WITHHELD FROM INDEX]","a":5555,"p":"TREE SCHOOL GRANT","c":"","s":"DC","e":"","o":"202300749349100425","record_type":"individual_masked"},{"y":2022,"r":"COHERENCE LAB","a":44440,"p":"TO SUPPORT THE PROTECTION OF ANCIENT FORESTS TO PRESERVE LIFE ON EARTH","c":"HANALEI","s":"HI","e":"","o":"202401799349100105","record_type":"named_recipient"},{"y":2024,"r":"BEYELER MUSEUM AG","a":118000,"p":"GIFT/DONATION OF PROPERTY:DESCRIPTION - ALEXANDER CALDER, ORIGINAL WORK OF ART, \"UNTITLED,\" 1971, GOUACHE AND INK ON PAPER.BOOK VALUE - $35,000METHOD FOR BOOK VALUE - RECORDED AT THE DONATION VALUE WHEN CONTRBUTED TO CALDER FOUNDATIONMETHOD FOR FAIR MARKET VALUE - COMPARABLE SALESDATE OF GIFT - 07/02/2025THE CALDER FOUNDATION DONATED THE ARTIST'S, ALEXANDER CALDER, ORIGINAL WORK OF ART, \"UNTITLED,\" 1971, GOUACHE AND INK ON PAPER, TO THE FOUNDATION BEYELER TO BE SOLD AT THE BEYELER FOUNDATION'S SUMMER NIGHT'S GALA AUCTION HELD ON SEPTEMBER 6, 2025. THE PROCEEDS FROM THE AUCTION ARE TO SUPPORT THE BEYELER MUSEUM'S WIDE-RANGING EXHIBITION PROGRAM. THE GRANT IS INTENDED EXCLUSIVELY TO FURTHER CHARITABLE AND EDUCATIONAL PURPOSES DESCRIBED IN SECTION 170(C)(2)(B)","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"MUSEE DE L'ARMEE","a":48325,"p":"GIFT/DONATION OF PROPERTY:DESCRIPTION - ALEXANDER CALDER, (1898-1976), BROCHE A LA CROIX DE LORRAINE. LORRAINE CROSS BROOCH, C.1942 SILVER AND STEEL WIRE.BOOK VALUE - $65,000METHOD FOR BOOK VALUE - RECORDED AT THE DONATION VALUE WHEN CONTRBUTED TO CALDER FOUNDATIONMETHOD FOR FAIR MARKET VALUE - COMPARABLE SALESDATE OF GIFT - 07/02/2025CALDER FOUNDATION DONATED AN EXCEPTIONAL WORK LORRAINE CROSS BROOCH BY ALEXANDER CALDER IN HONOR OF MR. ALFRED PACQUEMENT TO ENRICH THE MUSEE DE L'ARMEE'S COLLECTIONS IN PERFECT HARMONY AND COMPLEMENTARITY WITH THEIR ACQUISITION OF FRANCE FOREVER MOBILE, A PIECE OF MAJOR HERITAGE INTEREST IN 2020. THIS DONATION WAS MADE FOLLOWING THE FAVORABLE OPINION ISSUED BY MUSEE DE L'ARMEE'S CONSERVATION COMMITTEE ON DECEMBER 07, 2023 AND THE FAVORABLE OPINION ISSUED BY THE SCIENTIFIC COLLECTIONS COMMITTEE ON MARCH 21, 2024.","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"RESIMAR REGENERANDO DE SIERRA A MAR ASOCIACIN CIVIL","a":20000,"p":"LA TORTUGA VIVA, TURTLE SANCTUARY AT PLAYA VIVA. THE REPLACEMENT ATV FOR THE MARINE LIFE.","c":"","s":"","e":"","o":"202631969349100903","record_type":"named_recipient"},{"y":2024,"r":"KOGIA FOUNDATION","a":22222,"p":"REVOLUTIONIZE THE FIELD OF NATURE CONSERVATION COMMUNICATION THROUGH FREE MEDIA LIBRARY AND IMPACT-FOCUSED STORYTELLING.","c":"HAIKU","s":"HI","e":"","o":"202631969349100903","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

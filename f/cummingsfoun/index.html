@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Cummings&nbsp;Foundation</h1>
         <p class="hero-meta">Woburn, MA · EIN <code>04-3073023</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 35 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part XIV, line 3a, to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 35 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -399,7 +413,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Cummings Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -433,7 +447,7 @@
 <script>
 window.CUMMINGSFO_DATA={"meta":{"foundation":"Cummings Foundation","ein":"04-3073023","form":"990-PF","referee":"Part XIV line 3a TotalGrantOrContriPdDurYrAmt (the grants schedule's own total)","years":[2020,2021,2022,2023,2024],"grant_count":44,"grand_total":88236695,"tieout":{"2020":{"object_id":"202113179349100921","grant_count":15,"grant_sum":117250,"line25_col_d":117250,"status":"PASS"},"2021":{"object_id":"202243199349104374","grant_count":7,"grant_sum":8823,"line25_col_d":8823,"status":"PASS"},"2022":{"object_id":"202323199349104772","grant_count":9,"grant_sum":37022600,"line25_col_d":37022600,"status":"PASS"},"2023":{"object_id":"202423209349107792","grant_count":7,"grant_sum":18366000,"line25_col_d":18366000,"status":"PASS"},"2024":{"object_id":"202533219349108058","grant_count":6,"grant_sum":32722022,"line25_col_d":32722022,"status":"PASS"}}},"grants":[{"y":2020,"r":"CHELMSFORD HIGH SCHOOL","a":100,"p":"Educational Programming","c":"Chelmsford","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"FRIENDS OF WINTER POND","a":1000,"p":"Conservation Programs","c":"WINCHESTER","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"KATHI GLAVIN HIGGINS SCHOLARSHIP","a":800,"p":"Educational Programming","c":"BILLERICA","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MARLBOROUGH HIGH SCHOOL","a":1100,"p":"Educational Programming","c":"MARLBOROUGH","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MAYOR'S CHARITY RELIEF FUND","a":5000,"p":"Civic Fundraiser","c":"MARLBOROUGH","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MEDICAL MISSIONARIES OF MARY","a":1000,"p":"Religious Program","c":"BRONX","s":"NY","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"MISHAWUM CHORAL SOCIETY","a":300,"p":"Cultural Arts Programming","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"PAN MASSACHUSETTS CHALLENGE INC","a":50,"p":"Health Research and Programs","c":"NEEDHAM","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"RISE AGAIN","a":800,"p":"Mental Health Program","c":"N BILLERICA","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"SUPPORTIVE LIVING INC","a":100000,"p":"Brain Injury Residence","c":"WOBURN","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"WINCHESTER MEALS ON WHEELS","a":1000,"p":"Community Welfare Program","c":"WINCHESTER","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"NEW ENGLAND HOME FOR VETERANS","a":500,"p":"Homeless Shelter","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"AIDS ACTIONS COMMITTEE OF MA","a":100,"p":"Health Research and Programs","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2020,"r":"DANA FARBER","a":500,"p":"Health Research and Programs","c":"BOSTON","s":"MA","e":"","o":"202113179349100921","record_type":"named_recipient"},{"y":2021,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"ARTISTS FOR HUMANITY INC","a":103,"p":"SOCIAL JUSTICE","c":"BOSTON","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"BETTER FUTURE PROJECT INC","a":100,"p":"Conservation Programs","c":"CAMBRIDGE","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"EVENING OF GIVING","a":1400,"p":"Community Welfare Program","c":"MARLBOROUGH","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"NESKAYA INC","a":120,"p":"Cultural Arts Programming","c":"FRANCONIA","s":"NH","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"SOMERVILLE CAMBRIDGE ELDER","a":100,"p":"Elder Services","c":"SOMERVILLE","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2021,"r":"WORCESTER STATE UNIVERSITY","a":2000,"p":"Educational Programing","c":"WORCESTER","s":"MA","e":"","o":"202243199349104374","record_type":"named_recipient"},{"y":2022,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"ALZHEIMER'S ASSOCIATION","a":2600,"p":"HEALTH RESEARCH AND PROGRAMS","c":"WALTHAM","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"DANA-FARBER CANCER INSTITUTE","a":10000,"p":"HEALTH RESEARCH AND PROGRAMS","c":"BROOKLINE","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"FRIENDS FOREVER","a":1000,"p":"LEADERSHIP PROGRAMS","c":"DURHAM","s":"NH","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER SENIORS ASSOCIATION INC","a":1000,"p":"ELDER SERVICES","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"MEDFORD","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER FOUNDATION FOR EDUCATIONAL EXCELLENCE","a":1000,"p":"EDUCATIONAL PROGRAMMING","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"WINCHESTER PUBLIC LIBRARY","a":1000,"p":"EDUCATIONAL PROGRAMMING","c":"WINCHESTER","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2022,"r":"Oneworld Boston Inc","a":37000000,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202323199349104772","record_type":"named_recipient"},{"y":2023,"r":"ST CHARLES BORROMEO PARISH","a":5000,"p":"Community Welfare Program","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"MEDFORD","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"CUMMINGS FOUNDATION GRANTS INC","a":18350000,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"PLYMOUTH STATE UNIVERSITY","a":2000,"p":"EDUCATIONAL SCHOLARSHIPS","c":"PLYMOUTH","s":"NH","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"UNIVERSITY OF MASSACHUSETTS-AMHERST","a":2000,"p":"EDUCATIONAL SCHOLARSHIPS","c":"AMHERST","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"VNA HOSPICE CARE INC","a":1000,"p":"COMMUNITY HEALTHCARE PROGRAM","c":"WOBURN","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2023,"r":"MAYOR'S CHARITY RELIEF FUND","a":5000,"p":"CIVIC FUNDRAISER","c":"MARLBOROUGH","s":"MA","e":"","o":"202423209349107792","record_type":"named_recipient"},{"y":2024,"r":"MEDFORD JINGLE BELL FESTIVAL","a":1000,"p":"MISCELLANEOUS COMMUNITY SUPPORT","c":"MEDFORD","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"CUMMINGS FOUNDATION GRANTS INC","a":32713666,"p":"TRANSFER WAS MADE FOR ENDOWMENT PURPOSES","c":"WOBURN","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"VNA HOSPICE CARE INC","a":1000,"p":"HEALTHCARE","c":"WOBURN","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"ALZHEIMER'S ASSOCIATION","a":5156,"p":"HEALTHCARE","c":"CHICAGO","s":"IL","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"MARLBOROUGH FIRE DEPARTMENT RELIEF","a":200,"p":"MISCELLANEOUS COMMUNITY SUPPORT","c":"MARLBOROUGH","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"},{"y":2024,"r":"FRIENDS OF THE MARLBOROUGH SENIORS","a":1000,"p":"HUMAN SERVICES","c":"MARLBOROUGH","s":"MA","e":"","o":"202533219349108058","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"FRIENDS OF WINTER POND":"Environment & animals","SUPPORTIVE LIVING INC":"Basic needs & response","BETTER FUTURE PROJECT INC":"Environment & animals","FRIENDS OF THE MARLBOROUGH SENIORS":"Basic needs & response"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

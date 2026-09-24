@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Mae&nbsp;Philanthropies</h1>
         <p class="hero-meta">Palo Alto, CA · EIN <code>81-0868725</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 32 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 32 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -393,7 +407,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Mae Philanthropies. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -427,7 +441,7 @@
 <script>
 window.MAEPHILANT_DATA={"meta":{"foundation":"Mae Philanthropies","ein":"81-0868725","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":38,"grand_total":29645404,"tieout":{"2020":{"object_id":"202143149349100144","grant_count":5,"grant_sum":1925000,"line25_col_d":1925000,"status":"PASS"},"2021":{"object_id":"202203149349102885","grant_count":2,"grant_sum":18089904,"line25_col_d":18089904,"status":"PASS"},"2022":{"object_id":"202323189349102507","grant_count":8,"grant_sum":1517500,"line25_col_d":1517500,"status":"PASS"},"2023":{"object_id":"202433139349102038","grant_count":6,"grant_sum":1275000,"line25_col_d":1275000,"status":"PASS"},"2024":{"object_id":"202543169349101719","grant_count":17,"grant_sum":6838000,"line25_col_d":6838000,"status":"PASS"}}},"grants":[{"y":2020,"r":"UNIVERSITY OF CINCINNATI FOUNDATION","a":1500000,"p":"TO HELP SUPPORT EDUCATION FOR STUDENTS","c":"CINCINNATI","s":"OH","e":"","o":"202143149349100144","record_type":"named_recipient"},{"y":2020,"r":"TIDES FOUNDATION","a":100000,"p":"TO HELP SUPPORT A WORLD OF SHARED PROSPERITY AND SOCIAL JUSTICE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202143149349100144","record_type":"named_recipient"},{"y":2020,"r":"HOPEWELL FUND","a":50000,"p":"TO HELP SUPPORT INNOVATIVE SOCIAL CHANGE PROJECTS","c":"WASHINGTON","s":"DC","e":"","o":"202143149349100144","record_type":"named_recipient"},{"y":2020,"r":"WAKE FOREST UNIVERSITY","a":175000,"p":"TO HELP SUPPORT EDUCATION FOR STUDENTS","c":"WINSTONSALEM","s":"NC","e":"","o":"202143149349100144","record_type":"named_recipient"},{"y":2020,"r":"UCSF SCHOOL OF PHARMACY","a":100000,"p":"TO HELP SUPPORT RESEARCH IN HEALTH CARE","c":"SAN FRANCISCO","s":"CA","e":"","o":"202143149349100144","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF CINCINNATI FOUNDATION","a":4308566,"p":"TO HELP SUPPORT EDUCATION FOR STUDENTS","c":"CINCINNATI","s":"OH","e":"","o":"202203149349102885","record_type":"named_recipient"},{"y":2021,"r":"UNIVERSITY OF CINCINNATI FOUNDATION","a":13781338,"p":"TO HELP SUPPORT EDUCATION FOR STUDENTS","c":"CINCINNATI","s":"OH","e":"","o":"202203149349102885","record_type":"named_recipient"},{"y":2022,"r":"CHARITIES AID FOUNDATION AMERICA ANDREA BOCELLI FOUNDATION","a":60000,"p":"TO PROVIDE ASSISTANCE TO THOSE IN SITUATIONS OF POVERTY, ILLNESS, AND WITH COMPLEX SOCIAL ISSUES THAT STUNT OR REDUCE THEIR QUALITY OF LIFE","c":"ALEXANDRIA","s":"VA","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"GREATER MIAMI JEWISH FUND","a":25000,"p":"TO HELP AID JEWS IN NEED","c":"MIAMI","s":"FL","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"THE BIRTHRIGHT ISRAEL FOUNDATION","a":25000,"p":"TO PROVIDE ALL YOUNG JEWISH ADULTS WITH OPPORTUNITIES FOR TRANSFORMATIVE AND IMMERSIVE SHARED EXPERIENCES IN ISRAEL","c":"NEW YORK","s":"NY","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"BRAZIL FOUNDATION","a":15000,"p":"TO CONNECT LEADERS AND CIVIL SOCIETY ORGANIZATIONS WITH GLOBAL SUPPORT NETWORKS THAT PROMOTE EQUITY, SOCIO-ENVIRONMENTAL JUSTICE, AND OPPORTUNITIES IN BRAZIL.","c":"NEW YORK CITY","s":"NY","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"LIVING THROUGH GIVING FOUNDATION","a":62500,"p":"TO CONNECT INDIVIDUALS THROUGH ORGANIZED ACTS OF LOVE, MEANING, ADVOCACY, AND PURPOSE","c":"LOS ANGELES","s":"CA","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"TEMPLE BETH FUND","a":30000,"p":"TO BE A PLACE WHERE PRAYER, LEARNING AND TIKKUN OLAM ARE VITAL AND FULFILLING COMPONENTS OF OUR JEWISH COMMUNITY","c":"PINECREST","s":"FL","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"STANFORD UNIVERSITY","a":1100000,"p":"TO HELP SUPPORT EDUCATION FOR STUDENTS","c":"STANFORD","s":"CA","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2022,"r":"FOUNDATION FOR PROSECUTORIAL ACCOUNTABILITY","a":200000,"p":"TO PROMOTE A JUST LEGAL SYSTEM AND PREVENT PROSECUTORIAL MISCONDUCT.","c":"CHARLOTTE","s":"NC","e":"","o":"202323189349102507","record_type":"named_recipient"},{"y":2023,"r":"GREATER MIAMI JEWISH FUND","a":175000,"p":"TO HELP AID JEWS IN NEED","c":"MIAMI","s":"FL","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2023,"r":"TEMPLE BETH FUND","a":45000,"p":"TO BE A PLACE WHERE PRAYER, LEARNING AND TIKKUN OLAM ARE VITAL AND FULFILLING COMPONENTS OF OUR JEWISH COMMUNITY","c":"PINECREST","s":"FL","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2023,"r":"THE BIRTHRIGHT ISRAEL FOUNDATION","a":10000,"p":"TO PROVIDE ALL YOUNG JEWISH ADULTS WITH OPPORTUNITIES FOR TRANSFORMATIVE AND IMMERSIVE SHARED EXPERIENCES IN ISRAEL","c":"NEW YORK","s":"NY","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2023,"r":"AMERICAN HEART ASSOCIATION","a":25000,"p":"BUILDING HEALTHIER LIVES, FREE OF CARDIOVASCULAR DISEASES AND STROKE","c":"DALLAS","s":"TX","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2023,"r":"KATIA FRANCESCONI FOUNDATION","a":1000000,"p":"TO GIVE IMPOVERISHED CHILDREN A BETTER OPPORTUNITY FOR LIFE","c":"MIAMI BEACH","s":"FL","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2023,"r":"HEALTH IN THE HOOD","a":20000,"p":"TO PROVIDE EQUAL FOOD ACCESS FOR ALL, ONE COMMUNITY GARDEN AT A TIME WITH A PURPOSE TO CONNECT THEIR MOST FOOD INSECURE COMMUNITIES TO MORE NUTRITIOUS FOOD AND HEALTHIER, HAPPIER LIVES.","c":"MIAMI","s":"FL","e":"","o":"202433139349102038","record_type":"named_recipient"},{"y":2024,"r":"CATHOLIC CHARITIES","a":100000,"p":"WORKING TIRELESSLY TO PROVIDE FOOD TO FAMILIES, SENIORS, AND CHILDREN","c":"WILTON MANORS","s":"FL","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"CHILDREN'S BEREAVEMENT","a":100000,"p":"PROVIDES FREE PEER SUPPORT GROUPS FOR CHILDREN, YOUNG ADULTS, AND ADULTS AFTER THE DEATH OF A LOVED ONE","c":"MIAMI","s":"FL","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"CASSY BAY AREA","a":100000,"p":"COMMITMENT TO PROVIDE HIGH QUALITY CULTURALLY RESPONSIVE CLINICAL SUPPORT SERVICES IN A SAFE, SECURE AND HEALING ENVIRONMENT TO INDIVUDULAS AND FAMILIES WITH BEHAVIORAL AND MENTAL HEALTH CARE NEEDS","c":"MILPITAS","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"GREATER MIAMI JEWISH FED","a":43000,"p":"TO HELP AID JEWISH PEOPLE IN NEED","c":"MIAMI","s":"FL","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"HOFFMAN INSTITUTE FOUNDATION","a":250000,"p":"TRANSFORMATIVE ADULT EDUCATION, SPIRITUAL GROWTH, AND THE PERSONAL DIMENSIONS OF LEADERSHIP","c":"SAN RAFAEL","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"IMPACT ASSETS - YOUTH MENTAL HEALTH CORPS","a":500000,"p":"WORKS WITH INDIVIDUALS, FAMILIES AND A RANGE OF ORGANIZATIONS TO CREATE POSITIVE CHANGE FOR THE WORLD THROUGH IMPACT INVESTING AND PHILANTHROPIC GIVING","c":"BETHSEDA","s":"MD","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"INSEPARABLE INC","a":2000000,"p":"FIGHTS FOR A FUTURE WHERE MENTAL HEALTH POLICY, NO LONGER AN AFTERTHOUGHT, HELPS OUR COUNTRY THRIVE","c":"WASHINGTON","s":"DC","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"MINDFUL PHILANTHROPY INC","a":250000,"p":"GUIDING THE PHILANTHROPIC SECTOR WITH A BOLD VISION TO INVEST IN OUTCOMES THAT CHANGFE LIVES AND ENABLE ALL OF US TO THRIVE","c":"PHILIDELPHIA","s":"PA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"MUTTVILLE","a":200000,"p":"ADOPTION CENTER FOR DOGS","c":"SAN FRANCISCO","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"NATIONAL PHILANTHROPIC TRUST","a":250000,"p":"HELPS DONORS ACHIEVE THIER PHILANTHRPIC GOALS","c":"JENKINTOWN","s":"PA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"PAWS FOR PURPLE HEARTS","a":400000,"p":"CAINE ASSISTED WARRIOR THERAPY","c":"PENNGROVE","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"STANFORD UNIVERSITY","a":1000000,"p":"EDUCATIONAL INSTITUTION THAT INSIPRES LEARNING","c":"STANFORD","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"TEMPLE BETH AM","a":45000,"p":"TO BE A PLACE WHERE PRAYER, LEARNING AND TIKKUN OLAM ARE VITAL AND FULFILLING COMPONENTS OF OUR JEWISH COMMUNITY","c":"PINECREST","s":"FL","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF TENNESSEE","a":100000,"p":"PUBLIC EDUCATION CENTER OF HIGHER LEARNING","c":"KNOXVILLE","s":"TN","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"UNIVERSITY OF WISONSIN - CTR FOR HEALTHY MINDS","a":1000000,"p":"PUBLIC EDUCATION CENTER OF HIGHER LEARNING","c":"MADISON","s":"WI","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"WARRIOR CANINE CONNECTION","a":400000,"p":"PIONEERING ORGANIZATION THAT UTILIZES A MISSION BASED TRAUMA RECOVERY MODEL TO EMPOWER RETURNING COMBAT VETERANS WHO HAVE SUSTAINED PHYSICAL AND PSYCHOLOGICAL WOUNDS WHILE IN SERVICE TO OUT COUNTRY","c":"BOYDS","s":"MD","e":"","o":"202543169349101719","record_type":"named_recipient"},{"y":2024,"r":"WILLIAM JESSUP UNIVERSITY","a":100000,"p":"TO EDUCTATE TRANSFORMATIONAL LEADERS FOR THE GLORY OF GOD","c":"ROCKLIN","s":"CA","e":"","o":"202543169349101719","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};window.LEDGER_NTEE={"TIDES FOUNDATION":"Nonprofit capacity & transitions","HOPEWELL FUND":"Nonprofit capacity & transitions","LIVING THROUGH GIVING FOUNDATION":"Basic needs & response","KATIA FRANCESCONI FOUNDATION":"Nonprofit capacity & transitions","MINDFUL PHILANTHROPY INC":"Health & wellbeing","MUTTVILLE":"Environment & animals","PAWS FOR PURPLE HEARTS":"Community & economic development"};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

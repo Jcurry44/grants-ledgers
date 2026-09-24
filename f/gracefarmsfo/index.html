@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/ledger.css?v=a0f1ce7f65">
+<link rel="stylesheet" href="../../assets/ledger.css?v=60c26504e7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,15 +72,16 @@
         <h1>Grace Farms&nbsp;Foundation</h1>
         <p class="hero-meta">New Canaan, CT · EIN <code>27-1401401</code></p>
         <p class="lede">
-          <strong>The grants the foundation awarded</strong> — every dollar paid to 8 organizations,
-          as reported in its Form&nbsp;990-PF grants-paid schedule (Part&nbsp;XIV in current filings, formerly
-          Part&nbsp;XV) and <strong>reconciled to Part&nbsp;I, line&nbsp;25(d), to the dollar,</strong> for tax
+          <strong>Every grant the foundation reported paying</strong> — every dollar paid to 8 organizations,
+          reconciled to its own filed total, to the dollar, for tax
           years 2020–2024. Built from the foundation’s own public IRS filings.
+          <a href="#tab=methodology" id="lede-method">How it’s read →</a>
         </p>
         <div class="hero-actions">
           <button type="button" class="btn-primary" id="explore-btn">Explore the grants</button>
           <button type="button" class="badge-tie" id="badge-btn" title="Open the methodology"><span class="tick">✓</span> 5 of 5 years reconciled · to the dollar</button>
         </div>
+        <p class="hero-note moat-note" id="moat-note" hidden></p>
         <div class="hero-note" id="explore-note" hidden></div>
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
@@ -121,6 +122,7 @@
     </div>
   </div>
   <p class="fit-line" id="fit-line" hidden></p>
+  <p class="fit-line" id="tiny-note" hidden></p>
 
   <div class="year-rail-top" id="year-rail-top" role="group" aria-label="Filter by tax year"></div>
   <div class="tabs" role="tablist" aria-label="Sections" id="tablist">
@@ -193,6 +195,7 @@
         </div>
         <div class="db-rule" aria-hidden="true"></div>
         <div class="db-sub">Halt-on-fail: a year that does not tie is withheld, never estimated · the checks re-run in your browser console on every load · <a href="#tab=methodology" id="db-method">read the method</a></div>
+        <div class="db-except" id="db-except" hidden></div>
       </div>
 
       <div class="card rv">
@@ -204,6 +207,17 @@
         </div>
         <p class="card-lede" id="lede-movers">—</p>
         <ul id="movers"></ul>
+      </div>
+
+      <div class="cta-band rv" role="note">
+        <div class="cta-row">
+          <p>For research teams: name a foundation whose filings frustrate you and we’ll recover one year of its grants, free.</p>
+          <a href="#" class="cta-link" id="cta-recover">Tell us which one →</a>
+        </div>
+        <div class="cta-row">
+          <p>Is this your foundation? This record can be kept current every year.</p>
+          <a href="#" class="cta-link" id="cta-claim">Get in touch →</a>
+        </div>
       </div>
     </section>
 
@@ -391,7 +405,7 @@
     <div>Not affiliated with, commissioned by, or endorsed by Grace Farms Foundation. Every figure is computed from the foundation’s own public filings and is traceable to them.</div>
     <div>Latest filed year TY2024 · filings checked 2026-09-05 · 214 amended returns awaiting review · doctrine: <code>document referees itself; refuse, never guess</code>.</div>
     <div class="foot-report">Something off on this page? <a id="report-link" href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20a%20ledger%20page&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report it</a> · the message carries this exact view.</div>
-    <nav class="foot-site" aria-label="Site">
+    <nav class="foot-site" aria-label="Site footer">
       <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
       <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
@@ -425,7 +439,7 @@
 <script>
 window.GRACEFARMS_DATA={"meta":{"foundation":"Grace Farms Foundation","ein":"27-1401401","form":"990-PF","referee":"Part I line 25 col. (d) ContriPaidDsbrsChrtblAmt","years":[2020,2021,2022,2023,2024],"grant_count":10,"grand_total":411073,"tieout":{"2020":{"object_id":"202133169349102128","grant_count":1,"grant_sum":50000,"line25_col_d":50000,"status":"PASS"},"2021":{"object_id":"202243199349108309","grant_count":1,"grant_sum":50000,"line25_col_d":50000,"status":"PASS"},"2022":{"object_id":"202333199349109528","grant_count":1,"grant_sum":50000,"line25_col_d":50000,"status":"PASS"},"2023":{"object_id":"202423209349108632","grant_count":1,"grant_sum":25000,"line25_col_d":25000,"status":"PASS"},"2024":{"object_id":"202523219349101547","grant_count":6,"grant_sum":236073,"line25_col_d":236073,"status":"PASS"}}},"grants":[{"y":2020,"r":"YALE CENTER FOR FAITH & CULTURE","a":50000,"p":"GENERAL SUPPORT","c":"NEW HAVEN","s":"CT","e":"","o":"202133169349102128","record_type":"named_recipient"},{"y":2021,"r":"YALE CENTER FOR FAITH & CULTURE","a":50000,"p":"GENERAL SUPPORT","c":"NEW HAVEN","s":"CT","e":"","o":"202243199349108309","record_type":"named_recipient"},{"y":2022,"r":"YALE CENTER FOR FAITH & CULTURE","a":50000,"p":"GENERAL SUPPORT","c":"NEW HAVEN","s":"CT","e":"","o":"202333199349109528","record_type":"named_recipient"},{"y":2023,"r":"STANFORD UNIVERSITY","a":25000,"p":"TO SUPPORT RESEARCH ON CEMENT RELATED TO ENDING MODERN SLAVERY'S IMPRINT ON BUILDING","c":"STANFORD","s":"CA","e":"","o":"202423209349108632","record_type":"named_recipient"},{"y":2024,"r":"YALE CENTER FOR FAITH AND CULTURE","a":100000,"p":"TO SUPPORT THE YALE CENTER FOR FAITH AND CULTURE'S GENERAL CHARITABLE AND EDUCATIONAL PROGRAMS.","c":"NEW HAVEN","s":"CT","e":"","o":"202523219349101547","record_type":"named_recipient"},{"y":2024,"r":"YALE CENTER FOR ECOSYSTEMS ARCHITECTURE YALE SCHOOL OF ARCHITECTURE","a":55000,"p":"TO SUPPORT BIOMATERIALS RESEARCH AT YALE CEA.","c":"NEW HAVEN","s":"CT","e":"","o":"202523219349101547","record_type":"named_recipient"},{"y":2024,"r":"AFRICA TRANSFORMATIONAL INITIATIVE","a":28073,"p":"GFF AFRICA DISSOLUTION CONTRIBUTION TO LOCAL SUCCEEDING NGO.","c":"","s":"","e":"","o":"202523219349101547","record_type":"named_recipient"},{"y":2024,"r":"CENTER FOR INNOVATION","a":25000,"p":"TO SUPPORT DESIGN AND CONSTRUCTION EXPERTS WHO ARE CONTRIBUTING TO RECONSTRUCTION EFFORTS IN UKRAINE.","c":"SAN FRANCISCO","s":"CA","e":"","o":"202523219349101547","record_type":"named_recipient"},{"y":2024,"r":"BLACK ARTISTS DESIGNERS GUILD INC","a":25000,"p":"TO SUPPORT THE GUILD'S WORK TO DESIGN/BUILD THE NEW PROJECT: \"THE UNDERGROUND LIBRARY: AN ARCHIVE OF OUR TRUTH.\"","c":"BROOKLYN","s":"NY","e":"","o":"202523219349101547","record_type":"named_recipient"},{"y":2024,"r":"LAGUNA ART MUSEUM","a":3000,"p":"TO PROVIDE SUPPORT FOR AN EVENT THAT RAISED LOCAL AWARENESS FOR DESIGN FOR FREEDOM.","c":"LAGUNA BEACH","s":"CA","e":"","o":"202523219349101547","record_type":"named_recipient"}]};window.LEDGER_MERGES=[];window.LEDGER_ALIASES={};window.LEDGER_EXTRA_RULES={};</script>
 <section id="print-report" class="print-report" hidden aria-hidden="true"></section>
-<script src="../../assets/ledger.js?v=a0f1ce7f65"></script>
+<script src="../../assets/ledger.js?v=60c26504e7"></script>
 <script>setTimeout(function(){document.documentElement.classList.add('settled')},1600)</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
