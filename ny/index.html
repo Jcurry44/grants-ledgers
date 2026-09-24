@@ -9,14 +9,15 @@
 <title>New York — The Grants Ledger</title>
 <meta name="description" content="93 of New York's largest private foundations — every grant reconciled to the foundation's own IRS filing.">
 <meta name="theme-color" content="#1e4634">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="New York — The Grants Ledger">
 <meta property="og:description" content="93 of New York's largest private foundations — every grant reconciled to the foundation's own IRS filing.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
+<meta property="og:image:alt" content="$303,860,714,662 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/ny/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +56,7 @@ a:hover{text-decoration-color:currentColor}
 h1,h2,h3{text-wrap:balance}
 p,li,.lede{text-wrap:pretty}
 .sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.nw{white-space:nowrap}
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cover-deep);color:var(--cream-bright);padding:10px 16px;border-radius:0 0 var(--r-ctl) 0;text-decoration:none;font:600 13px var(--sans)}
 .skip:focus{left:0}
 .eyebrow{font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
@@ -76,10 +78,10 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 .gl-nav a,.gl-more summary{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-ctl);color:var(--cream-dim);text-decoration:none;cursor:pointer;list-style:none;white-space:nowrap}
 .gl-more summary::-webkit-details-marker{display:none}
 .gl-more summary svg{width:10px;height:10px}
-.gl-nav a[aria-current=page]{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-top .gl-nav > a[aria-current=page],.gl-top .gl-more summary.on{background:transparent;position:relative;color:var(--cream-bright)}
+.gl-top .gl-nav > a[aria-current=page]::after,.gl-top .gl-more summary.on::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:6px;pointer-events:none;background:linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom 4px/100% 2px no-repeat,linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom/100% 1px no-repeat}
 .gl-cnt{margin-left:6px;min-width:18px;padding:0 5px;border-radius:var(--r-pill);background:var(--copper-bright);color:var(--cover-deep);font:600 10.5px/18px var(--sans);text-align:center}
 .gl-more{position:relative}
-.gl-more summary.on{color:var(--cream-bright);background:rgba(255,255,255,.08)}
 .gl-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;display:grid;background:var(--sheet);border-radius:var(--r-card);box-shadow:var(--shadow-pop)}
 .gl-menu a{color:var(--ink);font:500 14px/1.2 var(--sans);padding:9px 12px;border-radius:var(--r-ctl);text-decoration:none}
 .gl-menu a[aria-current=page]{color:var(--copper-deep);background:var(--tint)}
@@ -89,18 +91,21 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 @media(hover:hover){.gl-nav a:hover,.gl-more summary:hover,.gl-method:hover{color:var(--cream-bright)}.gl-menu a:hover{background:var(--tint)}.gl-cta:hover{background:var(--copper-light)}}
 .gl-nav a:active,.gl-method:active{transform:translateY(1px)}
 @media(max-width:1099px){.gl-top{gap:16px;padding:0 20px}.gl-cta{display:none}}
+@media(min-width:641px) and (max-width:1099px){.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top{height:56px;gap:12px}.gl-brand b{font-size:18px}.gl-method{display:none}.gl-top .gl-nav a[data-nav=atlas],.gl-top .gl-nav a[data-nav=shortlist]{display:none}.gl-top .gl-nav{justify-content:flex-end}.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top:not([data-surface=hub]){gap:10px}.gl-top:not([data-surface=hub]) .gl-actions{display:none}.gl-top:not([data-surface=hub]) .gl-nav{gap:2px}.gl-top:not([data-surface=hub]) .gl-nav a,.gl-top:not([data-surface=hub]) .gl-more summary{padding:0 10px;min-height:44px}.gl-top:not([data-surface=hub]) .gl-more summary{gap:6px}}
+@media(max-width:640px){.gl-top:not([data-surface=hub]) .gl-nav > a[aria-current=page]::after,.gl-top:not([data-surface=hub]) .gl-more summary.on::after{left:10px;right:10px;bottom:4px}}
 @media(max-width:400px){.gl-brand b{font-size:17px}}
 @media(max-width:359px){.gl-brand b{display:none}}
 @media print{.gl-top{display:none}}
 footer.gl-foot{border-top:1px solid var(--rule);padding:2rem 0 2.8rem;color:var(--ink-dim);font-size:.86rem}
 footer.gl-foot .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-footer.gl-foot nav{display:flex;flex-wrap:wrap;gap:0 1.25rem;margin-bottom:.9rem}
+footer.gl-foot nav{display:block;text-wrap:balance;margin-bottom:.9rem}
 footer nav[aria-label="Site footer"]{font:500 var(--t-small)/1 var(--sans);letter-spacing:.01em;text-transform:none}
-footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;color:var(--ink-dim);text-decoration:none}
+footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;margin-right:1rem;color:var(--ink-dim);text-decoration:none}
 @media(hover:hover){footer nav[aria-label="Site footer"] a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:currentColor}}
 @media(pointer:coarse),(max-width:640px){footer nav[aria-label="Site footer"] a{padding:16px 0}}
+footer nav[aria-label="Site footer"] a[aria-current=page]{color:var(--ink);font-weight:600}
 footer.gl-foot a{color:var(--copper-deep)}
 </style>
 <style>
@@ -114,7 +119,8 @@ h1 em { font-style:normal; color:var(--copper-bright); }
 .big b { display:block; font-family:var(--serif); font-weight:620; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.1; padding-bottom:9px; color:var(--copper-bright); font-variant-numeric:tabular-nums lining-nums; }
 /* the reconciled total carries the double rule, at the figure's own width (as on the hub cover) */
 .big div:first-child b { display:inline-block; vertical-align:top; background:linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom 4px/100% 2px no-repeat,linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom/100% 1px no-repeat; }
-.big span { display:block; margin-top:6px; font-family:var(--mono); font-size:var(--t-label); line-height:1.35; letter-spacing:.12em; text-transform:uppercase; color:var(--cream-faint); }
+@media (max-width:640px) { .big { display:grid; grid-template-columns:1fr 1fr; gap:16px 24px; } .big div:first-child { grid-column:1/-1; } }
+.big span { display:block; margin-top:6px; font-family:var(--mono); font-size:var(--t-label); line-height:1.35; letter-spacing:.12em; text-transform:uppercase; color:var(--cream-faint); text-wrap:balance; }
 main { padding:0 0 clamp(2rem,6vh,3.4rem); }
 .body-wrap { padding-top:clamp(2rem,6vh,3.4rem); }
 .list { display:grid; gap:.7rem; }
@@ -123,7 +129,9 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
   box-shadow:inset 0 0 0 1px var(--rule); transition:transform .2s, box-shadow .2s; }
 @media (hover:hover) { .fc:hover { transform:translateY(-2px); box-shadow:var(--shadow-pop); } }
 @media (prefers-reduced-motion:reduce) { .fc { transition:none; } .fc:hover { transform:none; } }
-.fc .amt { font-family:var(--mono); font-size:.95rem; color:var(--copper-deep); white-space:nowrap; }
+/* p4: a running total is ink (copper is the reconciled figure and the thing under the cursor) */
+.fc .amt { font-family:var(--sans); font-weight:600; font-size:.98rem; color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums lining-nums; }
+@media (hover:hover) { .fc:hover .amt { color:var(--copper-deep); } }
 .fc b { font-family:var(--serif); font-weight:620; display:block; line-height:1.25; }
 .fc .meta { font-family:var(--mono); font-size:var(--t-label); letter-spacing:.05em; color:var(--ink-dim); display:block; margin-top:.15rem; }
 .fc .go { color:var(--copper-bright); }
@@ -141,7 +149,7 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
 <a class="skip" href="#main">Skip to content</a>
 <header class="gl-top" data-surface="page">
   <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
-    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
+    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><path fill="#d19049" d="M22 20.7Q22 21.1 21.9 21.2Q21.7 21.4 21.4 21.4Q21.1 21.4 20.9 21.2Q20.7 21.1 20.6 20.8Q20.4 20.6 20.2 20.4Q20 20.3 19.8 20.3Q19.6 20.3 19.3 20.4Q19 20.6 18.6 20.8Q18.1 21 17.5 21.2Q16.8 21.4 15.9 21.4Q14.2 21.4 12.8 20.8Q11.5 20.2 10.5 19.2Q9.5 18.2 9 16.7Q8.5 15.3 8.5 13.5Q8.5 11.8 9.1 10.4Q9.7 8.9 10.7 7.9Q11.7 6.8 13.1 6.2Q14.4 5.6 16 5.6Q17.2 5.6 17.9 5.8Q18.6 6.1 19 6.3Q19.5 6.5 19.7 6.5Q20 6.5 20.1 6.3Q20.2 6.1 20.4 5.9Q20.5 5.7 20.8 5.7Q21 5.7 21.1 5.9Q21.3 6 21.4 6.3L22.5 10Q22.6 10.2 22.4 10.4Q22.3 10.6 22.1 10.7Q21.8 10.7 21.6 10.6Q21.4 10.5 21.3 10.3Q20.7 8.9 20 8.2Q19.2 7.4 18.3 7.1Q17.5 6.8 16.5 6.8Q15.1 6.8 14.1 7.5Q13 8.3 12.4 9.7Q11.9 11 11.9 12.9Q11.9 15.2 12.5 16.7Q13.2 18.3 14.3 19.1Q15.5 19.9 16.9 19.9Q17.4 19.9 17.8 19.8Q18.2 19.7 18.5 19.5Q18.7 19.3 18.9 19.1Q19 18.8 19 18.4V15.9Q19 15.6 18.9 15.5Q18.8 15.4 18.4 15.3L17.7 15.1Q17.5 15.1 17.3 14.9Q17.2 14.8 17.2 14.6Q17.2 14.4 17.4 14.3Q17.5 14.1 17.8 14.1H22.8Q23.2 14.1 23.3 14.3Q23.5 14.4 23.5 14.6Q23.5 14.8 23.4 14.9Q23.3 15 23 15.1L22.6 15.2Q22.3 15.3 22.2 15.5Q22 15.6 22 15.9Z"/><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
   </a>
   <nav class="gl-nav" aria-label="Site">
     <a href="https://jcurry44.github.io/grants-ledgers/" data-nav="find">Find funders</a>
@@ -168,7 +176,7 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
 <header class="cover"><div class="wrap">
   <p class="eyebrow accent">New York</p>
   <h1>New York&rsquo;s giants, <em>reconciled</em></h1>
-  <p class="lede">The largest private foundations in New York — every grant as filed in the foundation&rsquo;s own Form&nbsp;990-PF, every year reconciling to a named filed total to the dollar, differences disclosed on each page. The first 93 of a statewide pass.</p>
+  <p class="lede">The largest private foundations in New York — every grant as filed in the foundation&rsquo;s own Form&nbsp;<span class="nw">990-PF</span>, every year reconciling to a named filed total to the dollar, differences disclosed on each page. The first 93 of a statewide pass.</p>
   <div class="big">
     <div><b class="num">$36,985,659,966</b><span>reconciled</span></div>
     <div><b class="num">130,287</b><span>grants</span></div>
@@ -269,7 +277,7 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/carsonfamtr/">
         <span class="amt num">$283,183,816</span>
-        <span><b>Carson Fam Charitable Tr</b><span class="meta">New York · <span class="nw">TY2020–2024</span> · 733 grants</span></span>
+        <span><b>Carson Family Charitable Trust</b><span class="meta">New York · <span class="nw">TY2020–2024</span> · 733 grants</span></span>
         <span class="go" aria-hidden="true">→</span>
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/forajustsoci/">
@@ -304,7 +312,7 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/bernardandan/">
         <span class="amt num">$221,277,850</span>
-        <span><b>Bernard and Anne Spitzer Charitable Tr</b><span class="meta">New York · <span class="nw">TY2020–2024</span> · 893 grants</span></span>
+        <span><b>Bernard and Anne Spitzer Charitable Trust</b><span class="meta">New York · <span class="nw">TY2020–2024</span> · 893 grants</span></span>
         <span class="go" aria-hidden="true">→</span>
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/williamrando/">
@@ -539,7 +547,7 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/ibminternati/">
         <span class="amt num">$61,604,173</span>
-        <span><b>Ibm International Foundation</b><span class="meta">Armonk · <span class="nw">TY2020–2024</span> · 5,108 grants</span></span>
+        <span><b>IBM International Foundation</b><span class="meta">Armonk · <span class="nw">TY2020–2024</span> · 5,108 grants</span></span>
         <span class="go" aria-hidden="true">→</span>
       </a>
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/theheckscher/">
@@ -647,14 +655,27 @@ main { padding:0 0 clamp(2rem,6vh,3.4rem); }
 </div></main>
 <footer class="gl-foot"><div class="wrap">
   <nav aria-label="Site footer">
-    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/" aria-current="page">New York</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20New%20York%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/ny/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem ↗</a>
   </nav>
-  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form <span class="nw">990-PF</span> filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 <script>try{const s=JSON.parse(localStorage.getItem('gl_projects')||'{}');const p=(s.projects||[]).find(x=>x.id===s.active)||(s.projects||[])[0];
 const n=p?p.funders.length:0;const el=document.querySelector('[data-shortlist-count]');if(el){el.textContent=n;el.hidden=n===0}}catch(e){}</script>
+<script>// the header's More menu dismisses like a menu: a press elsewhere, Escape (focus back to More), or focus leaving it -- the hub's script
+  (function(){ var m=document.querySelector('.gl-top .gl-more'); if(!m) return; var sm=m.querySelector('summary');
+    document.addEventListener('pointerdown', function(e){ if(m.open && !m.contains(e.target)) m.open=false; }, true);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.open){ m.open=false; sm.focus(); e.stopPropagation(); } }, true);
+    m.addEventListener('focusout', function(e){ if(m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open=false; });
+  })();</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script></body>
 </html>

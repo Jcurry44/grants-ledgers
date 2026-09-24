@@ -9,14 +9,15 @@
 <title>What the ledger catches — The Grants Ledger</title>
 <meta name="description" content="What turns up when every foundation filing is reconciled to its own filed total: money with no named recipient, registers that stop mid-alphabet, arithmetic errors inside the filings themselves.">
 <meta name="theme-color" content="#1e4634">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What the ledger catches — The Grants Ledger">
 <meta property="og:description" content="What turns up when every foundation filing is reconciled to its own filed total: money with no named recipient, registers that stop mid-alphabet, arithmetic errors inside the filings themselves.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
+<meta property="og:image:alt" content="$303,860,714,662 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/findings/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +56,7 @@ a:hover{text-decoration-color:currentColor}
 h1,h2,h3{text-wrap:balance}
 p,li,.lede{text-wrap:pretty}
 .sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.nw{white-space:nowrap}
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cover-deep);color:var(--cream-bright);padding:10px 16px;border-radius:0 0 var(--r-ctl) 0;text-decoration:none;font:600 13px var(--sans)}
 .skip:focus{left:0}
 .eyebrow{font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
@@ -76,10 +78,10 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 .gl-nav a,.gl-more summary{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-ctl);color:var(--cream-dim);text-decoration:none;cursor:pointer;list-style:none;white-space:nowrap}
 .gl-more summary::-webkit-details-marker{display:none}
 .gl-more summary svg{width:10px;height:10px}
-.gl-nav a[aria-current=page]{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-top .gl-nav > a[aria-current=page],.gl-top .gl-more summary.on{background:transparent;position:relative;color:var(--cream-bright)}
+.gl-top .gl-nav > a[aria-current=page]::after,.gl-top .gl-more summary.on::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:6px;pointer-events:none;background:linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom 4px/100% 2px no-repeat,linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom/100% 1px no-repeat}
 .gl-cnt{margin-left:6px;min-width:18px;padding:0 5px;border-radius:var(--r-pill);background:var(--copper-bright);color:var(--cover-deep);font:600 10.5px/18px var(--sans);text-align:center}
 .gl-more{position:relative}
-.gl-more summary.on{color:var(--cream-bright);background:rgba(255,255,255,.08)}
 .gl-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;display:grid;background:var(--sheet);border-radius:var(--r-card);box-shadow:var(--shadow-pop)}
 .gl-menu a{color:var(--ink);font:500 14px/1.2 var(--sans);padding:9px 12px;border-radius:var(--r-ctl);text-decoration:none}
 .gl-menu a[aria-current=page]{color:var(--copper-deep);background:var(--tint)}
@@ -89,18 +91,21 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 @media(hover:hover){.gl-nav a:hover,.gl-more summary:hover,.gl-method:hover{color:var(--cream-bright)}.gl-menu a:hover{background:var(--tint)}.gl-cta:hover{background:var(--copper-light)}}
 .gl-nav a:active,.gl-method:active{transform:translateY(1px)}
 @media(max-width:1099px){.gl-top{gap:16px;padding:0 20px}.gl-cta{display:none}}
+@media(min-width:641px) and (max-width:1099px){.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top{height:56px;gap:12px}.gl-brand b{font-size:18px}.gl-method{display:none}.gl-top .gl-nav a[data-nav=atlas],.gl-top .gl-nav a[data-nav=shortlist]{display:none}.gl-top .gl-nav{justify-content:flex-end}.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top:not([data-surface=hub]){gap:10px}.gl-top:not([data-surface=hub]) .gl-actions{display:none}.gl-top:not([data-surface=hub]) .gl-nav{gap:2px}.gl-top:not([data-surface=hub]) .gl-nav a,.gl-top:not([data-surface=hub]) .gl-more summary{padding:0 10px;min-height:44px}.gl-top:not([data-surface=hub]) .gl-more summary{gap:6px}}
+@media(max-width:640px){.gl-top:not([data-surface=hub]) .gl-nav > a[aria-current=page]::after,.gl-top:not([data-surface=hub]) .gl-more summary.on::after{left:10px;right:10px;bottom:4px}}
 @media(max-width:400px){.gl-brand b{font-size:17px}}
 @media(max-width:359px){.gl-brand b{display:none}}
 @media print{.gl-top{display:none}}
 footer.gl-foot{border-top:1px solid var(--rule);padding:2rem 0 2.8rem;color:var(--ink-dim);font-size:.86rem}
 footer.gl-foot .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-footer.gl-foot nav{display:flex;flex-wrap:wrap;gap:0 1.25rem;margin-bottom:.9rem}
+footer.gl-foot nav{display:block;text-wrap:balance;margin-bottom:.9rem}
 footer nav[aria-label="Site footer"]{font:500 var(--t-small)/1 var(--sans);letter-spacing:.01em;text-transform:none}
-footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;color:var(--ink-dim);text-decoration:none}
+footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;margin-right:1rem;color:var(--ink-dim);text-decoration:none}
 @media(hover:hover){footer nav[aria-label="Site footer"] a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:currentColor}}
 @media(pointer:coarse),(max-width:640px){footer nav[aria-label="Site footer"] a{padding:16px 0}}
+footer nav[aria-label="Site footer"] a[aria-current=page]{color:var(--ink);font-weight:600}
 footer.gl-foot a{color:var(--copper-deep)}
 </style>
 <style>
@@ -116,8 +121,12 @@ h1 em { font-style: normal; color: var(--copper-bright); }
 .lede { max-width: 54ch; color: var(--cream-faint); font-size: clamp(1.02rem, 1.5vw, 1.16rem); }
 .heronums { display: flex; flex-wrap: wrap; gap: 1.2rem 2.8rem; margin-top: 1.9rem; }
 .heronums div b { display: block; font-family: var(--serif); font-weight: 630; font-size: clamp(1.5rem, 3vw, 2.15rem); line-height: 1.1; color: var(--copper-bright); letter-spacing: -0.02em; }
-.heronums div span { display: block; margin-top: 6px; font-family: var(--mono); font-size: var(--t-label); line-height: 1.35; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-faint); }
-@media (max-width: 640px) { .heronums { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; margin-top: 24px; } .heronums div:first-child { grid-column: 1/-1; } }
+.heronums div span { display: block; margin-top: 6px; font-family: var(--mono); font-size: var(--t-label); line-height: 1.35; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-faint); text-wrap: balance; }
+/* p5: the paper tile's years never strand one word: they keep together, and under 360px take their own line */
+.heronums div span > span { display: inline; margin-top: 0; }
+.heronums .yrs { white-space: nowrap; }
+@media (max-width: 359px) { .heronums .sep { display: none; } .heronums span > .yrs { display: block; } }
+@media (max-width: 640px) { .heronums { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; margin-top: 24px; } .heronums div:first-child, .heronums div:nth-child(even):last-child { grid-column: 1/-1; } }
 
 .classes { padding: clamp(2.2rem, 6vh, 3.2rem) 0 0.6rem; }
 .classhead { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.3rem; }
@@ -125,9 +134,11 @@ h1 em { font-style: normal; color: var(--copper-bright); }
 .classhead .n { font-family: var(--mono); font-size: var(--t-label); letter-spacing: .06em; color: var(--ink-dim); white-space: nowrap; }
 .classsub { color: var(--ink-dim); max-width: 62ch; margin-bottom: 1.2rem; }
 
-.cards { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+/* p4: two across (a class of four reads 2 x 2, never 3 + 1); a lone last card takes the row */
+.cards { display: grid; gap: 0.9rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cards > .card:last-child:nth-child(odd) { grid-column: 1 / -1; } }
 .card { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r-card); padding: 1rem 1.05rem 0.9rem; display: flex; flex-direction: column; gap: 0.45rem; transition: border-color 0.18s var(--ease), transform 0.18s var(--ease); }
-.card:hover { border-color: var(--copper); transform: translateY(-2px); }
+@media (hover: hover) { .card:hover { border-color: var(--copper); transform: translateY(-2px); } }
 .card .fig { font-family: var(--serif); font-weight: 640; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.02em; color: var(--copper-deep); line-height: 1.05; }
 .card .who { font-family: var(--mono); font-size: var(--t-label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
 .card p { font-size: 0.95rem; color: var(--ink); }
@@ -139,7 +150,8 @@ h1 em { font-style: normal; color: var(--copper-bright); }
 .method h2 { font-family: var(--serif); font-weight: 630; font-size: clamp(1.35rem, 2.7vw, 1.9rem); margin-bottom: 0.5rem; letter-spacing: -0.015em; }
 .method p { color: var(--cream-faint); max-width: 62ch; margin-bottom: 0.8rem; }
 .method strong { color: var(--cream); }
-.rules { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 1.4rem; }
+.rules { display: grid; gap: 1rem 1.6rem; grid-template-columns: minmax(0, 1fr); margin-top: 1.4rem; }
+@media (min-width: 700px) { .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .rule { border-left: 2px solid var(--copper); padding-left: 0.8rem; }
 .rule b { font-family: var(--serif); font-weight: 620; font-size: 1rem; display: block; margin-bottom: 0.15rem; }
 .rule span { font-size: 0.9rem; color: var(--cream-faint); }
@@ -153,7 +165,7 @@ footer .wrap { display: grid; gap: 0.4rem; }
 <a class="skip" href="#main">Skip to content</a>
 <header class="gl-top" data-surface="page">
   <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
-    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
+    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><path fill="#d19049" d="M22 20.7Q22 21.1 21.9 21.2Q21.7 21.4 21.4 21.4Q21.1 21.4 20.9 21.2Q20.7 21.1 20.6 20.8Q20.4 20.6 20.2 20.4Q20 20.3 19.8 20.3Q19.6 20.3 19.3 20.4Q19 20.6 18.6 20.8Q18.1 21 17.5 21.2Q16.8 21.4 15.9 21.4Q14.2 21.4 12.8 20.8Q11.5 20.2 10.5 19.2Q9.5 18.2 9 16.7Q8.5 15.3 8.5 13.5Q8.5 11.8 9.1 10.4Q9.7 8.9 10.7 7.9Q11.7 6.8 13.1 6.2Q14.4 5.6 16 5.6Q17.2 5.6 17.9 5.8Q18.6 6.1 19 6.3Q19.5 6.5 19.7 6.5Q20 6.5 20.1 6.3Q20.2 6.1 20.4 5.9Q20.5 5.7 20.8 5.7Q21 5.7 21.1 5.9Q21.3 6 21.4 6.3L22.5 10Q22.6 10.2 22.4 10.4Q22.3 10.6 22.1 10.7Q21.8 10.7 21.6 10.6Q21.4 10.5 21.3 10.3Q20.7 8.9 20 8.2Q19.2 7.4 18.3 7.1Q17.5 6.8 16.5 6.8Q15.1 6.8 14.1 7.5Q13 8.3 12.4 9.7Q11.9 11 11.9 12.9Q11.9 15.2 12.5 16.7Q13.2 18.3 14.3 19.1Q15.5 19.9 16.9 19.9Q17.4 19.9 17.8 19.8Q18.2 19.7 18.5 19.5Q18.7 19.3 18.9 19.1Q19 18.8 19 18.4V15.9Q19 15.6 18.9 15.5Q18.8 15.4 18.4 15.3L17.7 15.1Q17.5 15.1 17.3 14.9Q17.2 14.8 17.2 14.6Q17.2 14.4 17.4 14.3Q17.5 14.1 17.8 14.1H22.8Q23.2 14.1 23.3 14.3Q23.5 14.4 23.5 14.6Q23.5 14.8 23.4 14.9Q23.3 15 23 15.1L22.6 15.2Q22.3 15.3 22.2 15.5Q22 15.6 22 15.9Z"/><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
   </a>
   <nav class="gl-nav" aria-label="Site">
     <a href="https://jcurry44.github.io/grants-ledgers/" data-nav="find">Find funders</a>
@@ -185,9 +197,9 @@ footer .wrap { display: grid; gap: 0.4rem; }
   <p class="lede">Each of these was found by insisting that a foundation’s grant rows equal a total that foundation itself filed with the IRS. When they don’t, something is there. Every figure below links to the ledger it came from.</p>
   <div class="heronums">
     <div><b class="num">1,935</b><span>foundations reconciled</span></div>
-    <div><b class="num">$304.0B</b><span>tied to filed totals</span></div>
+    <div><b class="num">$303.9B</b><span>tied to filed totals</span></div>
     <div><b class="num">$25.9B</b><span>characterized in recovery</span></div>
-    <div><b class="num">18</b><span>books settled from scanned paper</span></div>
+    <div data-sync="paper"><b class="num">57</b><span>foundations read from paper<span class="sep"> · </span><span class="yrs">140 years</span></span></div>
   </div>
 </div></section>
 
@@ -343,17 +355,29 @@ footer .wrap { display: grid; gap: 0.4rem; }
 
 <footer class="gl-foot"><div class="wrap">
   <nav aria-label="Site footer">
-    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/findings/" aria-current="page">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
-    <a href="https://jcurry44.github.io/">jcurry44.github.io ↗</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/">New York</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20findings%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/findings/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem ↗</a>
   </nav>
-  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form <span class="nw">990-PF</span> filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 
 <script>try{const s=JSON.parse(localStorage.getItem('gl_projects')||'{}');const p=(s.projects||[]).find(x=>x.id===s.active)||(s.projects||[])[0];
 const n=p?p.funders.length:0;const el=document.querySelector('[data-shortlist-count]');if(el){el.textContent=n;el.hidden=n===0}}catch(e){}</script>
+<script>// the header's More menu dismisses like a menu: a press elsewhere, Escape (focus back to More), or focus leaving it -- the hub's script
+  (function(){ var m=document.querySelector('.gl-top .gl-more'); if(!m) return; var sm=m.querySelector('summary');
+    document.addEventListener('pointerdown', function(e){ if(m.open && !m.contains(e.target)) m.open=false; }, true);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.open){ m.open=false; sm.focus(); e.stopPropagation(); } }, true);
+    m.addEventListener('focusout', function(e){ if(m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open=false; });
+  })();</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

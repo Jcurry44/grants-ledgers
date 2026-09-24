@@ -17,9 +17,10 @@
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
+<meta property="og:image:alt" content="$303,860,714,662 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -92,7 +93,7 @@ textarea { resize:vertical; }
 .viewtools { display:flex;gap:12px;align-items:center; }
 .collection { position:relative; }
 .collection>summary { cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-dim);padding:9px 0; }
-.collection>summary::after { content:'⌄'; }
+.collection>summary::after { content:none; }
 .collection>summary::-webkit-details-marker { display:none; }
 .collection .scopes { position:absolute;right:0;top:42px;min-width:250px;padding:8px;background:white;border:1px solid var(--rule);border-radius:var(--r-card);box-shadow:var(--shadow);z-index:20; }
 #regions { display:grid;gap:3px; }
@@ -959,7 +960,7 @@ table{font-family:var(--text)}
    right). Geometry, not hue -- it reads the same to a colour-blind eye. Copper on paper, copper-bright on the cover. */
 :root{--r2-c:var(--copper);--r2-bar:2px;--r2-gap:3px;--r2-hair:1px;--r2-h:6px}
 .workspacehead,.gl-top,.toast{--r2-c:var(--copper-bright)}
-.rule2,.tots div:first-child .num,.rephead,.tab.on::after,.viewselect::after,.gl-top .gl-nav a[aria-current=page]::before,
+.rule2,.tots div:first-child .num,.rephead,.tab.on::after,.viewselect::after,.gl-top .gl-nav a[aria-current=page]::before,.gl-top .gl-nav a[aria-current=page]::after,
 .r2wait::after,.tots[data-state=wait] div:first-child .num::after,.dossier[data-wait] .atlas-summary::after{
   background:linear-gradient(var(--r2-c),var(--r2-c)) left bottom calc(var(--r2-hair) + var(--r2-gap))/100% var(--r2-bar) no-repeat,
              linear-gradient(var(--r2-c),var(--r2-c)) left bottom/100% var(--r2-hair) no-repeat}
@@ -1064,10 +1065,213 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
 .qnote p{font:400 13px/1.6 var(--sans);letter-spacing:0}
 /* the summary's figures sit on one row when they fit (5 tiles never leave an orphan) */
 .repnums{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+/* ============================ P4 final polish (2026-09-24) ============================ */
+.nw{white-space:nowrap}
+/* ALL: the current page is marked by the double rule on the header too (DECISIONS #1) -- geometry, not a tint.
+   Label width (the item's 12px padding in from each side), on the item's own foot. Phones keep the bottom bar's top tick. */
+.gl-top .gl-nav a[aria-current=page]{background:transparent;position:relative}
+.gl-top .gl-nav a[aria-current=page]::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:var(--r2-h);pointer-events:none}
+@media(max-width:640px){.gl-top .gl-nav a[aria-current=page]::after{content:none}}
+/* K3: from 641 to 1099 the More menu hangs from its own right edge, so it never runs past the viewport */
+@media(min-width:641px) and (max-width:1099px){.gl-top .gl-menu{left:auto;right:0}}
+/* S22: one chevron -- the header's stroke glyph -- never a text character */
+.chev{display:inline-block;width:12px;height:12px;flex:none;vertical-align:-1px;margin-left:6px}
+.collection>summary{gap:7px}
+.collection>summary .chev{width:16px;height:16px;margin-left:0;transition:transform var(--dur) var(--ease)}
+.collection[open]>summary .chev{transform:rotate(180deg)}
+/* S9: the collection picker says what it picks */
+.collection .clk{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.collection .clv{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+@media(max-width:640px){
+  #research-view{-webkit-appearance:none;appearance:none;padding-right:26px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m2 4 4 4 4-4' fill='none' stroke='%234e5347' stroke-width='1.5'/%3E%3C/svg%3E") right 4px center/16px no-repeat}
+  .collection>summary{max-width:170px}
+}
+/* S1: a menu with no room below opens upward (JS decides) */
+.expmenu.up{top:auto;bottom:calc(100% + 6px)}
+/* K2: one wait voice -- the count holds a quiet slot while the drawing rule below says what is being read */
+#qcount.wait{position:relative;display:inline-block;min-width:7ch;color:transparent}
+#qcount.wait::before{content:"";position:absolute;left:0;right:0;top:18%;bottom:18%;border-radius:4px;background:rgba(163,92,26,.09)}
+/* K4: a zero result shows no sort, summary, export or ranking caption -- nothing to sort, summarize or export */
+#pane-q.noresults .resulttools,#pane-q.noresults .resultcaption,#pane-q.noresults .tablehead,#pane-q.noresults #qsum{display:none}
+/* S3: the directory and the shortlist number their rows (oldstyle rank numerals) instead of printing registry codes */
+.fc{grid-template-columns:46px minmax(0,1fr) auto auto}
+.rk{font:500 17px/1 var(--serif);font-variation-settings:"opsz" 24;font-variant-numeric:oldstyle-nums tabular-nums;color:var(--ink-dim);text-align:right;justify-self:end;letter-spacing:0}
+.lrow .rk{padding-top:4px}
+@media(max-width:640px){.fc{grid-template-columns:38px minmax(0,1fr)}.rk{font-size:15px}.lrow .rk{padding-top:2px}}
+/* S4: the brief never prints its own editing prompts -- they are screen-only asides */
+.brief-prompt{font:italic 400 14px/1.55 var(--body-f);color:var(--ink-dim);border-left:2px solid var(--rule-strong);padding:2px 0 2px 12px;white-space:normal}
+.briefnote.brief-prompt{margin-top:16px}
+@media print{.brief-prompt{display:none!important}}
+@media(max-width:400px){.bk-pre{display:none}}
+.listnote{font:400 13px/1.5 var(--sans);color:var(--ink-dim);margin-top:14px;max-width:72ch}
+/* S6: laptop widths keep the row's actions on one line, the reconciliation mark set as a caption above them */
+@media(min-width:1001px) and (max-width:1279px){
+  .tablehead,.fcard{grid-template-columns:minmax(0,1fr) 360px 300px}
+  .fside{flex-wrap:wrap;justify-content:flex-end;align-content:flex-start;row-gap:8px}
+  .fside .proof{order:-1;flex:0 0 100%;justify-content:flex-end;min-height:0;padding:0 2px;background:none;border:0;font:500 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+}
+@media(min-width:1001px) and (max-width:1100px){.tablehead,.fcard{grid-template-columns:minmax(0,1fr) 320px 292px;gap:18px}}
+@media(min-width:641px) and (max-width:1100px){.fside .addb,.fside .evidencebtn{font-size:13px}}
+@media(min-width:851px) and (max-width:1000px){
+  .tablehead{display:none}
+  .fcard{grid-template-columns:minmax(0,1fr) 210px;gap:16px}
+  .fidentity{grid-column:1}
+  .fstats{grid-column:1;grid-row:2;max-width:none}
+  .fstat{font-size:11px;letter-spacing:.1em}
+  .fside{grid-column:2;grid-row:1 / 3;flex-direction:column;align-items:flex-end;gap:6px}
+}
+/* S7: 900-1099 keeps the search beside the claim (the 1100-1299 grid, a notch smaller), so results start on screen */
+@media(min-width:900px) and (max-width:1099px){
+  .workspacehead{display:grid;grid-template-columns:minmax(0,1fr) 340px;column-gap:36px;row-gap:0;align-items:start}
+  .mast{display:contents}
+  .mastkicker{grid-column:1;grid-row:1}
+  .masth{grid-column:1;grid-row:2;font-size:36px;max-width:17ch}
+  .mastsub{grid-column:1;grid-row:3;max-width:46ch}
+  .mastclaim{grid-column:1;grid-row:4;max-width:56ch}
+  .searchbox{grid-column:2;grid-row:1 / 5;align-self:start;margin-top:48px;width:100%}
+  .tots{grid-column:1 / -1;grid-row:5}
+}
+/* S14: By purpose -- the list under the purposes is scoped to one purpose and follows the pointer */
+.leadhead{display:flex;align-items:baseline;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;margin:36px 0 14px}
+.leadhead .h3{margin:0}
+.leadhead .tophcat{color:var(--copper-deep)}
+.leadhint{font:400 13px/1.45 var(--sans);color:var(--ink-dim)}
+@media(hover:none){.leadhint .hv{display:none}}
+.ck.lead{background:var(--tint)}
+.ck.lead span:nth-child(2){font-weight:600;color:var(--ink)}
+.ck.hl{box-shadow:inset 3px 0 0 var(--ink)}
+#catbar button.hl{box-shadow:inset 0 0 0 2px var(--ink)}
+.ck .chev{align-self:center;line-height:1}
+#catbar button{transition:box-shadow var(--dur-fast)}
+.brow{grid-template-columns:minmax(160px,320px) minmax(0,1fr) auto}
+.brow .bn{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* S15: a list that scrolls says so -- the last visible row fades instead of being sliced */
+.suggest::after{content:"";position:sticky;bottom:0;left:0;display:block;height:34px;margin-top:-34px;pointer-events:none;
+  background:linear-gradient(rgba(255,253,248,0),#fffdf8 88%);opacity:0;transition:opacity var(--dur-fast)}
+.suggest.more::after{opacity:1}
+/* S18: the footer closes on the lockup and its double rule; one prose line, no widow */
+.micro .footlock{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;color:var(--ink)}
+.micro .footlock b{font:600 17px/1 var(--serif);font-variation-settings:"opsz" 48;letter-spacing:-.01em;color:var(--ink)}
+.micro .footlock .gl-mark{width:22px;height:22px;border-radius:5px;box-shadow:none}
+.micro .coveragefoot{max-width:60ch;text-wrap:pretty}
+/* S20: the record's id line wraps without a stray separator */
+.p-id{gap:4px 10px}
+@media(min-width:641px){.p-id>span:not(.idm)::before{content:"· "}}
+/* K5: the summary's bars exist on screen and on paper (the inner span was inline, so it never drew) */
+.hbar .hb{display:block}
+@media print{.hbar .hb,.vbar i,.repnum,.savedreason{-webkit-print-color-adjust:exact;print-color-adjust:exact}.repnums{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.rephead .prep{margin-top:6px;font:400 13px/1.5 var(--sans);color:var(--ink-dim)}
+/* MM-11: phones give the chrome back -- the top strip slides away on a scroll down; a search button rides in it
+   once the search box has scrolled out of view */
+.gl-jump{display:none}
+@media(max-width:640px){
+  .gl-top{transition:top var(--dur-slow) var(--ease)}
+  html.hdr-hide .gl-top{top:calc(-1 * var(--gt-h) - 1px)}
+  .gl-jump{align-items:center;justify-content:center;width:44px;height:44px;margin-right:-10px;padding:0;border:0;border-radius:var(--r-ctl);background:transparent;color:var(--cream-bright);cursor:pointer}
+  .gl-jump svg{width:21px;height:21px}
+  html.q-away .gl-jump{display:inline-flex}
+  html.searching .gl-jump{display:none}
+}
+/* S30: at 360 and under, typing gets the header's 56px back (two more suggestion rows above the keyboard) */
+@media(max-width:360px){html.searching .gl-top{display:none}}
+/* MM-13: Explore on a phone -- no repeated fleet figures, a full-bleed map, and tappable chips for the small states */
+.ne-chips{display:none}
+@media(max-width:640px){
+  .geography .tots{display:none}
+  .geography .workspacehead{padding-bottom:18px}
+  .geography .atlas-map{margin-inline:-20px;border-radius:0;border-left:0;border-right:0;padding:18px 20px 20px}
+  .geography .mapzone{margin-inline:-20px;width:calc(100% + 40px)}
+  .ne-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .ne-chips .nel{flex-basis:100%;margin-bottom:2px;font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+  .nechip{min-height:36px;min-width:46px;padding:0 10px;font:500 12px/1 var(--mono);letter-spacing:.06em;border:1px solid var(--rule-strong);border-radius:4px;background:var(--sheet);color:var(--ink);cursor:pointer}
+  .nechip.on{background:var(--cover);border-color:var(--cover);color:var(--cream-bright)}
+}
+@media(max-width:370px){
+  .geography .atlas-map{margin-inline:-16px;padding-inline:16px}
+  .geography .mapzone{margin-inline:-16px;width:calc(100% + 32px)}
+}
+@media(max-width:640px){
+  /* S19: the two long selects take the full row; amounts and year keep the pair */
+  .peerfilters .pf-wide{grid-column:1 / -1}
+  /* S21: a suggestion keeps its distinguishing tail -- two lines, then the clamp */
+  .sug .n{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:clip}
+  /* S25: purpose leaders and summary bars -- name and amount share one line on a phone */
+  .brow{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;padding:8px 0;border-bottom:1px solid var(--rule)}
+  .brow>div{display:none}
+  .brow .bn{font-size:13.5px}
+  .brow .bv{flex:none;font-variant-numeric:tabular-nums lining-nums}
+  .hbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .hbar>span:nth-child(2){display:none}
+  .hbar .hn{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hbar .hv{flex:none}
+  /* S28: five summary tiles never leave an orphan */
+  .repnums{grid-template-columns:1fr 1fr}
+  .repnums>:last-child:nth-child(odd){grid-column:1 / -1}
+  /* S29: 44px and 32px hit areas without changing what is drawn */
+  .filterdone{min-height:44px}
+  .fside .proof{min-height:32px;margin:-8px 0}
+}
+/* ============================ P4 final polish, iteration 2 (2026-09-24) ============================ */
+/* I2-M1: 641-900 the view tabs scroll sideways; the strip now says so. The edge that is hiding a tab fades (JS sets
+   .fl / .fr from the scroll position and clears them when everything fits), a tab that takes focus or the selection
+   is brought clear of the fade, and the collection picker never gives up its width. */
+@media(min-width:641px) and (max-width:900px){
+  .workspacebar{gap:12px}
+  .viewtools,.collection{flex:none}
+  #tabs{scroll-padding-inline:40px;scroll-behavior:smooth}
+  /* the scroller clips an outside ring, so a focused tab draws its ring inside its own box, clear of the double rule */
+  #tabs .tab:focus-visible{outline:none}
+  #tabs .tab:focus-visible::before{content:"";position:absolute;inset:8px 2px 7px;border:2px solid var(--focus);border-radius:var(--r-ctl);pointer-events:none}
+  #tabs.fr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}
+  #tabs.fl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px);mask-image:linear-gradient(90deg,transparent,#000 44px)}
+  #tabs.fl.fr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent)}
+}
+/* I2-M1 + close-out: 641-899 (every iPad in portrait) the four filters sit two by two and no column is narrower than its
+   longest option (a select's max-content), so a picked "Community & economic development" or "British Columbia, Canada"
+   reads whole, the Purpose column leading 1.2:1; every label keeps one line. From 900 they share one row, each field at
+   least its longest option wide -- and to 999 the row is shared in proportion to those options (Purpose 286 · State 208
+   · Size 125 · Year 104 px), so every value keeps air before its chevron. From 1000 the shipped allocation stands. */
+@media(min-width:641px) and (max-width:899px){
+  .filterbar{display:grid;grid-template-columns:minmax(max-content,1.2fr) minmax(max-content,1fr);gap:14px 16px;align-items:end}
+  .qmorefilters{display:contents}
+}
+@media(min-width:900px){.filterbar>.qfield,.qmorefilters,.qmorefilters .qfield{min-width:max-content}}
+@media(min-width:900px) and (max-width:999px){
+  .filterbar>.qfield{flex:2.86 1 0}.qmorefilters{flex:4.65 1 0}
+  .qmorefilters .qfield{flex:1.04 1 0}.qmorefilters .qfield:first-child{flex:2.08 1 0}.qmorefilters .qfield:nth-child(2){flex:1.25 1 0}
+}
+/* I2-m4: the directory states reconciliation once -- the right-column mark; the meta line keeps only the note cue,
+   dotted like any term that explains itself on hover */
+.fc .meta .seenote{text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;white-space:nowrap}
+/* a dot list, in plain inline text so a copy pastes "a · b · c" (flex items paste one per line). Parts are joined by a
+   breakable space widened to the gap (.dlg); each part after the first opens on a zero-width, non-breaking dot (.dls)
+   drawn back into that gap. At a line end the space hangs and the dot has gone down with its part; at a line start the
+   space collapses and the dot falls left of the box, which clips it -- so a wrapped line never starts or ends on a stray
+   dot. A part is an inline block: it goes down whole ("· 0" never ends a line) and wraps inside itself only when it is
+   longer than a whole line. The dot is aria-hidden; its spaces still part the words for a screen reader.
+   `.fc .meta.dl` outranks `.fc .meta` (display:block, 0,2,0) so the directory's meta line gets the list too. */
+.dl,.fc .meta.dl{--dl-gap:3ch;display:block;overflow-x:clip}
+.dlg{font-family:var(--mono);word-spacing:calc(var(--dl-gap) - 1ch)}
+.dlp{white-space:nowrap}
+.dlt{display:inline-block;white-space:normal}
+.dls{display:inline-block;width:0;font-family:var(--mono);font-style:normal}
+.dls>i{font-style:normal;margin-left:calc(-.5*var(--dl-gap) - .5ch)}
+.rephead p.dl{--dl-gap:.95em}
+@media(max-width:640px){
+  /* I2-m1: the phone caption keeps its cue -- "see note" is what the 32px hit area opens */
+  .fside .proof .seenote{display:inline}
+}
+/* I2: under 360px the collection picker sets its label over its value, so the view picker beside it shows its whole label */
+@media(max-width:359px){
+  .collection>summary{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:4px;row-gap:3px;padding:6px 0}
+  .collection .clk{grid-column:1 / -1;font-size:10px}
+  .collection>summary .chev{width:14px;height:14px;justify-self:start}
+}
 </style>
 </head>
 <body>
-<a class="skiplink" href="#panelbody">Skip to research</a>
+<a class="skiplink" href="#panelbody">Skip to content</a>
 
 <div class="toast" id="toast" role="status" hidden></div>
 <!-- H-04: the header lives OUTSIDE .shell on purpose -- openOvl()/closeOvl() set .shell.inert
@@ -1078,7 +1282,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
     <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false">
       <rect width="32" height="32" rx="7" fill="#1e4634"/>
-      <text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text>
+      <path fill="#d19049" d="M22 20.7Q22 21.1 21.9 21.2Q21.7 21.4 21.4 21.4Q21.1 21.4 20.9 21.2Q20.7 21.1 20.6 20.8Q20.4 20.6 20.2 20.4Q20 20.3 19.8 20.3Q19.6 20.3 19.3 20.4Q19 20.6 18.6 20.8Q18.1 21 17.5 21.2Q16.8 21.4 15.9 21.4Q14.2 21.4 12.8 20.8Q11.5 20.2 10.5 19.2Q9.5 18.2 9 16.7Q8.5 15.3 8.5 13.5Q8.5 11.8 9.1 10.4Q9.7 8.9 10.7 7.9Q11.7 6.8 13.1 6.2Q14.4 5.6 16 5.6Q17.2 5.6 17.9 5.8Q18.6 6.1 19 6.3Q19.5 6.5 19.7 6.5Q20 6.5 20.1 6.3Q20.2 6.1 20.4 5.9Q20.5 5.7 20.8 5.7Q21 5.7 21.1 5.9Q21.3 6 21.4 6.3L22.5 10Q22.6 10.2 22.4 10.4Q22.3 10.6 22.1 10.7Q21.8 10.7 21.6 10.6Q21.4 10.5 21.3 10.3Q20.7 8.9 20 8.2Q19.2 7.4 18.3 7.1Q17.5 6.8 16.5 6.8Q15.1 6.8 14.1 7.5Q13 8.3 12.4 9.7Q11.9 11 11.9 12.9Q11.9 15.2 12.5 16.7Q13.2 18.3 14.3 19.1Q15.5 19.9 16.9 19.9Q17.4 19.9 17.8 19.8Q18.2 19.7 18.5 19.5Q18.7 19.3 18.9 19.1Q19 18.8 19 18.4V15.9Q19 15.6 18.9 15.5Q18.8 15.4 18.4 15.3L17.7 15.1Q17.5 15.1 17.3 14.9Q17.2 14.8 17.2 14.6Q17.2 14.4 17.4 14.3Q17.5 14.1 17.8 14.1H22.8Q23.2 14.1 23.3 14.3Q23.5 14.4 23.5 14.6Q23.5 14.8 23.4 14.9Q23.3 15 23 15.1L22.6 15.2Q22.3 15.3 22.2 15.5Q22 15.6 22 15.9Z"/>
       <rect x="7" y="24" width="18" height="2" fill="#d19049"/>
       <rect x="7" y="27.5" width="18" height="1" fill="#d19049"/>
     </svg><b>Grants Ledger</b>
@@ -1102,6 +1306,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   <div class="gl-actions">
     <a class="gl-method" href="https://jcurry44.github.io/grants-ledgers/about/#method" data-nav="method" id="aboutbtn">Method</a>
     <a class="gl-cta" href="https://jcurry44.github.io/grants-ledgers/#view=brief" data-nav="brief" id="navbrief" data-empty>Build a brief →</a>
+    <button type="button" class="gl-jump" id="searchjump" aria-label="Search organizations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>
   </div>
 </header>
 <div class="shell">
@@ -1113,7 +1318,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       <p class="mastkicker eyebrow accent" id="viewtitle">Find funders</p>
       <h1 class="masth">Grant ledgers for <span class="heroCount" id="heroN3">1,935</span> U.S. foundations, reconciled to the dollar.</h1>
       <p class="mastsub" id="viewdescription">Rank funders by the grants they actually filed. Save the ones that fit.</p>
-      <p class="mastclaim" id="mastclaim">Rebuilt from each foundation's own IRS 990-PF filings — every year reconciles to the filed total; exceptions disclosed. <button type="button" id="heroreconcile" class="mastclaimlink">How it reconciles →</button></p>
+      <p class="mastclaim" id="mastclaim">Rebuilt from each foundation's own IRS <span class="nw">990-PF</span> filings — every year reconciles to the filed total; exceptions disclosed. <button type="button" id="heroreconcile" class="mastclaimlink">How it reconciles →</button></p>
       <div class="tots" id="bigstats" aria-live="polite" data-state="wait">
         <div><b class="num" data-k="t">&mdash;</b><span>dollars reconciled</span></div>
         <div><b class="num" data-k="g">&mdash;</b><span>filed rows</span></div>
@@ -1138,9 +1343,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     <button class="tab" role="tab" data-t="y" aria-selected="false">By year</button>
     <button class="tab" role="tab" data-t="c" aria-selected="false">By purpose</button>
   </div>
-    <label class="viewselect"><span class="sr-only">Research view</span><select id="research-view" aria-label="Research view"><option value="q">Matching funders</option><option value="f">All 1,935 foundations</option><option value="r">Recipients</option><option value="y">By year</option><option value="c">By purpose</option></select></label>
+    <label class="viewselect"><span class="sr-only">Research view</span><select id="research-view" aria-label="Research view"><option value="q">Matching funders</option><option value="f">All foundations</option><option value="r">Recipients</option><option value="y">By year</option><option value="c">By purpose</option></select></label>
     <div class="viewtools">
-      <details class="collection" id="collection"><summary id="collectionlabel">All foundations</summary><div class="scopes"><span id="regions" role="group" aria-label="Foundation collection"></span></div></details>
+      <details class="collection" id="collection"><summary><span class="clk">Collection</span><span class="clv" id="collectionlabel">All</span><svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></summary><div class="scopes"><span id="regions" role="group" aria-label="Foundation collection"></span></div></details>
       <button class="viewtoggle" type="button" id="geotoggle" aria-pressed="false" aria-controls="mapcard"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 5 5-2 6 2 5-2v12l-5 2-6-2-5 2Z M7 3v12 M13 5v12"/></svg><span>Explore geography</span></button>
     </div>
   </div>
@@ -1160,11 +1365,11 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         </div>
         <div id="activefilters" class="activefilters" aria-label="Active filters"></div>
         <div class="qmeta">
-          <div class="resulttotals"><b id="qcount" role="status">Searching…</b><span id="qsum"></span></div>
+          <div class="resulttotals"><b id="qcount" role="status" class="wait">Searching…</b><span id="qsum"></span></div>
           <div class="resulttools">
             <span class="sortlabel">Sort by</span><select id="qsort" class="qsort" aria-label="Sort funders"><option value="total">Total filed</option><option value="count">Filed rows</option><option value="median">Typical grant</option><option value="recent">Latest year</option><option value="name">Name A–Z</option></select>
             <button type="button" class="qreportlink" id="qreport">View summary</button>
-            <span class="expwrap"><button type="button" class="tbtn" id="qexport">Export ▾</button></span>
+            <span class="expwrap"><button type="button" class="tbtn" id="qexport" aria-haspopup="true" aria-expanded="false">Export<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></span>
           </div>
         </div>
         <div class="resultcaption"><span><i aria-hidden="true"></i> <span id="qrankby">Ranked by total filed grant dollars</span> · past giving, not eligibility</span><p class="qex" id="qex" hidden><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,935</span> foundations →</button></p></div>
@@ -1193,6 +1398,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       </div>
       <details class="idhelp"><summary>How recipient matching works</summary><p class="idlegend" id="idlegend"></p></details>
       <div class="weave" id="weave"></div>
+      <button type="button" class="fmore" id="wmore" hidden>Show more</button>
     </div>
     <div class="tabpane" id="pane-y" role="tabpanel" hidden>
       <p class="panehint">Filed grant dollars, with the number of foundations represented in each year. Coverage changes across years; these totals are not a growth comparison.</p>
@@ -1202,8 +1408,8 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       <div class="catwrap">
         <p class="panehint" style="padding-top:0">Filed grant dollars by stated purpose. Select a purpose to see its recipients and funders.</p>
         <div class="catbar" id="catbar" aria-hidden="true"></div><div class="catkey" id="catkey"></div>
-        <div class="h3">The largest records</div>
-        <div class="toplist" id="topfnd"></div>
+        <div class="leadhead"><div class="h3" id="toph">Largest funders</div><p class="leadhint"><span class="hv">Point at a purpose to see who funds it most · </span>each foundation’s filed grants for that purpose</p></div>
+        <div class="toplist" id="topfnd" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -1217,6 +1423,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   </div>
   <div id="tickhost"></div>
   <footer class="micro">
+    <p class="footlock rule2"><svg class="gl-mark" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><path fill="#d19049" d="M22 20.7Q22 21.1 21.9 21.2Q21.7 21.4 21.4 21.4Q21.1 21.4 20.9 21.2Q20.7 21.1 20.6 20.8Q20.4 20.6 20.2 20.4Q20 20.3 19.8 20.3Q19.6 20.3 19.3 20.4Q19 20.6 18.6 20.8Q18.1 21 17.5 21.2Q16.8 21.4 15.9 21.4Q14.2 21.4 12.8 20.8Q11.5 20.2 10.5 19.2Q9.5 18.2 9 16.7Q8.5 15.3 8.5 13.5Q8.5 11.8 9.1 10.4Q9.7 8.9 10.7 7.9Q11.7 6.8 13.1 6.2Q14.4 5.6 16 5.6Q17.2 5.6 17.9 5.8Q18.6 6.1 19 6.3Q19.5 6.5 19.7 6.5Q20 6.5 20.1 6.3Q20.2 6.1 20.4 5.9Q20.5 5.7 20.8 5.7Q21 5.7 21.1 5.9Q21.3 6 21.4 6.3L22.5 10Q22.6 10.2 22.4 10.4Q22.3 10.6 22.1 10.7Q21.8 10.7 21.6 10.6Q21.4 10.5 21.3 10.3Q20.7 8.9 20 8.2Q19.2 7.4 18.3 7.1Q17.5 6.8 16.5 6.8Q15.1 6.8 14.1 7.5Q13 8.3 12.4 9.7Q11.9 11 11.9 12.9Q11.9 15.2 12.5 16.7Q13.2 18.3 14.3 19.1Q15.5 19.9 16.9 19.9Q17.4 19.9 17.8 19.8Q18.2 19.7 18.5 19.5Q18.7 19.3 18.9 19.1Q19 18.8 19 18.4V15.9Q19 15.6 18.9 15.5Q18.8 15.4 18.4 15.3L17.7 15.1Q17.5 15.1 17.3 14.9Q17.2 14.8 17.2 14.6Q17.2 14.4 17.4 14.3Q17.5 14.1 17.8 14.1H22.8Q23.2 14.1 23.3 14.3Q23.5 14.4 23.5 14.6Q23.5 14.8 23.4 14.9Q23.3 15 23 15.1L22.6 15.2Q22.3 15.3 22.2 15.5Q22 15.6 22 15.9Z"/><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b></p>
     <nav aria-label="Site footer">
       <button type="button" id="mastmethod">Method</button>
       <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
@@ -1227,7 +1434,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       <a href="db/README.md">Data dictionary</a>
       <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20hub&body=What%20I%20expected%3A%0A%0AWhat%20happened%3A%0A" id="report-link">Report a problem ↗</a>
     </nav>
-    <p class="coveragefoot"><span id="heroN2">1,935</span> foundation ledgers, each reconciled to its IRS 990-PF filings. An independent project by <a href="https://jcurry44.github.io/">Curry Studio</a>.</p>
+    <p class="coveragefoot"><span id="heroN2">1,935</span> foundation ledgers, each reconciled to its IRS <span class="nw">990-PF</span> filings. An independent project by <a href="https://jcurry44.github.io/">Curry&nbsp;Studio</a>.</p>
   </footer>
 </section>
 
@@ -1237,8 +1444,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     <div class="atlas-summary"><div class="atlas-title"><h2 id="dname"></h2><span id="dstats"></span></div><div class="atlas-value"><span id="dfig" class="num"></span><small>Filed grant dollars</small></div></div>
     <section class="atlas-panel atlas-map" aria-label="Foundation locations">
       <div class="atlas-panel-head"><h3>Foundation locations</h3><label class="sr-only" for="geo-state">Select a state</label><select class="qsel" id="geo-state"><option value="">All states</option></select></div>
-      <div class="mapzone"><svg class="usmap" id="usmap" role="img" aria-label="United States map shaded by the filed grant dollars of foundations based in each state"></svg><div class="maptip" id="maptip"></div></div>
+      <div class="mapzone"><svg class="usmap" id="usmap" role="group" aria-label="United States map shaded by the filed grant dollars of foundations based in each state"></svg><div class="maptip" id="maptip"></div></div>
       <div class="mapfoot"><span class="maplegend" aria-hidden="true"><span>Less</span><i style="background:#dce6d4"></i><i style="background:#bfd3b1"></i><i style="background:#93b38b"></i><i style="background:#649773"></i><i style="background:#31674b"></i><span>More filed dollars</span></span><button type="button" id="mapback">Reset map</button></div>
+      <div class="ne-chips" id="nechips" role="group" aria-label="Small states, easier to tap here than on the map"></div>
       <p class="atlas-map-note">Based on foundation addresses, not the communities their grants serve. <button type="button" class="stagelink" id="heromethod">Method</button></p>
       <span id="heroN" hidden>1,935</span><span id="mapstat" hidden></span>
     </section>
@@ -1306,9 +1514,16 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
 <script>
   // the skip link lands on the research panel itself (the tab strip is hidden on phones); no hash change, so the app's own hash state is untouched
   (function(){ var s=document.querySelector('.skiplink'), t=document.getElementById('panelbody'); if(s&&t){ s.addEventListener('click', function(e){ e.preventDefault(); t.focus({ preventScroll: true }); t.scrollIntoView({ block: 'start' }); }); } })();
+  // S8: the header's More menu dismisses like a menu -- a press anywhere else, Escape (focus returns to More), or focus leaving it.
+  // Capture phase, so the press that closes it still lands on whatever it was aimed at (the map's first click included).
+  (function(){ var m=document.querySelector('.gl-top .gl-more'); if(!m) return; var sm=m.querySelector('summary');
+    document.addEventListener('pointerdown', function(e){ if(m.open && !m.contains(e.target)) m.open=false; }, true);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.open){ m.open=false; sm.focus(); e.stopPropagation(); } }, true);
+    m.addEventListener('focusout', function(e){ if(m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open=false; });
+  })();
 </script>
 <script>
-/*DBVER-START*/window.DBV='c30d33667d';/*DBVER-END*/
+/*DBVER-START*/window.DBV='e6c54c7a02';/*DBVER-END*/
 (async () => {
   const $ = (id) => document.getElementById(id);
   const money = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US');
@@ -1325,6 +1540,10 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   const djb2 = (s) => { let h = 5381; for (let i = 0; i < s.length; i++) { h = (((h * 33) ^ s.charCodeAt(i)) >>> 0); } return h; };
   const canon1 = (s) => { const m = s.toUpperCase().replace(/^THE\s+/, '').match(/[A-Z0-9]/); return m ? m[0] : '0'; };
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // S22: one chevron everywhere (the header's stroke glyph), never the ▾ character
+  const CHEV = '<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+  // a median of an even count can land on a half dollar; it is printed to the dollar
+  const moneyR = (v) => money(Math.round(v));
 
   // ---------- identity confidence ----------
   // Coverage is measured per release; identity linkage remains an inference.
@@ -1432,7 +1651,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     }
   });
   try { [REG, AGG, USMAP, CITYPTS] = await Promise.all([get('registry.json'), get('aggregates.json'), fetch('db-static/usmap.json?v=' + V).then((r) => r.json()), fetch('db-static/citypts.json?v=' + V).then((r) => r.json()).catch(() => ({}))]); }
-  catch (e) { $('qcount').textContent='Couldn’t load';$('qresults').innerHTML='<div class="qempty"><b>The collection couldn’t load.</b>Check your connection, then try again.<br><button type="button" class="evidencebtn" id="boot-retry">Try again</button></div>';$('boot-retry').onclick=()=>location.reload();return; }
+  catch (e) { $('qcount').classList.remove('wait');$('qcount').textContent='Couldn’t load';$('qresults').innerHTML='<div class="qempty"><b>The collection couldn’t load.</b>Check your connection, then try again.<br><button type="button" class="evidencebtn" id="boot-retry">Try again</button></div>';$('boot-retry').onclick=()=>location.reload();return; }
   const F = REG.fleet;
   const REGION_KEY = { all: '', wny: 'w', ny: 'n' };
   let region = 'all';
@@ -1471,6 +1690,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     ovlMode = mode;
     hashView = null;
     $('ovl').dataset.mode=mode;
+    delete $('ovl').dataset.kind;
     $('ovlcard').setAttribute('aria-label',DIALOG_NAME[mode]||'Record');
     $('dialogcontext').textContent=DIALOG_NAME[mode]||'Research';
     syncNav();
@@ -1486,7 +1706,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     document.body.style.overflow = 'hidden';
     $('ovlx').focus({ preventScroll: true });
   }
-  function closeOvl() {
+  function closeOvl(quiet) {
     $('ovl').hidden = true;
     ovlMode = null;
     hashView = null;
@@ -1495,9 +1715,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
     curProfile = null;
     document.body.style.overflow = '';
-    writeHash();
+    if (quiet !== true) writeHash();   // readHash() closes quietly: the hash it is reading already says what is open
   }
-  $('ovlx').addEventListener('click', closeOvl);
+  $('ovlx').addEventListener('click', () => closeOvl());
   $('ovl').addEventListener('click', (e) => { if (e.target === $('ovl')) closeOvl(); });
 
   // ---------- the map ----------
@@ -1649,7 +1869,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   // the counts are provable (the country / region view), never guessed for a subset.
   function yearChart(el, by, cov, covN, noteEl, allYears=false) {
     const years=Object.keys(by||{}).map(Number).sort((a,b)=>a-b).slice(allYears?0:-6);
-    if(allYears)years.reverse();
+    years.reverse();   // S13: newest first, in By year and in Explore alike
     const ymax=Math.max(1,...years.map(y=>by[y]));
     const partial=years.filter(y=>cov&&covN&&(cov[y]||0)<covN*.6);
     el.innerHTML=years.map(y=>{
@@ -1682,6 +1902,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const seq = ++dossierSeq;
     const scope = mapSel || '_US';
     $('dcrumb').innerHTML = crumbHTML();
+    paintNEChips();
     $('dossier').dataset.wait = '';            // the summary's rule draws while a drill loads (never for a cached one)
     const D = await drillFor(scope);
     if (seq !== dossierSeq) return;
@@ -1707,7 +1928,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       $('dctx').innerHTML = '<div class="dh">Top recipients' + (govOnly ? ' · EIN-confirmed only' : '') + '</div><div class="dlist" id="drecs">'
         + barRows(recs.slice(0, 6).map(([n, e2, t]) => ({ n: dc(n), v: t, data: `data-e="${e2}"`, tip: (isGov(e2) ? GOV_WHY : EST_WHY), mark: idChip(e2, 'mini'), soft: !isGov(e2), hard: isGov(e2) }))) + '</div>'
         + '<div class="dh" style="margin-top:0.55rem">Leading foundations</div><div class="dlist">'
-        + barRows(fnds.slice(0, 3).map(([fi, t]) => ({ n: F[fi] ? F[fi].s : '?', v: t, href: F[fi] ? 'https://jcurry44.github.io/grants-ledgers/f/' + F[fi].u + '/' : '#' }))) + '</div>';
+        + barRows(fnds.slice(0, 3).map(([fi, t]) => ({ n: F[fi] ? F[fi].n : '?', v: t, href: F[fi] ? 'https://jcurry44.github.io/grants-ledgers/f/' + F[fi].u + '/' : '#' }))) + '</div>';
       $('dnote').innerHTML = 'Amounts are the filed rows · '
         + idChip('E', 'mini') + ' matched to an IRS-registered name by inference; review before combining · '
         + idChip('K', 'mini') + ' matched by name alone — read that total as an estimate';
@@ -1733,7 +1954,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       const sts = Object.entries(BY_ST).filter(([ab]) => USMAP.states[ab])
         .sort((a2, b2) => b2[1].t - a2[1].t).slice(0, 6);
       $('dctx').innerHTML = '<div class="dh">States by filed dollars</div><div class="dlist">'
-        + barRows(sts.map(([ab, s]) => ({ n: stName(ab), v: s.t, m: s.n + ' · ' + moneyC(s.t), data: `data-ab="${ab}"`, tip: 'Zoom to ' + stName(ab) }))) + '</div>';
+        + barRows(sts.map(([ab, s]) => ({ n: stName(ab), v: s.t, m: s.n.toLocaleString('en-US') + (s.n === 1 ? ' foundation' : ' foundations') + ' · ' + moneyC(s.t), data: `data-ab="${ab}"`, tip: 'Zoom to ' + stName(ab) }))) + '</div>';
       $('dnote').textContent = 'Explore a purpose or location to inspect the foundations and recipients behind these totals. Figures describe the included IRS filings, not all U.S. philanthropy.';
       return;
     }
@@ -1757,7 +1978,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const cities = stateCities(mapSel).slice(0, 6);
     const top = scopedF.slice().sort((a, b) => b.t - a.t).slice(0, 3);
     $('dctx').innerHTML = '<div class="dh">Cities in this state</div><div class="dlist" id="dcities">'
-      + barRows(cities.map((c) => ({ n: c.name, v: c.t, m: c.n + ' · ' + moneyC(c.t), on: citySel === c.key, data: `data-ck="${esc(c.key)}" data-cn="${esc(c.name)}"`, tip: 'Show only ' + c.name }))) + '</div>'
+      + barRows(cities.map((c) => ({ n: c.name, v: c.t, m: c.n.toLocaleString('en-US') + (c.n === 1 ? ' foundation' : ' foundations') + ' · ' + moneyC(c.t), on: citySel === c.key, data: `data-ck="${esc(c.key)}" data-cn="${esc(c.name)}"`, tip: 'Show only ' + c.name }))) + '</div>'
       + '<div class="dh" style="margin-top:0.55rem">Largest foundations</div><div class="dlist">'
       + barRows(top.map((f) => ({ n: f.n, v: f.t, href: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/' }))) + '</div>';
     $('dnote').textContent = 'Scoped to foundations based here · every figure reconciles to filed totals';
@@ -1891,6 +2112,19 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     $('mapback').addEventListener('click', () => selectState(null));
   }
 
+  // MM-13: the smallest northeastern states are 1-10px targets on a phone map; they get 36px chips under it
+  const NE_SMALL = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'VT'];
+  function paintNEChips() {
+    const host = $('nechips'); if (!host) return;
+    const abs = NE_SMALL.filter((ab) => BY_ST[ab] && USMAP.states[ab]);
+    host.innerHTML = abs.length ? '<span class="nel" aria-hidden="true">Small states</span>' + abs.map((ab) => '<button type="button" class="nechip' + (mapSel === ab ? ' on' : '') + '" data-neab="' + ab + '" aria-pressed="' + (mapSel === ab) + '" aria-label="' + esc(stName(ab)) + '">' + ab + '</button>').join('') : '';
+  }
+  {
+    const lightState = (ab, on) => { const p = document.querySelector('#usmap .st[data-ab="' + ab + '"]'); if (p && ab !== mapSel) p.classList.toggle('hl', on); };
+    $('nechips').addEventListener('click', (e) => { const b = e.target.closest('[data-neab]'); if (!b) return; e.stopPropagation(); selectState(b.dataset.neab === mapSel ? null : b.dataset.neab); });
+    ['mouseover', 'focusin'].forEach((ev) => $('nechips').addEventListener(ev, (e) => { const b = e.target.closest('[data-neab]'); if (b) lightState(b.dataset.neab, true); }));
+    ['mouseout', 'focusout'].forEach((ev) => $('nechips').addEventListener(ev, (e) => { const b = e.target.closest('[data-neab]'); if (b) lightState(b.dataset.neab, false); }));
+  }
   // selecting a state zooms to it AND scopes the Foundations tab to those based there
   function selectState(ab, silent) {
     const svg = $('usmap');
@@ -1955,7 +2189,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     $('regions').innerHTML = ['all', 'wny', 'ny'].map((r) =>
       `<button type="button" class="rchip${r === region ? ' on' : ''}" data-r="${r}" aria-pressed="${r === region ? 'true' : 'false'}">${LBL[r][0]}${LBL[r][1] ? ' <small>· ' + LBL[r][1] + '</small>' : ''}</button>`).join('');
     paintTotals();
-    $('collectionlabel').textContent = {all:'All foundations',wny:'Western New York',ny:'New York’s largest foundations'}[region];
+    $('collectionlabel').textContent = {all:'All',wny:'Western New York',ny:'New York’s largest'}[region];
     // the headline count is the registry's, never a number typed into the markup
     const nAll = REG.totals.all.n.toLocaleString('en-US');
     $('heroN').textContent = nAll;
@@ -1990,15 +2224,42 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       $('pane-' + b.dataset.t).setAttribute('aria-labelledby',b.id);
     });
     ['q', 'f', 'r', 'y', 'c'].forEach((k) => { $('pane-' + k).hidden = k !== t; });
+    if (typeof tabInView === 'function') tabInView($('tabs').querySelector('.tab.on'));
+    if (t === 'c' && typeof paintLeaders === 'function') paintLeaders(catLead || catDefault);
     $('panelbody').scrollTop = 0;
     if (!silent) writeHash();
     syncViewHeading();
   }
   $('tabs').addEventListener('click', (e) => { const b = e.target.closest('.tab'); if (b) setTab(b.dataset.t); });
+  // I2-M1: 641-900 the strip scrolls sideways -- fade whichever edge is hiding a tab, none when all five fit
+  function tabsEdge() {
+    const t = $('tabs'), max = t.scrollWidth - t.clientWidth;
+    t.classList.toggle('fl', max > 1 && t.scrollLeft > 2);
+    t.classList.toggle('fr', max > 1 && max - t.scrollLeft > 2);
+  }
+  function tabInView(b) {
+    const t = $('tabs');
+    if (!b || t.scrollWidth - t.clientWidth <= 1) return;
+    const tr = t.getBoundingClientRect(), br = b.getBoundingClientRect(), pad = 44;
+    if (br.left < tr.left + pad) t.scrollLeft -= tr.left + pad - br.left;
+    else if (br.right > tr.right - pad) t.scrollLeft += br.right - (tr.right - pad);
+  }
+  $('tabs').addEventListener('scroll', tabsEdge, { passive: true });
+  $('tabs').addEventListener('focusin', (e) => { const b = e.target.closest('.tab'); if (b) tabInView(b); });
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(tabsEdge); ro.observe($('tabs')); $('tabs').querySelectorAll('.tab').forEach((b) => ro.observe(b)); }
+  else window.addEventListener('resize', tabsEdge);
+  tabsEdge();
 
   // ---------- fleet (chunked) ----------
   const span = (ys) => { const out = []; let a = ys[0], b = ys[0]; for (let i = 1; i <= ys.length; i++) { if (ys[i] === b + 1) b = ys[i]; else { out.push(a === b ? String(a) : a + '–' + b); a = b = ys[i]; } } return out.join(', '); };
   const CHUNK = 72;
+  // a year list breaks between its ranges, never inside one ("TY2020–" / "2024")
+  const nwRanges = (t) => t.split(', ').map((r) => '<span class="nw">' + r + '</span>').join(', ');
+  // a dot list (see .dl): empty parts drop out, so no list ever opens or doubles a separator
+  function dlist(parts) {
+    return parts.filter(Boolean).map((p, i) => (i ? '<span class="dlg"> </span>' : '') + '<span class="dlp">'
+      + (i ? '<i class="dls"><i aria-hidden="true">·</i>&nbsp;</i>' : '') + '<span class="dlt">' + p + '</span></span>').join('');
+  }
   let fleetView = [], fleetShown = 0;
   function fleetFiltered() {
     return F.filter((f) => (region === 'all' || f.r === region)
@@ -2020,10 +2281,10 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   }
   function moreFleet() {
     const slice = fleetView.slice(fleetShown, fleetShown + CHUNK);
-    $('fleet').insertAdjacentHTML('beforeend', slice.map((f) => `
+    $('fleet').insertAdjacentHTML('beforeend', slice.map((f, k) => `
       <a class="fc" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" data-st="${f.st || ''}" data-u="${f.u}">
-        <span class="cd">${f.c}</span>
-        <span style="min-width:0"><b title="${esc(f.n)}">${esc(f.n)}</b><span class="meta">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${span(f.y)}${f.rn ? ' · Reconciled · see note' : ''}</span></span>
+        <span class="rk" aria-hidden="true">${(fleetShown + k + 1).toLocaleString('en-US')}</span>
+        <span style="min-width:0"><b title="${esc(f.n)}">${esc(f.n)}</b><span class="meta dl">${dlist([(f.ci || f.st) ? esc(f.ci || '') + (f.ci && f.st ? ', ' : '') + (f.st || '') : '', nwRanges('TY' + span(f.y)), f.rn ? '<span class="seenote" title="Note: ' + esc(f.rn) + ' (disclosed on the exceptions page)">see note</span>' : ''])}</span></span>
         <span class="tie" title="every year reconciles to its filed total${f.rn ? ' — ' + esc(f.rn) : ''}">✓ Reconciled<small>${f.g.toLocaleString('en-US')} · ${moneyC(f.t)}</small></span>
         <span class="fcacts">
           <button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}" data-name="${esc(f.n)}" aria-pressed="${PICKED.has(f.u)}">${PICKED.has(f.u) ? 'Saved · in shortlist' : 'Save to shortlist'}</button>
@@ -2172,6 +2433,19 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       return researchCache.get(ck);
     })).then((parts) => parts.flat());
   }
+  // K8: the pre-aggregated purpose-free answer for one size tier / from-year pair, when the build has it
+  function comboFor(filters) {
+    const spec = QMETA && QMETA.all;
+    const t = spec && spec.tiers ? spec.tiers.indexOf(filters.min || 0) : -1;
+    const key = t + '-' + (filters.yr || 0);
+    if (t < 0 || !spec.combos || !(key in spec.combos)) return Promise.reject(new Error('No aggregate for ' + key));
+    const ck = 'allc:' + key;
+    if (!researchCache.has(ck)) researchCache.set(ck, get('q/allc-' + key + '.json').catch((error) => { researchCache.delete(ck); throw error; }));
+    return researchCache.get(ck);
+  }
+  // K2: the count line holds a quiet slot while a query reads (the drawing rule below is the one wait voice);
+  // the words stay in the live region for a screen reader
+  function setCount(text, wait) { const c = $('qcount'); c.textContent = text; c.classList.toggle('wait', !!wait); }
   // a foundation-location scope (collection, map state, map city) keeps or drops whole funders,
   // so it narrows a per-funder aggregate bucket exactly -- no row histogram needed
   function funderInScope(f, filters) {
@@ -2197,7 +2471,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   }
   async function initQuery() {
     const m = await qMeta();
-    if (!m) { $('qcount').textContent = 'Couldn’t load'; $('qresults').innerHTML = '<div class="qempty"><b>The search index couldn’t load.</b><button type="button" class="tbtn" id="qinit-retry">Try again</button></div>'; $('qinit-retry').onclick = initQuery; return; }
+    if (!m) { setCount('Couldn’t load'); $('qresults').innerHTML = '<div class="qempty"><b>The search index couldn’t load.</b><button type="button" class="tbtn" id="qinit-retry">Try again</button></div>'; $('qinit-retry').onclick = initQuery; return; }
     $('qcat').innerHTML = '<option value="all">Any purpose</option>' + m.cats.map((c, i) => `<option value="${i}">${esc(c)}</option>`).join('');
     m.cats.all = 'Any purpose'; // so QMETA.cats[qState.cat] reads correctly when cat is the string 'all'
     // Every place that actually appears in a recipient's state column, grouped and
@@ -2491,6 +2765,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       if (filters.min) push('min', 'Any grant size', pool.exact ? back.min.size : null);
       if (filters.st !== 'all') push('st', 'Any location', back.st.size);
       if (filters.yr) push('yr', 'Any year', pool.exact ? back.yr.size : null);
+    } else if (pool && pool.kind === 'combo') {
+      if (filters.min) push('min', 'Any grant size', null);
+      if (filters.yr) push('yr', 'Any year', null);
     } else if (pool && pool.kind === 'bucket' && filters.st !== 'all') {
       const scoped = filters.region !== 'all' || !!filters.mapSel || !!filters.citySel;
       const all = Array.isArray(pool.cd.all) ? pool.cd.all : [];
@@ -2517,6 +2794,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const filters = { ...qState, region, mapSel, citySel };
     const box = $('qresults');
     qState.rows = []; qState.median = null; qState.ready = false; qState.allAgg = false;
+    $('pane-q').classList.remove('noresults');
     $('qreport').disabled = $('qexport').disabled = true;
     $('qmore').hidden = true;
     // H-03: "Any purpose" with nothing else selected is the registry aggregate already sitting
@@ -2534,7 +2812,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       const rows = F.map((f, fi) => [fi, f.g, f.t, f.g ? Math.round(f.t / f.g) : 0, f.y[f.y.length - 1], null]).sort((a, b) => b[2] - a[2] || a[0] - b[0]);
       qState.rows = rows; qState.ready = true; qState.shown = 0;
       box.innerHTML = '';
-      $('qcount').textContent = rows.length.toLocaleString('en-US') + ' foundations';
+      setCount(rows.length.toLocaleString('en-US') + ' foundations');
       // m2: the count line says the count; the caption under it says the ranking (and follows the sort)
       $('qsum').textContent = '';
       box.removeAttribute('aria-busy');
@@ -2543,7 +2821,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       sortQueryRows(); paintQuery();
       return;
     }
-    $('qcount').textContent = 'Searching…'; $('qsum').textContent = '';
+    setCount('Searching…', true); $('qsum').textContent = '';
     box.setAttribute('aria-busy', 'true');
     box.innerHTML = resultsWait(filters);
     let pool = null;   // what this query read, kept so a zero result can count its way back out (H-12)
@@ -2562,13 +2840,25 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
           median: !scoped && cd.med && cd.med[medKey] != null ? cd.med[medKey] : null };
         pool = { kind: 'bucket', cd };
       } else if (filters.cat === 'all') {
-        // "Any purpose" + a grant size and/or tax year: the purpose-free row histogram, only the
-        // size/year shards that can match, tested row by row by the same matchingResearch()
-        const [source] = await Promise.all([allRows(filters), behaviour()]);
+        // "Any purpose" + a grant size and/or tax year. K8: with no recipient state and no foundation-location
+        // scope, gen_query_index.py has already run this exact computation (q/allc-<tier>-<year>.json, ~25KB):
+        // same rows, same weighted medians, same summation order. Anything narrower reads the size/year row
+        // shards and runs matchingResearch() itself -- and so does this path if its file cannot be read.
+        const unscoped = filters.st === 'all' && filters.region === 'all' && !filters.mapSel && !filters.citySel;
+        const combo = unscoped ? await comboFor(filters).catch(() => null) : null;
         if (request !== queryRequest) return;
-        if (!Array.isArray(source)) throw new Error('Invalid research index');
-        result = matchingResearch(source, filters, F);
-        pool = { kind: 'rows', source, exact: false };
+        if (combo && Array.isArray(combo.rows)) {
+          await behaviour();
+          if (request !== queryRequest) return;
+          result = { rows: combo.rows.map((r) => r.slice()), median: combo.med != null ? combo.med : null };
+          pool = { kind: 'combo' };
+        } else {
+          const [source] = await Promise.all([allRows(filters), behaviour()]);
+          if (request !== queryRequest) return;
+          if (!Array.isArray(source)) throw new Error('Invalid research index');
+          result = matchingResearch(source, filters, F);
+          pool = { kind: 'rows', source, exact: false };
+        }
       } else {
         // Fast path. With no amount, year or map-based filter, the per-purpose
         // aggregate (q/cat<i>.json, ~0.5MB) already holds exactly the
@@ -2604,17 +2894,18 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       box.innerHTML = '';
       const nG = result.rows.reduce((sum, r) => sum + r[1], 0);
       const sum = result.rows.reduce((sum, r) => sum + r[2], 0);
-      $('qcount').textContent = result.rows.length.toLocaleString('en-US') + (result.rows.length === 1 ? ' foundation' : ' foundations');
+      setCount(result.rows.length.toLocaleString('en-US') + (result.rows.length === 1 ? ' foundation' : ' foundations'));
       $('qsum').innerHTML = (qState.allAgg ? nG.toLocaleString('en-US') + (nG === 1 ? ' filed row' : ' filed rows') : nG.toLocaleString('en-US') + (nG === 1 ? ' matching grant' : ' matching grants')) + '<span class="sumdollars"> · ' + moneyC(sum) + '</span>';
       $('qex').hidden = !(qState.cat === QDEF && qState.st === 'all' && !qState.min && !qState.yr && region === 'all' && !mapSel);
       $('qreport').disabled = $('qexport').disabled = !result.rows.length;
       if (!result.rows.length) {
         $('qsum').textContent = '';
+        $('pane-q').classList.add('noresults');
         box.innerHTML = emptyState(filters, pool);
       } else { sortQueryRows(); paintQuery(); }
     } catch (error) {
       if (request !== queryRequest) return;
-      $('qcount').textContent = 'Couldn’t load';
+      setCount('Couldn’t load');
       box.innerHTML = '<div class="qempty"><b>The grant index couldn’t load.</b><button type="button" class="tbtn" id="qretry">Try again</button></div>';
       $('qretry').addEventListener('click', runQuery);
     } finally {
@@ -2892,13 +3183,32 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     expBuilder = builder;
     const m = $('expmenu');
     m.hidden = !m.hidden;
+    btn.setAttribute('aria-expanded', String(!m.hidden));
     if (!m.hidden) {
       const w = btn.closest('.expwrap');
       if (w && m.parentElement !== w) w.appendChild(m);
+      placeExpMenu(btn, m);
     }
   }
+  // S1: a menu with no room below its button opens upward when there is room above (inside a dialog, its
+  // scroller's edges count, not the window's); otherwise the page brings it into view
+  function placeExpMenu(btn, m) {
+    m.classList.remove('up');
+    const b = btn.getBoundingClientRect(), h = m.offsetHeight;
+    const vv = window.visualViewport;
+    let lo = vv ? vv.offsetTop + vv.height : innerHeight;
+    const nav = document.querySelector('.gl-top .gl-nav');
+    if (nav && nav.getClientRects().length && getComputedStyle(nav).position === 'fixed') lo = Math.min(lo, nav.getBoundingClientRect().top);
+    const top = document.querySelector('.gl-top');
+    let hi = top && top.getClientRects().length ? Math.max(0, top.getBoundingClientRect().bottom) : 0;
+    const card = btn.closest('.ovlcard');
+    if (card) { const r = card.getBoundingClientRect(); lo = Math.min(lo, r.bottom); hi = Math.max(hi, r.top); }
+    if (b.bottom + 6 + h <= lo - 8) return;
+    if (b.top - 6 - h >= hi + 8) { m.classList.add('up'); return; }
+    m.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+  }
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.expwrap')) { const m = $('expmenu'); if (m) m.hidden = true; }
+    if (!e.target.closest('.expwrap')) { const m = $('expmenu'); if (m && !m.hidden) { m.hidden = true; document.querySelectorAll('.expwrap [aria-expanded=true]').forEach((b) => b.setAttribute('aria-expanded', 'false')); } }
   });
   function doExport(kind) {
     if (!expBuilder) return;
@@ -2909,6 +3219,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     if (kind === 'xlsx-raw') download(name + '.xlsx', xlsx(name, cols, rows, false), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     if (kind === 'xlsx-fmt') download(name + '-formatted.xlsx', xlsx(name, cols, rows, true), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     $('expmenu').hidden = true;
+    document.querySelectorAll('.expwrap [aria-expanded=true]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
   }
 
   function queryScope() {
@@ -3034,17 +3345,23 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       evidence:'Saved '+(e.saved_at||'date unknown')+(e.recipient_name?' · comparable: '+e.recipient_name:''),
       note:NOTES[f.u]||''});
     const fw = fb && fb.get(f.u);
-    return funderRow(f, Object.assign({n:f.g,evidence:'Added without a saved matching selection'}, fw ? {median:fw.median,max:fw.max} : {}));
+    return funderRow(f, Object.assign({n:f.g,evidence:'Added without a saved matching selection'}, fw && !fw.none ? {median:fw.median,max:fw.max} : {}));
   }
   function evidenceSummary(f, fb) {
     const e=PROJ().evidence[f.u];
     if (!e) {
       const fw = fb && fb.get(f.u);
       const where = PROJ().via && PROJ().via[f.u] === 'hub' ? 'Whole ledger (saved from Find funders)' : 'Whole ledger (saved from its page)';
-      if (fw) return `<div class="savedreason"><b>${money(fw.median)} median · ${money(fw.max)} largest grant</b><p>${where}.</p></div>`;
+      // S5: in the brief every whole-ledger save gets the same block -- filed total, rows and years from the registry,
+      // then the median and largest named grant when the ledger has named rows (and says so when it has none)
+      if (fb) {
+        const line = fw && !fw.none ? moneyR(fw.median) + ' median named grant · ' + money(fw.max) + ' largest'
+          : fw && fw.none ? 'Filed without a named-recipient list, so there is no median or largest grant' : '';
+        return `<div class="savedreason"><b>${money(f.t)} filed · ${f.g.toLocaleString('en-US')} ${f.g === 1 ? 'filed row' : 'filed rows'}</b>${line ? '<p>' + line + '.</p>' : ''}<small>${where}.</small></div>`;
+      }
       return '<span class="lm">' + where + '. Add your rationale below.</span>';
     }
-    return `<div class="savedreason"><b>${e.n.toLocaleString('en-US')} matching filed rows · ${money(e.median)} median · latest TY${e.last}</b>
+    return `<div class="savedreason"><b>${e.n.toLocaleString('en-US')} matching filed ${e.n === 1 ? 'row' : 'rows'} · ${moneyR(e.median)} median · latest TY${e.last}</b>
       <p>${e.recipient_name?'Comparable record: '+esc(e.recipient_name)+'. ':''}${esc(e.scope)}</p>
       <small>Saved ${esc(e.saved_at||'date unknown')}${COVERAGE && e.dataset_sha256 && e.dataset_sha256!==COVERAGE.dataset_sha256?' · Earlier collection: recheck the evidence before outreach.':''}</small></div>`;
   }
@@ -3065,6 +3382,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
           const median=weightedMedian(named.map(g=>[g[2],1]));
           const max=named.reduce((m,g)=>Math.max(m,g[2]),-Infinity);
           if (median!=null && isFinite(max)) fallback.set(f.u,{median,max});
+          else if (Array.isArray(rows) && !named.length) fallback.set(f.u,{none:true});
         } catch(e) {}
         return;
       }
@@ -3089,15 +3407,15 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     if(ovlMode!=='r' || PROJ().id!==projectId) return;
     saveList(); stashExpMenu();
     $('pbody').innerHTML=`<div class="rep brief">
-      <div class="repbar"><span class="rbt">${esc(p.name)}</span><span class="rbacts"><span class="expwrap"><button type="button" class="tbtn" id="brief-export">Export ▾</button></span><button type="button" class="tbtn" id="brief-print">Print / PDF</button><button type="button" class="tbtn" id="brief-back">Edit shortlist</button></span></div>
-      <div class="rephead"><div class="eyebrow">Grants Ledger · Research brief · ${todayISO()}</div><h2>${esc(p.name)}</h2>
-      <p class="briefgoal">${esc(p.brief||'Add a project objective in the shortlist to give this brief context.')}</p>
-      <p>${funders.length} shortlisted ${funders.length===1 ? 'foundation' : 'foundations'} · ${funders.filter(f=>p.evidence[f.u]).length} saved from a search · ${funders.filter(f=>String(NOTES[f.u]||'').trim()).length} with research notes</p></div>
+      <div class="repbar"><span class="rbt"></span><span class="rbacts"><span class="expwrap"><button type="button" class="tbtn" id="brief-export" aria-haspopup="true" aria-expanded="false">Export${CHEV}</button></span><button type="button" class="tbtn" id="brief-print">Print / PDF</button><button type="button" class="tbtn" id="brief-back">Edit shortlist</button></span></div>
+      <div class="rephead"><div class="eyebrow"><span class="bk-pre">Grants Ledger · </span><span class="nw">Research brief · ${todayISO()}</span></div><h2>${esc(p.name)}</h2>
+      ${String(p.brief||'').trim() ? `<p class="briefgoal">${esc(p.brief)}</p>` : '<p class="briefgoal brief-prompt">Add a project objective in the shortlist to give this brief context. (Not printed.)</p>'}
+      <p class="dl">${dlist([funders.length + ' shortlisted ' + (funders.length===1 ? 'foundation' : 'foundations'), funders.filter(f=>p.evidence[f.u]).length + ' saved from a search', funders.filter(f=>String(NOTES[f.u]||'').trim()).length + ' with research notes'])}</p></div>
       ${funders.map((f,i)=>{const e=p.evidence[f.u];return `<section class="repsec briefcard"><h3>${i+1}. <a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></h3>
         <p class="briefmeta">${esc(f.ci)}${f.st?', '+esc(f.st):''} · published ledger TY${f.y[0]}–${f.y[f.y.length-1]}</p>
         ${evidenceSummary(f, fallback)}
         ${e?.sources?.length?`<ul class="briefsources">${e.sources.map(g=>`<li><a href="${ledgerLink(F.indexOf(f),g.name)}">${esc(dc(g.name))} →</a> · ${money(g.amount)} · TY${g.year}</li>`).join('')}</ul>`:e?'<p class="repnote">Individual source examples are unavailable in this snapshot; open the ledger to inspect the selection.</p>':''}
-        <p class="briefnote"><b>Research note & next step</b><br>${esc(NOTES[f.u]||'Review current eligibility, application route and fit before outreach.')}</p>
+        ${String(NOTES[f.u]||'').trim() ? `<p class="briefnote"><b>Research note & next step</b><br>${esc(NOTES[f.u])}</p>` : '<p class="briefnote brief-prompt">No research note yet. Add one in the shortlist; this line is not printed.</p>'}
       </section>`;}).join('')}
       <div class="repnote">Historical support is evidence for further research, not a prediction of funding. Recipient identities and sectors may be inferred; confirm the organization and current funder criteria. Each saved selection has its own scope, so its dollar totals are not added into a funding opportunity estimate. ${coverage?'Collection measured '+esc(coverage.built_at.slice(0,10))+'; '+coverage.foundations.toLocaleString('en-US')+' published foundations.':'Current coverage couldn’t load; check the collection before using this brief.'}</div>
     </div>`;
@@ -3130,16 +3448,16 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         <div><div class="p-name">${esc(p.name)}</div>
           <div class="tot">${rows.length} ${rows.length === 1 ? 'foundation' : 'foundations'} · ${rows.filter(f=>p.evidence[f.u]).length} saved from a search</div></div>
         <div class="acts">
-          <span class="expwrap"><button type="button" class="tbtn" id="lexport"${rows.length ? '' : ' disabled'}>Export ▾</button></span>
+          <span class="expwrap"><button type="button" class="tbtn" id="lexport" aria-haspopup="true" aria-expanded="false"${rows.length ? '' : ' disabled'}>Export${CHEV}</button></span>
           <button type="button" class="tbtn" id="lreport"${rows.length ? '' : ' disabled'}>Build research brief</button>
           <button type="button" class="tbtn" id="lprint"${rows.length ? '' : ' disabled'}>Print / PDF</button>
 
         </div>
       </div>
       <details class="projectobjective"><summary>${p.brief?'Edit project objective':'Add a project objective'}</summary><label class="sr-only" for="project-brief">Project objective</label><textarea class="lnote" id="project-brief" rows="2" maxlength="3000" placeholder="Who is this research for, what needs funding, and what makes a strong fit?">${esc(p.brief||'')}</textarea></details>
-      ${rows.length ? rows.map((f) => `
+      ${rows.length ? rows.map((f, i) => `
         <div class="lrow">
-          <span class="cd">${f.c}</span>
+          <span class="rk" aria-hidden="true">${i + 1}</span>
           <span><span class="ln"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span>
             <span class="lm">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${f.y[0]}–${f.y[f.y.length - 1]} · ✓ reconciled${f.rn ? ' · see note' : ''}</span></span>
           <span class="lv num">${p.evidence[f.u] ? moneyC(p.evidence[f.u].total) : moneyC(f.t)}<small>${p.evidence[f.u] ? 'matching dollars' : 'filed dollars'}</small></span>
@@ -3148,7 +3466,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
           <textarea class="lnote" aria-label="Research note for ${esc(f.n)}" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
         </div>`).join('')
         : `<div class="qempty"><b>Start with one promising funder.</b>Review its grants, save the evidence, and add a note for your brief.<br><button type="button" class="evidencebtn" id="list-find" style="margin-top:16px">Find funders →</button></div>`}
-      <p style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-dim); margin-top:0.9rem">Saved evidence describes historical grants within its stated scope. Recheck eligibility and the source ledger before outreach.</p>`;
+      <p class="listnote">Saved evidence describes historical grants within its stated scope. Recheck eligibility and the source ledger before outreach.</p>`;
     if (projMsg) { const el = $('projmsg'); el.textContent = projMsg.msg; el.classList.toggle('bad', projMsg.bad); el.hidden = false; }
     // ---- project controls ----
     const find=$('list-find');if(find)find.onclick=()=>{closeOvl();setTab('q');$('qcat').focus({preventScroll:true});};
@@ -3281,10 +3599,15 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   $('expmenu').addEventListener('click', (e) => { const b = e.target.closest('[data-x]'); if (b) doExport(b.dataset.x); });
 
   // ---------- recipients (weave) ----------
+  let weaveAll = false;
   function renderWeave() {
     const pool = AGG.weave.filter((w) => namedRecipient(w[1]) && (region === 'all' || w[4].includes(REGION_KEY[region])));
     const gov = pool.filter((w) => isGov(w[0]));
-    const items = (govOnly ? gov : pool).slice(0, 14);
+    const list = govOnly ? gov : pool;
+    const items = weaveAll ? list : list.slice(0, 14);
+    // S2: the rest of the list is already in memory -- it waits behind the same dashed Show more the directory uses
+    $('wmore').hidden = items.length >= list.length;
+    $('wmore').textContent = 'Show more · ' + (list.length - items.length).toLocaleString('en-US') + ' remaining';
     $('weave').innerHTML = items.map(([id, n, t, nf]) =>
       `<div class="wv"><button type="button" class="wn" data-e="${id}">${esc(dc(n))}</button>
        <span class="wm">${nf} foundations ${idChip(id)}</span><span class="ws num${sumCls(id)}"${softTip(id)}>${money(t)}</span></div>`).join('');
@@ -3317,6 +3640,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   }
   $('idtog').addEventListener('click', () => setGovOnly(!govOnly));
   $('weave').addEventListener('click', (e) => { const b = e.target.closest('.wn'); if (b) openProfile(b.dataset.e); });
+  $('wmore').addEventListener('click', () => { const n = $('weave').querySelectorAll('.wn').length; weaveAll = true; renderWeave(); const next = $('weave').querySelectorAll('.wn')[n]; if (next) next.focus({ preventScroll: true }); });
 
   // ---------- years ----------
   function renderTrend() {
@@ -3342,13 +3666,54 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         <i style="background:${k === 'Other filed purposes' ? '#c9c2ae' : SHADES[Math.min(i, 8)]}"></i>
         <span>${esc(k)}</span><span class="kv num">${moneyC(v)} · ${(v / tot * 100).toFixed(0)}%</span><span class="chev">›</span></button>`).join('');
     $('catkey').onclick = (e) => { const b = e.target.closest('[data-cat]'); if (b) drillCat(b.dataset.cat); };
-    const fl = fleetFiltered().slice().sort((a, b) => b.t - a.t).slice(0, 10);
-    const mx = fl[0] ? fl[0].t : 1;
-    $('topfnd').innerHTML = fl.map((f, i) => `
-      <a class="brow" href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/" title="Open the ${esc(f.n)} ledger">
-        <span class="bn">${esc(f.s)}</span>
-        <div><div class="bb" style="--bc:${SHADES[Math.min(i, 8)]}; width:${Math.max(2, f.t / mx * 100)}%"></div></div>
-        <span class="bv num">${moneyC(f.t)}</span></a>`).join('');
+    // S14: the list under the purposes answers the tab's question for ONE purpose -- the largest by default,
+    // then whichever purpose the pointer (or keyboard focus) is on
+    catDefault = (rows.find(([k]) => k !== 'Everything else') || [null])[0];
+    if (!catLead || !rows.some(([k]) => k === catLead)) catLead = null;
+    if (tab === 'c') paintLeaders(catLead || catDefault);
+  }
+  let catLead = null, catDefault = null, leadSeq = 0, leadTimer = 0;
+  async function paintLeaders(cat) {
+    if (!cat) { $('topfnd').innerHTML = ''; return; }
+    catLead = cat;
+    const seq = ++leadSeq;
+    document.querySelectorAll('#catkey .ck').forEach((b) => b.classList.toggle('lead', b.dataset.cat === cat));
+    $('toph').innerHTML = 'Largest funders <span class="tophcat">· ' + esc(cat) + '</span>';
+    let list = [];
+    try {
+      if (region === 'all') {
+        const D = await drillFor('_US');
+        list = ((D && D.catFnd && D.catFnd[cat]) || []).map(([fi, t]) => [fi, t]);
+      } else {
+        // a collection other than the whole ledger: that purpose's funder totals, kept to the collection
+        const ci = REG.cats.indexOf(cat);
+        const cd = ci >= 0 ? await qCat(ci) : null;
+        list = (cd && Array.isArray(cd.all) ? cd.all : []).filter((r) => F[r[0]] && F[r[0]].r === region).map((r) => [r[0], r[2]]);
+      }
+    } catch (e) { list = []; }
+    if (seq !== leadSeq) return;
+    list = list.filter(([fi]) => F[fi]).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const mx = list.length ? list[0][1] : 1;
+    $('topfnd').innerHTML = list.length ? list.map(([fi, t]) => `
+      <a class="brow" href="https://jcurry44.github.io/grants-ledgers/f/${F[fi].u}/" title="Open the ${esc(F[fi].n)} ledger">
+        <span class="bn">${esc(F[fi].n)}</span>
+        <div><div class="bb" style="width:${Math.max(2, t / mx * 100)}%"></div></div>
+        <span class="bv num">${moneyC(t)}</span></a>`).join('')
+      : '<p class="panehint">No foundation in this collection files grants under this purpose.</p>';
+  }
+  {
+    // hover-linking: a purpose row lights its bar segment and vice versa; the pointer's purpose leads the list
+    const lightCat = (cat) => document.querySelectorAll('#catkey .ck, #catbar [data-cat]').forEach((b) => b.classList.toggle('hl', !!cat && b.dataset.cat === cat));
+    const onCat = (e) => {
+      const b = e.target.closest('[data-cat]');
+      if (!b) return;
+      lightCat(b.dataset.cat);
+      if (b.dataset.cat === 'Everything else' || b.dataset.cat === catLead) return;
+      clearTimeout(leadTimer); leadTimer = setTimeout(() => paintLeaders(b.dataset.cat), 70);
+    };
+    ['catkey', 'catbar'].forEach((id) => { $(id).addEventListener('mouseover', onCat); $(id).addEventListener('focusin', onCat); });
+    document.querySelector('.catwrap').addEventListener('mouseleave', () => { clearTimeout(leadTimer); lightCat(null); });
+    $('catkey').addEventListener('focusout', () => lightCat(null));
   }
 
   // ---------- search ----------
@@ -3522,7 +3887,43 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     $('sug-status').textContent = none ? 'No matches' : plural(pick.length, 'organization') + ', ' + plural(fhits.length + closeHits.length, 'foundation');
     box.hidden = false;
     $('q').setAttribute('aria-expanded', 'true');
+    sugSnap();
+    sugFade();
   }
+  // I2-m3: a group heading ("Closest matches") never sits alone at the foot of the visible list: when its first row
+  // does not fit, the box ends on the row above the heading and the fade says there is more
+  function sugSnap() {
+    const b = $('suggest');
+    b.style.maxHeight = '';
+    if (b.hidden || b.scrollTop > 0) return;
+    const lim = b.clientHeight;
+    if (b.scrollHeight - lim <= 6) return;
+    for (const h of b.querySelectorAll('.sughead')) {
+      const nx = h.nextElementSibling;
+      const top = h.offsetTop;
+      if (top >= lim) break;
+      if (top > 120 && (!nx || nx.offsetTop + nx.offsetHeight > lim)) { b.style.maxHeight = top + 'px'; return; }
+    }
+    // close-out: the fade must read as the list continuing, so it falls on the next row's words -- never on an empty
+    // strip of that row's top padding. The box grows (up to 48px, while it stays on screen -- or when its foot is already
+    // below the fold of a scrolling page) until the first line of the first unfinished row's name is inside it; with no
+    // room (the phone takeover is fitted to the keyboard) it ends on the last whole row, whose foot the fade veils.
+    const rows = [...$('suglist').children].filter((r) => !r.classList.contains('sughead'));
+    const r = rows.find((x) => x.offsetTop + x.offsetHeight > lim);
+    const n = r && r.querySelector('.n');
+    if (!n) return;
+    const want = Math.ceil(r.offsetTop + (n.getBoundingClientRect().top - r.getBoundingClientRect().top) + (parseFloat(getComputedStyle(n).lineHeight) || 20) + 8);
+    if (want <= lim) return;
+    const vv = window.visualViewport;
+    const nav = document.querySelector('.gl-top .gl-nav');
+    const navTop = nav && nav.getClientRects().length && getComputedStyle(nav).position === 'fixed' ? nav.getBoundingClientRect().top : innerHeight;
+    const vb = Math.min(vv ? vv.offsetTop + vv.height : innerHeight, navTop), bb = b.getBoundingClientRect().bottom;
+    const room = (bb > vb && !document.documentElement.classList.contains('searching')) ? 48 : vb - 12 - bb;
+    const edge = b.offsetHeight - b.clientHeight;
+    b.style.maxHeight = ((want - lim <= Math.min(48, room)) ? want : r.offsetTop) + edge + 'px';
+  }
+  // S15: a list taller than its box fades its last visible row instead of slicing it
+  function sugFade() { const b = $('suggest'); b.classList.toggle('more', !b.hidden && b.scrollHeight - b.scrollTop - b.clientHeight > 6); }
   // DECISIONS #1: the first keystrokes wait on the search index -- the list opens on the drawing rule
   // instead of staying shut. A cached answer replaces it before it ever paints.
   function sugWait() {
@@ -3605,10 +4006,12 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const vv = window.visualViewport;
     const visibleBottom = vv ? vv.offsetTop + vv.height : innerHeight;
     const nav = document.querySelector('.gl-top .gl-nav');
-    const navTop = nav && getComputedStyle(nav).position === 'fixed' ? nav.getBoundingClientRect().top : innerHeight;
+    const navTop = nav && nav.getClientRects().length && getComputedStyle(nav).position === 'fixed' ? nav.getBoundingClientRect().top : innerHeight;
     const room = Math.min(visibleBottom, navTop) - $('q').getBoundingClientRect().bottom - 16;
     root.style.setProperty('--sug-max', Math.max(180, Math.round(room)) + 'px');
+    requestAnimationFrame(() => { sugSnap(); sugFade(); });
   }
+  $('suggest').addEventListener('scroll', () => sugFade(), { passive: true });
   $('q').addEventListener('focus', () => {
     // H-05: a field that already holds a query shows its results again on focus
     if ($('suggest').hidden && $('q').value.trim().length >= 2) suggest($('q').value, true);
@@ -3616,6 +4019,33 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     document.documentElement.classList.add('searching');
     liftSearch(); fitSuggest();
   });
+  {
+    const root = document.documentElement;
+    let lastY = scrollY, ticking = false;
+    addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = scrollY;
+        if (!phoneQ.matches || root.classList.contains('searching') || !$('ovl').hidden || y < 60) { root.classList.remove('hdr-hide'); lastY = y; return; }
+        if (y > lastY + 8) { if (y > 120) root.classList.add('hdr-hide'); lastY = y; }
+        else if (y < lastY - 8) { root.classList.remove('hdr-hide'); lastY = y; }
+      });
+    }, { passive: true });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => {
+      const r = en.boundingClientRect;
+      root.classList.toggle('q-away', !en.isIntersecting && (r.top < 0 || r.height === 0));
+    }, { rootMargin: '-56px 0px 0px 0px' }).observe($('q'));
+    $('searchjump').addEventListener('click', () => {
+      root.classList.remove('hdr-hide');
+      const geo = $('mapcard').classList.contains('open');
+      if (geo) { setMapCard(false); writeHash(); }
+      $('q').focus({ preventScroll: true });   // in the tap, so a phone raises its keyboard
+      if (!phoneQ.matches) $('q').scrollIntoView({ block: 'center' });
+      else if (geo) requestAnimationFrame(() => requestAnimationFrame(() => { if (root.classList.contains('searching')) { liftSearch(); fitSuggest(); } }));
+    });
+  }
   $('q').addEventListener('blur', () => {
     // a tap on a suggestion blurs the field first; hold the layout until that tap has landed
     setTimeout(() => {
@@ -3717,18 +4147,18 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     rows.forEach((g) => { if (!asFiled.has(g[1])) asFiled.set(g[1], rec.v[g[3]] || rec.n); });
     $('pbody').innerHTML = `
       <div class="p-name">${esc(dc(rec.n))}</div>
-      <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '· <abbr title="IRS Employer Identification Number">EIN</abbr> ' + id.slice(1) + ' · matched to an IRS-registered organization' : '· matched by name alone, from the recipient name as filed'}</span></div>
+      <div class="p-id">${idChip(id, 'lg')}<span>${isGov(id) ? '<abbr title="IRS Employer Identification Number">EIN</abbr> <span class="nw">' + id.slice(1) + '</span> · matched to an IRS-registered organization' : 'matched by name alone, from the recipient name as filed'}</span></div>
       ${alias.length ? `<details class="p-alias"><summary>View ${alias.length+1} filed name variants</summary><p>${esc([rec.v[rec.d]||rec.n,...alias].join(' · '))}</p></details>` : ''}
       <div class="p-tot"><b class="num${sumCls(id)}"${softTip(id)}>${money(total)}</b><span>${rows.length} grants · ${byF.size} ${byF.size === 1 ? 'foundation' : 'foundations'} · ${years[0]}–${years[years.length - 1]}${isGov(id) ? '' : ' · name-only match'}</span></div>
       <p class="p-warn">Cross-foundation totals use inferred recipient matches. Check filed names and addresses; aliases can split one organization, and same-named organizations can be combined.</p>
       <div id="peerhost"></div>
       <details class="sourcegrants"><summary>View ${rows.length.toLocaleString('en-US')} source grants and ${byF.size} known foundations</summary>
       <div class="chiprow">${[...byF.entries()].sort((a, b) => b[1] - a[1]).map(([fi, amt]) =>
-        `<a class="fchip" href="${ledgerLink(fi, asFiled.get(fi) || rec.n)}" title="${esc(F[fi].n)} — open its ledger at this recipient's grants"><span class="cd">${F[fi].c}</span><span>${esc(F[fi].s)}</span><span class="fa num">${moneyC(amt)}</span></a>`).join('')}</div>
+        `<a class="fchip" href="${ledgerLink(fi, asFiled.get(fi) || rec.n)}" title="${esc(F[fi].n)} — open its ledger at this recipient's grants"><span>${esc(F[fi].n)}</span><span class="fa num">${moneyC(amt)}</span></a>`).join('')}</div>
       <div class="yearsline">${years.map((y) => `<div class="yb"><div class="y">${y}</div><div class="v num">${moneyC(byY.get(y))}</div></div>`).join('')}</div>
       <div class="tw"><table><thead><tr><th>Year</th><th>Foundation</th><th class="amt">Amount</th><th>Source ledger</th></tr></thead><tbody>
-        ${rows.map((g) => `<tr><td class="yr">${g[0]}</td><td>${esc(F[g[1]].s)}</td><td class="amt num">${money(g[2])}</td>
-          <td><a class="rowlink" href="${ledgerLink(g[1], rec.v[g[3]] || rec.n)}" title="Opens the ${esc(F[g[1]].s)} ledger filtered to this recipient — it may hold more than one grant">View this recipient in the source ledger →</a></td></tr>`).join('')}
+        ${rows.map((g) => `<tr><td class="yr">${g[0]}</td><td>${esc(F[g[1]].n)}</td><td class="amt num">${money(g[2])}</td>
+          <td><a class="rowlink" href="${ledgerLink(g[1], rec.v[g[3]] || rec.n)}" title="Opens the ${esc(F[g[1]].n)} ledger filtered to this recipient — it may hold more than one grant">View this recipient in the source ledger →</a></td></tr>`).join('')}
       </tbody></table></div></details>`;
     renderPeers(rec, id, [...byF.keys()]);
     hideSuggest();
@@ -3793,15 +4223,17 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const orgMedian = weightedMedian(rec.g.filter(g=>g[2]>0).map(g=>[g[2],1]));
     const latest = Math.max(...Object.keys(coverage.rows_by_year).map(Number));
     const opts = (values,selected) => values.map(([v,n]) => `<option value="${esc(String(v))}"${String(v)===String(selected)?' selected':''}>${esc(n)}</option>`).join('');
+    // S10: the starting range reads like money a person typed -- two significant figures, grouped
+    const sig2 = (v) => { if (!(v > 0)) return 0; const p = Math.pow(10, Math.max(0, Math.floor(Math.log10(v)) - 1)); return Math.round(v / p) * p; };
     host.innerHTML = `<section class="peerwrap" aria-label="Funder suggestions">
       <div class="peerhead"><b>Find additional funders</b><span class="sub">Evidence you can inspect and save</span></div>
       <p class="peerlead">${signal ? 'Starting sector signal: ' + esc(m.sectors[signal[0]]) + ', from the ' + esc(m.basis[signal[1]]) + '.' : 'Choose a sector to begin; this record has no clear sector signal.'} Adjust it to fit the work. A sector signal is the recipient’s field, inferred from its name — not the same as the filed purpose. Location refers to a recipient’s filed address.</p>
       <div class="peerfilters">
-        <label>Field (from the name)<select class="qsel" id="peer-sector">${opts([[-1,'Choose a sector…'],...m.sectors.map((n,i)=>[i,n])],signal ? signal[0] : -1)}</select></label>
-        <label>Recipient location<select class="qsel" id="peer-state">${opts([['all','Any location'],...REG.states.map((n,i)=>[i,placeOf(n).label]).sort((a,b)=>a[1].localeCompare(b[1]))],state ?? 'all')}</select></label>
+        <label class="pf-wide">Field (from the name)<select class="qsel" id="peer-sector">${opts([[-1,'Choose a sector…'],...m.sectors.map((n,i)=>[i,n])],signal ? signal[0] : -1)}</select></label>
+        <label class="pf-wide">Recipient location<select class="qsel" id="peer-state">${opts([['all','Any location'],...REG.states.map((n,i)=>[i,placeOf(n).opt]).sort((a,b)=>a[1].localeCompare(b[1]))],state ?? 'all')}</select></label>
         <label>Purpose<select class="qsel" id="peer-use">${opts([['all','Any grant use'],...m.mechanisms.map((n,i)=>[i,n])],'all')}</select></label>
-        <label>Minimum grant ($)<input class="qsel" id="peer-min" type="number" min="0" step="any" placeholder="Any amount" value="${orgMedian ? Math.floor(orgMedian/4) : ''}"></label>
-        <label>Maximum grant ($)<input class="qsel" id="peer-max" type="number" min="0" step="any" placeholder="No maximum" value="${orgMedian ? Math.ceil(orgMedian*4) : ''}"></label>
+        <label>Minimum grant ($)<input class="qsel" id="peer-min" type="text" inputmode="numeric" autocomplete="off" placeholder="Any amount" value="${orgMedian ? sig2(orgMedian/4).toLocaleString('en-US') : ''}"></label>
+        <label>Maximum grant ($)<input class="qsel" id="peer-max" type="text" inputmode="numeric" autocomplete="off" placeholder="No maximum" value="${orgMedian ? sig2(orgMedian*4).toLocaleString('en-US') : ''}"></label>
         <label>Tax year from<select class="qsel" id="peer-year">${opts([[0,'Any year'],...Object.keys(coverage.rows_by_year).sort().reverse().map(y=>[y,y])],latest-2)}</select></label>
       </div>
       <p class="peerlead">${orgMedian ? 'Starting range: about a quarter to four times this recipient’s typical grant (' + money(orgMedian) + '). ' : ''}Ranked by latest matching year, closeness to that median, then number of matching rows. Filters never widen automatically.</p>
@@ -3812,7 +4244,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     async function update() {
       const token = ++request, out = host.querySelector('#peer-results');
       const sector = +$('peer-sector').value;
-      const readAmount = key => $(key).value.trim()==='' ? null : Number($(key).value);
+      const readAmount = key => { const v = $(key).value.replace(/[$,\s]/g, ''); return v === '' ? null : Number(v); };
       const filter = {state:$('peer-state').value, mechanism:$('peer-use').value, min:readAmount('peer-min'),
         max:readAmount('peer-max'), year:+$('peer-year').value, reference:orgMedian};
       if (sector<0) { out.innerHTML='<p class="peerlead">Select the sector you want to research.</p>'; return; }
@@ -3839,7 +4271,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
             reason:'Historical support matching the selected sector, filed recipient location, grant use, amount range and years.'};
           candidateEvidence.set(f.u,evidence);
           const check=coverage.funders[f.u]?.ledger_check_date;
-          return `<article class="prospect"><div class="prow"><span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span><span class="pm">${r.n.toLocaleString('en-US')} matching filed rows · latest tax year ${r.last}${check?' · ledger checked '+esc(check):' · check date not recorded'}</span></span><span class="pv">${moneyC(r.median)}<small>matching median</small></span><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1">${PICKED.has(f.u)?'Saved · in shortlist':'Save to shortlist'}</button></div>
+          return `<article class="prospect"><div class="prow"><span><span class="pn"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></span><span class="pm">${r.n.toLocaleString('en-US')} matching filed ${r.n === 1 ? 'row' : 'rows'} · latest tax year ${r.last}${check?' · ledger checked '+esc(check):' · check date not recorded'}</span></span><span class="pv">${moneyC(r.median)}<small>matching median</small></span><button type="button" class="addb${PICKED.has(f.u)?' on':''}" data-add="${f.u}" data-prospect="1">${PICKED.has(f.u)?'Saved · in shortlist':'Save to shortlist'}</button></div>
             <details class="peerevidence" data-proof="${f.u}"><summary>View matching grants and criteria</summary><p>${esc(scope)}</p><div data-samples>Opening filed evidence…</div></details></article>`;
         }).join('')}</div>`;
       out.querySelectorAll('[data-proof]').forEach(details=>details.addEventListener('toggle',async()=>{
@@ -3856,6 +4288,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         } catch(e) { if(details.isConnected) area.textContent='The source rows couldn’t load. Close and reopen to try again, or open the foundation ledger.'; }
       }));
     }
+    ['peer-min','peer-max'].forEach(k => $(k).addEventListener('change', () => { const v = $(k).value.replace(/[$,\s]/g, ''); if (v !== '' && Number.isFinite(+v) && +v >= 0) $(k).value = Math.round(+v).toLocaleString('en-US'); }));
     host.querySelectorAll('select,input').forEach(input=>input.addEventListener('change',update));
     update();
   }
@@ -3949,19 +4382,20 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         .filter((r) => r.f);
       const wholeSet = !!qState.allAgg;
       title = wholeSet ? 'All ' + rows.length.toLocaleString('en-US') + ' foundations' : cat + (qState.st === 'all' ? '' : ' · ' + place);
+      const optText = (id) => { const sel = $(id), o = sel && sel.options[sel.selectedIndex]; return o ? o.textContent.trim() : ''; };
       params = wholeSet ? 'The whole collection  ·  every filed row, every year  ·  no filter applied' : [
-        'purpose: ' + cat,
-        'recipient location as filed: ' + place,
-        'grant size: ' + (qState.min ? 'at least ' + money(qState.min) : 'any'),
-        'tax year from: ' + (qState.yr || 'any year'),
-        region !== 'all' ? 'scope: ' + region : '',
-        mapSel ? 'funders based in: ' + (citySel?citySel+', ':'') + stName(mapSel) : '',
+        'Purpose (as filed): ' + cat,
+        'Recipient state: ' + (qState.st === 'all' ? 'Any location' : placeOf(m.states[qState.st]).opt),
+        'Grant size: ' + (qState.min ? optText('qmin') : 'Any amount'),
+        'From tax year: ' + (qState.yr || 'Any year'),
+        region !== 'all' ? 'Collection: ' + ({ wny: 'Western New York', ny: 'New York’s largest foundations' }[region] || region) : '',
+        mapSel ? 'Funders based in: ' + (citySel?citySel+', ':'') + stName(mapSel) : '',
       ].filter(Boolean).join('  ·  ');
     }
     repRows = rows;
     repMeta = { title, params, kind, whole: kind === 'list' || (kind !== 'list' && !!qState.allAgg), median: kind === 'list' ? null : qState.median };
     openOvl('r');
-    if (kind !== 'list') nameDialog('Search summary');
+    if (kind !== 'list') { nameDialog('Search summary'); $('ovl').dataset.kind = 'summary'; syncNav(); }
     paintReport();
   }
   function paintReport() {
@@ -3981,15 +4415,16 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const today = todayISO();
     $('pbody').innerHTML = `<div class="rep">
       <div class="repbar">
-        <span class="rbt">${esc(meta.title)}</span>
+        <span class="rbt"></span>
         <span class="rbacts">
-          <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
+          <span class="expwrap"><button type="button" class="tbtn" data-rex aria-haspopup="true" aria-expanded="false">Export${CHEV}</button></span>
           <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
         </span>
       </div>
       <div class="rephead">
         <div class="t">${esc(meta.title)}</div>
-        <div class="p">${esc(meta.params)} · prepared ${today} from The Grants Ledger</div>
+        <div class="p">${esc(meta.params)}</div>
+        <div class="p prep">Prepared <span class="nw">${today}</span> from The Grants Ledger</div>
       </div>
       <div class="eyebrow">Based on: ${meta.kind === 'list' ? 'your shortlist' : 'your current search'}</div>
       <div class="repnums">
@@ -4019,7 +4454,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
             return `<tr><td><a class="rowlink" href="https://jcurry44.github.io/grants-ledgers/f/${r.f.u}/">${esc(r.f.n)}</a></td>
               <td class="yr">${esc(r.f.ci)}${r.f.st ? ', ' + r.f.st : ''}</td>
               <td class="amt num">${r.n ? r.n.toLocaleString('en-US') : '—'}</td>
-              <td class="amt num">${meta.whole ? (r.typ != null ? money(r.typ) : '—') : (r.median != null ? money(r.median) : '—')}</td>
+              <td class="amt num">${meta.whole ? (r.typ != null ? moneyR(r.typ) : '—') : (r.median != null ? moneyR(r.median) : '—')}</td>
               <td class="amt num">${b && b[1] != null ? b[1] + '%' : '—'}</td>
               <td class="amt num">${r.last || '—'}</td>
               <td class="amt num">${money(r.total || 0)}</td></tr>`;
@@ -4027,9 +4462,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         </tbody></table></div>
         ${rows.length > 60 ? `<div class="repnote">Showing the first 60 of ${rows.length.toLocaleString('en-US')} — the export contains every row.</div>` : ''}
       </div>
-      <div class="repnote">Query figures describe the matching named-recipient grant rows; project totals include every filed row. Repeat-recipient shares use each foundation’s full available history, exclude unnamed recipients, and do not estimate renewal probability. Source ledgers disclose adjusted totals (bridges) and unitemized amounts. Prepared from public IRS Form 990-PF filings. Nothing here is an audit.</div>
+      <div class="repnote">Query figures describe the matching named-recipient grant rows; project totals include every filed row. Repeat-recipient shares use each foundation’s full available history, exclude unnamed recipients, and do not estimate renewal probability. Source ledgers disclose adjusted totals (bridges) and unitemized amounts. Prepared from public IRS Form <span class="nw">990-PF</span> filings. Nothing here is an audit.</div>
       <div class="repfoot">
-        <span class="expwrap"><button type="button" class="tbtn" data-rex>Export ▾</button></span>
+        <span class="expwrap"><button type="button" class="tbtn" data-rex aria-haspopup="true" aria-expanded="false">Export${CHEV}</button></span>
         <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
       </div>
     </div>`;
@@ -4063,13 +4498,13 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const n=v=>(v||0).toLocaleString('en-US'),pct=(a,b)=>b?(100*a/b).toFixed(1)+'%':'—', t=c.totals, ident=c.identity;
     const dates=Object.values(c.funders).map(f=>f.ledger_check_date).filter(Boolean).sort();
     host.innerHTML=`<div class="method"><h2 class="h3">Method</h2>
-      <p>Measured from this published collection on <b>${esc(c.built_at.slice(0,10))}</b>. This is a dataset build date; filing and review dates are shown separately.</p>
+      <p>Measured from this published collection on <b class="nw">${esc(c.built_at.slice(0,10))}</b>. This is a dataset build date; filing and review dates are shown separately.</p>
       <div class="coveragegrid"><div><b>${n(c.foundations)}</b><span>published foundations</span></div><div><b>${n(t.rows)}</b><span>filed rows · ${moneyC(t.dollars)}</span></div><div><b>${n(t.named_rows)}</b><span>named-recipient rows</span></div><div><b>${n(t.unitemized_rows)}</b><span>unitemized rows (a lump sum filed without a recipient list) · ${moneyC(t.unitemized_dollars)}</span></div></div>
       <div class="mh">How current is it?</div>
-      <p>The ledgers contain ${n(c.foundation_years)} foundation-years. Their latest tax years vary; a recent site build does not imply a recent filing. ${dates.length?'Explicit ledger check dates run from '+esc(dates[0])+' to '+esc(dates[dates.length-1])+', recorded for '+n(dates.length)+' of '+n(c.foundations)+' foundations.':'Ledger check dates are not recorded.'}</p>
-      <p>${c.latest_source_scan?'Latest logged filing-index scan: <b>'+esc(c.latest_source_scan.date)+'</b>; '+n(c.latest_source_scan.foundations_watched)+' foundations watched, '+n(c.latest_source_scan.review_candidates)+' foundations with review candidates. '+esc(c.latest_source_scan.note):'No filing-index scan date is recorded.'}</p>
+      <p>The ledgers contain ${n(c.foundation_years)} foundation-years. Their latest tax years vary; a recent site build does not imply a recent filing. ${!dates.length?'Ledger check dates are not recorded.':dates[0]===dates[dates.length-1]?(dates.length===c.foundations?'Every ledger was checked on <time class="nw">'+esc(dates[0])+'</time>.':'Ledger checks are recorded for '+n(dates.length)+' of '+n(c.foundations)+' foundations, all on <time class="nw">'+esc(dates[0])+'</time>.'):'Explicit ledger check dates run from <time class="nw">'+esc(dates[0])+'</time> to <time class="nw">'+esc(dates[dates.length-1])+'</time>, recorded for '+n(dates.length)+' of '+n(c.foundations)+' foundations.'}</p>
+      <p>${c.latest_source_scan?'Latest logged filing-index scan: <b class="nw">'+esc(c.latest_source_scan.date)+'</b>; '+n(c.latest_source_scan.foundations_watched)+' foundations watched, '+n(c.latest_source_scan.review_candidates)+' foundations with review candidates. '+esc(c.latest_source_scan.note):'No filing-index scan date is recorded.'}</p>
       <details><summary>Latest published tax year by foundation</summary><div class="tw"><table><thead><tr><th>Foundation</th><th>Latest TY</th><th>Ledger checked</th><th>Unitemized rows</th></tr></thead><tbody>${F.map(f=>{const d=c.funders[f.u];return `<tr><td><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></td><td>${d.latest_year}</td><td>${esc(d.ledger_check_date||'Not recorded')}</td><td>${n(d.unitemized_rows)}</td></tr>`;}).join('')}</tbody></table></div></details>
-      <div class="mh">What the collection covers</div><p>A selected collection of major U.S. private-foundation Form 990-PF filings. It does not cover all philanthropy, all years, public charities, donor-advised funds or every corporate giving program. An empty search is not evidence that no funder supports the work.</p>
+      <div class="mh">What the collection covers</div><p>A selected collection of major U.S. private-foundation Form <span class="nw">990-PF</span> filings. It does not cover all philanthropy, all years, public charities, donor-advised funds or every corporate giving program. An empty search is not evidence that no funder supports the work.</p>
       <div class="mh">Recipient identity is an inference</div>
       <p>${n(ident.source_ein_rows)} parsed rows contain a source recipient-<abbr title="IRS Employer Identification Number">EIN</abbr> field. EIN-confirmed records are inferred by matching filed names against the IRS Business Master File — the IRS’s own public list of registered organizations — and a reviewed merge list. ${n(ident.matched_identities)} of ${n(ident.named_identities)} named-recipient identities are EIN-confirmed, covering ${pct(ident.matched_rows,t.named_rows)} of named-recipient rows and ${pct(ident.matched_dollars,t.named_dollars)} of their dollars.</p>
       <p>${idChip('E')} marks an EIN-confirmed identity, inferred from the filed name; ${idChip('K')} marks a name match only. Either can split aliases or combine same-named recipients. Check source names and addresses before relying on a combined total. The “EIN-confirmed only” switch filters by match status; it does not certify identity.</p>
@@ -4128,7 +4563,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   const viewScroll={research:0,atlas:0};
   function syncNav() {
     const geo=$('mapcard').classList.contains('open');
-    const current=ovlMode==='l'||ovlMode==='r'?'listbtn':geo?'navexplore':'navresearch';
+    // K1: the search summary is a view of Find funders, not of the shortlist (it shares the brief's overlay mode)
+    const summary=ovlMode==='r'&&$('ovl').dataset.kind==='summary';
+    const current=(ovlMode==='l'||ovlMode==='r')&&!summary?'listbtn':geo?'navexplore':'navresearch';
     ['navresearch','navexplore','listbtn'].forEach(id=>{
       $(id).classList.toggle('on',id===current);
       if(id===current)$(id).setAttribute('aria-current','page');else $(id).removeAttribute('aria-current');
@@ -4183,6 +4620,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   async function readHash() {
     region = 'all'; govOnly = false; HASHQ = null; mapSel = null; catSel = null;
     const p = Object.fromEntries(location.hash.slice(1).split('&').filter(Boolean).map((kv) => { const i = kv.indexOf('='); return [kv.slice(0, i), decodeURIComponent(kv.slice(i + 1))]; }));
+    if (!$('ovl').hidden && !['shortlist', 'brief'].includes(p.view) && !p.org && !p.f) closeOvl(true);
     if (['wny', 'ny'].includes(p.region)) region = p.region;
     if (p.id === 'gov') govOnly = true;
     if (p.q) {

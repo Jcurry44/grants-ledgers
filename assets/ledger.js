@@ -1,3 +1,12 @@
+// Close-out (2026-09-24), the shared header contract: the header's More menu dismisses like a menu -- a press
+// anywhere else, Escape (focus returns to More), or focus leaving it. The hub's own script, the same behaviour on
+// every surface; capture phase, so the press that closes it still lands on whatever it was aimed at.
+(function () {
+  var m = document.querySelector('.gl-top .gl-more'); if (!m) return; var sm = m.querySelector('summary');
+  document.addEventListener('pointerdown', function (e) { if (m.open && !m.contains(e.target)) m.open = false; }, true);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.open) { m.open = false; sm.focus(); e.stopPropagation(); } }, true);
+  m.addEventListener('focusout', function (e) { if (m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open = false; });
+})();
 (function () {
   'use strict';
   const DATA = window[document.documentElement.dataset.blob || 'OISHEI_DATA'];
@@ -46,14 +55,14 @@
             : { maximumFractionDigits: 0 });
   };
   // Compact money, magnitude-general: K, M, B, T. Three significant figures, and the
-  // unit is chosen AFTER rounding, so $999,999,999 promotes to $1.00B instead of
+  // unit is chosen AFTER rounding, so $999,999,999 promotes to $1B instead of
   // printing "$1000M" -- the defect that made a $6,311,161,824 year read "$6311.2M".
   // Below $1,000 the exact figure is both shorter and truer, so it is printed in full.
   // $1,000-$9,999 keeps one K decimal ($7.5K, 2 significant figures) rather than
   // rounding away the only figure that distinguishes it from its neighbors; $10K
   // and up drops the decimal, as it always has.
   const COMPACT_UNITS = [[1e3, 'K'], [1e6, 'M'], [1e9, 'B'], [1e12, 'T']];
-  const moneyCompact = (n) => {
+  const moneyCompact = (n, keepZeros) => {
     const v = isFinite(Number(n)) ? Number(n) : 0;
     const a = Math.abs(v);
     if (a < 1e3) return money(v);
@@ -65,7 +74,25 @@
       if (+s < 1000 || i === COMPACT_UNITS.length - 1) break;
       i++;                                              // rounding crossed the unit
     }
+    // P4 i2: an all-zero fraction is not precision -- "$1.0K", "$43.0M", "$5.00M" print "$1K", "$43M", "$5M"
+    // (build_any's _money_compact stamps the same string into the HTML, so the two stay identical). A chart's
+    // labels keep theirs (keepZeros) so one series shares one precision: see yearLabel below.
+    if (!keepZeros) s = s.replace(/\.0+$/, '');
     return (v < 0 ? '\u2212$' : '$') + s + COMPACT_UNITS[i][1];
+  };
+  // The year series (trend columns, the line form's labels, the year tiles) prints at ONE precision: "$43.0M"
+  // beside "$43.1M" and "$532.0M" beside "$607.9M", never a ragged "$43M" / "$607.9M" row; a series whose every
+  // label is a zero fraction drops them all. Keyed by the sums themselves, so it follows byYear.
+  let yearLblKey = null, yearLblMap = null;
+  const yearLabel = (y) => {
+    const key = YEARS.map((yy) => byYear[yy] ? byYear[yy].sum : 0).join(',');
+    if (key !== yearLblKey) {
+      const raw = YEARS.map((yy) => moneyCompact(byYear[yy] ? byYear[yy].sum : 0, true));
+      const allZero = raw.every((t) => !/\.\d/.test(t) || /\.0+[KMBT]$/.test(t));
+      yearLblMap = new Map(YEARS.map((yy, k) => [yy, allZero ? raw[k].replace(/\.0+(?=[KMBT]$)/, '') : raw[k]]));
+      yearLblKey = key;
+    }
+    return yearLblMap.get(y) || moneyCompact(byYear[y] ? byYear[y].sum : 0);
   };
   // Axis ticks are round numbers by construction, so they carry no trailing zeros and
   // abbreviate from $1K -- one axis must not read "$0, $5,000, $10K".
@@ -122,7 +149,7 @@
   const isMobile = () => window.matchMedia('(max-width: 719px)').matches;
 
   // ---------- display casing (as-filed preserved in titles) ----------
-  const _KEEPUP = new Set(['LLC','LLP','PLLC','PC','II','III','IV','YMCA','YWCA','BOCES','SUNY','WNY','CTNY','USA','NFTA','ECMC','ECC','WNED','WBFO','NY','DBA','LISC','JRO','AKG','AK360','MSNT','DEI']);
+  const _KEEPUP = new Set(['LLC','LLP','PLLC','PC','II','III','IV','VI','VII','VIII','IX','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','YMCA','YWCA','BOCES','SUNY','WNY','CTNY','USA','NFTA','ECMC','ECC','WNED','WBFO','NY','DBA','LISC','JRO','AKG','AK360','MSNT','DEI']);
   const _SMALL = new Set(['of','and','the','for','in','at','on','to','a','an','de']);
   const _ACRO = new Set();
   const learnAcronyms = (rows) => rows.forEach((g) => {
@@ -192,16 +219,32 @@
   // reader can never tell "no link yet" from "we withheld a link", only see the receipt.
   function receiptMark(raw, cls, label) {
     const r = receiptFor(raw);
-    const text = esc(label !== undefined ? label : raw);
     const clsAttr = cls ? ` class="${cls}"` : '';
-    return r
-      ? `<a${clsAttr} href="${r.href}" target="_blank" rel="noopener" title="${r.scan ? 'Open the scanned filing' : 'Open on ProPublica'}">${text}</a>`
-      : `<code${clsAttr}>${text}</code>`;
+    // P4 (m18): a short label ("Filing ↗") carries the object id in its title; without a resolvable link the
+    // label drops its ↗ (an arrow that goes nowhere is a broken promise) and still names the receipt
+    const idTitle = label !== undefined ? ` \u00b7 ${esc(raw)}` : '';
+    if (r) return `<a${clsAttr} href="${r.href}" target="_blank" rel="noopener" title="${r.scan ? 'Open the scanned filing' : 'Open on ProPublica'}${idTitle}">${esc(label !== undefined ? label : raw)}</a>`;
+    const plain = label !== undefined ? String(label).replace(/\s*\u2197\s*$/, '').replace(/\s*↗\s*$/, '') : raw;
+    return `<code${clsAttr}${label !== undefined ? ` title="${esc(raw)}"` : ''}>${esc(plain)}</code>`;
   }
   // withheld / $0-filed years, parsed once and shared by the year rail, the moat note and
   // the overview's tie-out exceptions -- one source, so every surface names the same years.
   const WITHHELD = (() => { try { return JSON.parse(document.documentElement.dataset.withheld || '{}'); } catch (e) { return {}; } })();
   const ZEROYRS = (() => { try { return JSON.parse(document.documentElement.dataset.zeroyears || '{}'); } catch (e) { return {}; } })();
+  // Close-out (6): a year range is honest about the years it spans. With a withheld year the page's span is the
+  // filed record's (published + withheld -- the rail's own span) and says how many are withheld: Beckman reads
+  // "2020–2024 · 2 withheld" (5 filed − 2 = the cover's three reconciled years), never "2021–2024" across a
+  // withheld 2023. build_any stamps the same span on the hero meta and the side kicker.
+  const WH_YEARS = Object.keys(WITHHELD).filter((y) => (WITHHELD[y] || {}).kind === 'withheld').map(Number).sort((a, b) => a - b);
+  const NWITH = WH_YEARS.length;
+  const SPAN_YEARS = [...new Set([...(Object.keys(tieout).length ? Object.keys(tieout).map(Number) : YEARS), ...WH_YEARS])].sort((a, b) => a - b);
+  const SPAN_ALL = SPAN_YEARS.length > 1 ? `${SPAN_YEARS[0]}\u2013${SPAN_YEARS[SPAN_YEARS.length - 1]}` : String(SPAN_YEARS[0]);
+  const SPAN_TEXT = SPAN_ALL + (NWITH ? ` \u00b7 ${NWITH} withheld` : '');
+  // (2) a caption that covers the whole book says which years that is: "all filed years" only when every filed year
+  // is in it; with a year withheld it counts the reconciled ones, as the cover's label does ("three reconciled years")
+  const allYearsPhrase = () => NWITH ? `${numWord(FILED_YEARS)} reconciled ${plural(FILED_YEARS, 'year')}` : 'all filed years';
+  // (3) a difference carries its sign: \u0394 +$1 (filed above the rows), \u0394 \u2212$32 (below), \u0394 $0
+  const signedMoney = (n) => (Number(n) > 0 ? '+' : '') + money(n);
   // ux-ledger-04: a filed year read from the paper filing, not an e-file, carries a
   // non-numeric object id ("<ein>_<period>_990PF (IRS scan)") -- shared by the year
   // rail, the moat note and the trend chart, so every surface agrees on which years these are.
@@ -538,6 +581,10 @@
     const host = document.getElementById('print-report');
     if (!host) { printBusy = false; setPrintBusy(false); window.print(); return; }
     const h1 = document.querySelector('h1'); const meta = document.querySelector('.hero-meta');
+    // the meta line in one row of plain text: its no-break separators become plain spaces and the as-filed
+    // name (its own line on the page) is joined with a separator instead of running into 'The filings'
+    const metaText = meta ? [...meta.childNodes].map((n) => (n.nodeType === 1 && n.classList.contains('hm-filed') ? ' · ' : '') + n.textContent)
+      .join('').replace(/\s+/g, ' ').replace(/\s*↗/g, '').trim() : '';
     const rows = viewRows();
     const scope = [];
     if (state.y !== null) scope.push('tax year ' + state.y);
@@ -553,6 +600,7 @@
     const cats = catList.slice(0, 8);
     const tops = entList.slice(0, 10);
     const years = Object.keys(tieout).sort();
+    const prTieYears = [...new Set([...years, ...Object.keys(WITHHELD).filter((y) => (WITHHELD[y] || {}).kind !== 'not yet published')])].sort();
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     // building the row table for the heaviest books is the actual multi-second cost;
     // past ~5,000 in-scope rows it is appended in chunks on a timer instead of one
@@ -560,9 +608,10 @@
     const BIG_ROWS = rows.length > 5000;
     host.innerHTML = `
       <header class="pr-head">
-        <div class="pr-brand">The Grants Ledger · reconciled record from IRS Form 990-PF</div>
+        <div class="pr-brand">The Grants Ledger · reconciled record from IRS Form <span class="nw">990-PF</span></div>
         <h1>${esc(h1 ? h1.textContent.trim() : document.title)}</h1>
-        <p class="pr-meta">${esc(meta ? meta.textContent.trim() : '')} · filed years ${esc(years[0])}–${esc(years[years.length - 1])} · printed ${new Date().toISOString().slice(0, 10)}</p>
+        <p class="pr-total"><b>${money(GRAND)}</b> reconciled to the dollar \u00b7 ${esc(($('badge-btn') ? $('badge-btn').textContent : '').replace(/^\s*\u2713\s*/, '').replace(/\s+/g, ' ').replace(/\s*\u00b7\s*to the dollar\s*$/, '').trim())}</p>
+        <p class="pr-meta">${esc(metaText)}${/\bTY\d{4}/.test(metaText) ? '' : ' · filed years ' + esc(SPAN_TEXT)} · printed ${new Date().toISOString().slice(0, 10)}</p>
       </header>
       <section class="pr-kpis">
         <div><b>${kpi('kpi-orgs')}</b><span>Recipients</span></div>
@@ -577,24 +626,26 @@
         <tbody>${cats.map((c) => `<tr><td>${esc(c.key)}</td><td class="num">${money(c.sum)}</td><td class="num">${(c.sum / grand * 100).toFixed(1)}%</td></tr>`).join('')}</tbody></table>
       </section>
       <section class="pr-sec">
-        <h2>Largest recipients, all filed years</h2>
+        <h2>Largest recipients, ${allYearsPhrase()}</h2>
         <table class="pr-table"><thead><tr><th>Recipient</th><th class="num">Grants</th><th class="num">Total</th><th>Years</th></tr></thead>
         <tbody>${tops.map((e) => `<tr><td>${esc(dc(e.display))}</td><td class="num">${num(e.count)}</td><td class="num">${money(e.total)}</td><td>${[...e.years].sort().join(', ')}</td></tr>`).join('')}</tbody></table>
       </section>
       <section class="pr-sec">
         <h2>Reconciliation to the filed totals</h2>
-        <table class="pr-table"><thead><tr><th>Tax year</th><th class="num">Rows</th><th class="num">Rows sum</th><th class="num">Filed ${esc(REF_LBL)}</th><th>Result</th><th>Object ID</th></tr></thead>
-        <tbody>${years.map((y) => { const t = tieout[y]; const d = (t.line25_col_d || 0) - (t.grant_sum || 0); return `<tr><td>${esc(y)}</td><td class="num">${num(t.grant_count || 0)}</td><td class="num">${money(t.grant_sum || 0)}</td><td class="num">${money(t.line25_col_d || 0)}</td><td>${d === 0 ? `matches ${esc(REF_LBL)} exactly` : 'differs from ' + esc(REF_LBL) + ' by ' + money(Math.abs(d))}</td><td>${receiptMark(t.object_id, 'pr-obj')}</td></tr>`; }).join('')}</tbody></table>
+        <table class="pr-table pr-tie"><thead><tr><th>Tax year</th><th class="num">Rows</th><th class="num">\u03a3 grant schedule</th><th class="num">Filed ${esc(REF_LBL)}</th><th class="num">\u0394</th><th>Filing</th></tr></thead>
+        <tbody>${prTieYears.map((y) => { const t = tieout[y]; if (!t) { const w = WITHHELD[y] || {}; const f = typeof w.sum === 'number' && typeof w.filed === 'number'; return `<tr class="pr-withheld"><td>${esc(y)}</td><td class="num">${f ? num(w.rows) : '\u2014'}</td><td class="num">${f ? money(w.sum) : '\u2014'}</td><td class="num">${f ? money(w.filed) : '\u2014'}</td><td class="num">${f ? signedMoney(w.filed - w.sum) + ' \u00b7 withheld' : 'withheld'}</td><td>${w.object_id ? esc(w.object_id) : 'named on the exceptions page'}</td></tr>`; } const d = (t.line25_col_d || 0) - (t.grant_sum || 0); return `<tr><td>${esc(y)}</td><td class="num">${num(t.grant_count || 0)}</td><td class="num">${money(t.grant_sum || 0)}</td><td class="num">${money(t.line25_col_d || 0)}</td><td class="num">${d === 0 ? '$0 \u2713' : signedMoney(d)}</td><td>${receiptMark(t.object_id, 'pr-obj')}</td></tr>`; }).join('')}</tbody>
+        <tfoot><tr><td>Published total</td><td class="num">${num(years.reduce((a, y) => a + (tieout[y].grant_count || 0), 0))}</td><td class="num">${money(years.reduce((a, y) => a + (tieout[y].grant_sum || 0), 0))}</td><td class="num">${money(years.reduce((a, y) => a + (tieout[y].line25_col_d || 0), 0))}</td><td class="num">${(() => { const dd = years.reduce((a, y) => a + (tieout[y].line25_col_d || 0) - (tieout[y].grant_sum || 0), 0); return dd === 0 ? '$0 \u2713' : signedMoney(dd); })()}</td><td></td></tr></tfoot></table>
       </section>
       <section class="pr-sec pr-rows">
         <h2>Every grant in scope${scope.length ? ' — ' + esc(scope.join(' · ')) : ''}</h2>
         <p class="pr-sub">${num(rows.length)} ${rows.length === 1 ? 'grant' : 'grants'} · ${money(total)}</p>
         <table class="pr-table"><thead><tr><th>Year</th><th>Recipient</th><th class="num">Amount</th><th>Purpose (as filed)</th><th>Location</th></tr></thead>
-        <tbody id="pr-rows-tbody">${BIG_ROWS ? '' : rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
+        <tbody id="pr-rows-tbody">${BIG_ROWS ? '' : rows.map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([dc(g.c || ''), g.s].filter(Boolean).join(', '))}</td></tr>`).join('')}</tbody></table>
       </section>
       <footer class="pr-foot">
         ${srcNote ? `<p class="pr-src">${srcNote.innerHTML}</p>` : ''}
-        <p>Every figure reconciles to a total the foundation itself filed with the IRS. Historical record, not eligibility; nothing here is an audit. jcurry44.github.io/grants-ledgers</p>
+        <p>Every figure reconciles to a total the foundation itself filed with the IRS. Historical record, not eligibility; nothing here is an audit.</p>
+        <p class="pr-url">This view: ${esc(location.href.replace(/^https?:\/\//, ''))}</p>
       </footer>`;
     const finish = () => {
       host.hidden = false; host.setAttribute('aria-hidden', 'false');
@@ -609,7 +660,7 @@
       const STEP = 3000;
       let ci = 0;
       const appendChunk = () => {
-        tbody.insertAdjacentHTML('beforeend', rows.slice(ci, ci + STEP).map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([g.c, g.s].filter(Boolean).join(', '))}</td></tr>`).join(''));
+        tbody.insertAdjacentHTML('beforeend', rows.slice(ci, ci + STEP).map((g) => `<tr><td>${g.y}</td><td>${g.record_type === 'unitemized' ? `<span class="recip-flat">${esc(dc(g.r))} · unitemized disclosure</span>` : g.record_type === 'individual_masked' ? `<span class="recip-flat">${esc(MASKED_LABEL)}</span>` : esc(dc(g.r))}</td><td class="num">${money(g.a)}</td><td>${esc(g.p || '')}</td><td>${esc([dc(g.c || ''), g.s].filter(Boolean).join(', '))}</td></tr>`).join(''));
         ci += STEP;
         if (ci < rows.length) setTimeout(appendChunk, 0); else finish();
       };
@@ -628,6 +679,16 @@
   // the build stamps the canonical recipient count into the page; while the full list is
   // still loading that stamp is the only true figure for it
   const STAMPED_ORGS = ($('kpi-orgs') ? $('kpi-orgs').textContent : '').trim() || '\u2014';
+  // P4 (M3): build_any stamps the whole-book median and typical-grant range into the HTML, computed from
+  // the FULL list exactly as below. While a big book's full list is still loading, those stamps are the
+  // true figures -- the embedded preview is its largest rows, and its quartiles read 50x too high.
+  // (A page built before the stamps carries "\u2014" there, and keeps the old wait state.)
+  const stampOf = (id) => {
+    const v = $(id), hint = v && v.parentElement.querySelector('.k-hint');
+    const t = v ? v.textContent.trim() : '';
+    return t && t !== '\u2014' && t !== '\u2026' ? { v: t, hint: hint ? hint.textContent.trim() : '' } : null;
+  };
+  const STAMPED_MEDIAN = stampOf('kpi-median'), STAMPED_RANGE = stampOf('kpi-range');
   const waitLine = () => `Loading the full grant list \u2014 ${num(ROWS_TOTAL)} rows\u2026`;
 
   // ---------- hero KPIs ----------
@@ -736,8 +797,14 @@
     }
     const ctxScope = $('ctx-scope');
     if (ctxScope) {
-      const span = YEARS.length > 1 ? YEARS[0] + '–' + LATEST : String(LATEST);
-      ctxScope.textContent = sy === null ? `TY${span} · ${moneyCompact(GRAND)}` : `TY${sy} · ${moneyCompact(byYear[sy].sum)}`;
+      const span = SPAN_ALL;   // close-out (6): the page's one span (the filed record's, the rail's)
+      const ty = window.matchMedia && window.matchMedia('(max-width: 360px)').matches ? '' : 'TY';
+      // close-out i2: a withheld book never shows a bare span. >=720 "TY2020–2024 · 2 withheld · $94.5M"; the phone
+      // strip has no room for the suffix beside the name, so it counts: "3 of 5 yrs · $94.5M" (the side foot's own
+      // count, same width as the span it replaces)
+      const phone = window.matchMedia && window.matchMedia('(max-width: 719px)').matches;
+      const lead = !NWITH ? `${ty}${span}` : (phone ? `${FILED_YEARS} of ${SPAN_YEARS.length} yrs` : `${ty}${span} \u00b7 ${NWITH} withheld`);
+      ctxScope.textContent = sy === null ? `${lead} · ${moneyCompact(GRAND)}` : `${ty}${sy} · ${moneyCompact(byYear[sy].sum)}`;
     }
   }
   {
@@ -748,7 +815,7 @@
     [document.getElementById('year-rail'), document.getElementById('year-rail-top')].filter(Boolean).forEach((rail) => {
       const railYears = [...new Set([...YEARS, ...Object.keys(withheld).map(Number), ...Object.keys(zeroYears).map(Number)])].sort((a, b) => a - b);
       rail.innerHTML = ['all'].concat(railYears).map((y) => withheld[String(y)]
-        ? `<a class="withheld" data-y="${y}" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}">${y}<small>${withheld[String(y)].kind || 'withheld'}</small></a>`
+        ? `<a class="withheld" data-y="${y}" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}"><span class="wy">${y}</span><small>${withheld[String(y)].kind || 'withheld'}</small></a>`
         : zeroYears[String(y)]
           ? `<span class="zeroyr" data-y="${y}" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
           : `<button type="button" data-yr="${y}"${y === 'all' ? '' : ` data-y="${y}" style="--share:${(byYear[y].sum / maxYearSum * 100).toFixed(2)}%"`} aria-pressed="false"${scanYears.has(y) ? ` class="scan" title="Read from the paper filing — absent from every e-file dataset"` : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
@@ -836,8 +903,14 @@
       Object.keys(withheld).sort().forEach((y) => {
         const w = withheld[y] || {};
         const label = w.kind === 'not yet published' ? 'not yet published' : 'withheld';
-        lines.push(`<p>TY${esc(y)} ${label} — ${esc(w.why || 'named on the exceptions page.')} <a href="../../exceptions/#${slug}">why →</a></p>`);
+        lines.push(`<p>TY${esc(y)} ${label} — ${esc(w.why || 'named on the exceptions page.')} <a class="why-go" href="../../exceptions/#${slug}">why →</a></p>`);
       });
+      // close-out i2: paper has no link -- print hides "why →" and names the page it went to, once
+      if (lines.length) {
+        let exUrl = '';
+        try { exUrl = new URL(`../../exceptions/#${document.documentElement.dataset.slug || ''}`, location.href).href.replace(/^https?:\/\//, ''); } catch (e) { exUrl = ''; }
+        if (exUrl) lines.push(`<p class="p-only">The exceptions page lists ${lines.length === 1 ? 'this year' : 'these years'}: ${esc(exUrl)}</p>`);
+      }
       Object.keys(zeroYears).sort().forEach((y) => {
         lines.push(`<p>TY${esc(y)} filed $0 — the return is in the record; no grants were paid that year.</p>`);
       });
@@ -877,7 +950,7 @@
         <button type="button" class="tr-card${sel ? ' sel' : ''}" data-y="${y}" aria-pressed="${sel}"
           aria-label="Tax year ${y}: ${money(byYear[y].sum)} across ${num(byYear[y].count)} ${grantsWord(byYear[y].count)}${pct === null ? '' : ', ' + pctTxt + ' versus prior year'}. Scopes the whole page to this year.">
           <span class="ty"><span>${y}</span><span class="chg ${pct !== null && pct < 0 ? 'neg' : 'pos'}">${pctTxt}</span></span>
-          <span class="tsum">${moneyCompact(byYear[y].sum)}</span>
+          <span class="tsum">${yearLabel(y)}</span>
           <span class="tct">${num(byYear[y].count)} ${grantsWord(byYear[y].count)}</span>
         </button>`;
       }).join('');
@@ -944,13 +1017,21 @@
       const ty = (svgRect.top - hostRect.top) + (chart.pts[i][1] - vb.y) * k;
       const tTip = tieout[String(y)];
       const dTip = tTip ? tTip.line25_col_d - tTip.grant_sum : 0;
-      tipEl.innerHTML = `<strong>${y}</strong><span>${money(byYear[y].sum)} · ${num(byYear[y].count)} ${grantsWord(byYear[y].count)} · ${dTip === 0 ? 'PASS Δ $0' : 'Δ ' + money(dTip)}</span>`
+      tipEl.innerHTML = `<strong>${y}</strong><span>${money(byYear[y].sum)} · ${num(byYear[y].count)} ${grantsWord(byYear[y].count)} · ${dTip === 0 ? 'PASS Δ\u00a0$0' : 'Δ\u00a0' + signedMoney(dTip)}</span>`
         + (SCAN_YEARS.has(y) ? '<span>Read from the paper filing</span>' : '');
       tipEl.classList.add('show');
       const tw = tipEl.offsetWidth || 190;
       x = Math.max(tw / 2 + 4, Math.min(hostRect.width - tw / 2 - 4, x));
       tipEl.style.left = x + 'px';
-      tipEl.style.top = ty + 'px';
+      // P4: the tip's own box spans more than its column at every width -- lift it clear of the top of any
+      // painted label under that span (its bottom sits 14px above the value it points at, per the CSS)
+      let labelTop = Infinity;
+      svgEl.querySelectorAll('.tr-cval, .tr-cword, .tr-val').forEach((t) => {
+        if (!t.getClientRects().length || parseFloat(getComputedStyle(t).opacity) < 0.05) return;
+        const r = t.getBoundingClientRect();
+        if (r.right - hostRect.left > x - tw / 2 && r.left - hostRect.left < x + tw / 2) labelTop = Math.min(labelTop, r.top - hostRect.top);
+      });
+      tipEl.style.top = Math.min(ty, labelTop - 4 + 14) + 'px';
     }
     function tipHide() { tipEl.classList.remove('show'); }
     svgEl.querySelectorAll('.tr-pt, .tr-col[data-i]').forEach((g) => {
@@ -993,6 +1074,9 @@
     const maxV = Math.max(1, ...YEARS.map((y) => byYear[y].sum));
     const hAt = (v) => Math.max(0, v) / maxV * (base - pad.t);
     const cxAt = (k) => pad.x + slotW * (k + 0.5);
+    // P4: a withheld year is an empty slot of a fixed, modest height -- drawn at full plot height it was the
+    // largest shape on the chart, for the one year with no figure at all
+    const wSlotH = Math.round(Math.max(24, Math.min(40, (base - pad.t) * 0.2)));
     const slug = esc(document.documentElement.dataset.slug || '');
     // a column with its top corners rounded and its foot square on the baseline
     const colPath = (x, top, w) => {
@@ -1010,8 +1094,8 @@
         <a class="tr-col is-withheld" data-y="${y}" data-kind="withheld" href="../../exceptions/#${slug}" aria-label="Tax year ${y}: ${kind} — the reason is on the exceptions page">
           <title>${esc(w.why || 'Filed, not published — named on the exceptions page.')}</title>
           <rect class="tr-hit" x="${cx - slotW / 2}" y="0" width="${slotW}" height="${H}" fill="transparent"/>
-          <rect class="tr-wframe" x="${x0 + 0.5}" y="${pad.t + 0.5}" width="${barW - 1}" height="${base - pad.t - 1}" rx="3"/>
-          <text class="tr-cword" x="${cx}" y="${pad.t - 7}" text-anchor="middle">${kind === 'withheld' ? 'withheld' : 'not published'}</text>
+          <rect class="tr-wframe" x="${x0 + 0.5}" y="${base - wSlotH + 0.5}" width="${barW - 1}" height="${wSlotH - 1}" rx="3"/>
+          <text class="tr-cword" x="${cx}" y="${base - wSlotH - 7}" text-anchor="middle">${kind === 'withheld' ? 'withheld' : 'not published'}</text>
           ${yearLbl}
         </a>`;
       }
@@ -1032,9 +1116,9 @@
       const sel = state.y === y;
       // the value sits on its column; an unitemized year says so on a second line, nearest the column
       const labels = unit
-        ? `<text class="tr-cval" x="${cx}" y="${top - 21}" text-anchor="middle">${moneyCompact(v)}</text>
+        ? `<text class="tr-cval" x="${cx}" y="${top - 21}" text-anchor="middle">${yearLabel(y)}</text>
            <text class="tr-cword" x="${cx}" y="${top - 7}" text-anchor="middle">unitemized</text>`
-        : `<text class="tr-cval" x="${cx}" y="${top - 8}" text-anchor="middle">${moneyCompact(v)}</text>`;
+        : `<text class="tr-cval" x="${cx}" y="${top - 8}" text-anchor="middle">${yearLabel(y)}</text>`;
       return `
         <g class="tr-col${unit ? ' is-unit' : ''}${scan ? ' is-scan' : ''}${sel ? ' is-sel' : ''}" data-i="${i}" data-y="${y}" data-kind="${unit ? 'unitemized' : 'filed'}" tabindex="0" role="button"
            aria-label="${trendPtLabel(y, i)}">
@@ -1087,16 +1171,20 @@
           if (dx) t.setAttribute('x', +t.getAttribute('x') + dx);
           if (dy) t.setAttribute('y', +t.getAttribute('y') + dy);
         });
-        const touch = (a, b) => !!a && !!b && a.l < b.r + 3 && b.l < a.r + 3 && a.t < b.b + 1 && b.t < a.b + 1;
+        // P4: two tolerances. Labels closer than 10px on one line step down to the 11px size (a flat series at
+        // 320px read "$641K $618K $646K" as one string); only a real collision (4px) lifts a group a line.
+        const touchAt = (tol) => (a, b) => !!a && !!b && a.l < b.r + tol && b.l < a.r + tol && a.t < b.b + 1 && b.t < a.b + 1;
+        const crowd = touchAt(10), touch = touchAt(4);
         const edges = () => groups.forEach((ts) => { if (!ts.length) return; const b = box(ts); if (b.l < 0) shift(ts, -b.l, 0); else if (b.r > W) shift(ts, W - b.r, 0); });
         // what a label group k may not touch: its neighbours' columns, and the labels of the neighbour before it
         const blockers = (k) => [k - 1, k + 1].filter((j) => j >= 0 && j < cols.length)
           .flatMap((j) => [barBox(bars[j]), j < k && groups[j].length ? box(groups[j]) : null]).filter(Boolean);
-        const anyTouch = () => groups.some((ts, k) => ts.length && blockers(k).some((o) => touch(box(ts), o)));
+        const anyTouch = (t) => groups.some((ts, k) => ts.length && blockers(k).some((o) => (t || touch)(box(ts), o)));
         edges();
-        if (!anyTouch()) return;
+        if (!anyTouch(crowd)) return;
         svgEl.classList.add('tight');
         edges();
+        if (!anyTouch()) return;
         // lift, left to right, just clear of whatever it touches; lifts only go up, so this settles
         for (let pass = 0; pass < 6 && anyTouch(); pass++) {
           groups.forEach((ts, k) => {
@@ -1182,7 +1270,7 @@
       const sel = state.y === y;
       const incomplete = incompleteYear(y);
       const hollow = incomplete || SCAN_YEARS.has(y);
-      const valTxt = moneyCompact(byYear[y].sum) + (incomplete ? ' · unitemized' : '');
+      const valTxt = yearLabel(y) + (incomplete ? ' · unitemized' : '');
       // L-04 repair: the last point's value label ("$X.XM · unitemized") is the
       // longest on the chart and, centered on the right-most point, ran off the
       // right edge of the viewBox. Anchor it to end flush with the chart's own
@@ -1262,7 +1350,7 @@
     const pct = barPct(value, max);
     return `
       <div class="bar-row${o.cls ? ' ' + o.cls : ''}" ${o.attrs || ''}>
-        <div class="bar-label">${label}</div>
+        <div class="bar-label"${o.title ? ` title="${o.title}"` : ''}>${label}</div>
         <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${pct}%"></div></div>
         <div class="bar-val">${o.val || money(value)}</div>
       </div>`;
@@ -1324,7 +1412,10 @@
       $('eq-a').textContent = money(eqA);
       $('eq-b').textContent = money(eqB);
       const eqSeal = document.querySelector('#db-eq .eq-seal');
-      if (eqSeal) eqSeal.textContent = eqD === 0 ? '\u0394\u00a0$0 \u2713' : '\u0394 ' + money(eqD);
+      if (eqSeal) eqSeal.textContent = eqD === 0 ? '\u0394\u00a0$0 \u2713' : '\u0394\u00a0' + signedMoney(eqD);
+      // P4 (L1): "=" only between equal figures
+      const eqOp = document.querySelector('#db-eq .eq-op');
+      if (eqOp) eqOp.textContent = eqD === 0 ? '=' : '\u2260';
       const eqLbl = document.querySelector('#db-eq .eq-part .eq-label');
       if (eqLbl) eqLbl.textContent = SY !== null ? `\u03a3 ${SY} grant schedule` : '\u03a3 grant schedules';
       const dbEl = document.querySelector('.db-line');
@@ -1341,7 +1432,8 @@
           const scanned = SCAN_YEARS.has(y);
           const cls = w ? 'withheld' : (scanned ? 'scan' : '');
           const title = w ? ` title="${esc(w.why || 'Withheld')}"` : (scanned ? ' title="Read from the paper filing"' : '');
-          return `<a href="#tab=methodology" data-y="${y}"${cls ? ` class="${cls}"` : ''}${title}>${y}${w ? '' : ' \u2713'}</a>`;
+          // P4 (L1): a withheld year is struck AND worded -- geometry and a word, never hue alone
+          return `<a href="#tab=methodology" data-y="${y}"${cls ? ` class="${cls}"` : ''}${title}>${w ? `<span class="dy-y">${y}</span> ${w.kind === 'not yet published' ? 'not yet published' : 'withheld'}` : y + ' \u2713'}</a>`;
         }).join('');
         dbYearsEl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setTab('methodology')));
       }
@@ -1353,7 +1445,7 @@
       $('lede-trend').innerHTML = trendLede + (SY !== null ? ` Viewing <strong>${SY}</strong> \u2014 every panel below is scoped to it.` : '');
       const topN = Math.min(5, sEnts.length);
       const top5 = sEnts.slice(0, 5).reduce((s, e) => s + e.total, 0);
-      const allYrs = FILED_YEARS === 1 ? 'in the single filed year' : `across the ${numWord(FILED_YEARS)} filed years`;
+      const allYrs = FILED_YEARS === 1 ? 'in the single filed year' : `across the ${numWord(FILED_YEARS)} ${NWITH ? 'reconciled' : 'filed'} years`;
       $('lede-conc').innerHTML = `${capWord(numWord(topN))} ${orgsWord(topN)} received <strong>${money(top5)}</strong> — ${share(top5, S_NAMED, '¢')} of every named-recipient dollar ${SY !== null ? 'in tax year ' + SY : allYrs}.`;
       const nrY = SY !== null ? SY : LATEST;
       const nrNew = newIn[nrY] || 0, nrRet = returningIn[nrY] || 0, nrAll = nrNew + nrRet;
@@ -1440,7 +1532,7 @@
       $('conc-top5').innerHTML = top5list.map((e, i) => barRow(
         `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}`,
         e.total, maxT5,
-        { cls: 'is-btn stacked', attrs: `style="--i:${i}" data-ent="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(dc(e.display))}, ${money(e.total)}, ${share(e.total, S_NAMED, ' percent')} of named-recipient dollars${SY !== null ? ' in ' + SY : ''}. Opens the profile."`,
+        { cls: 'is-btn stacked', title: esc(dc(e.display)), attrs: `style="--i:${i}" data-ent="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(dc(e.display))}, ${money(e.total)}, ${share(e.total, S_NAMED, ' percent')} of named-recipient dollars${SY !== null ? ' in ' + SY : ''}. Opens the profile."`,
           val: `${money(e.total)}` }
       )).join('');
       $('conc-top5').querySelectorAll('.bar-row').forEach((r) => {
@@ -1641,8 +1733,53 @@
           const t = entYearSum(e, SY);
           return t > 0 ? { ...e, total: t, count: e.grants.filter((g) => g.y === SY).length } : null;
         }).filter(Boolean).sort((a, b) => b.total - a.total);
+    // P4 (L4): a filer that named no recipient gets one note, not an empty "Top recipients" card over
+    // "0 of 0 recipients" and a search box with nothing to search
+    {
+      const cards = [...document.querySelectorAll('#panel-recipients > .card:not(#rec-none)')];
+      let none = document.getElementById('rec-none');
+      const noNamed = !entList.length && !rowsPending;
+      if (noNamed && !none) {
+        none = document.createElement('div');
+        none.className = 'card rec-none'; none.id = 'rec-none';
+        $('panel-recipients').appendChild(none);
+      }
+      cards.forEach((c) => { c.hidden = noNamed; });
+      if (none) none.hidden = !noNamed;
+      if (noNamed) {
+        const masked = grants.filter((g) => g.record_type === 'individual_masked');
+        const sumOf = (rs) => rs.reduce((t, g) => t + g.a, 0);
+        const parts = [];
+        if (unitemized.length) parts.push(`${unitemized.length === 1 ? 'its one filed row is an unitemized disclosure' : 'its ' + num(unitemized.length) + ' filed rows are unitemized disclosures'} totalling ${money(sumOf(unitemized))}`);
+        if (masked.length) parts.push(`${num(masked.length)} ${plural(masked.length, 'grant')} to individuals (names withheld) totalling ${money(sumOf(masked))}`);
+        none.innerHTML = `<div class="card-head"><h2>No named recipients</h2></div>`
+          + `<p class="rec-none-p">This filer disclosed no named recipient organization; ${parts.join(', and ')}. `
+          + `Every dollar still reconciles to the filed totals. <a href="#tab=grants" id="rec-none-go">Open the grants \u2192</a></p>`;
+        const go = document.getElementById('rec-none-go');
+        if (go) go.addEventListener('click', (e) => { e.preventDefault(); setTab('grants'); });
+        return;
+      }
+    }
     const top = sEnts.slice(0, 10);
     const maxT = top.length ? top[0].total : 0;   // an empty scope has no leader
+    // P4: a scope with nobody named in it (a year filed as unitemized disclosures) says so once, in place
+    // of an empty bar card and a "clear the search" message nobody asked for
+    {
+      const scopeNone = !sEnts.length && !rowsPending;
+      const barsCard = $('rec-bars').closest('.card');
+      if (barsCard) barsCard.hidden = scopeNone;
+      const tools = document.querySelector('#panel-recipients .rec-tools');
+      if (tools) tools.hidden = scopeNone;
+      const emp = $('rec-empty');
+      if (emp) {
+        const yRows = SY === null ? [] : grants.filter((g) => g.y === SY);
+        emp.textContent = scopeNone
+          ? (SY !== null && yRows.length && yRows.every((g) => g.record_type !== 'named_recipient')
+              ? `No recipient is named in ${SY} \u2014 its ${num(yRows.length)} filed ${plural(yRows.length, 'row')} (${money(yRows.reduce((t, g) => t + g.a, 0))}) ${yRows.length === 1 ? 'names' : 'name'} no organization. The year still reconciles, to the dollar.`
+              : 'No named recipient in this scope.')
+          : (recQ ? `No recipient matches \u201c${recQ}\u201d \u2014 clear the search.` : 'No recipients match \u2014 clear the search.');
+      }
+    }
     $('rec-bars').innerHTML = top.map((e, i) => barRow(
       `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}${e.aliases.length > 1 ? ` <span class="merged-flag" title="${e.aliases.length} as-filed name variants merged — reviewed by hand">${e.aliases.length} names</span>` : ''}`,
       e.total, maxT,
@@ -1704,7 +1841,27 @@
       const N = isMobile() ? 25 : 50;
       const showAll = recExpanded || q || list.length <= N;
       const slice = showAll ? list : list.slice(0, N);
-      $('rec-rows').innerHTML = slice.map((e, ri) => item(e, ri)).join('') + (showAll ? '' :
+      // P4 (L2): grants to individuals are counted in every total but never listed by name -- one line,
+      // placed at its dollar rank, says how many rows and how much
+      const mRows = q ? [] : grants.filter((g) => g.record_type === 'individual_masked' && (SY === null || g.y === SY));
+      let mHtml = '', mAt = -1;
+      if (mRows.length) {
+        const mTot = mRows.reduce((t, g) => t + g.a, 0);
+        const mYears = [...new Set(mRows.map((g) => g.y))].sort();
+        mAt = slice.findIndex((e) => e.total < mTot);
+        if (mAt < 0 && showAll) mAt = slice.length;
+        mHtml = `
+      <li class="rec-flat-li">
+        <div class="rec-item rec-flat" title="${esc(MASKED_TITLE)}">
+          <span class="ri-name">Individual recipients (names withheld)</span>
+          <span class="ri-meta">${num(mRows.length)} ${grantsWord(mRows.length)} · ${mYears.join(', ')} · <span class="ri-share">${share(mTot, S_GRAND, '%', 1)} of ${SY !== null ? SY : 'all'} dollars</span></span>
+          <span class="ri-amt">${money(mTot)}</span>
+        </div>
+      </li>`;
+      }
+      const rowsHtml = slice.map((e, ri) => item(e, ri));
+      if (mAt >= 0) rowsHtml.splice(mAt, 0, mHtml);
+      $('rec-rows').innerHTML = rowsHtml.join('') + (showAll ? '' :
         `<li><button type="button" class="show-all" id="rec-more">Show all ${num(list.length)} ${recipWord(list.length)} — top ${N} shown, ${money(list.slice(N).reduce((s,e)=>s+e.total,0))} in the rest</button></li>`);
       const more = document.getElementById('rec-more');
       if (more) more.addEventListener('click', () => { recExpanded = true; writeHash(false); renderRecipients(); });
@@ -1793,8 +1950,9 @@
     const inY = state.y !== null ? e.grants.filter((g) => g.y === state.y).length : 0;
     const keepY = state.y !== null && inY > 0;
     $('pf-all').textContent = keepY
-      ? `Open ${num(inY)} ${state.y} ${grantsWord(inY)} in the ledger`
-      : `Open all ${num(e.count)} lifetime ${grantsWord(e.count)} in the ledger`;
+      ? (inY === 1 ? `Open its one ${state.y} ${grantsWord(1)} in the ledger` : `Open ${num(inY)} ${state.y} ${grantsWord(inY)} in the ledger`)
+      : e.count === 1 ? 'Open its one filed row in the ledger'   // P4: never "all 1 lifetime filed row"
+        : `Open all ${num(e.count)} ${grantsWord(e.count)} in the ledger`;
     $('pf-all').onclick = () => { state.r = id; if (!keepY) state.y = null; state.page = 0; closeProfile(false, true); setTab('grants'); };
     $('profile').hidden = false;
     $('pf-backdrop').hidden = false;
@@ -1910,9 +2068,9 @@
     $('grant-cards').innerHTML = slice.map((g, ri) => `
       <li class="gcard" style="--ri:${Math.min(ri, 12)}">
         ${g.record_type === 'unitemized'
-          ? `<div class="gcard-flat" style="padding:0.85rem 0.35rem;border-bottom:1px solid var(--rule)" title="${UNITEMIZED_TITLE}">`
+          ? `<div class="gcard-flat" title="${UNITEMIZED_TITLE}">`
           : g.record_type === 'individual_masked'
-            ? `<div class="gcard-flat" style="padding:0.85rem 0.35rem;border-bottom:1px solid var(--rule)" title="${esc(MASKED_TITLE)}">`
+            ? `<div class="gcard-flat" title="${esc(MASKED_TITLE)}">`
             : `<button type="button" class="gcard-btn" data-rec="${esc(g.r)}" aria-label="${esc(dc(g.r))}, ${money(g.a)}, ${g.y}. Opens the recipient profile.">`}
           <div class="gc-top"><span class="gc-y">${g.y}</span><span class="gc-a">${money(g.a)}</span></div>
           <div class="gc-r">${g.record_type === 'individual_masked' ? esc(MASKED_LABEL) : esc(dc(g.r))}${g.record_type === 'unitemized' ? ' · unitemized disclosure' : ''}</div>
@@ -1927,6 +2085,8 @@
     $('page-info').textContent = rows.length
       ? `Showing ${num(from)}–${num(to)} of ${num(rows.length)}`
       : 'No matching grants';
+    // P4 (L9): one page of rows has nothing to page through -- no "Previous · Page 1 of 1 · Next"
+    { const pg = document.querySelector('.pager'); if (pg) pg.hidden = rows.length <= P; }
     $('prev-page').disabled = state.page === 0;
     $('next-page').disabled = to >= rows.length;
     // long books: First / Last and a typed page number, hidden while two pages are enough
@@ -2165,14 +2325,18 @@
     const tieRows = allTieYears.map((y) => {
       if (!tieout[y]) {
         const w = WITHHELD[y] || {};
+        // P4 (L1): a year withheld because it does not reconcile carries both of its filed figures -- the
+        // schedule shows exactly how far apart they are; it never enters the totals below
+        const hasFig = typeof w.sum === 'number' && typeof w.filed === 'number';
+        const wd = hasFig ? w.filed - w.sum : null;
         return `
-        <tr class="tie-row" data-y="${y}">
+        <tr class="tie-row is-withheld" data-y="${y}">
           <td data-label="Tax year">${y}</td>
-          <td data-label="Grant rows"><span class="tie-v">—</span></td>
-          <td data-label="Σ grant schedule"><span class="tie-v">—</span></td>
-          <td data-label="Filed ${esc(REF_LBL)}"><span class="tie-v">—</span></td>
-          <td data-label="Δ"><span class="badge-fail">— · withheld</span></td>
-          <td data-label="Source"><a href="../../exceptions/#${exSlug}" title="${esc(w.why || 'Named on the exceptions page.')}">Exceptions ↗</a></td>
+          <td data-label="Grant rows"><span class="tie-v">${hasFig ? num(w.rows) : '—'}</span></td>
+          <td data-label="Σ grant schedule"><span class="tie-v">${hasFig ? money(w.sum) : '—'}</span></td>
+          <td data-label="Filed ${esc(REF_LBL)}"><span class="tie-v">${hasFig ? money(w.filed) : '—'}</span></td>
+          <td data-label="Δ"><span class="badge-fail">${hasFig ? 'Δ\u00a0' + signedMoney(wd) + ' · ' : ''}withheld</span></td>
+          <td data-label="Source">${w.object_id ? receiptMark(w.object_id, '', 'Filing ↗') + ' ' : ''}<a href="../../exceptions/#${exSlug}" title="${esc(w.why || 'Named on the exceptions page.')}">Why →</a></td>
         </tr>`;
       }
       const t = tieout[y];
@@ -2185,8 +2349,8 @@
           <td data-label="Grant rows"><span class="tie-v">${num(t.grant_count)}</span></td>
           <td data-label="Σ grant schedule"><span class="tie-v">${money(t.grant_sum)}</span></td>
           <td data-label="Filed ${esc(REF_LBL)}"><span class="tie-v">${money(t.line25_col_d)}</span></td>
-          <td data-label="Δ">${delta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ ${money(delta)} · withheld</span>`}</td>
-          <td data-label="Source">${receiptMark(t.object_id, '')} <span class="cm-tier">${scanned ? 'IRS scan' : 'e-file'}</span></td>
+          <td data-label="Δ">${delta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ\u00a0${signedMoney(delta)} · withheld</span>`}</td>
+          <td data-label="Source">${receiptMark(t.object_id, '', scanned ? 'Scan ↗' : 'Filing ↗')} <span class="cm-tier">${scanned ? 'IRS scan' : 'e-file'}</span></td>
         </tr>`;
     }).join('');
     const grandDelta = sumRef - sumSched;
@@ -2199,7 +2363,7 @@
       <tbody>${tieRows}</tbody>
       <tfoot><tr>
         <td>Total</td><td>${num(sumRows)}</td><td>${money(sumSched)}</td><td>${money(sumRef)}</td>
-        <td>${grandDelta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ ${money(grandDelta)}</span>`}</td><td></td>
+        <td>${grandDelta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ\u00a0${signedMoney(grandDelta)}</span>`}</td><td></td>
       </tr></tfoot>
     </table>`;
     $('ent-table').innerHTML = mergedEntities.map((e) => `
@@ -2219,6 +2383,7 @@
       entDetails.open = mergedEntities.length <= 6;
       entDetails.hidden = mergedEntities.length === 0;
     }
+    requestAnimationFrame(() => { if (typeof fitKw === 'function') fitKw(); });
   }
 
   // ---------- render ----------
@@ -2244,20 +2409,26 @@
     // to mean anything -- the total above stays exact; the interior statistics don't
     // pretend to describe a shape with one or two points.
     const tiny = isTiny();
-    const tinyHint = tiny ? `Too few named-recipient rows (${num(namedGrants.length)}, fewer than 10) for this figure` : null;
+    // P4 (m13): a book with no named row at all says why in its own words; the range tile beside the
+    // median no longer repeats the median's sentence word for word
+    const tinyHint = !tiny ? null : namedGrants.length === 0
+      ? 'No named-recipient rows — every filed row is an unitemized disclosure'
+      : `Too few named-recipient rows (${num(namedGrants.length)}, fewer than 10) for this figure`;
     if (tiny) {
       $('kpi-median').textContent = '\u2014';
       $('kpi-median').parentElement.querySelector('.k-hint').textContent = tinyHint;
     } else {
       $('kpi-median').parentElement.querySelector('.k-hint').textContent =
-        `${num(scopedNamed.length)} named-recipient rows${SY === null ? ', all filed years' : ' in ' + SY}`;
+        `${num(scopedNamed.length)} named-recipient rows${SY === null ? ', ' + allYearsPhrase() : ' in ' + SY}`;
     }
     $('kpi-orgs').parentElement.querySelector('.k-hint').textContent =
-      `Named recipients${SY === null ? ', all filed years' : ' in ' + SY}`;
+      `Named recipients${SY === null ? ', ' + allYearsPhrase() : ' in ' + SY}`;
     const tinyNote = document.getElementById('tiny-note');
     if (tinyNote) {
-      tinyNote.hidden = !tiny;
-      if (tiny) tinyNote.textContent = `${num(namedGrants.length)} named-recipient ${namedGrants.length === 1 ? 'row is' : 'rows are'} too few for a median, a typical-grant range or a recipient-concentration share to mean anything. The totals above are exact; those figures are withheld rather than shown misleadingly precise.`;
+      // P4: a book with no named row at all is explained once, by the coverage note ("All 4 filed rows are unitemized
+      // disclosures ..."); "0 named-recipient rows are too few for a median" beneath it said the same thing worse
+      tinyNote.hidden = !tiny || (namedGrants.length === 0 && unitemized.length > 0);
+      if (tiny) tinyNote.textContent = `${num(namedGrants.length)} named-recipient ${namedGrants.length === 1 ? 'row is' : 'rows are'} too few for a median, a typical-grant range or a recipient-concentration share to mean anything. The totals above are exact; those figures are left out rather than shown with misleading precision.`;
     }
     // Typical grant: the middle half of named grants (25th to 75th percentile).
     // A range says more to a grant writer than one median; "could we fit" starts here.
@@ -2267,7 +2438,12 @@
       const fit = $('fit-line');
       if (tiny) {
         if (el) el.textContent = '\u2014';
-        if (rangeHintEl) rangeHintEl.textContent = tinyHint;
+        if (rangeHintEl) rangeHintEl.textContent = 'Same reason as the median';
+        if (fit) fit.hidden = true;
+      } else if (rowsPending) {
+        // P4 (M3): never the preview's quartiles -- the stamped whole-book range, or a plain wait
+        if (el) el.textContent = SY === null && STAMPED_RANGE ? STAMPED_RANGE.v : '\u2026';
+        if (rangeHintEl) rangeHintEl.textContent = SY === null && STAMPED_RANGE ? STAMPED_RANGE.hint : waitLine();
         if (fit) fit.hidden = true;
       } else {
         const q = (arr, p) => { if (!arr.length) return null; const i = (arr.length - 1) * p; const lo = Math.floor(i), hi = Math.ceil(i); return arr[lo] + (arr[hi] - arr[lo]) * (i - lo); };
@@ -2293,17 +2469,24 @@
     const coverage = document.getElementById('record-coverage');
     if (coverage) {
       const rolled = unitemized.filter((g) => SY === null || g.y === SY);
+      const rolledSum = money(rolled.reduce((sum, g) => sum + g.a, 0));
+      const dWord = rolled.length === 1 ? 'disclosure' : 'disclosures';
       coverage.hidden = !rolled.length;
-      coverage.innerHTML = `${num(scopedNamed.length)} named-recipient rows · ${money(scopedNamed.reduce((sum, g) => sum + g.a, 0))}. `
-        + `${num(rolled.length)} unitemized ${rolled.length === 1 ? 'disclosure' : 'disclosures'} · ${money(rolled.reduce((sum, g) => sum + g.a, 0))} retained in filed totals. `
-        + 'Unnamed disclosures are excluded from recipient counts, grant medians and recipient comparisons.'
-        + ' · <a href="../../recovered/">recover a year like this →</a>';
+      // P4 (m15): "·"-separated, never a full stop followed by a digit ("$165,466,430. 1" read as a
+      // decimal); a book with no named row says so plainly instead of "0 named-recipient rows · $0"
+      coverage.innerHTML = (scopedNamed.length
+        ? `${num(scopedNamed.length)} named-recipient ${plural(scopedNamed.length, 'row')} \u00b7 ${money(scopedNamed.reduce((sum, g) => sum + g.a, 0))} \u00b7 `
+          + `${num(rolled.length)} unitemized ${dWord} (${rolledSum}) retained in filed totals. `
+          + 'Unnamed disclosures are excluded from recipient counts, grant medians and recipient comparisons.'
+        : `${rolled.length === 1 ? 'The one filed row is an unitemized disclosure' : 'All ' + num(rolled.length) + ' filed rows are unitemized disclosures'} (${rolledSum}), retained in filed totals. `
+          + 'The filing names no recipient, so there are no recipient counts, medians or comparisons to make.')
+        + ' <a href="../../recovered/">Recover a year like this \u2192</a>';
     }
-    if (rowsPending) {   // a median of the largest rows is not the median; the stamp is the only true count
+    if (rowsPending) {   // a median of the largest rows is not the median; the stamps are the only true figures
       $('kpi-orgs').textContent = SY === null ? STAMPED_ORGS : '\u2026';
-      $('kpi-orgs').parentElement.querySelector('.k-hint').textContent = SY === null ? 'Named recipients, all filed years' : `Named recipients in ${SY} \u2014 full list loading`;
-      $('kpi-median').textContent = '\u2026';
-      $('kpi-median').parentElement.querySelector('.k-hint').textContent = waitLine();
+      $('kpi-orgs').parentElement.querySelector('.k-hint').textContent = SY === null ? 'Named recipients, ' + allYearsPhrase() : `Named recipients in ${SY} \u2014 full list loading`;
+      $('kpi-median').textContent = SY === null && STAMPED_MEDIAN ? STAMPED_MEDIAN.v : '\u2026';
+      $('kpi-median').parentElement.querySelector('.k-hint').textContent = SY === null && STAMPED_MEDIAN ? STAMPED_MEDIAN.hint : waitLine();
       if (coverage) coverage.hidden = true;
     }
     const en = document.getElementById('explore-note');
@@ -2332,19 +2515,19 @@
         gs.innerHTML = `<span class="gs-label">In ${SY}</span><span class="gs-val">${money(byYear[SY].sum)}</span><span class="gs-meta">${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${(() => {
           const ty = tieout[String(SY)];
           const d = ty ? ty.line25_col_d - ty.grant_sum : 0;
-          return (d === 0 ? 'Δ $0 vs ' : 'Δ ' + money(d) + ' vs ') + REF_LBL;
+          return (d === 0 ? 'Δ\u00a0$0 vs ' : 'Δ\u00a0' + signedMoney(d) + ' vs ') + REF_LBL;
         })()}</span>`;
       }
     }
     // L-11: the phone rail's own scope readout, next to it (the rail never moves to show it)
     const railScope = document.getElementById('rail-scope');
     if (railScope) {
-      if (SY === null) railScope.hidden = true;
+      if (SY === null) { railScope.hidden = true; railScope.textContent = ''; }   // P4 (M2): nothing stale to paint
       else {
         railScope.hidden = false;
         const ty = tieout[String(SY)];
         const d = ty ? ty.line25_col_d - ty.grant_sum : 0;
-        railScope.textContent = `In ${SY} · ${money(byYear[SY].sum)} · ${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${d === 0 ? 'Δ $0' : 'Δ ' + money(d)}`;
+        railScope.textContent = `In ${SY} · ${money(byYear[SY].sum)} · ${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${d === 0 ? 'Δ\u00a0$0' : 'Δ\u00a0' + signedMoney(d)}`;
       }
     }
     const dEl = $('kpi-delta');
@@ -2354,7 +2537,9 @@
     dEl.parentElement.querySelector('.k-label').textContent = SY === null ? 'Latest year' : 'Year change';
     if (dp === null) {
       dEl.textContent = '—';
-      $('kpi-delta-hint').textContent = `${dy} is the first filed year in the record`;
+      $('kpi-delta-hint').textContent = Object.keys(tieout).some((k) => +k < dy)
+        ? `${dy} is the first year with grants paid`   // P4 (m13): earlier years are filed, at $0
+        : `${dy} is the first filed year in the record`;
     } else {
       const pct = yoyPct(byYear[dy].sum, byYear[dp].sum);
       if (pct === null) {                 // a prior year that paid out nothing is no base
@@ -2563,7 +2748,7 @@
       if (!t) return '';
       return `<tr>
         <td class="cm-cat"><span class="cm-sw" style="background:${catColorOf(c.key)}"></span>${esc(c.key)}<span class="cm-tier">${tier}</span></td>
-        <td class="cm-kw">${esc(kwPretty(c.kw))}</td>
+        <td class="cm-kw"><div class="kw-wrap" data-kw="${esc(kwPretty(c.kw))}"><span class="kw-list">${esc(kwPretty(c.kw))}</span> <button type="button" class="kw-more" aria-expanded="false" hidden></button></div></td>
         <td class="cm-n">${num(t.count)}</td>
         <td class="cm-v">${money(t.sum)}</td>
         <td class="cm-p">${share(t.sum, GRAND)}</td>
@@ -2585,6 +2770,40 @@
       <p class="cm-note">Field rules run first, top to bottom; a mechanism label (capital, operating, endowment) applies only when the purpose names no field. When the purpose names nothing at all, the same field words are read against the recipient\u2019s filed name — that second step decided ${num(s2count)} ${grantsWord(s2count)} (${money(s2sum)}); for example \u201cNext Generation Initiative\u201d carries no field, but its recipient — Buffalo Philharmonic Orchestra Society — does. This table <em>is</em> the classifier: the page runs exactly these rules, nothing more.</p>`;
   }
   renderCatMap();
+  // P4 (lc-08): each rule's keyword list shows two lines, then "+n words" -- measured on the real cell, so it
+  // is right at every width; a click shows the whole rule (the table IS the classifier, nothing is hidden)
+  function fitKw() {
+    document.querySelectorAll('#cat-map .kw-wrap').forEach((w) => {
+      if (!w.getClientRects().length) return;
+      const list = w.querySelector('.kw-list'), btn = w.querySelector('.kw-more');
+      const words = (w.dataset.kw || '').split(', ');
+      if (!btn.dataset.wired) {
+        btn.dataset.wired = '1';
+        btn.addEventListener('click', () => { w.classList.toggle('open'); fitKw(); });
+      }
+      const lh = parseFloat(getComputedStyle(list).lineHeight) || 18;
+      const fits = () => w.offsetHeight <= 2 * lh + 2;
+      list.textContent = words.join(', '); btn.hidden = true;
+      if (w.classList.contains('open')) {
+        btn.hidden = false; btn.textContent = 'Show fewer'; btn.setAttribute('aria-expanded', 'true');
+        return;
+      }
+      btn.setAttribute('aria-expanded', 'false');
+      if (fits()) return;
+      btn.hidden = false;
+      let lo = 1, hi = words.length - 1;
+      while (lo < hi) {
+        const mid = Math.ceil((lo + hi) / 2);
+        list.textContent = words.slice(0, mid).join(', ') + ',';
+        btn.textContent = `+${words.length - mid} words`;
+        if (fits()) lo = mid; else hi = mid - 1;
+      }
+      list.textContent = words.slice(0, lo).join(', ') + ',';
+      btn.textContent = `+${words.length - lo} ${words.length - lo === 1 ? 'word' : 'words'}`;
+    });
+  }
+  { let kT = 0; window.addEventListener('resize', () => { clearTimeout(kT); kT = setTimeout(fitKw, 150); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitKw);
 
   // L-14: a scannable methodology -- a sticky contents strip over whatever sections
   // this book actually has (a fiscal-note book gets one more than a plain one), with
@@ -2612,15 +2831,24 @@
       const target = document.getElementById(a.dataset.target);
       if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - (toc.offsetHeight + 12), behavior: reducedMotion() ? 'instant' : 'smooth' });
     });
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((en) => {
-          if (!en.isIntersecting) return;
-          toc.querySelectorAll('a').forEach((a) => a.classList.toggle('cur', a.dataset.target === en.target.id));
-        });
-      }, { rootMargin: '-20% 0px -70% 0px' });
-      heads.forEach((h) => io.observe(h));
-    }
+    // P4: the current section is the last heading above a reading line just under the strip; at the end of
+    // the page the last section is current even if its heading never reaches that line ("Limitations" sits in
+    // the final screen and was never marked)
+    let spyRaf = 0;
+    const spy = () => {
+      spyRaf = 0;
+      if (panel.hidden || !toc.getClientRects().length) return;
+      const line = toc.getBoundingClientRect().bottom + Math.min(160, innerHeight * 0.22);
+      let cur = heads[0];
+      heads.forEach((h) => { if (h.getBoundingClientRect().top <= line) cur = h; });
+      const se = document.scrollingElement || document.documentElement;
+      const last = heads[heads.length - 1];
+      if (se.scrollTop + innerHeight >= se.scrollHeight - 4 && last.getBoundingClientRect().top < innerHeight) cur = last;
+      toc.querySelectorAll('a').forEach((a) => a.classList.toggle('cur', a.dataset.target === cur.id));
+    };
+    window.addEventListener('scroll', () => { if (!spyRaf) spyRaf = requestAnimationFrame(spy); }, { passive: true });
+    window.addEventListener('resize', () => { if (!spyRaf) spyRaf = requestAnimationFrame(spy); });
+    document.querySelectorAll('[data-tab="methodology"], #tab-methodology').forEach((b) => b.addEventListener('click', () => requestAnimationFrame(spy)));
   }
   renderMethTOC();
 
@@ -3023,8 +3251,30 @@
         moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
         moreBtn.textContent = open ? 'Show less' : 'Read the full note';
       });
+      // Close-out (5): below 900px the lede is measured, not clamped blind. Four lines or fewer show whole and the
+      // button goes (it would cost about as much as the line it hides); a longer lede is cut after three lines with
+      // its last line fading out -- the browser's clamp ellipsis landed after a full stop ("filings.…") or mid-word.
+      const fitLede = () => {
+        ledeP.classList.remove('cut', 'whole');
+        if (!window.matchMedia('(max-width: 899px)').matches) { moreBtn.hidden = false; return; }
+        ledeP.classList.add('measure');
+        const lh = parseFloat(getComputedStyle(ledeP).lineHeight) || 16;
+        const lines = Math.round(ledeP.getBoundingClientRect().height / lh);
+        ledeP.classList.remove('measure');
+        const whole = lines <= 4;
+        ledeP.classList.add(whole ? 'whole' : 'cut');
+        moreBtn.hidden = whole;
+        if (whole && ledeP.classList.contains('open')) { ledeP.classList.remove('open'); moreBtn.setAttribute('aria-expanded', 'false'); moreBtn.textContent = 'Read the full note'; }
+      };
+      fitLede();
+      let fitRaf = 0, fitW = window.innerWidth;
+      window.addEventListener('resize', () => { if (window.innerWidth === fitW) return; fitW = window.innerWidth; cancelAnimationFrame(fitRaf); fitRaf = requestAnimationFrame(fitLede); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLede);
     }
   })();
+
+  // P4 (M1): the phone sizing reads the figure's character count; a page built before the stamp gets it here
+  { const gv = document.querySelector('.grand .g-val'); if (gv && !gv.style.getPropertyValue('--n')) gv.style.setProperty('--n', String(gv.textContent.trim().length)); }
 
   // init
   readHash();

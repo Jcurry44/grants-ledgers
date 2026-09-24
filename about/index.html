@@ -9,14 +9,15 @@
 <title>About — The Grants Ledger</title>
 <meta name="description" content="What The Grants Ledger is, who it is for, how it is built and maintained, and exactly where its limits are. An independent, reconciled record of grantmaking by 1,935 major U.S. private foundations, built from public IRS Form 990-PF filings.">
 <meta name="theme-color" content="#1e4634">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About — The Grants Ledger">
 <meta property="og:description" content="What The Grants Ledger is, who it is for, how it is built and maintained, and exactly where its limits are.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
+<meta property="og:image:alt" content="$303,860,714,662 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/about/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +56,7 @@ a:hover{text-decoration-color:currentColor}
 h1,h2,h3{text-wrap:balance}
 p,li,.lede{text-wrap:pretty}
 .sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.nw{white-space:nowrap}
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cover-deep);color:var(--cream-bright);padding:10px 16px;border-radius:0 0 var(--r-ctl) 0;text-decoration:none;font:600 13px var(--sans)}
 .skip:focus{left:0}
 .eyebrow{font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
@@ -76,10 +78,10 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 .gl-nav a,.gl-more summary{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-ctl);color:var(--cream-dim);text-decoration:none;cursor:pointer;list-style:none;white-space:nowrap}
 .gl-more summary::-webkit-details-marker{display:none}
 .gl-more summary svg{width:10px;height:10px}
-.gl-nav a[aria-current=page]{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-top .gl-nav > a[aria-current=page],.gl-top .gl-more summary.on{background:transparent;position:relative;color:var(--cream-bright)}
+.gl-top .gl-nav > a[aria-current=page]::after,.gl-top .gl-more summary.on::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:6px;pointer-events:none;background:linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom 4px/100% 2px no-repeat,linear-gradient(var(--copper-bright),var(--copper-bright)) left bottom/100% 1px no-repeat}
 .gl-cnt{margin-left:6px;min-width:18px;padding:0 5px;border-radius:var(--r-pill);background:var(--copper-bright);color:var(--cover-deep);font:600 10.5px/18px var(--sans);text-align:center}
 .gl-more{position:relative}
-.gl-more summary.on{color:var(--cream-bright);background:rgba(255,255,255,.08)}
 .gl-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;display:grid;background:var(--sheet);border-radius:var(--r-card);box-shadow:var(--shadow-pop)}
 .gl-menu a{color:var(--ink);font:500 14px/1.2 var(--sans);padding:9px 12px;border-radius:var(--r-ctl);text-decoration:none}
 .gl-menu a[aria-current=page]{color:var(--copper-deep);background:var(--tint)}
@@ -89,18 +91,21 @@ button,a,summary,select{-webkit-tap-highlight-color:transparent}
 @media(hover:hover){.gl-nav a:hover,.gl-more summary:hover,.gl-method:hover{color:var(--cream-bright)}.gl-menu a:hover{background:var(--tint)}.gl-cta:hover{background:var(--copper-light)}}
 .gl-nav a:active,.gl-method:active{transform:translateY(1px)}
 @media(max-width:1099px){.gl-top{gap:16px;padding:0 20px}.gl-cta{display:none}}
+@media(min-width:641px) and (max-width:1099px){.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top{height:56px;gap:12px}.gl-brand b{font-size:18px}.gl-method{display:none}.gl-top .gl-nav a[data-nav=atlas],.gl-top .gl-nav a[data-nav=shortlist]{display:none}.gl-top .gl-nav{justify-content:flex-end}.gl-top .gl-menu{left:auto;right:0}}
 @media(max-width:640px){.gl-top:not([data-surface=hub]){gap:10px}.gl-top:not([data-surface=hub]) .gl-actions{display:none}.gl-top:not([data-surface=hub]) .gl-nav{gap:2px}.gl-top:not([data-surface=hub]) .gl-nav a,.gl-top:not([data-surface=hub]) .gl-more summary{padding:0 10px;min-height:44px}.gl-top:not([data-surface=hub]) .gl-more summary{gap:6px}}
+@media(max-width:640px){.gl-top:not([data-surface=hub]) .gl-nav > a[aria-current=page]::after,.gl-top:not([data-surface=hub]) .gl-more summary.on::after{left:10px;right:10px;bottom:4px}}
 @media(max-width:400px){.gl-brand b{font-size:17px}}
 @media(max-width:359px){.gl-brand b{display:none}}
 @media print{.gl-top{display:none}}
 footer.gl-foot{border-top:1px solid var(--rule);padding:2rem 0 2.8rem;color:var(--ink-dim);font-size:.86rem}
 footer.gl-foot .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-footer.gl-foot nav{display:flex;flex-wrap:wrap;gap:0 1.25rem;margin-bottom:.9rem}
+footer.gl-foot nav{display:block;text-wrap:balance;margin-bottom:.9rem}
 footer nav[aria-label="Site footer"]{font:500 var(--t-small)/1 var(--sans);letter-spacing:.01em;text-transform:none}
-footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;color:var(--ink-dim);text-decoration:none}
+footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;margin-right:1rem;color:var(--ink-dim);text-decoration:none}
 @media(hover:hover){footer nav[aria-label="Site footer"] a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:currentColor}}
 @media(pointer:coarse),(max-width:640px){footer nav[aria-label="Site footer"] a{padding:16px 0}}
+footer nav[aria-label="Site footer"] a[aria-current=page]{color:var(--ink);font-weight:600}
 footer.gl-foot a{color:var(--copper-deep)}
 </style>
 <style>
@@ -171,7 +176,7 @@ footer a { color: var(--copper-deep); }
 <a class="skip" href="#main">Skip to content</a>
 <header class="gl-top" data-surface="page">
   <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
-    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
+    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><path fill="#d19049" d="M22 20.7Q22 21.1 21.9 21.2Q21.7 21.4 21.4 21.4Q21.1 21.4 20.9 21.2Q20.7 21.1 20.6 20.8Q20.4 20.6 20.2 20.4Q20 20.3 19.8 20.3Q19.6 20.3 19.3 20.4Q19 20.6 18.6 20.8Q18.1 21 17.5 21.2Q16.8 21.4 15.9 21.4Q14.2 21.4 12.8 20.8Q11.5 20.2 10.5 19.2Q9.5 18.2 9 16.7Q8.5 15.3 8.5 13.5Q8.5 11.8 9.1 10.4Q9.7 8.9 10.7 7.9Q11.7 6.8 13.1 6.2Q14.4 5.6 16 5.6Q17.2 5.6 17.9 5.8Q18.6 6.1 19 6.3Q19.5 6.5 19.7 6.5Q20 6.5 20.1 6.3Q20.2 6.1 20.4 5.9Q20.5 5.7 20.8 5.7Q21 5.7 21.1 5.9Q21.3 6 21.4 6.3L22.5 10Q22.6 10.2 22.4 10.4Q22.3 10.6 22.1 10.7Q21.8 10.7 21.6 10.6Q21.4 10.5 21.3 10.3Q20.7 8.9 20 8.2Q19.2 7.4 18.3 7.1Q17.5 6.8 16.5 6.8Q15.1 6.8 14.1 7.5Q13 8.3 12.4 9.7Q11.9 11 11.9 12.9Q11.9 15.2 12.5 16.7Q13.2 18.3 14.3 19.1Q15.5 19.9 16.9 19.9Q17.4 19.9 17.8 19.8Q18.2 19.7 18.5 19.5Q18.7 19.3 18.9 19.1Q19 18.8 19 18.4V15.9Q19 15.6 18.9 15.5Q18.8 15.4 18.4 15.3L17.7 15.1Q17.5 15.1 17.3 14.9Q17.2 14.8 17.2 14.6Q17.2 14.4 17.4 14.3Q17.5 14.1 17.8 14.1H22.8Q23.2 14.1 23.3 14.3Q23.5 14.4 23.5 14.6Q23.5 14.8 23.4 14.9Q23.3 15 23 15.1L22.6 15.2Q22.3 15.3 22.2 15.5Q22 15.6 22 15.9Z"/><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
   </a>
   <nav class="gl-nav" aria-label="Site">
     <a href="https://jcurry44.github.io/grants-ledgers/" data-nav="find">Find funders</a>
@@ -199,7 +204,7 @@ footer a { color: var(--copper-deep); }
 <header class="cover"><div class="wrap">
   <p class="eyebrow accent">About</p>
   <h1>What this is, how it is built, and where it stops</h1>
-  <p class="lede">An independent record of grantmaking by 1,935 major U.S. private foundations, assembled from public IRS Form 990-PF filings. Every year published here reconciles to a total that the foundation itself filed with the IRS. This page states the rule, the method, the maintenance schedule and the limits — in that order, and without softening any of them.</p>
+  <p class="lede">An independent record of grantmaking by 1,935 major U.S. private foundations, assembled from public IRS Form <span class="nw">990-PF</span> filings. Every year published here reconciles to a total that the foundation itself filed with the IRS. This page states the rule, the method, the maintenance schedule and the limits — in that order, and without softening any of them.</p>
   <nav class="toc" aria-label="On this page">
     <a href="#who">Who it is for</a>
     <a href="#what">What it is</a>
@@ -243,14 +248,14 @@ footer a { color: var(--copper-deep); }
 <section id="what"><div class="wrap">
   <h2>What it is</h2>
   <div class="body">
-    <p>The Grants Ledger is a reconciled, page-per-foundation record of grantmaking by the largest U.S. private foundations. It is built entirely from Form 990-PF — the annual return every private foundation files with the Internal Revenue Service, which the IRS publishes for public inspection.</p>
+    <p>The Grants Ledger is a reconciled, page-per-foundation record of grantmaking by the largest U.S. private foundations. It is built entirely from Form <span class="nw">990-PF</span> — the annual return every private foundation files with the Internal Revenue Service, which the IRS publishes for public inspection.</p>
     <p>The collection as published today:</p>
   </div>
   <div class="figs">
-    <div class="fig"><b>1,935</b><span>foundations</span></div>
-    <div class="fig"><b>1,446,980</b><span>grant records</span></div>
-    <div class="fig"><b>$304,011,800,391</b><span>reconciled</span></div>
-    <div class="fig"><b>9,444</b><span>foundation-years published</span></div>
+    <div class="fig"><b data-cov="foundations">1,935</b><span>foundations</span></div>
+    <div class="fig"><b data-cov="rows">1,446,521</b><span>grant records</span></div>
+    <div class="fig"><b data-cov="dollars">$303,860,714,662</b><span>reconciled</span></div>
+    <div class="fig"><b data-cov="years">9,440</b><span>foundation-years published</span></div>
   </div>
   <div class="body" style="margin-top:1.4rem">
     <h3>What it is not</h3>
@@ -266,7 +271,7 @@ footer a { color: var(--copper-deep); }
   <p class="sub">One sentence, applied to every foundation, every year, without exception.</p>
   <p class="pull">The individual grants listed for a year must add up to a grant total that the foundation itself filed with the IRS for that year — to the dollar. If they do not, the year is not published.</p>
   <div class="body">
-    <p>The filed total used as the referee is normally <strong>Part I, line 25, column (d)</strong> of Form 990-PF — contributions, gifts and grants paid, on the disbursements-for-charitable-purposes column. <strong>1,626 of the 1,935 ledgers</strong> tie every published year to that line exactly.</p>
+    <p>The filed total used as the referee is normally <strong>Part I, line 25, column (d)</strong> of Form <span class="nw">990-PF</span> — contributions, gifts and grants paid, on the disbursements-for-charitable-purposes column. <strong>1,626 of the 1,935 ledgers</strong> tie every published year to that line exactly.</p>
     <p>The other <strong>309</strong> reconcile instead to the grants schedule’s own filed total, <strong>Part XIV, line 3a</strong>, because in those returns the two filed numbers are not the same. That is a definitional difference inside the filing, not an error in it — in the cases worked through, a commitment recorded on one line against cash actually disbursed on the other. It is disclosed rather than averaged: each of those ledgers names its referee on its face and prints both figures, and the pattern is worked through with real numbers on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>.</p>
     <p>Nothing is ever estimated to close a gap. A year whose rows do not reach its filed total is withheld and the difference is published. Every such year in the entire collection is listed by name on the exceptions page.</p>
   </div>
@@ -276,7 +281,7 @@ footer a { color: var(--copper-deep); }
   <h2>How it is built</h2>
   <p class="sub">The same seven steps run for every foundation in the collection. Nothing is hand-entered into a page; pages are generated from a frozen template, a per-foundation configuration and the parsed filings, so the whole collection can be rebuilt from source.</p>
   <div class="steps">
-    <div class="step"><div><b>Fetch the filings</b><span>The source is the IRS Tax Exempt Organization Search public release of Form 990-PF e-file XML. Filings are pulled from the IRS’s own yearly indexes and archives, keyed by tax period and return type.</span></div></div>
+    <div class="step"><div><b>Fetch the filings</b><span>The source is the IRS Tax Exempt Organization Search public release of Form <span class="nw">990-PF</span> e-file XML. Filings are pulled from the IRS’s own yearly indexes and archives, keyed by tax period and return type.</span></div></div>
     <div class="step"><div><b>Parse the grants schedule</b><span>Every grant row is read as filed: recipient name, address, purpose, amount, tax year. Nothing is normalized away at this stage — typos, truncations and run-together names are preserved exactly as the foundation wrote them.</span></div></div>
     <div class="step"><div><b>Reconcile against the filed total</b><span>The rows are summed and compared to the filed referee line, year by year. A year that ties is eligible to publish. A year that does not tie is withheld, and the difference is recorded for disclosure. This step can only pass or fail; it has no third outcome.</span></div></div>
     <div class="step"><div><b>Recover what the e-file data does not carry</b><span>Some foundations file a whole year as a single line — “See attached statement” — with the grants themselves in an attachment the IRS publishes only as a scanned image with no text layer. Those pages are read by optical character recognition and, where the software cannot render a figure legibly, by eye from the page image. Recovered years face the same referee as everything else, and are additionally checked against the attachment’s own printed total wherever one is printed. A figure that cannot be read is labeled unread rather than guessed.</span></div></div>
@@ -296,12 +301,12 @@ footer a { color: var(--copper-deep); }
     <p>A scheduled job runs <strong>monthly, on the 2nd of each month</strong>. For every foundation in the collection it pulls the current IRS index, looks for filings not already held, fetches them, re-runs the reconciliation under the same referee rules, rebuilds the affected pages, regenerates the collection database and search indexes, and stamps every rebuilt page with the run date.</p>
     <p>Two rules govern what that job is allowed to publish on its own:</p>
     <p><strong>Anything the standing rules cannot settle is not auto-published.</strong> It is written into the run report as needing review, and the existing page stands unchanged until a person looks at it.</p>
-    <p><strong>An amended return never silently replaces a published year.</strong> When a foundation files an amended 990-PF for a year already in the collection, the refresh flags it for review rather than overwriting the record. Replacing a published figure without a human decision is exactly the failure this product exists to avoid.</p>
+    <p><strong>An amended return never silently replaces a published year.</strong> When a foundation files an amended <span class="nw">990-PF</span> for a year already in the collection, the refresh flags it for review rather than overwriting the record. Replacing a published figure without a human decision is exactly the failure this product exists to avoid.</p>
     <p>When the IRS posts a genuinely new filing that reconciles cleanly under the standing rules, the ledger gains that year at the next run. When it posts one that does not reconcile, the year is withheld and appears on the exceptions page instead.</p>
   </div>
   <div class="note">
     <b>Stated plainly, because it matters for procurement</b>
-    <p>The monthly job is registered and enabled on the maintainer’s machine and has been run manually; its first fully automatic run falls on 2 September 2026. This is an independent project maintained by one person, not a hosted service with an operations team. There is no uptime guarantee and no service-level agreement — see <a href="#support">support expectations</a>.</p>
+    <p>The monthly job runs on the second of each month on the maintainer’s machine (most recently on 2 September 2026). It checks the IRS indexes for new and amended filings and flags them; each flagged filing is reviewed by hand before its ledger changes. This is an independent project maintained by one person, not a hosted service with an operations team. There is no uptime guarantee and no service-level agreement — see <a href="#support">support expectations</a>.</p>
   </div>
 </div></section>
 
@@ -318,7 +323,7 @@ footer a { color: var(--copper-deep); }
 
 <section id="limits"><div class="wrap">
   <h2>Data limits, stated up front</h2>
-<p><strong>Grants to named individuals never show the person&rsquo;s name, anywhere on the site.</strong> Scholarship, fellowship, loan and hardship rows that name a person keep their amount, year, purpose and state exactly as filed — on the foundation&rsquo;s own page, in search, in cross-foundation profiles, in every export and in the underlying data files — so every year still reconciles to the dollar; only the name and city are withheld: the row reads &ldquo;Individual recipient (name withheld)&rdquo; on the page, and the data files carry a placeholder in the name&rsquo;s place. 33,682 rows across 318 foundations at the last build; the <a href="../privacy/">privacy page</a> explains the rule and the removal path.</p>
+<p><strong>Grants to named individuals never show the person&rsquo;s name, anywhere on the site.</strong> Scholarship, fellowship, loan and hardship rows that name a person keep their amount, year, purpose and state exactly as filed — on the foundation&rsquo;s own page, in search, in cross-foundation profiles, in every export and in the underlying data files — so every year still reconciles to the dollar; only the name and city are withheld: the row reads &ldquo;Individual recipient (name withheld)&rdquo; on the page, and the data files carry a placeholder in the name&rsquo;s place. 33,982 rows across 319 foundations at the last build; the <a href="../privacy/">privacy page</a> explains the rule and the removal path.</p>
   <p class="sub">These are true of every page in the collection, always. They are here because a figure used without them can be wrong even though it reconciles.</p>
 
   <div class="lim">
@@ -338,7 +343,7 @@ footer a { color: var(--copper-deep); }
 
   <div class="lim">
     <b>Inclusion is by assets, and the floor is roughly $86 million.</b>
-    <span>The collection is 1,904 of the 2,000 largest U.S. private foundations by assets — 95.2% of the IRS-indexed top 2,000, whose asset floor is $86,222,585 — plus a 29-foundation Western New York local slate reaching down to $10,304,811. The universe those are cut from is 127,326 U.S. 990-PF filers with posted filings. Of the 96 top-2,000 foundations not in the collection, 67 are excluded by rule, 7 are deferred, and 22 are still to be built.</span>
+    <span>The collection is 1,904 of the 2,000 largest U.S. private foundations by assets — 95.2% of the IRS-indexed top 2,000, whose asset floor is $86,222,585 — plus a 29-foundation Western New York local slate reaching down to $10,304,811. The universe those are cut from is 127,326 U.S. <span class="nw">990-PF</span> filers with posted filings. Of the 96 <span class="nw">top-2,000</span> foundations not in the collection, 67 are excluded by rule, 7 are deferred, and 22 are still to be built.</span>
   </div>
 
   <div class="tws"><div class="tw" tabindex="0" role="region" aria-label="Coverage of the asset-ranked universe by depth">
@@ -368,7 +373,7 @@ footer a { color: var(--copper-deep); }
 
   <div class="lim">
     <b>The years are not evenly covered, and the most recent year is thin.</b>
-    <span>The collection spans tax years 2016 through 2025, but it is dense only in the middle. 2023 is the fullest year, present in 1,907 of 1,935 ledgers; 2022 is in 1,894 and 2024 in 1,842. <strong>2025 is present in only 205 ledgers — 10.59%</strong> — because most 2025 returns have not yet been filed or posted. 1,801 of the 1,935 ledgers carry five consecutive years; the rest carry fewer because the foundation is young, filed nothing in a year, or has a year withheld. Never read a year-over-year line across the whole collection as a trend in American giving; it is a trend in what had been filed and posted.</span>
+    <span>The collection spans tax years 2016 through 2025, but it is dense only in the middle. 2023 is the fullest year, present in 1,906 of 1,935 ledgers; 2022 is in 1,894 and 2024 in 1,840. <strong>2025 is present in only 205 ledgers — 10.59%</strong> — because most 2025 returns have not yet been filed or posted. 1,796 of the 1,935 ledgers carry five consecutive years; the rest carry fewer because the foundation is young, filed nothing in a year, or has a year withheld. Never read a year-over-year line across the whole collection as a trend in American giving; it is a trend in what had been filed and posted.</span>
   </div>
 
   <div class="lim">
@@ -424,26 +429,41 @@ footer a { color: var(--copper-deep); }
 </main>
 <footer class="gl-foot"><div class="wrap">
   <nav aria-label="Site footer">
-    <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/">Find funders</a>
     <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/ny/">New York</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/about/" aria-current="page">About</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
     <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
-    <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
     <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20about%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/about/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem ↗</a>
   </nav>
-  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
+  <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form <span class="nw">990-PF</span> filings. A documented reconciliation of public filings — not an audit.</p>
   <p style="margin-top:.6rem" class="mono" id="about-date">Figures on this page counted from the current published collection.</p>
   <script>(function(){
-    fetch('https://jcurry44.github.io/grants-ledgers/db/coverage.json').then(function(r){return r.json();}).then(function(c){
+    // the same aggregate the hub paints: the date, and the four figures above if a build has moved them
+    fetch('../db/coverage.json').then(function(r){return r.json();}).then(function(c){
       var d = c && c.built_at ? String(c.built_at).slice(0,10) : null;
-      if (d) document.getElementById('about-date').textContent = 'Figures on this page counted from the published collection on ' + d + '.';
+      if (d) { var el = document.getElementById('about-date'), sp = document.createElement('span'); sp.className = 'nw'; sp.textContent = d;
+        el.textContent = 'Figures on this page counted from the published collection on '; el.appendChild(sp); el.appendChild(document.createTextNode('.')); }
+      var t = c && c.totals || {}, v = {foundations: c.foundations, rows: t.rows, dollars: t.dollars, years: c.foundation_years};
+      document.querySelectorAll('[data-cov]').forEach(function(b){ var n = v[b.getAttribute('data-cov')]; if (typeof n !== 'number') return;
+        var s = (b.getAttribute('data-cov') === 'dollars' ? '$' : '') + n.toLocaleString('en-US'); if (b.textContent !== s) b.textContent = s; });
     }).catch(function(){});
   })();</script>
 </div></footer>
 
 <script>try{const s=JSON.parse(localStorage.getItem('gl_projects')||'{}');const p=(s.projects||[]).find(x=>x.id===s.active)||(s.projects||[])[0];
 const n=p?p.funders.length:0;const el=document.querySelector('[data-shortlist-count]');if(el){el.textContent=n;el.hidden=n===0}}catch(e){}</script>
+<script>// the header's More menu dismisses like a menu: a press elsewhere, Escape (focus back to More), or focus leaving it -- the hub's script
+  (function(){ var m=document.querySelector('.gl-top .gl-more'); if(!m) return; var sm=m.querySelector('summary');
+    document.addEventListener('pointerdown', function(e){ if(m.open && !m.contains(e.target)) m.open=false; }, true);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.open){ m.open=false; sm.focus(); e.stopPropagation(); } }, true);
+    m.addEventListener('focusout', function(e){ if(m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open=false; });
+  })();</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>(()=>{const W=[...document.querySelectorAll('.tws')];if(!W.length)return;const u=w=>{const t=w.firstElementChild;if(!t)return;const m=t.scrollWidth-t.clientWidth,x=Math.abs(t.scrollLeft),c=getComputedStyle(t);w.classList.toggle('can-l',m>1&&x>1);w.classList.toggle('can-r',m>1&&x<m-1);t.tabIndex=m>1?0:-1;w.style.setProperty('--sb',Math.max(0,t.offsetHeight-t.clientHeight-parseFloat(c.borderTopWidth)-parseFloat(c.borderBottomWidth))+'px')};W.forEach(w=>{const t=w.firstElementChild;if(!t)return;u(w);t.addEventListener('scroll',()=>u(w),{passive:true});if('ResizeObserver'in window)new ResizeObserver(()=>u(w)).observe(t)});if(document.fonts)document.fonts.ready.then(()=>W.forEach(u))})();</script>
 </body>

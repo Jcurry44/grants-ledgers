@@ -231,6 +231,16 @@ h1 {
 .hero-meta { font-size: 0.82rem; color: var(--cream-dim); margin: 0 0 1rem; }
 .hero-meta code { font-family: var(--mono); font-size: 0.78rem; color: var(--cream-dim); }
 .hero-meta .hm { white-space: nowrap; }   /* "filings checked … · The filings ↗" breaks as one unit */
+/* P4 i2 (m7): build_any binds each '·' to the item AFTER it (' ·&nbsp;', marked by .hm-b), so the line can only
+   break before a separator. The block then shifts left by --sepw and indents its first line by the same, and the
+   clip hides the left --sepw: a separator that opens a line (·, then its no-break space) falls outside the clip, and
+   every line's text starts at the column edge -- no line ends on a dot, none starts with one. --sepw is the dot +
+   no-break-space advance in IBM Plex Sans (.328 + .237 = .565em, measured in render), a hair under so a letter is
+   never clipped; the dot's ink ends at .31em, well inside the clip, in Plex and in every fallback measured (Segoe
+   UI .49em total: its text sits .06em left, inside the letter's own side bearing). Pages built before this keep
+   their markup and simply do not match (their dots stay where they were). */
+.hero-meta:has(> .hm-b) { --sepw: 0.55em; margin-left: calc(-1 * var(--sepw)); text-indent: var(--sepw); clip-path: inset(-12px -12px -12px var(--sepw)); }
+.hero-meta:has(> .hm-b) .hm-filed { text-indent: 0; padding-left: var(--sepw); }
 .hero-meta a { color: var(--copper-light); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
 @media (hover: hover) { .hero-meta a:hover { color: var(--copper-bright); } }
 .lede { font-family: var(--body-f); color: var(--cream-dim); font-size: 1.04rem; line-height: 1.6; max-width: 46rem; margin: 0 0 1.35rem; }
@@ -317,6 +327,13 @@ h1 {
   min-width: min(100%, 430px);
 }
 @media (max-width: 899px) { .grand { justify-self: start; } }
+/* P4 i2 (m4): the double rule is drawn at the FIGURE's width (spec 2.4), at every width -- a 350px rule under
+   "$523" or a 430px rule under a 290px total read as a column rule, not the total's own underline. The figure
+   and the rule share a max-content column; the label, the sub-line and the scope span both columns, and an item
+   that spans the 1fr track never widens the figure's column (CSS Grid 12.5), so they keep their own measure. */
+.grand { display: grid; grid-template-columns: max-content minmax(0, 1fr); }
+.grand > * { grid-column: 1 / -1; }
+.grand > .g-val, .grand > .g-rule { grid-column: 1; }
 .grand .g-label {
   font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--cream-faint); margin-bottom: 0.45rem;
@@ -342,9 +359,9 @@ h1 {
 }
 @keyframes gsIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .grand .g-rule {
-  height: 7px; margin-top: 0.7rem;
+  height: 6px; margin-top: 0.7rem;   /* P4: 2 / 3 / 1 -- the spec's rule2, one geometry everywhere (was 3 / 3 / 1) */
   background:
-    linear-gradient(var(--copper-bright), var(--copper-bright)) top / 100% 3px no-repeat,
+    linear-gradient(var(--copper-bright), var(--copper-bright)) top / 100% 2px no-repeat,
     linear-gradient(var(--copper-bright), var(--copper-bright)) bottom / 100% 1px no-repeat;
   transform-origin: left;
 }
@@ -617,6 +634,7 @@ h1 {
   @media (hover: hover) { .year-rail-top button:hover { border-color: var(--copper); } }
 }
 .rail-scope { display: none; }
+.rail-scope[hidden] { display: none !important; }   /* P4 (M2): the phone rule below must never out-rank hidden */
 @media (max-width: 1099px) {
   .rail-scope {
     display: block; margin: 6px 0 0; font: 500 12.5px var(--mono); color: var(--copper-deep);
@@ -973,6 +991,12 @@ select {
 .doctrine-band .db-except[hidden] { display: none; }
 .doctrine-band .db-except p { margin: 0.2rem 0; }
 .doctrine-band .db-except a { color: var(--cream); }
+/* close-out i2: on paper the "why →" link goes nowhere -- hide it and print the exceptions page's address once */
+.doctrine-band .db-except .p-only { display: none; }
+@media print {
+  .doctrine-band .db-except .why-go { display: none; }
+  .doctrine-band .db-except .p-only { display: block; overflow-wrap: anywhere; }
+}
 /* L-07: one chip per filed period, linking into the schedule that reconciles it */
 .db-years { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; margin-top: 0.7rem; }
 .db-years a { font: 600 0.72rem var(--mono); letter-spacing: 0.08em; color: var(--cream-dim); text-decoration: none; }
@@ -1745,7 +1769,7 @@ body[data-density=compact] .gcard { padding: 0.55rem 0.35rem; }
   body { background: #fff !important; }
   .cover { background: #fff !important; color: var(--ink); padding-bottom: 0; }
   .cover::after { display: none; }
-  .hero-actions, .tabs, .ledger-tools, .pager, .pf-backdrop, .profile, button, input, select { display: none !important; }
+  .hero-actions, .tabs, .ledger-tools, .pager, .pf-backdrop, .profile, input, select { display: none !important; }   /* P4: content buttons (years, recipients, category rows) print as text -- control buttons are listed in the FINAL POLISH print block */
   [hidden] { display: none !important; }
   .grand .g-val { color: var(--copper-deep); }
   h1, .lede, .hero-meta { color: var(--ink); }
@@ -1769,6 +1793,156 @@ body[data-density=compact] .gcard { padding: 0.55rem 0.35rem; }
 @media (max-width: 719px) { .foot-site { gap: 0 1.1rem; } .foot-site a { min-height: 44px; padding: 0; } }
 @media (prefers-reduced-motion: reduce) { .rv { animation: none; } }
 
+/* ============ FINAL POLISH (P4, 2026-09-24) ============ */
+
+/* the display voice: page h1 and the reconciled figure use Fraunces' display cut (spec 2.1: 600, opsz 144),
+   the same voice as the hub's h1 and the 404 -- one rule, not three */
+h1 { font-variation-settings: "opsz" 144; font-weight: 600; }
+/* the cover figure never reflows when the web font lands: a Georgia fallback scaled to Fraunces' figure
+   widths (measured in render: Fraunces 600/opsz 144 figures are 81.5% of Georgia Bold's at the same size) */
+@font-face { font-family: "Fraunces Fallback"; src: local("Georgia Bold"), local("Georgia-Bold"); font-weight: 100 900; size-adjust: 81.5%; ascent-override: 98%; descent-override: 26%; line-gap-override: 0%; }
+.grand .g-val { font-family: "Fraunces", "Fraunces Fallback", Georgia, serif; font-variation-settings: "opsz" 144; font-variant-numeric: tabular-nums lining-nums; }
+/* M1: on a phone the figure is sized from its own length (build_any stamps --n, the character count) so an
+   11-digit total fits one line at 320px instead of being clipped by the cover */
+@media (max-width: 899px) {
+  .grand .g-val { font-size: min(clamp(2.9rem, 6vw, 4.6rem), calc((100vw - 40px) / (var(--n, 12) * 0.5))); }
+}
+/* the as-filed name, when the page is shown under a cleaned display name: the meta line's last line */
+.hero-meta .hm-filed { display: block; margin-top: 0.3rem; }
+
+/* Close-out (2026-09-24): the SHARED HEADER CONTRACT, the hub's rule verbatim -- the current page is the double rule
+   on the item's own foot (::after, the label's width: the item's 12px padding in from each side, flush with its box
+   bottom), 2 / 3 / 1 in copper-bright, no tint. The ledger's phone strip keeps it under the label (10px in, 4px up);
+   the hub turns it off there (its bottom bar carries its own tick). */
+.gl-top .gl-nav a[aria-current=page] { background: transparent; position: relative; color: var(--cream-bright); }
+.gl-top .gl-nav a[aria-current=page]::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 6px; pointer-events: none;
+  background: linear-gradient(var(--copper-bright), var(--copper-bright)) left bottom 4px / 100% 2px no-repeat,
+              linear-gradient(var(--copper-bright), var(--copper-bright)) left bottom / 100% 1px no-repeat;
+}
+@media (max-width: 640px) { .gl-top:not([data-surface=hub]) .gl-nav a[aria-current=page]::after { left: 10px; right: 10px; bottom: 4px; } }
+/* the More menu hangs from its own right edge wherever the CTA is gone, so it never runs past the viewport */
+@media (min-width: 641px) and (max-width: 1099px) { .gl-top .gl-menu { left: auto; right: 0; } }
+
+/* L10: past ~1550px the frame hugs the rail (a 64px gutter at most) instead of centring in what is left --
+   at 1920 the content floated 288px off the rail, a bare green field across the hero. Below that width the
+   formula gives the same gutter centring always gave. The header's lockup lines up with the content. */
+@media (min-width: 1100px) {
+  .wrap { margin-left: clamp(0px, calc((100vw - 236px - 1180px) / 2), 64px); margin-right: auto; }
+  .gl-top[data-surface=ledger] { --fm: clamp(0px, calc((100vw - 236px - 1180px) / 2), 64px);
+    padding-left: calc(var(--fm) + 2.25rem); padding-right: max(2.25rem, calc(100vw - 236px - var(--fm) - 1180px + 2.25rem)); }
+}
+@media (min-width: 1600px) {
+  .wrap { max-width: 1280px; margin-left: clamp(0px, calc((100vw - 236px - 1280px) / 2), 64px); }
+  .gl-top[data-surface=ledger] { --fm: clamp(0px, calc((100vw - 236px - 1280px) / 2), 64px);
+    padding-right: max(2.25rem, calc(100vw - 236px - var(--fm) - 1280px + 2.25rem)); }
+}
+
+/* L5: in a half-width card the top-five names stack over their bars (two lines at most, the full name in
+   the row's label) -- "Unc Chapel Hil..." three times over was three different grants */
+/* only the concentration card is a size container: the new-vs-returning card keeps its intrinsic width, so
+   the grid still gives its five year cells the room they need */
+.grid2 > .card:has(#conc-top5) { container-type: inline-size; }
+@media (min-width: 560px) {
+  #conc-top5 .bar-row.stacked .bar-label { white-space: normal; text-overflow: clip; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.3; }
+}
+@container (max-width: 600px) {
+  #conc-top5 .bar-row.stacked { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label val" "track track"; gap: 0.3rem 0.8rem; }
+  #conc-top5 .bar-row.stacked .bar-label { white-space: normal; overflow: hidden; text-overflow: clip; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.3; }
+}
+
+/* L6: a section's title never breaks for the note that shares its row -- the note wraps, or steps aside */
+@media (min-width: 720px) {
+  .sec-head h2 { flex: none; white-space: nowrap; }
+  .sec-head .sec-rule { min-width: 24px; }
+  .sec-head .sub { white-space: normal; text-align: right; min-width: 0; flex: 0 1 auto; line-height: 1.35; }
+}
+@media (max-width: 1199px) { #panel-overview > .card:first-child .sec-head .sub { display: none; } }
+
+/* the year rail: "2020 $0 FILED" / "2021 WITHHELD", never "2020$0 filed" */
+.year-rail-top .zeroyr small, .year-rail-top .withheld small { margin-left: 0.4em; }
+#year-rail .zeroyr small, #year-rail .withheld small { margin-left: 0; }
+
+/* L9: one page of rows has no pager (the typed-page field's own display rule used to beat [hidden]) */
+.pager[hidden], .page-jump[hidden] { display: none; }
+
+/* m16: the unitemized / withheld-name card lines up with every other card in the phone list */
+.gcard-flat { padding: 0.8rem 0.6rem; border-bottom: 1px solid var(--rule); }
+
+/* m17: at 400px and under each tab is at least as wide as its word, so its tint and its double rule are too */
+@media (max-width: 400px) {
+  .tab { flex: 1 1 auto; min-width: max-content; padding-left: 4px; padding-right: 4px; }
+}
+/* m25: on the narrowest stuck bar the book's name gets the room */
+@media (max-width: 360px) {
+  .tabs.stuck .tabs-ctx { gap: 0.6rem; letter-spacing: 0.04em; }
+  .tabs-ctx #ctx-name { flex: 1 1 60%; min-width: 0; }
+}
+
+/* m18: the phone schedule's labels read left, on one line */
+@media (max-width: 719px) {
+  .tie-table tbody td::before { text-align: left; white-space: nowrap; font-size: 12px; }
+}
+.tie-row.is-withheld td { color: var(--ink-dim); }
+.tie-row.is-withheld td:first-child { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+
+/* m19: the phone "More" sheet names each control above it */
+.lt-more[open] .lt-menu label.sr-only {
+  position: static; width: auto; height: auto; margin: 8px 2px 4px; padding: 0; clip: auto; overflow: visible; white-space: normal;
+  font: 500 11px/1.25 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim);
+}
+@media (min-width: 720px) { .lt-more .lt-menu label[for=sort] { display: none !important; } }
+
+/* the doctrine band's withheld year: the year struck, the word beside it */
+.db-years a.withheld { text-decoration: none; color: var(--cream-dim); }
+.db-years a.withheld .dy-y { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+
+/* Recipients: the grants to individuals, one line; a filer that named nobody, one note */
+.rec-flat { cursor: default; }
+.rec-flat .ri-name { font-style: italic; font-weight: 500; }
+.rec-flat:hover, .rec-flat:focus-visible { background: none; }
+.rec-none-p { margin: 0; max-width: 64ch; color: var(--ink-dim); line-height: 1.6; }
+.rec-none-p a { white-space: nowrap; }
+#rec-none[hidden], #panel-recipients > .card[hidden], .rec-tools[hidden] { display: none; }
+
+/* lc-08: two lines of keywords per rule, then "+n words" */
+.kw-wrap { display: block; }
+.kw-more { appearance: none; background: none; border: 0; padding: 0 0 0 2px; margin: 0; cursor: pointer; font: 600 11px/1.55 var(--sans); color: var(--green); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.kw-more[hidden] { display: none; }
+@media (hover: hover) { .kw-more:hover { color: var(--copper-deep); } }
+
+/* MM-15: on a phone the year tiles under the trend retire -- the column chart already carries every year on
+   its own axis and every value on its column, and a tap on a column scopes the page (the rail's scope line
+   then gives that year's rows and its reconciliation). The 88px carousel repeated the chart beneath it. */
+@media (max-width: 639px) { #tr-cards { display: none; } }
+/* the trend's withheld slot stands on the baseline, modest and empty; its word sits above it */
+.tr-col.is-withheld .tr-wframe { fill: var(--sheet); }
+
+/* L3: the browser's own print (Ctrl+P) -- content buttons print as their text (a grants table printed its
+   Year and Recipient columns blank), controls stay off the page, and the cover prints in ink on white */
+@media print {
+  .hero-actions, .hero-more, .tabs, .ledger-tools, .pager, .scope-line, .rec-tools, .alpha, .show-all, #rec-more,
+  .return-chip, .pf-backdrop, .profile, .kw-more, .skip, .hero-note button, .rows-status button, #clear-all, .gl-toast, .cta-band,
+  .year-rail-top, .rail-scope, .side, .gl-top, .wave, input, select { display: none !important; }
+  .grant-table td > button, .recip, .ycell, .cat-row, .tr-card, .nr-cell, .mover-btn, .rec-item, .gcard-btn, .nrd-row {
+    appearance: none; background: none !important; border: 0; padding: 0; color: inherit !important; font: inherit; text-align: left; box-shadow: none !important; transform: none !important;
+  }
+  .grant-table td > button { display: inline !important; }
+  .cover, .cover * { color: var(--ink) !important; }
+  .cover .grand .g-val { color: var(--copper-deep) !important; -webkit-text-fill-color: var(--copper-deep) !important; background: none !important; }
+  .cover .g-rule { background: none !important; border-top: 2px solid var(--copper-deep); border-bottom: 1px solid var(--copper-deep); height: 6px; box-sizing: border-box; }
+  .cover .hero-meta a, .cover .lede a { color: var(--ink) !important; text-decoration: underline; }
+  .tick { color: var(--pass) !important; }
+  .doctrine-band { background: none !important; color: var(--ink) !important; border: 1px solid #999; }
+  .doctrine-band * { color: var(--ink) !important; }
+  .print-report .pr-total { margin: 2pt 0 6pt; font: 500 10.5pt/1.35 var(--sans); color: #333; }
+  .print-report .pr-total b { font: 600 17pt/1.1 var(--serif); color: var(--copper-deep); font-variant-numeric: tabular-nums lining-nums; margin-right: 4pt; }
+  .print-report .pr-tie tfoot td { font-weight: 600; border-top: 1pt solid #111; border-bottom: 3px double #111; }
+  .print-report .pr-withheld td { color: #555; }
+  .print-report .pr-rows { break-before: page; }
+  .print-report .pr-url { word-break: break-all; }
+}
+
 /* ============ LEGACY MARKUP (R2.2, M-3) -- pages built before 2026-09-24 carry the old in-cover top bar
    and a bare "Grants Ledger" kicker until the fleet rebuild replaces them; these rules keep them readable
    with the current assets. Nothing in the current template matches them. Delete after the rebuild. ============ */
@@ -1787,3 +1961,40 @@ body[data-density=compact] .gcard { padding: 0.55rem 0.35rem; }
 .side-title:not(:has(.side-name)) > span { font: 600 0.9rem/1.2 var(--sans); letter-spacing: 0; color: var(--cream-bright); }
 .cover .hero-cred { color: var(--cream-dim); }
 .cover .hero-cred a { color: var(--cream-bright); }
+
+/* ============================ Close-out (2026-09-24) ============================ */
+/* "990-PF" (and a year range) never breaks at its hyphen or dash in prose -- build_any wraps it; the hub's class */
+.nw { white-space: nowrap; }
+/* (4) the proof line under the figure: balanced when it wraps -- never a one-word last line ("every / year") */
+.grand .g-sub { text-wrap: balance; }
+/* (5) the phone lede. build/ledger.js measure it: four lines or fewer show whole (.whole -- the "Read the full note"
+   row would cost about as much as the line it hides); a longer lede is cut after three lines and its last line
+   fades out (.cut). The browser's own clamp ellipsis landed after a full stop ("filings.…") or mid-word
+   ("for ta…"); a fade never doubles punctuation. Without JS the old three-line clamp stands. */
+@media (max-width: 899px) {
+  .hero .lede.measure, .hero .lede.whole { display: block; -webkit-line-clamp: unset; overflow: visible; max-height: none; }
+  .hero .lede.whole { margin-bottom: 0.95rem; }   /* no button row under it: the lede keeps the gap the button row gave */
+  .hero .lede.cut:not(.open) {
+    display: block; -webkit-line-clamp: unset; overflow: hidden; max-height: calc(3 * 1.6em);
+    -webkit-mask: linear-gradient(#000, #000) left top / 100% calc(100% - 1.6em) no-repeat,
+                  linear-gradient(90deg, #000 55%, transparent 97%) left bottom / 100% 1.6em no-repeat;
+            mask: linear-gradient(#000, #000) left top / 100% calc(100% - 1.6em) no-repeat,
+                  linear-gradient(90deg, #000 55%, transparent 97%) left bottom / 100% 1.6em no-repeat;
+  }
+  .hero-more[hidden] { display: none; }
+}
+@media print {
+  .hero .lede, .hero .lede.cut { display: block !important; -webkit-line-clamp: unset !important; max-height: none !important;
+    overflow: visible !important; -webkit-mask: none !important; mask: none !important; }
+}
+/* a KPI caption that wraps is balanced -- "723 named-recipient rows, all filed / years" left a one-word last line */
+.kpi .k-hint { text-wrap: balance; }
+/* the sidebar rail's withheld / $0-filed chip matches its neighbours: the year in the chips' own mono size, struck
+   when withheld, and a word that sits inside the dashed frame -- "WITHHELD" (0.7rem, +0.06em) ran into the frame */
+#year-rail .withheld, #year-rail .zeroyr { font: 500 0.74rem/1.2 var(--mono); padding: 0.32rem 0 0.3rem; border-radius: 7px; justify-content: center; }
+:is(#year-rail, #year-rail-top) .withheld .wy { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+#year-rail .withheld small, #year-rail .zeroyr small { display: block; font: 600 11px/1.2 var(--mono); letter-spacing: 0; margin-top: 0.12rem; text-decoration: none; }
+
+/* close-out i2 (found checking the print): on paper the colophon's name, links and doctrine line kept their cover
+   colours (cream on white -- "Curry Studio", the site and the address all but vanished); they print in ink */
+@media print { .foot-in :is(a, strong, code) { color: var(--ink) !important; } }
