@@ -202,6 +202,12 @@
   // the overview's tie-out exceptions -- one source, so every surface names the same years.
   const WITHHELD = (() => { try { return JSON.parse(document.documentElement.dataset.withheld || '{}'); } catch (e) { return {}; } })();
   const ZEROYRS = (() => { try { return JSON.parse(document.documentElement.dataset.zeroyears || '{}'); } catch (e) { return {}; } })();
+  // ux-ledger-04: a filed year read from the paper filing, not an e-file, carries a
+  // non-numeric object id ("<ein>_<period>_990PF (IRS scan)") -- shared by the year
+  // rail, the moat note and the trend chart, so every surface agrees on which years these are.
+  const SCAN_YEARS = new Set(Object.keys(tieout)
+    .filter((y) => { const o = tieout[y].object_id; return o && !/^\d+$/.test(String(o)); })
+    .map(Number));
 
   // ---------- ux-ledger-05: tiny books ----------
   // Fewer than 10 named-recipient rows, or a single "recipient" that reads like the
@@ -265,14 +271,18 @@
     return g._ci;
   }
   function catOf(g) { return catInfoOf(g).key; }
-  const CAT_SHADES = ['#432708', '#5d370d', '#7a4a13', '#96601f', '#b0782f', '#c79045', '#d9aa64', '#e7c28b', '#f1d7b2'];
+  // L-08: a twelve-step, single-hue luminance ramp -- darkest is always the largest
+  // named field, and a field past the twelfth never wraps back to a darker shade a
+  // bigger field already owns (it holds at the lightest step instead).
+  const CAT_SHADES = ['#2f1a05', '#432708', '#5d370d', '#7a4a13', '#96601f', '#b0782f', '#c79045', '#d9aa64', '#e7c28b', '#f1d7b2', '#f7e6cc', '#fbf1e2'];
+  const CAT_UNITEMIZED_KEY = 'Unitemized disclosures';
   const catColorOf = (k) => { const c = catList.find((x) => x.key === k); return c ? c.color : '#c9c2ae'; };
   const entYearSum = (e, y) => e.grants.filter((g) => g.y === y).reduce((s, g) => s + g.a, 0);
 
   // ---------- the model: every row-derived figure, from whichever rows are in hand ----------
   // complete=false means these are the embedded preview rows: the canonical-recipient map,
   // categories and movers are then provisional, and the per-year figures come from the filed
-  // tie-out (which the self-check proves the rows agree with once the full list is in).
+  // tie-out (which the self-check confirms the rows agree with once the full list is in).
   function deriveModel(rows, complete) {
     grants = rows;
     namedGrants = grants.filter((g) => g.record_type !== 'unitemized');
@@ -360,7 +370,14 @@
     });
     catList = [...catTotals.entries()].map(([k, v]) => ({ key: k, ...v }))
       .sort((a, b) => b.sum - a.sum);
-    { let si = 0; catList.forEach((c) => { c.color = c.key === CAT_OTHER ? '#c9c2ae' : CAT_SHADES[si++ % CAT_SHADES.length]; }); }
+    {
+      let si = 0;
+      catList.forEach((c) => {
+        if (c.key === CAT_OTHER) { c.color = '#c9c2ae'; return; }
+        if (c.key === CAT_UNITEMIZED_KEY) { c.color = '#4e5347'; return; }  // pattern-rendered, not a ramp shade
+        c.color = CAT_SHADES[Math.min(si++, CAT_SHADES.length - 1)];
+      });
+    }
     // new vs returning (canonical) per year + latest-year movers
     firstYearOf = new Map();
     entList.forEach((e) => { firstYearOf.set(e.id, Math.min(...[...e.years])); });
@@ -605,6 +622,8 @@
 
   // ---------- tiny DOM helpers ----------
   const $ = (id) => document.getElementById(id);
+  // the stuck tab bar's context strip height (0 wherever the strip does not exist)
+  const ctxStripH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ctx-h')) || 0;
   const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; };
   // the build stamps the canonical recipient count into the page; while the full list is
   // still loading that stamp is the only true figure for it
@@ -645,14 +664,19 @@
     });
     writeHash(push !== false);
     render();
+    // R2: an observer only reports crossings -- a toolbar hidden with its panel never "unpins"
+    // on its own, so the tab switch re-reads it (and the context strip comes back elsewhere)
+    try { if (typeof observeTools === 'function') observeTools(); } catch (e) {}
     updateReturnChip();
     if (push !== false) {
-      if (tab === 'overview') window.scrollTo({ top: 0, behavior: 'instant' });
+      const behavior = reducedMotion() ? 'instant' : 'smooth';
+      if (tab === 'overview') window.scrollTo({ top: 0, behavior });
       else {
         const panel = $('panel-' + tab);
         const tabsEl = document.querySelector('.tabs');
-        const off = (tabsEl && getComputedStyle(tabsEl).display !== 'none' ? tabsEl.offsetHeight : 0) + 10;
-        window.scrollTo({ top: Math.max(0, panel.getBoundingClientRect().top + window.scrollY - off), behavior: 'instant' });
+        const shown = tabsEl && getComputedStyle(tabsEl).display !== 'none';
+        const off = (shown ? tabsEl.offsetHeight + ctxStripH() : 0) + 10;   // R2: the stuck bar's context strip hangs under it
+        window.scrollTo({ top: Math.max(0, panel.getBoundingClientRect().top + window.scrollY - off), behavior });
       }
     }
   }
@@ -680,7 +704,10 @@
       setTab(n); $('tab-' + n).focus();
     }
   });
-  $('explore-btn').addEventListener('click', () => { setTab('grants'); $('panel-grants').scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth' }); });
+  // L-11: setTab() already offset-scrolls to clear the sticky tab bar -- a second,
+  // un-offset scrollIntoView right after it was what buried "The ledger" heading
+  // under the tabs (or the tab bar itself, on a phone).
+  $('explore-btn').addEventListener('click', () => setTab('grants'));
   $('badge-btn').addEventListener('click', () => setTab('methodology'));
 
   // sidebar: nav + the global year rail (one state.y, every surface)
@@ -701,30 +728,65 @@
     const put = (sel, v) => { const el = document.querySelector(sel); if (el) el.textContent = v; };
     put('#sn-recipients', nOrgs); put('#sn-grants', nGrants);
     put('#tab-recipients .tcount', nOrgs); put('#tab-grants .tcount', nGrants);
+    // L-12: the stuck tab bar's own context line, since the header above it has scrolled away
+    const ctxName = $('ctx-name');
+    if (ctxName && !ctxName.textContent) {
+      const h1El = document.querySelector('h1');
+      ctxName.textContent = h1El ? h1El.textContent.replace(/\s+/g, ' ').trim() : document.title;
+    }
+    const ctxScope = $('ctx-scope');
+    if (ctxScope) {
+      const span = YEARS.length > 1 ? YEARS[0] + '–' + LATEST : String(LATEST);
+      ctxScope.textContent = sy === null ? `TY${span} · ${moneyCompact(GRAND)}` : `TY${sy} · ${moneyCompact(byYear[sy].sum)}`;
+    }
   }
   {
     // the sidebar rail (>=1100px) and the top rail (below it) are the same control
     const withheld = WITHHELD, zeroYears = ZEROYRS;
-    // ux-ledger-04: a filed year read from the paper filing, not an e-file, carries a
-    // non-numeric object id ("<ein>_<period>_990PF (IRS scan)") -- the year rail is where
-    // a skeptic's eye already is, so its tooltip says so per year, not only in Methodology.
-    const scanYears = new Set(Object.keys(tieout)
-      .filter((y) => { const o = tieout[y].object_id; return o && !/^\d+$/.test(String(o)); })
-      .map(Number));
+    const scanYears = SCAN_YEARS;
+    const maxYearSum = Math.max(1, ...YEARS.map((y) => byYear[y].sum));
     [document.getElementById('year-rail'), document.getElementById('year-rail-top')].filter(Boolean).forEach((rail) => {
       const railYears = [...new Set([...YEARS, ...Object.keys(withheld).map(Number), ...Object.keys(zeroYears).map(Number)])].sort((a, b) => a - b);
       rail.innerHTML = ['all'].concat(railYears).map((y) => withheld[String(y)]
-        ? `<a class="withheld" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}">${y}<small>${withheld[String(y)].kind || 'withheld'}</small></a>`
+        ? `<a class="withheld" data-y="${y}" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}">${y}<small>${withheld[String(y)].kind || 'withheld'}</small></a>`
         : zeroYears[String(y)]
-          ? `<span class="zeroyr" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
-          : `<button type="button" data-yr="${y}" aria-pressed="false"${scanYears.has(y) ? ' title="Read from the paper filing — absent from every e-file dataset"' : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
+          ? `<span class="zeroyr" data-y="${y}" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
+          : `<button type="button" data-yr="${y}"${y === 'all' ? '' : ` data-y="${y}" style="--share:${(byYear[y].sum / maxYearSum * 100).toFixed(2)}%"`} aria-pressed="false"${scanYears.has(y) ? ` class="scan" title="Read from the paper filing — absent from every e-file dataset"` : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
       rail.addEventListener('click', (e) => {
         const b = e.target.closest('[data-yr]');
         if (!b) return;
+        // L-11: the phone rail must not visibly move when a layout change above it
+        // (the scope line, KPI hints) shifts the page -- measure, render, correct.
+        const isTop = rail.id === 'year-rail-top';
+        const y0 = isTop ? rail.getBoundingClientRect().top : 0;
         state.y = b.dataset.yr === 'all' ? null : +b.dataset.yr;
         state.page = 0;
         writeHash(true);
         render();
+        if (isTop) {
+          // R2 (R-3): hold the rail where the finger left it -- correct now, then on each of the
+          // next few frames for anything that settles late (observer-driven classes, fonts, the
+          // chart reveal). A new touch or wheel ends the hold, so it never fights the reader.
+          let live = true;
+          const stop = () => { live = false; };
+          window.addEventListener('touchstart', stop, { once: true, passive: true });
+          window.addEventListener('wheel', stop, { once: true, passive: true });
+          const hold = (n) => {
+            if (!live) return;
+            const dy = rail.getBoundingClientRect().top - y0;
+            if (Math.abs(dy) > 0.5) window.scrollBy({ top: dy, behavior: 'instant' });
+            if (n > 0) requestAnimationFrame(() => hold(n - 1));
+          };
+          hold(5);
+          const onChip = rail.querySelector('.on');
+          // R2: centre the chip by scrolling the rail sideways only -- scrollIntoView could also
+          // scroll the page vertically (block:'nearest' honours the pinned chrome's padding),
+          // which is exactly the movement the hold above exists to prevent
+          if (onChip) {
+            const cr = onChip.getBoundingClientRect(), rr = rail.getBoundingClientRect();
+            rail.scrollTo({ left: Math.max(0, rail.scrollLeft + (cr.left - rr.left) - (rr.width - cr.width) / 2), behavior: reducedMotion() ? 'instant' : 'smooth' });
+          }
+        }
       });
     });
     document.querySelectorAll('.side-nav [data-tab]').forEach((b) =>
@@ -784,6 +846,16 @@
   }
 
   // ---------- overview ----------
+  // R3 (DECISIONS-JOE #2, 2026-09-24): the trend is drawn as COLUMNS -- one per filed year, the value
+  // printed on each, unitemized / $0-filed / withheld years told apart by pattern, outline and a word
+  // (never by hue). The straight-segment line renderer is kept intact beside it; this one constant
+  // picks the form. Reverting = set it to 'line' and rebuild the fleet (build_any re-stamps ?v=).
+  const TREND_FORM = 'columns';   // 'line' restores the straight-segment line
+  // R3 (NEW-1): the chart is drawn in CSS pixels. The old fixed 560-unit viewBox scaled every label
+  // with the card -- ~6px type on a 390 phone, ~21px at 1440. Now the viewBox IS the host's rendered
+  // width, so an 11px label is 11px at every width, and the chart re-lays itself when the host's
+  // width changes (ResizeObserver, one rAF later -- never inside the observer callback).
+  let trendW = 0, trendFit = null;
   function renderTrend() {
     const host = $('trend');
     if (YEARS.length < 2) {           // one filed year is not a trend; hide the card entirely
@@ -793,71 +865,13 @@
       if (cards) cards.hidden = true;
       return;
     }
-    const tipEl = $('tr-tip');
-    const W = 560, H = 228, pad = { t: 34, r: 18, b: 16, l: 36 };
-    const maxV = Math.max(1, ...YEARS.map((y) => byYear[y].sum)) * 1.12;
-    const xAt = (i) => pad.l + 22 + (i / (YEARS.length - 1)) * (W - pad.l - pad.r - 44);
-    const yAt = (v) => pad.t + (1 - v / maxV) * (H - pad.t - pad.b);
-    const pts = YEARS.map((y, i) => [xAt(i), yAt(byYear[y].sum)]);
-    let line = `M ${pts[0][0]} ${pts[0][1]}`;
-    for (let i = 1; i < pts.length; i++) {
-      const cx = (pts[i-1][0] + pts[i][0]) / 2;
-      line += ` C ${cx} ${pts[i-1][1]}, ${cx} ${pts[i][1]}, ${pts[i][0]} ${pts[i][1]}`;
-    }
-    const area = line + ` L ${pts[pts.length-1][0]} ${yAt(0)} L ${pts[0][0]} ${yAt(0)} Z`;
-    // Gridlines follow the data. The old fixed 5/10/15M grid drew three lines flat on
-    // the baseline of a billion-dollar chart and labelled a $5B tick "$5000M"; a $523
-    // ledger got ticks far above its own ceiling. Steps are 1/2/5 x 10^k, ~4 intervals.
-    const tickStep = (() => {
-      const target = maxV / 4;
-      if (!(target > 0)) return 1;
-      const mag = Math.pow(10, Math.floor(Math.log10(target)));
-      const r = target / mag;
-      return (r <= 1 ? 1 : r <= 2 ? 2 : r <= 5 ? 5 : 10) * mag;
-    })();
-    const ticks = [0];
-    for (let v = tickStep; v < maxV && ticks.length < 8; v += tickStep) ticks.push(v);
-    const grid = ticks.map((v) =>
-      (v === 0 ? '' : `<line class="tr-grid" x1="${pad.l}" y1="${yAt(v)}" x2="${W - pad.r}" y2="${yAt(v)}"/>`) +
-      `<text class="tr-tick" x="${pad.l - 7}" y="${yAt(v) + 3}" text-anchor="end">${moneyTick(v)}</text>`).join('');
-    const marks = YEARS.map((y, i) => {
-      const [x, yy] = pts[i];
-      const sel = state.y === y;
-      const pct = i === 0 ? null : yoyPct(byYear[y].sum, byYear[YEARS[i-1]].sum);
-      const pctTxt = pct === null ? '' : (pct > 0 ? '+' : '−') + Math.abs(pct).toFixed(0) + '%';
-      return `
-        <g class="tr-pt${sel ? ' is-sel' : ''}" data-i="${i}" data-y="${y}" tabindex="0" role="button"
-           aria-label="Tax year ${y}: ${money(byYear[y].sum)}, ${num(byYear[y].count)} ${grantsWord(byYear[y].count)}${pct===null?'':', ' + pctTxt + ' versus prior year'}. Scopes the whole page to this year.">
-          <rect x="${x - 52}" y="${pad.t - 16}" width="104" height="${H - pad.t + 8}" fill="transparent"/>
-          <circle cx="${x}" cy="${yy}" r="${sel ? 6.5 : 4.5}" class="tr-dot"/>
-          <text x="${x}" y="${yy - 14}" text-anchor="middle" class="tr-val">${moneyCompact(byYear[y].sum)}</text>
-        </g>`;
-    }).join('');
-    const svgHtml = `
-      <svg viewBox="0 0 ${W} ${H}" class="${state.y !== null ? 'scoped' : ''}" role="group" aria-label="Charitable disbursements by tax year, ${YEARS[0]} through ${LATEST}. ${YEARS.map((y)=>y + ': ' + moneyCompact(byYear[y].sum)).join(', ')}.">
-        <defs>
-          <linearGradient id="trFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#a35c1a" stop-opacity="0.14"/>
-            <stop offset="100%" stop-color="#a35c1a" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        ${grid}
-        ${state.y !== null ? `<rect class="tr-band" x="${xAt(YEARS.indexOf(state.y)) - 30}" y="10" width="60" height="${H - 18}" rx="8"/>` : ''}
-        <line class="tr-base" x1="${pad.l}" y1="${yAt(0)}" x2="${W - pad.r}" y2="${yAt(0)}"/>
-        <path class="tr-area" d="${area}"/>
-        <path class="tr-line" d="${line}"/>
-        ${marks}
-      </svg>`;
-    host.innerHTML = '';
-    host.appendChild(tipEl);
-    host.insertAdjacentHTML('beforeend', svgHtml);
-    const svgEl = host.querySelector('svg');
+    host.dataset.form = TREND_FORM;
     const cardsHost = document.getElementById('tr-cards');
     if (cardsHost) {
       cardsHost.classList.toggle('scoped', state.y !== null);
       cardsHost.innerHTML = YEARS.map((y, i) => {
         const pct = i === 0 ? null : yoyPct(byYear[y].sum, byYear[YEARS[i-1]].sum);
-        const pctTxt = pct === null ? '' : (pct > 0 ? '+' : '\u2212') + Math.abs(pct).toFixed(0) + '%';
+        const pctTxt = pct === null ? '' : (pct > 0 ? '+' : '−') + Math.abs(pct).toFixed(0) + '%';
         const sel = state.y === y;
         return `
         <button type="button" class="tr-card${sel ? ' sel' : ''}" data-y="${y}" aria-pressed="${sel}"
@@ -875,34 +889,63 @@
         });
       });
     }
-    { // reveal choreography: delay each year by the tip's real arrival (path length, not guesswork)
-      const lineEl = svgEl.querySelector('.tr-line');
-      const L = lineEl.getTotalLength();
-      host.style.setProperty('--plen', L.toFixed(1));
-      const fracAt = (tx) => {
-        let lo = 0, hi = L;
-        for (let k = 0; k < 18; k++) {
-          const mid = (lo + hi) / 2;
-          if (lineEl.getPointAtLength(mid).x < tx) lo = mid; else hi = mid;
+    drawTrend();
+    if (cardsHost) {
+      // R2.2: on a phone the cards are a sideways carousel -- a year scoped from the rail or the chart
+      // could sit off its right edge. Bring the chosen card into view by scrolling the carousel only
+      // (element scrollTo, never scrollIntoView, which can also move the page under the reader's finger).
+      // The target is always a card's own snap position -- the carousel snaps (proximity), and any
+      // other offset is pulled straight back to the nearest card start.
+      const selCard = cardsHost.querySelector('.tr-card.sel');
+      if (selCard && cardsHost.scrollWidth > cardsHost.clientWidth + 1) {
+        const hb = cardsHost.getBoundingClientRect(), sl = cardsHost.scrollLeft, view = cardsHost.clientWidth;
+        const sp = parseFloat(getComputedStyle(cardsHost).scrollPaddingLeft) || 0;
+        const at = (c) => c.getBoundingClientRect().left - hb.left + sl;
+        const l = at(selCard), r = l + selCard.offsetWidth;
+        let to = null;
+        if (l - sp < sl) to = l - sp;
+        else if (r + sp > sl + view) {
+          const first = [...cardsHost.children].find((c) => r + sp - (at(c) - sp) <= view);   // least travel that shows it whole
+          to = (first ? at(first) : l) - sp;
         }
-        return lo / L;
-      };
-      const yearCards = document.querySelectorAll('#tr-cards .tr-card');
-      svgEl.querySelectorAll('.tr-pt').forEach((g, i) => {
-        const td = (fracAt(pts[i][0]) * 1.4).toFixed(2) + 's';
-        g.style.setProperty('--td', td);
-        if (yearCards[i]) yearCards[i].style.setProperty('--td', td);
-      });
+        if (to !== null) cardsHost.scrollTo({ left: Math.min(Math.max(0, to), cardsHost.scrollWidth - view), behavior: reducedMotion() ? 'auto' : 'smooth' });
+      }
     }
+  }
+
+  // draws the chart alone (never the cards), so a width change re-lays it without touching the carousel
+  function drawTrend() {
+    const host = $('trend');
+    if (!host || YEARS.length < 2) return;
+    const tipEl = $('tr-tip');
+    const hostW = Math.round(host.clientWidth);
+    trendW = hostW;
+    const W = Math.max(200, hostW || 560);   // a hidden panel measures 0: draw at a sane width, re-lay when shown
+    const chart = TREND_FORM === 'line' ? trendLine(W) : trendColumns(W);
+    host.innerHTML = '';
+    host.appendChild(tipEl);
+    host.insertAdjacentHTML('beforeend', chart.svg);
+    const svgEl = host.querySelector('svg');
+    trendFit = chart.after ? () => chart.after(svgEl) : null;
+    if (trendFit) trendFit();
+    const yearCards = document.querySelectorAll('#tr-cards .tr-card');
+    const tds = chart.delays(svgEl);
+    svgEl.querySelectorAll('.tr-pt, .tr-col[data-i]').forEach((g) => {
+      const i = +g.dataset.i;
+      g.style.setProperty('--td', tds[i]);
+      if (yearCards[i]) yearCards[i].style.setProperty('--td', tds[i]);
+    });
     function tipShow(i) {
       const y = YEARS[i];
       const hostRect = host.getBoundingClientRect();
       const svgRect = svgEl.getBoundingClientRect();
-      let x = (svgRect.left - hostRect.left) + pts[i][0] / W * svgRect.width;
-      const ty = (svgRect.top - hostRect.top) + pts[i][1] / H * svgRect.height;
+      const vb = svgEl.viewBox.baseVal, k = svgRect.width / vb.width;   // through the live viewBox (it can grow upward)
+      let x = (svgRect.left - hostRect.left) + (chart.pts[i][0] - vb.x) * k;
+      const ty = (svgRect.top - hostRect.top) + (chart.pts[i][1] - vb.y) * k;
       const tTip = tieout[String(y)];
       const dTip = tTip ? tTip.line25_col_d - tTip.grant_sum : 0;
-      tipEl.innerHTML = `<strong>${y}</strong><span>${money(byYear[y].sum)} · ${num(byYear[y].count)} ${grantsWord(byYear[y].count)} · ${dTip === 0 ? 'PASS Δ $0' : 'Δ ' + money(dTip)}</span>`;
+      tipEl.innerHTML = `<strong>${y}</strong><span>${money(byYear[y].sum)} · ${num(byYear[y].count)} ${grantsWord(byYear[y].count)} · ${dTip === 0 ? 'PASS Δ $0' : 'Δ ' + money(dTip)}</span>`
+        + (SCAN_YEARS.has(y) ? '<span>Read from the paper filing</span>' : '');
       tipEl.classList.add('show');
       const tw = tipEl.offsetWidth || 190;
       x = Math.max(tw / 2 + 4, Math.min(hostRect.width - tw / 2 - 4, x));
@@ -910,7 +953,7 @@
       tipEl.style.top = ty + 'px';
     }
     function tipHide() { tipEl.classList.remove('show'); }
-    host.querySelectorAll('.tr-pt').forEach((g) => {
+    svgEl.querySelectorAll('.tr-pt, .tr-col[data-i]').forEach((g) => {
       const i = +g.dataset.i;
       const y = +g.dataset.y;
       const act = () => { state.y = state.y === y ? null : y; state.page = 0; writeHash(true); render(); };
@@ -921,6 +964,297 @@
       g.addEventListener('click', act);
       g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
     });
+  }
+  if ('ResizeObserver' in window && $('trend')) {
+    let raf = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => { const w = Math.round($('trend').clientWidth); if (w && w !== trendW) drawTrend(); });
+    }).observe($('trend'));
+  }
+  // label widths are measured -- measure again once the web fonts have replaced the fallback
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (trendFit) trendFit(); });
+  const trendAria = () => `Charitable disbursements by tax year, ${YEARS[0]} through ${LATEST}. ${YEARS.map((y)=>y + ': ' + moneyCompact(byYear[y].sum)).join(', ')}.`;
+  const trendPtLabel = (y, i) => {
+    const pct = i === 0 ? null : yoyPct(byYear[y].sum, byYear[YEARS[i-1]].sum);
+    const pctTxt = pct === null ? '' : (pct > 0 ? '+' : '−') + Math.abs(pct).toFixed(0) + '%';
+    return `Tax year ${y}: ${money(byYear[y].sum)}, ${num(byYear[y].count)} ${grantsWord(byYear[y].count)}${pct===null?'':', ' + pctTxt + ' versus prior year'}${incompleteYear(y) ? ', unitemized — no recipients named' : ''}${SCAN_YEARS.has(y) ? ', read from the paper filing' : ''}. Scopes the whole page to this year.`;
+  };
+
+  // ---- the column form (default) ----
+  function trendColumns(W) {
+    // every filed year gets a slot -- a withheld year and a $0-filed year included, drawn as what they are
+    const slots = [...new Set([...YEARS, ...Object.keys(WITHHELD).map(Number), ...Object.keys(ZEROYRS).map(Number)])].sort((a, b) => a - b);
+    const H = Math.round(Math.max(196, Math.min(272, W * 0.3)));
+    const pad = { t: 40, b: 30, x: 2 };   // two label lines above the tallest column; the year row below the base
+    const base = H - pad.b;
+    const slotW = (W - 2 * pad.x) / slots.length;
+    const barW = Math.round(Math.min(84, Math.max(16, slotW * 0.56)));
+    const maxV = Math.max(1, ...YEARS.map((y) => byYear[y].sum));
+    const hAt = (v) => Math.max(0, v) / maxV * (base - pad.t);
+    const cxAt = (k) => pad.x + slotW * (k + 0.5);
+    const slug = esc(document.documentElement.dataset.slug || '');
+    // a column with its top corners rounded and its foot square on the baseline
+    const colPath = (x, top, w) => {
+      const h = base - top, r = Math.min(3, h, w / 2);
+      return `M${x} ${base}V${top + r}Q${x} ${top} ${x + r} ${top}H${x + w - r}Q${x + w} ${top} ${x + w} ${top + r}V${base}Z`;
+    };
+    const pts = [];
+    const marks = slots.map((y, k) => {
+      const cx = cxAt(k), x0 = Math.round(cx - barW / 2);
+      const yearLbl = `<text class="tr-cyear" x="${cx}" y="${base + 18}" text-anchor="middle">${y}</text>`;
+      if (WITHHELD[String(y)] && !YEARS.includes(y)) {
+        const w = WITHHELD[String(y)] || {};
+        const kind = w.kind === 'not yet published' ? 'not yet published' : 'withheld';
+        return `
+        <a class="tr-col is-withheld" data-y="${y}" data-kind="withheld" href="../../exceptions/#${slug}" aria-label="Tax year ${y}: ${kind} — the reason is on the exceptions page">
+          <title>${esc(w.why || 'Filed, not published — named on the exceptions page.')}</title>
+          <rect class="tr-hit" x="${cx - slotW / 2}" y="0" width="${slotW}" height="${H}" fill="transparent"/>
+          <rect class="tr-wframe" x="${x0 + 0.5}" y="${pad.t + 0.5}" width="${barW - 1}" height="${base - pad.t - 1}" rx="3"/>
+          <text class="tr-cword" x="${cx}" y="${pad.t - 7}" text-anchor="middle">${kind === 'withheld' ? 'withheld' : 'not published'}</text>
+          ${yearLbl}
+        </a>`;
+      }
+      if (ZEROYRS[String(y)] && !YEARS.includes(y)) {
+        return `
+        <g class="tr-col is-zero" data-y="${y}" data-kind="zero" role="img" aria-label="Tax year ${y}: $0 filed — the return is in the record; no grants were paid">
+          <rect class="tr-zbar" x="${x0}" y="${base - 2}" width="${barW}" height="2"/>
+          <text class="tr-cval" x="${cx}" y="${base - 8}" text-anchor="middle">$0 filed</text>
+          ${yearLbl}
+        </g>`;
+      }
+      const i = YEARS.indexOf(y);
+      const v = byYear[y].sum;
+      const top = base - hAt(v);
+      const unit = incompleteYear(y);
+      pts[i] = [cx, top - (unit ? 34 : 21)];
+      const scan = SCAN_YEARS.has(y);
+      const sel = state.y === y;
+      // the value sits on its column; an unitemized year says so on a second line, nearest the column
+      const labels = unit
+        ? `<text class="tr-cval" x="${cx}" y="${top - 21}" text-anchor="middle">${moneyCompact(v)}</text>
+           <text class="tr-cword" x="${cx}" y="${top - 7}" text-anchor="middle">unitemized</text>`
+        : `<text class="tr-cval" x="${cx}" y="${top - 8}" text-anchor="middle">${moneyCompact(v)}</text>`;
+      return `
+        <g class="tr-col${unit ? ' is-unit' : ''}${scan ? ' is-scan' : ''}${sel ? ' is-sel' : ''}" data-i="${i}" data-y="${y}" data-kind="${unit ? 'unitemized' : 'filed'}" tabindex="0" role="button"
+           aria-label="${trendPtLabel(y, i)}">
+          <rect class="tr-hit" x="${cx - slotW / 2}" y="0" width="${slotW}" height="${H}" fill="transparent"/>
+          <path class="tr-cbar" d="${colPath(x0, top, barW)}"/>
+          ${labels}
+          ${yearLbl}
+          ${scan ? `<line class="tr-scanmark" x1="${cx - 14}" x2="${cx + 14}" y1="${base + 22.5}" y2="${base + 22.5}"/>` : ''}
+        </g>`;
+    }).join('');
+    const selK = state.y !== null ? slots.indexOf(state.y) : -1;
+    // the summary names every filed year the columns show -- a withheld or $0 year included
+    const colsAria = `Charitable disbursements by tax year, ${slots[0]} through ${slots[slots.length - 1]}. `
+      + slots.map((y) => y + ': ' + (YEARS.includes(y) ? moneyCompact(byYear[y].sum) + (incompleteYear(y) ? ' unitemized' : '') : WITHHELD[String(y)] ? 'withheld' : '$0 filed')).join(', ') + '.';
+    const svg = `
+      <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" class="tr-columns${state.y !== null ? ' scoped' : ''}" role="group" aria-label="${colsAria}">
+        <defs>
+          <pattern id="trHatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2" height="5" fill="#4e5347"/></pattern>
+        </defs>
+        ${selK >= 0 ? `<rect class="tr-band" x="${cxAt(selK) - Math.min(slotW, barW + 28) / 2}" y="4" width="${Math.min(slotW, barW + 28)}" height="${H - 6}" rx="8"/>` : ''}
+        <line class="tr-base" x1="${pad.x}" y1="${base + 0.5}" x2="${W - pad.x}" y2="${base + 0.5}"/>
+        ${marks}
+      </svg>`;
+    return {
+      svg, pts, H,
+      // columns rise left to right, one beat apart
+      delays: () => YEARS.map((y) => (slots.indexOf(y) * 0.08).toFixed(2) + 's'),
+      // Labels are measured, not assumed. A label group (value, and its word) never runs past the chart's
+      // own edges; where two neighbours' groups would touch (a phone's narrowest slots, "unitemized" beside
+      // a column of similar height) the values step from 12px to 11px (never below), and any group still
+      // touching a neighbour's column or labels lifts just clear of it. Idempotent: it starts from the drawn positions,
+      // so it can run again once the web fonts land.
+      after: (svgEl) => {
+        const cols = [...svgEl.querySelectorAll('.tr-col')];
+        const groups = cols.map((g) => [...g.querySelectorAll('.tr-cval, .tr-cword')]);
+        const bars = cols.map((g) => g.querySelector('.tr-cbar, .tr-wframe, .tr-zbar'));
+        groups.flat().forEach((t) => {
+          if (t.dataset.x0 === undefined) { t.dataset.x0 = t.getAttribute('x'); t.dataset.y0 = t.getAttribute('y'); }
+          t.setAttribute('x', t.dataset.x0); t.setAttribute('y', t.dataset.y0);
+        });
+        svgEl.classList.remove('tight');
+        svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`); svgEl.setAttribute('height', H);
+        const rect = (b) => ({ l: b.x, r: b.x + b.width, t: b.y, b: b.y + b.height });
+        const box = (ts) => {
+          const bs = ts.map((t) => rect(t.getBBox()));
+          return { l: Math.min(...bs.map((b) => b.l)), r: Math.max(...bs.map((b) => b.r)), t: Math.min(...bs.map((b) => b.t)), b: Math.max(...bs.map((b) => b.b)) };
+        };
+        const barBox = (el) => el ? rect(el.getBBox()) : null;   // geometry only: a column still rising (scaleY) counts at full height
+        const shift = (ts, dx, dy) => ts.forEach((t) => {
+          if (dx) t.setAttribute('x', +t.getAttribute('x') + dx);
+          if (dy) t.setAttribute('y', +t.getAttribute('y') + dy);
+        });
+        const touch = (a, b) => !!a && !!b && a.l < b.r + 3 && b.l < a.r + 3 && a.t < b.b + 1 && b.t < a.b + 1;
+        const edges = () => groups.forEach((ts) => { if (!ts.length) return; const b = box(ts); if (b.l < 0) shift(ts, -b.l, 0); else if (b.r > W) shift(ts, W - b.r, 0); });
+        // what a label group k may not touch: its neighbours' columns, and the labels of the neighbour before it
+        const blockers = (k) => [k - 1, k + 1].filter((j) => j >= 0 && j < cols.length)
+          .flatMap((j) => [barBox(bars[j]), j < k && groups[j].length ? box(groups[j]) : null]).filter(Boolean);
+        const anyTouch = () => groups.some((ts, k) => ts.length && blockers(k).some((o) => touch(box(ts), o)));
+        edges();
+        if (!anyTouch()) return;
+        svgEl.classList.add('tight');
+        edges();
+        // lift, left to right, just clear of whatever it touches; lifts only go up, so this settles
+        for (let pass = 0; pass < 6 && anyTouch(); pass++) {
+          groups.forEach((ts, k) => {
+            if (!ts.length) return;
+            blockers(k).forEach((o) => { const me = box(ts); if (touch(me, o)) shift(ts, 0, -(me.b - o.t + 3)); });
+          });
+        }
+        // a group lifted above the plot grows the chart upward rather than painting over the card's lede
+        const top = Math.min(...groups.filter((ts) => ts.length).map((ts) => box(ts).t));
+        if (top < 2) {
+          const d = Math.ceil(2 - top);
+          svgEl.setAttribute('viewBox', `0 ${-d} ${W} ${H + d}`); svgEl.setAttribute('height', H + d);
+        }
+      },
+    };
+  }
+
+  // ---- the line form (TREND_FORM = 'line') -- the pre-R3 renderer, drawn in CSS pixels ----
+  function trendLine(W) {
+    // L-04 repair: pad.b was 26, leaving the year labels (drawn at H-2, 2 units off
+    // the viewBox floor) close enough to the edge that real renders clipped them
+    // into half-glyphs. 32 gives the label row real headroom under the baseline.
+    // R3: W is the host's own width (1 unit = 1px); pad.l fits an 11px tick label ("$100M").
+    const H = Math.round(Math.max(200, Math.min(300, W * 0.36))), pad = { t: 34, r: 18, b: 32, l: 48 };
+    const maxV = Math.max(1, ...YEARS.map((y) => byYear[y].sum)) * 1.12;
+    const step = (W - pad.l - pad.r - 44) / (YEARS.length - 1);
+    const xAt = (i) => pad.l + 22 + i * step;
+    const yAt = (v) => pad.t + (1 - v / maxV) * (H - pad.t - pad.b);
+    const pts = YEARS.map((y, i) => [xAt(i), yAt(byYear[y].sum)]);
+    // L-04: a fiscal-year chart, not a wave -- straight segments between filed years,
+    // with the segment into an incomplete/scanned year drawn dashed and its point hollow.
+    const fullLineD = 'M ' + pts.map((p) => p.join(' ')).join(' L ');
+    let line = `M ${pts[0][0]} ${pts[0][1]}`, dashLine = '', mainOpen = true;
+    for (let i = 1; i < pts.length; i++) {
+      const flagged = incompleteYear(YEARS[i]) || SCAN_YEARS.has(YEARS[i]);
+      if (flagged) {
+        dashLine += ` M ${pts[i-1][0]} ${pts[i-1][1]} L ${pts[i][0]} ${pts[i][1]}`;
+        mainOpen = false;
+      } else {
+        if (!mainOpen) { line += ` M ${pts[i-1][0]} ${pts[i-1][1]}`; mainOpen = true; }
+        line += ` L ${pts[i][0]} ${pts[i][1]}`;
+      }
+    }
+    const area = fullLineD + ` L ${pts[pts.length-1][0]} ${yAt(0)} L ${pts[0][0]} ${yAt(0)} Z`;
+    // value labels stay visible at rest only on the first, last, largest and smallest
+    // year -- every other one shows on hover/focus, so the chart reads clean by default.
+    const sums = YEARS.map((y) => byYear[y].sum);
+    const showValIdx = new Set([0, YEARS.length - 1, sums.indexOf(Math.max(...sums)), sums.indexOf(Math.min(...sums))]);
+    // Gridlines follow the data. The old fixed 5/10/15M grid drew three lines flat on
+    // the baseline of a billion-dollar chart and labelled a $5B tick "$5000M"; a $523
+    // ledger got ticks far above its own ceiling. Steps are 1/2/5 x 10^k, ~4 intervals.
+    const tickStep = (() => {
+      const target = maxV / 4;
+      if (!(target > 0)) return 1;
+      const mag = Math.pow(10, Math.floor(Math.log10(target)));
+      const r = target / mag;
+      return (r <= 1 ? 1 : r <= 2 ? 2 : r <= 5 ? 5 : 10) * mag;
+    })();
+    const ticks = [0];
+    for (let v = tickStep; v < maxV && ticks.length < 8; v += tickStep) ticks.push(v);
+    // R2.2 (m-2): the first year's value label starts at the plot's left edge, a few units from the
+    // y-axis tick labels -- on the same baseline the two read as one string ("$10M $8.64M · unitemized").
+    // It steps to just above (or below, if there is room over its dot) the tick it would share a line
+    // with; if neither clears every tick, that one tick label gives way (its gridline stays).
+    const tickBase = ticks.map((v) => yAt(v) + 3);
+    const clashAt = (b) => tickBase.findIndex((t) => Math.abs(t - b) < 12);
+    let firstValY = pts[0][1] - 14, hideTick = -1;
+    {
+      const k = clashAt(firstValY);
+      if (k >= 0) {
+        const opts = [tickBase[k] - 12, tickBase[k] + 12]
+          .filter((b) => b >= 12 && b <= pts[0][1] - 9 && clashAt(b) < 0)
+          .sort((a, b) => Math.abs(a - firstValY) - Math.abs(b - firstValY));
+        if (opts.length) firstValY = opts[0]; else hideTick = k;
+      }
+    }
+    const grid = ticks.map((v, k) =>
+      (v === 0 ? '' : `<line class="tr-grid" x1="${pad.l}" y1="${yAt(v)}" x2="${W - pad.r}" y2="${yAt(v)}"/>`) +
+      (k === hideTick ? '' : `<text class="tr-tick" x="${pad.l - 7}" y="${yAt(v) + 3}" text-anchor="end">${moneyTick(v)}</text>`)).join('');
+    const hitW = Math.min(104, step);
+    const marks = YEARS.map((y, i) => {
+      const [x, yy] = pts[i];
+      const sel = state.y === y;
+      const incomplete = incompleteYear(y);
+      const hollow = incomplete || SCAN_YEARS.has(y);
+      const valTxt = moneyCompact(byYear[y].sum) + (incomplete ? ' · unitemized' : '');
+      // L-04 repair: the last point's value label ("$X.XM · unitemized") is the
+      // longest on the chart and, centered on the right-most point, ran off the
+      // right edge of the viewBox. Anchor it to end flush with the chart's own
+      // right padding instead of centering it on a point with no room to its right.
+      // R2 (R-6): and the first point mirrors it -- centred on the first year, a long label
+      // ("$8.64M · unitemized") ran left over the y-axis tick labels. It starts at the plot's
+      // left edge instead, clear of the ticks (which end at pad.l - 7).
+      const isLast = i === pts.length - 1, isFirst = i === 0;
+      const valAnchor = isLast ? 'end' : isFirst ? 'start' : 'middle';
+      const valX = isLast ? (W - pad.r) : isFirst ? pad.l : x;
+      return `
+        <g class="tr-pt${sel ? ' is-sel' : ''}${showValIdx.has(i) ? ' show-val' : ''}" data-i="${i}" data-y="${y}" tabindex="0" role="button"
+           aria-label="${trendPtLabel(y, i)}">
+          <rect x="${x - hitW / 2}" y="${pad.t - 16}" width="${hitW}" height="${H - pad.t + 8}" fill="transparent"/>
+          <circle cx="${x}" cy="${yy}" r="${sel ? 6.5 : 4.5}" class="tr-dot${hollow ? ' hollow' : ''}"/>
+          <text x="${valX}" y="${isFirst ? firstValY : yy - 14}" text-anchor="${valAnchor}" class="tr-val">${valTxt}</text>
+          <text x="${x}" y="${H - 14}" text-anchor="middle" class="tr-year">${y}</text>
+        </g>`;
+    }).join('');
+    const bandW = Math.min(60, step * 0.9);
+    const svg = `
+      <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" class="tr-line-form${state.y !== null ? ' scoped' : ''}" role="group" aria-label="${trendAria()}">
+        <defs>
+          <linearGradient id="trFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#a35c1a" stop-opacity="0.14"/>
+            <stop offset="100%" stop-color="#a35c1a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        ${grid}
+        ${state.y !== null ? `<rect class="tr-band" x="${xAt(YEARS.indexOf(state.y)) - bandW / 2}" y="10" width="${bandW}" height="${H - 18}" rx="8"/>` : ''}
+        <line class="tr-base" x1="${pad.l}" y1="${yAt(0)}" x2="${W - pad.r}" y2="${yAt(0)}"/>
+        <path class="tr-area" d="${area}"/>
+        <path class="tr-line" d="${line}"/>
+        ${dashLine ? `<path class="tr-line dashed" d="${dashLine}"/>` : ''}
+        <path class="tr-timing" d="${fullLineD}" aria-hidden="true"/>
+        ${marks}
+      </svg>`;
+    return {
+      svg, pts, H,
+      // reveal choreography: delay each year by the tip's real arrival (path length, not guesswork)
+      delays: (svgEl) => {
+        const lineEl = svgEl.querySelector('.tr-timing');
+        const L = lineEl.getTotalLength();
+        $('trend').style.setProperty('--plen', L.toFixed(1));
+        const fracAt = (tx) => {
+          let lo = 0, hi = L;
+          for (let k = 0; k < 18; k++) {
+            const mid = (lo + hi) / 2;
+            if (lineEl.getPointAtLength(mid).x < tx) lo = mid; else hi = mid;
+          }
+          return lo / L;
+        };
+        return pts.map((p) => (fracAt(p[0]) * 1.4).toFixed(2) + 's');
+      },
+      // R3: in CSS pixels a phone's line is short -- two resting labels ("$36.5M · unitemized") can meet;
+      // the later one lifts just clear of the earlier (measured, idempotent, re-run when fonts land)
+      after: (svgEl) => {
+        const vals = [...svgEl.querySelectorAll('.tr-pt.show-val .tr-val, .tr-pt.is-sel .tr-val')];
+        vals.forEach((t) => { if (t.dataset.y0 === undefined) t.dataset.y0 = t.getAttribute('y'); t.setAttribute('y', t.dataset.y0); });
+        svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`); svgEl.setAttribute('height', H);
+        const r = (t) => { const b = t.getBBox(); return { l: b.x, r: b.x + b.width, t: b.y, b: b.y + b.height }; };
+        const touch = (a, b) => a.l < b.r + 3 && b.l < a.r + 3 && a.t < b.b + 1 && b.t < a.b + 1;
+        for (let k = 1; k < vals.length; k++) {
+          for (let j = 0; j < k; j++) {
+            const a = r(vals[j]), b = r(vals[k]);
+            if (touch(a, b)) vals[k].setAttribute('y', +vals[k].getAttribute('y') - (b.b - a.t + 3));
+          }
+        }
+        const top = vals.length ? Math.min(...vals.map((t) => r(t).t)) : 2;
+        if (top < 2) { const d = Math.ceil(2 - top); svgEl.setAttribute('viewBox', `0 ${-d} ${W} ${H + d}`); svgEl.setAttribute('height', H + d); }
+      },
+    };
   }
 
   function barRow(label, value, max, opts) {
@@ -990,13 +1324,27 @@
       $('eq-a').textContent = money(eqA);
       $('eq-b').textContent = money(eqB);
       const eqSeal = document.querySelector('#db-eq .eq-seal');
-      if (eqSeal) eqSeal.textContent = eqD === 0 ? '\u0394 $0 \u2713' : '\u0394 ' + money(eqD);
+      if (eqSeal) eqSeal.textContent = eqD === 0 ? '\u0394\u00a0$0 \u2713' : '\u0394 ' + money(eqD);
       const eqLbl = document.querySelector('#db-eq .eq-part .eq-label');
       if (eqLbl) eqLbl.textContent = SY !== null ? `\u03a3 ${SY} grant schedule` : '\u03a3 grant schedules';
       const dbEl = document.querySelector('.db-line');
       if (dbEl) dbEl.innerHTML = SY !== null
         ? `Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>tax year ${SY}, to the dollar.</em>`
         : 'Every number on this page reconciles to the foundation\u2019s own filed totals \u2014 <em>' + (document.documentElement.dataset.running || 'to the dollar, five years running.') + '</em>';
+      // L-07: every filed period, one chip each, linking straight to its row in Methodology
+      const dbYearsEl = $('db-years');
+      if (dbYearsEl && !dbYearsEl.dataset.built) {
+        dbYearsEl.dataset.built = '1';
+        const allTaxYears = [...new Set([...Object.keys(tieout).map(Number), ...Object.keys(WITHHELD).map(Number)])].sort((a, b) => a - b);
+        dbYearsEl.innerHTML = allTaxYears.map((y) => {
+          const w = WITHHELD[String(y)];
+          const scanned = SCAN_YEARS.has(y);
+          const cls = w ? 'withheld' : (scanned ? 'scan' : '');
+          const title = w ? ` title="${esc(w.why || 'Withheld')}"` : (scanned ? ' title="Read from the paper filing"' : '');
+          return `<a href="#tab=methodology" data-y="${y}"${cls ? ` class="${cls}"` : ''}${title}>${y}${w ? '' : ' \u2713'}</a>`;
+        }).join('');
+        dbYearsEl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setTab('methodology')));
+      }
       $('db-eq').setAttribute('aria-label',
         `Sum of the ${SY !== null ? SY + ' grant schedule' : 'grant schedules'}, ${money(eqA)}, `
         + (eqD === 0
@@ -1014,8 +1362,19 @@
         : nrRet === 0
           ? `No recipient in ${nrY} had been funded in an earlier filed year — all <strong>${num(nrAll)}</strong> ${nrAll === 1 ? 'is' : 'are'} new.`
           : `Giving concentrates among returning grantees: <strong>${num(nrRet)} of ${num(nrAll)}</strong> ${recipWord(nrAll)} in ${nrY} had been funded before.`;
-      if (incompleteYear(nrY)) $('lede-newret').textContent = `${nrY} contains unitemized disclosures. New and returning recipient comparisons are unavailable for that year.`;
-      if (!sEnts.length) $('lede-conc').textContent = 'No named-recipient detail is available in this scope. The filed total remains available in reconciliation.';
+      const nrIncomplete = incompleteYear(nrY);
+      if (nrIncomplete) $('lede-newret').textContent = `${nrY} contains unitemized disclosures. New and returning recipient comparisons are unavailable for that year.`;
+      // L-14: with nothing to show beneath it, the sentence IS the card -- and its
+      // sibling (Concentration) takes the width back rather than leaving it empty.
+      {
+        const nrCardEl = $('newret').closest('.card');
+        if (nrCardEl) nrCardEl.classList.toggle('compact', !tiny && nrIncomplete);
+        $('newret').hidden = nrIncomplete;
+        if (nrIncomplete) $('nr-detail').hidden = true;
+      }
+      if (!sEnts.length) $('lede-conc').textContent = SY !== null && incompleteYear(SY)
+        ? `${SY} was filed as unitemized disclosures \u2014 no recipient is named, so there is no concentration to measure. Its filed total still reconciles, to the dollar.`
+        : 'No named-recipient detail is available in this scope. The filed total remains available in reconciliation.';
       const CAT_UNITEMIZED = 'Unitemized disclosures';
       const cTop = sCatList.find((c) => c.key !== CAT_OTHER && c.key !== CAT_UNITEMIZED);
       const cOtherRow = sCatList.find((c) => c.key === CAT_OTHER) || { sum: 0, count: 0 };
@@ -1064,12 +1423,20 @@
         : cRest === 1
           ? `${cTopN} ${orgsWord(cTopN)} — the other one holds the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`
           : `${cTopN} ${orgsWord(cTopN)} — the other ${num(cRest)} share the remaining ${(100 - barPct(sTop5Sum, S_NAMED)).toFixed(1)}%`;
-      if (!sEnts.length) $('conc-hint').textContent = 'Recipient concentration is unavailable';
-      else if (unitemized.length) $('conc-hint').textContent += ' · share of named-recipient dollars';
+      if (sEnts.length && unitemized.length) $('conc-hint').textContent += ' · share of named-recipient dollars';
+      // R3 (NEW-2): a scope with no named recipient says so ONCE -- the lede above. No dash, no empty
+      // track, no second "unavailable" line, and no labelled-but-empty list (axe aria-prohibited-attr);
+      // the card goes compact so it leaves no empty air beside its neighbour.
+      const concNone = !sEnts.length;
+      ['conc-share', 'conc-hint', 'conc-top5'].forEach((id) => { const n = $(id); if (n) n.hidden = concNone; });
+      { const pair = document.querySelector('.conc-pair'); if (pair) pair.hidden = concNone; }
+      $('conc-share').closest('.card').classList.toggle('compact', concNone);
       // the largest recipients behind the number — they arrive one by one
       const top5list = sEnts.slice(0, 5);
       const maxT5 = top5list.length ? top5list[0].total : 0;   // an empty scope has no leader
-      $('conc-top5').setAttribute('aria-label', cTopN === 1 ? 'The largest recipient' : `The ${numWord(cTopN)} largest recipients`);
+      $('conc-top5').setAttribute('role', 'group');   // a labelled group (a bare div may not carry aria-label)
+      if (concNone) $('conc-top5').removeAttribute('aria-label');
+      else $('conc-top5').setAttribute('aria-label', cTopN === 1 ? 'The largest recipient' : `The ${numWord(cTopN)} largest recipients`);
       $('conc-top5').innerHTML = top5list.map((e, i) => barRow(
         `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}`,
         e.total, maxT5,
@@ -1103,29 +1470,51 @@
         const n = parseInt(hex.slice(1), 16);
         return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) < 145;
       };
+      // L-08: the grid draws named fields darkest-to-lightest, then the unitemized
+      // hatch, then the hollow "other" -- the row list below/beside it stays in plain
+      // dollar order (sCatList's own sort), so only the grid's own sequence changes.
+      const catRank = (c) => c.key === CAT_OTHER ? 2 : c.key === CAT_UNITEMIZED_KEY ? 1 : 0;
+      const pennyOrder = sCatList.map((c, i) => i).sort((a, b) => catRank(sCatList[a]) - catRank(sCatList[b]));
       const cells = [];
-      sCatList.forEach((c, ci) => {
+      pennyOrder.forEach((ci) => {
+        const c = sCatList[ci];
         const hollow = c.key === CAT_OTHER;
+        const unit = c.key === CAT_UNITEMIZED_KEY;
         for (let k = 0; k < cents[ci]; k++) {
           const label = (k === 0 && cents[ci] >= 4)
-            ? `<b class="${hollow ? 'k' : (darkText(c.color) ? 'w' : 'k')}">${cents[ci]}</b>` : '';
-          cells.push(`<span aria-hidden="true" class="penny${hollow ? ' other' : ''}" data-cat="${esc(c.key)}" style="--pc:${c.color};--pi:${cells.length}" title="${esc(c.key)} — ${cents[ci]}¢ of the dollar">${label}</span>`);
+            ? `<b class="${hollow || unit ? 'k' : (darkText(c.color) ? 'w' : 'k')}">${cents[ci]}</b>` : '';
+          cells.push(`<span aria-hidden="true" class="penny${hollow ? ' other' : ''}${unit ? ' unitemized' : ''}" data-cat="${esc(c.key)}" style="--pc:${c.color};--pi:${cells.length}" title="${esc(c.key)} — ${cents[ci]}¢ of the dollar">${label}</span>`);
         }
       });
       grid.innerHTML = cells.join('');
       grid.setAttribute('aria-label', 'One granted dollar as one hundred cents: '
         + sCatList.map((c, i) => `${c.key} ${cents[i]}¢`).join(', ') + '.');
-      $('cat-rows').innerHTML = sCatList.map((c, i) => `
+      const capVal = $('penny-cap-val');
+      const capDefault = capVal ? capVal.textContent : 'one dollar, one hundred cents';
+      const maxCatSum = sCatList.length ? Math.max(...sCatList.map((c) => c.sum)) : 0;
+      $('cat-rows').innerHTML = sCatList.map((c, i) => {
+        const unit = c.key === CAT_UNITEMIZED_KEY;
+        const hollow = c.key === CAT_OTHER;
+        return `
         <button type="button" class="cat-row" data-cat="${esc(c.key)}" aria-label="${esc(c.key)}: ${cents[i] === 0 ? 'under one cent' : cents[i] + ' cents'} of every dollar, ${money(c.sum)} across ${num(c.count)} ${grantsWord(c.count)}. Opens these grants in the ledger.">
-          <span class="cr-sw" style="background:${c.color}"></span>
+          <span class="cr-sw${unit ? ' unitemized' : ''}${hollow ? ' other' : ''}"${unit || hollow ? '' : ` style="background:${c.color}"`}></span>
           <span class="cr-c">${cents[i] === 0 ? '<1\u00a2' : cents[i] + '\u00a2'}</span>
           <span class="cr-name">${esc(c.key)}<span class="cr-meta">${num(c.count)} ${grantsWord(c.count)} \u00b7 ${share(c.sum, S_GRAND)}</span></span>
           <span class="cr-val">${moneyCompact(c.sum)}</span>
-        </button>`).join('');
+          <span class="cr-bar" aria-hidden="true" style="--w:${barPct(c.sum, maxCatSum)}%"></span>
+        </button>`;
+      }).join('');
       const rows = [...$('cat-rows').querySelectorAll('.cat-row')];
       const spotlight = (cat) => {
         grid.classList.toggle('dim', cat !== null);
         grid.querySelectorAll('.penny').forEach((p) => p.classList.toggle('hot', p.dataset.cat === cat));
+        if (capVal) {
+          if (cat === null) capVal.textContent = capDefault;
+          else {
+            const idx = sCatList.findIndex((c) => c.key === cat);
+            if (idx >= 0) capVal.textContent = `${cents[idx]}¢ \u00b7 ${cat}`;
+          }
+        }
         rows.forEach((r) => r.classList.toggle('hot', r.dataset.cat === cat));
       };
       rows.forEach((el) => {
@@ -1221,7 +1610,10 @@
     // computed from rows, and a preview would put wrong numbers on the page -- so it waits
     if (rowsPending) {
       const wait = waitLine();
-      ['lede-conc', 'lede-newret', 'lede-cats', 'lede-movers', 'conc-hint'].forEach((id) => { const n = $(id); if (n) n.textContent = wait; });
+      // R3 (DECISIONS-JOE #1): each waiting card says so once and draws the double-rule loader under it
+      ['lede-conc', 'lede-newret', 'lede-cats', 'lede-movers'].forEach((id) => { const n = $(id); if (n) n.innerHTML = esc(wait) + '<span class="dr-load" aria-hidden="true"></span>'; });
+      ['conc-share', 'conc-hint', 'conc-top5'].forEach((id) => { const n = $(id); if (n) n.hidden = true; });
+      { const pair = document.querySelector('.conc-pair'); if (pair) pair.hidden = true; }
       $('conc-share').textContent = '\u2026';
       $('conc-bar').style.width = '0%';
       ['conc-top5', 'penny-grid', 'cat-rows', 'newret', 'movers'].forEach((id) => { const n = $(id); if (n) n.innerHTML = ''; });
@@ -1252,7 +1644,7 @@
     const top = sEnts.slice(0, 10);
     const maxT = top.length ? top[0].total : 0;   // an empty scope has no leader
     $('rec-bars').innerHTML = top.map((e, i) => barRow(
-      `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}${e.aliases.length > 1 ? ' <span class="merged-flag" title="Merged from ' + e.aliases.length + ' as-filed name variants — see Methodology">▸' + e.aliases.length + '</span>' : ''}`,
+      `<span class="rk">${String(i + 1).padStart(2, '0')}</span> ${esc(dc(e.display))}${e.aliases.length > 1 ? ` <span class="merged-flag" title="${e.aliases.length} as-filed name variants merged — reviewed by hand">${e.aliases.length} names</span>` : ''}`,
       e.total, maxT,
       { cls: 'is-btn stacked', attrs: `style="--i:${i}" data-ent="${esc(e.id)}" role="button" tabindex="0" aria-label="${esc(dc(e.display))}, ${money(e.total)}, ${num(e.count)} ${grantsWord(e.count)}. Opens the recipient profile."` }
     )).join('');
@@ -1271,7 +1663,7 @@
     const item = (e, ri) => `
       <li style="--ri:${Math.min(ri || 0, 18)}">
         <button type="button" class="rec-item" data-ent="${esc(e.id)}">
-          <span class="ri-name" title="As filed: ${esc(e.aliases.join(' · '))}">${esc(dc(e.display))}${e.aliases.length > 1 ? ' <span class="merged-flag">▸' + e.aliases.length + '</span>' : ''}</span>
+          <span class="ri-name" title="As filed: ${esc(e.aliases.join(' · '))}">${esc(dc(e.display))}${e.aliases.length > 1 ? ` <span class="merged-flag" title="${e.aliases.length} as-filed name variants merged — reviewed by hand">${e.aliases.length} names</span>` : ''}</span>
           <span class="ri-meta">${num(e.count)} ${grantsWord(e.count)} · ${[...e.years].sort().join(', ')} · <span class="ri-share">${share(e.total, S_GRAND, '%', (S_GRAND > 0 && Math.abs(e.total) / S_GRAND >= 0.01) ? 1 : 2)} of ${SY !== null ? SY : 'all'} dollars</span></span>
           <span class="ri-amt">${money(e.total)}</span>
         </button>
@@ -1361,7 +1753,9 @@
     })).filter((p) => p.count > 0);
     const maxP = Math.max(...per.map((p) => p.sum));
     $('pf-title').textContent = dc(e.display);
-    $('pf-sub').textContent = `${money(e.total)} · ${num(e.count)} ${grantsWord(e.count)} · ${[...e.years].sort().join(', ')}`;
+    const eYears = [...e.years].sort((a, b) => a - b);
+    const eYearSpan = eYears.length <= 1 ? String(eYears[0]) : `${eYears[0]}–${eYears[eYears.length - 1]}`;
+    $('pf-sub').textContent = `${money(e.total)} · ${num(e.count)} ${grantsWord(e.count)} · ${eYearSpan}`;
     $('pf-aliases').innerHTML = e.aliases.length > 1
       ? `<div class="pf-h">As filed (${num(e.aliases.length)} name variants, merged — reviewed)</div>` +
         e.aliases.map((a) => `<code>${esc(a)}</code>`).join(' ')
@@ -1375,12 +1769,27 @@
       r.addEventListener('click', go);
       r.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); go(); } });
     });
-    $('pf-grants').innerHTML = e.grants.slice().sort((a, b) => b.y - a.y || b.a - a.a).map((g) => `
-      <li class="pf-g">
-        <span class="pf-gy">${g.y}</span>
-        <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))} ${receiptFor(g.o) ? receiptMark(g.o, 'pf-go') : `<code class="pf-go" title="Filing reference">${esc(g.o)}</code>`}</span>
-        <span class="pf-ga">${money(g.a)}</span>
-      </li>`).join('');
+    // L-10: grouped by year, sticky year header, one receipt per year (not per row)
+    {
+      const byY = new Map();
+      e.grants.slice().sort((a, b) => b.y - a.y || b.a - a.a).forEach((g) => {
+        if (!byY.has(g.y)) byY.set(g.y, []);
+        byY.get(g.y).push(g);
+      });
+      const yearsDesc = [...byY.keys()].sort((a, b) => b - a);
+      $('pf-grants').innerHTML = yearsDesc.map((y) => {
+        const rows = byY.get(y);
+        const yearSum = rows.reduce((s, g) => s + g.a, 0);
+        const t = tieout[String(y)];
+        const chip = t ? receiptMark(t.object_id, 'pf-go', 'filing ↗') : '';
+        return `<li class="pf-yh" data-y="${y}"><span>${y}</span><span>${money(yearSum)} · ${num(rows.length)} ${grantsWord(rows.length)}${chip ? ' · ' + chip : ''}</span></li>`
+          + rows.map((g) => `
+          <li class="pf-g">
+            <span class="pf-gp" title="As filed: ${esc(g.p)}">${esc(dc(g.p))}</span>
+            <span class="pf-ga">${money(g.a)}</span>
+          </li>`).join('');
+      }).join('');
+    }
     const inY = state.y !== null ? e.grants.filter((g) => g.y === state.y).length : 0;
     const keepY = state.y !== null && inY > 0;
     $('pf-all').textContent = keepY
@@ -1740,20 +2149,59 @@
 
   // ---------- methodology ----------
   function renderMethodology() {
-    // every filed tax period gets a card — including a year the foundation filed but paid
-    // no grants, which still reconciles ($0 = $0) and is part of the badge's N/N claim
-    $('tie-cards').innerHTML = Object.keys(tieout).sort().map((y) => {
+    // L-07: every filed tax period gets a row in one schedule -- including a year the
+    // foundation filed but paid no grants, which still reconciles ($0 = $0) and is
+    // part of the badge’s N/N claim -- closed with a double-rule total.
+    // repair pass (major): a withheld year has no filing to reconcile, but the one
+    // table meant to show every other year reconciles was built from tieout alone,
+    // so it never listed the year it was refusing. It is now the union of filed and
+    // withheld years; a withheld row renders with dashes, its own fail badge, and a
+    // link to why, instead of silently vanishing from the schedule.
+    const tieYears = Object.keys(tieout).sort();
+    const withheldYears = Object.keys(WITHHELD).sort();
+    const allTieYears = [...new Set([...tieYears, ...withheldYears])].sort();
+    const exSlug = esc(document.documentElement.dataset.slug || '');
+    let sumRows = 0, sumSched = 0, sumRef = 0;
+    const tieRows = allTieYears.map((y) => {
+      if (!tieout[y]) {
+        const w = WITHHELD[y] || {};
+        return `
+        <tr class="tie-row" data-y="${y}">
+          <td data-label="Tax year">${y}</td>
+          <td data-label="Grant rows"><span class="tie-v">—</span></td>
+          <td data-label="Σ grant schedule"><span class="tie-v">—</span></td>
+          <td data-label="Filed ${esc(REF_LBL)}"><span class="tie-v">—</span></td>
+          <td data-label="Δ"><span class="badge-fail">— · withheld</span></td>
+          <td data-label="Source"><a href="../../exceptions/#${exSlug}" title="${esc(w.why || 'Named on the exceptions page.')}">Exceptions ↗</a></td>
+        </tr>`;
+      }
       const t = tieout[y];
+      const delta = t.line25_col_d - t.grant_sum;
+      sumRows += t.grant_count; sumSched += t.grant_sum; sumRef += t.line25_col_d;
+      const scanned = t.object_id && !/^\d+$/.test(String(t.object_id));
       return `
-        <div class="tie-card">
-          <div class="tc-top"><span class="tc-y">${y}</span><span class="mini-seal">${(t.line25_col_d - t.grant_sum) === 0 ? 'Δ $0 ✓' : 'Δ ' + money(t.line25_col_d - t.grant_sum)}</span></div>
-          <div class="tc-row"><span>Grant schedule sum</span><strong>${money(t.grant_sum)}</strong></div>
-          <div class="tc-row"><span>${esc(REF_LBL)}</span><strong>${money(t.line25_col_d)}</strong></div>
-          <div class="tc-row"><span>Grant rows</span><strong>${num(t.grant_count)}</strong></div>
-          <div class="tc-row"><span>Δ</span><strong>${money(t.line25_col_d - t.grant_sum)}</strong></div>
-          <div class="tc-obj">Object ID ${receiptMark(t.object_id, '')}</div>
-        </div>`;
+        <tr class="tie-row" data-y="${y}">
+          <td data-label="Tax year">${y}</td>
+          <td data-label="Grant rows"><span class="tie-v">${num(t.grant_count)}</span></td>
+          <td data-label="Σ grant schedule"><span class="tie-v">${money(t.grant_sum)}</span></td>
+          <td data-label="Filed ${esc(REF_LBL)}"><span class="tie-v">${money(t.line25_col_d)}</span></td>
+          <td data-label="Δ">${delta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ ${money(delta)} · withheld</span>`}</td>
+          <td data-label="Source">${receiptMark(t.object_id, '')} <span class="cm-tier">${scanned ? 'IRS scan' : 'e-file'}</span></td>
+        </tr>`;
     }).join('');
+    const grandDelta = sumRef - sumSched;
+    $('tie-cards').innerHTML = `<table class="tie-table">
+      <caption class="sr-only">Reconciliation of the grant schedule to the filed total, by tax year.</caption>
+      <thead><tr>
+        <th scope="col">Tax year</th><th scope="col">Grant rows</th><th scope="col">Σ grant schedule</th>
+        <th scope="col">Filed ${esc(REF_LBL)}</th><th scope="col">Δ</th><th scope="col">Source</th>
+      </tr></thead>
+      <tbody>${tieRows}</tbody>
+      <tfoot><tr>
+        <td>Total</td><td>${num(sumRows)}</td><td>${money(sumSched)}</td><td>${money(sumRef)}</td>
+        <td>${grandDelta === 0 ? '<span class="badge-pass">$0 ✓</span>' : `<span class="badge-fail">Δ ${money(grandDelta)}</span>`}</td><td></td>
+      </tr></tfoot>
+    </table>`;
     $('ent-table').innerHTML = mergedEntities.map((e) => `
       <li class="ent-row">
         <strong>${esc(dc(e.display))}</strong>
@@ -1764,6 +2212,13 @@
       `${num(mergedEntities.length)} ${plural(mergedEntities.length, 'merge')}, each reviewed by hand (parenthetical DBA or acronym, leading/trailing "The", or punctuation-only variants of the same organization). ` +
       `No EIN appears in ${Number(document.documentElement.dataset.n || 857) === 1 ? 'the single filed row' : 'any of the ' + num(Number(document.documentElement.dataset.n || 857)) + ' filed rows'}, so merges rest on the name evidence shown here — anything less certain stays unmerged.`;
     if (rowsPending) { $('ent-table').innerHTML = ''; $('ent-note').textContent = waitLine(); }
+    // L-14: a handful of merges are worth seeing at a glance; a long table is collapsed
+    const entDetails = $('ent-details');
+    if (entDetails) {
+      $('ent-summary').textContent = `${num(mergedEntities.length)} ${plural(mergedEntities.length, 'merge')}, each reviewed — show the evidence`;
+      entDetails.open = mergedEntities.length <= 6;
+      entDetails.hidden = mergedEntities.length === 0;
+    }
   }
 
   // ---------- render ----------
@@ -1877,8 +2332,19 @@
         gs.innerHTML = `<span class="gs-label">In ${SY}</span><span class="gs-val">${money(byYear[SY].sum)}</span><span class="gs-meta">${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${(() => {
           const ty = tieout[String(SY)];
           const d = ty ? ty.line25_col_d - ty.grant_sum : 0;
-          return (d === 0 ? 'Δ $0 vs ' : 'Δ ' + money(d) + ' vs ') + REF_LBL;
+          return (d === 0 ? 'Δ $0 vs ' : 'Δ ' + money(d) + ' vs ') + REF_LBL;
         })()}</span>`;
+      }
+    }
+    // L-11: the phone rail's own scope readout, next to it (the rail never moves to show it)
+    const railScope = document.getElementById('rail-scope');
+    if (railScope) {
+      if (SY === null) railScope.hidden = true;
+      else {
+        railScope.hidden = false;
+        const ty = tieout[String(SY)];
+        const d = ty ? ty.line25_col_d - ty.grant_sum : 0;
+        railScope.textContent = `In ${SY} · ${money(byYear[SY].sum)} · ${num(byYear[SY].count)} ${grantsWord(byYear[SY].count)} · ${d === 0 ? 'Δ $0' : 'Δ ' + money(d)}`;
       }
     }
     const dEl = $('kpi-delta');
@@ -1906,10 +2372,45 @@
     if (typeof syncSide === 'function') syncSide();
     syncControls();   // one sync point: every path that changes state gets reflected in the controls
     renderKpis();
+    fitKpis();
     if (state.tab === 'overview') renderOverview();
     else if (state.tab === 'recipients') renderRecipients();
     else if (state.tab === 'grants') renderGrants();
     else renderMethodology();
+    markScrollRegions();
+  }
+  // R2 (c): a headline figure never wraps and never clips. The four values share one size; when
+  // any of them would overflow its cell ("$100K–$250K" in the 2x2 phone grid, or four across
+  // beside the sidebar at 1100px) all four step down together, so the strip stays one voice.
+  function fitKpis() {
+    const vals = [...document.querySelectorAll('.sheet-kpis .k-val')];
+    if (!vals.length) return;
+    vals.forEach((v) => { v.style.fontSize = ''; });
+    let ratio = 1;
+    vals.forEach((v) => { const cw = v.clientWidth, sw = v.scrollWidth; if (cw > 0 && sw > cw) ratio = Math.min(ratio, cw / sw); });
+    if (ratio < 1) {
+      const base = parseFloat(getComputedStyle(vals[0]).fontSize) || 30;
+      const fs = Math.max(15, Math.floor(base * ratio * 0.97 * 10) / 10);
+      vals.forEach((v) => { v.style.fontSize = fs + 'px'; });
+    }
+  }
+  // R2 (R-5): a table that scrolls sideways (the purpose map, the NTEE map, the grant table
+  // between 720 and 899px) has to be reachable and named for a keyboard or screen-reader user.
+  function markScrollRegions() {
+    document.querySelectorAll('.cm-wrap, .tw, .table-wrap').forEach((w) => {
+      if (!w.getClientRects().length) return;   // in a hidden panel: judge it when it shows
+      const scrolls = w.scrollWidth > w.clientWidth + 1;
+      if (scrolls && !w.hasAttribute('tabindex')) {
+        const cap = w.querySelector('caption');
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'region');
+        w.setAttribute('aria-label', (cap && cap.textContent.trim()) || 'Scrollable table');
+        w.dataset.scrollRegion = '1';
+      } else if (!scrolls && w.dataset.scrollRegion) {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label');
+        delete w.dataset.scrollRegion;
+      }
+    });
   }
 
   function syncProfile() {
@@ -1919,9 +2420,10 @@
   window.addEventListener('hashchange', () => { readHash(); syncControls(); setTab(state.tab, false); syncProfile(); });
   window.addEventListener('popstate', () => { readHash(); syncControls(); setTab(state.tab, false); syncProfile(); });
   let rzT = null;
-  window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { if (state.tab === 'grants') renderGrants(); }, 200); });
+  window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { if (state.tab === 'grants') renderGrants(); fitKpis(); markScrollRegions(); }, 200); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitKpis());
 
-  // verify console — the referee, re-run in the reader's own browser, on the full list only
+  // check console — the referee, re-run in the reader's own browser, on the full list only
   function verifyRows() {
     const gt = grants.reduce((s, g) => s + g.a, 0);
     console.assert(gt === Number(document.documentElement.dataset.grand || 64172055), 'grand total', gt);
@@ -1941,14 +2443,14 @@
       if (mode === null) { if (node) node.remove(); node = null; return; }
       if (!node) {
         node = document.createElement('p');
-        node.id = 'rows-status'; node.className = 'mini-note';
+        node.id = 'rows-status'; node.className = 'mini-note rows-status';
         node.setAttribute('role', 'status'); node.setAttribute('aria-live', 'polite');
-        node.style.cssText = 'padding:0.75rem 1.25rem;border:1px solid #bca87c;background:#fff7e7;margin:1rem 0;line-height:1.6';
         const host = document.querySelector('.sheet-kpis');
         if (host) host.insertAdjacentElement('afterend', node); else document.body.prepend(node);
       }
       const shown = `${num(grants.length)} largest of ${num(ROWS_TOTAL)} ${grantsWord(ROWS_TOTAL)}`;
-      if (mode === 'loading') node.textContent = `Loading the full grant list \u2014 ${num(ROWS_TOTAL)} rows. The ${shown} are shown meanwhile.`;
+      node.classList.toggle('failed', mode !== 'loading');
+      if (mode === 'loading') node.innerHTML = `Loading the full grant list \u2014 ${num(ROWS_TOTAL)} rows. The ${esc(shown)} are shown meanwhile.<span class="dr-load" aria-hidden="true"></span>`;
       else {
         node.innerHTML = `The full grant list did not load \u2014 the ${esc(shown)} are shown. `
           + '<button type="button" id="rows-retry" class="show-all" style="width:auto;margin:0 0 0 0.4rem;padding:0.3rem 0.8rem">Retry</button>';
@@ -1995,32 +2497,44 @@
       });
   }
 
-  // sticky toolbar: cast a shadow only when actually stuck, and export its height
+  // sticky tab bar + grants toolbar. R2 (R-3/R-4): the tab bar is .stuck exactly while it is
+  // pinned at the top -- observed on itself, 1px inside the viewport edge (the old sentinel
+  // flipped the class 32px early, while the bar was still in flow, and the class used to add
+  // an in-flow row). The grants toolbar counts as pinned from the moment it reaches the bottom
+  // of the tab bar's context strip; from then on the strip steps aside (.lt-pinned), so the
+  // pinned chrome on a phone is the tab bar plus one toolbar row and nothing else.
   const toolsEl = $('ledger-tools');
   const sentinel = $('tools-sentinel');
-  if (toolsEl && sentinel && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([en]) => {
-      toolsEl.classList.toggle('stuck', !en.isIntersecting);
-    }, { threshold: 0 }).observe(sentinel);
+  const tabsBar = document.getElementById('tablist');
+  let toolsIO = null;
+  function observeTools() {
+    if (!toolsEl || !sentinel || !('IntersectionObserver' in window)) return;
+    if (toolsIO) toolsIO.disconnect();
+    const tabsH = tabsBar && getComputedStyle(tabsBar).display !== 'none' ? tabsBar.offsetHeight : 0;
+    const top = Math.round(tabsH + (tabsH ? ctxStripH() : 0));
+    toolsIO = new IntersectionObserver(([en]) => {
+      const r = en.boundingClientRect;
+      const pinned = r.width > 0 && !en.isIntersecting && r.top < top + 1;   // width 0: its panel is hidden
+      toolsEl.classList.toggle('stuck', pinned);
+      if (tabsBar) tabsBar.classList.toggle('lt-pinned', pinned);
+    }, { rootMargin: `-${top}px 0px 0px 0px`, threshold: 0 });
+    toolsIO.observe(sentinel);
   }
   window.setToolsH = setToolsH;
   function setToolsH() {
     if (toolsEl) document.documentElement.style.setProperty('--tools-h', toolsEl.offsetHeight + 'px');
-    const tabs = document.getElementById('tablist');
-    if (tabs) document.documentElement.style.setProperty('--tabs-h', tabs.offsetHeight + 'px');
+    if (tabsBar) document.documentElement.style.setProperty('--tabs-h', tabsBar.offsetHeight + 'px');
   }
-  {
-    const tabs = document.getElementById('tablist');
-    if (tabs && 'IntersectionObserver' in window) {
-      const s = document.createElement('div');
-      tabs.parentNode.insertBefore(s, tabs);
-      new IntersectionObserver(([en]) => {
-        tabs.classList.toggle('stuck', !en.isIntersecting);
-      }, { threshold: 0 }).observe(s);
-    }
+  if (tabsBar && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([en]) => {
+      const r = en.boundingClientRect;
+      tabsBar.classList.toggle('stuck', r.height > 0 && r.top < 1 && en.intersectionRatio < 1);
+    }, { rootMargin: '-1px 0px 0px 0px', threshold: [0, 1] }).observe(tabsBar);
   }
   setToolsH();
-  window.addEventListener('resize', () => setTimeout(setToolsH, 120));
+  observeTools();
+  let thT = null;
+  window.addEventListener('resize', () => { clearTimeout(thT); thT = setTimeout(() => { setToolsH(); observeTools(); }, 120); });
 
   document.getElementById('return-chip').addEventListener('click', () => {
     if (!returnTo) return;
@@ -2071,6 +2585,44 @@
       <p class="cm-note">Field rules run first, top to bottom; a mechanism label (capital, operating, endowment) applies only when the purpose names no field. When the purpose names nothing at all, the same field words are read against the recipient\u2019s filed name — that second step decided ${num(s2count)} ${grantsWord(s2count)} (${money(s2sum)}); for example \u201cNext Generation Initiative\u201d carries no field, but its recipient — Buffalo Philharmonic Orchestra Society — does. This table <em>is</em> the classifier: the page runs exactly these rules, nothing more.</p>`;
   }
   renderCatMap();
+
+  // L-14: a scannable methodology -- a sticky contents strip over whatever sections
+  // this book actually has (a fiscal-note book gets one more than a plain one), with
+  // the current section highlighted as the reader scrolls.
+  function renderMethTOC() {
+    const panel = document.getElementById('panel-methodology');
+    const toc = document.getElementById('meth-toc');
+    if (!panel || !toc) return;
+    const heads = [...panel.querySelectorAll('h2[id], h3[id]')];
+    if (!heads.length) return;
+    // R3 (NEW-3): the strip carries short labels (the full heading rides in the title), so it fits one
+    // row on a desktop instead of hiding "Limitations" past the card's edge
+    const SHORT = { 'm-referee': 'Referee', 'm-source': 'Source', 'm-bridge': 'Bridging', 'm-canon': 'Name merges', 'm-purpose': 'Purpose map', 'm-limits': 'Limitations' };
+    const shortOf = (h) => SHORT[h.id] || (h.id === 'm-scans' ? (/reconcil/i.test(h.textContent) ? 'Filed total' : 'Read from paper') : h.textContent.trim().split(/\s+/).slice(0, 2).join(' '));
+    toc.innerHTML = heads.map((h, i) => `<a href="#tab=methodology" data-target="${h.id}" title="${esc(h.textContent.trim())}"${i === 0 ? ' class="cur"' : ''}>${esc(shortOf(h))}</a>`).join('');
+    const tocCue = () => toc.classList.toggle('more-r', toc.scrollLeft + toc.clientWidth < toc.scrollWidth - 2);
+    toc.addEventListener('scroll', tocCue, { passive: true });
+    window.addEventListener('resize', tocCue);
+    document.querySelectorAll('[data-tab="methodology"], #tab-methodology').forEach((b) => b.addEventListener('click', () => requestAnimationFrame(tocCue)));
+    requestAnimationFrame(tocCue);
+    toc.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-target]');
+      if (!a) return;
+      e.preventDefault();
+      const target = document.getElementById(a.dataset.target);
+      if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - (toc.offsetHeight + 12), behavior: reducedMotion() ? 'instant' : 'smooth' });
+    });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          toc.querySelectorAll('a').forEach((a) => a.classList.toggle('cur', a.dataset.target === en.target.id));
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      heads.forEach((h) => io.observe(h));
+    }
+  }
+  renderMethTOC();
 
   // entrance choreography — staggered within a viewport batch
   const rvIO = new IntersectionObserver((entries) => {
@@ -2247,10 +2799,243 @@
     });
   })();
 
+  // ---------- one hover bus: years and recipients light up wherever they appear (L-06) ----------
+  (function () {
+    function delegateHover(attr, cls) {
+      const on = (e) => {
+        const el = e.target.closest ? e.target.closest(`[${attr}]`) : null;
+        if (!el) return;
+        if (e.relatedTarget && el.contains(e.relatedTarget)) return;   // still inside -- ignore inner churn
+        const v = el.getAttribute(attr);
+        if (!v) return;
+        document.querySelectorAll(`[${attr}="${CSS.escape(v)}"]`).forEach((n) => n.classList.add(cls));
+      };
+      const off = (e) => {
+        const el = e.target.closest ? e.target.closest(`[${attr}]`) : null;
+        if (!el) return;
+        if (e.relatedTarget && el.contains(e.relatedTarget)) return;
+        const v = el.getAttribute(attr);
+        if (!v) return;
+        document.querySelectorAll(`[${attr}="${CSS.escape(v)}"]`).forEach((n) => n.classList.remove(cls));
+      };
+      // R2 (R-9): a finger is not a hover. A tap's compatibility mouseover used to leave the
+      // tapped year lit everywhere with nothing to clear it; pointer events carry the device,
+      // and focus lights the bus only when it is keyboard focus (:focus-visible).
+      if ('PointerEvent' in window) {
+        document.addEventListener('pointerover', (e) => { if (e.pointerType === 'mouse') on(e); });
+        document.addEventListener('pointerout', (e) => { if (e.pointerType === 'mouse') off(e); });
+      } else {
+        document.addEventListener('mouseover', on);
+        document.addEventListener('mouseout', off);
+      }
+      document.addEventListener('focusin', (e) => {
+        let kbd = true;
+        try { kbd = e.target.matches(':focus-visible'); } catch (x) {}
+        if (kbd) on(e);
+      });
+      document.addEventListener('focusout', off);
+    }
+    if (window.CSS && CSS.escape) { delegateHover('data-y', 'hot-y'); delegateHover('data-ent', 'hot-e'); }
+  })();
+
+  // ---------- shared header: save to shortlist, the way back, the full note (L-01/L-02/L-12) ----------
+  (function () {
+    const PKEY = 'gl_projects';
+    const todayISO = () => new Date().toISOString().slice(0, 10);
+    function readStore() { try { return JSON.parse(localStorage.getItem(PKEY) || '{}'); } catch (e) { return {}; } }
+    function writeStore(s) { try { localStorage.setItem(PKEY, JSON.stringify(s)); } catch (e) {} }
+    function activeProject(s) {
+      const list = Array.isArray(s.list) ? s.list : [];
+      return list.find((p) => p.id === s.active) || list[0] || null;
+    }
+    function blankProject(nm) {
+      return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7), name: nm || 'First project', created: todayISO(), updated: todayISO(), funders: [], notes: {}, evidence: {}, brief: '' };
+    }
+    const SLUG = document.documentElement.dataset.slug || '';
+
+    function toast(text, linkHref, linkText) {
+      let el = document.querySelector('.gl-toast');
+      if (!el) { el = document.createElement('div'); el.className = 'gl-toast'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
+      el.textContent = text;
+      if (linkHref) { const a = document.createElement('a'); a.href = linkHref; a.textContent = linkText || 'Open →'; el.appendChild(a); }
+      requestAnimationFrame(() => el.classList.add('show'));
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.remove('show'), 4200);
+    }
+
+    function syncShortlistCount() {
+      const p = activeProject(readStore());
+      const n = p && Array.isArray(p.funders) ? p.funders.length : 0;
+      document.querySelectorAll('[data-shortlist-count]').forEach((el) => { el.textContent = n; el.hidden = n === 0; });
+      return n;
+    }
+
+    const saveBtn = $('save-btn');
+    if (saveBtn && SLUG) {
+      const setPressed = (on) => {
+        saveBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        const label = saveBtn.querySelector('span');
+        if (label) {
+          label.className = 'sv';
+          label.innerHTML = on ? 'Saved<span class="sv-x"> · in shortlist</span>' : 'Save<span class="sv-x"> to shortlist</span>';
+        }
+      };
+      const initP = activeProject(readStore());
+      setPressed(!!(initP && Array.isArray(initP.funders) && initP.funders.includes(SLUG)));
+      saveBtn.addEventListener('click', () => {
+        const s = readStore();
+        if (!Array.isArray(s.list) || !s.list.length) { s.v = 1; const p0 = blankProject('First project'); s.list = [p0]; s.active = p0.id; }
+        let p = activeProject(s);
+        if (!p) { p = blankProject('First project'); s.list.push(p); s.active = p.id; }
+        if (!Array.isArray(p.funders)) p.funders = [];
+        if (!p.evidence) p.evidence = {};
+        const on = p.funders.includes(SLUG);
+        // a plain "Save to shortlist" carries no query scope -- no evidence record is
+        // written, so the hub's own "no saved matching selection" copy (whole ledger,
+        // saved from its page) renders for it, exactly as for any foundation-wide save.
+        if (on) { p.funders = p.funders.filter((u) => u !== SLUG); delete p.evidence[SLUG]; }
+        else p.funders.push(SLUG);
+        if (p.via) delete p.via[SLUG];   // a save made here is 'saved from its page', never the hub's earlier one
+        p.updated = todayISO();
+        writeStore(s);
+        setPressed(!on);
+        const n = syncShortlistCount();
+        if (!on) toast(`Saved · ${n} in shortlist · `, 'https://jcurry44.github.io/grants-ledgers/#view=shortlist', 'Open shortlist →');
+      });
+    }
+    syncShortlistCount();
+
+    // the header's "Find funders" reads "← Back to results" when the hub sent us here
+    const findLink = $('gl-find');
+    if (findLink) {
+      try {
+        if (document.referrer && /^https:\/\/jcurry44\.github\.io\/grants-ledgers\/(?:$|[?#])/.test(document.referrer) && history.length > 1) {
+          findLink.textContent = '← Back to results';
+          findLink.removeAttribute('href');
+          findLink.tabIndex = 0;
+          const back = (e) => { e.preventDefault(); history.back(); };
+          findLink.addEventListener('click', back);
+          findLink.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') back(e); });
+        }
+      } catch (e) {}
+    }
+
+    // R2.2 (m-1): the long search placeholder ("Search recipient, purpose, or place…") only where the box
+    // can show all of it -- it was clipping to "…or pla" beside the full desktop row -- else "Search grants…".
+    // Measured against the box's real width and font, re-measured whenever the toolbar changes width.
+    const qIn = $('q');
+    const fullPh = qIn ? (qIn.getAttribute('placeholder') || '') : '';
+    let phCtx = null;
+    const fitPh = () => {
+      if (!qIn || !/purpose/.test(fullPh) || !qIn.clientWidth) return;
+      let fits = false;
+      try {
+        const cs = getComputedStyle(qIn);
+        phCtx = phCtx || document.createElement('canvas').getContext('2d');
+        phCtx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        fits = phCtx.measureText(fullPh).width <= qIn.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 2;
+      } catch (e) {}
+      qIn.setAttribute('placeholder', fits ? fullPh : 'Search grants…');
+    };
+
+    // Where the grants controls live. A closed <details> never paints its content (Chromium's
+    // ::details-content), so they are MOVED between the row and the "More" menu, never display:contents'd.
+    //  <1100px: search + More on one pinned row, everything else in the menu (R2, R-4).
+    //  >=1100px: every control on the row -- except where that row would wrap (1100-~1356px beside the
+    //  sidebar: the two most common laptop widths). There Compact / Export CSV / Print report / Copy link
+    //  fold into More and search + both filters stay on the row: one 63px row at every desktop width
+    //  (R2.2, M-4). Measured on the real row, so fonts, zoom and text size are accounted for.
+    const ltMore = document.querySelector('.lt-more');
+    const ltMenu = ltMore && ltMore.querySelector('.lt-menu');
+    if (ltMore && ltMenu && window.matchMedia) {
+      const wideTools = matchMedia('(min-width: 1100px)');
+      const ltRow = ltMore.parentNode;
+      const ltKids = [...ltMenu.children];
+      const ltActs = ltKids.filter((k) => k.classList.contains('lt-btn'));
+      const rowWraps = () => {
+        const ks = [...ltRow.children].filter((k) => k.getClientRects().length && getComputedStyle(k).position !== 'absolute');
+        if (ks.length < 2) return false;
+        const mid = (k) => { const b = k.getBoundingClientRect(); return (b.top + b.bottom) / 2; };
+        const m0 = mid(ks[0]);
+        return ks.some((k) => Math.abs(mid(k) - m0) > 8);
+      };
+      let ltW = -1;
+      const placeTools = () => {
+        ltMore.classList.remove('lt-fold');
+        if (!wideTools.matches) {
+          ltKids.forEach((k) => ltMenu.appendChild(k));
+          ltMore.hidden = false;
+        } else {
+          ltKids.forEach((k) => ltRow.insertBefore(k, ltMore));
+          ltMore.hidden = true;
+          if (ltRow.offsetWidth && rowWraps()) {
+            ltActs.forEach((k) => ltMenu.appendChild(k));
+            ltMore.hidden = false;
+            ltMore.classList.add('lt-fold');
+            if (rowWraps()) ltKids.forEach((k) => ltMenu.appendChild(k));   // zoomed / huge text: the one-row phone layout
+          }
+          if (ltMore.hidden) ltMore.open = false;
+        }
+        ltW = ltRow.offsetWidth;
+        fitPh();
+        if (typeof setToolsH === 'function') setToolsH();
+      };
+      placeTools();
+      if (wideTools.addEventListener) wideTools.addEventListener('change', placeTools); else if (wideTools.addListener) wideTools.addListener(placeTools);
+      // re-place when the row's width changes -- a resize, or the Grants panel being shown (0 -> its width).
+      // Watched on the zero-height sentinel above the toolbar (same width, and a height that moving the
+      // controls can never change): watching the row itself re-sized it inside its own callback, which the
+      // browser reports as a "ResizeObserver loop" error.
+      const ltWatch = $('tools-sentinel') || ltRow;
+      if ('ResizeObserver' in window) new ResizeObserver(() => { if (ltRow.offsetWidth !== ltW) placeTools(); }).observe(ltWatch);
+      else window.addEventListener('resize', placeTools);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeTools);
+      // the menu closes on an outside tap or click, or Escape (focus back on its summary)
+      document.addEventListener('click', (e) => { if (ltMore.open && !ltMore.hidden && !ltMore.contains(e.target)) ltMore.open = false; });
+      ltMore.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && ltMore.open) { ltMore.open = false; const sm = ltMore.querySelector('summary'); if (sm) sm.focus(); }
+      });
+    } else fitPh();
+
+    // compact row density, remembered across visits (L-09)
+    const densityBtn = $('density');
+    if (densityBtn) {
+      const apply = (on) => {
+        if (on) document.body.setAttribute('data-density', 'compact');
+        else document.body.removeAttribute('data-density');
+        densityBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      };
+      let saved = false;
+      try { saved = localStorage.getItem('gl-density') === 'compact'; } catch (e) {}
+      apply(saved);
+      densityBtn.addEventListener('click', () => {
+        const on = document.body.dataset.density !== 'compact';
+        apply(on);
+        try { localStorage.setItem('gl-density', on ? 'compact' : 'comfortable'); } catch (e) {}
+      });
+    }
+
+    // "Read the full note" expands the clamped mobile lede (L-12)
+    const moreBtn = $('hero-more'), ledeP = $('lede-p');
+    if (moreBtn && ledeP) {
+      moreBtn.addEventListener('click', () => {
+        const open = ledeP.classList.toggle('open');
+        moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        moreBtn.textContent = open ? 'Show less' : 'Read the full note';
+      });
+    }
+  })();
+
   // init
   readHash();
   syncControls();
   setTab(state.tab, false);
   if (state.pr !== null) openProfile(state.pr, true);
   if (rowsPending) loadRows(); else verifyRows();
+  // L-11: a deep link that already scopes the page (a tab, a recipient, a search) has
+  // nothing for a phone to gain by opening on the cover -- start at the tab bar instead.
+  if ((state.tab !== 'overview' || state.r !== null || state.q) && window.innerWidth < 1100) {
+    const tabsEl = $('tablist');
+    if (tabsEl) window.scrollTo({ top: tabsEl.offsetTop, behavior: 'instant' });
+  }
 })();

@@ -8,45 +8,108 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Privacy — The Grants Ledger</title>
 <meta name="description" content="What this site does and does not collect. A static site built from public IRS filings: no accounts, no cookies, no forms, and a single cookie-free page-counter script that records no personal data. Saved lists and notes stay in your own browser and are never transmitted.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#1e4634">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Privacy — The Grants Ledger">
 <meta property="og:description" content="What this site does and does not collect, checked against its own code so a reviewer can check the claim.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/privacy/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-:root {
-  color-scheme: light;
-  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
-  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
-  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
-  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="gl-tokens">
+:root{
+  color-scheme:light;
+  --paper:#f6f4ec; --sheet:#ffffff; --sheet-warm:#fdfcf8; --tint:#f3efe2;
+  --ink:#20241e; --ink-dim:#4e5347; --ink-faint:#6a6e5d;
+  --cover:#1e4634; --cover-deep:#163527; --cover-line:rgba(242,239,228,.16);
+  --cream:#f2efe4; --cream-bright:#f6efdd; --cream-dim:rgba(242,239,228,.72); --cream-faint:var(--cream-dim);
+  --copper:#a35c1a; --copper-deep:#8a4a12; --copper-bright:#d19049; --copper-light:#e0a45e; --copper-soft:rgba(163,92,26,.10);
+  --green:#23573f; --pass:#1f6b47; --neg:#8c3a34;
+  --rule:rgba(32,36,30,.12); --rule-strong:rgba(32,36,30,.24); --edge:#8f9287;
+  --r-ctl:6px; --r-card:10px; --r-pill:999px;
+  --shadow-card:0 1px 2px rgba(40,36,20,.05),0 12px 32px -20px rgba(30,26,12,.35);
+  --shadow-pop:0 18px 44px -16px rgba(30,26,12,.5),inset 0 0 0 1px var(--rule-strong);
+  --serif:"Fraunces","Iowan Old Style",Georgia,serif;
+  --body-f:"Newsreader","Iowan Old Style",Georgia,serif;
+  --sans:"IBM Plex Sans","Helvetica Neue",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --text:var(--body-f);
+  --t-1:clamp(2.4rem,4.4vw,3.3rem); --t-2:2.5rem; --t-3:1.5rem; --t-4:1.125rem;
+  --t-body:15.5px; --t-small:13px; --t-label:11px;
+  --s-1:4px; --s-2:8px; --s-3:16px; --s-4:24px; --s-5:32px; --s-6:48px; --s-7:64px;
+  --ease:cubic-bezier(.22,1,.36,1); --dur-fast:120ms; --dur:200ms; --dur-slow:280ms; --dur-reveal:450ms;
+  --gt-h:62px; --focus:var(--copper-deep);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
-a { color: var(--copper-deep); }
-:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
-.sr-only { position:absolute; width:1px; height:1px; clip-path: inset(50%); overflow:hidden; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:calc(var(--gt-h) + 8px)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body-f)}
+a{color:var(--copper-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(163,92,26,.45)}
+a:hover{text-decoration-color:currentColor}
+.gl-top a{text-decoration:none}
+h1,h2,h3{text-wrap:balance}
+p,li,.lede{text-wrap:pretty}
+.sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cover-deep);color:var(--cream-bright);padding:10px 16px;border-radius:0 0 var(--r-ctl) 0;text-decoration:none;font:600 13px var(--sans)}
+.skip:focus{left:0}
+.eyebrow{font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.cover .eyebrow,.hero .eyebrow,.gl-top .eyebrow{color:var(--cream-dim)}
+.eyebrow.accent{color:var(--copper-deep);letter-spacing:.16em}
+.cover .eyebrow.accent,.hero .eyebrow.accent,.gl-top .eyebrow.accent{color:var(--copper-light)}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:var(--r-ctl)}
+.cover :focus-visible,.gl-top :focus-visible,.side :focus-visible,.foot :focus-visible,.hero :focus-visible{--focus:var(--copper-bright)}
+:where(button,[role=button],summary,.btn,.chip,.trychip):not(:disabled):active{transform:translateY(1px);transition-duration:40ms}
+@media(prefers-reduced-motion:reduce){:active{transform:none}}
+:disabled,[aria-disabled=true]{opacity:1;color:var(--ink-faint);background:var(--tint);border-color:var(--rule);cursor:not-allowed}
+button,a,summary,select{-webkit-tap-highlight-color:transparent}
+.gl-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream-bright);white-space:nowrap}
+.gl-brand b{font:600 20px/1 var(--serif);font-variation-settings:"opsz" 48;letter-spacing:-.01em;color:var(--cream-bright)}
+.gl-mark{flex:none;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(209,144,73,.45)}
+.gl-brand:hover b{color:var(--copper-light)}
+.gl-top{position:relative;z-index:40;height:var(--gt-h);display:flex;align-items:center;gap:28px;padding:0 max(24px,calc((100vw - 1352px)/2));background:var(--cover-deep);border-bottom:1px solid var(--cover-line);color:var(--cream-bright);font:500 13px/1 var(--sans);letter-spacing:.01em}
+.gl-nav{display:flex;align-items:center;gap:4px;flex:1;min-width:0}
+.gl-nav a,.gl-more summary{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-ctl);color:var(--cream-dim);text-decoration:none;cursor:pointer;list-style:none;white-space:nowrap}
+.gl-more summary::-webkit-details-marker{display:none}
+.gl-more summary svg{width:10px;height:10px}
+.gl-nav a[aria-current=page]{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-cnt{margin-left:6px;min-width:18px;padding:0 5px;border-radius:var(--r-pill);background:var(--copper-bright);color:var(--cover-deep);font:600 10.5px/18px var(--sans);text-align:center}
+.gl-more{position:relative}
+.gl-more summary.on{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;display:grid;background:var(--sheet);border-radius:var(--r-card);box-shadow:var(--shadow-pop)}
+.gl-menu a{color:var(--ink);font:500 14px/1.2 var(--sans);padding:9px 12px;border-radius:var(--r-ctl);text-decoration:none}
+.gl-menu a[aria-current=page]{color:var(--copper-deep);background:var(--tint)}
+.gl-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.gl-method{color:var(--cream-dim);text-decoration:none;padding:10px 12px;border-radius:var(--r-ctl)}
+.gl-cta{padding:11px 16px;border-radius:var(--r-ctl);background:var(--copper-bright);color:var(--cover-deep);font-weight:600;text-decoration:none;white-space:nowrap}
+@media(hover:hover){.gl-nav a:hover,.gl-more summary:hover,.gl-method:hover{color:var(--cream-bright)}.gl-menu a:hover{background:var(--tint)}.gl-cta:hover{background:var(--copper-light)}}
+.gl-nav a:active,.gl-method:active{transform:translateY(1px)}
+@media(max-width:1099px){.gl-top{gap:16px;padding:0 20px}.gl-cta{display:none}}
+@media(max-width:640px){.gl-top{height:56px;gap:12px}.gl-brand b{font-size:18px}.gl-method{display:none}.gl-top .gl-nav a[data-nav=atlas],.gl-top .gl-nav a[data-nav=shortlist]{display:none}.gl-top .gl-nav{justify-content:flex-end}.gl-top .gl-menu{left:auto;right:0}}
+@media(max-width:640px){.gl-top:not([data-surface=hub]){gap:10px}.gl-top:not([data-surface=hub]) .gl-actions{display:none}.gl-top:not([data-surface=hub]) .gl-nav{gap:2px}.gl-top:not([data-surface=hub]) .gl-nav a,.gl-top:not([data-surface=hub]) .gl-more summary{padding:0 10px;min-height:44px}.gl-top:not([data-surface=hub]) .gl-more summary{gap:6px}}
+@media(max-width:400px){.gl-brand b{font-size:17px}}
+@media(max-width:359px){.gl-brand b{display:none}}
+@media print{.gl-top{display:none}}
+footer.gl-foot{border-top:1px solid var(--rule);padding:2rem 0 2.8rem;color:var(--ink-dim);font-size:.86rem}
+footer.gl-foot .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+footer.gl-foot nav{display:flex;flex-wrap:wrap;gap:0 1.25rem;margin-bottom:.9rem}
+footer nav[aria-label="Site footer"]{font:500 var(--t-small)/1 var(--sans);letter-spacing:.01em;text-transform:none}
+footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;color:var(--ink-dim);text-decoration:none}
+@media(hover:hover){footer nav[aria-label="Site footer"] a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:currentColor}}
+@media(pointer:coarse),(max-width:640px){footer nav[aria-label="Site footer"] a{padding:16px 0}}
+footer.gl-foot a{color:var(--copper-deep)}
+</style>
+<style>
 .wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
 .cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.4rem,6vh,3.9rem) 0 clamp(1.8rem,4vh,2.6rem); }
-.cover a { color: var(--copper); }
-.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+.cover a { color: var(--copper-light); }
+.stamp { font-family: var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--cream-faint); margin-top:1.2rem; }
 h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 1rem; }
 .lede { max-width: 46rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
-.stamp { font-family: var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--cream-faint); margin-top:1.2rem; }
-.tnav { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
-.tnav .wrap { display:flex; flex-wrap:wrap; gap:.15rem 1.25rem; align-items:center; padding-top:.55rem; padding-bottom:.55rem; }
-.tnav a { font-family: var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color: var(--ink-dim); padding:.2rem 0; border-bottom:2px solid transparent; }
-.tnav a:hover { color: var(--copper-deep); }
-.tnav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--copper); }
-.tnav .sp { margin-left:auto; }
-@media (max-width:719px) { .tnav { position: static; } .tnav .sp { margin-left:0; } }
 section { padding: clamp(2rem,5vh,3.2rem) 0; border-top: 1px solid var(--rule); }
 section:first-of-type { border-top: 0; }
 h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.35rem,2.6vw,1.85rem); letter-spacing:-.015em; margin-bottom:.35rem; }
@@ -64,12 +127,29 @@ strong { font-weight: 640; }
 .row .mk.yes { color: var(--copper-deep); }
 .row b { font-weight:640; }
 .row span { font-size:.92rem; color: var(--ink-dim); }
-.tw { overflow-x:auto; margin-top:1rem; }
+.tws { margin-top:1rem; }
+.tw { overflow-x:auto; }
+.tws{position:relative;--fade:var(--paper)}
+.tws::before,.tws::after{content:"";position:absolute;top:0;bottom:var(--sb,0px);width:40px;pointer-events:none;opacity:0;transition:opacity var(--dur) var(--ease);z-index:2}
+.tws::before{left:0;background:linear-gradient(90deg,var(--fade) 12%,transparent)}
+.tws::after{right:0;background:linear-gradient(270deg,var(--fade) 12%,transparent)}
+.tws.can-l::before,.tws.can-r::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.tws::before,.tws::after{transition:none}}
 table { width:100%; border-collapse: collapse; font-size:.9rem; }
-th { text-align:left; font-family: var(--mono); font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; color: var(--ink-dim); font-weight:600; padding:.5rem .55rem; border-bottom:1px solid var(--rule); }
+th { text-align:left; font-family: var(--mono); font-size:var(--t-label); letter-spacing:.1em; text-transform:uppercase; color: var(--ink-dim); font-weight:600; padding:.5rem .55rem; border-bottom:1px solid var(--rule); }
 td { padding:.6rem .55rem; border-bottom:1px solid var(--rule); vertical-align:top; }
 td.k { font-family: var(--mono); font-size:.82rem; white-space:nowrap; }
-.note { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
+@media (max-width:640px) {
+  .tw-stack table, .tw-stack tbody, .tw-stack tr, .tw-stack td { display:block; }
+  .tw-stack thead { position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap; }
+  .tw-stack tr { background: var(--sheet); border-radius: var(--r-card); box-shadow: inset 0 0 0 1px var(--rule); padding:14px 16px; }
+  .tw-stack tr + tr { margin-top:10px; }
+  .tw-stack td { border:0; padding:0; }
+  .tw-stack td + td { margin-top:10px; }
+  .tw-stack td[data-label]::before { content: attr(data-label); display:block; margin-bottom:3px; font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim); }
+  .tw-stack td.k { font-size:.95rem; font-weight:500; color: var(--ink); }
+}
+.note { background: var(--sheet); border-radius:var(--r-card); box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
 .note b { font-family: var(--serif); font-weight:620; display:block; margin-bottom:.3rem; }
 .note p { font-size:.9rem; color: var(--ink-dim); }
 .note p + p { margin-top:.6rem; }
@@ -77,26 +157,44 @@ td.k { font-family: var(--mono); font-size:.82rem; white-space:nowrap; }
 .mono { font-family: var(--mono); font-size:.86rem; }
 footer { border-top:1px solid var(--rule); padding:2rem 0 2.8rem; color: var(--ink-dim); font-size:.86rem; }
 footer a { color: var(--copper-deep); }
-footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.9rem; font-family: var(--mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
 </style>
 </head>
 <body>
 
+<a class="skip" href="#main">Skip to content</a>
+<header class="gl-top" data-surface="page">
+  <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
+    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
+  </a>
+  <nav class="gl-nav" aria-label="Site">
+    <a href="https://jcurry44.github.io/grants-ledgers/" data-nav="find">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/#view=atlas" data-nav="atlas">Explore</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/#view=shortlist" data-nav="shortlist">Shortlist<span class="gl-cnt" data-shortlist-count hidden>0</span></a>
+    <details class="gl-more">
+      <summary>More<svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></summary>
+      <div class="gl-menu">
+        <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/about/">About &amp; method</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
+      </div>
+    </details>
+  </nav>
+  <div class="gl-actions">
+    <a class="gl-method" href="https://jcurry44.github.io/grants-ledgers/about/#method" data-nav="method">Method</a>
+    <a class="gl-cta" href="https://jcurry44.github.io/grants-ledgers/#view=brief" data-nav="brief">Build a brief →</a>
+  </div>
+</header>
+<main id="main">
+
 <header class="cover"><div class="wrap">
-  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Privacy</div>
-  <h1>What this site collects<br>about you: nothing</h1>
+  <p class="eyebrow accent">Privacy</p>
+  <h1>What this site collects about you: nothing</h1>
   <p class="lede">The Grants Ledger is a static website — plain files served over the web, built from public IRS filings. It has no accounts, no login, no forms, no cookies, and the one analytics script it loads is a cookie-free page counter that records no personal data. This page describes the actual data flows, checked against the site’s own code, so that a reviewer can check the claim rather than take it.</p>
   <p class="stamp">Effective 31 August 2026 · checked against the published source on that date</p>
 </div></header>
-
-<nav class="tnav" aria-label="Trust and policy"><div class="wrap">
-  <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/privacy/" aria-current="page">Privacy</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="sp">Exceptions ↗</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/">The collection ↗</a>
-</div></nav>
 
 <section><div class="wrap">
   <h2>The short version</h2>
@@ -105,7 +203,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
     <div class="row"><span class="mk no">—</span><div><b>Accounts, logins, sign-ups</b></div><span>None exist. There is nothing on this site to register for.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Forms of any kind</b></div><span>There is not a single <span class="mono">&lt;form&gt;</span> element on the site. Nothing collects a name, an email address, or any other input.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Cookies</b></div><span>This site sets no cookies. It never reads or writes <span class="mono">document.cookie</span>.</span></div>
-    <div class="row"><span class="mk yes">●</span><div><b>Analytics: a cookie-free page counter</b></div><span>Every page loads a small script from <a href="https://www.goatcounter.com/">GoatCounter</a> that counts page views without cookies or personal data. Details below. No other analytics or tracking script of any kind runs here — no Google Analytics, no tag manager, no Plausible, Fathom, Matomo, Hotjar, Segment, Mixpanel or PostHog. No tracking pixel, no beacon, no session recording.</span></div>
+    <div class="row"><span class="mk yes">●</span><div><b>Analytics: a cookie-free page counter</b></div><span>Every page loads a small script from <a href="https://www.goatcounter.com/">GoatCounter ↗</a> that counts page views without cookies or personal data. Details below. No other analytics or tracking script of any kind runs here — no Google Analytics, no tag manager, no Plausible, Fathom, Matomo, Hotjar, Segment, Mixpanel or PostHog. No tracking pixel, no beacon, no session recording.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Advertising or data sales</b></div><span>There is no advertising on this site and no data about visitors to sell, share or transfer, because none is gathered.</span></div>
     <div class="row"><span class="mk no">—</span><div><b>Fingerprinting or cross-site tracking</b></div><span>None. The referrer policy on every page is <span class="mono">strict-origin-when-cross-origin</span>, so the pages you view are not passed along in full to other sites.</span></div>
     <div class="row"><span class="mk yes">●</span><div><b>Saved lists and notes</b></div><span>Stored in your own browser only, and never sent anywhere. Details below.</span></div>
@@ -116,15 +214,15 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
   <h2>What is stored in your browser</h2>
   <p class="sub">The collection page lets you save foundations and recipients to a list and attach your own notes to them. That is the only feature on the site that remembers anything, and it remembers it on your device.</p>
-  <div class="tw">
+  <div class="tws"><div class="tw tw-stack" tabindex="0" role="region" aria-label="What is stored in your browser">
     <table>
       <thead><tr><th>Stored value</th><th>Where</th><th>What it holds</th><th>Leaves your browser?</th></tr></thead>
       <tbody>
-        <tr><td class="k">gl_list</td><td>browser <span class="mono">localStorage</span></td><td>The identifiers of the foundations and recipients you saved to your list.</td><td><strong>No.</strong> Never transmitted.</td></tr>
-        <tr><td class="k">gl_notes</td><td>browser <span class="mono">localStorage</span></td><td>The notes you typed against items on your list.</td><td><strong>No.</strong> Never transmitted.</td></tr>
+        <tr><td class="k">gl_list</td><td data-label="Where">browser <span class="mono">localStorage</span></td><td data-label="What it holds">The identifiers of the foundations and recipients you saved to your list.</td><td data-label="Leaves your browser?"><strong>No.</strong> Never transmitted.</td></tr>
+        <tr><td class="k">gl_notes</td><td data-label="Where">browser <span class="mono">localStorage</span></td><td data-label="What it holds">The notes you typed against items on your list.</td><td data-label="Leaves your browser?"><strong>No.</strong> Never transmitted.</td></tr>
       </tbody>
     </table>
-  </div>
+  </div></div>
   <div class="body" style="margin-top:1.2rem">
     <p>These two values live in your browser’s local storage for this site only. They are not synchronised to any server, not shared between your devices, and not visible to anyone but you. No copy reaches the maintainer of this site at any point.</p>
     <p>You can delete them at any time by clearing site data for this domain in your browser settings. They will also be absent in a private window, or in a different browser, or on a different device — which is the ordinary consequence of storing them locally rather than in an account.</p>
@@ -168,7 +266,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   <div class="body">
     <p>Email is the only way to contact this project, and it is the only circumstance in which the maintainer holds anything about you at all: your email address and whatever you chose to write.</p>
     <p>That correspondence is used to answer you and, where you reported an error, to record what was checked and changed. It is not added to a mailing list — no mailing list exists. It is not used for marketing, not shared with anyone, and not sold. If you would like your correspondence deleted, ask, and it will be.</p>
-    <p class="mono" style="margin-top:1rem"><a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger">jjcurry027@gmail.com</a></p>
+    <p class="mono" style="margin-top:1rem"><a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger">jjcurry027@gmail.com ↗</a></p>
   </div>
 </div></section>
 
@@ -194,17 +292,21 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   </div>
 </div></section>
 
-<footer><div class="wrap">
-  <div class="flinks">
+</main>
+<footer class="gl-foot"><div class="wrap">
+  <nav aria-label="Site footer">
     <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
     <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="https://jcurry44.github.io/grants-ledgers/changelog/">Update history</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
-    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20privacy%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/privacy/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
-  </div>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20privacy%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/privacy/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem ↗</a>
+  </nav>
   <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 
+<script>try{const s=JSON.parse(localStorage.getItem('gl_projects')||'{}');const p=(s.projects||[]).find(x=>x.id===s.active)||(s.projects||[])[0];
+const n=p?p.funders.length:0;const el=document.querySelector('[data-shortlist-count]');if(el){el.textContent=n;el.hidden=n===0}}catch(e){}</script>
+<script>(()=>{const W=[...document.querySelectorAll('.tws')];if(!W.length)return;const u=w=>{const t=w.firstElementChild;if(!t)return;const m=t.scrollWidth-t.clientWidth,x=Math.abs(t.scrollLeft),c=getComputedStyle(t);w.classList.toggle('can-l',m>1&&x>1);w.classList.toggle('can-r',m>1&&x<m-1);t.tabIndex=m>1?0:-1;w.style.setProperty('--sb',Math.max(0,t.offsetHeight-t.clientHeight-parseFloat(c.borderTopWidth)-parseFloat(c.borderBottomWidth))+'px')};W.forEach(w=>{const t=w.firstElementChild;if(!t)return;u(w);t.addEventListener('scroll',()=>u(w),{passive:true});if('ResizeObserver'in window)new ResizeObserver(()=>u(w)).observe(t)});if(document.fonts)document.fonts.ready.then(()=>W.forEach(u))})();</script>
 </body>
 </html>

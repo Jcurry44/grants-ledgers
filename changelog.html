@@ -7,45 +7,108 @@
 <meta name="color-scheme" content="light">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Update history — The Grants Ledger</title>
-<meta name="description" content="Every significant change to The Grants Ledger since it began, compiled from the project's own version-control history — foundations added, years recovered, corrections made, and the defects that were found and fixed.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e4634'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d19049'%3E≡%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Every significant change to The Grants Ledger since it began, compiled from the project’s own version-control history — foundations added, years recovered, corrections made, and the defects that were found and fixed.">
+<meta name="theme-color" content="#1e4634">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e4634'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-weight='600' font-size='19' fill='%23d19049'%3EG%3C/text%3E%3Crect x='7' y='24' width='18' height='2' fill='%23d19049'/%3E%3Crect x='7' y='27.5' width='18' height='1' fill='%23d19049'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Update history — The Grants Ledger">
-<meta property="og:description" content="Every significant change to The Grants Ledger, compiled from the project's own version-control history.">
+<meta property="og:description" content="Every significant change to The Grants Ledger, compiled from the project’s own version-control history.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$304,011,800,391 reconciled to the dollar · 1,935 foundations">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/changelog/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-:root {
-  color-scheme: light;
-  --cover: #1e4634; --cover-deep: #163527; --copper: #d19049; --copper-deep: #a35c1a;
-  --paper: #f6f4ec; --sheet: #fdfcf8; --ink: #23281f; --ink-dim: #5a6052; --rule: #e3ded0;
-  --neg: #a7312a; --cream: #f6efdd; --cream-faint: rgba(246,239,221,.72);
-  --serif: "Fraunces", Georgia, serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", monospace;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Newsreader:opsz,ital,wght@6..72,0,300..700;6..72,1,300..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="gl-tokens">
+:root{
+  color-scheme:light;
+  --paper:#f6f4ec; --sheet:#ffffff; --sheet-warm:#fdfcf8; --tint:#f3efe2;
+  --ink:#20241e; --ink-dim:#4e5347; --ink-faint:#6a6e5d;
+  --cover:#1e4634; --cover-deep:#163527; --cover-line:rgba(242,239,228,.16);
+  --cream:#f2efe4; --cream-bright:#f6efdd; --cream-dim:rgba(242,239,228,.72); --cream-faint:var(--cream-dim);
+  --copper:#a35c1a; --copper-deep:#8a4a12; --copper-bright:#d19049; --copper-light:#e0a45e; --copper-soft:rgba(163,92,26,.10);
+  --green:#23573f; --pass:#1f6b47; --neg:#8c3a34;
+  --rule:rgba(32,36,30,.12); --rule-strong:rgba(32,36,30,.24); --edge:#8f9287;
+  --r-ctl:6px; --r-card:10px; --r-pill:999px;
+  --shadow-card:0 1px 2px rgba(40,36,20,.05),0 12px 32px -20px rgba(30,26,12,.35);
+  --shadow-pop:0 18px 44px -16px rgba(30,26,12,.5),inset 0 0 0 1px var(--rule-strong);
+  --serif:"Fraunces","Iowan Old Style",Georgia,serif;
+  --body-f:"Newsreader","Iowan Old Style",Georgia,serif;
+  --sans:"IBM Plex Sans","Helvetica Neue",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --text:var(--body-f);
+  --t-1:clamp(2.4rem,4.4vw,3.3rem); --t-2:2.5rem; --t-3:1.5rem; --t-4:1.125rem;
+  --t-body:15.5px; --t-small:13px; --t-label:11px;
+  --s-1:4px; --s-2:8px; --s-3:16px; --s-4:24px; --s-5:32px; --s-6:48px; --s-7:64px;
+  --ease:cubic-bezier(.22,1,.36,1); --dur-fast:120ms; --dur:200ms; --dur-slow:280ms; --dur-reveal:450ms;
+  --gt-h:62px; --focus:var(--copper-deep);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.6; }
-a { color: var(--copper-deep); }
-:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
-.sr-only { position:absolute; width:1px; height:1px; clip-path: inset(50%); overflow:hidden; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:calc(var(--gt-h) + 8px)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body-f)}
+a{color:var(--copper-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(163,92,26,.45)}
+a:hover{text-decoration-color:currentColor}
+.gl-top a{text-decoration:none}
+h1,h2,h3{text-wrap:balance}
+p,li,.lede{text-wrap:pretty}
+.sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cover-deep);color:var(--cream-bright);padding:10px 16px;border-radius:0 0 var(--r-ctl) 0;text-decoration:none;font:600 13px var(--sans)}
+.skip:focus{left:0}
+.eyebrow{font:500 var(--t-label)/1.25 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.cover .eyebrow,.hero .eyebrow,.gl-top .eyebrow{color:var(--cream-dim)}
+.eyebrow.accent{color:var(--copper-deep);letter-spacing:.16em}
+.cover .eyebrow.accent,.hero .eyebrow.accent,.gl-top .eyebrow.accent{color:var(--copper-light)}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:var(--r-ctl)}
+.cover :focus-visible,.gl-top :focus-visible,.side :focus-visible,.foot :focus-visible,.hero :focus-visible{--focus:var(--copper-bright)}
+:where(button,[role=button],summary,.btn,.chip,.trychip):not(:disabled):active{transform:translateY(1px);transition-duration:40ms}
+@media(prefers-reduced-motion:reduce){:active{transform:none}}
+:disabled,[aria-disabled=true]{opacity:1;color:var(--ink-faint);background:var(--tint);border-color:var(--rule);cursor:not-allowed}
+button,a,summary,select{-webkit-tap-highlight-color:transparent}
+.gl-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream-bright);white-space:nowrap}
+.gl-brand b{font:600 20px/1 var(--serif);font-variation-settings:"opsz" 48;letter-spacing:-.01em;color:var(--cream-bright)}
+.gl-mark{flex:none;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(209,144,73,.45)}
+.gl-brand:hover b{color:var(--copper-light)}
+.gl-top{position:relative;z-index:40;height:var(--gt-h);display:flex;align-items:center;gap:28px;padding:0 max(24px,calc((100vw - 1352px)/2));background:var(--cover-deep);border-bottom:1px solid var(--cover-line);color:var(--cream-bright);font:500 13px/1 var(--sans);letter-spacing:.01em}
+.gl-nav{display:flex;align-items:center;gap:4px;flex:1;min-width:0}
+.gl-nav a,.gl-more summary{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-ctl);color:var(--cream-dim);text-decoration:none;cursor:pointer;list-style:none;white-space:nowrap}
+.gl-more summary::-webkit-details-marker{display:none}
+.gl-more summary svg{width:10px;height:10px}
+.gl-nav a[aria-current=page]{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-cnt{margin-left:6px;min-width:18px;padding:0 5px;border-radius:var(--r-pill);background:var(--copper-bright);color:var(--cover-deep);font:600 10.5px/18px var(--sans);text-align:center}
+.gl-more{position:relative}
+.gl-more summary.on{color:var(--cream-bright);background:rgba(255,255,255,.08)}
+.gl-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;display:grid;background:var(--sheet);border-radius:var(--r-card);box-shadow:var(--shadow-pop)}
+.gl-menu a{color:var(--ink);font:500 14px/1.2 var(--sans);padding:9px 12px;border-radius:var(--r-ctl);text-decoration:none}
+.gl-menu a[aria-current=page]{color:var(--copper-deep);background:var(--tint)}
+.gl-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.gl-method{color:var(--cream-dim);text-decoration:none;padding:10px 12px;border-radius:var(--r-ctl)}
+.gl-cta{padding:11px 16px;border-radius:var(--r-ctl);background:var(--copper-bright);color:var(--cover-deep);font-weight:600;text-decoration:none;white-space:nowrap}
+@media(hover:hover){.gl-nav a:hover,.gl-more summary:hover,.gl-method:hover{color:var(--cream-bright)}.gl-menu a:hover{background:var(--tint)}.gl-cta:hover{background:var(--copper-light)}}
+.gl-nav a:active,.gl-method:active{transform:translateY(1px)}
+@media(max-width:1099px){.gl-top{gap:16px;padding:0 20px}.gl-cta{display:none}}
+@media(max-width:640px){.gl-top{height:56px;gap:12px}.gl-brand b{font-size:18px}.gl-method{display:none}.gl-top .gl-nav a[data-nav=atlas],.gl-top .gl-nav a[data-nav=shortlist]{display:none}.gl-top .gl-nav{justify-content:flex-end}.gl-top .gl-menu{left:auto;right:0}}
+@media(max-width:640px){.gl-top:not([data-surface=hub]){gap:10px}.gl-top:not([data-surface=hub]) .gl-actions{display:none}.gl-top:not([data-surface=hub]) .gl-nav{gap:2px}.gl-top:not([data-surface=hub]) .gl-nav a,.gl-top:not([data-surface=hub]) .gl-more summary{padding:0 10px;min-height:44px}.gl-top:not([data-surface=hub]) .gl-more summary{gap:6px}}
+@media(max-width:400px){.gl-brand b{font-size:17px}}
+@media(max-width:359px){.gl-brand b{display:none}}
+@media print{.gl-top{display:none}}
+footer.gl-foot{border-top:1px solid var(--rule);padding:2rem 0 2.8rem;color:var(--ink-dim);font-size:.86rem}
+footer.gl-foot .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+footer.gl-foot nav{display:flex;flex-wrap:wrap;gap:0 1.25rem;margin-bottom:.9rem}
+footer nav[aria-label="Site footer"]{font:500 var(--t-small)/1 var(--sans);letter-spacing:.01em;text-transform:none}
+footer nav[aria-label="Site footer"] a{display:inline-block;padding:6px 0;color:var(--ink-dim);text-decoration:none}
+@media(hover:hover){footer nav[aria-label="Site footer"] a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:currentColor}}
+@media(pointer:coarse),(max-width:640px){footer nav[aria-label="Site footer"] a{padding:16px 0}}
+footer.gl-foot a{color:var(--copper-deep)}
+</style>
+<style>
 .wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
 .cover { background: linear-gradient(180deg,var(--cover),var(--cover-deep)); color: var(--cream); padding: clamp(2.4rem,6vh,3.9rem) 0 clamp(1.8rem,4vh,2.6rem); }
-.cover a { color: var(--copper); }
-.kick { font-family: var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--cream-faint); }
+.cover a { color: var(--copper-light); }
 h1 { font-family: var(--serif); font-weight:640; font-size: clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 1rem; }
 .lede { max-width: 46rem; color: var(--cream-faint); font-size: clamp(1rem,1.5vw,1.12rem); }
-.tnav { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
-.tnav .wrap { display:flex; flex-wrap:wrap; gap:.15rem 1.25rem; align-items:center; padding-top:.55rem; padding-bottom:.55rem; }
-.tnav a { font-family: var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color: var(--ink-dim); padding:.2rem 0; border-bottom:2px solid transparent; }
-.tnav a:hover { color: var(--copper-deep); }
-.tnav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--copper); }
-.tnav .sp { margin-left:auto; }
-@media (max-width:719px) { .tnav { position: static; } .tnav .sp { margin-left:0; } }
 section { padding: clamp(1.8rem,4vh,2.6rem) 0; border-top: 1px solid var(--rule); }
 section:first-of-type { border-top: 0; }
 h2 { font-family: var(--serif); font-weight:620; font-size: clamp(1.3rem,2.5vw,1.75rem); letter-spacing:-.015em; margin-bottom:.35rem; }
@@ -60,44 +123,62 @@ strong { font-weight: 640; }
 .rel:first-of-type { border-top: 0; padding-top: .4rem; }
 .reldate { font-family: var(--mono); font-size:.74rem; letter-spacing:.07em; text-transform:uppercase; color: var(--copper-deep); padding-top:.4rem; }
 @media (min-width:840px) { .reldate { position:sticky; top:3.1rem; align-self:start; } }
-.reldate em { display:block; font-style:normal; color: var(--ink-dim); font-size:.68rem; letter-spacing:.05em; margin-top:.25rem; }
+.reldate em { display:block; font-style:normal; color: var(--ink-dim); font-size:var(--t-label); letter-spacing:.08em; margin-top:.25rem; }
 .relh { font-family: var(--serif); font-weight:640; font-size:1.28rem; letter-spacing:-.015em; line-height:1.25; }
 .rellede { color: var(--ink-dim); font-size:.95rem; margin-top:.35rem; max-width:46rem; }
 ul.ch { list-style:none; margin-top:.9rem; display:grid; gap:.05rem; }
 ul.ch li { display:grid; grid-template-columns: 5.6rem minmax(0,1fr); gap:.9rem; padding:.6rem 0; border-bottom:1px solid var(--rule); font-size:.93rem; align-items:start; }
 @media (max-width:520px) { ul.ch li { grid-template-columns: minmax(0,1fr); gap:.2rem; } }
 ul.ch li:last-child { border-bottom:0; }
-ul.ch .t { font-family: var(--mono); font-size:.62rem; letter-spacing:.07em; text-transform:uppercase; padding-top:.32rem; color: var(--ink-dim); }
+ul.ch .t { font-family: var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; padding-top:.32rem; color: var(--ink-dim); }
 ul.ch .t.add { color: var(--copper-deep); }
 ul.ch .t.fix { color: var(--neg); }
 ul.ch b { font-weight:640; }
 .stat { display:inline-block; font-family: var(--mono); font-size:.86em; font-variant-numeric: tabular-nums; }
-.note { background: var(--sheet); border-radius:14px; box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
+.note { background: var(--sheet); border-radius:var(--r-card); box-shadow: inset 0 0 0 1px var(--rule); padding:1.05rem 1.15rem; margin-top:1.2rem; max-width:52rem; }
 .note b { font-family: var(--serif); font-weight:620; display:block; margin-bottom:.3rem; }
 .note p { font-size:.9rem; color: var(--ink-dim); }
 .note p + p { margin-top:.6rem; }
 .mono { font-family: var(--mono); font-size:.86rem; }
 footer { border-top:1px solid var(--rule); padding:2rem 0 2.8rem; color: var(--ink-dim); font-size:.86rem; }
 footer a { color: var(--copper-deep); }
-footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.9rem; font-family: var(--mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; }
 </style>
 </head>
 <body>
 
+<a class="skip" href="#main">Skip to content</a>
+<header class="gl-top" data-surface="page">
+  <a class="gl-brand" href="https://jcurry44.github.io/grants-ledgers/" aria-label="The Grants Ledger, home">
+    <svg class="gl-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#1e4634"/><text x="16" y="21" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="19" fill="#d19049">G</text><rect x="7" y="24" width="18" height="2" fill="#d19049"/><rect x="7" y="27.5" width="18" height="1" fill="#d19049"/></svg><b>Grants Ledger</b>
+  </a>
+  <nav class="gl-nav" aria-label="Site">
+    <a href="https://jcurry44.github.io/grants-ledgers/" data-nav="find">Find funders</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/#view=atlas" data-nav="atlas">Explore</a>
+    <a href="https://jcurry44.github.io/grants-ledgers/#view=shortlist" data-nav="shortlist">Shortlist<span class="gl-cnt" data-shortlist-count hidden>0</span></a>
+    <details class="gl-more">
+      <summary class="on">More<svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></summary>
+      <div class="gl-menu">
+        <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/about/">About &amp; method</a>
+        <a href="https://jcurry44.github.io/grants-ledgers/changelog/" aria-current="page">Update history</a>
+      </div>
+    </details>
+  </nav>
+  <div class="gl-actions">
+    <a class="gl-method" href="https://jcurry44.github.io/grants-ledgers/about/#method" data-nav="method">Method</a>
+    <a class="gl-cta" href="https://jcurry44.github.io/grants-ledgers/#view=brief" data-nav="brief">Build a brief →</a>
+  </div>
+</header>
+<main id="main">
+
 <header class="cover"><div class="wrap">
-  <div class="kick"><a href="https://jcurry44.github.io/grants-ledgers/">The Grants Ledger</a> · Update history</div>
-  <h1>Everything that has changed,<br>with the dates it changed</h1>
+  <p class="eyebrow accent">Update history</p>
+  <h1>Everything that has changed, with the dates it changed</h1>
   <p class="lede">Compiled from the project’s own version-control history. Foundations added, years recovered from paper, years withheld, and — kept in deliberately — the defects that were found and the fixes that closed them. A changelog that only listed additions would be advertising.</p>
 </div></header>
-
-<nav class="tnav" aria-label="Trust and policy"><div class="wrap">
-  <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/changelog/" aria-current="page">Update history</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/exceptions/" class="sp">Exceptions ↗</a>
-  <a href="https://jcurry44.github.io/grants-ledgers/">The collection ↗</a>
-</div></nav>
 
 <section><div class="wrap">
   <div class="body">
@@ -109,7 +190,20 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
 <section><div class="wrap">
 
       <article class="rel">
-    <div class="reldate">23 Sep 2026<em>Current</em></div>
+    <div class="reldate">24 Sep 2026<em>Current</em></div>
+    <div>
+      <h2 class="relh">One product, one header, and the double rule as its signature</h2>
+<p><strong>One product, one header.</strong> The hub, all 1,935 ledgers and every editorial page now share one header &mdash; the mark, Find funders, Explore, Shortlist, More, Method and Build a brief &mdash; and one set of type, spacing, focus rings and pressed states. Any ledger can be saved to the shortlist from its own page.</p>
+<p><strong>The double rule is the signature.</strong> The two lines an accountant rules under a reconciled total now also mark the current tab, draw the loading indicator and head the printed report. It carries meaning by shape, never by colour.</p>
+<p><strong>Years drawn as years.</strong> A foundation&rsquo;s annual totals are columns, one per filed year, with the amount printed on each; a withheld or unitemized year is drawn in outline and named. Hover a year in the rail, the chart or the reconciliation table and the other two answer. Chart labels hold their size on a phone.</p>
+<p><strong>Find funders, faster.</strong> The first screen leads with the claim; &ldquo;Any purpose&rdquo; is the default, and grant-size and tax-year filters now work across every purpose. On a phone, search takes the screen and keeps its suggestions above the keyboard, and the search you ran is still there when you come back from a ledger. Panels that wait on data show it instead of a dash.</p>
+<p><strong>Links that introduce themselves.</strong> The 300 largest ledgers carry their own share card &mdash; the foundation&rsquo;s name and its reconciled total &mdash; so a forwarded link previews the record itself.</p>
+<p><strong>Editorial pages read on a phone.</strong> Wide tables on Census and Recovered become cards under 640px, scrollable tables say so, and footer links are full-size tap targets.</p>
+    </div>
+  </article>
+
+      <article class="rel">
+    <div class="reldate">23 Sep 2026</div>
     <div>
       <h2 class="relh">Ledger pages that show where each year came from, and two new publishing rules</h2>
 <p><strong>Each ledger says what it was read from.</strong> Where a year&rsquo;s grant list exists only as a scanned attachment, the page now says so under the headline &mdash; for Hellman, &ldquo;Four of five filed years were read from the paper filing &mdash; absent from every e-file dataset&rdquo; &mdash; with a link to how they were recovered. A withheld year now counts in the headline badge (&ldquo;4 of 5 filed years reconciled &middot; 1 withheld&rdquo;) instead of appearing only in the year rail. The EIN links to the foundation&rsquo;s filings on ProPublica&rsquo;s Nonprofit Explorer. A book with fewer than ten named-recipient rows no longer prints a median, a typical-grant range or a concentration share, and says why.</p>
@@ -242,7 +336,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
       <h2 class="relh">Recovery wave 3</h2>
 <p class="rellede">Twenty more census books opened against the IRS scans, this time by a deterministic reader with helpers only for the cells the engine could not read. 6 came back in part or in full.</p>
       <ul class="ch">
-        <li><span class="t add">Added</span><div><b>Recovery wave 3.</b> <span class="stat">1,049</span> grant rows recovered across <span class="stat">8</span> foundation-years, <span class="stat">$50.8M</span> reconciled to the filed line to the dollar: Wasily Family Foundation, Kraft Family Foundation, Friedman Family Foundation, Peter R And Cynthia K Kellogg Foundation, Kapnick Foundation Tr, Patterson Family Foundation. Every register was read twice by local OCR at different resolutions and an amount kept only when the readings agreed; <span class="stat">69</span> disputed cells were settled by re-reading at four further resolutions and <span class="stat">3</span> the engine could not read at any resolution were read by eye from the page image, each recorded in the book's receipt.</div></li>
+        <li><span class="t add">Added</span><div><b>Recovery wave 3.</b> <span class="stat">1,049</span> grant rows recovered across <span class="stat">8</span> foundation-years, <span class="stat">$50.8M</span> reconciled to the filed line to the dollar: Wasily Family Foundation, Kraft Family Foundation, Friedman Family Foundation, Peter R And Cynthia K Kellogg Foundation, Kapnick Foundation Tr, Patterson Family Foundation. Every register was read twice by local OCR at different resolutions and an amount kept only when the readings agreed; <span class="stat">69</span> disputed cells were settled by re-reading at four further resolutions and <span class="stat">3</span> the engine could not read at any resolution were read by eye from the page image, each recorded in the book’s receipt.</div></li>
         <li><span class="t fix">Changed</span><div><b>Years that do not tie are not shown as rows.</b> Wasily Family Foundation 2021, 2023, 2024; Kraft Family Foundation 2020, 2021, 2023, 2024; Friedman Family Foundation 2019, 2021, 2022, 2023, 2024; Peter R And Cynthia K Kellogg Foundation 2019, 2020, 2021, 2024; Kapnick Foundation Tr 2020, 2021, 2023, 2024; Patterson Family Foundation 2020, 2021, 2022, 2023, 2024 stay as single not-itemized rows: each is short of its filed line by an amount the scan cannot settle (a seven-figure cell the engine drops at every resolution, or a value it misreads identically). Walgreens Assistance Inc; Tracy Family Foundation; Thirteen Foundation have no grant list in any public copy of their filings. Clowes Fund Incorporated; Entergy Charitable Foundation; Gerald A & Karen Kolschowsky Foundation Inc; Lone Pine Foundation Inc; Best Buy Foundation; Gray Foundation; Paccar Foundation; Charles A Frueauff Foundation Inc; Caring Foundation; Altman-Kazickas Foundation; Deutsche Bank Americas Foundation wait for a second reading engine.</div></li>
       </ul>
     </div>
@@ -254,7 +348,7 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
       <h2 class="relh">Recovery wave 2: five books read by the deterministic lane</h2>
 <p class="rellede">Ten more census books opened against the IRS scans, this time by a deterministic reader with helpers only for the cells the engine could not read. 5 came back in part or in full.</p>
       <ul class="ch">
-        <li><span class="t add">Added</span><div><b>Recovery wave 2.</b> <span class="stat">3,846</span> grant rows recovered across <span class="stat">9</span> foundation-years, <span class="stat">$177.7M</span> reconciled to the filed line to the dollar: Pisces Foundation, Emerson Electric Charitable Trust, Anthony Pritzker Family Foundation, The Amgen Foundation, Donald B and Dorothy L Stabler Foundation. Every register was read twice by local OCR at different resolutions and an amount kept only when the readings agreed; <span class="stat">60</span> disputed cells were settled by re-reading at four further resolutions and <span class="stat">246</span> the engine could not read at any resolution were read by eye from the page image, each recorded in the book's receipt.</div></li>
+        <li><span class="t add">Added</span><div><b>Recovery wave 2.</b> <span class="stat">3,846</span> grant rows recovered across <span class="stat">9</span> foundation-years, <span class="stat">$177.7M</span> reconciled to the filed line to the dollar: Pisces Foundation, Emerson Electric Charitable Trust, Anthony Pritzker Family Foundation, The Amgen Foundation, Donald B and Dorothy L Stabler Foundation. Every register was read twice by local OCR at different resolutions and an amount kept only when the readings agreed; <span class="stat">60</span> disputed cells were settled by re-reading at four further resolutions and <span class="stat">246</span> the engine could not read at any resolution were read by eye from the page image, each recorded in the book’s receipt.</div></li>
         <li><span class="t fix">Changed</span><div><b>Years that do not tie are not shown as rows.</b> Pisces Foundation 2022, 2024; Emerson Electric Charitable Trust 2019, 2022, 2023; Anthony Pritzker Family Foundation 2020, 2023, 2024; The Amgen Foundation 2020, 2022, 2023, 2024; Donald B and Dorothy L Stabler Foundation 2020, 2022, 2023, 2024 stay as single not-itemized rows: each is short of its filed line by an amount the scan cannot settle (a seven-figure cell the engine drops at every resolution, or a value it misreads identically). The Marie-Josee and Henry R Kravis Foundation; Thrive Causemetics Foundation have no grant list in any public copy of their filings. Audrey and Martin Gruss Foundation; First Horizon Foundation; TJX Foundation Inc wait for a second reading engine.</div></li>
       </ul>
     </div>
@@ -440,18 +534,21 @@ footer .flinks { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-bottom:.
   </div>
 </div></section>
 
-<footer><div class="wrap">
-  <div class="flinks">
+</main>
+<footer class="gl-foot"><div class="wrap">
+  <nav aria-label="Site footer">
     <a href="https://jcurry44.github.io/grants-ledgers/">The collection</a>
     <a href="https://jcurry44.github.io/grants-ledgers/about/">About</a>
     <a href="https://jcurry44.github.io/grants-ledgers/privacy/">Privacy</a>
     <a href="https://jcurry44.github.io/grants-ledgers/terms/">Terms</a>
     <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">Exceptions</a>
-    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20changelog%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/changelog/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem</a>
-  </div>
+    <a href="mailto:jjcurry027@gmail.com?subject=The%20Grants%20Ledger%3A%20a%20problem%20on%20the%20changelog%20page&body=Page%3A%20https%3A//jcurry44.github.io/grants-ledgers/changelog/%0A%0AWhat%20I%20expected%3A%0A%0AWhat%20happened%3A%0A">Report a problem ↗</a>
+  </nav>
   <p>An independent project by Curry Studio · Joe Curry, North Tonawanda NY. Not affiliated with, commissioned by, or endorsed by any foundation shown. Built from public IRS Form 990-PF filings. A documented reconciliation of public filings — not an audit.</p>
 </div></footer>
 
+<script>try{const s=JSON.parse(localStorage.getItem('gl_projects')||'{}');const p=(s.projects||[]).find(x=>x.id===s.active)||(s.projects||[])[0];
+const n=p?p.funders.length:0;const el=document.querySelector('[data-shortlist-count]');if(el){el.textContent=n;el.hidden=n===0}}catch(e){}</script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

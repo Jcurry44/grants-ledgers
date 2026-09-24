@@ -1,44 +1,48 @@
 :root {
   color-scheme: light; /* the popup widgets (select dropdowns, scrollbars) follow the paper, not the OS */
-  --cover: #1e4634;          /* the cloth cover */
-  --cover-deep: #163527;
-  --cover-line: rgba(242,239,228,0.16);
-  --cream: #f2efe4;          /* text on the cover */
-  --cream-dim: rgba(242,239,228,0.72);
-  --cream-faint: rgba(242,239,228,0.52);
-  --bg: #f6f4ec;             /* the desk the sheet sits on */
-  --sheet: #ffffff;          /* the filing sheet */
-  --sheet-warm: #fdfcf8;
-  --tint: #f3efe2;           /* cream tint for hovers/active */
-  --ink: #20241e;
-  --ink-dim: #4e5347;
-  --ink-faint: #6a6e5d;
-  --rule: rgba(32,36,30,0.12);
-  --rule-strong: rgba(32,36,30,0.24);
-  --green: #23573f;
-  --green-soft: rgba(35,87,63,0.09);
-  --copper: #a35c1a;
-  --copper-deep: #8a4a12;
-  --copper-bright: #d19049;  /* copper foil on the green cover */
-  --copper-soft: rgba(163,92,26,0.10);
-  --neg: #8c3a34;
-  --pass: #1f6b47;
-  --pass-bg: rgba(31,107,71,0.09);
-  --pass-border: rgba(31,107,71,0.30);
+  /* paper & ink */
+  --paper: #f6f4ec; --sheet: #ffffff; --sheet-warm: #fdfcf8; --tint: #f3efe2;
+  --ink: #20241e; --ink-dim: #4e5347; --ink-faint: #6a6e5d;
+  /* the cover (dark surfaces) */
+  --cover: #1e4634; --cover-deep: #163527; --cover-line: rgba(242,239,228,.16);
+  --cream: #f2efe4; --cream-bright: #f6efdd; --cream-dim: rgba(242,239,228,.72); --cream-faint: rgba(242,239,228,.52);
+  /* copper */
+  --copper: #a35c1a; --copper-deep: #8a4a12; --copper-bright: #d19049; --copper-light: #e0a45e; --copper-soft: rgba(163,92,26,.10);
+  /* semantic (always paired with a glyph or a word, never alone) */
+  --green: #23573f; --green-soft: rgba(35,87,63,0.09); --pass: #1f6b47; --pass-bg: rgba(31,107,71,0.09); --pass-border: rgba(31,107,71,0.30); --neg: #8c3a34;
+  /* lines */
+  --rule: rgba(32,36,30,.12); --rule-strong: rgba(32,36,30,.24); --edge: #8f9287;
+  /* radii */
+  --r-ctl: 6px; --r-card: 10px; --r-pill: 999px;
+  /* shadows */
+  --shadow-card: 0 1px 2px rgba(40,36,20,.05), 0 12px 32px -20px rgba(30,26,12,.35);
+  --shadow-pop: 0 18px 44px -16px rgba(30,26,12,.5), inset 0 0 0 1px var(--rule-strong);
+  /* type */
   --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
   --body-f: "Newsreader", "Iowan Old Style", Georgia, serif;
   --sans: "IBM Plex Sans", "Helvetica Neue", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --r: 10px;
-  --r-s: 7px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur: 190ms;
-  --card-shadow: 0 1px 2px rgba(40,36,20,0.05), 0 10px 30px -18px rgba(40,36,20,0.25);
-  --pop-shadow: 0 24px 60px -24px rgba(30,26,12,0.35);
+  --t-1: clamp(2.4rem,4.4vw,3.3rem); --t-2: 2.5rem; --t-3: 1.5rem; --t-4: 1.125rem;
+  --t-body: 15.5px; --t-small: 13px; --t-label: 11px;
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); --dur-fast: 120ms; --dur: 190ms; --dur-slow: 280ms; --dur-reveal: 450ms;
+  /* chrome */
+  --gt-h: 62px; --focus: var(--copper-deep);
+  /* aliases so nothing that reads the old names has to change */
+  --bg: var(--paper); --r: var(--r-card); --r-s: var(--r-ctl);
+  --card-shadow: var(--shadow-card); --pop-shadow: var(--shadow-pop);
   --tools-h: 64px;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--gt-h) + 8px);
+  /* L-11 repair: the year rail's own click handler measures a layout shift and
+     corrects scrollY for it (assets/ledger.js) -- the browser's own CSS scroll
+     anchoring was ALSO independently "helping" by re-anchoring scroll to a
+     content change above the fold, one frame after that manual correction had
+     already run, so the two fought and the rail visibly jumped ~490px instead
+     of holding still. One authority for this correction (the app's own), not two. */
+  overflow-anchor: none;
+}
 body {
   margin: 0;
   background: var(--bg);
@@ -48,18 +52,111 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  padding-top: 0;
 }
 button, input, select { font: inherit; color: inherit; }
 a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
-a:hover { color: var(--copper-deep); }
-:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
-.cover :focus-visible, .foot :focus-visible, .skip:focus-visible { outline-color: var(--copper-bright); } /* 3.94:1 */
-.rec-sort button.active:focus-visible, .alpha button.on:focus-visible, #pf-all:focus-visible { outline: 2px solid #fff; outline-offset: -3px; } /* 8.38:1 */
+@media (hover: hover) { a:hover { color: var(--copper-deep); } }
+/* the one focus ring is defined once, in the shared §2.6 recipe below (with the white-ring
+   exception for controls that sit on a filled/dark background of their own) */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .skip { position: absolute; left: 1rem; top: -3rem; background: var(--ink); color: var(--sheet); padding: 0.6rem 1rem; border-radius: 0 0 8px 8px; z-index: 100; text-decoration: none; transition: top 160ms; }
 .skip:focus { top: 0; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
 @media (min-width: 900px) { .wrap { padding: 0 2.25rem; } }
+
+/* ============ EYEBROW + STATE RECIPES (design-spec §2.1 / §2.6) ============ */
+.eyebrow { font: 500 var(--t-label)/1.25 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); }
+.cover .eyebrow, .gl-top .eyebrow, .side .eyebrow { color: var(--cream-dim); }
+.eyebrow.accent { color: var(--copper-bright); letter-spacing: .16em; }
+
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--r-ctl); }
+.cover :focus-visible, .gl-top :focus-visible, .side :focus-visible, .foot :focus-visible, .hero :focus-visible { --focus: var(--copper-bright); }
+.rec-sort button.active:focus-visible, .alpha button.on:focus-visible, #pf-all:focus-visible { outline: 2px solid #fff; outline-offset: -3px; } /* 8.38:1 */
+:where(button,[role=button],summary,.btn,.chip,.tab,.pager button,.side-nav button,.ss-rail button,.cat-row,.bar-row.is-btn,.tr-card,.nr-cell,.gcard-btn,.rec-item,.mover-btn,.lt-btn):not(:disabled):active { transform: translateY(1px); transition-duration: 40ms; }
+.btn-primary:active, .gl-cta:active { filter: brightness(.94); }
+@media (prefers-reduced-motion: reduce) { :active { transform: none; } }
+:disabled, [aria-disabled=true] { opacity: 1; color: var(--ink-faint); background: var(--tint); border-color: var(--rule); cursor: not-allowed; }
+button, a, summary, select { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) {
+  .gcard-btn:active, .bar-row.is-btn:active, .rec-item:active, .mover-btn:active, .nr-cell:active, .tab:active, .cat-row:active { background: var(--tint); }
+}
+
+/* ============ SHARED HEADER: gl-top (hub, every ledger, every editorial page) ============ */
+.gl-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--cream-bright); white-space: nowrap; }
+.gl-brand b { font: 600 20px/1 var(--serif); font-variation-settings: "opsz" 48; letter-spacing: -.01em; color: var(--cream-bright); }
+.gl-mark { flex: none; border-radius: 7px; box-shadow: inset 0 0 0 1px rgba(209,144,73,.45); }
+@media (hover: hover) { .gl-brand:hover b { color: var(--copper-light); } }
+.gl-top { position: relative; z-index: 40; height: var(--gt-h); display: flex; align-items: center; gap: 28px;
+  padding: 0 max(24px, calc((100vw - 1352px)/2)); background: var(--cover-deep); border-bottom: 1px solid var(--cover-line);
+  color: var(--cream-bright); font: 500 13px/1 var(--sans); letter-spacing: .01em; }
+.gl-top[data-surface=hub] { position: sticky; top: 0; }
+.gl-nav { display: flex; align-items: center; gap: 4px; flex: 1; min-width: 0; }
+.gl-nav a, .gl-more summary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: var(--r-ctl); color: var(--cream-dim); text-decoration: none; cursor: pointer; list-style: none; white-space: nowrap; }
+.gl-more summary::-webkit-details-marker { display: none; }
+.gl-more summary svg { width: 10px; height: 10px; }
+.gl-nav a[aria-current=page] { color: var(--cream-bright); background: rgba(255,255,255,.08); }
+.gl-cnt { margin-left: 6px; min-width: 18px; padding: 0 5px; border-radius: var(--r-pill); background: var(--copper-bright); color: var(--cover-deep); font: 600 10.5px/18px var(--sans); text-align: center; }
+.gl-more { position: relative; }
+.gl-menu { position: absolute; top: calc(100% + 6px); left: 0; min-width: 220px; padding: 6px; display: grid; background: var(--sheet); border-radius: var(--r-card); box-shadow: var(--shadow-pop); }
+.gl-menu a { color: var(--ink); font: 500 14px/1.2 var(--sans); padding: 9px 12px; border-radius: var(--r-ctl); text-decoration: none; }
+.gl-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.gl-method { color: var(--cream-dim); text-decoration: none; padding: 10px 12px; border-radius: var(--r-ctl); }
+.gl-cta { padding: 11px 16px; border-radius: var(--r-ctl); background: var(--copper-bright); color: var(--cover-deep); font-weight: 600; text-decoration: none; white-space: nowrap; }
+@media (hover: hover) { .gl-nav a:hover, .gl-more summary:hover, .gl-method:hover { color: var(--cream-bright); } .gl-menu a:hover { background: var(--tint); } .gl-cta:hover { background: var(--copper-light); } }
+.gl-nav a:active, .gl-method:active { transform: translateY(1px); }
+@media (max-width: 1099px) {
+  .gl-top { gap: 16px; padding: 0 20px; } .gl-cta { display: none; }
+  /* minor repair: the right-aligned menu rule used to cut in only at ≤640px, so
+     the still-left-aligned menu ran off the right edge of the viewport at
+     641-1099px (any width where .gl-cta is already hidden but this hadn't
+     kicked in yet). Right-align it for the whole range the CTA is gone. */
+  .gl-top:not([data-surface=hub]) .gl-menu { left: auto; right: 0; }
+}
+@media (max-width: 640px) {
+  .gl-top { height: 56px; gap: 12px; } .gl-brand b { font-size: 18px; } .gl-method { display: none; }
+  .gl-top:not([data-surface=hub]) .gl-nav a[data-nav=atlas], .gl-top:not([data-surface=hub]) .gl-nav a[data-nav=shortlist] { display: none; }
+  .gl-top:not([data-surface=hub]) .gl-nav { justify-content: flex-end; }
+}
+@media (max-width: 640px) {
+  /* R2 (R-2): on a phone the ledger header is brand · Find funders · More. The empty
+     .gl-actions box (Method and the CTA are both hidden by now) still cost a 12px flex
+     gap, and 12px link padding another 8 -- together enough to run "Find funders" into
+     the wordmark anywhere from 361 to 384px. Reclaim both; every target stays 44px tall. */
+  .gl-top:not([data-surface=hub]) { gap: 10px; }
+  .gl-top:not([data-surface=hub]) .gl-actions { display: none; }
+  .gl-top:not([data-surface=hub]) .gl-nav { gap: 2px; }
+  .gl-top:not([data-surface=hub]) .gl-nav a, .gl-top:not([data-surface=hub]) .gl-more summary { padding: 0 10px; min-height: 44px; }
+  .gl-top:not([data-surface=hub]) .gl-more summary { gap: 6px; }
+}
+@media (max-width: 400px) { .gl-brand b { font-size: 17px; } }
+@media (max-width: 379px) { .gl-brand b { font-size: 16px; } }
+@media (max-width: 357px) {
+  /* below 358px there is no width at which the wordmark and "Find funders" both fit with
+     air between them; the G mark alone carries the brand there */
+  .gl-brand b { display: none; }
+}
+@media print { .gl-top { display: none; } }
+
+/* ============ ONE HOVER BUS: years and recipients light up wherever they appear
+   (design-spec §5, L-06). State is outline/weight/luminance only -- never hue,
+   so it reads the same under deuteranopia. ============ */
+.tr-pt.hot-y .tr-dot { stroke: var(--ink); stroke-width: 2.5; }
+.tr-pt.hot-y .tr-year { font-weight: 700; fill: var(--ink); }
+.tr-card.hot-y, .nr-cell.hot-y, .tie-row.hot-y td { box-shadow: inset 0 0 0 2px var(--ink); }
+/* the phone schedule is a card per year: the lit year is a left rule on the card, not a box on every field */
+@media (max-width: 719px) { .tie-row.hot-y td { box-shadow: none; } .tie-table tbody tr.tie-row.hot-y { box-shadow: inset 0 0 0 1px var(--rule), inset 3px 0 0 var(--ink); } }
+#year-rail button.hot-y { box-shadow: inset 0 0 0 2px var(--cream-bright); }
+#year-rail-top button.hot-y { box-shadow: inset 0 0 0 2px var(--ink); }
+.ycell.hot-y { color: var(--ink); font-weight: 700; }
+.grant-table tr:has(.ycell.hot-y) td { background: var(--tint); }
+.bar-row.hot-e { background: var(--tint); }
+.bar-row.hot-e .bar-label { font-weight: 700; }
+.bar-row.hot-e .bar-fill { outline: 2px solid var(--ink); outline-offset: 1px; }
+.rec-item.hot-e, .mover.hot-e { background: var(--tint); box-shadow: inset 3px 0 0 var(--ink); }
+.pf-g.hot-y { background: var(--tint); }
+.pf-y.hot-y .pf-yb { outline: 2px solid var(--ink); }
+.pf-yh.hot-y { color: var(--ink); border-bottom-color: var(--ink); }
 
 /* ============ THE COVER ============ */
 .cover {
@@ -81,47 +178,82 @@ a:hover { color: var(--copper-deep); }
   pointer-events: none; user-select: none;
 }
 .cover > * { position: relative; z-index: 1; }
-.topbar {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 1.2rem;
-  padding: 1.05rem 0 0.95rem;
-  border-bottom: 1px solid var(--cover-line);
-  font-size: 0.8rem; color: var(--cream-dim);
-}
-.topbar .mark { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; color: var(--cream); letter-spacing: 0.01em; }
-.topbar .mark .tm { color: var(--copper-bright); }
-.topbar .spacer { flex: 1; }
-.topbar a { color: var(--cream-dim); text-decoration: none; }
-.topbar a:hover { color: var(--cream); text-decoration: underline; }
 
 .hero { padding: 2.6rem 0 0; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2.5rem 4rem; align-items: end; }
 @media (max-width: 899px) {
+  /* L-12: actions (CTA + trust badge + save) sit right after the reconciled number,
+     ahead of a now-clamped lede, so the first screen carries the number, the proof
+     and the calls to action instead of a full paragraph pushing them under the fold. */
   .hero { grid-template-columns: 1fr; gap: 0; padding-top: 1.5rem; }
   .hero > div:first-child { display: contents; }
   .hero h1 { order: 1; font-size: clamp(1.9rem, 8vw, 2.4rem); }
   .hero .hero-meta { order: 2; margin-bottom: 1.1rem; }
-  .hero .grand { order: 3; margin: 0.2rem 0 1.25rem; }
-  .hero .lede { order: 4; font-size: 0.98rem; margin-bottom: 1.1rem; }
-  .hero .hero-actions { order: 5; flex-direction: column; align-items: stretch; }
-  .hero .hero-actions .btn-primary, .hero .hero-actions .badge-tie { justify-content: center; text-align: center; width: 100%; }
+  .hero .grand { order: 3; margin: 0.2rem 0 1.15rem; }
+  .hero .hero-actions { order: 4; }
+  .hero .lede {
+    order: 5; font-size: 0.98rem; margin: 0.9rem 0 0.3rem;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .hero .lede.open { -webkit-line-clamp: unset; overflow: visible; }
+  /* "Read the full note" used to be its own centered 44px row below the lede
+     (full pill height + margin). A small left-aligned text link right under
+     the clamp costs a fraction of that -- most of a line, not a whole row. */
+  .hero-more {
+    order: 5; appearance: none; background: none; border: 0; cursor: pointer;
+    display: inline-flex; align-items: center; min-height: 28px;
+    font: 500 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--copper-light); padding: 4px 0; margin: 0.1rem 0 0.45rem;
+  }
   .hero .hero-note { order: 6; }
-  .hero .hero-cred { order: 7; margin-top: 0.9rem; }
-  .cover { padding-bottom: 3.4rem; }
-  .topbar .tb-meta { display: none; }
+  /* L-12 repair: trims the residual gap between the hero's own bottom padding
+     and how far the KPI sheet overlaps up onto it (was 3.4rem pad / -2rem
+     overlap, a 1.4rem/22px gap that did nothing but push the KPI strip, and
+     everything below it, further down the fold). */
+  .cover { padding-bottom: 2.6rem; }
+  /* .sheet-kpis's own phone margin-top override lives right after its base rule
+     below (line ~317) -- same specificity, so it has to come AFTER that rule in
+     the file to actually win; declaring it here (before the base rule) was a
+     silent no-op the whole time. */
 }
+@media (min-width: 900px) { .hero-more { display: none; } }
+h1, h2, h3 { text-wrap: balance; }
+p, li, .lede { text-wrap: pretty; }
 h1 {
   font-family: var(--serif); font-weight: 600;
   font-size: clamp(2rem, 4.4vw, 3.3rem);
   line-height: 1.04; letter-spacing: -0.022em;
   margin: 0 0 0.55rem;
-  text-wrap: balance;
 }
+/* R3 (NEW-4): the cover's figure is bottom-aligned in the right column, so the top of that column is
+   empty paper -- the name may run across it (to the hero's full width) instead of breaking after its first
+   word in the left column. The left column is 1.15fr of 2.15fr plus the 4rem gap. */
+@media (min-width: 900px) { .hero h1 { width: max-content; max-width: calc(100% * 2.15 / 1.15 + 4rem); } }
 .hero-meta { font-size: 0.82rem; color: var(--cream-dim); margin: 0 0 1rem; }
 .hero-meta code { font-family: var(--mono); font-size: 0.78rem; color: var(--cream-dim); }
+.hero-meta .hm { white-space: nowrap; }   /* "filings checked … · The filings ↗" breaks as one unit */
+.hero-meta a { color: var(--copper-light); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (hover: hover) { .hero-meta a:hover { color: var(--copper-bright); } }
 .lede { font-family: var(--body-f); color: var(--cream-dim); font-size: 1.04rem; line-height: 1.6; max-width: 46rem; margin: 0 0 1.35rem; }
 .lede strong { color: var(--cream); font-weight: 500; }
-.lede a { color: var(--cream-dim); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.lede a { color: var(--copper-light); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
 .lede a:hover { color: var(--cream); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; }
+/* R2 (b): the two actions share one row -- Explore, then Save -- and the proof chip takes the
+   row under them, on purpose, at every width. (Before, Save wrapped onto an orphan row of its
+   own whenever the hero column was narrower than all three; on a phone the chip was squeezed
+   into half a row and ellipsised mid-word. The proof line never truncates now: it wraps.) */
+.hero-actions { display: grid; grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "ex sv ." "bd bd bd"; gap: 0.65rem; align-items: center; justify-items: start; }
+.hero-actions .btn-primary { grid-area: ex; }
+.hero-actions .btn-save { grid-area: sv; }
+.hero-actions .badge-tie { grid-area: bd; }
+@media (max-width: 560px) {
+  .hero-actions { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "ex sv" "bd bd"; gap: 0.6rem; }
+  .hero-actions .btn-primary { width: 100%; height: 48px; padding: 0 1rem; }
+  .hero-actions .btn-save { height: 48px; padding: 0 1rem; }
+}
+@media (max-width: 419px) {
+  /* the visible label shortens to "Save"; "Save to shortlist" stays the accessible name */
+  .btn-save .sv-x { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+}
 .hero-note { font-size: 0.78rem; color: rgba(246, 239, 221, 0.82); margin-top: 0.6rem; max-width: 72ch; }
 .hero-note[hidden] { display: none; }
 .hero-note button {
@@ -142,14 +274,42 @@ h1 {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: rgba(242,239,228,0.08); color: var(--cream);
   border: 1px solid var(--cover-line); border-radius: 999px;
-  font-weight: 500; font-size: 0.82rem;
-  padding: 0 1.05rem; height: 46px;
+  font-weight: 500; font-size: 0.82rem; line-height: 1.3; text-align: left;
+  padding: 0.5rem 1.05rem; min-height: 40px; max-width: 100%;
   transition: background var(--dur);
 }
-.badge-tie:hover { background: rgba(242,239,228,0.14); }
+@media (pointer: coarse) { .badge-tie { min-height: 44px; } }
+.badge-tie span:last-child { text-wrap: balance; }   /* when the proof line wraps (320px), it wraps evenly */
+@media (hover: hover) { .badge-tie:hover { background: rgba(242,239,228,0.14); } }
 .badge-tie .tick { color: #7fc79e; font-weight: 700; }
-.hero-cred { margin: 1.15rem 0 0; font-size: 0.78rem; color: var(--cream-faint); max-width: 60ch; }
-.hero-cred a { color: var(--cream-dim); }
+.btn-save {
+  appearance: none; cursor: pointer;
+  display: inline-flex; gap: 8px; align-items: center;
+  padding: .72rem 1rem; border: 1px solid rgba(242,239,228,.34); border-radius: var(--r-s);
+  background: transparent; color: var(--cream); font: 600 .92rem var(--sans); height: 46px;
+  transition: background var(--dur), border-color var(--dur), color var(--dur);
+}
+.btn-save .bm { width: 17px; height: 17px; flex: none; }
+@media (hover: hover) { .btn-save:hover { border-color: var(--copper-bright); } }
+.btn-save[aria-pressed=true] { background: rgba(209,144,73,.16); border-color: var(--copper-bright); color: var(--cream-bright); }
+.btn-save[aria-pressed=true] .bm path { fill: currentColor; }
+/* L-12 repair: hero-cred moved from the (dark) cover to right after the (light)
+   sheet-kpis strip -- restyled for that background; the link now takes the
+   sitewide default `a` (green) instead of the cover's cream tokens. */
+.hero-cred { margin: 0.9rem 0 1.3rem; font-size: 0.78rem; color: var(--ink-faint); max-width: 60ch; }
+@media screen and (min-width: 1100px) {
+  /* R2 (d): on desktop the "independent presentation" credit sits under the rail's own foot --
+     always in view, never between the headline figures and section I. (At <=1099px it follows
+     the open section instead; see the flex order in main.) */
+  aside.side { padding-bottom: 6.8rem; }
+  .hero-cred {
+    position: fixed; left: 0; bottom: 0; z-index: 31; width: 235px; max-width: none;
+    margin: 0; padding: 0.75rem 1.1rem 1.05rem; border-top: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 11.5px; line-height: 1.45; color: var(--cream-dim);
+  }
+  .hero-cred a { color: var(--cream-bright); }
+  @media (hover: hover) { .hero-cred a:hover { color: var(--copper-light); } }
+}
 
 /* the number on the cover */
 .grand {
@@ -173,7 +333,7 @@ h1 {
   margin-top: 0.9rem;
 }
 .grand .g-scope[hidden] { display: none; }
-.grand .g-scope .gs-label { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-faint); }
+.grand .g-scope .gs-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-faint); }
 .grand .g-scope .gs-val { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem, 2.6vw, 2.1rem); letter-spacing: -0.02em; color: #f6efdd; font-variant-numeric: tabular-nums; line-height: 1; }
 .grand .g-scope .gs-meta { font-size: 0.76rem; color: rgba(246, 239, 221, 0.62); }
 .grand .g-scope { opacity: 1; animation: none; }
@@ -200,10 +360,22 @@ h1 {
   background: var(--sheet);
   border-radius: var(--r);
   box-shadow: var(--pop-shadow);
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));   /* R2: equal cells -- a nowrap figure must never widen its own column */
   overflow: hidden;
 }
-@media (max-width: 1099px) { .sheet-kpis { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1099px) { .sheet-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* L-12 repair: matches .cover's own trimmed bottom padding (~line 200) exactly,
+   rather than overlapping past it -- an earlier version of this fix used a
+   bigger overlap than the padding it was paired with, which read fine on a
+   book with a trailing moat-note but clipped straight through the "Read the
+   full note" link's own text on a book without one (padding-bottom must stay
+   >= this margin's magnitude, book-content-independently, or SOME book's
+   hero content ends up under the KPI card instead of above it). Equal
+   magnitudes means the KPI sheet always starts exactly where hero content
+   ends, on every book, never into it. This has to come after the base rule
+   above (same specificity, later wins) -- a duplicate placed earlier in the
+   file was a silent no-op. */
+@media (max-width: 899px) { .sheet-kpis { margin-top: -2.6rem; } }
 /* ux-ledger-08: a 1-column stack at <=719px was what pushed the tab bar 1.8 screens
    down on a phone; the 2x2 grid the 1099px rule already uses stays in force here too. */
 /* the one-line answer to "could we fit", under the headline figures */
@@ -213,7 +385,7 @@ h1 {
    ux-ledger-01: this chip renders inside #year-rail, the SIDEBAR rail on the dark cover
    background (>=1100px) -- var(--ink-dim) is a light-background color and read at 1.34:1
    there (9.28px label too). Use the sidebar's own light-on-dark palette instead, the same
-   one .ss-rail already uses at a verified 7.18:1, and size the label >=11px. */
+   one .ss-rail already uses at a measured 7.18:1, and size the label >=11px. */
 #year-rail .withheld { display: inline-flex; flex-direction: column; align-items: center; gap: 0;
   border: 1px dashed rgba(246, 239, 221, 0.45); color: rgba(246, 239, 221, 0.85); text-decoration: none; opacity: 1; }
 #year-rail .withheld small { font: 600 0.7rem/1.15 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: rgba(246, 239, 221, 0.85); }
@@ -235,17 +407,19 @@ h1 {
   .kpi:nth-child(odd) { border-right-color: var(--rule); }
   .kpi:nth-child(n+3) { border-top-color: var(--rule); }
 }
-.kpi .k-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.kpi .k-label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 0.35rem; }
 .kpi .k-val {
   font-family: var(--serif); font-weight: 600;
   font-size: clamp(1.6rem, 2.6vw, 2.15rem);
   letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.05;
+  white-space: nowrap;   /* R2 (c): one line, always -- fitKpis() in ledger.js scales all four together */
 }
 .kpi .k-val.up { color: var(--pass); }
 .kpi .k-val.down { color: var(--neg); }
 .kpi .k-hint { font-size: 0.78rem; color: var(--ink-dim); margin-top: 0.3rem; }
 
 /* tabs */
+[role=tabpanel] { scroll-margin-top: calc(var(--tabs-h, 46px) + var(--ctx-h, 0px) + 8px); }
 .tabs {
   scrollbar-width: none;
   display: flex; gap: 0.2rem;
@@ -257,6 +431,34 @@ h1 {
   transition: box-shadow var(--dur);
 }
 .tabs.stuck { box-shadow: 0 12px 26px -20px rgba(30,26,12,0.5); }
+/* L-12: while the tab bar is stuck, it carries the book's name and its current scope --
+   the header above it has already scrolled away by then. */
+.tabs-ctx { display: none; }
+@media (max-width: 1099px) {
+  /* R2 (R-3): the context line hangs UNDER the stuck bar as an overlay, never as an in-flow
+     row. Stuck/unstuck used to add or remove 24px of flow (38px when the name wrapped), which
+     moved everything below the tab bar -- the year rail included -- a frame after the rail had
+     already corrected for its own layout change. Out of flow, it cannot move anything. */
+  :root { --ctx-h: 26px; }
+  /* anything scrolled into view (the pager's return to the top of the ledger, a year chip)
+     lands below the pinned tab bar AND its context strip, not under them */
+  html { scroll-padding-top: calc(var(--tabs-h, 47px) + var(--ctx-h) + 8px); }
+  .tabs { flex-wrap: wrap; overflow: visible; }
+  .tabs .tab { font-size: 13px; }
+  .tabs.stuck .tabs-ctx {
+    display: flex; position: absolute; left: 0; right: 0; top: 100%; height: var(--ctx-h); margin-top: 1px;
+    align-items: center; justify-content: space-between; gap: 1rem;
+    font: 500 11px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim);
+    background: var(--bg); border-bottom: 1px solid var(--rule); box-shadow: 0 12px 26px -20px rgba(30,26,12,0.5);
+    pointer-events: none;
+  }
+  .tabs.stuck { box-shadow: none; }
+  /* R2 (R-4): once the grants toolbar pins under the tab bar it carries the scope itself
+     (search + More), so the strip steps aside -- tabs + one toolbar row, ~110px, nothing more */
+  .tabs.stuck.lt-pinned .tabs-ctx { display: none; }
+}
+#ctx-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+#ctx-scope { flex: none; white-space: nowrap; }
 .tab {
   appearance: none; background: none; border: 0; cursor: pointer;
   font-weight: 600; font-size: 0.92rem; color: var(--ink-dim);
@@ -270,16 +472,26 @@ h1 {
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--copper); }
 .tab[aria-selected="true"] .tcount { color: var(--copper-deep); }
 .tabs::-webkit-scrollbar { display: none; }
+/* R3 (DECISIONS-JOE #1): the selected tab's underline is the double rule -- a 2px bar, a 3px gap, a 1px
+   bar (the spec's .rule2 geometry, identical on the hub), its thin bar laid over the bar's own hairline.
+   Geometry, not hue: it reads the same to every eye. The ink slides between tabs; with reduced motion
+   (or before the ink exists) the selected tab draws its own, static. */
+.tab { position: relative; }
+.tab[aria-selected="true"] { border-bottom-color: transparent; }
+.tab[aria-selected="true"]::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 6px; pointer-events: none;
+  color: var(--copper); background: linear-gradient(currentColor, currentColor) left bottom 4px / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+}
 .tab-ink {
-  position: absolute; bottom: 0; height: 3px;
-  background: var(--copper); border-radius: 2px 2px 0 0;
+  position: absolute; bottom: -1px; height: 6px; color: var(--copper);
+  background: linear-gradient(currentColor, currentColor) left bottom 4px / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
   transition: left 0.32s var(--ease), width 0.32s var(--ease);
   pointer-events: none;
 }
-.tabs.has-ink .tab[aria-selected="true"] { border-bottom-color: transparent; }
+.tabs.has-ink .tab[aria-selected="true"]::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .tab-ink { display: none; }
-  .tabs.has-ink .tab[aria-selected="true"] { border-bottom-color: var(--copper); }
+  .tabs.has-ink .tab[aria-selected="true"]::after { display: block; }
 }
 @media (max-width: 520px) {
   .tabs { gap: 0; }
@@ -297,8 +509,18 @@ h1 {
      book with unitemized disclosures -- it needs the same order as the other post-tab
      notes or it reintroduces exactly the gap ux-ledger-08 removes. */
   #fit-line, #tiny-note, #record-coverage { order: 2; }
-  #year-rail-top { order: 3; }
+  /* L-11 repair: #rail-scope is a sibling of #year-rail-top, not nested inside
+     it, so a flex reorder of main's children needs to move both together --
+     leaving #rail-scope at its default order:0 tied it with .sheet-kpis and
+     rendered the scope line 220px above the rail it's meant to sit under. */
+  #year-rail-top, #rail-scope { order: 3; }
   main > section { order: 4; }
+  /* L-12 repair: hero-cred sits right after .sheet-kpis in the markup (see the
+     HTML comment there), which put it BETWEEN the KPI strip and the tab bar --
+     exactly the gap ux-ledger-08 (above) worked to close. order:5 moves it
+     after whichever section is showing instead, by the footer, where a "not
+     affiliated" credit line reads naturally anyway. */
+  .hero-cred { order: 5; }
 }
 
 /* the sidebar — the desktop app shell, cut from the same cloth as the cover */
@@ -313,15 +535,16 @@ h1 {
   }
   .tabs { display: none; }
 }
-.side-brand { display: flex; gap: 0.6rem; align-items: center; }
-.side-mark {
-  width: 34px; height: 34px; border-radius: 9px; flex: none;
-  background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(209, 144, 73, 0.5);
-  color: var(--copper-bright); font-family: var(--serif); font-weight: 700; font-size: 1.15rem;
-  display: grid; place-items: center;
-}
-.side-title { font-family: var(--serif); font-weight: 600; font-size: 0.97rem; line-height: 1.15; color: #f6efdd; }
-.side-title span { display: block; font-family: var(--sans); font-weight: 500; font-size: 0.6rem; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(246, 239, 221, 0.75); margin-top: 0.3rem; }
+/* R2 (a): the header carries the ONLY brand lockup. The rail's head is the book's own identity
+   -- its name over its EIN, set as a label on the rail's cloth, on a band the height of the
+   header whose hairline continues the header's bottom rule -- not a square mark + serif lockup
+   sitting beside the real one. */
+.side-brand { display: flex; align-items: center; margin: -1.4rem -1.1rem 0; padding: 0 1.1rem; height: var(--gt-h); flex: none; overflow: hidden; border-bottom: 1px solid var(--cover-line); }
+.side-mark { display: none; }   /* pages built before R2 still carry the square mark */
+.side-title { font: 600 0.9rem/1.2 var(--sans); letter-spacing: 0; color: var(--cream-bright); display: flex; flex-direction: column-reverse; gap: 0.25rem; min-width: 0; }
+.side-kicker { font: 500 11px/1 var(--mono); letter-spacing: 0.04em; color: var(--cream-dim); white-space: nowrap; }
+.side-kicker:not(.ein):not(.yrs) { display: none; }   /* pages built before R2 still carry the old brand-word kicker */
+.side-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .side-nav { display: flex; flex-direction: column; gap: 0.15rem; }
 .side-nav button {
   appearance: none; background: none; border: 0; cursor: pointer;
@@ -335,13 +558,22 @@ h1 {
   box-shadow: inset 0 0 0 1.5px rgba(246, 239, 221, 0.4); transform: translateY(-1px);
   transition: background var(--dur), box-shadow var(--dur);
 }
-.side-nav button:hover { background: rgba(255, 255, 255, 0.05); color: #f6efdd; }
+@media (hover: hover) { .side-nav button:hover:not([aria-current]) { background: rgba(255, 255, 255, 0.06); color: #f6efdd; } }
 .side-nav button[aria-current="page"] { background: rgba(255, 255, 255, 0.08); color: #f6efdd; }
 .side-nav button[aria-current="page"]::before { background: var(--copper-bright); box-shadow: none; }
-.side button:focus-visible { outline: 2px solid var(--copper-bright); outline-offset: 2px; }
-.sn-count { margin-left: auto; font-family: var(--mono); font-size: 0.66rem; color: rgba(246, 239, 221, 0.7); font-weight: 500; }
+/* R3 (DECISIONS-JOE #1): on the rail the open section is marked by the double rule under its label (the
+   desktop face of the tab bar), in copper-bright on the cloth; the bullet dots retire. Pages built before
+   R3 have no .sn-l and keep their dots. */
+.side-nav button:has(.sn-l) { padding: 0.5rem 0.7rem 0.62rem; }
+.side-nav button:has(.sn-l)::before { display: none; }
+.side-nav .sn-l { position: relative; }
+.side-nav button[aria-current="page"] .sn-l::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 6px; pointer-events: none;
+  color: var(--copper-bright); background: linear-gradient(currentColor, currentColor) left bottom 4px / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+}
+.sn-count { margin-left: auto; font-family: var(--mono); font-size: 11px; color: rgba(246, 239, 221, 0.7); font-weight: 500; }
 .side-scope { border-top: 1px solid rgba(255, 255, 255, 0.09); padding-top: 1.05rem; }
-.ss-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246, 239, 221, 0.72); margin-bottom: 0.55rem; }
+.ss-label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 0.55rem; }
 .ss-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.35rem; }
 .ss-rail button {
   appearance: none; border: 0; cursor: pointer; font: inherit;
@@ -350,10 +582,13 @@ h1 {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   transition: background var(--dur), color var(--dur), box-shadow var(--dur);
 }
-.ss-rail button:hover { background: rgba(255, 255, 255, 0.1); color: #f6efdd; }
+@media (hover: hover) { .ss-rail button:hover:not(.on) { background: rgba(255, 255, 255, 0.14); color: #f6efdd; } }
 .ss-rail button.on { background: var(--copper-bright); color: #2b1804; box-shadow: none; font-weight: 700; }
-.ss-note { font-size: 0.64rem; line-height: 1.5; color: rgba(246, 239, 221, 0.68); margin-top: 0.7rem; }
-.side-foot { margin-top: auto; font-family: var(--mono); font-size: 0.64rem; color: rgba(246, 239, 221, 0.7); }
+.ss-rail button.scan { text-decoration: underline dotted; text-underline-offset: 3px; }
+.ss-rail button::after { content: ""; display: block; height: 3px; width: var(--share, 0%); margin: 0.3rem auto 0; background: currentColor; opacity: 0.55; border-radius: 2px; }
+.ss-rail button.on::after { opacity: 1; }
+.ss-note { font-size: 12px; line-height: 1.5; color: rgba(246, 239, 221, 0.68); margin-top: 0.7rem; }
+.side-foot { margin-top: auto; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: rgba(246, 239, 221, 0.7); text-wrap: balance; }
 @media print { .side { display: none !important; } body { padding-left: 0 !important; } }
 
 /* The year rail the sidebar carries at 1100px and up, as a horizontal strip below it.
@@ -361,12 +596,32 @@ h1 {
    here and this one is display:none there, so exactly one is ever on screen. */
 .year-rail-top { display: none; }
 @media (max-width: 1099px) {
-  .year-rail-top { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 1rem 0 0.25rem; padding: 0 0 2px; }
+  .year-rail-top {
+    display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin: 1rem 0 0.25rem; padding: 0 28px 2px 0;
+    mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+    scroll-snap-type: x proximity;
+  }
   .year-rail-top::-webkit-scrollbar { display: none; }
-  .year-rail-top button, .year-rail-top .withheld, .year-rail-top .zeroyr { flex: 0 0 auto; min-height: 40px; padding: 0.35rem 0.8rem; border-radius: 999px;
-    border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); font: 500 0.8rem/1.2 var(--mono); letter-spacing: 0.04em; cursor: pointer; }
+  .year-rail-top button, .year-rail-top .withheld, .year-rail-top .zeroyr {
+    flex: 0 0 auto; min-height: 44px; padding: 0.35rem 0.8rem; border-radius: 999px;
+    border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); font: 500 0.8rem/1.2 var(--mono); letter-spacing: 0.04em; cursor: pointer;
+    scroll-snap-align: start;
+  }
+  /* minor repair: the browser's UA default (small{font-size:smaller}, ~80%) was
+     shrinking the "$0 FILED"/"WITHHELD" caption a second time on top of the
+     0.8rem chip font, landing under the 11px floor. Set it explicitly. */
+  .year-rail-top .withheld small, .year-rail-top .zeroyr small { font-size: 11px; }
   .year-rail-top button.on { background: var(--green, #23573f); border-color: var(--green, #23573f); color: #fff; }
-  .year-rail-top button:hover { border-color: var(--copper); }
+  @media (hover: hover) { .year-rail-top button:hover { border-color: var(--copper); } }
+}
+.rail-scope { display: none; }
+@media (max-width: 1099px) {
+  .rail-scope {
+    display: block; margin: 6px 0 0; font: 500 12.5px var(--mono); color: var(--copper-deep);
+  }
+  @media (prefers-reduced-motion: no-preference) { .rail-scope { animation: gsIn 0.3s var(--ease) both; } }
 }
 
 /* Print report: on screen it does not exist; in print-report mode it is the only thing that does. */
@@ -379,7 +634,11 @@ h1 {
   .print-report .pr-brand { font: 500 8pt/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-bottom: 6pt; }
   .print-report h1 { font: 600 22pt/1.1 var(--serif); margin: 0 0 4pt; letter-spacing: -0.01em; }
   .print-report .pr-meta { margin: 0 0 12pt; color: #444; font-size: 9.5pt; }
-  .print-report .pr-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; border-top: 1.5pt solid #111; border-bottom: 0.5pt solid #999; padding: 8pt 0; margin-bottom: 8pt; }
+  /* R3 (DECISIONS-JOE #1): the report's header ends on the double rule -- 2px, a 3px gap, 1px -- drawn with
+     borders so it prints even with "background graphics" off; it replaces the KPI strip's top rule. */
+  .print-report .pr-head::after { content: ""; display: block; box-sizing: content-box; height: 3px; margin: 10pt 0 0; border-top: 2px solid var(--copper-deep); border-bottom: 1px solid var(--copper-deep); }
+  .print-report .pr-meta { margin-bottom: 0; }
+  .print-report .pr-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; border-bottom: 0.5pt solid #999; padding: 8pt 0; margin: 4pt 0 8pt; }
   .print-report .pr-kpis b { display: block; font: 600 15pt/1.1 var(--serif); }
   .print-report .pr-kpis span { font: 500 7.5pt/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #555; }
   .print-report .pr-fit { margin: 0 0 12pt; color: #333; }
@@ -414,7 +673,17 @@ h1 {
 .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .card-head h2 { font-family: var(--serif); font-size: 1.18rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 .card-head .sub { font-size: 0.8rem; color: var(--ink-dim); }
-.grid2 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+.grid2 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+/* L-14: a card with nothing but its own lede left in it stops claiming half the row */
+.card.compact { padding: 1rem 1.5rem; }
+@media (min-width: 1000px) {
+  .grid2:has(.card.compact) > .card:first-child { grid-column: 1 / -1; }
+  /* L-14 repair: Concentration spanning the full row (above) only moved the empty
+     air -- the compact card itself still sat in a single 1fr column of a row it
+     now had entirely to itself, rendering as a ~544px box with an empty right
+     half. It needs the same full-row span, as a lede-only strip. */
+  .grid2 > .card.compact { grid-column: 1 / -1; }
+}
 @media (min-width: 1000px) { .grid2 { grid-template-columns: 1fr 1fr; } }
 
 /* editorial grammar — v9 scale */
@@ -425,7 +694,7 @@ h1 {
 .sec-head .snum {
   font-family: var(--serif); font-weight: 600;
   font-size: 1.9rem; line-height: 1;
-  color: var(--copper);
+  color: var(--ink);
 }
 .sec-head h2 {
   font-family: var(--serif); font-weight: 600;
@@ -436,27 +705,28 @@ h1 {
 .sec-head .sub { font-size: 0.8rem; color: var(--ink-dim); white-space: nowrap; }
 @media (max-width: 719px) { .sec-head .sub { display: none; } }
 
-/* the cover settles like a printed page */
+/* the cover settles like a printed page — the reconciled figure is never part of
+   this: it is painted in the HTML and stays at opacity:1 from the first frame
+   (design-spec §2.5 / L-03), only its one-time foil glint (below) ever touches it. */
+.cover .grand .g-val, .cover .grand .g-rule { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .grand .g-rule { animation: ruleIn 0.9s var(--ease) 0.3s both; }
-  .cover .topbar, .cover .hero > div:first-child > *, .cover .grand > * {
+  .cover .hero > div:first-child > * {
     opacity: 0; transform: translateY(10px);
-    animation: settle 0.6s var(--ease) both;
+    animation: settle var(--dur-reveal) var(--ease) both;
   }
-  .cover .topbar { animation-delay: 0.05s; }
-  .cover .hero h1 { animation-delay: 0.12s; }
-  .cover .hero-meta { animation-delay: 0.2s; }
-  .cover .lede { animation-delay: 0.28s; }
-  .cover .hero-actions { animation-delay: 0.36s; }
-  .cover .hero-cred { animation-delay: 0.44s; }
-  .cover .grand .g-label { animation-delay: 0.3s; }
-  .cover .grand .g-val { animation-delay: 0.38s; }
-  .cover .grand .g-rule { animation-delay: 0s; } /* keeps its own ruleIn */
-  .cover .grand .g-sub { animation-delay: 0.55s; }
+  .cover .hero h1 { animation-delay: 0.04s; }
+  .cover .hero-meta { animation-delay: 0.08s; }
+  .cover .lede { animation-delay: 0.12s; }
+  .cover .hero-actions { animation-delay: 0.16s; }
+  .cover .hero-cred { animation-delay: 0.2s; }
+  .cover .grand .g-label { opacity: 0; transform: translateY(10px); animation: settle var(--dur-reveal) var(--ease) 0.05s both; }
+  .cover .grand .g-sub { opacity: 0; transform: translateY(10px); animation: settle var(--dur-reveal) var(--ease) 0.18s both; }
+  .grand .g-rule { animation: ruleIn 0.55s var(--ease) 0.08s both; }
 }
 @keyframes settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-/* one foil glint across the number — once, never looping */
+/* one foil glint across the number — once, never looping, and never a reason the
+   figure is ever not there: opacity is fixed above, only background-position moves. */
 @media (prefers-reduced-motion: no-preference) {
   .grand .g-val {
     background: linear-gradient(100deg,
@@ -467,17 +737,19 @@ h1 {
     background-position: 100% 0;
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent; color: transparent;
-    animation: settle 0.6s var(--ease) 0.38s both, glint 1.6s ease-in-out 1.3s 1 both;
+    animation: glint 1.6s ease-in-out 0.9s 1 both;
   }
   @keyframes glint { from { background-position: 100% 0; } to { background-position: 0% 0; } }
 }
 
-/* the dollar assembles left to right when seen */
+/* the dollar assembles left to right when seen — a coin is always painted
+   (opacity:1, never a rest state of 0) and only its transform animates in. */
+.penny, .card.rv .penny { opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
-  .card.rv .penny { opacity: 1; }
   .card.in .penny { animation: pennyIn 0.32s var(--ease) backwards; animation-delay: calc(var(--pi) * 7ms + 120ms); }
 }
-@keyframes pennyIn { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@keyframes pennyIn { from { transform: scale(0.3); } to { transform: none; } }
+@media print { html.settled .penny { animation: none !important; transform: none !important; } }
 
 /* the footer carries the same quiet field */
 .foot { position: relative; overflow: hidden; }
@@ -491,10 +763,13 @@ h1 {
 @media (max-width: 899px) { .dollar-viz { grid-template-columns: 1fr; } .penny-grid { max-width: 330px; } }
 .penny-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
 .penny { position: relative; cursor: pointer; aspect-ratio: 1; border-radius: 4px; background: var(--pc); transition: opacity var(--dur), transform var(--dur); }
-.penny.other { background: transparent; box-shadow: inset 0 0 0 1.5px #a89f8a; }
-.penny b { position: absolute; inset: 0; display: grid; place-items: center; font: 600 9.5px var(--mono); pointer-events: none; }
-.penny b.w { color: rgba(255, 255, 255, 0.92); }
-.penny b.k { color: var(--ink); }
+.penny.other { background: transparent; box-shadow: inset 0 0 0 1.5px #7d8272; }
+.penny.unitemized { background: repeating-linear-gradient(135deg, #4e5347 0 2px, transparent 2px 5px); box-shadow: inset 0 0 0 1.5px #4e5347; }
+/* the exact cent count is read from the caption below, not stamped on the coin */
+.penny b { display: none; }
+.penny-cap { margin: 0.55rem 0 0; }
+#penny-cap-val { color: var(--ink); font-weight: 600; }
+@media (hover: none), (max-width: 640px) { .penny-cap { display: none; } }
 .penny-grid.dim .penny:not(.hot) { opacity: 0.18; }
 .penny-grid.dim .penny.hot { transform: scale(1.1); }
 /* the coin grid is a hover instrument; on touch screens and small phones the
@@ -502,19 +777,24 @@ h1 {
 @media (hover: none), (max-width: 640px) { .penny-grid { display: none; } .dollar-viz { grid-template-columns: 1fr; margin-top: 0.5rem; } }
 .cat-rows { display: flex; flex-direction: column; }
 .cat-row {
+  position: relative;
   appearance: none; background: none; border: 0; font: inherit; cursor: pointer;
-  display: flex; align-items: baseline; gap: 0.6rem; text-align: left;
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: baseline; gap: 0.15rem 0.6rem; text-align: left;
   padding: 0.46rem 0.45rem; border-bottom: 1px solid var(--rule); border-radius: 6px;
   transition: background var(--dur);
 }
 .cat-row:hover, .cat-row.hot { background: var(--tint); }
-.cat-row:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
-.cr-sw { width: 11px; height: 11px; border-radius: 3.5px; flex: none; transform: translateY(1px); }
-.cat-row[data-cat="Other filed purposes"] .cr-sw { background: transparent !important; box-shadow: inset 0 0 0 1.5px #a89f8a; }
-.cr-c { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--copper-deep); min-width: 2.3rem; font-variant-numeric: tabular-nums; }
+.cr-sw { width: 11px; height: 11px; border-radius: 3.5px; flex: none; align-self: center; }
+.cr-sw.other, .cat-row[data-cat="Other filed purposes"] .cr-sw { background: transparent !important; box-shadow: inset 0 0 0 1.5px #7d8272; }
+.cr-sw.unitemized { background: repeating-linear-gradient(135deg, #4e5347 0 1.5px, transparent 1.5px 3.5px); box-shadow: inset 0 0 0 1.5px #4e5347; }
+.cm-sw.unitemized { background: repeating-linear-gradient(135deg, #4e5347 0 1.5px, transparent 1.5px 3.5px); box-shadow: inset 0 0 0 1.5px #4e5347; }
+.cr-c { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--ink); min-width: 2.3rem; font-variant-numeric: tabular-nums; }
 .cr-name { font-weight: 600; font-size: 0.9rem; min-width: 0; }
 .cr-meta { display: block; font-weight: 400; font-size: 0.72rem; color: var(--ink-faint); margin-top: 0.12rem; }
-.cr-val { margin-left: auto; font-family: var(--mono); font-size: 0.82rem; color: var(--copper-deep); white-space: nowrap; }
+.cr-val { font-family: var(--sans); font-size: 0.82rem; color: var(--ink); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; white-space: nowrap; }
+.cat-row.hot .cr-val, .cat-row.hot .cr-c { color: var(--copper-deep); }
+.cr-bar { grid-column: 1 / -1; height: 3px; background: var(--ink); opacity: 0.18; width: var(--w, 0%); border-radius: 2px; margin-top: 0.3rem; transition: opacity var(--dur); }
+.cat-row.hot .cr-bar { opacity: 0.6; }
 
 /* stacked bars: the name owns its line, the bar sits beneath */
 .bar-row.stacked {
@@ -523,6 +803,12 @@ h1 {
   gap: 0.3rem 0.9rem;
 }
 .bar-row.stacked .bar-label { white-space: normal; overflow: visible; text-overflow: clip; }
+/* L-14: the concentration bars read as one row -- name, track, dollars -- so the top-5
+   list scans as a compact ranking rather than five two-line entries */
+@media (min-width: 560px) {
+  #conc-top5 .bar-row.stacked { grid-template-columns: minmax(0, 1.6fr) minmax(60px, 3fr) auto; grid-template-areas: "label track val"; }
+  #conc-top5 .bar-row.stacked .bar-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
 /* the return chip — one click back to where you drilled from */
 .return-chip {
   position: fixed; left: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom)); z-index: 30;
@@ -535,28 +821,40 @@ h1 {
   box-shadow: var(--pop-shadow);
   transition: transform var(--dur) var(--ease), opacity var(--dur);
 }
-.return-chip:hover { transform: translateY(-2px); }
+@media (hover: hover) { .return-chip:hover { transform: translateY(-2px); } }
 .return-chip[hidden] { display: none; }
+.gl-toast {
+  position: fixed; left: 50%; bottom: calc(1.1rem + env(safe-area-inset-bottom)); z-index: 60;
+  transform: translateX(-50%) translateY(12px); opacity: 0;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--ink); color: var(--sheet); border-radius: var(--r-pill);
+  font-size: 0.86rem; font-weight: 500; padding: 0.75rem 1.2rem;
+  box-shadow: var(--shadow-pop); max-width: calc(100vw - 2rem); white-space: nowrap;
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+.gl-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.gl-toast a { color: var(--copper-light); font-weight: 600; text-decoration: none; margin-left: 0.2rem; }
+.gl-toast a:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { .gl-toast { transition: opacity var(--dur) linear; } }
 body:has(.return-chip:not([hidden])) :is(main, .foot-in) { padding-bottom: 4.5rem; }
-/* the top-5 cascade — they arrive one by one */
+/* the top-5 cascade — they arrive one by one. A row that is in the HTML is always
+   painted (opacity:1 at rest, design-spec §2.5 / L-03): only its transform moves. */
 #conc-top5 { margin-top: 1rem; }
-#conc-top5 .bar-row { opacity: 0; transform: translateY(10px); }
+#conc-top5 .bar-row { opacity: 1; transform: translateY(10px); }
 #conc-top5.seen .bar-row {
   animation: waveIn 0.7s var(--ease) both;
   animation-delay: calc(var(--i) * 230ms + 260ms);
 }
-#newret .nr-cell { opacity: 0; transform: translateY(10px); }
+#newret .nr-cell { opacity: 1; transform: translateY(10px); }
 #newret.seen .nr-cell {
   animation: waveIn 0.7s var(--ease) both;
   animation-delay: calc(var(--ni) * 160ms + 150ms);
 }
+@keyframes waveIn { to { transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  #newret .nr-cell { opacity: 1; transform: none; animation: none; }
+  #conc-top5 .bar-row, #newret .nr-cell { transform: none; animation: none; }
 }
-@keyframes waveIn { to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  #conc-top5 .bar-row { opacity: 1; transform: none; animation: none; }
-}
+@media print, (scripting: none) { html.settled #conc-top5 .bar-row, html.settled #newret .nr-cell { animation: none !important; transform: none !important; } }
 /* new vs returning: cells are controls, details live below */
 .nr-cell { cursor: pointer; transition: box-shadow var(--dur), background var(--dur); text-align: left; appearance: none; border: 0; font: inherit; }
 .nr-cell:hover { background: var(--tint); }
@@ -659,7 +957,7 @@ select {
   line-height: 1.35; letter-spacing: -0.01em;
   max-width: 34ch;
 }
-.doctrine-band .db-line em { font-style: normal; color: var(--copper-bright); }
+.doctrine-band .db-line em { font-style: normal; font-weight: 600; color: var(--cream-bright); }
 .doctrine-band .db-rule {
   height: 6px; margin: 0.9rem 0 0.8rem; max-width: 240px;
   background:
@@ -675,6 +973,13 @@ select {
 .doctrine-band .db-except[hidden] { display: none; }
 .doctrine-band .db-except p { margin: 0.2rem 0; }
 .doctrine-band .db-except a { color: var(--cream); }
+/* L-07: one chip per filed period, linking into the schedule that reconciles it */
+.db-years { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; margin-top: 0.7rem; }
+.db-years a { font: 600 0.72rem var(--mono); letter-spacing: 0.08em; color: var(--cream-dim); text-decoration: none; }
+@media (hover: hover) { .db-years a:hover { color: var(--cream-bright); } }
+.db-years a.withheld { text-decoration: line-through; color: var(--cream-faint); }
+.db-years a.scan { text-decoration: underline dashed; text-underline-offset: 3px; }
+.db-years a.hot-y { color: var(--cream-bright); }
 
 /* ux-ledger-04: the moat, said where the buyer is already looking -- under the badge,
    not only seven clicks into Methodology. Shares .hero-note's cover-dark type. */
@@ -720,9 +1025,9 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   font-variant-numeric: tabular-nums;
 }
 .eq-part { display: flex; flex-direction: column; gap: 0.15rem; }
-.eq-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--cream-faint); }
+.eq-label { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--cream-faint); }
 .eq-val { font-family: var(--serif); font-weight: 600; font-size: clamp(1.35rem, 2.6vw, 1.9rem); color: var(--cream); letter-spacing: -0.02em; }
-.eq-op { font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--copper-bright); align-self: center; }
+.eq-op { font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--cream-dim); align-self: center; }
 .eq-seal {
   align-self: center;
   font-family: var(--sans); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em;
@@ -731,6 +1036,15 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
   transform: rotate(-4deg);
+}
+/* L-12: on a phone the equation stacks with the "=" sitting in a left gutter between
+   the two figures, instead of wrapping wherever the flex row happens to break. */
+@media (max-width: 639px) {
+  .db-eq { display: grid; grid-template-columns: 1.2rem 1fr; row-gap: 0.5rem; align-items: start; }
+  .eq-part:first-child { grid-column: 2; }
+  .eq-op { grid-column: 1; grid-row: 2; align-self: start; }
+  .eq-part:nth-child(3) { grid-column: 2; grid-row: 2; }
+  .eq-seal { grid-column: 2; grid-row: 3; justify-self: start; }
 }
 .db-eq.armed .eq-seal { opacity: 0; transform: rotate(-4deg) scale(1.7); }
 .db-eq.stamped .eq-seal {
@@ -774,41 +1088,60 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 
 /* trend */
 #trend { position: relative; }
-#trend svg { width: 100%; height: auto; display: block; }
-.tr-base, .tr-grid, .tr-area, .tr-line, .tr-band { pointer-events: none; }
+/* L-04 repair: don't let a real browser's SVG clip-at-viewBox default cut off
+   anything that rounds outside 0..228 (year labels, the last value label). */
+#trend svg { width: 100%; height: auto; display: block; overflow: visible; }
+.tr-base, .tr-grid, .tr-area, .tr-line, .tr-band, .tr-timing { pointer-events: none; }
 .tr-band { fill: rgba(163, 92, 26, 0.08); }
-#trend svg.scoped .tr-pt { transition: opacity var(--dur); }
-#trend svg.scoped .tr-pt:not(.is-sel) { opacity: 0.45; }
-#trend svg.scoped .tr-pt:not(.is-sel):hover, #trend svg.scoped .tr-pt:not(.is-sel):focus-visible { opacity: 1; }
-.tr-pt.is-sel .tr-val { font-weight: 700; fill: var(--copper-deep); }
+/* R2.2 (M-2): the chart's other years step back by their DOT only -- dimming the whole point took its
+   value and year labels to 2.15:1. Text stays at rest colour (ink-dim, 8.4:1). */
+#trend svg.scoped .tr-pt:not(.is-sel) .tr-dot { opacity: 0.5; }
+@media (hover: hover) { #trend svg.scoped .tr-pt:not(.is-sel):hover .tr-dot { opacity: 1; } }
+#trend svg.scoped .tr-pt:not(.is-sel):focus-visible .tr-dot { opacity: 1; }
+.tr-pt.is-sel .tr-year { font-weight: 700; fill: var(--ink); }
+.tr-pt.is-sel .tr-val { font-weight: 700; fill: var(--copper-deep); opacity: 1; }
 #tr-cards.scoped .tr-card { transition-delay: 0s; }
-#tr-cards.scoped .tr-card:not(.sel) { opacity: 0.72; }
-#tr-cards.scoped .tr-card:not(.sel):hover, #tr-cards.scoped .tr-card:not(.sel):focus-visible { opacity: 1; }
+/* R2.2 (M-2): once a year is scoped the other years recede by colour, never by opacity -- opacity
+   took their year, count and change labels to 2.9-3.8:1. Only the figure steps back (ink -> ink-faint,
+   5.1:1 on the card); every label keeps its rest colour. The chosen year keeps its copper ring. */
+#tr-cards.scoped .tr-card:not(.sel) .tsum { color: var(--ink-faint); transition: color var(--dur); }
+@media (hover: hover) { #tr-cards.scoped .tr-card:not(.sel):hover .tsum { color: var(--ink); } }
+#tr-cards.scoped .tr-card:not(.sel):focus-visible .tsum { color: var(--ink); }
 .tr-base { stroke: var(--rule-strong); stroke-width: 1; }
 .tr-grid { stroke: var(--rule); stroke-width: 1; }
 .tr-area { fill: url(#trFill); }
 .tr-line { fill: none; stroke: var(--copper); stroke-width: 2.5; stroke-linecap: round; }
+.tr-line.dashed { stroke-dasharray: 5 4; }
+.tr-timing { fill: none; stroke: none; }
 @media (prefers-reduced-motion: no-preference) {
   /* the trend reveals like a wave, left to right: the line draws at constant speed,
      the wash sweeps beneath it, and each year rings up as the tip arrives (--td is
      measured off the real path, not guessed) */
-  #trend .tr-line { stroke-dasharray: var(--plen, 1400); animation: tr-draw 1.1s linear both; }
+  #trend .tr-line:not(.dashed) { stroke-dasharray: var(--plen, 1400); animation: tr-draw 1.1s linear both; }
+  #trend .tr-line.dashed { opacity: 0; animation: gsIn 0.5s var(--ease) 1.05s both; }
   #trend .tr-area { animation: tr-wipe 1.1s linear both; }
   @keyframes tr-draw { from { stroke-dashoffset: var(--plen, 1400); } to { stroke-dashoffset: 0; } }
   @keyframes tr-wipe { from { clip-path: inset(-6% 106% -6% -6%); } to { clip-path: inset(-6% -3% -6% -6%); } }
   .tr-dot { transform-box: fill-box; transform-origin: center; }
   #trend:not(.seen) .tr-dot { transform: scale(0); }
   #trend.seen .tr-dot { transform: scale(1); transition: transform 0.45s cubic-bezier(0.34, 1.6, 0.64, 1); transition-delay: var(--td, 0s); }
-  #trend:not(.seen) :is(.tr-val, .tr-year, .tr-pct) { opacity: 0; transform: translateY(5px); }
-  #trend.seen :is(.tr-val, .tr-year, .tr-pct) { opacity: 1; transform: translateY(0); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); transition-delay: calc(var(--td, 0s) + 0.08s); }
+  #trend:not(.seen) .tr-year { transform: translateY(5px); }
+  #trend.seen .tr-year { transform: translateY(0); transition: transform 0.5s var(--ease); transition-delay: calc(var(--td, 0s) + 0.08s); }
 }
-.tr-dot { fill: var(--copper); stroke: var(--sheet); stroke-width: 2; transition: r var(--dur); }
+.tr-dot { fill: var(--copper); stroke: var(--sheet); stroke-width: 2; transition: r var(--dur), fill var(--dur); }
+.tr-dot.hollow { fill: var(--sheet); stroke: var(--copper); stroke-width: 2.5; }
 .tr-pt { cursor: pointer; }
-.tr-pt:hover .tr-dot { fill: var(--copper-deep); }
-.tr-pt:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
-.tr-val { font-family: var(--mono); font-size: 11px; fill: var(--ink-dim); }
+@media (hover: hover) { .tr-pt:hover .tr-dot { fill: var(--copper-deep); } .tr-pt:hover .tr-dot.hollow { stroke: var(--copper-deep); } }
+/* value labels stay quiet at rest -- only the ones flagged .show-val (first, last,
+   largest, smallest, or the selected year) are visible; hover/focus reveals any other */
+.tr-val { font-family: var(--mono); font-size: 11px; fill: var(--ink-dim); font-variant-numeric: tabular-nums lining-nums; opacity: 0; transition: opacity var(--dur);
+  paint-order: stroke; stroke: var(--sheet); stroke-width: 4px; stroke-linejoin: round; }   /* R2: a paper halo -- a gridline never runs through a value label */
+.tr-pt.show-val .tr-val, .tr-pt.is-sel .tr-val { opacity: 1; }
+@media (hover: hover) { .tr-pt:hover .tr-val { opacity: 1; } }
+.tr-pt:focus-visible .tr-val { opacity: 1; }
+.tr-year { font: 500 11px var(--sans); fill: var(--ink-dim); }
 #main:focus { outline: none; }
-.tr-tick { font-family: var(--mono); font-size: 9.5px; fill: var(--ink-faint); }
+.tr-tick { font-family: var(--mono); font-size: 11px; fill: var(--ink-faint); }
 #tr-cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1rem; }
 .tr-card {
   appearance: none; font: inherit; text-align: left; cursor: pointer;
@@ -819,20 +1152,27 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   transition: box-shadow var(--dur), transform var(--dur), background var(--dur);
 }
 .tr-card:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--copper), 0 10px 20px -14px rgba(30, 26, 12, 0.4); }
-.tr-card:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .tr-card.sel { background: var(--sheet); box-shadow: inset 0 0 0 2px var(--copper); }
-.tr-card .ty { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
-.tr-card .chg { font-size: 0.68rem; }
+.tr-card .ty { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-weight: 500; font-size: 0.72rem; color: var(--ink-dim); }
+.tr-card .chg { font-size: 11px; }
 .tr-card .chg.pos { color: var(--pass); }
 .tr-card .chg.neg { color: var(--neg); }
-.tr-card .tsum { font-family: var(--serif); font-weight: 600; font-size: 1.06rem; color: var(--copper-deep); }
+.tr-card .tsum { font-family: var(--serif); font-weight: 600; font-size: 1.06rem; color: var(--ink); font-variant-numeric: tabular-nums lining-nums; }
+.tr-card.sel .tsum { color: var(--copper-deep); }
 .tr-card .tct { font-size: 0.7rem; color: var(--ink-faint); }
 @media (max-width: 639px) {
-  #tr-cards { gap: 0.3rem; }
-  .tr-card { padding: 0.32rem 0.3rem; gap: 0.05rem; }
-  .tr-card .chg, .tr-card .tct { display: none; }
-  .tr-card .ty { font-size: 0.6rem; }
-  .tr-card .tsum { font-size: clamp(0.56rem, 3vw, 0.88rem); }
+  /* L-12: a horizontal carousel of full-size cards reads better than five squeezed
+     into one row -- every figure stays legible instead of shrinking past 11.5px. */
+  /* R2.2 (M-1): grid-template-columns:none -- without it the base repeat(5, minmax(0,1fr)) stayed in force
+     and the five cards sat in 40-54px explicit tracks, clipping "$59.1M" to "$59.1N" and "-27%" to "-27".
+     4px of padding (cancelled by the negative margin) keeps the focus ring and the chosen card's ring
+     inside the scroller's clip. */
+  #tr-cards { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(104px, 1fr); overflow-x: auto; scroll-snap-type: x proximity; gap: 0.5rem; padding: 4px; margin: calc(1rem - 4px) -4px 0; scroll-padding-inline: 4px; scrollbar-width: none; }
+  #tr-cards::-webkit-scrollbar { display: none; }
+  .tr-card { scroll-snap-align: start; padding: 0.5rem 0.6rem; }
+  .tr-card .ty { font-size: 0.72rem; }
+  .tr-card .tsum { font-size: 0.98rem; }
+  .tr-card .chg { display: inline; }
 }
 .tr-tip {
   position: absolute; pointer-events: none; z-index: 5;
@@ -845,6 +1185,63 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 }
 .tr-tip.show { opacity: 1; transform: translate(-50%, calc(-100% - 14px)) scale(1); }
 .tr-tip strong { font-family: var(--serif); font-size: 0.92rem; display: block; margin-bottom: 0.05rem; }
+.tr-tip span + span { display: block; }
+/* R3 (DECISIONS-JOE #2): the column form. One column per filed year, drawn in CSS pixels (the viewBox is
+   the host's own width), its value printed on it -- ink, never copper, at 12px (11px words; values step
+   to 11px only where a phone's neighbours would touch -- never below). A year's kind is pattern + outline + a word, never hue alone:
+   filed = solid; unitemized = 45-degree hatch, ink outline, "unitemized"; $0 filed = a flat ink bar,
+   "$0 filed"; withheld = an empty dashed slot, "withheld". A year read from paper keeps its dotted
+   underline (the rail's own mark). Chosen year: band + full column, the others' fills step back. Hover
+   bus and keyboard focus: an ink outline and weight. */
+.tr-col { outline: none; }
+.tr-col.is-withheld { text-decoration: none; }   /* a link, but its labels must not read as the paper mark (decorations propagate from the <a>) */
+.tr-col[data-i], .tr-col.is-withheld { cursor: pointer; }
+.tr-cbar { fill: var(--copper); }
+.tr-col.is-unit .tr-cbar { fill: url(#trHatch); stroke: #4e5347; stroke-width: 1.5px; }
+.tr-wframe { fill: none; stroke: var(--edge); stroke-width: 1.25px; stroke-dasharray: 4 3; }
+.tr-zbar { fill: var(--ink); }
+.tr-cval { font: 600 12px var(--sans); fill: var(--ink); font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1; }
+.tr-cword { font: italic 500 11px var(--sans); fill: var(--ink-dim); }
+.tr-cyear { font: 500 11px var(--sans); fill: var(--ink-dim); font-variant-numeric: tabular-nums lining-nums; }
+.tr-scanmark { stroke: var(--ink-dim); stroke-width: 1px; stroke-dasharray: 1 2; }
+.tr-columns.tight .tr-cval { font-size: 11px; }
+.tr-columns.scoped .tr-col[data-i]:not(.is-sel) .tr-cbar { opacity: 0.38; }
+@media (hover: hover) { .tr-columns.scoped .tr-col[data-i]:not(.is-sel):hover .tr-cbar { opacity: 1; } }
+.tr-col.is-sel .tr-cval { font-weight: 700; fill: var(--copper-deep); }
+.tr-col.is-sel .tr-cyear, .tr-col.hot-y .tr-cyear, .tr-col:focus-visible .tr-cyear { font-weight: 700; fill: var(--ink); }
+.tr-col.hot-y .tr-cval, .tr-col:focus-visible .tr-cval { font-weight: 700; }
+.tr-col.hot-y .tr-cbar, .tr-col:focus-visible .tr-cbar { stroke: var(--ink); stroke-width: 2px; opacity: 1; }
+.tr-col.hot-y .tr-wframe, .tr-col:focus-visible .tr-wframe { stroke: var(--ink); stroke-width: 2px; }
+.tr-col.hot-y .tr-zbar { stroke: var(--ink); stroke-width: 2px; }
+.tr-col.hot-y .tr-cword, .tr-col:focus-visible .tr-cword { fill: var(--ink); }
+.tr-col:focus-visible .tr-hit { stroke: var(--focus); stroke-width: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  /* columns rise from the baseline one beat apart, when the chart is first seen; a re-render after that
+     (a scope click, a width change) paints them in place */
+  .tr-cbar { transform-box: fill-box; transform-origin: 50% 100%; }
+  #trend:not(.seen) .tr-cbar { transform: scaleY(0); }
+  #trend.seen .tr-cbar { transform: scaleY(1); transition: transform 0.6s var(--ease), opacity var(--dur); transition-delay: var(--td, 0s), 0s; }
+  #trend:not(.seen) .tr-col :is(.tr-cval, .tr-cword) { opacity: 0; }
+  #trend.seen .tr-col :is(.tr-cval, .tr-cword) { transition: opacity 0.35s var(--ease); transition-delay: calc(var(--td, 0s) + 0.4s); }
+}
+@media print { .tr-cbar { transform: none !important; } .tr-col :is(.tr-cval, .tr-cword) { opacity: 1 !important; } }
+
+/* R3 (DECISIONS-JOE #1): the loading indicator is the double rule drawing itself left to right -- the
+   heavy bar, then the hairline a beat behind -- over and over while the full grant list is fetched.
+   Reduced motion: the rule simply stands, drawn. */
+.dr-load { display: block; position: relative; height: 6px; width: 100%; max-width: 220px; margin: 0.6rem 0 0.1rem; color: var(--copper); }
+.dr-load::before, .dr-load::after { content: ""; position: absolute; left: 0; right: 0; background: currentColor; transform-origin: left center; }
+.dr-load::before { top: 0; height: 2px; }
+.dr-load::after { bottom: 0; height: 1px; }
+@media (prefers-reduced-motion: no-preference) {
+  .dr-load::before, .dr-load::after { animation: dr-draw 1.5s var(--ease) infinite both; }
+  .dr-load::after { animation-delay: 0.14s; }
+}
+@keyframes dr-draw { 0% { transform: scaleX(0); opacity: 1; } 60% { transform: scaleX(1); opacity: 1; } 88%, 100% { transform: scaleX(1); opacity: 0; } }
+.rows-status { display: block; margin: 1rem 0; padding: 0.8rem 1.1rem 0.85rem; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r-card); box-shadow: var(--shadow-card); font: 13px/1.5 var(--sans); color: var(--ink-dim); }
+.rows-status.failed { border-color: var(--rule-strong); }
+/* R3 (NEW-2): an empty concentration scope keeps one sentence -- no dash, no empty track, no empty list */
+#conc-share[hidden], #conc-hint[hidden], #conc-top5[hidden], .conc-pair[hidden] { display: none; }
 .tr-tip span { color: rgba(255,255,255,0.72); }
 
 /* bars */
@@ -867,7 +1264,7 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .bar-row.is-btn:hover, .bar-row.is-btn:focus-visible { background: var(--tint); }
 .bar-label { grid-area: label; font-size: 0.87rem; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-label .rk { font-family: var(--serif); color: var(--ink-faint); font-size: 0.82rem; margin-right: 0.35rem; font-variant-numeric: oldstyle-nums; }
-.merged-flag { font-size: 0.7rem; color: var(--green); font-weight: 600; }
+.merged-flag { display: inline-block; font: 500 11px var(--mono); letter-spacing: 0.06em; color: var(--ink-dim); border: 1px solid var(--rule-strong); border-radius: var(--r-pill); padding: 0.05rem 0.4rem; margin-left: 0.4rem; }
 .bar-track { grid-area: track; height: 12px; background: var(--tint); border-radius: 6px; overflow: hidden; }
 .bar-fill {
   height: 100%; background: linear-gradient(90deg, var(--copper), var(--copper-deep));
@@ -875,10 +1272,12 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   animation: growX 0.7s var(--ease) both;
 }
 @keyframes growX { from { transform: scaleX(0); } }
-.bar-val { grid-area: val; font-family: var(--mono); font-size: 0.8rem; color: var(--copper-deep); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bar-val { grid-area: val; font-family: var(--sans); font-size: 0.8rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+@media (hover: hover) { .bar-row:hover .bar-val { color: var(--copper-deep); } }
+#rec-bars .bar-row:first-child .bar-val { color: var(--copper-deep); }
 
 /* overview widgets */
-#conc-share { font-family: var(--serif); font-weight: 600; font-size: 2.5rem; letter-spacing: -0.02em; color: var(--copper-deep); line-height: 1; }
+#conc-share { font-family: var(--serif); font-weight: 600; font-size: 2.5rem; letter-spacing: -0.02em; color: var(--ink); line-height: 1; }
 .conc-wrap { margin: 0.75rem 0 0.5rem; }
 .conc-track { height: 14px; background: var(--tint); border-radius: 7px; overflow: hidden; }
 #conc-bar { height: 100%; background: linear-gradient(90deg, var(--copper), var(--copper-deep)); border-radius: 7px; transform-origin: left; animation: growX 0.8s var(--ease) both; }
@@ -887,7 +1286,7 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 @media (max-width: 719px) { .newret { grid-template-columns: repeat(2, 1fr); } }
 .nr-cell { border-radius: var(--r-s); padding: 0.6rem 0.7rem; background: var(--sheet-warm); box-shadow: inset 0 0 0 1px var(--rule); }
 .nr-cell.sel { box-shadow: inset 0 0 0 2px var(--copper); }
-.nr-y { font-family: var(--serif); font-weight: 600; }
+.nr-y { font-family: var(--serif); font-weight: 600; font-variant-numeric: tabular-nums lining-nums; }
 .nr-n { font-size: 0.78rem; color: var(--pass); font-weight: 600; }
 .nr-r { font-size: 0.78rem; color: var(--ink-dim); }
 #movers { list-style: none; margin: 0.2rem 0 0; padding: 0; }
@@ -911,11 +1310,13 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .mv-fill.neg { background: rgba(167, 49, 42, 0.24); background-image: repeating-linear-gradient(135deg, transparent 0 3px, var(--neg) 3px 4px); border-right: 3px solid var(--neg); }
 #movers.seen .mv-fill { width: var(--to); }
 .mv-tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink-dim); opacity: 0.55; border-radius: 1px; }
+#movers .mover { opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
-  #movers .mover { opacity: 0; transform: translateY(10px); }
+  #movers .mover { transform: translateY(10px); }
   #movers.seen .mover { animation: waveIn 0.7s var(--ease) both; animation-delay: calc(var(--i) * 150ms + 120ms); }
   #movers.seen .mv-fill { transition: width 0.9s var(--ease); transition-delay: calc(var(--i) * 150ms + 560ms); }
 }
+@media print { html.settled #movers .mover { animation: none !important; transform: none !important; } }
 @media (prefers-reduced-motion: reduce) {
   #movers .mover { opacity: 1; transform: none; animation: none; }
   .mv-fill { width: var(--to); }
@@ -976,11 +1377,11 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 }
 .alpha button:hover { background: var(--tint); }
 .alpha button:disabled { color: var(--rule-strong); cursor: default; background: none; }
-.alpha button[data-l="*"] { width: auto; min-width: 2.1rem; padding: 0 0.45rem; font-size: 0.66rem; letter-spacing: 0.04em; }
+.alpha button[data-l="*"] { width: auto; min-width: 2.1rem; padding: 0 0.45rem; font-size: 11px; letter-spacing: 0.04em; }
 .alpha button.on { background: var(--copper-deep); color: #fff; }
 .alpha button.on:hover { background: var(--copper-deep); }
 @media (max-width: 719px) {
-  .alpha { position: sticky; top: var(--tabs-h, 48px); flex-wrap: nowrap; overflow-x: auto; gap: 0; scrollbar-width: none; }
+  .alpha { position: sticky; top: calc(var(--tabs-h, 48px) + var(--ctx-h, 0px)); flex-wrap: nowrap; overflow-x: auto; gap: 0; scrollbar-width: none; }
   .alpha button { flex: 0 0 44px; height: 44px; }
   .letter-head { position: static; }
 }
@@ -1011,7 +1412,8 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .rec-item + li .rec-item { border-top: 1px solid var(--rule); border-radius: 0 0 var(--r-s) var(--r-s); }
 .ri-name { grid-area: name; font-weight: 600; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ri-meta { grid-area: meta; font-size: 0.75rem; color: var(--ink-faint); }
-.ri-amt { grid-area: amt; justify-self: end; font-family: var(--mono); font-size: 0.86rem; color: var(--copper-deep); font-variant-numeric: tabular-nums; }
+.ri-amt { grid-area: amt; justify-self: end; font-family: var(--sans); font-size: 0.86rem; color: var(--ink); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+@media (hover: hover) { .rec-item:hover .ri-amt { color: var(--copper-deep); } }
 
 /* profile drawer */
 .pf-backdrop { position: fixed; inset: 0; background: rgba(24,32,24,0.4); backdrop-filter: blur(2px); opacity: 0; pointer-events: none; transition: opacity 220ms var(--ease); z-index: 40; touch-action: none; }
@@ -1023,6 +1425,7 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   transform: translateX(103%); transition: transform 280ms var(--ease);
   display: flex; flex-direction: column;
   box-shadow: -20px 0 60px -30px rgba(20,16,4,0.4);
+  overscroll-behavior: contain;
 }
 .profile.open { transform: translateX(0); }
 .profile[hidden] { display: none; }
@@ -1041,11 +1444,18 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .pf-h { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin: 1rem 0 0.45rem; }
 #pf-aliases code { font-family: var(--mono); font-size: 0.72rem; background: var(--tint); border-radius: 4px; padding: 0.12rem 0.4rem; display: inline-block; margin: 0.14rem 0.18rem 0 0; }
 #pf-grants { list-style: none; margin: 0.3rem 0 0; padding: 0; }
-.pf-g { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 0.75rem; padding: 0.5rem 0.1rem; border-bottom: 1px solid var(--rule); font-size: 0.84rem; align-items: baseline; }
-.pf-gy { font-family: var(--mono); color: var(--ink-faint); font-size: 0.76rem; }
+/* L-10: a sticky year header owns the receipt; the rows beneath it lose the year column */
+.pf-yh {
+  position: sticky; top: 0; z-index: 1; background: var(--sheet);
+  font: 600 0.74rem var(--mono); letter-spacing: 0.08em; color: var(--ink-dim);
+  display: flex; justify-content: space-between; gap: 0.6rem;
+  padding: 0.55rem 0.1rem 0.35rem; border-bottom: 1px solid var(--rule-strong);
+}
+.pf-yh.hot-y { color: var(--ink); border-bottom-color: var(--ink); }
+.pf-g { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0.75rem; padding: 0.5rem 0.1rem; border-bottom: 1px solid var(--rule); font-size: 0.84rem; align-items: baseline; }
 .pf-gp { color: var(--ink-dim); }
-.pf-go { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); background: var(--tint); border-radius: 4px; padding: 0.08rem 0.32rem; margin-left: 0.4rem; white-space: nowrap; }
-.pf-ga { font-family: var(--mono); color: var(--copper-deep); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pf-go { color: var(--ink-dim); font-weight: 600; white-space: nowrap; text-decoration: underline; text-underline-offset: 2px; }
+.pf-ga { color: var(--ink); font-family: var(--sans); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; white-space: nowrap; }
 .pf-actions { padding: 0.9rem 1.5rem; padding-bottom: calc(0.9rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--rule); background: var(--sheet-warm); }
 #pf-all { appearance: none; cursor: pointer; width: 100%; background: var(--green); color: #fff; border: 0; border-radius: var(--r-s); font-weight: 600; padding: 0 1rem; height: 48px; transition: background var(--dur); }
 #pf-all:hover { background: #1c4732; }
@@ -1077,10 +1487,13 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .ledger-tools.stuck { box-shadow: 0 10px 24px -18px rgba(30,26,12,0.4); }
 .lt-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
 .ledger-tools input, .ledger-tools select {
-  background: var(--sheet); border: 1px solid var(--rule-strong);
+  background: var(--sheet); border: 1px solid var(--edge);
   border-radius: var(--r-s); padding: 0 0.8rem; height: 40px;
 }
 .ledger-tools input { flex: 1 1 200px; }
+#cat-sel { flex: 0 1 220px; }
+#min-amt { flex: 0 0 140px; }
+@media (min-width: 720px) { #sort { display: none; } }
 @media (max-width: 560px) {
   #cat-sel { max-width: 100%; flex: 1 1 100%; }
 }
@@ -1088,14 +1501,45 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .lt-btn {
   appearance: none; cursor: pointer;
   font-size: 0.8rem; font-weight: 600;
-  background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: var(--r-s);
+  background: var(--sheet); border: 1px solid var(--edge); border-radius: var(--r-s);
   padding: 0 0.95rem; height: 40px; color: var(--ink);
   transition: border-color var(--dur), background var(--dur);
 }
-.lt-btn:hover:not(:disabled) { border-color: var(--green); background: var(--green-soft); }
-.lt-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+@media (hover: hover) { .lt-btn:hover:not(:disabled) { border-color: var(--green); background: var(--green-soft); } }
+.lt-btn:disabled { opacity: 1; color: var(--ink-faint); background: var(--tint); border-color: var(--rule); cursor: not-allowed; }
+.lt-btn[aria-pressed=true] { background: rgba(163,92,26,.1); border-color: var(--copper-deep); color: var(--copper-deep); }
+/* L-09: compact density, persisted, shrinks the grants table's row height */
+body[data-density=compact] .grant-table td { padding: 0.42rem 0.6rem; }
+body[data-density=compact] .grant-table { font-size: 0.82rem; }
+body[data-density=compact] .gcard { padding: 0.55rem 0.35rem; }
+/* the export/print/copy trio folds behind one control on a phone, so the row stays one line */
+.lt-more { position: relative; margin-left: auto; }
+.lt-more > summary { list-style: none; cursor: pointer; }
+.lt-more > summary::-webkit-details-marker { display: none; }
+.lt-more > summary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 0.9rem; font-size: 0.8rem; font-weight: 600; color: var(--ink); border: 1px solid var(--edge); border-radius: var(--r-s); }
+.lt-more[open] > summary { border-color: var(--copper-deep); color: var(--copper-deep); }
+.lt-more .lt-menu { position: absolute; top: calc(100% + 4px); right: 0; z-index: 8; display: grid; gap: 2px; padding: 6px; min-width: 220px; max-width: min(88vw, 260px); background: var(--sheet); border-radius: var(--r-card); box-shadow: var(--shadow-pop); }
+.lt-more .lt-menu .lt-btn { width: 100%; text-align: left; border: 0; }
+/* L-09 repair: sort/min-amt/cat-sel moved in here for phones (see markup note) --
+   full width in the dropdown. The desktop spacer only does its job once
+   .lt-menu goes display:contents (>=720px, below) -- inside the closed phone
+   menu it would just be a blank grid row, so it's hidden there specifically. */
+.lt-more .lt-menu select { width: 100%; }
+@media (max-width: 1099px) { .lt-more .lt-menu .lt-spacer { display: none; } }
+/* R2.2 (M-4): 1100-~1356px, beside the sidebar, the full row would wrap -- ledger.js folds the four actions
+   into More there and keeps search + the two filters on the row. That More sits in a 40px desktop row. */
+@media (min-width: 1100px) { .lt-more.lt-fold > summary { min-height: 40px; } }
+/* R2: at >=1100px ledger.js moves the menu's controls into the toolbar row itself and hides the
+   disclosure (a closed <details> never paints its content, display:contents or not). Without
+   script the disclosure simply stays a working dropdown at every width. */
+.lt-more[hidden] { display: none; }
 .table-wrap { overflow-x: auto; }
 @media (min-width: 900px) { .table-wrap { overflow: visible; } }
+/* R2 (found in the render): below 900px .table-wrap scrolls sideways, which makes IT the sticky
+   header's scroll container -- the header then sat var(--tabs-h)+var(--tools-h) px down inside
+   the table, painted over the second and third rows. Page-level stickiness is impossible inside
+   a sideways scroller, so the header simply stays in place there. */
+@media (max-width: 899px) { .table-wrap .grant-table th { position: static; } }
 .grant-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
 .grant-table th {
   position: sticky; top: calc(var(--tabs-h, 48px) + var(--tools-h)); z-index: 2;
@@ -1106,74 +1550,176 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   cursor: pointer; user-select: none;
 }
 .grant-table th:hover { color: var(--ink); }
-.grant-table th.sorted { color: var(--copper-deep); }
+.grant-table th[data-sort]::after { content: "\2195"; margin-left: 0.35rem; opacity: 0.35; font-family: var(--sans); font-size: 0.9em; }
+.grant-table th[aria-sort=ascending]::after { content: "\2191"; opacity: 1; }
+.grant-table th[aria-sort=descending]::after { content: "\2193"; opacity: 1; }
+.grant-table th.sorted { color: var(--ink); border-bottom: 2px solid var(--ink); }
 .grant-table th.amt-h, .grant-table .amt { text-align: right; }
 .grant-table td { padding: 0.68rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .grant-table tbody tr { transition: background 120ms; }
 .grant-table tbody tr:hover { background: var(--tint); }
-.grant-table .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--copper-deep); font-weight: 500; }
+.grant-table .amt { font-family: var(--sans); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; white-space: nowrap; color: var(--ink); font-weight: 500; }
+@media (hover: hover) { .grant-table tbody tr:hover .amt { color: var(--copper-deep); } }
 .recip, .ycell { appearance: none; background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-align: left; }
 .recip { font-weight: 600; color: var(--ink); }
 .recip:hover { color: var(--green); text-decoration: underline; }
-.ycell { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.ycell { color: var(--ink-faint); font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .ycell:hover { color: var(--green); text-decoration: underline; }
 .grant-table .purpose { color: var(--ink-dim); font-size: 0.81rem; max-width: 30rem; }
 .grant-table .loc { color: var(--ink-faint); font-size: 0.77rem; white-space: nowrap; }
 #grant-cards { list-style: none; margin: 0; padding: 0; display: none; }
-.gcard-btn { appearance: none; background: none; border: 0; width: 100%; cursor: pointer; text-align: left; padding: 0.85rem 0.35rem; border-bottom: 1px solid var(--rule); }
+.gcard-btn { appearance: none; background: none; border: 0; width: 100%; min-height: 44px; cursor: pointer; text-align: left; padding: 0.8rem 0.6rem; border-bottom: 1px solid var(--rule); }
 .gcard-btn:hover, .gcard-btn:focus-visible { background: var(--tint); }
 .gc-top { display: flex; justify-content: space-between; align-items: baseline; }
 .gc-y { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); }
-.gc-a { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--copper-deep); font-variant-numeric: tabular-nums; }
+.gc-a { font-family: var(--sans); font-size: 1rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
 .gc-r { font-weight: 600; font-size: 0.94rem; margin-top: 0.18rem; }
 .gc-p { font-size: 0.81rem; color: var(--ink-dim); margin-top: 0.18rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .gc-l { font-size: 0.74rem; color: var(--ink-faint); margin-top: 0.22rem; }
 @media (max-width: 719px) {
   .table-wrap { display: none; }
   #grant-cards { display: block; }
-  .ledger-tools { position: static; padding: 0.5rem 0 0.55rem; }
+  /* L-09 repair: this used to drop the whole toolbar's position to static here,
+     so the search box (and everything else) scrolled away with the list --
+     position:sticky only has room to work because #panel-grants (its containing
+     block) wraps the toolbar AND the list AND the pager, exactly like desktop.
+     To keep the pinned strip to one ~56px row instead of the full toolbar, the
+     selects fold into the same "More" disclosure the export buttons already use. */
+  .ledger-tools { padding: 0.5rem 0 0.55rem; }
+}
+@media (max-width: 1099px) {
+  /* R2 (R-4): wherever the page is the tabbed layout (<1100px) the pinned toolbar is search +
+     More on ONE row. It used to wrap More onto an orphan second row on a phone (110px of pinned
+     toolbar under a 71px tab bar), and the full desktop row wrapped to two or three rows on a
+     tablet (up to 159px pinned under the tabs). Both controls are 44px. */
+  .ledger-tools .lt-row { flex-wrap: nowrap; }
+  .ledger-tools .q-wrap { flex: 1 1 auto; min-width: 0; }
+  .ledger-tools .lt-more { flex: none; margin-left: 0; }
+  .ledger-tools .q-wrap input { height: 44px; }
+  .lt-more .lt-menu select, .lt-more .lt-menu .lt-btn { min-height: 44px; }
 }
 .pager { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding-top: 0.95rem; font-size: 0.8rem; color: var(--ink-dim); }
-.pager button { appearance: none; cursor: pointer; background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: var(--r-s); padding: 0 1rem; height: 44px; transition: all var(--dur); }
-.pager button:hover:not(:disabled) { border-color: var(--green); background: var(--green-soft); }
-.pager button:disabled { opacity: 0.35; cursor: not-allowed; }
+.pager button { appearance: none; cursor: pointer; background: var(--sheet); border: 1px solid var(--edge); border-radius: var(--r-s); padding: 0 1rem; height: 44px; transition: all var(--dur); }
+@media (hover: hover) { .pager button:hover:not(:disabled) { border-color: var(--green); background: var(--green-soft); } }
+.pager button:disabled { opacity: 1; color: var(--ink-faint); background: var(--tint); border-color: var(--rule); cursor: not-allowed; }
 /* long books: First / Last and a typed page number beside Previous / Next */
 .pager-nav { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
 .page-jump { display: inline-flex; align-items: center; gap: 0.35rem; margin: 0 0.25rem; font: 500 0.8rem/1 var(--sans); color: var(--ink-dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .page-jump input { width: 5ch; padding: 0.3rem 0.3rem; text-align: center; font: 600 0.8rem/1 var(--mono); color: var(--ink);
   background: var(--sheet); border: 1px solid var(--rule-strong); border-radius: var(--r-s); -moz-appearance: textfield; appearance: textfield; }
 .page-jump input::-webkit-outer-spin-button, .page-jump input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.page-jump input:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; border-color: var(--green); }
+.page-jump input:focus-visible { border-color: var(--green); }
 @media (pointer: coarse), (max-width: 719px) { .page-jump input { min-height: 40px; width: 6ch; } }
+/* L-11: 16px stops iOS Safari zooming the page in on focus */
+@media (pointer: coarse) { .ledger-tools input, .ledger-tools select, #rec-q, #q, .page-jump input { font-size: 16px; } .page-jump input { width: 7ch; } }
+@media (pointer: coarse) { .lede a, .hero-note a, .hero-note button, .mini-note a, .cta-link, .foot-in a { display: inline-block; padding: 12px 0; margin: -12px 0; } }
 @media (max-width: 719px) { .pager { flex-direction: column; align-items: stretch; } .pager-nav { justify-content: center; } }
 .empty { padding: 2.2rem 1rem; text-align: center; color: var(--ink-dim); }
 
 /* methodology */
 .cm-wrap { overflow-x: auto; margin-top: 0.6rem; }
 .cm-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-.cm-table th { text-align: left; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-dim); font-weight: 600; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule-strong); }
+.cm-table th { text-align: left; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); font-weight: 500; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule-strong); }
 .cm-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .cm-table th:nth-child(n+3), .cm-table .cm-n, .cm-table .cm-v, .cm-table .cm-p { text-align: right; white-space: nowrap; }
 .cm-table .cm-n, .cm-table .cm-v, .cm-table .cm-p { font-family: var(--mono); font-size: 0.75rem; }
 .cm-cat { font-weight: 600; white-space: nowrap; }
 .cm-sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 0.45rem; }
-.cm-tier { display: inline-block; margin-left: 0.45rem; font-family: var(--mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); border: 1px solid var(--rule); border-radius: 999px; padding: 0.05rem 0.4rem; vertical-align: middle; }
+.cm-tier { display: inline-block; margin-left: 0.45rem; font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); border: 1px solid var(--rule); border-radius: 999px; padding: 0.05rem 0.4rem; vertical-align: middle; white-space: nowrap; }
 .cm-kw { color: var(--ink-dim); font-size: 0.73rem; line-height: 1.55; min-width: 260px; }
 .cm-other td { background: var(--sheet-warm); }
 .cm-note { font-size: 0.78rem; color: var(--ink-dim); margin-top: 0.7rem; line-height: 1.6; max-width: 72ch; }
 
+/* the "bridging to other public figures" cards keep the original tie-card layout --
+   L-07 only replaces the referee's own #tie-cards with a table, below */
 .tie-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 0.75rem; margin-top: 0.6rem; }
 @media (min-width: 1150px) { .tie-cards { grid-template-columns: repeat(5, 1fr); } }
 .tie-card { border-radius: var(--r-s); background: var(--sheet-warm); box-shadow: inset 0 0 0 1px var(--rule); padding: 0.85rem 0.95rem; }
 .tc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
 .tc-y { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; }
-.badge-pass { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--pass); background: var(--pass-bg); border: 1px solid var(--pass-border); border-radius: 4px; padding: 0.18rem 0.45rem; }
 .tc-row { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.79rem; color: var(--ink-dim); padding: 0.14rem 0; }
 .tc-row strong { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
-.tc-obj { margin-top: 0.45rem; font-size: 0.71rem; color: var(--ink-faint); }
+
+/* L-07: the referee's own reconciliation is a schedule with a double-rule total */
+.tie-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 0.6rem; }
+.tie-table th {
+  text-align: left; font-size: 0.69rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faint); padding: 0.6rem 0.6rem; border-bottom: 1px solid var(--rule-strong);
+}
+.tie-table td { padding: 0.62rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+.tie-table th:nth-child(n+2), .tie-table td:nth-child(n+2):not(:last-child) { text-align: right; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+.tie-table td:first-child { font-family: var(--serif); font-weight: 600; }
+.tie-table tfoot td { font-weight: 600; border-top: 1.5px solid var(--ink); padding-top: 0.75rem; }
+.tie-table tfoot { border-bottom: 3px double var(--ink); }
+.tie-row.hot-y { background: var(--tint); }
+.badge-pass { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--pass); background: var(--pass-bg); border: 1px solid var(--pass-border); border-radius: 4px; padding: 0.18rem 0.45rem; white-space: nowrap; }
+.badge-fail { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--neg); border: 1.5px solid currentColor; background: none; border-radius: 4px; padding: 0.18rem 0.45rem; white-space: nowrap; }
+@media (max-width: 719px) {
+  /* the schedule folds back into a card layout on a narrow screen */
+  .tie-table, .tie-table thead, .tie-table tbody, .tie-table tfoot, .tie-table tr { display: block; }
+  .tie-table thead { display: none; }
+  .tie-table tbody tr {
+    display: grid; grid-template-columns: 1fr; gap: 0.14rem 0;
+    border-radius: var(--r-s); background: var(--sheet-warm); box-shadow: inset 0 0 0 1px var(--rule);
+    padding: 0.85rem 0.95rem; margin-bottom: 0.6rem; border-bottom: 0;
+  }
+  /* L-07 repair: two label|value pairs used to share one row (1fr 1fr), so each
+     got only ~half the card's width -- nowhere near enough for a label like
+     "Filed Part I · line 25(d)" next to its value, which wrapped across up to 4
+     lines and (via flex's default align-items:stretch) stretched the sibling
+     badge into a 160px-tall box. One full-width row per field gives the label
+     its own auto column at the card's full ~300px, plenty for one line, and
+     align-items:start keeps every row at its own natural height regardless of
+     its neighbors. */
+  .tie-table tbody td {
+    display: grid; grid-template-columns: auto 1fr; column-gap: 0.5rem; align-items: start;
+    padding: 0.14rem 0; border: 0; font-size: 0.79rem; color: var(--ink-dim); text-align: left;
+  }
+  .tie-table tbody td::before { content: attr(data-label); color: var(--ink-faint); font-weight: 400; }
+  .tie-table tbody td .tie-v { justify-self: end; text-align: right; }
+  .tie-table tbody td .badge-pass, .tie-table tbody td .badge-fail { justify-self: end; align-self: start; }
+  .tie-table tbody td:first-child {
+    grid-template-columns: 1fr; font-size: 1.1rem; color: var(--ink);
+    padding-bottom: 0.3rem; margin-bottom: 0.15rem; border-bottom: 1px solid var(--rule);
+  }
+  .tie-table tbody td:last-child {
+    grid-template-columns: 1fr; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    padding-top: 0.35rem; margin-top: 0.15rem; border-top: 1px solid var(--rule);
+  }
+  .tie-table tbody td:first-child::before, .tie-table tbody td:last-child::before { content: none; }
+  .tie-table tfoot { display: none; }
+}
 .tc-obj code { font-family: var(--mono); font-size: 0.69rem; }
 .meth p { font-family: var(--body-f); max-width: 72ch; font-size: 1rem; }
-.meth h3 { font-family: var(--serif); font-size: 1.02rem; margin: 1.35rem 0 0.45rem; }
+.meth { counter-reset: meth; }
+.meth h3 { font-family: var(--serif); font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.45rem; }
+.meth h3::before { content: counter(meth) "  "; counter-increment: meth; font-family: var(--serif); color: var(--copper); }
+/* L-14: a sticky contents strip over whatever sections this book actually has */
+.meth-toc {
+  position: sticky; top: calc(var(--tabs-h, 0px) + var(--ctx-h, 0px)); z-index: 5; background: var(--sheet);
+  display: flex; gap: 1.1rem; overflow-x: auto; scrollbar-width: none;
+  padding: 0.6rem 0 0.6rem; margin: -1px 0 0.4rem; border-bottom: 1px solid var(--rule);
+  font: 600 0.72rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.meth-toc::-webkit-scrollbar { display: none; }
+.meth-toc a { color: var(--ink-dim); text-decoration: none; white-space: nowrap; padding-bottom: 8px; }
+/* R3 (NEW-3): the strip never hides a section past its edge without a cue. Wide screens wrap it (short
+   labels fit one row on every book measured); narrow ones scroll it with a right-edge fade that goes
+   away at the end of the strip. */
+@media (min-width: 720px) { .meth-toc { flex-wrap: wrap; row-gap: 0.45rem; overflow: visible; } }
+@media (max-width: 719px) {
+  .meth-toc { padding-right: 28px; scroll-padding-inline: 0 28px; }
+  .meth-toc.more-r { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+}
+/* R3: the current section carries the same double rule as the selected tab */
+.meth-toc a.cur { color: var(--ink); background: linear-gradient(var(--copper), var(--copper)) left bottom 4px / 100% 2px no-repeat, linear-gradient(var(--copper), var(--copper)) left bottom / 100% 1px no-repeat; }
+@media (hover: hover) { .meth-toc a:hover { color: var(--ink); } }
+/* a long merge table is worth collapsing; the sticky-left recipient column keeps its
+   place on a table wide enough to scroll */
+.ent-details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; padding: 0.3rem 0; list-style: revert; }
+.ent-details[hidden] { display: none; }
+.cm-table td:first-child { position: sticky; left: 0; background: var(--sheet); }
+.cm-other td:first-child { background: var(--sheet-warm); }
 #ent-table { list-style: none; margin: 0.4rem 0 0; padding: 0; }
 .ent-row { padding: 0.55rem 0; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
 .ent-aliases { display: block; margin-top: 0.3rem; }
@@ -1190,8 +1736,8 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 .foot-in code { font-family: var(--mono); font-size: 0.72rem; color: var(--cream-faint); }
 .foot-in > div { max-width: 72ch; }
 
-@media (pointer: coarse) { .tab, .scope-chip, .lt-btn, .pager button, #clear-all, .rec-sort button, .nrd-row, .show-all, .topbar a, .foot-site a { min-height: 46px; } }
-.topbar a, .foot-site a { padding: 0.6rem 0; display: inline-block; }
+@media (pointer: coarse) { .tab, .scope-chip, .lt-btn, .pager button, #clear-all, .rec-sort button, .nrd-row, .show-all, .foot-site a, .gl-nav a, .gl-method { min-height: 46px; } }
+.foot-site a { padding: 0.6rem 0; display: inline-block; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; animation-delay: 0s !important; transition-delay: 0s !important; }
 }
@@ -1199,9 +1745,9 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
   body { background: #fff !important; }
   .cover { background: #fff !important; color: var(--ink); padding-bottom: 0; }
   .cover::after { display: none; }
-  .topbar, .hero-actions, .tabs, .ledger-tools, .pager, .pf-backdrop, .profile, button, input, select { display: none !important; }
+  .hero-actions, .tabs, .ledger-tools, .pager, .pf-backdrop, .profile, button, input, select { display: none !important; }
   [hidden] { display: none !important; }
-  .grand .g-val, .topbar .mark { color: var(--copper-deep); }
+  .grand .g-val { color: var(--copper-deep); }
   h1, .lede, .hero-meta { color: var(--ink); }
   .sheet-kpis { box-shadow: none; border: 1px solid #999; margin-top: 1rem; }
   .card { box-shadow: none; border: 1px solid #bbb; }
@@ -1210,16 +1756,34 @@ a.pf-go:hover { color: var(--copper-deep); text-decoration: underline; backgroun
 }
 
 /* ---- visual pass 2026-09-05: site navigation, measure, numerals ---- */
-.topbar .tb-site { display: flex; gap: 1.1rem; margin-left: 1.5rem; }
-.topbar .tb-site a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); }
-.topbar .tb-site a:hover { color: var(--copper-bright); text-decoration: none; }
-@media (max-width: 1099px) { .topbar .tb-site { display: none; } }
 .hero .lede { max-width: 58ch; }
 .hero .hero-meta code { font-family: var(--mono); font-size: 0.85em; letter-spacing: 0.04em; }
-.sec-head .snum { color: var(--copper); }
+.sec-head .snum { color: var(--ink); }
 .foot-report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .foot-report a:hover { color: #fff; }
-.foot-site { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.14); }
-.foot-site a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; }
-.foot-site a:hover { color: var(--copper-bright); }
+/* R3: the site links read in the control voice -- Plex Sans 13/500, sentence case -- not as a mono eyebrow;
+   44px tap targets on phones, the rows touching so the column of targets has no dead gaps */
+.foot-site { display: flex; flex-wrap: wrap; gap: 0 1.35rem; margin-top: 0.9rem; padding-top: 0.5rem; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.foot-site a { font: 500 13px/1.3 var(--sans); letter-spacing: 0.01em; text-transform: none; color: var(--cream-dim); text-decoration: none; display: inline-flex; align-items: center; margin: 0; }   /* margin 0: the coarse-pointer -12px link bleed would stack the 44px rows 24px deep into each other */
+@media (hover: hover) { .foot-site a:hover { color: var(--copper-light); text-decoration: underline; text-underline-offset: 3px; } }
+@media (max-width: 719px) { .foot-site { gap: 0 1.1rem; } .foot-site a { min-height: 44px; padding: 0; } }
 @media (prefers-reduced-motion: reduce) { .rv { animation: none; } }
+
+/* ============ LEGACY MARKUP (R2.2, M-3) -- pages built before 2026-09-24 carry the old in-cover top bar
+   and a bare "Grants Ledger" kicker until the fleet rebuild replaces them; these rules keep them readable
+   with the current assets. Nothing in the current template matches them. Delete after the rebuild. ============ */
+.topbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 1.2rem; padding: 1.05rem 0 0.95rem; border-bottom: 1px solid var(--cover-line); font-size: 0.8rem; color: var(--cream-dim); }
+.topbar .mark { font: 700 1.02rem var(--serif); color: var(--cream); }
+.topbar .tm { color: var(--copper-bright); }
+.topbar .spacer { flex: 1; }
+.topbar a { color: var(--cream-dim); text-decoration: none; display: inline-block; padding: 0.6rem 0; }
+@media (hover: hover) { .topbar a:hover { color: var(--cream); text-decoration: underline; } }
+.topbar .tb-site { display: flex; gap: 1.1rem; margin-left: 1.5rem; }
+.topbar .tb-site a { font: 0.7rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+@media (max-width: 1099px) { .topbar .tb-site { display: none; } }
+@media (max-width: 899px) { .topbar .tb-meta { display: none; } }
+@media print { .topbar { display: none; } }
+.side-title:not(:has(.side-name)) { font: 500 11px/1.2 var(--mono); letter-spacing: 0.04em; color: var(--cream-dim); }
+.side-title:not(:has(.side-name)) > span { font: 600 0.9rem/1.2 var(--sans); letter-spacing: 0; color: var(--cream-bright); }
+.cover .hero-cred { color: var(--cream-dim); }
+.cover .hero-cred a { color: var(--cream-bright); }
