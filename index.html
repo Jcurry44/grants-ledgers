@@ -1268,6 +1268,12 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   .collection .clk{grid-column:1 / -1;font-size:10px}
   .collection>summary .chev{width:14px;height:14px;justify-self:start}
 }
+/* exit and return (10-07): the phone search takeover's visible way out */
+.qcancel{display:none}
+@media(max-width:640px){
+  html.searching .qcancel{display:inline-flex;align-items:center;position:absolute;right:5px;top:5px;z-index:3;height:40px;padding:0 12px;border:0;border-radius:var(--r-ctl);background:transparent;color:var(--copper-deep);font:600 15px var(--sans);cursor:pointer}
+  html.searching #q{padding-right:84px}
+}
 </style>
 </head>
 <body>
@@ -1329,6 +1335,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       <svg class="searchicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
       <label class="sr-only" for="q">Search organizations</label>
       <input type="search" id="q" placeholder="Search any organization…" autocomplete="off" spellcheck="false" autocapitalize="none" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suglist">
+      <button type="button" class="qcancel" id="qcancel">Cancel</button>
       <span class="slash" aria-hidden="true">/</span>
       <div class="suggest" id="suggest" hidden><div id="suglist" role="listbox" aria-label="Suggestions"></div><div class="nosug" id="nosug" hidden></div><div class="srchint" id="srchint"></div></div>
       <span class="sr-only" id="sug-status" role="status" aria-live="polite"></span>
@@ -1521,6 +1528,257 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.open){ m.open=false; sm.focus(); e.stopPropagation(); } }, true);
     m.addEventListener('focusout', function(e){ if(m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open=false; });
   })();
+// GLR:BEGIN -- exit and return (Joe, 2026-10-07): "when you interact with something there needs to be an extremely easy
+// way to exit and get back exactly to where you just were." ONE copy runs on the hub (hub.html) and on every ledger page
+// (assets/ledger.js); deploy_check fails the release when the two copies differ.
+//   GLR.replace(url) / GLR.push(url)  the only history writes on these pages. Each entry keeps its key (k), its depth on
+//                                     this page (d) and the in-site page the reader came from (from) in history.state.
+//   GLR.layer({id, close, hide, host}) an overlay. L.open() pushes ONE entry (or adopts the one it is on, after a reload
+//                                     or a Back into it); L.close() pops it, and a URL the page writes meanwhile lands on
+//                                     the entry it returns to; L.drop() forgets it without moving. Back while it is open
+//                                     calls hide() and never leaves the page. On a phone a Done button in thumb reach,
+//                                     inside host, calls close().
+//   GLR.onNav(fn)                     the page's own popstate / hashchange handler, minus the events a layer consumed
+//   GLR.keep(fn)                      what to save besides scrollY (lists grown, sorts, panel scroll); saved per history
+//                                     entry as the reader scrolls, on every in-site hop and on pagehide
+//   GLR.saved                         {y, s} saved for this entry when the reader came Back, reloaded or took the chip
+//   GLR.settle()                      once the page has re-applied GLR.saved.s: scroll to y and hold it there while late
+//                                     content fills in, until the reader moves or 5 s pass
+//   GLR.go(url) / GLR.back()          a scripted in-site hop; the chip's "back to the exact entry the reader left"
+//   GLR.label(fn) / GLR.paint()       what this page is called on the next page's chip; re-check the chip and Done
+window.GLR = window.GLR || (function () {
+  'use strict';
+  var NS = 'gl.ret.', HOLD = 5000;
+  function load(k) { try { return JSON.parse(sessionStorage.getItem(NS + k) || 'null'); } catch (e) { return null; } }
+  function store(k, v) { try { if (v == null) sessionStorage.removeItem(NS + k); else sessionStorage.setItem(NS + k, JSON.stringify(v)); } catch (e) {} }
+  function newKey() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function hs() { var s = history.state; return s && typeof s === 'object' ? s : {}; }
+  function copy(s, extra) { var n = {}, x; for (x in s) n[x] = s[x]; for (x in extra || {}) n[x] = extra[x]; return n; }
+  function write(s, url, push) {
+    try { history[push ? 'pushState' : 'replaceState'](s, '', url == null ? location.href : url); } catch (e) {}
+    here = location.href;
+  }
+  function hashOf(u) { var i = String(u || '').indexOf('#'); return i < 0 ? '' : u.slice(i); }
+  function site(u) { return u.origin === location.origin && u.pathname.split('/')[1] === location.pathname.split('/')[1]; }
+  var nav = ''; try { var ne = performance.getEntriesByType('navigation')[0]; nav = ne ? ne.type : ''; } catch (e) {}
+  // the page restores its own scroll: a browser restore lands before late rows and grown lists exist, and is clamped short
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  var keepFn = function () { return null; };
+  var labelFn = function () { return (document.title || 'the last page').split(/\s[—|·–-]\s/)[0]; };
+  var here = location.href, navFns = [], layers = [], skip = { pop: 0, hash: 0, url: null }, skipT = null, settling = false;
+
+  // ---- this entry's identity: Back and reload keep it; a fresh arrival takes a new one, plus where it came from
+  var st = hs(), go = load('go'), hop = load('hop'), adopted = false;
+  store('go', null); store('hop', null);
+  if (!st.k) {
+    if (go && Date.now() - go.t < 15000 && go.u === location.href) {
+      var g0 = load('s:' + go.k);
+      st = { k: go.k, d: 0 }; if (g0 && g0.from) st.from = g0.from; adopted = true;
+    } else {
+      st = { k: newKey(), d: 0 };
+      if (hop && Date.now() - hop.t < 60000 && hop.u !== location.href) {
+        st.from = { u: hop.u, k: hop.k, l: hop.l };
+        st.b = history.length > 1 ? 1 : 0;   // a new tab has nothing behind it: its chip navigates instead
+      }
+    }
+    write(st);
+  }
+  var saved = (adopted || nav === 'back_forward' || nav === 'reload') ? load('s:' + st.k) : null;
+  if (saved && saved.p !== location.pathname) saved = null;
+
+  function save() {
+    if (settling) return;   // a restore in flight must not record the clamped positions it passes through
+    var s = hs(); if (!s.k) return;
+    var v = { y: Math.round(window.scrollY), p: location.pathname, u: location.href, s: null, from: s.from || null, t: Date.now() };
+    try { v.s = keepFn(); } catch (e) {}
+    store('s:' + s.k, v);
+  }
+  var saveT = null;
+  addEventListener('scroll', function () { clearTimeout(saveT); saveT = setTimeout(save, 160); }, { passive: true });
+  addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+
+  // ---- hops: any in-site link (or GLR.go) records the exact spot it left
+  function label() { var l = ''; try { l = String(labelFn() || ''); } catch (e) {} l = l.replace(/\s+/g, ' ').trim(); return l.length > 34 ? l.slice(0, 32).trim() + '…' : l || 'the last page'; }
+  function hopFrom() { save(); store('hop', { u: location.href, k: hs().k, l: label(), t: Date.now() }); }
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    var u; try { u = new URL(a.href, location.href); } catch (x) { return; }
+    if (!site(u) || (u.pathname === location.pathname && u.search === location.search)) return;   // a hash is not a hop
+    hopFrom();
+  });
+
+  // ---- history writes
+  function push(url, extra) {
+    var s = hs(), n = copy({ k: newKey(), d: (s.d || 0) + 1 }, extra);
+    if (s.from) n.from = s.from; if (s.b != null) n.b = s.b;
+    save();
+    write(n, url, true);
+  }
+  function replace(url) {
+    if (skip.pop) { skip.url = url; return; }   // a pop is landing: the URL belongs to the entry it lands on
+    write(hs(), url);
+  }
+  function expectPop() {
+    skip.pop = 1; clearTimeout(skipT);
+    skipT = setTimeout(function () { skip.pop = 0; skip.hash = 0; flush(); }, 1500);
+  }
+  function flush() { if (skip.url != null) { var u = skip.url; skip.url = null; write(hs(), u); } }
+
+  // ---- layers
+  var doneBtn = null;
+  function topLayer() { for (var i = layers.length - 1; i >= 0; i--) if (layers[i].on) return layers[i]; return null; }
+  function layer(o) {
+    var L = { id: o.id, on: false, pushed: false, o: o };
+    L.open = function () {
+      L.on = true;
+      if (!L.pushed) {
+        if (hs().ly === o.id) L.pushed = true;   // reloaded, or came Back / Forward into its own entry
+        else { push(null, { ly: o.id }); L.pushed = true; }
+      }
+      var i = layers.indexOf(L); if (i >= 0) layers.splice(i, 1); layers.push(L);   // the newest open layer is on top
+      paint();
+    };
+    L.close = function () {
+      L.on = false; paint();
+      if (!L.pushed) return false;
+      L.pushed = false; expectPop();
+      try { history.back(); } catch (e) { skip.pop = 0; return false; }
+      return true;
+    };
+    L.drop = function () { L.on = false; L.pushed = false; paint(); };
+    layers.push(L);
+    return L;
+  }
+
+  // ---- Back / Forward inside the page
+  function arrive() {   // a fragment link makes an entry this script never wrote: give it a key, one deeper
+    var s = hs();
+    if (s.k) return s;
+    var n = { k: newKey(), d: (cur.d || 0) + 1 }; if (cur.from) n.from = cur.from; if (cur.b != null) n.b = cur.b;
+    write(n); return n;
+  }
+  var cur = hs();
+  addEventListener('popstate', function (e) {
+    var hashMoved = hashOf(here) !== location.hash;
+    here = location.href;
+    if (skip.pop) {   // the pop a close() asked for
+      skip.pop = 0; skip.hash = hashMoved ? 1 : 0; clearTimeout(skipT);
+      skipT = setTimeout(function () { skip.hash = 0; }, 400);
+      flush(); cur = hs(); paint(); return;
+    }
+    var s = arrive(), t = topLayer();
+    if (t && t.pushed && s.ly !== t.id) {   // Back while a layer is open: close it, stay on the page
+      t.on = false; t.pushed = false; skip.hash = hashMoved ? 1 : 0;
+      clearTimeout(skipT); skipT = setTimeout(function () { skip.hash = 0; }, 400);
+      try { t.o.hide(); } catch (x) {}
+      cur = s; paint(); return;
+    }
+    cur = s;
+    navFns.forEach(function (fn) { try { fn(e); } catch (x) { if (window.console) console.error(x); } });
+    var v = load('s:' + s.k);
+    if (v && v.p === location.pathname) requestAnimationFrame(function () { window.scrollTo(0, v.y); });
+    paint();
+  });
+  addEventListener('hashchange', function (e) {
+    here = location.href;
+    if (skip.hash) { skip.hash = 0; return; }
+    cur = arrive();
+    navFns.forEach(function (fn) { try { fn(e); } catch (x) { if (window.console) console.error(x); } });
+    paint();
+  });
+
+  // ---- restore: hold the saved spot while the page fills in
+  function settle() {
+    if (!saved || settling) return;
+    var y = saved.y, t0 = Date.now(), iv = null, ro = null, EV = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    settling = true;
+    function stop() {
+      if (!settling) return;
+      settling = false; clearInterval(iv); if (ro) ro.disconnect();
+      EV.forEach(function (ev) { removeEventListener(ev, stop, true); });
+      save();
+    }
+    function hold() {
+      if (!settling) return;
+      var max = Math.max(0, document.documentElement.scrollHeight - innerHeight), to = Math.min(y, max);
+      if (Math.abs(window.scrollY - to) > 1) window.scrollTo(0, to);
+      if (Date.now() - t0 > HOLD) stop();
+    }
+    EV.forEach(function (ev) { addEventListener(ev, stop, { capture: true, passive: true }); });
+    iv = setInterval(hold, 100);
+    if ('ResizeObserver' in window) { ro = new ResizeObserver(hold); ro.observe(document.body); }
+    hold();
+  }
+
+  // ---- the chip and the Done button
+  function back() {
+    var s = hs(), f = s.from; if (!f) return false;
+    save();
+    store('go', { k: f.k, u: f.u, t: Date.now() });
+    if (s.b) history.go(-((s.d || 0) + 1));   // the page it came from sits right behind this page's first entry
+    else location.href = f.u;
+    return true;
+  }
+  function gap(side) {   // clear of the phone's fixed bottom bar and the desktop rail's fixed credit line
+    if (side === 'b') {
+      var n = document.querySelector('.gl-top .gl-nav');
+      if (n && n.getClientRects().length && getComputedStyle(n).position === 'fixed') {
+        var r = n.getBoundingClientRect(); if (r.top > innerHeight / 2) return Math.round(innerHeight - r.top) + 12;
+      }
+      return 16;
+    }
+    var c = document.querySelector('.hero-cred');
+    if (c && c.getClientRects().length && getComputedStyle(c).position === 'fixed') return Math.round(c.getBoundingClientRect().right) + 16;
+    return 16;
+  }
+  function paint() {
+    var t = topLayer(), phone = matchMedia('(max-width: 640px)').matches;
+    if (t && t.o.host && phone) {
+      if (!doneBtn) {
+        doneBtn = document.createElement('button'); doneBtn.type = 'button'; doneBtn.className = 'glr-done'; doneBtn.textContent = 'Done';
+        doneBtn.addEventListener('click', function () { var l = topLayer(); if (l && l.o.close) l.o.close(); });
+      }
+      if (doneBtn.parentNode !== t.o.host) t.o.host.appendChild(doneBtn);
+      doneBtn.hidden = false;
+    } else if (doneBtn) doneBtn.hidden = true;
+    var f = hs().from, chip = document.getElementById('glr-chip');
+    if (!f) { if (chip) chip.hidden = true; return; }
+    if (!chip) {
+      chip = document.createElement('button'); chip.type = 'button'; chip.id = 'glr-chip'; chip.className = 'glr-chip';
+      chip.addEventListener('click', back);
+      document.body.appendChild(chip);
+    }
+    chip.textContent = '← Back to ' + f.l;
+    chip.setAttribute('aria-label', 'Back to ' + f.l + ', where you were');
+    var own = document.querySelector('.return-chip:not([hidden])');   // a page's own in-page return chip comes first
+    chip.hidden = !!t || !!own;
+    chip.style.bottom = 'calc(' + gap('b') + 'px + env(safe-area-inset-bottom))';
+    chip.style.left = gap('l') + 'px';
+  }
+  var css = document.createElement('style');
+  css.textContent = '.glr-chip{position:fixed;left:16px;bottom:16px;z-index:32;display:inline-flex;align-items:center;max-width:min(80vw,360px);height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:#14261d;color:#f6f2e7;font:inherit;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(10,24,17,.28);cursor:pointer}'
+    + '.glr-chip[hidden],.glr-done[hidden]{display:none}.glr-chip:focus-visible,.glr-done:focus-visible{outline:2px solid #b8742a;outline-offset:2px}'
+    + '.glr-done{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom));z-index:25;display:block;flex:none;margin:14px auto calc(12px + env(safe-area-inset-bottom));min-width:140px;height:48px;padding:0 28px;border:0;border-radius:999px;background:#14261d;color:#f6f2e7;font:inherit;font-size:15px;font-weight:600;box-shadow:0 8px 24px rgba(10,24,17,.28);cursor:pointer}'
+    + '@media (min-width:641px){.glr-done{display:none}}@media print{.glr-chip,.glr-done{display:none!important}}';
+  (document.head || document.documentElement).appendChild(css);
+  addEventListener('resize', function () { paint(); });
+  addEventListener('pageshow', function (e) { if (e.persisted) { store('go', null); settling = false; paint(); } });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paint); else paint();
+
+  return {
+    push: push, replace: replace, layer: layer, settle: settle, back: back, paint: paint,
+    saved: saved, restoring: !!saved,
+    onNav: function (fn) { navFns.push(fn); },
+    keep: function (fn) { keepFn = fn; },
+    label: function (fn) { labelFn = fn; },
+    go: function (url) { hopFrom(); location.href = url; },
+    from: function () { return hs().from || null; }
+  };
+})();
+// GLR:END
 </script>
 <script>
 /*DBVER-START*/window.DBV='e6c54c7a02';/*DBVER-END*/
@@ -1681,6 +1939,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   let ovlMode = null, hashView = null, returnFocus = null, lastPointerTarget = null;
   // WebKit does not focus a button on click, so the opener is remembered from the pointer event
   document.addEventListener('pointerdown', (e) => { lastPointerTarget = e.target.closest('button, a, [tabindex]'); }, true);
+  // exit and return (10-07): every dialog is a layer -- Back closes it and stays on the hub; X, Esc, a tap outside and
+  // the phone's Done pop the one entry it added, so the next Back leaves the hub in one press
+  const OVL = GLR.layer({ id: 'ovl', host: $('ovlcard'), close: () => closeOvl(), hide: () => closeOvl(true) });
   function openOvl(mode) {
     clearTimeout(toastTimer); $('toast').hidden = true;
     if ($('ovl').hidden) {
@@ -1702,6 +1963,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     // in a report the sticky action bar carries the close button, so the floating one steps aside
     document.querySelector('.ovlcard').classList.toggle('repmode', mode === 'r');
     $('ovl').hidden = false;
+    OVL.open();
     $('ovlcard').scrollTop = 0;
     document.body.style.overflow = 'hidden';
     $('ovlx').focus({ preventScroll: true });
@@ -1715,6 +1977,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
     curProfile = null;
     document.body.style.overflow = '';
+    if (quiet === true) OVL.drop(); else OVL.close();   // a reader's close pops the entry the dialog added
     if (quiet !== true) writeHash();   // readHash() closes quietly: the hash it is reading already says what is open
   }
   $('ovlx').addEventListener('click', () => closeOvl());
@@ -2209,8 +2472,14 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
 
   // ---------- tabs ----------
   let tab = 'q';
+  const tabScroll = {};   // exit and return (10-07): each view's scroll, and how far Find funders had grown
   function setTab(t, silent) {
     const previous=tab;
+    if (!silent && previous !== t) {
+      tabScroll[previous] = window.scrollY;
+      if (previous === 'q') tabScroll.qn = qState.shown;
+      if (t === 'q' && tabScroll.qn) { growQ = tabScroll.qn; growUntil = Date.now() + 3000; }
+    }
     tab = t;
     $('research-view').value=t;
     if(previous!==t&&t==='q'&&QMETA)runQuery();
@@ -2229,6 +2498,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     $('panelbody').scrollTop = 0;
     if (!silent) writeHash();
     syncViewHeading();
+    if (!silent && previous !== t && tabScroll[t] != null) { const y = tabScroll[t]; requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' })); }
   }
   $('tabs').addEventListener('click', (e) => { const b = e.target.closest('.tab'); if (b) setTab(b.dataset.t); });
   // I2-M1: 641-900 the strip scrolls sideways -- fade whichever edge is hiding a tab, none when all five fit
@@ -2261,6 +2531,8 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       + (i ? '<i class="dls"><i aria-hidden="true">·</i>&nbsp;</i>' : '') + '<span class="dlt">' + p + '</span></span>').join('');
   }
   let fleetView = [], fleetShown = 0;
+  // exit and return (10-07): how far the lists had grown when the reader left; honoured until growUntil
+  let growF = 0, growQ = 0, growUntil = 0;
   function fleetFiltered() {
     return F.filter((f) => (region === 'all' || f.r === region)
       && (!mapSel || (f.st || '').toUpperCase() === mapSel)
@@ -2278,6 +2550,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const t = fleetView.reduce((s, f) => s + f.t, 0);
     $('fcount').textContent = fleetView.length.toLocaleString('en-US') + ' foundations · ' + moneyC(t);
     moreFleet();
+    while (Date.now() < growUntil && growF > fleetShown && fleetShown < fleetView.length) moreFleet();
   }
   function moreFleet() {
     const slice = fleetView.slice(fleetShown, fleetShown + CHUNK);
@@ -2302,7 +2575,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     es.forEach((en) => { if (en.isIntersecting && !$('fmore').hidden) moreFleet(); });
   }, { root: null, rootMargin: '400px' }) : null;
   if (io) io.observe($('fmore'));
-  $('fsort').addEventListener('change', renderFleet);
+  $('fsort').addEventListener('change', () => { renderFleet(); writeHash(); });
   // hover a foundation → its home state lights on the map (two-way linking)
   $('fleet').addEventListener('mouseover', (e) => {
     const a = e.target.closest('.fc');
@@ -2615,7 +2888,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     const sort=$('qsort').value;
     qState.rows.sort((a,b)=>(sort==='name'?F[a[0]].n.localeCompare(F[b[0]].n):sort==='recent'?b[4]-a[4]:sort==='count'?b[1]-a[1]:sort==='median'?b[3]-a[3]:b[2]-a[2])||b[2]-a[2]||a[0]-b[0]);
   }
-  $('qsort').onchange=()=>{syncRankCaption(!!qState.allAgg);if(!qState.ready)return;sortQueryRows();qState.shown=0;$('qresults').innerHTML='';paintQuery();};
+  $('qsort').onchange=()=>{writeHash();syncRankCaption(!!qState.allAgg);if(!qState.ready)return;sortQueryRows();qState.shown=0;$('qresults').innerHTML='';paintQuery();};
   $('navresearch').onclick=()=>{if(!$('ovl').hidden)closeOvl();setTab('q');};
   $('research-view').onchange=()=>setTab($('research-view').value);
   $('navexplore').onclick=()=>{setMapCard(true);writeHash();};
@@ -2977,6 +3250,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     qState.shown += slice.length;
     $('qmore').hidden = qState.shown >= qState.rows.length;
     $('qmore').textContent = 'Show more · ' + (qState.rows.length - qState.shown).toLocaleString('en-US') + ' remaining';
+    if (Date.now() < growUntil && growQ > qState.shown && qState.shown < qState.rows.length) paintQuery(true);
   }
 
   $('qresults').addEventListener('click', (e) => {
@@ -3984,7 +4258,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     $('q').removeAttribute('aria-activedescendant');
     sugActive = -1;
     // a restored (unfocused) takeover ends when its list closes
-    if (document.activeElement !== $('q')) { document.documentElement.classList.remove('searching'); document.documentElement.style.removeProperty('--sug-max'); }
+    if (document.activeElement !== $('q')) { document.documentElement.classList.remove('searching'); document.documentElement.style.removeProperty('--sug-max'); endLift(); }
   }
   $('q').addEventListener('input', (e) => { suggest(e.target.value); });
   // H-07: on a phone, search is the primary interaction -- focus lifts the box to just under the
@@ -3995,6 +4269,11 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   // 8px under the header = the hero's own claim-to-search gap, so the claim above scrolls fully
   // under the header instead of leaving its underline peeking through
   const LIFT_GAP = 8;
+  let liftFrom = null;   // exit and return (10-07): where the page sat before the phone search took over
+  function endLift() {   // the takeover is over without leaving: back to exactly that spot
+    const y = liftFrom; liftFrom = null;
+    if (y != null && phoneQ.matches && $('ovl').hidden) window.scrollTo({ top: y, behavior: 'instant' });
+  }
   function liftSearch() {
     const top = $('q').getBoundingClientRect().top;
     if (Math.abs(top - (headerH() + LIFT_GAP)) < 3) return;
@@ -4016,8 +4295,15 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     // H-05: a field that already holds a query shows its results again on focus
     if ($('suggest').hidden && $('q').value.trim().length >= 2) suggest($('q').value, true);
     if (!phoneQ.matches) return;
+    if (!document.documentElement.classList.contains('searching')) liftFrom = window.scrollY;
     document.documentElement.classList.add('searching');
     liftSearch(); fitSuggest();
+  });
+  $('qcancel').addEventListener('mousedown', (e) => e.preventDefault());   // the field keeps focus until the click lands
+  $('qcancel').addEventListener('click', () => {
+    hideSuggest(); $('q').blur();
+    document.documentElement.classList.remove('searching'); document.documentElement.style.removeProperty('--sug-max');
+    endLift();
   });
   {
     const root = document.documentElement;
@@ -4053,6 +4339,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       if (a && a.closest && a.closest('.searchbox')) return;
       document.documentElement.classList.remove('searching');
       document.documentElement.style.removeProperty('--sug-max');
+      endLift();
     }, 250);
   });
   if (window.visualViewport) {
@@ -4083,11 +4370,11 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       if (open && sugActive >= 0 && opts[sugActive]) { e.preventDefault(); opts[sugActive].click(); return; }
       // ux-hub-05: with nothing arrowed to, Enter used to only ever open a recipient -- a plain
       // foundation query like "hellman" did nothing. The top foundation hit (rendered first) wins.
-      if (curFhits.length) { e.preventDefault(); location.href = 'https://jcurry44.github.io/grants-ledgers/f/' + curFhits[0].u + '/'; return; }
+      if (curFhits.length) { e.preventDefault(); GLR.go('https://jcurry44.github.io/grants-ledgers/f/' + curFhits[0].u + '/'); return; }
       if (sugItems.length) openProfile(sugItems[0][0]);
       return;
     }
-    if (e.key === 'Escape') { e.preventDefault(); hideSuggest(); }
+    if (e.key === 'Escape') { e.preventDefault(); hideSuggest(); if (phoneQ.matches) $('q').blur(); }   // a phone's Esc ends the takeover
   });
   $('suggest').addEventListener('click', (e) => {
     if (e.target.closest('#sugidtog')) { setGovOnly(!govOnly); return; }
@@ -4613,13 +4900,17 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       p.push('q=' + [qState.cat, qState.st, qState.min, qState.yr].join(','));
     }
     if (ovlMode === 'x' && st.slug) p.push('f=' + st.slug);
+    if ($('qsort').value !== 'total') p.push('qs=' + $('qsort').value);   // exit and return: the order survives too
+    if ($('fsort').value !== 't') p.push('fs=' + $('fsort').value);
     const sv = $('q').value.trim().slice(0, 120);
     if (sv) p.push('s=' + encodeURIComponent(sv));   // H-05: the typed query survives the round trip
-    history.replaceState(null, '', p.length ? '#' + p.join('&') : location.pathname);
+    GLR.replace(p.length ? '#' + p.join('&') : location.pathname);
   }
   async function readHash() {
     region = 'all'; govOnly = false; HASHQ = null; mapSel = null; catSel = null;
     const p = Object.fromEntries(location.hash.slice(1).split('&').filter(Boolean).map((kv) => { const i = kv.indexOf('='); return [kv.slice(0, i), decodeURIComponent(kv.slice(i + 1))]; }));
+    const okSort = (sel, v, d) => { sel.value = [...sel.options].some((o) => o.value === v) ? v : d; };
+    okSort($('qsort'), p.qs, 'total'); okSort($('fsort'), p.fs, 't');
     if (!$('ovl').hidden && !['shortlist', 'brief'].includes(p.view) && !p.org && !p.f) closeOvl(true);
     if (['wny', 'ny'].includes(p.region)) region = p.region;
     if (p.id === 'gov') govOnly = true;
@@ -4653,6 +4944,19 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
       }
     }
   }
+  // exit and return (10-07): what a Back or a reload must put back besides the URL -- how far each list had grown,
+  // each view's scroll, and where the phone search took over from
+  GLR.keep(() => ({ q: qState.shown, f: fleetShown, w: weaveAll, ts: tabScroll, vs: viewScroll, lift: liftFrom }));
+  GLR.label(() => $('mapcard').classList.contains('open') ? 'Explore' : ($('q').value.trim() ? 'your results' : ($('viewtitle').textContent || 'Find funders')));
+  {
+    const R = GLR.saved && GLR.saved.s;
+    if (R) {
+      growQ = R.q || 0; growF = R.f || 0; growUntil = Date.now() + 6000;
+      if (R.w) weaveAll = true;
+      Object.assign(tabScroll, R.ts || {}); Object.assign(viewScroll, R.vs || {});
+      if (R.lift != null) liftFrom = R.lift;
+    }
+  }
   setTab('q',true);
   readHash();
   // H-05: Back (or Forward) from a ledger restores the query AND reopens its list; a fresh load of an s= link
@@ -4667,13 +4971,13 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   }
   // the back/forward cache keeps the text but not always the open list
   addEventListener('pageshow', (e) => { if (e.persisted && $('q').value.trim().length >= 2) restoreQuery($('q').value, true); });
+  GLR.settle();
   // a 404 page (or any link) can hand the hub a name to search: #find=<text>
   {
     const m = /(?:^#|&)find=([^&]*)/.exec(location.hash);
-    if (m) { const v = decodeURIComponent(m[1]); history.replaceState(null, '', location.pathname + location.search); $('q').value = v; $('q').focus(); suggest(v); }
+    if (m) { const v = decodeURIComponent(m[1]); GLR.replace(location.pathname + location.search); $('q').value = v; $('q').focus(); suggest(v); }
   }
-  addEventListener('hashchange', readHash);
-  addEventListener('popstate', readHash);
+  GLR.onNav(readHash);   // Back / Forward and hash links, minus the ones a dialog consumed
 })();
 </script>
 <script data-goatcounter="https://grants-ledgers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

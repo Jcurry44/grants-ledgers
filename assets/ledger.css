@@ -631,6 +631,9 @@ h1 {
      0.8rem chip font, landing under the 11px floor. Set it explicitly. */
   .year-rail-top .withheld small, .year-rail-top .zeroyr small { font-size: 11px; }
   .year-rail-top button.on { background: var(--green, #23573f); border-color: var(--green, #23573f); color: #fff; }
+  /* exit and return (10-07): "All" is the rail's way out of a year, so it never scrolls out of reach (it ended as a
+     15px sliver on a ledger with a withheld year) -- it stays pinned at the rail's left edge and the years slide under it */
+  .year-rail-top [data-yr="all"] { position: sticky; left: 0; z-index: 1; box-shadow: 8px 0 10px -8px rgba(20, 38, 29, 0.35); }
   @media (hover: hover) { .year-rail-top button:hover { border-color: var(--copper); } }
 }
 .rail-scope { display: none; }
@@ -841,6 +844,9 @@ h1 {
 }
 @media (hover: hover) { .return-chip:hover { transform: translateY(-2px); } }
 .return-chip[hidden] { display: none; }
+/* exit and return (10-07): at 1100px+ the rail's credit line is fixed bottom-left (z 31, 235px wide) and covered the
+   chip, so a click on it did nothing; it sits beside the credit, above it in the stack */
+@media screen and (min-width: 1100px) { .return-chip { left: calc(235px + 1rem); z-index: 32; } }
 .gl-toast {
   position: fixed; left: 50%; bottom: calc(1.1rem + env(safe-area-inset-bottom)); z-index: 60;
   transform: translateX(-50%) translateY(12px); opacity: 0;

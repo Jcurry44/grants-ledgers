@@ -7,6 +7,257 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.open) { m.open = false; sm.focus(); e.stopPropagation(); } }, true);
   m.addEventListener('focusout', function (e) { if (m.open && e.relatedTarget && !m.contains(e.relatedTarget)) m.open = false; });
 })();
+// GLR:BEGIN -- exit and return (Joe, 2026-10-07): "when you interact with something there needs to be an extremely easy
+// way to exit and get back exactly to where you just were." ONE copy runs on the hub (hub.html) and on every ledger page
+// (assets/ledger.js); deploy_check fails the release when the two copies differ.
+//   GLR.replace(url) / GLR.push(url)  the only history writes on these pages. Each entry keeps its key (k), its depth on
+//                                     this page (d) and the in-site page the reader came from (from) in history.state.
+//   GLR.layer({id, close, hide, host}) an overlay. L.open() pushes ONE entry (or adopts the one it is on, after a reload
+//                                     or a Back into it); L.close() pops it, and a URL the page writes meanwhile lands on
+//                                     the entry it returns to; L.drop() forgets it without moving. Back while it is open
+//                                     calls hide() and never leaves the page. On a phone a Done button in thumb reach,
+//                                     inside host, calls close().
+//   GLR.onNav(fn)                     the page's own popstate / hashchange handler, minus the events a layer consumed
+//   GLR.keep(fn)                      what to save besides scrollY (lists grown, sorts, panel scroll); saved per history
+//                                     entry as the reader scrolls, on every in-site hop and on pagehide
+//   GLR.saved                         {y, s} saved for this entry when the reader came Back, reloaded or took the chip
+//   GLR.settle()                      once the page has re-applied GLR.saved.s: scroll to y and hold it there while late
+//                                     content fills in, until the reader moves or 5 s pass
+//   GLR.go(url) / GLR.back()          a scripted in-site hop; the chip's "back to the exact entry the reader left"
+//   GLR.label(fn) / GLR.paint()       what this page is called on the next page's chip; re-check the chip and Done
+window.GLR = window.GLR || (function () {
+  'use strict';
+  var NS = 'gl.ret.', HOLD = 5000;
+  function load(k) { try { return JSON.parse(sessionStorage.getItem(NS + k) || 'null'); } catch (e) { return null; } }
+  function store(k, v) { try { if (v == null) sessionStorage.removeItem(NS + k); else sessionStorage.setItem(NS + k, JSON.stringify(v)); } catch (e) {} }
+  function newKey() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function hs() { var s = history.state; return s && typeof s === 'object' ? s : {}; }
+  function copy(s, extra) { var n = {}, x; for (x in s) n[x] = s[x]; for (x in extra || {}) n[x] = extra[x]; return n; }
+  function write(s, url, push) {
+    try { history[push ? 'pushState' : 'replaceState'](s, '', url == null ? location.href : url); } catch (e) {}
+    here = location.href;
+  }
+  function hashOf(u) { var i = String(u || '').indexOf('#'); return i < 0 ? '' : u.slice(i); }
+  function site(u) { return u.origin === location.origin && u.pathname.split('/')[1] === location.pathname.split('/')[1]; }
+  var nav = ''; try { var ne = performance.getEntriesByType('navigation')[0]; nav = ne ? ne.type : ''; } catch (e) {}
+  // the page restores its own scroll: a browser restore lands before late rows and grown lists exist, and is clamped short
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  var keepFn = function () { return null; };
+  var labelFn = function () { return (document.title || 'the last page').split(/\s[—|·–-]\s/)[0]; };
+  var here = location.href, navFns = [], layers = [], skip = { pop: 0, hash: 0, url: null }, skipT = null, settling = false;
+
+  // ---- this entry's identity: Back and reload keep it; a fresh arrival takes a new one, plus where it came from
+  var st = hs(), go = load('go'), hop = load('hop'), adopted = false;
+  store('go', null); store('hop', null);
+  if (!st.k) {
+    if (go && Date.now() - go.t < 15000 && go.u === location.href) {
+      var g0 = load('s:' + go.k);
+      st = { k: go.k, d: 0 }; if (g0 && g0.from) st.from = g0.from; adopted = true;
+    } else {
+      st = { k: newKey(), d: 0 };
+      if (hop && Date.now() - hop.t < 60000 && hop.u !== location.href) {
+        st.from = { u: hop.u, k: hop.k, l: hop.l };
+        st.b = history.length > 1 ? 1 : 0;   // a new tab has nothing behind it: its chip navigates instead
+      }
+    }
+    write(st);
+  }
+  var saved = (adopted || nav === 'back_forward' || nav === 'reload') ? load('s:' + st.k) : null;
+  if (saved && saved.p !== location.pathname) saved = null;
+
+  function save() {
+    if (settling) return;   // a restore in flight must not record the clamped positions it passes through
+    var s = hs(); if (!s.k) return;
+    var v = { y: Math.round(window.scrollY), p: location.pathname, u: location.href, s: null, from: s.from || null, t: Date.now() };
+    try { v.s = keepFn(); } catch (e) {}
+    store('s:' + s.k, v);
+  }
+  var saveT = null;
+  addEventListener('scroll', function () { clearTimeout(saveT); saveT = setTimeout(save, 160); }, { passive: true });
+  addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+
+  // ---- hops: any in-site link (or GLR.go) records the exact spot it left
+  function label() { var l = ''; try { l = String(labelFn() || ''); } catch (e) {} l = l.replace(/\s+/g, ' ').trim(); return l.length > 34 ? l.slice(0, 32).trim() + '…' : l || 'the last page'; }
+  function hopFrom() { save(); store('hop', { u: location.href, k: hs().k, l: label(), t: Date.now() }); }
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    var u; try { u = new URL(a.href, location.href); } catch (x) { return; }
+    if (!site(u) || (u.pathname === location.pathname && u.search === location.search)) return;   // a hash is not a hop
+    hopFrom();
+  });
+
+  // ---- history writes
+  function push(url, extra) {
+    var s = hs(), n = copy({ k: newKey(), d: (s.d || 0) + 1 }, extra);
+    if (s.from) n.from = s.from; if (s.b != null) n.b = s.b;
+    save();
+    write(n, url, true);
+  }
+  function replace(url) {
+    if (skip.pop) { skip.url = url; return; }   // a pop is landing: the URL belongs to the entry it lands on
+    write(hs(), url);
+  }
+  function expectPop() {
+    skip.pop = 1; clearTimeout(skipT);
+    skipT = setTimeout(function () { skip.pop = 0; skip.hash = 0; flush(); }, 1500);
+  }
+  function flush() { if (skip.url != null) { var u = skip.url; skip.url = null; write(hs(), u); } }
+
+  // ---- layers
+  var doneBtn = null;
+  function topLayer() { for (var i = layers.length - 1; i >= 0; i--) if (layers[i].on) return layers[i]; return null; }
+  function layer(o) {
+    var L = { id: o.id, on: false, pushed: false, o: o };
+    L.open = function () {
+      L.on = true;
+      if (!L.pushed) {
+        if (hs().ly === o.id) L.pushed = true;   // reloaded, or came Back / Forward into its own entry
+        else { push(null, { ly: o.id }); L.pushed = true; }
+      }
+      var i = layers.indexOf(L); if (i >= 0) layers.splice(i, 1); layers.push(L);   // the newest open layer is on top
+      paint();
+    };
+    L.close = function () {
+      L.on = false; paint();
+      if (!L.pushed) return false;
+      L.pushed = false; expectPop();
+      try { history.back(); } catch (e) { skip.pop = 0; return false; }
+      return true;
+    };
+    L.drop = function () { L.on = false; L.pushed = false; paint(); };
+    layers.push(L);
+    return L;
+  }
+
+  // ---- Back / Forward inside the page
+  function arrive() {   // a fragment link makes an entry this script never wrote: give it a key, one deeper
+    var s = hs();
+    if (s.k) return s;
+    var n = { k: newKey(), d: (cur.d || 0) + 1 }; if (cur.from) n.from = cur.from; if (cur.b != null) n.b = cur.b;
+    write(n); return n;
+  }
+  var cur = hs();
+  addEventListener('popstate', function (e) {
+    var hashMoved = hashOf(here) !== location.hash;
+    here = location.href;
+    if (skip.pop) {   // the pop a close() asked for
+      skip.pop = 0; skip.hash = hashMoved ? 1 : 0; clearTimeout(skipT);
+      skipT = setTimeout(function () { skip.hash = 0; }, 400);
+      flush(); cur = hs(); paint(); return;
+    }
+    var s = arrive(), t = topLayer();
+    if (t && t.pushed && s.ly !== t.id) {   // Back while a layer is open: close it, stay on the page
+      t.on = false; t.pushed = false; skip.hash = hashMoved ? 1 : 0;
+      clearTimeout(skipT); skipT = setTimeout(function () { skip.hash = 0; }, 400);
+      try { t.o.hide(); } catch (x) {}
+      cur = s; paint(); return;
+    }
+    cur = s;
+    navFns.forEach(function (fn) { try { fn(e); } catch (x) { if (window.console) console.error(x); } });
+    var v = load('s:' + s.k);
+    if (v && v.p === location.pathname) requestAnimationFrame(function () { window.scrollTo(0, v.y); });
+    paint();
+  });
+  addEventListener('hashchange', function (e) {
+    here = location.href;
+    if (skip.hash) { skip.hash = 0; return; }
+    cur = arrive();
+    navFns.forEach(function (fn) { try { fn(e); } catch (x) { if (window.console) console.error(x); } });
+    paint();
+  });
+
+  // ---- restore: hold the saved spot while the page fills in
+  function settle() {
+    if (!saved || settling) return;
+    var y = saved.y, t0 = Date.now(), iv = null, ro = null, EV = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    settling = true;
+    function stop() {
+      if (!settling) return;
+      settling = false; clearInterval(iv); if (ro) ro.disconnect();
+      EV.forEach(function (ev) { removeEventListener(ev, stop, true); });
+      save();
+    }
+    function hold() {
+      if (!settling) return;
+      var max = Math.max(0, document.documentElement.scrollHeight - innerHeight), to = Math.min(y, max);
+      if (Math.abs(window.scrollY - to) > 1) window.scrollTo(0, to);
+      if (Date.now() - t0 > HOLD) stop();
+    }
+    EV.forEach(function (ev) { addEventListener(ev, stop, { capture: true, passive: true }); });
+    iv = setInterval(hold, 100);
+    if ('ResizeObserver' in window) { ro = new ResizeObserver(hold); ro.observe(document.body); }
+    hold();
+  }
+
+  // ---- the chip and the Done button
+  function back() {
+    var s = hs(), f = s.from; if (!f) return false;
+    save();
+    store('go', { k: f.k, u: f.u, t: Date.now() });
+    if (s.b) history.go(-((s.d || 0) + 1));   // the page it came from sits right behind this page's first entry
+    else location.href = f.u;
+    return true;
+  }
+  function gap(side) {   // clear of the phone's fixed bottom bar and the desktop rail's fixed credit line
+    if (side === 'b') {
+      var n = document.querySelector('.gl-top .gl-nav');
+      if (n && n.getClientRects().length && getComputedStyle(n).position === 'fixed') {
+        var r = n.getBoundingClientRect(); if (r.top > innerHeight / 2) return Math.round(innerHeight - r.top) + 12;
+      }
+      return 16;
+    }
+    var c = document.querySelector('.hero-cred');
+    if (c && c.getClientRects().length && getComputedStyle(c).position === 'fixed') return Math.round(c.getBoundingClientRect().right) + 16;
+    return 16;
+  }
+  function paint() {
+    var t = topLayer(), phone = matchMedia('(max-width: 640px)').matches;
+    if (t && t.o.host && phone) {
+      if (!doneBtn) {
+        doneBtn = document.createElement('button'); doneBtn.type = 'button'; doneBtn.className = 'glr-done'; doneBtn.textContent = 'Done';
+        doneBtn.addEventListener('click', function () { var l = topLayer(); if (l && l.o.close) l.o.close(); });
+      }
+      if (doneBtn.parentNode !== t.o.host) t.o.host.appendChild(doneBtn);
+      doneBtn.hidden = false;
+    } else if (doneBtn) doneBtn.hidden = true;
+    var f = hs().from, chip = document.getElementById('glr-chip');
+    if (!f) { if (chip) chip.hidden = true; return; }
+    if (!chip) {
+      chip = document.createElement('button'); chip.type = 'button'; chip.id = 'glr-chip'; chip.className = 'glr-chip';
+      chip.addEventListener('click', back);
+      document.body.appendChild(chip);
+    }
+    chip.textContent = '← Back to ' + f.l;
+    chip.setAttribute('aria-label', 'Back to ' + f.l + ', where you were');
+    var own = document.querySelector('.return-chip:not([hidden])');   // a page's own in-page return chip comes first
+    chip.hidden = !!t || !!own;
+    chip.style.bottom = 'calc(' + gap('b') + 'px + env(safe-area-inset-bottom))';
+    chip.style.left = gap('l') + 'px';
+  }
+  var css = document.createElement('style');
+  css.textContent = '.glr-chip{position:fixed;left:16px;bottom:16px;z-index:32;display:inline-flex;align-items:center;max-width:min(80vw,360px);height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:#14261d;color:#f6f2e7;font:inherit;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(10,24,17,.28);cursor:pointer}'
+    + '.glr-chip[hidden],.glr-done[hidden]{display:none}.glr-chip:focus-visible,.glr-done:focus-visible{outline:2px solid #b8742a;outline-offset:2px}'
+    + '.glr-done{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom));z-index:25;display:block;flex:none;margin:14px auto calc(12px + env(safe-area-inset-bottom));min-width:140px;height:48px;padding:0 28px;border:0;border-radius:999px;background:#14261d;color:#f6f2e7;font:inherit;font-size:15px;font-weight:600;box-shadow:0 8px 24px rgba(10,24,17,.28);cursor:pointer}'
+    + '@media (min-width:641px){.glr-done{display:none}}@media print{.glr-chip,.glr-done{display:none!important}}';
+  (document.head || document.documentElement).appendChild(css);
+  addEventListener('resize', function () { paint(); });
+  addEventListener('pageshow', function (e) { if (e.persisted) { store('go', null); settling = false; paint(); } });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paint); else paint();
+
+  return {
+    push: push, replace: replace, layer: layer, settle: settle, back: back, paint: paint,
+    saved: saved, restoring: !!saved,
+    onNav: function (fn) { navFns.push(fn); },
+    keep: function (fn) { keepFn = fn; },
+    label: function (fn) { labelFn = fn; },
+    go: function (url) { hopFrom(); location.href = url; },
+    from: function () { return hs().from || null; }
+  };
+})();
+// GLR:END
 (function () {
   'use strict';
   const DATA = window[document.documentElement.dataset.blob || 'OISHEI_DATA'];
@@ -508,9 +759,11 @@
     if (state.sort !== 'amount-desc') parts.push('sort=' + state.sort);
     if (state.page) parts.push('page=' + (state.page + 1));
     const hash = '#' + parts.join('&');
+    // exit and return (10-07): a view change (tab, year, filter, page) REPLACES this entry, so Back leaves the page in
+    // one press and lands exactly where the reader came from; only a layer (the recipient profile) adds an entry.
+    // `push` is kept for the callers' intent (setTab scrolls on it) and no longer reaches history.
     if (location.hash !== hash) {
-      if (push) history.pushState(null, '', hash);
-      else history.replaceState(null, '', hash);
+      GLR.replace(hash);
       if (typeof syncSide === 'function') syncSide();
   }
   }
@@ -712,7 +965,8 @@
 
   // ---------- tabs ----------
   const TABS = ['overview', 'recipients', 'grants', 'methodology'];
-  function setTab(tab, push) {
+  const tabY = {};   // exit and return: each tab's scroll, so going back to a tab lands where the reader left it
+  function setTab(tab, push, toY) {
     requestAnimationFrame(positionInk);
     state.tab = tab;
     TABS.forEach((t) => {
@@ -731,7 +985,8 @@
     updateReturnChip();
     if (push !== false) {
       const behavior = reducedMotion() ? 'instant' : 'smooth';
-      if (tab === 'overview') window.scrollTo({ top: 0, behavior });
+      if (toY != null) window.scrollTo({ top: toY, behavior: 'instant' });
+      else if (tab === 'overview') window.scrollTo({ top: 0, behavior });
       else {
         const panel = $('panel-' + tab);
         const tabsEl = document.querySelector('.tabs');
@@ -742,8 +997,15 @@
     }
   }
   TABS.forEach((t) => {
-    $('tab-' + t).addEventListener('click', () => { returnTo = null; updateReturnChip(); setTab(t); });
+    $('tab-' + t).addEventListener('click', () => tabClick(t));
   });
+  // a reader's tab switch (tab bar or desktop side nav): leave this tab's spot behind, land on the other tab's own spot
+  function tabClick(t) {
+    returnTo = null; updateReturnChip();
+    const from = state.tab;
+    if (from !== t) tabY[from] = window.scrollY;
+    setTab(t, true, from !== t ? tabY[t] : undefined);
+  }
   function jumpFromOverview() {
     returnTo = { tab: state.tab, scrollY: window.scrollY, c: state.c, r: state.r, q: state.q, min: state.min };
     updateReturnChip();
@@ -752,6 +1014,7 @@
     const chip = document.getElementById('return-chip');
     if (!chip) return;
     chip.hidden = !(returnTo && state.tab !== returnTo.tab);
+    GLR.paint();   // the cross-page chip steps aside while this one shows
   }
   $('tablist').addEventListener('keydown', (e) => {
     const i = TABS.indexOf(state.tab);
@@ -857,7 +1120,7 @@
       });
     });
     document.querySelectorAll('.side-nav [data-tab]').forEach((b) =>
-      b.addEventListener('click', () => { returnTo = null; updateReturnChip(); setTab(b.dataset.tab); }));
+      b.addEventListener('click', () => tabClick(b.dataset.tab)));
     syncSide();
 
     // ux-ledger-04: the moat, said where the buyer is already looking -- under the badge,
@@ -1894,6 +2157,7 @@
       if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert');
     });
   };
+  const PF = GLR.layer({ id: 'profile', host: $('profile'), close: () => closeProfile(), hide: () => closeProfile(true, true) });
   function openProfile(id, fromHash) {
     const e = entities.get(id);
     if (!e) return;
@@ -1901,7 +2165,8 @@
     profileId = id;
     profileScopeY = state.y;
     state.pr = id;
-    if (!fromHash) writeHash(true);
+    PF.open();
+    if (!fromHash) writeHash(false);
     if (!wasOpen) lastFocus = (lastClick.el && performance.now() - lastClick.t < 1000) ? lastClick.el : document.activeElement;
     const per = YEARS.map((y) => ({
       y,
@@ -1967,7 +2232,8 @@
   function closeProfile(restore, fromHash) {
     profileId = null;
     state.pr = null;
-    if (!fromHash) writeHash(true);
+    if (!fromHash) { PF.close(); writeHash(false); }   // the URL lands on the entry the pop returns to
+    else PF.drop();
     bgInert(false);
     $('profile').classList.remove('open');
     $('pf-backdrop').classList.remove('open');
@@ -2602,8 +2868,7 @@
     if (state.pr !== null && (profileId !== state.pr || profileScopeY !== state.y)) openProfile(state.pr, true);
     else if (state.pr === null && profileId !== null) closeProfile(true, true);
   }
-  window.addEventListener('hashchange', () => { readHash(); syncControls(); setTab(state.tab, false); syncProfile(); });
-  window.addEventListener('popstate', () => { readHash(); syncControls(); setTab(state.tab, false); syncProfile(); });
+  GLR.onNav(() => { readHash(); syncControls(); setTab(state.tab, false); syncProfile(); });
   let rzT = null;
   window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { if (state.tab === 'grants') renderGrants(); fitKpis(); markScrollRegions(); }, 200); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitKpis());
@@ -3137,11 +3402,13 @@
     const findLink = $('gl-find');
     if (findLink) {
       try {
-        if (document.referrer && /^https:\/\/jcurry44\.github\.io\/grants-ledgers\/(?:$|[?#])/.test(document.referrer) && history.length > 1) {
+        const hubRe = /^https:\/\/jcurry44\.github\.io\/grants-ledgers\/(?:(?:index|hub)\.html)?(?:$|[?#])/;
+        const from = GLR.from();
+        if ((from && hubRe.test(from.u)) || (document.referrer && hubRe.test(document.referrer) && history.length > 1)) {
           findLink.textContent = '← Back to results';
           findLink.removeAttribute('href');
           findLink.tabIndex = 0;
-          const back = (e) => { e.preventDefault(); history.back(); };
+          const back = (e) => { e.preventDefault(); if (!GLR.back()) history.back(); };
           findLink.addEventListener('click', back);
           findLink.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') back(e); });
         }
@@ -3277,6 +3544,7 @@
   { const gv = document.querySelector('.grand .g-val'); if (gv && !gv.style.getPropertyValue('--n')) gv.style.setProperty('--n', String(gv.textContent.trim().length)); }
 
   // init
+  GLR.keep(() => ({ tabY, rt: returnTo }));
   readHash();
   syncControls();
   setTab(state.tab, false);
@@ -3284,8 +3552,14 @@
   if (rowsPending) loadRows(); else verifyRows();
   // L-11: a deep link that already scopes the page (a tab, a recipient, a search) has
   // nothing for a phone to gain by opening on the cover -- start at the tab bar instead.
-  if ((state.tab !== 'overview' || state.r !== null || state.q) && window.innerWidth < 1100) {
+  // Exit and return (10-07): never on a Back or a reload -- that reader gets the exact spot they left.
+  if (!GLR.restoring && (state.tab !== 'overview' || state.r !== null || state.q) && window.innerWidth < 1100) {
     const tabsEl = $('tablist');
     if (tabsEl) window.scrollTo({ top: tabsEl.offsetTop, behavior: 'instant' });
   }
+  if (GLR.saved && GLR.saved.s) {
+    Object.assign(tabY, GLR.saved.s.tabY || {});
+    if (GLR.saved.s.rt) { returnTo = GLR.saved.s.rt; updateReturnChip(); }
+  }
+  GLR.settle();
 })();
