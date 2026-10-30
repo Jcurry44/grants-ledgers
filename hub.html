@@ -7,13 +7,13 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#1e4634">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>The Grants Ledger — 1,935 foundations, reconciled</title>
-<meta name="description" content="A reconciled record of grantmaking from 1,935 major U.S. private foundations — the top of the field by assets, currently every foundation above roughly $86M. Every included year reconciles to the total that foundation itself filed with the IRS. Not a census of American philanthropy.">
+<title>The Grants Ledger — Find funders through past giving</title>
+<meta name="description" content="Find funders through the nonprofits they have supported. Explore historical IRS grant records from 1,935 U.S. foundations, compare the evidence, and build a research shortlist.">
 <link rel="canonical" href="https://jcurry44.github.io/grants-ledgers/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jcurry44.github.io/grants-ledgers/">
-<meta property="og:title" content="The Grants Ledger — major U.S. foundations, reconciled to the dollar">
-<meta property="og:description" content="A reconciled record of grantmaking by major U.S. private foundations, rebuilt from each foundation's own public IRS 990-PF filings — every included year reconciles to the filed total, to the dollar.">
+<meta property="og:title" content="The Grants Ledger — Find funders through past giving">
+<meta property="og:description" content="Start with a nonprofit you know. Inspect its funders, compare historical IRS grant evidence, and build your shortlist. Current eligibility requires a separate check.">
 <meta property="og:image" content="https://jcurry44.github.io/grants-ledgers/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -1275,6 +1275,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   html.searching #q{padding-right:84px}
 }
 </style>
+<link rel="stylesheet" href="assets/research-workflow.css">
 </head>
 <body>
 <a class="skiplink" href="#panelbody">Skip to content</a>
@@ -1300,6 +1301,7 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     <details class="gl-more">
       <summary>More<svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></summary>
       <div class="gl-menu">
+        <a href="research/">Commission a research brief · $350</a>
         <a href="https://jcurry44.github.io/grants-ledgers/findings/">Findings</a>
         <a href="https://jcurry44.github.io/grants-ledgers/census/">Census</a>
         <a href="https://jcurry44.github.io/grants-ledgers/recovered/">Recovered from paper</a>
@@ -1322,9 +1324,9 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
   <div class="workspacehead">
     <div class="mast">
       <p class="mastkicker eyebrow accent" id="viewtitle">Find funders</p>
-      <h1 class="masth">Grant ledgers for <span class="heroCount" id="heroN3">1,935</span> U.S. foundations, reconciled to the dollar.</h1>
-      <p class="mastsub" id="viewdescription">Rank funders by the grants they actually filed. Save the ones that fit.</p>
-      <p class="mastclaim" id="mastclaim">Rebuilt from each foundation's own IRS <span class="nw">990-PF</span> filings — every year reconciles to the filed total; exceptions disclosed. <button type="button" id="heroreconcile" class="mastclaimlink">How it reconciles →</button></p>
+      <h1 class="masth">Find funders through the organizations they support.</h1>
+      <p class="mastsub" id="viewdescription">Start with a nonprofit you know. Inspect its funders, compare the evidence, and build your shortlist.</p>
+      <p class="mastclaim" id="mastclaim"><span class="heroCount" id="heroN3">1,935</span> U.S. foundations · public IRS filings · reconciled totals. <button type="button" id="heroreconcile" class="mastclaimlink">Method &amp; coverage →</button></p>
       <div class="tots" id="bigstats" aria-live="polite" data-state="wait">
         <div><b class="num" data-k="t">&mdash;</b><span>dollars reconciled</span></div>
         <div><b class="num" data-k="g">&mdash;</b><span>filed rows</span></div>
@@ -1333,13 +1335,15 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
     </div>
     <div class="searchbox">
       <svg class="searchicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
-      <label class="sr-only" for="q">Search organizations</label>
-      <input type="search" id="q" placeholder="Search any organization…" autocomplete="off" spellcheck="false" autocapitalize="none" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suglist">
+      <label class="searchlabel" for="q">Your nonprofit, a peer, or a foundation</label>
+      <input type="search" id="q" placeholder="Search by organization name…" autocomplete="off" spellcheck="false" autocapitalize="none" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suglist" aria-describedby="searchguide">
       <button type="button" class="qcancel" id="qcancel">Cancel</button>
       <span class="slash" aria-hidden="true">/</span>
       <div class="suggest" id="suggest" hidden><div id="suglist" role="listbox" aria-label="Suggestions"></div><div class="nosug" id="nosug" hidden></div><div class="srchint" id="srchint"></div></div>
       <span class="sr-only" id="sug-status" role="status" aria-live="polite"></span>
-      <p class="masttry" id="masttry">Try <button type="button" class="trychip" data-try="Hellman">Hellman</button> · <button type="button" class="trychip" data-try="Harvard">Harvard</button> · <button type="button" class="trychip" data-try="Gates">Gates</button></p>
+      <p class="masttry" id="masttry">Try a nonprofit <button type="button" class="trychip" data-try="Urban Tilth">Urban Tilth</button><button type="button" class="trychip" data-try="Harvard">Harvard</button></p>
+      <p class="searchguide" id="searchguide">Open a recipient to see past funders and additional prospects, with the grants behind each match.</p>
+      <a class="pilotlink" href="research/">Need a client-ready shortlist? <span>$350 research pilot ↗</span></a>
     </div>
   </div>
   <div class="workspacebar">
@@ -1374,14 +1378,14 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         <div class="qmeta">
           <div class="resulttotals"><b id="qcount" role="status" class="wait">Searching…</b><span id="qsum"></span></div>
           <div class="resulttools">
-            <span class="sortlabel">Sort by</span><select id="qsort" class="qsort" aria-label="Sort funders"><option value="total">Total filed</option><option value="count">Filed rows</option><option value="median">Average grant</option><option value="recent">Latest year</option><option value="name">Name A–Z</option></select>
+            <span class="sortlabel">Sort by</span><select id="qsort" class="qsort" aria-label="Sort funders"><option value="total">Total filed</option><option value="count">Filed rows</option><option value="median">Average named grant</option><option value="recent">Latest year</option><option value="name">Name A–Z</option></select>
             <button type="button" class="qreportlink" id="qreport">View summary</button>
             <span class="expwrap"><button type="button" class="tbtn" id="qexport" aria-haspopup="true" aria-expanded="false">Export<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></span>
           </div>
         </div>
         <div class="resultcaption"><span><i aria-hidden="true"></i> <span id="qrankby">Ranked by total filed grant dollars</span> · past giving, not eligibility</span><p class="qex" id="qex" hidden><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,935</span> foundations →</button></p></div>
       </div>
-      <div class="tablehead" aria-hidden="true"><span>Foundation</span><div class="metriclabels" id="qmetriclabels"><span>Total filed</span><span>Filed rows</span><span>Average grant</span><span>Latest year</span></div><span></span></div>
+      <div class="tablehead" aria-hidden="true"><span>Foundation</span><div class="metriclabels" id="qmetriclabels"><span>Total filed</span><span>Filed rows</span><span>Average named grant</span><span>Latest year</span></div><span></span></div>
       <div class="flist" id="qresults" style="margin-top:0.6rem" aria-busy="true"><div class="qwait"><span class="r2wait">Reading the ledgers…</span></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div></div>
       <button type="button" class="fmore" id="qmore" hidden>Show more</button>
       <details class="qnote"><summary>How these results are counted</summary><p>Every filter applies to the same grant row. Counts, amounts and medians include matching rows with named recipients; amounts reported as one lump sum, not a named grant list, stay in the source ledger and aren’t in these matches. Recipient location is the filed address, which may differ from the area served. “Location not filed” means the row has no recipient state. Nothing is selected until you choose it.</p></details>
@@ -2624,7 +2628,25 @@ window.GLR = window.GLR || (function () {
   const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
   const uid = () => 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const slug = (s2) => String(s2).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48) || 'project';
-  const blankProject = (nm) => ({ id: uid(), name: nm || 'Untitled project', created: todayISO(), updated: todayISO(), funders: [], notes: {}, evidence: {}, brief: '', via: {} });
+  const blankProject = (nm) => ({ id: uid(), name: nm || 'Untitled project', created: todayISO(), updated: todayISO(), funders: [], notes: {}, evidence: {}, checks: {}, brief: '', via: {} });
+  function cleanChecks(value, funders) {
+    const out = {};
+    if (!value || typeof value !== 'object') return out;
+    for (const u of funders) {
+      const c = Object.prototype.hasOwnProperty.call(value, u) && value[u];
+      if (!c || typeof c !== 'object') continue;
+      const status = ['unknown','open','invitation','closed','unclear'].includes(c.status) ? c.status : 'unknown';
+      let source = '';
+      try { const url = new URL(String(c.source || '')); if (['https:','http:'].includes(url.protocol) && !url.username && !url.password) source = url.href.slice(0,2000); } catch(e) {}
+      const date = typeof c.checked === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.checked) && Number.isFinite(Date.parse(c.checked)) && new Date(c.checked).toISOString().slice(0,10) === c.checked ? c.checked : '';
+      Object.defineProperty(out,u,{value:{status,source,checked:date,next:typeof c.next==='string'?c.next.slice(0,2000):''},enumerable:true,writable:true,configurable:true});
+    }
+    return out;
+  }
+  function checkStatus(c) {
+    return ({unknown:'Not checked',open:'Accepting inquiries / applications',invitation:'Invitation only',closed:'Closed',unclear:'Needs clarification'})[c?.status] || 'Not checked';
+  }
+  function researchCheck(u) { return cleanChecks(PROJ().checks,[u])[u] || {status:'unknown',source:'',checked:'',next:''}; }
   // where a whole-ledger save was made: 'hub' for this page; absent = the ledger page's own Save
   const cleanVia = (v, funders) => { const out = {}; if (v && typeof v === 'object') funders.forEach((u) => { if (v[u] === 'hub') out[u] = 'hub'; }); return out; };
   function readStore() {
@@ -2645,6 +2667,7 @@ window.GLR = window.GLR || (function () {
       funders: Array.isArray(p.funders) ? p.funders.filter((u) => typeof u === 'string') : [],
       notes: (p.notes && typeof p.notes === 'object') ? p.notes : {},
       evidence: cleanEvidence(p.evidence, Array.isArray(p.funders) ? p.funders : []),
+      checks: cleanChecks(p.checks, Array.isArray(p.funders) ? p.funders : []),
       brief: typeof p.brief === 'string' ? p.brief.slice(0,3000) : '',
       via: cleanVia(p.via, Array.isArray(p.funders) ? p.funders : []),
     }));
@@ -2654,7 +2677,20 @@ window.GLR = window.GLR || (function () {
   }
   const STORE = readStore();
   const PROJ = () => STORE.list.find((p) => p.id === STORE.active) || STORE.list[0];
-  function writeStore() { try { localStorage.setItem(PKEY, JSON.stringify(STORE)); } catch (e) {} }
+  function writeStore() {
+    try {
+      localStorage.setItem(PKEY, JSON.stringify(STORE));
+      document.getElementById('storagewarning')?.remove();
+      return true;
+    } catch (e) {
+      if (!document.getElementById('storagewarning')) {
+        const warning = document.createElement('div'); warning.id='storagewarning';warning.className='storagewarning';warning.setAttribute('role','alert');
+        warning.textContent='This browser could not save your changes. Keep this tab open and use “Back up project” in your shortlist to download your work.';
+        document.body.appendChild(warning);
+      }
+      return false;
+    }
+  }
   // The old single list ('gl_list') used to be carried over in memory only: this page showed those
   // foundations saved while their ledger pages, which read PKEY alone, showed them unsaved. Carry it
   // over once and write it down, merged into the active project; the old keys are left in place.
@@ -2747,11 +2783,11 @@ window.GLR = window.GLR || (function () {
   const purposeScope = (cat) => cat === 'all' ? 'Any purpose' : QMETA.cats[cat] + ' (filed-purpose category)';
   // N3: the sort control names exactly the columns it sorts, in the table-head's order
   const SORT_LABELS = {
-    whole: { total: 'Total filed', count: 'Filed rows', median: 'Average grant', recent: 'Latest year', name: 'Name A–Z' },
+    whole: { total: 'Total filed', count: 'Filed rows', median: 'Average named grant', recent: 'Latest year', name: 'Name A–Z' },
     match: { total: 'Matching dollars', count: 'Matching grants', median: 'Median grant', recent: 'Latest year', name: 'Name A–Z' },
   };
   const RANK_CAPTION = {
-    whole: { total: 'Ranked by total filed grant dollars', count: 'Ranked by filed rows', median: 'Ranked by average grant (filed dollars ÷ filed rows)', recent: 'Ranked by latest filed year', name: 'Listed A–Z by name' },
+    whole: { total: 'Ranked by total filed grant dollars', count: 'Ranked by filed rows', median: 'Ranked by average named-recipient grant; unavailable values last', recent: 'Ranked by latest filed year', name: 'Listed A–Z by name' },
     match: { total: 'Ranked by matching grant dollars', count: 'Ranked by number of matching grants', median: 'Ranked by median matching grant', recent: 'Ranked by latest matching year', name: 'Listed A–Z by name' },
   };
   const syncRankCaption = (whole) => { $('qrankby').textContent = RANK_CAPTION[whole ? 'whole' : 'match'][$('qsort').value] || ''; };
@@ -2841,6 +2877,27 @@ window.GLR = window.GLR || (function () {
   }
 
   // Pure research calculations; regression-tested against row-level fixtures.
+  // Coverage separates searchable named recipients from redacted individuals and
+  // unitemized disclosures. All three still belong in the reconciled filed total.
+  function namedGrantStats(f, coverage) {
+    const c = coverage && coverage.funders && coverage.funders[f.u];
+    if (!c || c.rows !== f.g || c.dollars !== f.t) return null;
+    const n = c.named_rows || 0, total = c.named_dollars || 0;
+    const unitemized = c.unitemized_rows || 0, individuals = c.individual_rows || 0;
+    if (!Number.isInteger(n) || n < 0 || !Number.isFinite(total)
+      || n + unitemized + individuals !== c.rows
+      || Math.abs(total + (c.unitemized_dollars || 0) + (c.individual_dollars || 0) - c.dollars) > 0.01) return null;
+    return { n, total, average: n ? total / n : null, unitemized,
+      unitemizedDollars: c.unitemized_dollars || 0, individuals };
+  }
+  function namedGrantCoverage(stats) {
+    if (!stats) return 'Named-recipient coverage unavailable';
+    if (!stats.n) return 'No itemized named-recipient grants';
+    if (stats.unitemized) return stats.unitemized.toLocaleString('en-US') + ' unitemized '
+      + (stats.unitemized === 1 ? 'disclosure' : 'disclosures') + ' · excluded from grant-size statistics';
+    if (stats.individuals) return 'Redacted individual awards excluded from grant-size statistics';
+    return '';
+  }
   function weightedMedian(pairs) {
     const sorted = pairs.slice().sort((a, b) => a[0] - b[0]);
     const n = sorted.reduce((sum, p) => sum + p[1], 0);
@@ -2904,7 +2961,7 @@ window.GLR = window.GLR || (function () {
   };
   function sortQueryRows() {
     const sort=$('qsort').value;
-    qState.rows.sort((a,b)=>(sort==='name'?F[a[0]].n.localeCompare(F[b[0]].n):sort==='recent'?b[4]-a[4]:sort==='count'?b[1]-a[1]:sort==='median'?b[3]-a[3]:b[2]-a[2])||b[2]-a[2]||a[0]-b[0]);
+    qState.rows.sort((a,b)=>(sort==='name'?F[a[0]].n.localeCompare(F[b[0]].n):sort==='recent'?b[4]-a[4]:sort==='count'?b[1]-a[1]:sort==='median'?(b[3] ?? -Infinity)-(a[3] ?? -Infinity):b[2]-a[2])||b[2]-a[2]||a[0]-b[0]);
   }
   $('qsort').onchange=()=>{writeHash();syncRankCaption(!!qState.allAgg);if(!qState.ready)return;sortQueryRows();qState.shown=0;$('qresults').innerHTML='';paintQuery();};
   $('navresearch').onclick=()=>{if(!$('ovl').hidden)closeOvl();setTab('q');};
@@ -2949,12 +3006,12 @@ window.GLR = window.GLR || (function () {
   // Use the same filed-name classification as the query index. Every filter
   // intersects on this exact source row; original indices remain stable.
   const queryPlaceholder = new RegExp("^\\s*\\[.*\\]\\s*$|\\bSEE\\b.{0,60}\\b(?:ATTACHED|ATTACHMENTS?|SCHEDULES?|STATEMENTS?|EXHIBITS?|LIST|LISTING|DETAILS?|DETAILED|PDF|SUPPLEMENT)\\b|\\bGRANTS? PAID\\s*[-:]\\s*ATTACHMENT\\b|\\bGRANTS TO VARIOUS\\b|^THE FOUNDATION MAKES ANNUAL GRANTS TO VARIOUS\\b|^\\s*(?:PART XV IS NOT REQUIRED|N/?A REGULATION SECTION|NUMEROUS INDIVIDUALS|MISCELLANEOUS (?:CONTRIBUTIONS|GRANTS))\\b|^\\s*\\[?(?:ATTACHED|ATTACHMENT|SCHEDULE|STATEMENT|EXHIBIT|LISTING)\\b|\\bRECIPIENT STATEMENT ATTACHED\\b|\\b(?:UNITEMIZED|NOT ITEMIZED|ANONYMOUS|WITHHELD|CONFIDENTIAL)\\b|^\\s*(?:NONE|N/?A|MISCELLANEOUS|INDIVIDUALS?|GRANTEES|RECIPIENTS)\\s*$|^\\s*VARIOUS\\b|^\\s*(?:MULTIPLE|OTHER)\\s+(?:GRANTEES|RECIPIENTS|ORGANIZATIONS|GRANTS|CHARITIES)\\b|\\b(?:ELIGIBLE PATIENTS?|SCHOLARSHIP RECIPIENTS?|INDIVIDUAL ASSISTANCE|INDIVIDUAL PATIENT PROGRAMS|INDIVIDUAL SCHOLARSHIPS?|GRANTS TO INDIVIDUALS)\\b|\\b(?:LIST AVAILABLE UPON REQUEST|FULL SCHEDULE KEPT ON FILE|SMALL DISCRETIONARY GRANTS--VARIOUS)\\b",'i');
-  function namedRecipient(name) {return !queryPlaceholder.test(name||'');}
+  function namedRecipient(name) {return !!String(name || '').trim() && !queryPlaceholder.test(name);}
   function queryEvidenceRows(rows,filters) {
     return rows.map((g,index)=>({g,index})).filter(({g})=>(filters.cat==='all'||g[3]===filters.cat)
       &&(filters.st==='all'||g[4]===Number(filters.st))
       &&(!filters.min||g[2]>=filters.min)&&(!filters.yr||g[0]>=filters.yr)
-      &&namedRecipient(g[5]))
+      &&g[6]!=='unitemized'&&namedRecipient(g[5]))
       .sort((a,b)=>b.g[0]-a.g[0]||b.g[2]-a.g[2]||a.index-b.index);
   }
   async function openQueryEvidence(fi) {
@@ -3088,20 +3145,26 @@ window.GLR = window.GLR || (function () {
     $('pane-q').classList.remove('noresults');
     $('qreport').disabled = $('qexport').disabled = true;
     $('qmore').hidden = true;
-    // H-03: "Any purpose" with nothing else selected is the registry aggregate already sitting
-    // in memory (the same ranked list the "All 1,935 foundations" tab uses) -- no fetch, no wait.
+    // With no filters, totals stay reconciled to every filed row. The existing small
+    // coverage index supplies named-recipient statistics without reading grant files.
     const unfiltered = filters.st === 'all' && !filters.min && !filters.yr && filters.region === 'all' && !filters.mapSel && !filters.citySel;
     const whole = filters.cat === 'all' && unfiltered;
     $('qmetriclabels').innerHTML = whole
-      ? '<span>Total filed</span><span>Filed rows</span><span>Average grant</span><span>Latest year</span>'
+      ? '<span>Total filed</span><span>Filed rows</span><span>Average named grant</span><span>Latest year</span>'
       : '<span>Matching dollars</span><span>Matching grants</span><span>Median grant</span><span>Latest year</span>';
     syncSortLabels(whole);
     if (whole) {
       qState.allAgg = true;
-      // slot 3 is the average grant (total filed / filed rows) -- the column it feeds, so the
-      // "Average grant" sort compares what the card shows. It is a mean, so it is never called
-      // "typical": the ledger pages use that word for the median and the middle half.
-      const rows = F.map((f, fi) => [fi, f.g, f.t, f.g ? Math.round(f.t / f.g) : 0, f.y[f.y.length - 1], null]).sort((a, b) => b[2] - a[2] || a[0] - b[0]);
+      setCount('Reading grant coverage…', true);
+      box.setAttribute('aria-busy', 'true');
+      box.innerHTML = resultsWait(filters);
+      let coverage = null;
+      try { coverage = await coverageData(); } catch (error) { /* totals remain usable; never guess a grant size */ }
+      if (request !== queryRequest) return;
+      const rows = F.map((f, fi) => {
+        const stats = namedGrantStats(f, coverage);
+        return [fi, f.g, f.t, stats ? stats.average : null, f.y[f.y.length - 1], null];
+      }).sort((a, b) => b[2] - a[2] || a[0] - b[0]);
       qState.rows = rows; qState.ready = true; qState.shown = 0;
       box.innerHTML = '';
       setCount(rows.length.toLocaleString('en-US') + ' foundations');
@@ -3225,6 +3288,7 @@ window.GLR = window.GLR || (function () {
       const proofBtn = `<button type="button" class="proof${bridged ? ' bridged' : ''}" data-proof="${fi}" aria-label="Reconciliation for ${esc(f.n)}" title="${bridged?'Reconciled · Reconciles to Part XIV 3a, disclosed on the exceptions page · opens the reconciliation':'Reconciled to IRS filings · opens the reconciliation'}">✓ ${bridged ? 'Reconciled<span class="seenote"> · see note</span>' : 'Reconciled'}</button>`;
       const addBtn = `<button type="button" class="addb${PICKED.has(f.u) ? ' on' : ''}" data-add="${f.u}" aria-pressed="${PICKED.has(f.u)}">${PICKED.has(f.u) ? 'Saved · in shortlist' : 'Save to shortlist'}</button>`;
       if (qState.allAgg) {
+        const stats = namedGrantStats(f, COVERAGE), coverageNote = namedGrantCoverage(stats);
         // H-03: nothing filtered yet -- the record itself is the story (total filed, filed
         // rows, years on file, latest year), not a "match" against a purpose no one picked.
         return `<article class="${cardCls}" style="--i:${i}" aria-label="${esc(f.n)}">
@@ -3232,11 +3296,12 @@ window.GLR = window.GLR || (function () {
             <h2 class="nm"><a href="https://jcurry44.github.io/grants-ledgers/f/${f.u}/">${esc(f.n)}</a></h2>
             <div class="where">${esc(f.ci)}${f.st ? ', ' + f.st : ''} · TY${span(f.y)}</div>
             <span class="mag" aria-hidden="true"><i style="--w:${pct}%"></i></span>
+            ${coverageNote ? `<span class="matchreason">${esc(coverageNote)}</span>` : ''}
           </div>
           <div class="fstats">
             <span class="fstat money"><b>${moneyC(tot || 0)}</b>total filed</span>
             <span class="fstat"><b>${n.toLocaleString('en-US')}</b>filed rows</span>
-            <span class="fstat money" title="Average: total filed dollars ÷ filed rows. The ledger shows the median."><b>${moneyC(med || 0)}</b>average grant</span>
+            <span class="fstat money" title="Mean of itemized named-recipient grants. Excludes unitemized disclosures and redacted individual awards; total filed retains them."><b>${med != null ? moneyC(med) : '—'}</b>average named grant</span>
             <span class="fstat"><b>${last}</b>latest year</span>
           </div>
           <div class="fside">
@@ -3285,8 +3350,7 @@ window.GLR = window.GLR || (function () {
         PICKED.add(u); add.classList.add('on'); add.textContent='Saved · in shortlist';
         // H-03: with no purpose chosen there is nothing "matching" to attach -- save the funder
         // plain, same as the directory tab, so the shortlist reads "Whole ledger" honestly
-        // instead of a filter tuple whose slots mean something else in this mode ([3] is a year
-        // count here, not a dollar median).
+        // instead of a filter tuple whose slot [3] is a mean here, not a dollar median.
         const row=qState.allAgg?null:qState.rows.find(r=>F[r[0]].u===u);
         if(row) PROJ().evidence[u]={kind:'query',n:row[1],total:row[2],median:row[3],last:row[4],max:row[5],saved_at:todayISO(),
           scope:purposeScope(qState.cat)+' · '+(qState.st==='all'?'any recipient location':placeOf(QMETA.states[qState.st]).label)+' · minimum '+money(qState.min)+' · tax year from '+(qState.yr||'any')+(region!=='all'?' · region '+region:'')+(mapSel?' · funders based in '+(citySel?citySel+', ':'')+stName(mapSel):''),
@@ -3528,6 +3592,10 @@ window.GLR = window.GLR || (function () {
     { h: 'State', k: 'st', type: 's', w: 8 },
     { h: 'Rows in scope', k: 'n', type: 'int', w: 16 },
     { h: 'Median grant', k: 'median', type: 'n', w: 15 },
+    { h: 'Average named grant (all years)', k: 'average', type: 'n', w: 24 },
+    { h: 'Named-recipient rows (all years)', k: 'named_n', type: 'int', w: 24 },
+    { h: 'Named-recipient dollars (all years)', k: 'named_total', type: 'n', w: 26 },
+    { h: 'Grant-size coverage (all years)', k: 'grant_coverage', type: 's', w: 56 },
     { h: 'Largest grant', k: 'max', type: 'n', w: 15 },
     { h: 'Most recent year', k: 'last', type: 'yr', w: 16 },
     { h: 'Repeat recipients (%)', k: 'renew', type: 'pct', w: 30 },
@@ -3539,16 +3607,25 @@ window.GLR = window.GLR || (function () {
     { h: 'Ledger', k: 'url', type: 's', w: 46 },
     { h: 'Saved evidence', k: 'evidence', type: 's', w: 60 },
     { h: 'Note', k: 'note', type: 's', w: 40 },
+    { h: 'Application status (researcher assessment)', k: 'application_status', type: 's', w: 36 },
+    { h: 'Current guidance source', k: 'guidance_source', type: 's', w: 50 },
+    { h: 'Date checked', k: 'checked_date', type: 's', w: 16 },
+    { h: 'Next step / unresolved questions', k: 'next_step', type: 's', w: 60 },
   ];
   function funderRow(f, extra) {
     const b = observedBehaviour(F.indexOf(f));
+    const check = researchCheck(f.u);
+    const stats = namedGrantStats(f, COVERAGE);
     return Object.assign({
       name: f.n, city: f.ci, st: f.st || '', total: f.t,
       recon: f.rn ? 'reconciled to filed total (bridged; see the exceptions page: ' + f.rn + ')' : 'reconciled to filed total',
       url: 'https://jcurry44.github.io/grants-ledgers/f/' + f.u + '/',
       note: NOTES[f.u] || '',
+      application_status: checkStatus(check), guidance_source: check.source, checked_date: check.checked, next_step: check.next,
       renew: b && b[1] != null ? b[1] : '', recipients: b ? b[0] : '',
       window: b ? 'TY' + b[4] + '–' + b[5] : '', scope: 'All filed rows, including unitemized disclosures; all available years',
+      average: stats && stats.average != null ? stats.average : '', named_n: stats ? stats.n : '',
+      named_total: stats ? stats.total : '', grant_coverage: namedGrantCoverage(stats) || 'Itemized named-recipient grants',
       n: '', median: '', max: '', last: f.y[f.y.length - 1],
     }, extra || {});
   }
@@ -3561,6 +3638,7 @@ window.GLR = window.GLR || (function () {
     PICKED.forEach((u) => { if (!had.has(u)) p.via[u] = 'hub'; });
     Object.keys(p.via).forEach((u) => { if (!PICKED.has(u)) delete p.via[u]; });
     p.funders = [...PICKED];
+    p.checks = cleanChecks(p.checks, p.funders);
     p.notes = Object.assign({}, NOTES);
     p.updated = todayISO();
     writeStore();
@@ -3613,7 +3691,7 @@ window.GLR = window.GLR || (function () {
     return JSON.stringify({
       format: 'grants-ledger-project', v: 1, exported: todayISO(),
       source: 'https://jcurry44.github.io/grants-ledgers/',
-      project: { name: p.name, created: p.created, updated: p.updated, funders: p.funders, notes: p.notes, evidence: p.evidence, brief: p.brief, via: p.via || {} },
+      project: { name: p.name, created: p.created, updated: p.updated, funders: p.funders, notes: p.notes, evidence: p.evidence, checks: cleanChecks(p.checks,p.funders), brief: p.brief, via: p.via || {} },
     }, null, 2);
   }
   function cleanEvidence(value, funders) {
@@ -3671,7 +3749,7 @@ window.GLR = window.GLR || (function () {
       if (!ev) {
         try {
           const rows=await prospectData('fnd/'+f.u+'.json');
-          const named=rows.filter(g=>g[6]!=='unitemized');
+          const named=rows.filter(g=>g[6]!=='unitemized' && namedRecipient(g[5]));
           const median=weightedMedian(named.map(g=>[g[2],1]));
           const max=named.reduce((m,g)=>Math.max(m,g[2]),-Infinity);
           if (median!=null && isFinite(max)) fallback.set(f.u,{median,max});
@@ -3708,7 +3786,8 @@ window.GLR = window.GLR || (function () {
         <p class="briefmeta">${esc(f.ci)}${f.st?', '+esc(f.st):''} · published ledger TY${f.y[0]}–${f.y[f.y.length-1]}</p>
         ${evidenceSummary(f, fallback)}
         ${e?.sources?.length?`<ul class="briefsources">${e.sources.map(g=>`<li><a href="${ledgerLink(F.indexOf(f),g.name)}">${esc(dc(g.name))} →</a> · ${money(g.amount)} · TY${g.year}</li>`).join('')}</ul>`:e?'<p class="repnote">Individual source examples are unavailable in this snapshot; open the ledger to inspect the selection.</p>':''}
-        ${String(NOTES[f.u]||'').trim() ? `<p class="briefnote"><b>Research note & next step</b><br>${esc(NOTES[f.u])}</p>` : '<p class="briefnote brief-prompt">No research note yet. Add one in the shortlist; this line is not printed.</p>'}
+        ${String(NOTES[f.u]||'').trim() ? `<p class="briefnote"><b>Fit rationale</b><br>${esc(NOTES[f.u])}</p>` : '<p class="briefnote brief-prompt">No research note yet. Add one in the shortlist; this line is not printed.</p>'}
+        ${(() => {const c=researchCheck(f.u);return `<div class="briefcheck"><strong>Application route · ${esc(checkStatus(c))}</strong><br>${c.source?`<a href="${esc(c.source)}" target="_blank" rel="noopener noreferrer">Recorded guidance source ↗</a>`:'No current guidance source recorded.'}${c.checked?' · Checked '+esc(c.checked):' · No check date recorded.'}${c.next?'<p><b>Next step</b><br>'+esc(c.next)+'</p>':'<p><b>Next step</b><br>Confirm current eligibility and the application route before outreach.</p>'}<small>Researcher-entered assessment; historical giving does not establish current eligibility.${c.status!=='unknown'&&(!c.source||!c.checked)?' Source or check date is incomplete.':''}</small></div>`;})()}
       </section>`;}).join('')}
       <div class="repnote">Historical support is evidence for further research, not a prediction of funding. Recipient identities and sectors may be inferred; confirm the organization and current funder criteria. Each saved selection has its own scope, so its dollar totals are not added into a funding opportunity estimate. ${coverage?'Collection measured '+esc(coverage.built_at.slice(0,10))+'; '+coverage.foundations.toLocaleString('en-US')+' published foundations.':'Current coverage couldn’t load; check the collection before using this brief.'}</div>
     </div>`;
@@ -3730,12 +3809,11 @@ window.GLR = window.GLR || (function () {
         <details class="projectmenu" id="projectmenu"><summary aria-label="Project options">•••</summary><div class="projectoptions"><button type="button" class="pbtn" id="pren">Rename</button>
         <button type="button" class="pbtn" id="pdel"${STORE.list.length > 1 ? '' : ' disabled title="This is your only project."'}>Delete</button>
         <span class="pgap"></span>
-        <button type="button" class="pbtn" id="psave">Save to file</button>
-        <button type="button" class="pbtn" id="popen">Open from file…</button><button type="button" class="pbtn" id="lclear"${rows.length ? '' : ' disabled'}>Clear shortlist</button></div></details>
+        <button type="button" class="pbtn" id="lclear"${rows.length ? '' : ' disabled'}>Clear shortlist</button></div></details>
         <input type="file" id="pfile" accept=".json,application/json" hidden>
       </div>
       <div id="project-name-editor" hidden></div>
-      <details class="storagehelp"><summary>Saved in this browser only</summary><p>Use <b>Save to file</b> in Project options to back up your funders, evidence and notes. <b>Open from file</b> restores them on another device. Clearing site data removes local projects.</p></details>
+      <div class="storagehelp"><p><strong>Saved in this browser only.</strong> Back up your funders, evidence and research checks to a file. Restore it on another device; clearing site data removes local projects.</p><div class="storageactions"><button type="button" class="pbtn backup-primary" id="psave">Back up project ↓</button><button type="button" class="pbtn" id="popen">Restore from file…</button></div></div>
       <p class="projmsg" id="projmsg" hidden></p>
       <div class="lhead">
         <div><div class="p-name">${esc(p.name)}</div>
@@ -3756,7 +3834,8 @@ window.GLR = window.GLR || (function () {
           <span class="lv num">${p.evidence[f.u] ? moneyC(p.evidence[f.u].total) : moneyC(f.t)}<small>${p.evidence[f.u] ? 'matching dollars' : 'filed dollars'}</small></span>
           <button type="button" class="rm" data-rm="${f.u}" aria-label="Remove">remove</button>
           <div class="list-evidence">${p.evidence[f.u]?`<details class="savedselection"><summary>${p.evidence[f.u].n.toLocaleString('en-US')} matching grants · ${moneyC(p.evidence[f.u].median)} median</summary>${evidenceSummary(f)}</details>`:evidenceSummary(f)}</div>
-          <textarea class="lnote" aria-label="Research note for ${esc(f.n)}" data-note="${f.u}" rows="1" placeholder="Why this funder — the note that goes in the brief…">${esc(NOTES[f.u] || '')}</textarea>
+          <textarea class="lnote" aria-label="Research note for ${esc(f.n)}" data-note="${f.u}" rows="1" placeholder="Why this funder fits the program — or why to rule it out…">${esc(NOTES[f.u] || '')}</textarea>
+          ${(() => {const c=researchCheck(f.u);return `<details class="researchcheck"><summary>Application route &amp; next step · ${esc(checkStatus(c))}</summary><p class="checkhint">Your assessment from current funder guidance. These fields appear in the brief and exports.</p><div class="checkfields"><label>Application status<select data-check="status" data-funder="${f.u}" aria-label="Application status for ${esc(f.n)}">${[['unknown','Not checked'],['open','Accepting inquiries / applications'],['invitation','Invitation only'],['closed','Closed'],['unclear','Needs clarification']].map(([v,t])=>`<option value="${v}"${c.status===v?' selected':''}>${t}</option>`).join('')}</select></label><label>Date checked<input type="date" data-check="checked" data-funder="${f.u}" value="${esc(c.checked)}" max="${todayISO()}" aria-label="Date checked for ${esc(f.n)}"></label><label class="checkwide">Funder guidance URL<input type="url" data-check="source" data-funder="${f.u}" value="${esc(c.source)}" placeholder="https://…" maxlength="2000" aria-label="Guidance URL for ${esc(f.n)}"></label><label class="checkwide">Next step or unresolved question<textarea rows="2" data-check="next" data-funder="${f.u}" maxlength="2000" placeholder="Confirm geographic fit, contact the program team, or record why to exclude." aria-label="Next step for ${esc(f.n)}">${esc(c.next)}</textarea></label></div></details>`;})()}
         </div>`).join('')
         : `<div class="qempty"><b>Start with one promising funder.</b>Review its grants, save the evidence, and add a note for your brief.<br><button type="button" class="evidencebtn" id="list-find" style="margin-top:16px">Find funders →</button></div>`}
       <p class="listnote">Saved evidence describes historical grants within its stated scope. Recheck eligibility and the source ledger before outreach.</p>`;
@@ -3823,6 +3902,7 @@ window.GLR = window.GLR || (function () {
         if (typeof pr.created === 'string') np.created = pr.created;
         np.funders = known;
         np.evidence = cleanEvidence(pr.evidence,known);
+        np.checks = cleanChecks(pr.checks,known);
         np.via = cleanVia(pr.via, known);
         np.brief = typeof pr.brief==='string' ? pr.brief.slice(0,3000) : '';
         if (pr.notes && typeof pr.notes === 'object') known.forEach((u) => { if (typeof pr.notes[u] === 'string') np.notes[u] = pr.notes[u]; });
@@ -3839,7 +3919,7 @@ window.GLR = window.GLR || (function () {
     const ex = $('lexport');
     if (ex) ex.addEventListener('click', () => exportMenu(ex, () => ({
       name: slug(PROJ().name) + '-funders', cols: FCOLS,
-      rows: listRows().map(savedFunderRow),
+      rows: listRows().map(f => savedFunderRow(f)),
     })));
     const lr = $('lreport');
     if (lr) lr.addEventListener('click', () => buildReport('list'));
@@ -3883,6 +3963,14 @@ window.GLR = window.GLR || (function () {
   });
   $('pbody').addEventListener('input', (e) => {
     if(e.target.id==='project-brief') { PROJ().brief=e.target.value;saveList();return; }
+    if(e.target.dataset.check) {
+      const u=e.target.dataset.funder,key=e.target.dataset.check;
+      if(!PICKED.has(u)||!['status','source','checked','next'].includes(key))return;
+      const p=PROJ();if(!p.checks)p.checks={};
+      p.checks[u]=Object.assign({},p.checks[u]||{}, {[key]:e.target.value});
+      if(key==='status') e.target.closest('.researchcheck').querySelector('summary').textContent='Application route & next step · '+checkStatus(p.checks[u]);
+      p.updated=todayISO();writeStore();return;
+    }
     const t = e.target.closest('[data-note]');
     if (!t) return;
     NOTES[t.dataset.note] = t.value;
@@ -4496,8 +4584,8 @@ window.GLR = window.GLR || (function () {
   }
   const prospectCache = new Map(), candidateEvidence = new Map();
   let COVERAGE = null;
-  // the 362KB coverage file serves profiles, evidence and the method dialog, none of them the
-  // first screen: it loads when the browser is idle, not while the first results are on the wire
+  // Reuse the existing coverage index for grant-size statistics, profiles and evidence.
+  // The whole-collection results also request it directly; the shared cache avoids a second fetch.
   ('requestIdleCallback' in window ? window.requestIdleCallback : ((f) => setTimeout(f, 3000)))(() => coverageData().catch(() => {}));
   async function prospectData(path) {
     if (!prospectCache.has(path)) prospectCache.set(path, get(path).catch(e => { prospectCache.delete(path); throw e; }));
@@ -4709,6 +4797,10 @@ window.GLR = window.GLR || (function () {
     const rows = repRows, meta = repMeta;
     const nG = rows.reduce((s, r) => s + (r.n || 0), 0);
     const sum = rows.reduce((s, r) => s + (r.total || 0), 0);
+    const named = meta.whole ? rows.map(r => namedGrantStats(r.f, COVERAGE)) : [];
+    const namedCount = named.reduce((s, r) => s + (r ? r.n : 0), 0);
+    const namedTotal = named.reduce((s, r) => s + (r ? r.total : 0), 0);
+    const namedAverage = named.length && named.every(Boolean) && namedCount ? namedTotal / namedCount : null;
     const pooledMedian = meta.median;
     const latest = rows.reduce((last, r) => Math.max(last, r.last || 0), 0);
     const top = rows.slice().sort((a, b) => (b.total || 0) - (a.total || 0)).slice(0, 10);
@@ -4737,7 +4829,7 @@ window.GLR = window.GLR || (function () {
         <div class="repnum"><b class="num">${rows.length.toLocaleString('en-US')}</b><span>foundations</span></div>
         <div class="repnum"><b class="num">${nG.toLocaleString('en-US')}</b><span>${meta.whole ? 'filed rows, all years' : 'matching grants'}</span></div>
         <div class="repnum"><b class="num">${moneyC(sum)}</b><span>${meta.whole ? 'filed dollars, all years' : 'matching dollars'}</span></div>
-        ${meta.whole ? `<div class="repnum"><b class="num">${moneyC(nG ? Math.round(sum / nG) : 0)}</b><span>average grant · dollars ÷ rows</span></div>` : `<div class="repnum"><b class="num">${pooledMedian != null ? moneyC(pooledMedian) : '—'}</b><span>median matching grant</span></div>`}
+        ${meta.whole ? `<div class="repnum"><b class="num">${namedAverage != null ? moneyC(namedAverage) : '—'}</b><span>average named-recipient grant</span></div>` : `<div class="repnum"><b class="num">${pooledMedian != null ? moneyC(pooledMedian) : '—'}</b><span>median matching grant</span></div>`}
         <div class="repnum"><b class="num">${latest || '—'}</b><span>latest tax year in scope</span></div>
       </div>
       <div class="repsec">
@@ -4754,7 +4846,7 @@ window.GLR = window.GLR || (function () {
       </div>
       <div class="repsec">
         <h4>The foundations</h4>
-        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">${meta.whole ? 'Average grant' : 'Median'}</th><th class="amt" title="Share of named recipients appearing in multiple available filed years; not an award renewal rate">Repeat recipients (%)</th><th class="amt">Recent</th><th class="amt">${meta.whole ? 'Filed dollars' : 'Matching dollars'}</th></tr></thead><tbody>
+        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">${meta.whole ? 'Filed rows' : 'Grants'}</th><th class="amt">${meta.whole ? 'Average named grant' : 'Median'}</th><th class="amt" title="Share of named recipients appearing in multiple available filed years; not an award renewal rate">Repeat recipients (%)</th><th class="amt">Recent</th><th class="amt">${meta.whole ? 'Filed dollars' : 'Matching dollars'}</th></tr></thead><tbody>
           ${rows.slice(0, 60).map((r) => {
             const b = observedBehaviour(F.indexOf(r.f));
             return `<tr><td><a class="rowlink" href="https://jcurry44.github.io/grants-ledgers/f/${r.f.u}/">${esc(r.f.n)}</a></td>
@@ -4768,7 +4860,7 @@ window.GLR = window.GLR || (function () {
         </tbody></table></div>
         ${rows.length > 60 ? `<div class="repnote">Showing the first 60 of ${rows.length.toLocaleString('en-US')} — the export contains every row.</div>` : ''}
       </div>
-      <div class="repnote">Query figures describe the matching named-recipient grant rows; project totals include every filed row. Repeat-recipient shares use each foundation’s full available history, exclude unnamed recipients, and do not estimate renewal probability. Source ledgers disclose adjusted totals (bridges) and unitemized amounts. Prepared from public IRS Form <span class="nw">990-PF</span> filings. Nothing here is an audit.</div>
+      <div class="repnote">Filtered figures describe matching named-recipient grants. Whole-collection totals include every filed row; average named grants exclude unitemized disclosures and redacted individual awards. An unavailable average is shown as —, never zero. Repeat-recipient shares use each foundation’s full available history and do not estimate renewal probability. Source ledgers disclose adjusted totals (bridges) and unitemized amounts. Prepared from public IRS Form <span class="nw">990-PF</span> filings. Nothing here is an audit.</div>
       <div class="repfoot">
         <span class="expwrap"><button type="button" class="tbtn" data-rex aria-haspopup="true" aria-expanded="false">Export${CHEV}</button></span>
         <button type="button" class="tbtn" data-rprint>Print / PDF</button><button type="button" class="tbtn" data-rlink title="Copy a link to this search">Copy link</button>
@@ -4837,10 +4929,10 @@ window.GLR = window.GLR || (function () {
   // ---------- findings ticker ----------
   const FINDINGS = [
     { u: 'novartispati', t: '$14.6 billion filed as “Various individuals”', s: 'A pharmaceutical patient-assistance foundation: its grants line is free medicine to patients, and the ledger says exactly that instead of pretending it is grantmaking.' },
-    { u: 'muskfoundati', t: '$89.9 million to “The Foundation” of Houston', s: 'The Musk Foundation’s largest rows cite an Attachment A that is absent from every public copy. The year still reconciles to the dollar.' },
+    { u: 'muskfoundati', t: '$89.9 million to “The Foundation” of Houston', s: 'The Musk Foundation’s largest rows cite an Attachment A not found in the copies reviewed. The year still reconciles to the dollar.' },
     { u: 'johnsonjohns', t: '187,513 rows read from 2,547 scanned pages', s: 'J&J’s matching-gift registers, down to a genuine 78-cent gift — and the registers miss the filer’s own subtotals, each gap named on the page.' },
     { u: 'bezosfamilyf', t: 'A $1,533,193 arithmetic error, disclosed', s: 'The Bezos Family Foundation’s 2023 attachment sums its own book-value column wrong. Left exactly as filed, and said out loud.' },
-    { u: 'robertsfound', t: 'A register cut off mid-alphabet', s: 'The Roberts Foundation’s 2021 sheet ends after “Mc” in every public copy — $25.0 million carried as one labeled line, not guessed.' },
+    { u: 'robertsfound', t: 'A register cut off mid-alphabet', s: 'The Roberts Foundation’s 2021 sheet ends after “Mc” in the copies reviewed — $25.0 million carried as one labeled line, not guessed.' },
     { u: 'jwillardanda', t: '$141.2 million paid; zero recipients public', s: 'The Marriott Foundation’s grant lists never reach the public record — the filings’ own arithmetic still reconciles to the dollar, not assumed.' },
     { u: 'hellmanfound', t: 'The software read $2,500 as $500', s: 'Caught by checking the ink to the left of the digits. The Hellman Foundation’s four scanned years reconcile exactly — 947 rows.' },
   ];
@@ -4879,7 +4971,7 @@ window.GLR = window.GLR || (function () {
   }
   function syncViewHeading() {
     const geo=$('mapcard').classList.contains('open');
-    const titles={q:['Find funders','Rank funders by the grants they actually filed. Save the ones that fit.'],f:['All 1,935 foundations','Open a ledger and follow its grantmaking record.'],r:['Recipients','See who has funded an organization across the collection.'],y:['By year','Compare filed records with their annual coverage in view.'],c:['By purpose','Explore how foundations describe the work they support.']};
+    const titles={q:['Find funders','Start with a nonprofit you know. Inspect its funders, compare the evidence, and build your shortlist.'],f:['All 1,935 foundations','Open a ledger and follow its grantmaking record.'],r:['Recipients','See who has funded an organization across the collection.'],y:['By year','Compare filed records with their annual coverage in view.'],c:['By purpose','Explore how foundations describe the work they support.']};
     const copy=geo?['Explore grantmaking','Where foundations are based. Where their grant dollars go.']:titles[tab]||titles.q;
     $('viewtitle').textContent=copy[0];$('viewdescription').textContent=copy[1];
     document.querySelector('.scopealert').hidden=geo||!['q','f'].includes(tab);

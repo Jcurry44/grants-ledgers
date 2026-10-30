@@ -1081,7 +1081,7 @@ window.GLR = window.GLR || (function () {
         ? `<a class="withheld" data-y="${y}" href="../../exceptions/#${document.documentElement.dataset.slug || ''}" title="${String(withheld[String(y)].why || '').replace(/"/g, '&quot;')}" aria-label="Tax year ${y}, ${withheld[String(y)].kind || 'withheld'}"><span class="wy">${y}</span><small>${withheld[String(y)].kind || 'withheld'}</small></a>`
         : zeroYears[String(y)]
           ? `<span class="zeroyr" data-y="${y}" title="This year is filed and reconciles at $0 — no grants were paid." aria-label="Tax year ${y}, $0 filed, no grants">${y}<small>$0 filed</small></span>`
-          : `<button type="button" data-yr="${y}"${y === 'all' ? '' : ` data-y="${y}" style="--share:${(byYear[y].sum / maxYearSum * 100).toFixed(2)}%"`} aria-pressed="false"${scanYears.has(y) ? ` class="scan" title="Read from the paper filing — absent from every e-file dataset"` : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
+          : `<button type="button" data-yr="${y}"${y === 'all' ? '' : ` data-y="${y}" style="--share:${(byYear[y].sum / maxYearSum * 100).toFixed(2)}%"`} aria-pressed="false"${scanYears.has(y) ? ` class="scan" title="Recovered from the scanned filing"` : ''}>${y === 'all' ? 'All' : y}</button>`).join('');
       rail.addEventListener('click', (e) => {
         const b = e.target.closest('[data-yr]');
         if (!b) return;
@@ -1131,7 +1131,7 @@ window.GLR = window.GLR || (function () {
       moatEl.hidden = false;
       const nScan = numWord(scanYears.size);
       moatEl.innerHTML = `${nScan.charAt(0).toUpperCase() + nScan.slice(1)} of ${numWord(nFiled)} filed ${plural(nFiled, 'year')} ${scanYears.size === 1 ? 'was' : 'were'} `
-        + `read from the paper filing — absent from every e-file dataset. `
+        + `recovered from the scanned filing. `
         + `<a href="../../recovered/#${esc(document.documentElement.dataset.slug || '')}">How we recovered ${scanYears.size === 1 ? 'it' : 'them'} →</a>`;
     }
 
