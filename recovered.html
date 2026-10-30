@@ -7,10 +7,10 @@
 <meta name="color-scheme" content="light">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Recovered from paper — The Grants Ledger</title>
-<meta name="description" content="238,116 grant rows from 140 foundation-years and 57 foundations, read from scanned IRS attachments and reconciled to each filed total to the dollar. Absent from every e-file dataset.">
+<meta name="description" content="238,116 grant rows from 140 foundation-years and 57 foundations, read from scanned IRS attachments, with source receipts and totals reconciled to the filed dollar.">
 <meta name="theme-color" content="#1e4634">
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Recovered from paper — The Grants Ledger">
 <meta property="og:description" content="238,116 grant rows from 140 foundation-years, read from scanned IRS attachments and reconciled to each filed total to the dollar.">
@@ -258,8 +258,8 @@ td .dim { color: var(--ink-dim); font-size: 0.75rem; }
 
 <section class="hero"><div class="wrap">
   <p class="eyebrow accent">Recovered rows · 57 foundations</p>
-  <h1>The rows <em>absent from every <span class="nw">e-file</span> dataset</em>.</h1>
-  <p class="lede">When a foundation attaches its grant list to the return as paper, the IRS e-file data carries one line — “see attached” — and every database built on that data carries nothing. These are the attachments, read from the IRS’s posted scans and reconciled to each filed total to the dollar.</p>
+  <h1>Grant histories, <em>recovered from scanned filings</em>.</h1>
+  <p class="lede">A grant list attached to a return can be difficult to search or reuse. These rows were read from the IRS’s posted scans and reconciled to each filed total to the dollar, with receipts showing how they were recovered.</p>
   <div class="heronums">
     <div><b class="num">238,116</b><span>grant rows recovered</span></div>
     <div><b class="num">$6.2B</b><span>reconciled to the dollar</span></div>
@@ -274,14 +274,14 @@ td .dim { color: var(--ink-dim); font-size: 0.75rem; }
   <p class="sub">The page images are read twice by local OCR at different resolutions and an amount is kept only when the two readings agree. Cells they disagree on are re-read at four further resolutions; cells no resolution can read are read by eye from the page image and recorded as such. The year is published only when the rows sum to Part I line 25(d) exactly, with cents apportioned at no more than one dollar on any row. Every published year names its method on its own page.</p>
   <div class="split">
     <div class="card"><div class="fig num">140</div><div class="who">years read this way</div><p>Each ties to the dollar. The withheld years — where the scan carries no schedule, or a cell no reading can settle — appear on the <a href="https://jcurry44.github.io/grants-ledgers/exceptions/">exceptions page</a>, never as rows.</p></div>
-    <div class="card"><div class="fig num">0</div><div class="who">estimates</div><p>No amount on this site comes from OCR text alone. The filed total referees every year; a reading that does not match it is refused, not repaired.</p></div>
+    <div class="card"><div class="fig">Σ</div><div class="who">filed-total check</div><p>Reconciliation checks that row amounts add to the filed total. It does not independently verify every recipient, purpose or individual amount; check the cited filing before relying on a row.</p></div>
     <div class="card"><div class="fig">receipts</div><div class="who">on every book</div><p>Which pages were read, which cells were re-read or read by eye, what the printed totals said. The receipt is part of the record, not a footnote.</p></div>
   </div>
 </div></section>
 
 <section class="sec"><div class="wrap">
   <h2>A sample pack: five full foundation-years</h2>
-  <p class="sub">Complete years, one CSV each, with the recovery receipt beside them. Open them against ProPublica or Candid and you will find the totals and no rows.</p>
+  <p class="sub">Complete years, one CSV each, with the recovery receipt beside them. Compare the rows with the cited filings. Coverage in other databases has not been independently benchmarked.</p>
   <ul class="samples"><li><a href="https://jcurry44.github.io/grants-ledgers/db/sample/howardgbuffe-2024.csv">Howard G. Buffett Foundation · TY2024</a> — 116 rows, $473,405,666, every row carrying a citation to the scanned filing</li><li><a href="https://jcurry44.github.io/grants-ledgers/db/sample/wyssfoundati-2022.csv">Wyss Foundation · TY2022</a> — 99 rows, $163,338,595, every row carrying a citation to the scanned filing</li><li><a href="https://jcurry44.github.io/grants-ledgers/db/sample/sgfoundation-2023.csv">S &amp; G Foundation · TY2023</a> — 3 rows, $125,578,043, every row carrying its IRS object ID</li><li><a href="https://jcurry44.github.io/grants-ledgers/db/sample/charlesandly-2021.csv">Charles and Lynn Schusterman Family Foundation · TY2021</a> — 688 rows, $292,518,511, every row carrying a citation to the scanned filing</li><li><a href="https://jcurry44.github.io/grants-ledgers/db/sample/bezosfamilyf-2023.csv">Bezos Family Foundation · TY2023</a> — 243 rows, $156,961,900, every row carrying a citation to the scanned filing</li></ul>
   <p class="sub">Where the citation is a scanned-filing reference rather than an id the IRS issued, the CSV’s last column is named <code>source_ref</code> instead of <code>irs_object_id</code>, so the two are never mistaken for each other.</p>
   <p class="sub">The whole recovered set travels inside the <a href="https://jcurry44.github.io/grants-ledgers/db/all-grants.csv.gz">full dataset</a>; recovered years are marked on each ledger page and in its receipt.</p>
@@ -300,7 +300,8 @@ td .dim { color: var(--ink-dim); font-size: 0.75rem; }
 
 <section class="method"><div class="wrap">
   <h2>Who this is for</h2>
-  <p>Prospect research and advancement teams screening funders that look quiet in commercial databases; foundation staff and boards who want their own record read back as a book; the digitizers and data services whose pipelines carry these foundations as a single unitemized line; and reporters checking a claim against the filing itself. The method is published, the receipts are attached, and the sample pack is free to read.</p>
+  <p>Prospect research and advancement teams reviewing a funder’s giving history; foundation staff and boards reviewing their own record; data services working with scanned schedules; and reporters checking a claim against the filing itself. The method is published, the receipts are attached, and the sample pack is free to read.</p>
+  <p>Need a focused prospect list for your organization? <a href="research/">Explore the research pilot →</a></p>
   <p>Questions and requests: <a href="mailto:jjcurry027@gmail.com">jjcurry027@gmail.com ↗</a>. Nothing here is an audit, attestation or opinion — it is a documented reconciliation of public filings, with the receipts.</p>
 </div></section>
 
