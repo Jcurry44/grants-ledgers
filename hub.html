@@ -1374,14 +1374,14 @@ a.evidencebtn{display:inline-flex;align-items:center;justify-content:center;gap:
         <div class="qmeta">
           <div class="resulttotals"><b id="qcount" role="status" class="wait">Searching…</b><span id="qsum"></span></div>
           <div class="resulttools">
-            <span class="sortlabel">Sort by</span><select id="qsort" class="qsort" aria-label="Sort funders"><option value="total">Total filed</option><option value="count">Filed rows</option><option value="median">Typical grant</option><option value="recent">Latest year</option><option value="name">Name A–Z</option></select>
+            <span class="sortlabel">Sort by</span><select id="qsort" class="qsort" aria-label="Sort funders"><option value="total">Total filed</option><option value="count">Filed rows</option><option value="median">Average grant</option><option value="recent">Latest year</option><option value="name">Name A–Z</option></select>
             <button type="button" class="qreportlink" id="qreport">View summary</button>
             <span class="expwrap"><button type="button" class="tbtn" id="qexport" aria-haspopup="true" aria-expanded="false">Export<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></span>
           </div>
         </div>
         <div class="resultcaption"><span><i aria-hidden="true"></i> <span id="qrankby">Ranked by total filed grant dollars</span> · past giving, not eligibility</span><p class="qex" id="qex" hidden><button type="button" class="qexlink" id="qexall">Browse all <span id="qexn">1,935</span> foundations →</button></p></div>
       </div>
-      <div class="tablehead" aria-hidden="true"><span>Foundation</span><div class="metriclabels" id="qmetriclabels"><span>Total filed</span><span>Filed rows</span><span>Typical grant</span><span>Latest year</span></div><span></span></div>
+      <div class="tablehead" aria-hidden="true"><span>Foundation</span><div class="metriclabels" id="qmetriclabels"><span>Total filed</span><span>Filed rows</span><span>Average grant</span><span>Latest year</span></div><span></span></div>
       <div class="flist" id="qresults" style="margin-top:0.6rem" aria-busy="true"><div class="qwait"><span class="r2wait">Reading the ledgers…</span></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div><div class="fcard skel" aria-hidden="true"><div class="fidentity"><i class="sk sk-nm"></i><i class="sk sk-where"></i><i class="sk sk-mag"></i></div><div class="fstats"><i class="sk"></i><i class="sk"></i><i class="sk"></i><i class="sk"></i></div><div class="fside"><i class="sk"></i></div></div></div>
       <button type="button" class="fmore" id="qmore" hidden>Show more</button>
       <details class="qnote"><summary>How these results are counted</summary><p>Every filter applies to the same grant row. Counts, amounts and medians include matching rows with named recipients; amounts reported as one lump sum, not a named grant list, stay in the source ledger and aren’t in these matches. Recipient location is the filed address, which may differ from the area served. “Location not filed” means the row has no recipient state. Nothing is selected until you choose it.</p></details>
@@ -2655,6 +2655,24 @@ window.GLR = window.GLR || (function () {
   const STORE = readStore();
   const PROJ = () => STORE.list.find((p) => p.id === STORE.active) || STORE.list[0];
   function writeStore() { try { localStorage.setItem(PKEY, JSON.stringify(STORE)); } catch (e) {} }
+  // The old single list ('gl_list') used to be carried over in memory only: this page showed those
+  // foundations saved while their ledger pages, which read PKEY alone, showed them unsaved. Carry it
+  // over once and write it down, merged into the active project; the old keys are left in place.
+  (function carryOldList() {
+    let old = null, oldN = null;
+    try {
+      if (localStorage.getItem('gl_list_carried')) return;
+      old = JSON.parse(localStorage.getItem('gl_list') || 'null');
+      oldN = JSON.parse(localStorage.getItem('gl_notes') || 'null');
+    } catch (e) { return; }
+    if (Array.isArray(old) && old.length) {
+      const p = PROJ();
+      old.forEach((u) => { if (typeof u === 'string' && !p.funders.includes(u)) p.funders.push(u); });
+      if (oldN && typeof oldN === 'object') Object.keys(oldN).forEach((u) => { if (!(u in p.notes)) p.notes[u] = oldN[u]; });
+      writeStore();
+    }
+    try { localStorage.setItem('gl_list_carried', '1'); } catch (e) {}
+  })();
   // PICKED and NOTES are the live view of the ACTIVE project; every writer goes through saveList()
   const PICKED = new Set(PROJ().funders);
   const NOTES = Object.assign({}, PROJ().notes);
@@ -2729,11 +2747,11 @@ window.GLR = window.GLR || (function () {
   const purposeScope = (cat) => cat === 'all' ? 'Any purpose' : QMETA.cats[cat] + ' (filed-purpose category)';
   // N3: the sort control names exactly the columns it sorts, in the table-head's order
   const SORT_LABELS = {
-    whole: { total: 'Total filed', count: 'Filed rows', median: 'Typical grant', recent: 'Latest year', name: 'Name A–Z' },
+    whole: { total: 'Total filed', count: 'Filed rows', median: 'Average grant', recent: 'Latest year', name: 'Name A–Z' },
     match: { total: 'Matching dollars', count: 'Matching grants', median: 'Median grant', recent: 'Latest year', name: 'Name A–Z' },
   };
   const RANK_CAPTION = {
-    whole: { total: 'Ranked by total filed grant dollars', count: 'Ranked by filed rows', median: 'Ranked by typical grant', recent: 'Ranked by latest filed year', name: 'Listed A–Z by name' },
+    whole: { total: 'Ranked by total filed grant dollars', count: 'Ranked by filed rows', median: 'Ranked by average grant (filed dollars ÷ filed rows)', recent: 'Ranked by latest filed year', name: 'Listed A–Z by name' },
     match: { total: 'Ranked by matching grant dollars', count: 'Ranked by number of matching grants', median: 'Ranked by median matching grant', recent: 'Ranked by latest matching year', name: 'Listed A–Z by name' },
   };
   const syncRankCaption = (whole) => { $('qrankby').textContent = RANK_CAPTION[whole ? 'whole' : 'match'][$('qsort').value] || ''; };
@@ -3075,13 +3093,14 @@ window.GLR = window.GLR || (function () {
     const unfiltered = filters.st === 'all' && !filters.min && !filters.yr && filters.region === 'all' && !filters.mapSel && !filters.citySel;
     const whole = filters.cat === 'all' && unfiltered;
     $('qmetriclabels').innerHTML = whole
-      ? '<span>Total filed</span><span>Filed rows</span><span>Typical grant</span><span>Latest year</span>'
+      ? '<span>Total filed</span><span>Filed rows</span><span>Average grant</span><span>Latest year</span>'
       : '<span>Matching dollars</span><span>Matching grants</span><span>Median grant</span><span>Latest year</span>';
     syncSortLabels(whole);
     if (whole) {
       qState.allAgg = true;
-      // slot 3 is the typical grant (total filed / filed rows) -- the column it feeds, so the
-      // "Typical grant" sort compares what the card shows
+      // slot 3 is the average grant (total filed / filed rows) -- the column it feeds, so the
+      // "Average grant" sort compares what the card shows. It is a mean, so it is never called
+      // "typical": the ledger pages use that word for the median and the middle half.
       const rows = F.map((f, fi) => [fi, f.g, f.t, f.g ? Math.round(f.t / f.g) : 0, f.y[f.y.length - 1], null]).sort((a, b) => b[2] - a[2] || a[0] - b[0]);
       qState.rows = rows; qState.ready = true; qState.shown = 0;
       box.innerHTML = '';
@@ -3217,7 +3236,7 @@ window.GLR = window.GLR || (function () {
           <div class="fstats">
             <span class="fstat money"><b>${moneyC(tot || 0)}</b>total filed</span>
             <span class="fstat"><b>${n.toLocaleString('en-US')}</b>filed rows</span>
-            <span class="fstat money"><b>${moneyC(med || 0)}</b>typical grant</span>
+            <span class="fstat money" title="Average: total filed dollars ÷ filed rows. The ledger shows the median."><b>${moneyC(med || 0)}</b>average grant</span>
             <span class="fstat"><b>${last}</b>latest year</span>
           </div>
           <div class="fside">
@@ -4718,7 +4737,7 @@ window.GLR = window.GLR || (function () {
         <div class="repnum"><b class="num">${rows.length.toLocaleString('en-US')}</b><span>foundations</span></div>
         <div class="repnum"><b class="num">${nG.toLocaleString('en-US')}</b><span>${meta.whole ? 'filed rows, all years' : 'matching grants'}</span></div>
         <div class="repnum"><b class="num">${moneyC(sum)}</b><span>${meta.whole ? 'filed dollars, all years' : 'matching dollars'}</span></div>
-        ${meta.whole ? `<div class="repnum"><b class="num">${moneyC(nG ? Math.round(sum / nG) : 0)}</b><span>typical grant · dollars ÷ rows</span></div>` : `<div class="repnum"><b class="num">${pooledMedian != null ? moneyC(pooledMedian) : '—'}</b><span>median matching grant</span></div>`}
+        ${meta.whole ? `<div class="repnum"><b class="num">${moneyC(nG ? Math.round(sum / nG) : 0)}</b><span>average grant · dollars ÷ rows</span></div>` : `<div class="repnum"><b class="num">${pooledMedian != null ? moneyC(pooledMedian) : '—'}</b><span>median matching grant</span></div>`}
         <div class="repnum"><b class="num">${latest || '—'}</b><span>latest tax year in scope</span></div>
       </div>
       <div class="repsec">
@@ -4735,7 +4754,7 @@ window.GLR = window.GLR || (function () {
       </div>
       <div class="repsec">
         <h4>The foundations</h4>
-        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">${meta.whole ? 'Typical grant' : 'Median'}</th><th class="amt" title="Share of named recipients appearing in multiple available filed years; not an award renewal rate">Repeat recipients (%)</th><th class="amt">Recent</th><th class="amt">${meta.whole ? 'Filed dollars' : 'Matching dollars'}</th></tr></thead><tbody>
+        <div class="tw"><table><thead><tr><th>Foundation</th><th>Where</th><th class="amt">Grants</th><th class="amt">${meta.whole ? 'Average grant' : 'Median'}</th><th class="amt" title="Share of named recipients appearing in multiple available filed years; not an award renewal rate">Repeat recipients (%)</th><th class="amt">Recent</th><th class="amt">${meta.whole ? 'Filed dollars' : 'Matching dollars'}</th></tr></thead><tbody>
           ${rows.slice(0, 60).map((r) => {
             const b = observedBehaviour(F.indexOf(r.f));
             return `<tr><td><a class="rowlink" href="https://jcurry44.github.io/grants-ledgers/f/${r.f.u}/">${esc(r.f.n)}</a></td>
